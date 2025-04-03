@@ -30,15 +30,16 @@ const NavBar: React.FC = () => {
       <div className={`main-nav-item ${isActive('/posts') || path === '/' ? 'active' : ''}`}>
         <Link to="/">Posts</Link>
       </div>
+      <div className={`main-nav-item ${isActive('/talks') ? 'active' : ''}`}>
+        <Link to="/talks">Talks</Link>
+      </div>
       <div className={`main-nav-item ${isActive('/archives') ? 'active' : ''}`}>
         <Link to="/archives">Archive</Link>
       </div>
       <div className={`main-nav-item ${isActive('/reading-list') ? 'active' : ''}`}>
         <Link to="/reading-list">Reading List</Link>
       </div>
-      <div className={`main-nav-item ${isActive('/favorite-talks') ? 'active' : ''}`}>
-        <Link to="/favorite-talks">Favorite Talks</Link>
-      </div>
+
     </div>
   );
 };

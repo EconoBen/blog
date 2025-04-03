@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams, Link } from 'react-router-dom';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import NavBar from './components/NavBar';
@@ -8,10 +8,10 @@ import TagPage from './components/TagPage';
 import ArchivePage from './components/ArchivePage';
 import About from './components/About';
 import ReadingList from './components/ReadingList';
-import FavoriteTalks from './components/FavoriteTalks';
+import Talks from './components/Talks';
 import ArchivesPage from './components/ArchivesPage';
 import { postService } from './services/PostService';
-import MarkdownRenderer from './components/MarkdownRenderer';
+import SocialLinks from './components/SocialLinks';
 
 /**
  * Home page component
@@ -20,30 +20,30 @@ import MarkdownRenderer from './components/MarkdownRenderer';
  */
 const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [post, setPost] = useState<any>(null);
+  const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
-    const loadDockerPost = async () => {
+    const loadPosts = async () => {
       try {
-        console.log("Attempting to load Docker post...");
-        const dockerPost = await postService.getPostBySlug('optimizing-docker-build-pipelines');
+        console.log("Loading all posts...");
+        const allPosts = await postService.getAllPosts();
 
-        if (dockerPost) {
-          console.log("Successfully loaded Docker post:", dockerPost.title);
-          setPost(dockerPost);
+        if (allPosts && allPosts.length > 0) {
+          console.log(`Successfully loaded ${allPosts.length} posts`);
+          setPosts(allPosts);
         } else {
-          console.error("Docker post not found");
-          setPost(null);
+          console.error("No posts found");
+          setPosts([]);
         }
       } catch (error) {
-        console.error("Failed to load post:", error);
-        setPost(null);
+        console.error("Failed to load posts:", error);
+        setPosts([]);
       } finally {
         setLoading(false);
       }
     };
 
-    loadDockerPost();
+    loadPosts();
   }, []);
 
   const formatDate = (date: Date) => {
@@ -55,29 +55,36 @@ const Home: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading post...</div>;
+    return <div>Loading posts...</div>;
   }
 
-  if (!post) {
-    return <div>Post not found</div>;
+  if (!posts || posts.length === 0) {
+    return <div>No posts found</div>;
   }
 
   return (
-    <>
-      <div className="blog-header">
-        <h1 className="blog-title">{post.title}</h1>
-        <div className="blog-meta">
-          {formatDate(post.date)}
-          {post.tags.map((tag: string) => (
-            <span key={tag} className="blog-tag">{tag}</span>
-          ))}
+    <div className="posts-list">
+      <h1 className="page-title">All Posts</h1>
+      {posts.map(post => (
+        <div key={post.slug} className="post-item">
+          <h2 className="post-title">
+            <Link to={`/posts/${post.slug}`}>{post.title}</Link>
+          </h2>
+          <div className="post-meta">
+            {formatDate(post.date)}
+            {post.tags.map((tag: string) => (
+              <span key={tag} className="post-tag">{tag}</span>
+            ))}
+          </div>
+          <div className="post-excerpt">
+            {post.content.substring(0, 200)}...
+          </div>
+          <div className="post-read-more">
+            <Link to={`/posts/${post.slug}`}>Read more →</Link>
+          </div>
         </div>
-      </div>
-
-      <div className="blog-content">
-        <MarkdownRenderer content={post.content} />
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 
@@ -235,6 +242,9 @@ const App: React.FC = () => {
           <div className="dark-mode-icon"></div>
         </div>
 
+        {/* Social Links */}
+        <SocialLinks />
+
         {/* Sidebar Component */}
         <Sidebar width={sidebarWidth} />
 
@@ -263,8 +273,9 @@ const App: React.FC = () => {
               <Route path="/archives/:month" element={<ArchivePageWrapper />} />
               <Route path="/archives" element={<ArchivesPage />} />
               <Route path="/about" element={<About />} />
+              <Route path="/talks" element={<Talks />} />
               <Route path="/reading-list" element={<ReadingList />} />
-              <Route path="/favorite-talks" element={<FavoriteTalks />} />
+
             </Routes>
           </div>
         </div>

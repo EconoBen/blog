@@ -1270,20 +1270,20 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 	line-height: 1.5;
 }
 
-/* Favorite Talks Styles */
-.favorite-talks-page {
+/* Talks Styles */
+.talks-page {
 	max-width: 800px;
 	margin: 0 auto;
 	padding: 0 20px;
 }
 
-.favorite-talks-page h1 {
+.talks-page h1 {
 	font-size: 2.5rem;
 	margin-bottom: 1rem;
 	color: #333;
 }
 
-.favorite-talks-intro {
+.talks-intro {
 	margin-bottom: 2rem;
 	line-height: 1.6;
 	color: #555;
@@ -1457,7 +1457,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 .dark-mode .about-page h2,
 .dark-mode .reading-list-page h1,
 .dark-mode .reading-list-category h2,
-.dark-mode .favorite-talks-page h1,
+.dark-mode .talks-page h1,
 .dark-mode .talks-category h2,
 .dark-mode .archives-page h1,
 .dark-mode .archive-year h2 {
@@ -1469,7 +1469,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 .dark-mode .skills-list li,
 .dark-mode .reading-list-intro,
 .dark-mode .reading-item-description,
-.dark-mode .favorite-talks-intro,
+.dark-mode .talks-intro,
 .dark-mode .talk-description,
 .dark-mode .archives-intro {
 	color: #bbb;

@@ -1,11 +1,82 @@
-// Import required libraries
+/**
+ * Script to generate PostService.ts with all markdown imports
+ *
+ * This script scans the src/posts directory for markdown files and
+ * generates the PostService.ts file with appropriate imports
+ */
+
+const fs = require('fs');
+const path = require('path');
+const glob = require('glob');
+
+/**
+ * Generate a slug from a filename
+ *
+ * @param {string} filename - The filename to convert to a slug
+ * @returns {string} The generated slug
+ */
+function generateSlug(filename) {
+  return path.basename(filename, '.md');
+}
+
+/**
+ * Generate a camelCase variable name from a slug
+ *
+ * @param {string} slug - The slug to convert
+ * @returns {string} The camelCase variable name
+ */
+function generateVarName(slug) {
+  return slug.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) + 'Md';
+}
+
+/**
+ * Main function to generate PostService.ts
+ */
+function generatePostService() {
+  // Find all markdown files in the posts directory
+  const postsDir = path.join(__dirname, '../src/posts');
+  const postFiles = glob.sync(path.join(postsDir, '*.md'));
+
+  if (postFiles.length === 0) {
+    console.error('No markdown files found in src/posts directory');
+    process.exit(1);
+  }
+
+  // Generate imports
+  const imports = postFiles.map(file => {
+    const slug = generateSlug(file);
+    const varName = generateVarName(slug);
+    const relativePath = path.relative(
+      path.join(__dirname, '../src/services'),
+      file
+    ).replace(/\\/g, '/'); // Ensure forward slashes for imports
+
+    return `import ${varName} from '../posts/${slug}.md';`;
+  }).join('\n');
+
+  // Generate markdown files map
+  const markdownFilesMap = postFiles.map(file => {
+    const slug = generateSlug(file);
+    const varName = generateVarName(slug);
+
+    return `    '${slug}': ${varName},`;
+  }).join('\n');
+
+  // Read the template file
+  const templatePath = path.join(__dirname, '../src/services/PostService.template.txt');
+  let template;
+
+  try {
+    template = fs.readFileSync(templatePath, 'utf8');
+  } catch (error) {
+    console.error('Template file not found. Creating a new one.');
+    // Use a default template if the file doesn't exist
+    template = `// Import required libraries
 import matter from 'gray-matter';
 
 // Import markdown files directly
 // This will be transformed by webpack's raw-loader
-import optimizingDockerBuildPipelinesMd from '../posts/optimizing-docker-build-pipelines.md';
-import kubernetesResourceManagementMd from '../posts/kubernetes-resource-management.md';
-import githubActionsDockerMd from '../posts/github-actions-docker.md';
+{{IMPORTS}}
 
 /**
  * Interface representing a blog post
@@ -51,9 +122,7 @@ class PostService {
     try {
       // Create a map of markdown content with their slugs
       const markdownFiles: Record<string, string> = {
-    'optimizing-docker-build-pipelines': optimizingDockerBuildPipelinesMd,
-    'kubernetes-resource-management': kubernetesResourceManagementMd,
-    'github-actions-docker': githubActionsDockerMd,
+{{MARKDOWN_FILES_MAP}}
       };
 
       // Process all markdown files
@@ -71,7 +140,7 @@ class PostService {
         };
       });
 
-      console.log(`Loaded ${this.posts.length} posts from markdown files`);
+      console.log(\`Loaded \${this.posts.length} posts from markdown files\`);
       this.initialized = true;
     } catch (error) {
       console.error('Failed to load posts:', error);
@@ -197,3 +266,20 @@ class PostService {
 
 // Create and export a singleton instance
 export const postService = new PostService();
+`;
+  }
+
+  // Replace placeholders in the template
+  const generatedFile = template
+    .replace('{{IMPORTS}}', imports)
+    .replace('{{MARKDOWN_FILES_MAP}}', markdownFilesMap);
+
+  // Write the generated file
+  const outputPath = path.join(__dirname, '../src/services/PostService.ts');
+  fs.writeFileSync(outputPath, generatedFile);
+
+  console.log(`Generated PostService.ts with ${postFiles.length} markdown files imported.`);
+}
+
+// Run the generator
+generatePostService();

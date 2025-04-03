@@ -21,11 +21,11 @@ interface Talk {
 }
 
 /**
- * Favorite Talks page component
+ * Talks page component
  *
- * @returns {JSX.Element} The rendered FavoriteTalks component
+ * @returns {JSX.Element} The rendered Talks component
  */
-const FavoriteTalks: React.FC = () => {
+const Talks: React.FC = () => {
   // Mock data - in a real app this would come from an API or database
   const talks: Talk[] = [
     {
@@ -95,9 +95,9 @@ const FavoriteTalks: React.FC = () => {
   };
 
   return (
-    <div className="favorite-talks-page">
-      <h1>Favorite Conference Talks</h1>
-      <p className="favorite-talks-intro">
+    <div className="talks-page">
+      <h1>Conference Talks</h1>
+      <p className="talks-intro">
         These are some of the most influential conference talks that have shaped my understanding
         of software development, DevOps, cloud computing, and more. Each of these presentations
         offers valuable insights and practical knowledge.
@@ -136,4 +136,4 @@ const FavoriteTalks: React.FC = () => {
   );
 };
 
-export default FavoriteTalks;
+export default Talks;

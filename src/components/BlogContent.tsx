@@ -59,8 +59,8 @@ const BlogContent: React.FC = () => {
         <div className="main-nav-item"><Link to="/about">About</Link></div>
         <div className="main-nav-item active"><Link to="/">Posts</Link></div>
         <div className="main-nav-item"><Link to="/archives">Archive</Link></div>
+        <div className="main-nav-item"><Link to="/talks">Talks</Link></div>
         <div className="main-nav-item"><Link to="/reading-list">Reading List</Link></div>
-        <div className="main-nav-item"><Link to="/favorite-talks">Favorite Talks</Link></div>
       </div>
 
       <div className="blog-header">
