@@ -19,11 +19,20 @@ interface ArchiveData {
 }
 
 /**
+ * Props for the Sidebar component
+ */
+interface SidebarProps {
+  /** Width of the sidebar in pixels */
+  width: number;
+}
+
+/**
  * Sidebar component for the blog
  *
+ * @param {SidebarProps} props - The component props
  * @returns {JSX.Element} The rendered Sidebar component
  */
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<SidebarProps> = ({ width }) => {
   const [recentPosts, setRecentPosts] = useState<Post[]>([]);
   const [tags, setTags] = useState<TagData[]>([]);
   const [archives, setArchives] = useState<ArchiveData[]>([]);
@@ -70,9 +79,9 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{ width: `${width}px` }}>
       <div className="sidebar-inner">
-        <div className="sidebar-logo">cd ~/tech-notes</div>
+        <div className="sidebar-logo">cd ~/bjl/tech-notes</div>
 
         <div className="sidebar-section">
           <div className="sidebar-heading">RECENT POSTS</div>

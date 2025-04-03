@@ -21,14 +21,15 @@ interface CodeBlockProps {
 const CodeBlock: React.FC<CodeBlockProps> = ({ filename, code }) => {
   const [copyButtonText, setCopyButtonText] = useState<string>('Copy');
 
-  // Split code into lines
-  const codeLines = code.split('\n');
+  // Split code into lines, ensuring no empty lines at the end cause layout issues
+  const codeLines = code.trimEnd().split('\n');
 
   /**
    * Handles copying the code to clipboard
    */
-  const handleCopy = (): void => {
-    navigator.clipboard.writeText(code).then(() => {
+  const handleCopy = async (): Promise<void> => {
+    try {
+      await navigator.clipboard.writeText(code);
       // Visual feedback
       setCopyButtonText('Copied!');
 
@@ -36,9 +37,14 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ filename, code }) => {
       setTimeout(() => {
         setCopyButtonText('Copy');
       }, 2000);
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-    });
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      setCopyButtonText('Failed to copy');
+
+      setTimeout(() => {
+        setCopyButtonText('Copy');
+      }, 2000);
+    }
   };
 
   return (
@@ -46,22 +52,29 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ filename, code }) => {
       <div className="code-header">
         <div className="code-filename">{filename}</div>
         <div className="code-actions">
-          <div className="code-action" onClick={handleCopy}>{copyButtonText}</div>
+          <button
+            className="code-action"
+            onClick={handleCopy}
+            type="button"
+            aria-label={`Copy code from ${filename}`}
+          >
+            {copyButtonText}
+          </button>
         </div>
       </div>
       <div className="code-container">
-        <div className="line-numbers">
-          {codeLines.map((_, index) => (
-            <span key={index}>{index + 1}</span>
-          ))}
-        </div>
-        <div className="code-content">
-          {codeLines.map((line, index) => (
-            <div className="code-line" key={index}>
-              {line}
-            </div>
-          ))}
-        </div>
+        <pre className="code-pre">
+          <table className="code-table">
+            <tbody>
+              {codeLines.map((line, index) => (
+                <tr key={index} className="code-row">
+                  <td className="line-number">{index + 1}</td>
+                  <td className="code-line">{line || ' '}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </pre>
       </div>
     </div>
   );

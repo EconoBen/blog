@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Post, postService } from '../services/PostService';
+import MarkdownRenderer from './MarkdownRenderer';
 
 /**
  * Props for the PostDetail component
@@ -62,13 +63,6 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
     });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const renderMarkdownWithExtensions = (content: string): string => {
-    // Here you would implement custom processing for the hover cards
-    // This is a placeholder for future implementation
-    return content;
-  };
-
   if (loading) {
     return <div className="post-detail-loading">Loading post...</div>;
   }
@@ -92,15 +86,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
       </div>
 
       <div className="blog-content">
-        {/* Use dangerouslySetInnerHTML for content with HTML elements */}
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
-
-        {/* Keep ReactMarkdown as fallback for pure markdown content */}
-        {/*
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {post.content}
-        </ReactMarkdown>
-        */}
+        <MarkdownRenderer content={post.content} />
       </div>
     </>
   );

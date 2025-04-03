@@ -1,5 +1,3 @@
-import matter from 'gray-matter';
-
 /**
  * Interface representing a blog post
  */
@@ -16,205 +14,275 @@ export interface Post {
   content: string;
 }
 
-// Mock data for development - in production, this would be loaded dynamically
-const POST_DATA = [
+/**
+ * Mock post data to use in browser environment
+ */
+const MOCK_POSTS: Post[] = [
   {
-    file: 'optimizing-docker-build-pipelines.md',
-    content: `---
-title: Optimizing Docker Build Pipelines for CI/CD
-date: 2025-04-02
-tags: [docker, cicd, performance]
----
-
-After analyzing build times across several projects, I've identified key optimization strategies that significantly reduce Docker image build times without compromising quality. These approaches are particularly valuable in CI/CD pipelines where every second of build time impacts developer productivity and infrastructure costs.
+    slug: 'optimizing-docker-build-pipelines',
+    title: 'Optimizing Docker Build Pipelines for CI/CD',
+    date: new Date('2025-04-02'),
+    tags: ['docker', 'cicd', 'performance'],
+    content: `
+After analyzing build times across several projects, I've identified key optimization
+strategies that significantly reduce Docker image build times without compromising quality. These approaches
+are particularly valuable in CI/CD pipelines where every second of build time impacts developer productivity
+and infrastructure costs.
 
 ## Layer Caching Strategy
 
-The most impactful improvement comes from proper <span class="term-reference">layer caching<div class="hover-card"><div class="hover-card-title">Docker Layer Caching</div>Docker builds images in layers, with each instruction creating a new layer. When you rebuild an image, Docker can reuse unchanged layers from cache, saving build time. Layers are identified by their content hash.</div></span>. By organizing your \`Dockerfile\` to place rarely changed instructions at the top and frequently modified code at the bottom, you can maximize cache utilization.
+The most impactful improvement comes from proper layer caching. By organizing your \`Dockerfile\` to place rarely changed instructions at the top
+and frequently modified code at the bottom, you can maximize cache utilization.
 
-<div class="code-block">
-  <div class="code-header">
-    <div class="code-filename">Dockerfile</div>
-    <div class="code-actions">
-      <div class="code-action">Copy</div>
-    </div>
-  </div>
-  <div class="code-container">
-    <div class="line-numbers">
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-      <span>4</span>
-      <span>5</span>
-      <span>6</span>
-      <span>7</span>
-      <span>8</span>
-      <span>9</span>
-    </div>
-    <div class="code-content">
-      <div class="code-line"><span class="comment"># Place rarely changing instructions at the top</span></div>
-      <div class="code-line"><span class="keyword">FROM</span> node:16-alpine</div>
-      <div class="code-line"><span class="keyword">WORKDIR</span> /app</div>
-      <div class="code-line"></div>
-      <div class="code-line"><span class="comment"># Dependencies change less frequently than code</span></div>
-      <div class="code-line"><span class="keyword">COPY</span> package*.json ./</div>
-      <div class="code-line"><span class="keyword">RUN</span> npm ci</div>
-      <div class="code-line"></div>
-      <div class="code-line"><span class="comment"># Application code changes most frequently - keep at bottom</span></div>
-      <div class="code-line"><span class="keyword">COPY</span> . .</div>
-      <div class="code-line"><span class="keyword">RUN</span> npm run build</div>
-    </div>
-  </div>
-</div>
+\`\`\`dockerfile
+# Place rarely changing instructions at the top
+FROM node:16-alpine
+WORKDIR /app
 
-This ordering ensures that changes to your application code don't invalidate the cached layers for dependency installation, which is typically the most time-consuming part of the build process.
+# Dependencies change less frequently than code
+COPY package*.json ./
+RUN npm ci
+
+# Application code changes most frequently - keep at bottom
+COPY . .
+RUN npm run build
+\`\`\`
+
+This ordering ensures that changes to your application code don't invalidate the cached layers for dependency
+installation, which is typically the most time-consuming part of the build process.
 
 ## Multi-Stage Builds
 
-<span class="term-reference">Multi-stage builds<div class="hover-card"><div class="hover-card-title">Multi-stage Builds</div>A technique that uses multiple FROM statements in a Dockerfile. Each FROM instruction begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't need in the final image.</div></span> provide another dimension of optimization, separating build dependencies from runtime requirements. This approach creates smaller, more secure production images by discarding unnecessary build tools and intermediate files.
+Multi-stage builds provide another dimension of optimization, separating build dependencies from runtime
+requirements. This approach creates smaller, more secure production images by discarding unnecessary build
+tools and intermediate files.
 
-<div class="code-block">
-  <div class="code-header">
-    <div class="code-filename">Dockerfile.multistage</div>
-    <div class="code-actions">
-      <div class="code-action">Copy</div>
-    </div>
-  </div>
-  <div class="code-container">
-    <div class="line-numbers">
-      <span>1</span>
-      <span>2</span>
-      <span>3</span>
-      <span>4</span>
-      <span>5</span>
-      <span>6</span>
-      <span>7</span>
-      <span>8</span>
-      <span>9</span>
-      <span>10</span>
-      <span>11</span>
-      <span>12</span>
-      <span>13</span>
-    </div>
-    <div class="code-content">
-      <div class="code-line"><span class="comment"># Build stage</span></div>
-      <div class="code-line"><span class="keyword">FROM</span> node:16-alpine <span class="keyword">AS</span> build</div>
-      <div class="code-line"><span class="keyword">WORKDIR</span> /app</div>
-      <div class="code-line"><span class="keyword">COPY</span> package*.json ./</div>
-      <div class="code-line"><span class="keyword">RUN</span> npm ci</div>
-      <div class="code-line"><span class="keyword">COPY</span> . .</div>
-      <div class="code-line"><span class="keyword">RUN</span> npm run build</div>
-      <div class="code-line"></div>
-      <div class="code-line"><span class="comment"># Production stage</span></div>
-      <div class="code-line"><span class="keyword">FROM</span> nginx:alpine</div>
-      <div class="code-line"><span class="keyword">COPY</span> --from=build /app/dist /usr/share/nginx/html</div>
-      <div class="code-line"><span class="keyword">EXPOSE</span> 80</div>
-      <div class="code-line"><span class="keyword">CMD</span> [<span class="string">"nginx"</span>, <span class="string">"-g"</span>, <span class="string">"daemon off;"</span>]</div>
-    </div>
-  </div>
-</div>
+\`\`\`dockerfile
+# Build stage
+FROM node:16-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
 
-In this example, the build tools, node_modules, and source code remain in the build stage, while only the compiled artifacts are copied to the production image, resulting in a dramatically smaller footprint.
+# Production stage
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+\`\`\`
+
+In this example, the build tools, node_modules, and source code remain in the build stage, while only the
+compiled artifacts are copied to the production image, resulting in a dramatically smaller footprint.
 
 ## BuildKit Optimizations
 
-Modern Docker installations include <span class="term-reference">BuildKit<div class="hover-card"><div class="hover-card-title">BuildKit</div>Docker's modern build system with advanced features like concurrent dependency resolution, enhanced caching, and automatic garbage collection of unused build cache. Enable with DOCKER_BUILDKIT=1 environment variable.</div></span>, which offers several performance improvements over the legacy builder:
+Modern Docker installations include BuildKit, which offers several performance improvements over the legacy builder:
 
 - Concurrent dependency resolution
 - More efficient caching with content-addressable storage
 - Automatic garbage collection of unused cache
 - Build secrets without leaving them in the image layers
 
-Enable BuildKit by setting the \`DOCKER_BUILDKIT=1\` environment variable before your build commands:
+Enable BuildKit by setting the \`DOCKER_BUILDKIT=1\` environment variable before your build
+commands:
 
-<div class="code-block">
-  <div class="code-header">
-    <div class="code-filename">build.sh</div>
-    <div class="code-actions">
-      <div class="code-action">Copy</div>
-    </div>
-  </div>
-  <div class="code-container">
-    <div class="line-numbers">
-      <span>1</span>
-      <span>2</span>
-    </div>
-    <div class="code-content">
-      <div class="code-line"><span class="keyword">export</span> <span class="string">DOCKER_BUILDKIT=1</span></div>
-      <div class="code-line">docker build -t myapp:latest .</div>
-    </div>
-  </div>
-</div>
+\`\`\`bash
+export DOCKER_BUILDKIT=1
+docker build -t myapp:latest .
+\`\`\`
+
+## CI Integration Tips
+
+When integrating these optimizations into CI systems, consider these additional strategies:
+
+Implement dedicated cache storage solutions to maintain layer caches between builds. Most CI providers offer
+options for this:
+
+\`\`\`yaml
+jobs:
+ build:
+ runs-on: ubuntu-latest
+ steps:
+ - uses: actions/checkout@v3
+
+ - name: Set up Docker Buildx
+ uses: docker/setup-buildx-action@v2
+
+ - name: Build and push
+ uses: docker/build-push-action@v3
+ with:
+ context: .
+ push: false
+ cache-from: type=gha
+ cache-to: type=gha,mode=max
+\`\`\`
 
 ## Conclusion
 
-By implementing these strategies—layer caching optimization, multi-stage builds, and BuildKit adoption—you can achieve significant reductions in Docker build times. In my projects, these techniques have consistently reduced build times by 40-60%, with some complex applications seeing even greater improvements.`
+By implementing these strategies—layer caching optimization, multi-stage builds, BuildKit adoption, and
+CI-specific caching—you can achieve significant reductions in Docker build times. In my projects, these
+techniques have consistently reduced build times by 40-60%, with some complex applications seeing even greater
+improvements.
+
+These optimizations not only speed up your CI/CD pipeline but also reduce resource consumption and
+infrastructure costs while improving developer productivity. Remember that the specific impact will vary based
+on your application's complexity, but the principles apply universally to Docker-based workflows.
+`
   },
   {
-    file: 'kubernetes-resource-management.md',
-    content: `---
-title: Kubernetes Resource Management Strategies
-date: 2025-03-28
-tags: [kubernetes, devops]
----
+    slug: 'react-performance-optimization',
+    title: 'Advanced React Performance Optimization Techniques',
+    date: new Date('2025-03-15'),
+    tags: ['react', 'javascript', 'performance'],
+    content: `
+# Advanced React Performance Optimization Techniques
 
-# Kubernetes Resource Management Strategies
+React applications can suffer from performance issues as they grow in size and complexity. Here are some advanced techniques to optimize your React applications.
 
-Effective resource management is crucial for running stable Kubernetes clusters. This post covers best practices for CPU, memory, and storage allocation.
+## Memoization with React.memo, useMemo, and useCallback
 
-## Resource Management Techniques
+Using memoization techniques can prevent unnecessary re-renders of components or recalculation of expensive values.
 
-- Setting appropriate resource requests and limits
-- Implementing horizontal pod autoscaling
-- Using vertical pod autoscaling for stateful workloads
-- Implementing pod disruption budgets
+\`\`\`jsx
+// Using React.memo to prevent unnecessary re-renders
+const MemoizedComponent = React.memo(function MyComponent(props) {
+  /* render using props */
+});
 
-By properly managing your Kubernetes resources, you can ensure optimal performance while controlling costs.`
-  },
-  {
-    file: 'github-actions-docker.md',
-    content: `---
-title: Setting Up GitHub Actions for Docker
-date: 2025-03-21
-tags: [github, automation]
----
+// Using useMemo to cache expensive calculations
+const memoizedValue = useMemo(() => {
+  return computeExpensiveValue(a, b);
+}, [a, b]);
 
-# Setting Up GitHub Actions for Docker
+// Using useCallback to memoize callback functions
+const memoizedCallback = useCallback(() => {
+  doSomething(a, b);
+}, [a, b]);
+\`\`\`
 
-This guide explains how to set up GitHub Actions workflows for building, testing, and deploying Docker containers.
+## Code Splitting with React.lazy and Suspense
 
-## Workflow Configuration
+Code splitting allows you to break up your code into smaller chunks which are loaded on demand.
 
-We'll cover:
-- Creating workflow files
-- Setting up Docker build steps
-- Configuring secrets for registry access
-- Implementing automated tests
-- Deploying to various environments
+\`\`\`jsx
+import React, { Suspense, lazy } from 'react';
 
-GitHub Actions provides powerful automation capabilities for containerized applications.`
-  },
-  {
-    file: 'container-security.md',
-    content: `---
-title: Container Security Best Practices
-date: 2025-03-15
-tags: [security, containers]
----
+// Lazy load a component
+const LazyComponent = lazy(() => import('./LazyComponent'));
 
-# Container Security Best Practices
+function MyComponent() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+\`\`\`
 
-This post explores essential security practices for containerized applications in production environments.
+## Virtualization for Long Lists
 
-## Key Security Measures
+When rendering long lists, virtualization can significantly improve performance by only rendering items currently in view.
 
-- Scanning for vulnerabilities in container images
-- Implementing least privilege principles
-- Network segmentation and policy controls
-- Runtime security monitoring
-- Secrets management
+\`\`\`jsx
+import { FixedSizeList } from 'react-window';
 
-Implementing these security measures will help protect your containerized applications from common threats and vulnerabilities.`
+function MyList({ items }) {
+  const Row = ({ index, style }) => (
+    <div style={style}>
+      {items[index]}
+    </div>
+  );
+
+  return (
+    <FixedSizeList
+      height={500}
+      width={300}
+      itemSize={50}
+      itemCount={items.length}
+    >
+      {Row}
+    </FixedSizeList>
+  );
+}
+\`\`\`
+
+## Debouncing and Throttling Event Handlers
+
+For handlers attached to frequently firing events like scroll or resize, debouncing or throttling can reduce the number of calls.
+
+\`\`\`jsx
+import { useEffect, useState } from 'react';
+import { debounce } from 'lodash';
+
+function SearchComponent() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState([]);
+
+  // Debounced search function
+  const debouncedSearch = debounce(async (term) => {
+    const data = await fetchSearchResults(term);
+    setResults(data);
+  }, 500);
+
+  useEffect(() => {
+    if (searchTerm) {
+      debouncedSearch(searchTerm);
+    }
+
+    // Cleanup
+    return () => {
+      debouncedSearch.cancel();
+    };
+  }, [searchTerm, debouncedSearch]);
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search..."
+      />
+      {/* Render results */}
+    </div>
+  );
+}
+\`\`\`
+
+## Using Web Workers for CPU-Intensive Tasks
+
+Move CPU-intensive operations off the main thread using Web Workers.
+
+\`\`\`jsx
+import { useState } from 'react';
+
+function CPUIntensiveComponent() {
+  const [result, setResult] = useState(null);
+
+  const startCalculation = () => {
+    const worker = new Worker('./calculationWorker.js');
+
+    worker.onmessage = (e) => {
+      setResult(e.data);
+      worker.terminate();
+    };
+
+    worker.postMessage({ data: 'calculation parameters' });
+  };
+
+  return (
+    <div>
+      <button onClick={startCalculation}>Start Calculation</button>
+      {result && <div>Result: {result}</div>}
+    </div>
+  );
+}
+\`\`\`
+
+By applying these techniques strategically in your React applications, you can achieve significant performance improvements and provide a smoother user experience.
+`
   }
 ];
 
@@ -244,115 +312,102 @@ class PostService {
     if (this.initialized) return;
 
     try {
-      // In a production environment, this would be fetched from an API
-      // For now, we're using the mock data defined above
-      this.posts = POST_DATA.map(postData => {
-        // Extract slug from filename (remove extension)
-        const slug = postData.file.replace('.md', '');
-
-        // Parse frontmatter and content
-        const { data, content } = matter(postData.content);
-
-        return {
-          slug,
-          title: data.title,
-          date: new Date(data.date),
-          tags: data.tags || [],
-          content
-        };
-      });
-
-      // Sort posts by date (newest first)
-      this.posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+      // Use mock data instead of file system
+      this.posts = MOCK_POSTS;
       this.initialized = true;
-
-      // Add logging to track post initialization
-      console.log(`PostService initialized with ${this.posts.length} posts:`);
-      this.posts.forEach(post => {
-        console.log(`- ${post.slug}: "${post.title}" (${post.tags.join(', ')})`);
-      });
+      console.log(`Loaded ${this.posts.length} posts from mock data`);
     } catch (error) {
-      console.error('Failed to initialize post service:', error);
-      throw error;
+      console.error('Failed to load posts:', error);
+      // Fallback to empty posts array
+      this.posts = [];
+      this.initialized = true;
     }
   }
 
   /**
-   * Get all posts
+   * Get all posts, sorted by date (newest first)
    *
-   * @returns {Promise<Post[]>} Array of all posts, sorted by date
+   * @returns {Promise<Post[]>} Array of all posts
    */
   async getAllPosts(): Promise<Post[]> {
-    await this.initialize();
-    return this.posts;
+    await this.ensureInitialized();
+    return [...this.posts].sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 
   /**
-   * Get recent posts
+   * Get recent posts, limited by count
    *
-   * @param {number} count - Number of recent posts to retrieve
+   * @param {number} count - Number of posts to return
    * @returns {Promise<Post[]>} Array of recent posts
    */
   async getRecentPosts(count: number = 5): Promise<Post[]> {
-    await this.initialize();
-    return this.posts.slice(0, count);
+    const allPosts = await this.getAllPosts();
+    return allPosts.slice(0, count);
   }
 
   /**
-   * Get all unique tags from posts
+   * Get all tags with post counts
    *
-   * @returns {Promise<{tag: string, count: number}[]>} Array of tags with post counts
+   * @returns {Promise<{tag: string, count: number}[]>} Array of tags with counts
    */
   async getAllTags(): Promise<{tag: string, count: number}[]> {
-    await this.initialize();
+    await this.ensureInitialized();
 
-    const tagCounts: Record<string, number> = {};
+    // Create a map of tag counts
+    const tagCounts = new Map<string, number>();
 
-    // Count occurrences of each tag
     this.posts.forEach(post => {
       post.tags.forEach(tag => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        const currentCount = tagCounts.get(tag) || 0;
+        tagCounts.set(tag, currentCount + 1);
       });
     });
 
     // Convert to array and sort by count (descending)
-    return Object.entries(tagCounts)
+    return Array.from(tagCounts.entries())
       .map(([tag, count]) => ({ tag, count }))
       .sort((a, b) => b.count - a.count);
   }
 
   /**
-   * Get posts by tag
+   * Get posts filtered by tag
    *
    * @param {string} tag - Tag to filter by
    * @returns {Promise<Post[]>} Array of posts with the specified tag
    */
   async getPostsByTag(tag: string): Promise<Post[]> {
-    await this.initialize();
-    return this.posts.filter(post => post.tags.includes(tag));
+    await this.ensureInitialized();
+    return this.posts
+      .filter(post => post.tags.includes(tag))
+      .sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 
   /**
-   * Get archive information by month
+   * Get archive data by month
    *
    * @returns {Promise<{month: string, count: number}[]>} Array of months with post counts
    */
   async getArchiveByMonth(): Promise<{month: string, count: number}[]> {
-    await this.initialize();
-
-    const archiveCounts: Record<string, number> = {};
+    await this.ensureInitialized();
 
     // Group posts by month
+    const monthCounts = new Map<string, number>();
+
     this.posts.forEach(post => {
-      const month = post.date.toLocaleString('en-US', { month: 'long', year: 'numeric' });
-      archiveCounts[month] = (archiveCounts[month] || 0) + 1;
+      const monthYear = post.date.toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+
+      const currentCount = monthCounts.get(monthYear) || 0;
+      monthCounts.set(monthYear, currentCount + 1);
     });
 
     // Convert to array and sort by date (newest first)
-    return Object.entries(archiveCounts)
+    return Array.from(monthCounts.entries())
       .map(([month, count]) => ({ month, count }))
       .sort((a, b) => {
-        // Parse month string back to date for sorting
+        // Sort by date (most recent first)
         const dateA = new Date(a.month);
         const dateB = new Date(b.month);
         return dateB.getTime() - dateA.getTime();
@@ -360,16 +415,28 @@ class PostService {
   }
 
   /**
-   * Get a single post by slug
+   * Get a post by its slug
    *
-   * @param {string} slug - Post slug to retrieve
-   * @returns {Promise<Post|null>} The post or null if not found
+   * @param {string} slug - Post slug to find
+   * @returns {Promise<Post | null>} The found post or null
    */
   async getPostBySlug(slug: string): Promise<Post | null> {
-    await this.initialize();
+    await this.ensureInitialized();
     return this.posts.find(post => post.slug === slug) || null;
+  }
+
+  /**
+   * Ensure the service is initialized before operations
+   *
+   * @private
+   * @returns {Promise<void>}
+   */
+  private async ensureInitialized(): Promise<void> {
+    if (!this.initialized) {
+      await this.initialize();
+    }
   }
 }
 
-// Export singleton instance
+// Create and export a singleton instance
 export const postService = new PostService();

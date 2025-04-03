@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import './App.css';
 import Sidebar from './components/Sidebar';
@@ -11,6 +11,7 @@ import ReadingList from './components/ReadingList';
 import FavoriteTalks from './components/FavoriteTalks';
 import ArchivesPage from './components/ArchivesPage';
 import { postService } from './services/PostService';
+import MarkdownRenderer from './components/MarkdownRenderer';
 
 /**
  * Home page component
@@ -73,7 +74,9 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="blog-content" dangerouslySetInnerHTML={{ __html: post.content }} />
+      <div className="blog-content">
+        <MarkdownRenderer content={post.content} />
+      </div>
     </>
   );
 };
@@ -116,11 +119,19 @@ const ArchivePageWrapper: React.FC = () => {
 const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const [sidebarWidth, setSidebarWidth] = useState<number>(240);
+  const [isResizing, setIsResizing] = useState<boolean>(false);
 
   useEffect(() => {
     // Check for saved dark mode preference
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedDarkMode);
+
+    // Check for saved sidebar width preference
+    const savedWidth = localStorage.getItem('sidebarWidth');
+    if (savedWidth) {
+      setSidebarWidth(parseInt(savedWidth));
+    }
   }, []);
 
   // Update body classes based on sidebar and dark mode state
@@ -136,7 +147,59 @@ const App: React.FC = () => {
     } else {
       document.body.classList.remove('dark-mode');
     }
-  }, [isSidebarOpen, isDarkMode]);
+
+    // Update CSS variable to match current sidebar width
+    document.body.style.setProperty('--sidebar-width', `${sidebarWidth}px`);
+  }, [isSidebarOpen, isDarkMode, sidebarWidth]);
+
+  /**
+   * Handles the start of resizing the sidebar
+   *
+   * @param {React.MouseEvent} e - The mouse event
+   */
+  const handleResizeStart = (e: React.MouseEvent): void => {
+    setIsResizing(true);
+    e.preventDefault();
+  };
+
+  /**
+   * Handles the mouse movement while resizing
+   *
+   * @param {MouseEvent} e - The mouse event
+   */
+  const handleResizeMove = useCallback((e: MouseEvent): void => {
+    if (!isResizing) return;
+
+    // Get window width to calculate max sidebar width
+    const windowWidth = window.innerWidth;
+    const maxWidth = Math.min(500, windowWidth * 0.4); // 40% of window width or 500px, whichever is smaller
+
+    // Set minimum and maximum width constraints
+    const newWidth = Math.max(180, Math.min(maxWidth, e.clientX));
+    setSidebarWidth(newWidth);
+    document.body.style.setProperty('--sidebar-width', `${newWidth}px`);
+  }, [isResizing, setSidebarWidth]);
+
+  /**
+   * Handles the end of resizing the sidebar
+   */
+  const handleResizeEnd = useCallback((): void => {
+    setIsResizing(false);
+    // Save the current width to localStorage using the computed style
+    const currentWidth = getComputedStyle(document.body).getPropertyValue('--sidebar-width');
+    localStorage.setItem('sidebarWidth', currentWidth.replace('px', ''));
+  }, []);
+
+  // Add and remove event listeners for resize functionality
+  useEffect(() => {
+    document.addEventListener('mousemove', handleResizeMove);
+    document.addEventListener('mouseup', handleResizeEnd);
+
+    return () => {
+      document.removeEventListener('mousemove', handleResizeMove);
+      document.removeEventListener('mouseup', handleResizeEnd);
+    };
+  }, [handleResizeMove, handleResizeEnd]);
 
   /**
    * Toggles the sidebar open/closed state
@@ -173,10 +236,21 @@ const App: React.FC = () => {
         </div>
 
         {/* Sidebar Component */}
-        <Sidebar />
+        <Sidebar width={sidebarWidth} />
+
+        {/* Sidebar Resize Handle */}
+        {isSidebarOpen && (
+          <div
+            className="sidebar-resize-handle"
+            onMouseDown={handleResizeStart}
+          />
+        )}
 
         {/* Main Content Component */}
-        <div className="main-content">
+        <div className="main-content" style={{
+          marginLeft: isSidebarOpen ? `${sidebarWidth}px` : '0',
+          maxWidth: isSidebarOpen ? `calc(100% - ${sidebarWidth}px)` : '100%'
+        }}>
           {/* Navigation Bar */}
           <NavBar />
 

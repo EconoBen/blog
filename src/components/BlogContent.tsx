@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import CodeBlock from '../components/CodeBlock';
+import { Link } from 'react-router-dom';
 
 /**
  * BlogContent component containing the main blog post content
@@ -55,11 +56,11 @@ const BlogContent: React.FC = () => {
   return (
     <div className="main-content">
       <div className="main-nav">
-        <div className="main-nav-item"><a href="#">About</a></div>
-        <div className="main-nav-item active"><a href="#">Posts</a></div>
-        <div className="main-nav-item"><a href="#">Archive</a></div>
-        <div className="main-nav-item"><a href="#">Reading List</a></div>
-        <div className="main-nav-item"><a href="#">Favorite Talks</a></div>
+        <div className="main-nav-item"><Link to="/about">About</Link></div>
+        <div className="main-nav-item active"><Link to="/">Posts</Link></div>
+        <div className="main-nav-item"><Link to="/archives">Archive</Link></div>
+        <div className="main-nav-item"><Link to="/reading-list">Reading List</Link></div>
+        <div className="main-nav-item"><Link to="/favorite-talks">Favorite Talks</Link></div>
       </div>
 
       <div className="blog-header">
