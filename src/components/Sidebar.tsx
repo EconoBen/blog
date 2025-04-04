@@ -84,24 +84,6 @@ const Sidebar: React.FC<SidebarProps> = ({ width }) => {
         <div className="sidebar-logo">cd ~/bjl/tech-notes</div>
 
         <div className="sidebar-section">
-          <div className="sidebar-heading">NAVIGATION</div>
-          <ul className="nav-list">
-            <li className="nav-item">
-              <Link to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/publications">Publications</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/talks">Talks</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="sidebar-section">
           <div className="sidebar-heading">RECENT POSTS</div>
           {loading ? (
             <div>Loading posts...</div>

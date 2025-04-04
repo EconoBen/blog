@@ -8,7 +8,7 @@ import { blogConfig } from '../config/blogConfig';
  */
 const SocialLinks: React.FC = () => {
   return (
-    <div className="social-links">
+    <div className="social-links" style={{ top: '5px' }}> {/* Positioned below the navbar */}
       {/* GitHub */}
       {blogConfig.socialLinks.github && (
         <a href={blogConfig.socialLinks.github} target="_blank" rel="noopener noreferrer" className="social-link" title="GitHub">

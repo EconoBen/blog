@@ -66,41 +66,84 @@ const ArchivesPage: React.FC = () => {
   };
 
   if (loading) {
-    return <div className="archives-page-loading">Loading archives...</div>;
+    return (
+      <div className="archives-page">
+        <div className="component-box">
+          <div className="component-header">
+            <h2>Archives</h2>
+            <p className="subtitle">Browse all blog posts by publication date</p>
+          </div>
+          <div className="loading-spinner">Loading archives...</div>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
-    return <div className="archives-page-error">{error}</div>;
+    return (
+      <div className="archives-page">
+        <div className="component-box">
+          <div className="component-header">
+            <h2>Archives</h2>
+            <p className="subtitle">Browse all blog posts by publication date</p>
+          </div>
+          <div className="error-message">{error}</div>
+        </div>
+      </div>
+    );
   }
 
   const groupedArchives = groupByYear();
 
   return (
     <div className="archives-page">
-      <h1>Archives</h1>
-      <p className="archives-intro">
-        Browse all blog posts by month. Click on a month to see all posts published during that period.
-      </p>
+      <div className="component-box">
+        <div className="component-header">
+          <h2>Archives</h2>
+          <p className="subtitle">Browse all blog posts by publication date</p>
+        </div>
 
-      {Object.keys(groupedArchives).length === 0 ? (
-        <div className="no-archives">No archives available.</div>
-      ) : (
-        Object.entries(groupedArchives).map(([year, months]) => (
-          <div key={year} className="archive-year">
-            <h2>{year}</h2>
-            <div className="archive-months">
-              {months.map(archive => (
-                <div key={archive.month} className="archive-month-item">
-                  <Link to={`/archives/${encodeURIComponent(archive.month)}`} className="archive-month-link">
-                    {archive.month.split(' ')[0]} {/* Just display the month part */}
-                  </Link>
-                  <span className="archive-count">{archive.count} posts</span>
+        {Object.keys(groupedArchives).length === 0 ? (
+          <div className="no-results">No archives available.</div>
+        ) : (
+          <div className="archives-content">
+            {Object.entries(groupedArchives).map(([year, months]) => (
+              <div key={year} className="archive-year-card">
+                <div className="year-header">
+                  <h3>{year}</h3>
+                  <div className="year-divider"></div>
                 </div>
-              ))}
-            </div>
+
+                <div className="archive-months-grid">
+                  {months.map(archive => (
+                    <Link
+                      key={archive.month}
+                      to={`/archives/${encodeURIComponent(archive.month)}`}
+                      className="archive-month-card"
+                    >
+                      <div className="month-content">
+                        <div className="month-name">
+                          {archive.month.split(' ')[0]}
+                        </div>
+                        <div className="post-count">
+                          <span className="count-number">{archive.count}</span>
+                          <span className="count-label">Posts</span>
+                        </div>
+                      </div>
+                      <div className="month-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="M12 5l7 7-7 7"></path>
+                        </svg>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-        ))
-      )}
+        )}
+      </div>
     </div>
   );
 };
