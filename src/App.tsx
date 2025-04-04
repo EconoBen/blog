@@ -1,92 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter as Router, Routes, Route, useParams, Link } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import NavBar from './components/NavBar';
 import PostDetail from './components/PostDetail';
 import TagPage from './components/TagPage';
 import ArchivePage from './components/ArchivePage';
 import About from './components/About';
-import ReadingList from './components/ReadingList';
-import Talks from './components/Talks';
+import TalksPage from './components/TalksPage';
 import ArchivesPage from './components/ArchivesPage';
-import { postService } from './services/PostService';
+import HomePage from './components/HomePage';
 import SocialLinks from './components/SocialLinks';
-
-/**
- * Home page component
- *
- * @returns {JSX.Element} The rendered Home component
- */
-const Home: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [posts, setPosts] = useState<any[]>([]);
-
-  useEffect(() => {
-    const loadPosts = async () => {
-      try {
-        console.log("Loading all posts...");
-        const allPosts = await postService.getAllPosts();
-
-        if (allPosts && allPosts.length > 0) {
-          console.log(`Successfully loaded ${allPosts.length} posts`);
-          setPosts(allPosts);
-        } else {
-          console.error("No posts found");
-          setPosts([]);
-        }
-      } catch (error) {
-        console.error("Failed to load posts:", error);
-        setPosts([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadPosts();
-  }, []);
-
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
-
-  if (loading) {
-    return <div>Loading posts...</div>;
-  }
-
-  if (!posts || posts.length === 0) {
-    return <div>No posts found</div>;
-  }
-
-  return (
-    <div className="posts-list">
-      <h1 className="page-title">All Posts</h1>
-      {posts.map(post => (
-        <div key={post.slug} className="post-item">
-          <h2 className="post-title">
-            <Link to={`/posts/${post.slug}`}>{post.title}</Link>
-          </h2>
-          <div className="post-meta">
-            {formatDate(post.date)}
-            {post.tags.map((tag: string) => (
-              <span key={tag} className="post-tag">{tag}</span>
-            ))}
-          </div>
-          <div className="post-excerpt">
-            {post.content.substring(0, 200)}...
-          </div>
-          <div className="post-read-more">
-            <Link to={`/posts/${post.slug}`}>Read more →</Link>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-};
+import PublicationsPage from './components/PublicationsPage';
 
 /**
  * Wrapper for PostDetail with route params
@@ -267,15 +191,14 @@ const App: React.FC = () => {
           {/* Routes */}
           <div className="content-wrapper">
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/posts/:slug" element={<PostDetailWrapper />} />
               <Route path="/tags/:tag" element={<TagPageWrapper />} />
               <Route path="/archives/:month" element={<ArchivePageWrapper />} />
               <Route path="/archives" element={<ArchivesPage />} />
               <Route path="/about" element={<About />} />
-              <Route path="/talks" element={<Talks />} />
-              <Route path="/reading-list" element={<ReadingList />} />
-
+              <Route path="/talks" element={<TalksPage />} />
+              <Route path="/publications" element={<PublicationsPage />} />
             </Routes>
           </div>
         </div>

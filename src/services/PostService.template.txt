@@ -19,6 +19,8 @@ export interface Post {
   tags: string[];
   /** Post content in markdown format */
   content: string;
+  /** Optional summary for displaying in previews */
+  summary?: string;
 }
 
 /**
@@ -63,7 +65,8 @@ class PostService {
           title: data.title,
           date: new Date(data.date),
           tags: data.tags || [],
-          content: markdownContent
+          content: markdownContent,
+          summary: data.summary || ''
         };
       });
 

@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './styles/layout.css';
+import './styles/components.css';
+import './styles/navigation.css';
+import './styles/typography.css';
+import './styles/dark-mode.css';
+import './styles/responsive.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

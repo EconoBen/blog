@@ -3,9 +3,7 @@ import matter from 'gray-matter';
 
 // Import markdown files directly
 // This will be transformed by webpack's raw-loader
-import optimizingDockerBuildPipelinesMd from '../posts/optimizing-docker-build-pipelines.md';
-import kubernetesResourceManagementMd from '../posts/kubernetes-resource-management.md';
-import githubActionsDockerMd from '../posts/github-actions-docker.md';
+import what_are_ai_agents_an_introductionMd from '../posts/what_are_ai_agents_an_introduction.md';
 
 /**
  * Interface representing a blog post
@@ -21,6 +19,8 @@ export interface Post {
   tags: string[];
   /** Post content in markdown format */
   content: string;
+  /** Optional summary for displaying in previews */
+  summary?: string;
 }
 
 /**
@@ -51,9 +51,7 @@ class PostService {
     try {
       // Create a map of markdown content with their slugs
       const markdownFiles: Record<string, string> = {
-    'optimizing-docker-build-pipelines': optimizingDockerBuildPipelinesMd,
-    'kubernetes-resource-management': kubernetesResourceManagementMd,
-    'github-actions-docker': githubActionsDockerMd,
+    'what_are_ai_agents_an_introduction': what_are_ai_agents_an_introductionMd,
       };
 
       // Process all markdown files
@@ -67,7 +65,8 @@ class PostService {
           title: data.title,
           date: new Date(data.date),
           tags: data.tags || [],
-          content: markdownContent
+          content: markdownContent,
+          summary: data.summary || ''
         };
       });
 

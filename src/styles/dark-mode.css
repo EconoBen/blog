@@ -1,0 +1,173 @@
+/**
+ * Dark Mode Styles
+ * Dark theme-specific overrides that can't be handled with CSS variables
+ */
+
+/* Base dark mode */
+.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Sidebar elements */
+.dark-mode .sidebar {
+    background: #1e1e1e;
+}
+
+.dark-mode .sidebar-heading {
+    color: #ccc;
+    border-bottom-color: #333;
+}
+
+.dark-mode .sidebar-logo {
+    color: #ccc;
+}
+
+.dark-mode .sidebar .post-title a {
+    color: #e0e0e0;
+}
+
+.dark-mode .sidebar .post-title a:hover {
+    color: #5e9eff;
+}
+
+.dark-mode .sidebar .post-tag {
+    background: #333;
+    color: #ccc;
+}
+
+.dark-mode .sidebar .post-item {
+    border-bottom-color: #333;
+}
+
+/* Content elements */
+.dark-mode .blog-content blockquote {
+    border-left-color: #444;
+    background: #1e1e1e;
+    color: #ccc;
+}
+
+.dark-mode .blog-content ul,
+.dark-mode .blog-content ol {
+    color: #e0e0e0;
+}
+
+.dark-mode .blog-content hr {
+    background: #333;
+}
+
+/* Post items */
+.dark-mode .post-item {
+    border-bottom-color: #333;
+}
+
+.dark-mode .post-item .post-title a {
+    color: #e0e0e0;
+}
+
+.dark-mode .post-item .post-title a:hover {
+    color: #5e9eff;
+}
+
+.dark-mode .post-item .post-excerpt {
+    color: #aaa;
+}
+
+.dark-mode .post-item .post-tag {
+    background: #333;
+    color: #ccc;
+}
+
+.dark-mode .post-item .post-read-more a {
+    color: #5e9eff;
+}
+
+.dark-mode .post-item .post-read-more a:hover {
+    color: #7eaeff;
+}
+
+/* Social links */
+.dark-mode .social-link {
+    background: #333;
+    color: #ddd;
+}
+
+.dark-mode .social-link:hover {
+    background: #444;
+    color: #0070f3;
+}
+
+/* Blog Card */
+.dark-mode .blog-card {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .blog-card-hovered {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Tech Badge */
+.dark-mode .tech-badge {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Navigation */
+.dark-mode .nav-scrolled {
+    background-color: var(--color-background);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .page-title {
+    border-bottom-color: #333;
+}
+
+/* Featured Post Card */
+.dark-mode .featured-post-card {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Code blocks */
+.dark-mode .code-block {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
+    background: #1e1e1e;
+}
+
+.dark-mode .code-header {
+    background: #2d2d2d;
+    color: #ccc;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .code-action {
+    background: #444;
+    color: #ccc;
+}
+
+.dark-mode .code-action:hover {
+    background: #555;
+}
+
+.dark-mode .code-container {
+    background: #282a36;
+}
+
+.dark-mode .line-number {
+    background: #252525;
+    border-right-color: #3d3d3d;
+    color: #777;
+}
+
+.dark-mode .code-line {
+    color: #f8f8f2;
+}
+
+.dark-mode .code-row:nth-child(odd) {
+    background-color: rgba(255,255,255,0.02);
+}
+
+/* Code syntax highlighting in dark mode */
+.dark-mode .blog-content code {
+    background: #2d2d2d;
+    color: #ff79c6;
+}
