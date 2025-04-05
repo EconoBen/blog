@@ -11,6 +11,7 @@ import ArchivesPage from './components/ArchivesPage';
 import HomePage from './components/HomePage';
 import SocialLinks from './components/SocialLinks';
 import PublicationsPage from './components/PublicationsPage';
+import SearchResults from './components/SearchResults';
 
 /**
  * Wrapper for PostDetail with route params
@@ -199,6 +200,7 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/talks" element={<TalksPage />} />
               <Route path="/publications" element={<PublicationsPage />} />
+              <Route path="/search" element={<SearchResults />} />
             </Routes>
           </div>
         </div>

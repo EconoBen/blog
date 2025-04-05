@@ -81,46 +81,52 @@ body.sidebar-open .sidebar-resize-handle {
 /* Sidebar Toggle Button */
 .sidebar-toggle {
     position: fixed;
-    top: var(--spacing-lg);
+    top: 50%;
     left: var(--spacing-lg);
-    width: 40px;
+    width: 24px;
     height: 40px;
-    background: var(--color-button-bg);
-    border-radius: var(--radius-full);
+    background: var(--color-sidebar-bg);
+    border-radius: 0 3px 3px 0;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 110;
-    box-shadow: var(--shadow-small);
-    transition: background var(--transition-medium), left var(--transition-medium);
+    z-index: 999;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: background var(--transition-medium), left var(--transition-medium), opacity var(--transition-medium);
+    transform: translateY(-50%);
+    border-left: none;
+    opacity: 0.8;
 }
 
 body.sidebar-open .sidebar-toggle {
-    left: calc(var(--sidebar-width) + var(--spacing-lg));
+    left: var(--sidebar-width);
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-toggle:hover {
     background: var(--color-button-hover);
+    opacity: 1;
 }
 
 .toggle-icon {
-    width: 20px;
-    height: 14px;
+    width: 14px;
+    height: 10px;
     position: relative;
     transform: rotate(0deg);
     transition: .5s ease-in-out;
     cursor: pointer;
+    opacity: 0.7;
 }
 
 .toggle-icon span {
     display: block;
     position: absolute;
-    height: 2px;
+    height: 1.5px;
     width: 100%;
-    background: #555;
-    border-radius: 2px;
-    opacity: 1;
+    background: var(--color-text);
+    border-radius: 1px;
+    opacity: 0.7;
     left: 0;
     transform: rotate(0deg);
     transition: .25s ease-in-out;
@@ -248,7 +254,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     align-items: center;
     justify-content: space-between;
     min-height: 60vh;
-    overflow: hidden;
+    overflow: visible;
     border-radius: 20px;
     background: var(--hero-bg);
 }
@@ -265,14 +271,18 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 450px;
+    max-width: 650px;
     animation: float 6s ease-in-out infinite;
+    position: relative;
+    overflow: visible;
+    margin-right: -100px;
 }
 
 .hero-graphic {
     position: relative;
     width: 100%;
     height: 100%;
+    overflow: visible;
 }
 
 /* Newsletter Section Layout */

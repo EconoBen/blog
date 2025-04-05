@@ -86,9 +86,8 @@ export const blogConfig: BlogConfig = {
 
   socialLinks: {
     github: "https://github.com/econoben",
-    twitter: "https://twitter.com/yourusername",
     linkedin: "https://linkedin.com/in/benjamin-labaschin",
     bluesky: "https://bsky.app/profile/econoben.dev",
-    email: "mailto:benjaminlabaschindev@gmail.com"
+    email: "mailto:benjaminlabaschin@gmail.com"
   }
 };

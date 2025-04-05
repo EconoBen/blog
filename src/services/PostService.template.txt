@@ -182,6 +182,38 @@ class PostService {
   }
 
   /**
+   * Search posts by query term in title, content, and tags
+   *
+   * @param {string} query - Search query
+   * @returns {Promise<Post[]>} Array of matching posts
+   */
+  async searchPosts(query: string): Promise<Post[]> {
+    await this.ensureInitialized();
+
+    // If query is empty, return empty array
+    if (!query.trim()) {
+      return [];
+    }
+
+    // Convert query to lowercase for case-insensitive matching
+    const normalizedQuery = query.toLowerCase().trim();
+
+    // Filter posts that match the query in title, content, or tags
+    return this.posts
+      .filter(post => {
+        const titleMatch = post.title.toLowerCase().includes(normalizedQuery);
+        const contentMatch = post.content.toLowerCase().includes(normalizedQuery);
+        const tagsMatch = post.tags.some(tag =>
+          tag.toLowerCase().includes(normalizedQuery)
+        );
+
+        // Return true if any field matches
+        return titleMatch || contentMatch || tagsMatch;
+      })
+      .sort((a, b) => b.date.getTime() - a.date.getTime());
+  }
+
+  /**
    * Ensure the service is initialized before operations
    *
    * @private

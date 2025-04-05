@@ -20,13 +20,50 @@ function generateSlug(filename) {
 }
 
 /**
- * Generate a camelCase variable name from a slug
+ * Generate a safe variable name from a slug
+ * Handles special characters and ensures the variable name is valid JavaScript
  *
  * @param {string} slug - The slug to convert
- * @returns {string} The camelCase variable name
+ * @returns {string} The safe variable name
  */
 function generateVarName(slug) {
-  return slug.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase()) + 'Md';
+  // Handle filenames starting with numbers by adding a prefix
+  const hasNumberPrefix = /^[0-9]/.test(slug);
+
+  // Convert to camelCase and sanitize
+  let varName = slug
+    // Convert hyphens to camelCase
+    .replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+    // Remove apostrophes and other problematic characters
+    .replace(/['"`]/g, '')
+    // Replace dots and other non-alphanumeric characters with underscores
+    .replace(/[^a-zA-Z0-9_]/g, '_')
+    + 'Md';
+
+  // Handle numeric prefixes by rearranging to put numbers at the end
+  if (hasNumberPrefix) {
+    // Extract the numeric part from the beginning
+    const numericMatch = slug.match(/^([0-9]+)(.*)$/);
+    if (numericMatch) {
+      const numericPart = numericMatch[1];
+      // Get the rest of the name without the numeric prefix
+      let restOfName = numericMatch[2];
+
+      // Remove any leading non-alphabetic characters from the rest of the name
+      restOfName = restOfName.replace(/^[^a-zA-Z]+/, '');
+
+      // If the rest of the name starts with a hyphen or underscore, trim it
+      restOfName = restOfName.replace(/^[-_]/, '');
+
+      // Convert the first part to camelCase if it has hyphens
+      const camelCaseRest = restOfName.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
+
+      // Create the final variable name with the number at the end
+      varName = camelCaseRest + numericPart + 'Md';
+    }
+  }
+
+  return varName;
 }
 
 /**
@@ -42,24 +79,45 @@ function generatePostService() {
     process.exit(1);
   }
 
+  // Create a map to track variable names to avoid duplicates
+  const varNamesMap = new Map();
+  // Create a map to store the final variable name for each slug
+  const slugToVarMap = new Map();
+
   // Generate imports
   const imports = postFiles.map(file => {
     const slug = generateSlug(file);
-    const varName = generateVarName(slug);
-    const relativePath = path.relative(
-      path.join(__dirname, '../src/services'),
-      file
-    ).replace(/\\/g, '/'); // Ensure forward slashes for imports
+    let varName = generateVarName(slug);
 
-    return `import ${varName} from '../posts/${slug}.md';`;
+    // Check if we've seen this variable name before
+    if (varNamesMap.has(varName)) {
+      // If duplicate, append a number to make it unique
+      const count = varNamesMap.get(varName) + 1;
+      varNamesMap.set(varName, count);
+      varName = `${varName}${count}`;
+    } else {
+      varNamesMap.set(varName, 1);
+    }
+
+    // Store the final variable name for this slug
+    slugToVarMap.set(slug, varName);
+
+    // Escape any special characters in the path string
+    const safePath = `../posts/${slug}.md`.replace(/'/g, "\\'");
+
+    return `import ${varName} from '${safePath}';`;
   }).join('\n');
 
-  // Generate markdown files map
+  // Generate markdown files map using the same variable names as in imports
   const markdownFilesMap = postFiles.map(file => {
     const slug = generateSlug(file);
-    const varName = generateVarName(slug);
+    // Use the same variable name that was used in the imports
+    const varName = slugToVarMap.get(slug);
 
-    return `    '${slug}': ${varName},`;
+    // Escape any special characters in the slug string
+    const safeSlug = slug.replace(/'/g, "\\'");
+
+    return `    '${safeSlug}': ${varName},`;
   }).join('\n');
 
   // Read the template file
@@ -92,6 +150,8 @@ export interface Post {
   tags: string[];
   /** Post content in markdown format */
   content: string;
+  /** Optional summary for displaying in previews */
+  summary?: string;
 }
 
 /**
@@ -136,7 +196,8 @@ class PostService {
           title: data.title,
           date: new Date(data.date),
           tags: data.tags || [],
-          content: markdownContent
+          content: markdownContent,
+          summary: data.summary || ''
         };
       });
 
@@ -281,5 +342,10 @@ export const postService = new PostService();
   console.log(`Generated PostService.ts with ${postFiles.length} markdown files imported.`);
 }
 
-// Run the generator
-generatePostService();
+// If the script is executed directly
+if (require.main === module) {
+  generatePostService();
+}
+
+// Export the function for use in other scripts
+module.exports = { generatePostService };

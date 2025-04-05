@@ -24,12 +24,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prestart": "node scripts/generate-post-imports.js",
     "start": "craco start",
     "prebuild": "node scripts/generate-post-imports.js",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
     "generate-posts": "node scripts/generate-post-imports.js",
+    "preserve": "node scripts/generate-post-imports.js",
     "serve": "serve -s build -p 3001"
   },
   "eslintConfig": {

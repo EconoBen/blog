@@ -145,14 +145,17 @@
 
     .nav-search {
         margin-top: var(--spacing-sm);
+        margin-left: 0;
+        width: 100%;
+        max-width: 250px;
     }
 
     .search-input {
-        width: 120px;
+        width: 100%;
     }
 
     .search-input:focus {
-        width: 140px;
+        width: 100%;
     }
 
     /* Talks page responsive styles */
@@ -283,6 +286,21 @@
 
     .logo-text {
         font-size: 16px;
+    }
+
+    .nav-search {
+        width: 100%;
+        margin: var(--spacing-sm) 0;
+        max-width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+        padding-right: 40px;
+    }
+
+    .search-input:focus {
+        width: 100%;
     }
 
     /* Hero */

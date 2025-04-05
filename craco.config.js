@@ -2,6 +2,7 @@
  * CRACO configuration file for customizing Create React App webpack config
  */
 const webpack = require('webpack');
+const PostGeneratorPlugin = require('./scripts/PostGeneratorPlugin');
 
 module.exports = {
   webpack: {
@@ -28,7 +29,9 @@ module.exports = {
       webpackConfig.plugins.push(
         new webpack.ProvidePlugin({
           Buffer: ['buffer', 'Buffer'],
-        })
+        }),
+        // Add our custom plugin to auto-generate PostService.ts
+        new PostGeneratorPlugin()
       );
 
       return webpackConfig;

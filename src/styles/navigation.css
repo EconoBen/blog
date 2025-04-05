@@ -148,44 +148,29 @@
     display: flex;
     align-items: center;
     position: relative;
+    margin-left: 20px;
+}
+
+.nav-search form {
+    width: 100%;
 }
 
 .search-input {
     font-family: var(--font-body);
     font-size: 0.9rem;
     padding: 8px 15px;
-    padding-right: 40px;
     border: none;
     border-radius: 20px;
     background: var(--search-bg);
     color: var(--text-color);
-    width: 180px;
+    width: 200px;
     transition: all 0.3s ease;
 }
 
 .search-input:focus {
-    width: 220px;
+    width: 260px;
     outline: none;
     box-shadow: 0 0 0 2px var(--accent-color-light);
-}
-
-.search-button {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    transition: color 0.2s ease;
-}
-
-.search-button:hover {
-    color: var(--accent-color);
 }
 
 /* Sidebar Navigation Components */

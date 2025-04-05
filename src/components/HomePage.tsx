@@ -320,26 +320,65 @@ const HomePage: React.FC = () => {
         </div>
         <div className="hero-decoration">
           <div className="hero-graphic">
-            <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" className="animated-graphic">
+            <svg width="600" height="600" viewBox="-50 -50 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="animated-graphic">
               <circle cx="200" cy="200" r="180" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="4 4" className="outer-circle" />
               <circle cx="200" cy="200" r="150" stroke="var(--accent-color-secondary)" strokeWidth="2" opacity="0.7" className="middle-circle" />
               <circle cx="200" cy="200" r="120" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="8 8" opacity="0.5" className="inner-circle" />
-              <path d="M200 80V320" stroke="var(--accent-color-secondary)" strokeWidth="2" strokeDasharray="6 6" opacity="0.6" className="vertical-line" />
-              <path d="M80 200H320" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="6 6" opacity="0.6" className="horizontal-line" />
+
+              {/* Neural network nodes */}
+              {/* Input layer */}
+              <circle cx="100" cy="150" r="10" fill="var(--accent-color)" fillOpacity="0.2" stroke="var(--accent-color)" strokeWidth="1.5" className="node input-node-1" />
+              <circle cx="100" cy="200" r="10" fill="var(--accent-color)" fillOpacity="0.2" stroke="var(--accent-color)" strokeWidth="1.5" className="node input-node-2" />
+              <circle cx="100" cy="250" r="10" fill="var(--accent-color)" fillOpacity="0.2" stroke="var(--accent-color)" strokeWidth="1.5" className="node input-node-3" />
+
+              {/* Hidden layer */}
+              <circle cx="200" cy="130" r="10" fill="var(--accent-color-secondary)" fillOpacity="0.2" stroke="var(--accent-color-secondary)" strokeWidth="1.5" className="node hidden-node-1" />
+              <circle cx="200" cy="200" r="10" fill="var(--accent-color-secondary)" fillOpacity="0.2" stroke="var(--accent-color-secondary)" strokeWidth="1.5" className="node hidden-node-2" />
+              <circle cx="200" cy="270" r="10" fill="var(--accent-color-secondary)" fillOpacity="0.2" stroke="var(--accent-color-secondary)" strokeWidth="1.5" className="node hidden-node-3" />
+
+              {/* Output layer */}
+              <circle cx="300" cy="170" r="10" fill="var(--accent-color)" fillOpacity="0.2" stroke="var(--accent-color)" strokeWidth="1.5" className="node output-node-1" />
+              <circle cx="300" cy="230" r="10" fill="var(--accent-color)" fillOpacity="0.2" stroke="var(--accent-color)" strokeWidth="1.5" className="node output-node-2" />
+
+              {/* Connections from input to hidden layer */}
+              <path d="M110 150 L190 130" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i1-h1" />
+              <path d="M110 150 L190 200" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i1-h2" />
+              <path d="M110 150 L190 270" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i1-h3" />
+
+              <path d="M110 200 L190 130" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i2-h1" />
+              <path d="M110 200 L190 200" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i2-h2" />
+              <path d="M110 200 L190 270" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i2-h3" />
+
+              <path d="M110 250 L190 130" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i3-h1" />
+              <path d="M110 250 L190 200" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i3-h2" />
+              <path d="M110 250 L190 270" stroke="var(--accent-color)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection i3-h3" />
+
+              {/* Connections from hidden to output layer */}
+              <path d="M210 130 L290 170" stroke="var(--accent-color-secondary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection h1-o1" />
+              <path d="M210 130 L290 230" stroke="var(--accent-color-secondary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection h1-o2" />
+
+              <path d="M210 200 L290 170" stroke="var(--accent-color-secondary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection h2-o1" />
+              <path d="M210 200 L290 230" stroke="var(--accent-color-secondary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection h2-o2" />
+
+              <path d="M210 270 L290 170" stroke="var(--accent-color-secondary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection h3-o1" />
+              <path d="M210 270 L290 230" stroke="var(--accent-color-secondary)" strokeWidth="1" strokeDasharray="3 3" opacity="0.4" className="connection h3-o2" />
+
+              {/* Signals flowing through the network - all starting from input nodes */}
+              {/* Path 1: input-1 → hidden-1 → output-1 */}
+              <circle cx="100" cy="150" r="3" fill="var(--accent-color)" className="signal signal-i1-h1-o1" />
+              {/* Path 2: input-1 → hidden-2 → output-2 */}
+              <circle cx="100" cy="150" r="3" fill="var(--accent-color)" className="signal signal-i1-h2-o2" />
+              {/* Path 3: input-2 → hidden-1 → output-2 */}
+              <circle cx="100" cy="200" r="3" fill="var(--accent-color)" className="signal signal-i2-h1-o2" />
+              {/* Path 4: input-2 → hidden-3 → output-1 */}
+              <circle cx="100" cy="200" r="3" fill="var(--accent-color)" className="signal signal-i2-h3-o1" />
+              {/* Path 5: input-3 → hidden-2 → output-1 */}
+              <circle cx="100" cy="250" r="3" fill="var(--accent-color)" className="signal signal-i3-h2-o1" />
+              {/* Path 6: input-3 → hidden-3 → output-2 */}
+              <circle cx="100" cy="250" r="3" fill="var(--accent-color)" className="signal signal-i3-h3-o2" />
+
+              {/* Center decoration */}
               <circle cx="200" cy="200" r="40" fill="var(--accent-color)" fillOpacity="0.1" stroke="var(--accent-color)" strokeWidth="2" className="center-circle" />
-              <circle cx="200" cy="200" r="8" fill="var(--accent-color)" className="center-dot" />
-              <circle cx="200" cy="120" r="6" fill="var(--accent-color-secondary)" className="top-dot" />
-              <circle cx="200" cy="280" r="6" fill="var(--accent-color-secondary)" className="bottom-dot" />
-              <circle cx="280" cy="200" r="6" fill="var(--accent-color)" className="right-dot" />
-              <circle cx="120" cy="200" r="6" fill="var(--accent-color-secondary)" className="left-dot" />
-
-              {/* Docker containers */}
-              <rect x="260" y="150" width="30" height="20" rx="2" fill="var(--accent-color)" fillOpacity="0.2" stroke="var(--accent-color)" strokeWidth="1.5" className="docker-1" />
-              <rect x="260" y="175" width="30" height="20" rx="2" fill="var(--accent-color)" fillOpacity="0.3" stroke="var(--accent-color)" strokeWidth="1.5" className="docker-2" />
-              <rect x="260" y="200" width="30" height="20" rx="2" fill="var(--accent-color)" fillOpacity="0.4" stroke="var(--accent-color)" strokeWidth="1.5" className="docker-3" />
-
-              {/* Cloud */}
-              <path d="M150 140 C140 130, 120 130, 110 140 C100 130, 80 130, 70 140 C60 150, 60 170, 70 180 L150 180 C160 170, 160 150, 150 140Z" fill="var(--accent-color-secondary)" fillOpacity="0.2" stroke="var(--accent-color-secondary)" strokeWidth="1.5" className="cloud" />
             </svg>
           </div>
         </div>
@@ -399,7 +438,7 @@ const HomePage: React.FC = () => {
           >
             All
           </button>
-          {categories.map(category => (
+          {categories.slice(0, 10).map(category => (
             <button
               key={category}
               className={`category-button ${activeCategory === category ? 'active' : ''}`}

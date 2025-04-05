@@ -669,10 +669,12 @@
 /* Hero Graphic Animations */
 .animated-graphic {
     transform-origin: center;
+    transform: scale(1.2);
+    z-index: 1;
 }
 
 .outer-circle {
-    animation: rotate 30s linear infinite;
+    animation: rotate 25s linear infinite;
 }
 
 .middle-circle {
@@ -680,7 +682,7 @@
 }
 
 .inner-circle {
-    animation: rotate-reverse 20s linear infinite;
+    animation: rotate-reverse 15s linear infinite;
 }
 
 .center-circle {
@@ -691,24 +693,275 @@
     animation: fadeInOut 7s ease-in-out infinite;
 }
 
-.top-dot, .right-dot, .bottom-dot, .left-dot {
-    animation: blink 5s ease-in-out infinite;
+/* Neural network nodes and connections animations */
+.node {
+    animation: nodePulse 5s ease-in-out infinite;
 }
 
-.docker-1 {
-    animation: float 5s ease-in-out infinite;
+.input-node-1 {
+    animation-delay: 0s;
 }
 
-.docker-2 {
-    animation: float 5s ease-in-out infinite 1s;
+.input-node-2 {
+    animation-delay: 0.5s;
 }
 
-.docker-3 {
-    animation: float 5s ease-in-out infinite 2s;
+.input-node-3 {
+    animation-delay: 1s;
 }
 
-.cloud {
-    animation: drift 15s ease-in-out infinite;
+.hidden-node-1 {
+    animation-delay: 1.5s;
+}
+
+.hidden-node-2 {
+    animation-delay: 2s;
+}
+
+.hidden-node-3 {
+    animation-delay: 2.5s;
+}
+
+.output-node-1 {
+    animation-delay: 3s;
+}
+
+.output-node-2 {
+    animation-delay: 3.5s;
+}
+
+.connection {
+    animation: connectionPulse 8s ease-in-out infinite;
+}
+
+/* Stagger connection animations */
+.connection:nth-child(odd) {
+    animation-delay: 0.3s;
+}
+
+.connection:nth-child(3n) {
+    animation-delay: 0.6s;
+}
+
+.connection:nth-child(4n) {
+    animation-delay: 0.9s;
+}
+
+/* Signals moving through the network - each following a specific path */
+.signal-i1-h1-o1 {
+    animation: signalTravel-i1-h1-o1 6s ease-in-out infinite;
+}
+
+.signal-i1-h2-o2 {
+    animation: signalTravel-i1-h2-o2 6s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.signal-i2-h1-o2 {
+    animation: signalTravel-i2-h1-o2 6s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.signal-i2-h3-o1 {
+    animation: signalTravel-i2-h3-o1 6s ease-in-out infinite;
+    animation-delay: 3s;
+}
+
+.signal-i3-h2-o1 {
+    animation: signalTravel-i3-h2-o1 6s ease-in-out infinite;
+    animation-delay: 4s;
+}
+
+.signal-i3-h3-o2 {
+    animation: signalTravel-i3-h3-o2 6s ease-in-out infinite;
+    animation-delay: 5s;
+}
+
+/* Define the specific paths for each signal */
+@keyframes signalTravel-i1-h1-o1 {
+    0%, 100% {
+        cx: 100;
+        cy: 150;
+        r: 3;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        r: 3;
+    }
+    40% {
+        cx: 200;
+        cy: 130;
+        r: 3;
+        opacity: 1;
+    }
+    75% {
+        cx: 300;
+        cy: 170;
+        r: 3;
+        opacity: 1;
+    }
+    90% {
+        cx: 350;
+        cy: 170;
+        opacity: 0;
+        r: 0;
+    }
+}
+
+@keyframes signalTravel-i1-h2-o2 {
+    0%, 100% {
+        cx: 100;
+        cy: 150;
+        r: 3;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        r: 3;
+    }
+    40% {
+        cx: 200;
+        cy: 200;
+        r: 3;
+        opacity: 1;
+    }
+    75% {
+        cx: 300;
+        cy: 230;
+        r: 3;
+        opacity: 1;
+    }
+    90% {
+        cx: 350;
+        cy: 230;
+        opacity: 0;
+        r: 0;
+    }
+}
+
+@keyframes signalTravel-i2-h1-o2 {
+    0%, 100% {
+        cx: 100;
+        cy: 200;
+        r: 3;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        r: 3;
+    }
+    40% {
+        cx: 200;
+        cy: 130;
+        r: 3;
+        opacity: 1;
+    }
+    75% {
+        cx: 300;
+        cy: 230;
+        r: 3;
+        opacity: 1;
+    }
+    90% {
+        cx: 350;
+        cy: 230;
+        opacity: 0;
+        r: 0;
+    }
+}
+
+@keyframes signalTravel-i2-h3-o1 {
+    0%, 100% {
+        cx: 100;
+        cy: 200;
+        r: 3;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        r: 3;
+    }
+    40% {
+        cx: 200;
+        cy: 270;
+        r: 3;
+        opacity: 1;
+    }
+    75% {
+        cx: 300;
+        cy: 170;
+        r: 3;
+        opacity: 1;
+    }
+    90% {
+        cx: 350;
+        cy: 170;
+        opacity: 0;
+        r: 0;
+    }
+}
+
+@keyframes signalTravel-i3-h2-o1 {
+    0%, 100% {
+        cx: 100;
+        cy: 250;
+        r: 3;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        r: 3;
+    }
+    40% {
+        cx: 200;
+        cy: 200;
+        r: 3;
+        opacity: 1;
+    }
+    75% {
+        cx: 300;
+        cy: 170;
+        r: 3;
+        opacity: 1;
+    }
+    90% {
+        cx: 350;
+        cy: 170;
+        opacity: 0;
+        r: 0;
+    }
+}
+
+@keyframes signalTravel-i3-h3-o2 {
+    0%, 100% {
+        cx: 100;
+        cy: 250;
+        r: 3;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+        r: 3;
+    }
+    40% {
+        cx: 200;
+        cy: 270;
+        r: 3;
+        opacity: 1;
+    }
+    75% {
+        cx: 300;
+        cy: 230;
+        r: 3;
+        opacity: 1;
+    }
+    90% {
+        cx: 350;
+        cy: 230;
+        opacity: 0;
+        r: 0;
+    }
 }
 
 @keyframes rotate {
@@ -736,7 +989,7 @@
     }
     50% {
         opacity: 0.8;
-        r: 125;
+        r: 150;
     }
     100% {
         opacity: 0.5;
@@ -753,26 +1006,25 @@
     }
 }
 
-@keyframes blink {
+@keyframes nodePulse {
     0%, 100% {
-        opacity: 0.7;
-        r: 6;
+        fill-opacity: 0.2;
+        r: 10;
     }
     50% {
-        opacity: 1;
-        r: 8;
+        fill-opacity: 0.5;
+        r: 12;
     }
 }
 
-@keyframes drift {
-    0% {
-        transform: translateX(0);
+@keyframes connectionPulse {
+    0%, 100% {
+        opacity: 0.3;
+        stroke-dasharray: 3 3;
     }
     50% {
-        transform: translateX(-15px);
-    }
-    100% {
-        transform: translateX(0);
+        opacity: 0.7;
+        stroke-dasharray: 4 2;
     }
 }
 

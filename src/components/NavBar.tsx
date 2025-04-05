@@ -1,5 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Post, postService } from '../services/PostService';
+
+/**
+ * Debounce function to limit how often a function is called
+ *
+ * @param {Function} func - The function to debounce
+ * @param {number} wait - The debounce delay in milliseconds
+ * @returns {Function} The debounced function
+ */
+const debounce = (func: (...args: any[]) => void, wait: number) => {
+  let timeout: NodeJS.Timeout;
+
+  return (...args: any[]) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
 
 /**
  * Enhanced NavBar component with animations and interactive elements
@@ -8,9 +25,44 @@ import { Link, useLocation } from 'react-router-dom';
  */
 const NavBar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const path = location.pathname;
   const [scrolled, setScrolled] = useState(false);
   const [navHover, setNavHover] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [autocompleteResults, setAutocompleteResults] = useState<Post[]>([]);
+  const [showAutocomplete, setShowAutocomplete] = useState<boolean>(false);
+  const autocompleteRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  /**
+   * Update autocomplete results as user types
+   *
+   * @param {string} value - The current input value
+   * @returns {Promise<void>}
+   */
+  const updateAutocomplete = useCallback(async (value: string) => {
+    if (!value.trim()) {
+      setAutocompleteResults([]);
+      return;
+    }
+
+    try {
+      const foundPosts = await postService.searchPosts(value);
+      setAutocompleteResults(foundPosts.slice(0, 5)); // Limit to top 5 matches
+    } catch (error) {
+      console.error('Error getting autocomplete results:', error);
+      setAutocompleteResults([]);
+    }
+  }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedAutocomplete = useCallback(
+    debounce((value: string) => {
+      updateAutocomplete(value);
+    }, 150), // Faster debounce for autocomplete
+    [updateAutocomplete]
+  );
 
   /**
    * Checks if a route is active
@@ -22,6 +74,78 @@ const NavBar: React.FC = () => {
     if (route === '/' && path === '/') return true;
     if (route !== '/' && path.startsWith(route)) return true;
     return false;
+  };
+
+  /**
+   * Handles the search input change
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e - Change event
+   */
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    debouncedAutocomplete(value);
+    setShowAutocomplete(true);
+  };
+
+  /**
+   * Handles the search form submission
+   *
+   * @param {React.FormEvent} e - Form event
+   */
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setShowAutocomplete(false);
+    }
+  };
+
+  /**
+   * Calculate estimated reading time based on content length
+   *
+   * @param {string} content - Post content
+   * @returns {number} Estimated reading time in minutes
+   */
+  const calculateReadingTime = (content: string): number => {
+    const wordsPerMinute = 200; // Average reading speed
+    const wordCount = content.split(/\s+/).length;
+    return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
+  };
+
+  /**
+   * Highlight matching text in a string
+   *
+   * @param {string} text - The text to highlight matches in
+   * @param {string} search - The search term to highlight
+   * @returns {JSX.Element | string} Text with highlighting markup
+   */
+  const highlightMatch = (text: string, search: string): React.ReactNode => {
+    if (!search.trim()) return text;
+
+    const parts = text.split(new RegExp(`(${search.trim()})`, 'gi'));
+
+    return (
+      <>
+        {parts.map((part, i) =>
+          part.toLowerCase() === search.toLowerCase()
+            ? <mark key={i}>{part}</mark>
+            : part
+        )}
+      </>
+    );
+  };
+
+  // Handle selecting a result from autocomplete
+  const handleSelectResult = (slug: string) => {
+    setShowAutocomplete(false);
+  };
+
+  // Handle focus on input
+  const handleInputFocus = () => {
+    if (searchQuery.trim() && autocompleteResults.length > 0) {
+      setShowAutocomplete(true);
+    }
   };
 
   // Add scroll listener to create sticky header effect
@@ -37,6 +161,25 @@ const NavBar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Handle clicks outside the autocomplete dropdown to close it
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        autocompleteRef.current &&
+        !autocompleteRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowAutocomplete(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -80,18 +223,54 @@ const NavBar: React.FC = () => {
         </div>
 
         <div className="nav-search">
-          <input
-            type="text"
-            placeholder="Search posts..."
-            aria-label="Search posts"
-            className="search-input"
-          />
-          <button className="search-button" aria-label="Search">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
+          <form onSubmit={handleSearch}>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder="Search posts..."
+              aria-label="Search posts"
+              className="search-input"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onFocus={handleInputFocus}
+            />
+
+            {showAutocomplete && autocompleteResults.length > 0 && (
+              <div ref={autocompleteRef} className="search-autocomplete nav-autocomplete">
+                {autocompleteResults.map(post => (
+                  <Link
+                    key={post.slug}
+                    to={`/blog/${post.slug}`}
+                    className="autocomplete-item"
+                    onClick={() => handleSelectResult(post.slug)}
+                  >
+                    <div className="autocomplete-title">
+                      {highlightMatch(post.title, searchQuery)}
+                    </div>
+                    <div className="autocomplete-meta">
+                      <span className="autocomplete-date">
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </span>
+                      <span className="autocomplete-reading-time">
+                        {calculateReadingTime(post.content)} min read
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+                <Link
+                  to={`/search?q=${encodeURIComponent(searchQuery)}`}
+                  className="autocomplete-view-all"
+                  onClick={() => setShowAutocomplete(false)}
+                >
+                  View all results
+                </Link>
+              </div>
+            )}
+          </form>
         </div>
       </div>
     </nav>
