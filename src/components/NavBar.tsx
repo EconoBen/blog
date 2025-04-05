@@ -136,7 +136,11 @@ const NavBar: React.FC = () => {
     );
   };
 
-  // Handle selecting a result from autocomplete
+  /**
+   * Handles selecting a result from autocomplete
+   *
+   * @param {string} slug - The post slug
+   */
   const handleSelectResult = (slug: string) => {
     setShowAutocomplete(false);
   };
@@ -164,25 +168,6 @@ const NavBar: React.FC = () => {
     };
   }, []);
 
-  // Handle clicks outside the autocomplete dropdown to close it
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        autocompleteRef.current &&
-        !autocompleteRef.current.contains(event.target as Node) &&
-        inputRef.current &&
-        !inputRef.current.contains(event.target as Node)
-      ) {
-        setShowAutocomplete(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
   return (
     <nav
       className={`main-nav ${scrolled ? 'nav-scrolled' : ''}`}
@@ -190,6 +175,7 @@ const NavBar: React.FC = () => {
       aria-label="Main navigation"
     >
       <div className="nav-container">
+        {/* Logo/Brand - Always visible */}
         <div className="nav-brand">
           <Link to="/" className="logo-link">
             <span className="logo-symbol">&lt;/&gt;</span>
@@ -197,7 +183,8 @@ const NavBar: React.FC = () => {
           </Link>
         </div>
 
-        <div className="nav-items">
+        {/* Desktop Navigation Items - Hidden on mobile */}
+        <div className="nav-items desktop-only">
           {[
             { path: '/about', label: 'About' },
             { path: '/', label: 'Posts' },
@@ -211,7 +198,10 @@ const NavBar: React.FC = () => {
               onMouseEnter={() => setNavHover(item.path)}
               onMouseLeave={() => setNavHover(null)}
             >
-              <Link to={item.path}>
+              <Link
+                to={item.path}
+                aria-current={isActive(item.path) ? 'page' : undefined}
+              >
                 {item.label}
                 <div
                   className={`nav-highlight ${navHover === item.path || isActive(item.path) ? 'visible' : ''}`}
@@ -222,7 +212,15 @@ const NavBar: React.FC = () => {
           ))}
         </div>
 
-        <div className="nav-search">
+        {/* Search Icon for Mobile */}
+        <div className="mobile-search-icon">
+          <Link to="/search" aria-label="Search">
+            <span role="img" aria-label="Search">🔍</span>
+          </Link>
+        </div>
+
+        {/* Desktop Search - Always visible on desktop, hidden on mobile */}
+        <div className="nav-search desktop-search">
           <form onSubmit={handleSearch}>
             <input
               ref={inputRef}
@@ -240,7 +238,7 @@ const NavBar: React.FC = () => {
                 {autocompleteResults.map(post => (
                   <Link
                     key={post.slug}
-                    to={`/blog/${post.slug}`}
+                    to={`/posts/${post.slug}`}
                     className="autocomplete-item"
                     onClick={() => handleSelectResult(post.slug)}
                   >
