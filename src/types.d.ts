@@ -77,3 +77,30 @@ export interface Publication {
   /** BibTeX citation */
   bibtex?: string;
 }
+
+/**
+ * Type of content for search results
+ */
+export type ContentType = 'post' | 'talk' | 'publication' | 'archive';
+
+/**
+ * Interface for unified search results
+ */
+export interface SearchResult {
+  /** Unique identifier for the result */
+  id: string;
+  /** Title of the content */
+  title: string;
+  /** Type of content */
+  type: ContentType;
+  /** Date of content creation/publication */
+  date: string;
+  /** Content description or excerpt */
+  description: string;
+  /** URL to navigate to this content */
+  url: string;
+  /** Optional image URL */
+  imageUrl?: string;
+  /** Optional metadata object for additional type-specific information */
+  metadata?: Record<string, any>;
+}

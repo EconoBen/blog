@@ -137,6 +137,25 @@ const NavBar: React.FC = () => {
   };
 
   /**
+   * Get content type label based on post tags or slug
+   *
+   * @param {Post} post - The post object
+   * @returns {string} Human-readable type label
+   */
+  const getContentTypeLabel = (post: Post): string => {
+    // Check tags first
+    if (post.tags.includes('talk')) return 'Talk';
+    if (post.tags.includes('publication')) return 'Publication';
+
+    // Check slug patterns
+    if (post.slug.includes('talk') || post.slug.startsWith('talk-')) return 'Talk';
+    if (post.slug.includes('publication') || post.slug.startsWith('pub-')) return 'Publication';
+
+    // Default to Post
+    return 'Post';
+  };
+
+  /**
    * Handles selecting a result from autocomplete
    *
    * @param {string} slug - The post slug
@@ -165,6 +184,25 @@ const NavBar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Close autocomplete on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        autocompleteRef.current &&
+        !autocompleteRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowAutocomplete(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -212,36 +250,37 @@ const NavBar: React.FC = () => {
           ))}
         </div>
 
-        {/* Search Icon for Mobile */}
-        <div className="mobile-search-icon">
-          <Link to="/search" aria-label="Search">
-            <span role="img" aria-label="Search">🔍</span>
-          </Link>
-        </div>
-
         {/* Desktop Search - Always visible on desktop, hidden on mobile */}
         <div className="nav-search desktop-search">
           <form onSubmit={handleSearch}>
-            <input
-              ref={inputRef}
-              type="text"
-              placeholder="Search posts..."
-              aria-label="Search posts"
-              className="search-input"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              onFocus={handleInputFocus}
-            />
+            <div className="search-container">
+              <input
+                ref={inputRef}
+                placeholder="Search posts..."
+                aria-label="Search posts"
+                className="search-input"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                onFocus={handleInputFocus}
+              />
+              <button
+                type="submit"
+                className="search-icon"
+                aria-label="Submit search"
+              >
+              </button>
+            </div>
 
             {showAutocomplete && autocompleteResults.length > 0 && (
-              <div ref={autocompleteRef} className="search-autocomplete nav-autocomplete">
+              <div className="autocomplete-dropdown" ref={autocompleteRef}>
                 {autocompleteResults.map(post => (
                   <Link
                     key={post.slug}
                     to={`/posts/${post.slug}`}
-                    className="autocomplete-item"
                     onClick={() => handleSelectResult(post.slug)}
+                    className="autocomplete-item"
                   >
+                    <div className="autocomplete-type">{getContentTypeLabel(post)}</div>
                     <div className="autocomplete-title">
                       {highlightMatch(post.title, searchQuery)}
                     </div>

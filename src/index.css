@@ -1543,1500 +1543,221 @@ img {
   font-weight: 500;
 }
 
+/* New autocomplete type indicator */
+.autocomplete-type {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.1rem;
+  font-weight: 600;
+}
+
 .autocomplete-view-all {
   display: block;
   text-align: center;
   padding: 0.75rem;
-  font-weight: 500;
-  color: var(--accent-color);
-  background-color: rgba(var(--accent-color-rgb), 0.05);
   border-top: 1px solid var(--border-color);
-  text-decoration: none;
-  margin-top: 0.5rem;
-  transition: background-color 0.2s ease;
+  color: var(--primary-color);
+  font-weight: 500;
 }
 
 .autocomplete-view-all:hover {
-  background-color: rgba(var(--accent-color-rgb), 0.1);
+  background-color: rgba(var(--primary-color-rgb), 0.05);
 }
 
-.results-count {
-  margin-bottom: 20px;
+/* Search results container */
+.search-results-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Search result item */
+.search-result-item {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.search-result-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color-light);
+}
+
+.search-result-link {
+  display: block;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.search-result-content {
+  display: flex;
+  padding: 0;
+}
+
+.search-result-image {
+  flex: 0 0 150px;
+  background: var(--bg-secondary);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-result-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.search-result-details {
+  flex: 1;
+  padding: 1.25rem;
+}
+
+.search-result-type {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: var(--bg-secondary);
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
 }
 
-.no-results-message {
+.search-result-title {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+.search-result-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.search-result-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+}
+
+/* Loading indicator */
+.search-loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 0;
+  padding: 3rem 0;
   color: var(--text-secondary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(var(--primary-color-rgb), 0.3);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Search results header */
+.search-results-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 1.5rem;
+}
+
+.search-results-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Search filter buttons */
+.search-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.filter-button {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
+}
+
+.filter-button:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-color-hover);
+}
+
+.filter-button.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* No results message */
+.no-results {
   text-align: center;
-}
-
-.no-results-message svg {
-  margin-bottom: 20px;
-  opacity: 0.5;
-}
-
-.no-results-message p {
-  font-size: 1.1rem;
+  padding: 3rem 0;
+  color: var(--text-secondary);
 }
 
 /* Highlighted search terms */
 mark {
-    background-color: rgba(var(--accent-color-rgb), 0.2);
-    color: var(--text-color);
-    padding: 0 2px;
-    border-radius: 2px;
+  background-color: rgba(var(--accent-color-rgb), 0.2);
+  padding: 0.1em 0.2em;
+  border-radius: 3px;
+  color: inherit;
 }
 
-/* Styles specific to the navigation search autocomplete */
-.nav-autocomplete {
-  width: 320px;
-  right: 0;
-  left: auto;
-  border-radius: 8px;
-  z-index: 1001; /* Higher z-index to appear above other elements */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-}
-
-.nav-search {
-  position: relative;
-}
-
-.results-count {
-  margin-bottom: 20px;
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-}
-
-/* Mobile responsiveness improvements */
+/* Responsive styles */
 @media (max-width: 768px) {
-  :root {
-    --content-padding: 10px;
-    --font-size-base: 14px;
-    --sidebar-width: 100%; /* Full width on mobile */
-  }
-
-  /* Fix navbar positioning and visibility */
-  .main-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 991;
-    height: 60px;
-    margin-bottom: 0;
-    background-color: var(--color-background);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-container {
-    grid-template-columns: auto auto;
-    width: 100%;
-    padding: 0 15px;
-  }
-
-  /* Main content proper padding to account for fixed navbar */
-  .main-content {
-    width: 100% !important;
-    margin-left: 0 !important;
-    max-width: 100% !important;
-    padding: 70px 10px 10px 10px !important; /* Extra top padding for fixed navbar */
-  }
-
-  /* Fix toggle button positions accounting for navbar height */
-  .sidebar-toggle, .dark-mode-toggle {
-    top: 70px;
-  }
-
-  /* Adjust social links to appear below fixed navbar */
-  .social-links {
-    top: 70px;
-  }
-
-  /* Mobile menu needs to be below fixed navbar */
-  .nav-items {
-    top: 60px;
-    height: calc(100vh - 60px);
-    padding-top: 20px;
-  }
-
-  /* Ensure content-wrapper adjusts for fixed navigation */
-  .content-wrapper {
-    margin-top: 0 !important;
-  }
-
-  /* Improve mobile menu animation */
-  .mobile-menu-toggle {
-    display: flex;
-    z-index: 1000;
-  }
-
-  /* Adjust logo size for mobile */
-  .logo-text {
-    font-size: 16px;
-  }
-
-  /* Make sure mobile menu button is visible and properly sized */
-  .mobile-menu-toggle {
-    width: 24px;
-    height: 20px;
-    padding: 0;
-    margin-right: 5px;
-  }
-
-  /* Ensure the mobile search is properly styled */
-  .mobile-search {
-    padding: 10px;
-    background-color: rgba(var(--accent-color-rgb), 0.05);
-    border-radius: 8px;
-    margin: 15px 0;
-  }
-
-  /* Fix position of the navbar */
-  .nav-scrolled {
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Ensure all necessary z-indices work together */
-  .nav-brand {
-    z-index: 1000;
-  }
-
-  /* Adjust sidebar positioning to work with fixed header */
-  .sidebar {
-    top: 0;
-    padding-top: 70px;
-  }
-
-  /* Proper handling of blog container on mobile */
-  .blog-container {
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  /* Make dropdown menu more touchable */
-  .autocomplete-item {
-    padding: 15px;
-  }
-}
-
-/* Small phones improved styles */
-@media (max-width: 480px) {
-  .nav-container {
-    padding: 0 10px;
-  }
-
-  .main-nav {
-    height: 56px;
-  }
-
-  .nav-items {
-    top: 56px;
-    width: 100%;
-    right: -100%;
-  }
-
-  .main-content {
-    padding: 66px 8px 10px 8px !important;
-  }
-
-  .sidebar-toggle, .dark-mode-toggle {
-    top: 66px;
-  }
-
-  /* Mobile landscape orientation fixes */
-  @media (orientation: landscape) {
-    .nav-items {
-      padding-bottom: 20px;
-      overflow-y: auto;
-    }
-
-    /* Better spacing for nav items in landscape */
-    .nav-item {
-      margin: 5px 0;
-    }
-
-    /* Account for the keyboard appearing */
-    .mobile-search {
-      margin-bottom: 60px;
-    }
-  }
-}
-
-/* Fix for notches and safe areas on newer phones */
-@supports (padding-top: env(safe-area-inset-top)) {
-  .main-nav {
-    padding-top: env(safe-area-inset-top);
-    height: calc(60px + env(safe-area-inset-top));
-  }
-
-  .main-content {
-    padding-top: calc(70px + env(safe-area-inset-top)) !important;
-  }
-
-  .sidebar-toggle, .dark-mode-toggle {
-    top: calc(70px + env(safe-area-inset-top));
-  }
-
-  .social-links {
-    top: calc(70px + env(safe-area-inset-top));
-  }
-
-  .nav-items {
-    padding-top: env(safe-area-inset-top);
-  }
-
-  @media (max-width: 480px) {
-    .main-nav {
-      height: calc(56px + env(safe-area-inset-top));
-    }
-
-    .main-content {
-      padding-top: calc(66px + env(safe-area-inset-top)) !important;
-    }
-
-    .sidebar-toggle, .dark-mode-toggle {
-      top: calc(66px + env(safe-area-inset-top));
-    }
-  }
-}
-
-/* Accessibility - highlight active element for keyboard users */
-:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-/* Display focus outlines only for keyboard navigation, not mouse/touch */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* Restore essential mobile styling */
-@media (max-width: 768px) {
-  body {
-    font-size: var(--font-size-base);
-    padding-top: 0;
-  }
-
-  /* Adjust blog container for mobile */
-  .blog-container {
+  .search-result-content {
     flex-direction: column;
-    padding-top: 0;
   }
 
-  /* Adjust sidebar for mobile */
-  .sidebar {
-    position: fixed;
-    width: 85% !important; /* Override inline styles */
-    max-width: 300px;
-    height: 100vh;
-    z-index: 990;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    box-shadow: var(--shadow-medium);
-  }
-
-  /* Show sidebar when open */
-  .sidebar-open .sidebar {
-    transform: translateX(0);
-  }
-
-  /* Fix the resizing handle for mobile */
-  .sidebar-resize-handle {
-    display: none;
-  }
-
-  /* Improve images on mobile */
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Update blog grid for mobile */
-  .blog-cards-container {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-
-  .featured-post {
-    grid-column: span 1 !important;
-  }
-
-  /* Adjust typography for mobile */
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .about-hero h1 {
-    font-size: 1.8rem;
-  }
-
-  .about-hero h2 {
-    font-size: 1.2rem;
-  }
-
-  .about-tagline {
-    font-size: 1rem;
-  }
-
-  /* Make code blocks fit on small screens */
-  pre, code {
-    max-width: 100%;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  /* Adjust tables for mobile */
-  table {
-    display: block;
+  .search-result-image {
+    flex: 0 0 150px;
+    height: 150px;
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* Mobile menu styling */
-  .nav-items {
-    position: fixed;
-    flex-direction: column;
-    background-color: var(--color-background);
-    right: -280px;
-    width: 250px;
-    transition: right 0.3s ease;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    z-index: 998;
-    overflow-y: auto;
-  }
-
-  .mobile-visible {
-    right: 0;
-  }
-
-  .nav-item {
-    margin: 10px 0;
-    width: 100%;
-  }
-
-  .nav-item a {
-    width: 100%;
-    padding: 12px 15px;
-    justify-content: flex-start;
-  }
-
-  .desktop-search {
-    display: none;
-  }
-
-  .mobile-search {
-    display: block;
-  }
-
-  /* Add a backdrop when mobile menu is open */
-  .mobile-menu-open:after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 997;
-  }
-
-  /* Prevent body scrolling when menu is open */
-  body.mobile-menu-open {
-    overflow: hidden;
-  }
-
-  /* Overlay when sidebar is open */
-  body:before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 980;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
-  body.sidebar-open:before {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* Scroll prevention when sidebar open */
-  body.sidebar-open {
-    overflow: hidden;
-  }
-
-  /* Add touch-friendly spacing */
-  button,
-  .nav-item a,
-  .social-link,
-  .tag,
-  .publication-topic-tag {
-    padding: 8px 12px;
-    min-height: 44px; /* For better touch targets */
-    display: flex;
-    align-items: center;
-  }
-
-  /* Improve form elements on mobile */
-  input, textarea, select, button {
-    max-width: 100%;
-    font-size: 16px !important; /* Prevents iOS zoom on input focus */
-  }
-
-  /* Force GPU acceleration for smoother animations */
-  .sidebar, .nav-items, .mobile-menu-toggle,
-  .blog-card, .sidebar-toggle, .dark-mode-toggle {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
-  /* Fix active state styling for touch devices */
-  a:active, button:active, .nav-item:active,
-  .social-link:active, .tag:active, .post-tag:active {
-    opacity: 0.7;
-    transition: opacity 0.1s ease;
-  }
-}
-
-/* Mobile menu styles */
-.mobile-menu-toggle {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 28px;
-  height: 20px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 998;
-}
-
-.mobile-menu-toggle span {
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-text);
-  transition: all 0.3s ease;
-}
-
-.mobile-menu-open .mobile-menu-toggle span:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.mobile-menu-open .mobile-menu-toggle span:nth-child(2) {
-  opacity: 0;
-}
-
-.mobile-menu-open .mobile-menu-toggle span:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
-}
-
-.mobile-search {
-  display: none;
-  width: 100%;
-  margin-top: 15px;
-}
-
-.mobile-search-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px 4px 0 0;
-}
-
-.mobile-search-button {
-  width: 100%;
-  padding: 10px;
-  background-color: var(--color-primary);
-  color: white;
-  border: none;
-  border-radius: 0 0 4px 4px;
-  margin-top: -1px;
-  cursor: pointer;
-}
-
-.desktop-search {
-  display: block;
-}
-
-/* Sidebar overlay for mobile */
-.sidebar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 994;
-  transition: opacity 0.3s ease;
-}
-
-/* Fix for iOS Safari 100vh issue */
-@supports (-webkit-touch-callout: none) {
-  .sidebar,
-  .sidebar-overlay,
-  body:before {
-    height: -webkit-fill-available;
-  }
-}
-
-/* Improve offline experience */
-body.offline .blog-container:before {
-  content: "You're offline. Some functionality may be limited.";
-  display: block;
-  padding: 10px;
-  background-color: #fffde7;
-  color: #856404;
-  text-align: center;
-  position: sticky;
-  top: 60px; /* Adjusted to account for fixed navbar */
-  z-index: 1000;
-}
-
-/* Dark mode adjustments for offline mode */
-.dark-mode body.offline .blog-container:before {
-  background-color: #2d2d2d;
-  color: #ffc107;
-}
-
-/* Use custom vh variable for height calculations */
-@media (max-width: 768px) {
-  .sidebar,
-  .nav-items,
-  .mobile-menu-open:after,
-  .sidebar-overlay {
-    height: calc(100 * var(--vh, 1vh));
-  }
-}
-
-/* Fix slow animations on mobile */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Fix for viewport height calculations on mobile */
-.mobile-height-fix {
-  height: 100vh; /* Fallback */
-  height: calc(var(--vh, 1vh) * 100);
-}
-
-/* Active touch state styles for mobile */
-.active-touch {
-  opacity: 0.7 !important;
-  transform: scale(0.98) !important;
-  transition: none !important;
-}
-
-/* Navbar z-index layering fixes */
-.main-nav {
-  z-index: 995; /* Navbar always on top of content, but below toggles/menu */
-}
-
-.sidebar-toggle,
-.dark-mode-toggle {
-  z-index: 996; /* Toggles above navbar */
-}
-
-.sidebar {
-  z-index: 997; /* Sidebar above navbar but below menus when open */
-}
-
-.mobile-menu-toggle {
-  z-index: 998; /* Menu toggle above everything except open menu */
-}
-
-.nav-items.mobile-visible {
-  z-index: 999; /* Mobile menu at highest z-index when visible */
-}
-
-.sidebar-overlay {
-  z-index: 994; /* Overlay below sidebar but above content */
-}
-
-/* Fix header clarity */
-.main-nav {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-/* Ensure sidebar toggle and dark mode toggle are visible on mobile */
-@media (max-width: 768px) {
-  .sidebar-toggle {
-    position: fixed;
-    top: 70px;
-    left: 10px;
-    z-index: 996;
-    background-color: var(--color-background);
-    border-radius: 4px;
-    padding: 8px;
-    box-shadow: var(--shadow-small);
-    border: 1px solid var(--color-border);
-  }
-
-  .dark-mode-toggle {
-    position: fixed;
-    top: 70px;
-    right: 10px;
-    z-index: 996;
-    background-color: var(--color-background);
-    border-radius: 4px;
-    padding: 8px;
-    box-shadow: var(--shadow-small);
-    border: 1px solid var(--color-border);
-  }
-}
-
-/* Fix mobile menu positioning */
-@media (max-width: 768px) {
-  .nav-items {
-    width: 80%;
-    max-width: 320px;
-    right: -100%;
-    z-index: 999;
-  }
-
-  .mobile-menu-open:after {
-    z-index: 993; /* Below sidebar-toggle and dark-mode-toggle */
-  }
-
-  /* Improve mobile navbar clarity */
-  .main-nav {
-    background-color: var(--color-background);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Improve navbar visibility in dark mode */
-  .dark-mode .main-nav {
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-  }
-}
-
-/* Fix active menu item visibility */
-.nav-item.active a {
-  color: var(--color-primary) !important;
-  font-weight: 500;
-}
-
-.dark-mode .nav-item.active a {
-  color: var(--color-primary) !important;
-}
-
-.nav-highlight.visible {
-  opacity: 1 !important;
-}
-
-/* Sidebar toggle button improvements */
-.sidebar-toggle {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0.85;
-}
-
-/* Show toggle button when visible class is added (after scroll or when sidebar is open) */
-.sidebar-toggle.visible {
-  opacity: 1;
-}
-
-/* Hide toggle initially for better mobile experience */
-@media (max-width: 768px) {
-  .sidebar-toggle {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  .sidebar-toggle.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Improved toggle icon animation */
-.toggle-icon {
-  width: 24px;
-  height: 18px;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.toggle-icon span {
-  display: block;
-  position: absolute;
-  height: 2px;
-  width: 100%;
-  background-color: var(--color-text);
-  border-radius: 1px;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.toggle-icon span:nth-child(1) {
-  top: 0;
-}
-
-.toggle-icon span:nth-child(2),
-.toggle-icon span:nth-child(3) {
-  top: 8px;
-}
-
-.toggle-icon span:nth-child(4) {
-  top: 16px;
-}
-
-/* Active sidebar toggle icon (X shape) */
-.toggle-icon.active span:nth-child(1) {
-  top: 8px;
-  width: 0%;
-  left: 50%;
-  opacity: 0;
-}
-
-.toggle-icon.active span:nth-child(2) {
-  transform: rotate(45deg);
-}
-
-.toggle-icon.active span:nth-child(3) {
-  transform: rotate(-45deg);
-}
-
-.toggle-icon.active span:nth-child(4) {
-  top: 8px;
-  width: 0%;
-  left: 50%;
-  opacity: 0;
-}
-
-/* Tooltip hover effect for better UX */
-.sidebar-toggle:before,
-.dark-mode-toggle:before {
-  content: attr(aria-label);
-  position: absolute;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 1000;
-}
-
-.sidebar-toggle:hover:before,
-.dark-mode-toggle:hover:before {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.sidebar-toggle:before {
-  left: 40px;
-}
-
-.dark-mode-toggle:before {
-  right: 40px;
-}
-
-/* Dark mode toggle improvements */
-.dark-mode-toggle {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0.85;
-}
-
-.dark-mode-toggle:hover {
-  opacity: 1;
-}
-
-.dark-mode-icon {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-text) 50%, transparent 50%);
-  transition: transform 0.3s ease;
-}
-
-.dark-mode .dark-mode-icon {
-  transform: rotate(180deg);
-}
-
-/* Ensure mobile toggle controls stay accessible when keyboard is shown */
-@media (max-height: 450px) {
-  .sidebar-toggle,
-  .dark-mode-toggle {
-    position: absolute;
-  }
-}
-
-/* Completely remove sidebar on mobile */
-.mobile-view .sidebar-overlay {
-  display: none;
-}
-
-/* Make main-content take full width on mobile with no margin */
-.mobile-view .main-content {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  padding-top: 70px !important;
-}
-
-/* Fixed bottom navigation bar for mobile */
-.mobile-view .nav-container {
-  padding: 0;
-  overflow: visible;
-}
-
-/* Bottom navigation bar styling */
-.bottom-nav {
-  display: none;
-}
-
-.mobile-view .bottom-nav {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--color-background);
-  border-top: 1px solid var(--border-color);
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
-  height: 60px;
-  z-index: 990;
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-.bottom-nav-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 0;
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 0.7rem;
-}
-
-.bottom-nav-icon {
-  font-size: 1.3rem;
-  margin-bottom: 4px;
-}
-
-.bottom-nav-item.active {
-  color: var(--color-primary);
-}
-
-/* Allow mobile-visible nav to be full width when sidebar is removed */
-.mobile-view .nav-items.mobile-visible {
-  width: 90%;
-  max-width: 350px;
-}
-
-/* Add bottom padding to content to account for bottom nav */
-.mobile-view .content-wrapper {
-  padding-bottom: 70px !important;
-}
-
-/* Fix dark mode toggle position on mobile */
-.mobile-view .dark-mode-toggle {
-  right: 15px;
-  top: 13px;
-  position: fixed;
-  padding: 0;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  box-shadow: none;
-  border: none;
-  z-index: 996;
-}
-
-.mobile-view .nav-brand {
-  margin-right: auto;
-  padding-right: 0;
-}
-
-/* Ensure mobile menu toggle is visible */
-.mobile-view .mobile-menu-toggle {
-  display: flex;
-  position: relative;
-  z-index: 998;
-}
-
-/* Mobile menu should occupy full screen */
-.mobile-view .nav-items {
-  top: 60px;
-  width: 100%;
-  right: -100%;
-  z-index: 997;
-  background-color: var(--color-background);
-  height: calc(100vh - 60px);
-  height: calc((var(--vh, 1vh) * 100) - 60px);
-}
-
-/* Make mobile search more prominent */
-.mobile-view .mobile-search {
-  padding: 20px 15px;
-  margin: 10px;
-  border-radius: 8px;
-}
-
-/* Ensure proper spacing on mobile navigation */
-.mobile-view .nav-item {
-  margin: 5px 15px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.mobile-view .nav-item:last-child {
-  border-bottom: none;
-}
-
-.mobile-view .nav-item a {
-  font-size: 1.1rem;
-  padding: 8px 10px;
-}
-
-/* Account for notch on newer iPhones */
-@supports (padding-top: env(safe-area-inset-top)) {
-  .mobile-view .main-nav {
-    padding-top: env(safe-area-inset-top);
-    height: calc(60px + env(safe-area-inset-top));
-  }
-
-  .mobile-view .nav-items {
-    height: calc(100vh - 60px - env(safe-area-inset-top));
-    height: calc((var(--vh, 1vh) * 100) - 60px - env(safe-area-inset-top));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .mobile-view .bottom-nav {
-    padding-bottom: env(safe-area-inset-bottom);
-    height: calc(60px + env(safe-area-inset-bottom));
-  }
-
-  .mobile-view .content-wrapper {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom)) !important;
-  }
-}
-
-/* Make sure bottom nav doesn't interfere with tap targets */
-.mobile-view .bottom-nav-item:active {
-  background-color: rgba(var(--accent-color-rgb), 0.1);
-}
-
-/* Better active indicator for bottom nav */
-.bottom-nav-item.active .bottom-nav-icon {
-  color: var(--color-primary);
-}
-
-.bottom-nav-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: calc(env(safe-area-inset-bottom) + 55px);
-  width: 5px;
-  height: 5px;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-}
-
-/* Hide all sidebar-related elements on mobile */
-.mobile-view .sidebar-toggle,
-.mobile-view .sidebar,
-.mobile-view .sidebar-resize-handle,
-.mobile-view .sidebar-overlay {
-  display: none !important;
-}
-
-/* Ensure the mobile menu icon is always visible */
-.mobile-view .mobile-menu-toggle {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  background: transparent;
-  border: none;
-  color: var(--color-text);
-  z-index: 998;
-}
-
-/* Make navbar and logo more touch-friendly */
-.mobile-view .nav-brand {
-  padding-left: 15px;
-  display: flex;
-  align-items: center;
-  height: 60px;
-}
-
-.mobile-view .logo-link {
-  display: flex;
-  align-items: center;
-}
-
-.mobile-view .logo-symbol {
-  font-size: 1.2rem;
-  margin-right: 5px;
-}
-
-.mobile-view .logo-text {
-  font-size: 1.3rem;
-  font-weight: 500;
-}
-
-/* Improve bottom nav spacing */
-.mobile-view .bottom-nav {
-  justify-content: space-around;
-  padding: 5px 10px calc(5px + env(safe-area-inset-bottom)) 10px;
-}
-
-/* Fix spacing in main content area */
-.mobile-view .main-content {
-  padding: 60px 15px 70px 15px !important;
-}
-
-/* Make nav items in mobile menu more touch-friendly */
-.mobile-view .nav-items {
-  padding: 15px;
-}
-
-.mobile-view .nav-item {
-  width: 100%;
-  margin: 5px 0;
-  padding: 5px 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.mobile-view .nav-item a {
-  width: 100%;
-  padding: 10px 15px;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-}
-
-/* Move the mobile menu closer to the top */
-.mobile-view .mobile-menu-open .nav-items {
-  padding-top: 5px;
-}
-
-/* Ensure mobile menu stays behind dark mode toggle */
-.mobile-view .nav-items {
-  z-index: 990;
-}
-
-/* Fix dark mode toggle position */
-.mobile-view .dark-mode-toggle {
-  position: absolute;
-  top: 50%;
-  right: 60px;
-  transform: translateY(-50%);
-  z-index: 999;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  box-shadow: none;
-}
-
-/* Better active state for bottom nav */
-.bottom-nav-item.active {
-  position: relative;
-}
-
-.bottom-nav-item.active:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: var(--color-primary);
-}
-
-/* Fix content padding on small screens */
-@media (max-width: 480px) {
-  .mobile-view .main-content {
-    padding: 60px 10px 70px 10px !important;
-  }
-
-  /* Simplify elements on very small screens */
-  .mobile-view .bottom-nav-item {
-    font-size: 0.65rem;
-  }
-}
-
-/* More aggressive content padding to avoid clipping on mobile */
-.mobile-view .content-wrapper > div {
-  padding: 10px;
-}
-
-/* Bottom navigation bar styling */
-.bottom-nav {
-  display: none;
-}
-
-/* Mobile-specific styles */
-@media (max-width: 768px) {
-  /* Bottom navigation - always visible */
-  .bottom-nav {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--color-background);
-    border-top: 1px solid var(--border-color);
-    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
-    height: 60px;
-    z-index: 990;
-    padding-bottom: env(safe-area-inset-bottom, 0);
-    justify-content: space-around;
-    transition: transform 0.3s ease;
-  }
-
-  /* Hide the nav-items on mobile - using bottom nav instead */
-  .desktop-only {
-    display: none !important;
-  }
-
-  /* Show search icon on mobile header */
-  .mobile-search-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    font-size: 1.5rem;
-    padding: 0 10px;
-  }
-
-  /* Simplify header for mobile */
-  .nav-container {
-    grid-template-columns: 1fr auto;
-  }
-
-  /* Add safe area padding to main content */
-  .main-content {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0)) !important;
-  }
-
-  /* Remove unused elements */
-  .mobile-menu-toggle,
-  .nav-items:not(.desktop-only),
-  .mobile-search {
-    display: none !important;
-  }
-
-  /* Hide desktop search on mobile */
-  .desktop-search {
-    display: none !important;
-  }
-
-  /* Make bottom nav items active state clearer */
-  .bottom-nav-item.active {
-    color: var(--color-primary);
     position: relative;
   }
 
-  .bottom-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    color: var(--color-text);
-    width: 20%;
-    height: 100%;
-    font-size: 0.7rem;
-    padding: 0;
+  .search-filters {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    flex-wrap: nowrap;
   }
 
-  .bottom-nav-icon {
-    font-size: 1.4rem;
-    margin-bottom: 3px;
+  .filter-button {
+    white-space: nowrap;
   }
-
-  /* Add a dot indicator for active tab */
-  .bottom-nav-item.active::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    width: 5px;
-    height: 5px;
-    background-color: var(--color-primary);
-    border-radius: 50%;
-  }
-
-  /* Make sure the header is clean and minimal */
-  .main-nav {
-    height: 54px;
-  }
-
-  .nav-brand {
-    padding-left: 15px;
-    height: 54px;
-  }
-
-  /* Fix the main content padding */
-  .main-content {
-    padding-top: 64px !important;
-  }
-}
-
-/* Extra small mobile phones */
-@media (max-width: 360px) {
-  .bottom-nav-item {
-    font-size: 0.6rem;
-  }
-
-  .logo-text {
-    font-size: 1.1rem;
-  }
-
-  .nav-brand {
-    padding-left: 10px;
-  }
-}
-
-/* Notch handling */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .bottom-nav {
-    height: calc(60px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .main-content {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom)) !important;
-  }
-}
-
-/* Hide all sidebar-related elements on mobile */
-.mobile-view .sidebar-toggle,
-.mobile-view .sidebar,
-.mobile-view .sidebar-resize-handle,
-.mobile-view .sidebar-overlay {
-  display: none !important;
-}
-
-/* Main mobile view adjustments */
-.mobile-view .main-content {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin-left: 0 !important;
-  padding-top: 64px !important;
-  padding-bottom: calc(70px + env(safe-area-inset-bottom, 0)) !important;
-}
-
-/* Bottom navigation styling - consolidated */
-.bottom-nav {
-  display: none;
-}
-
-.mobile-view .bottom-nav {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--color-background);
-  border-top: 1px solid var(--border-color);
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
-  height: 60px;
-  z-index: 990;
-  padding-bottom: env(safe-area-inset-bottom, 0);
-  justify-content: space-around;
-}
-
-.bottom-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: var(--text-color);
-  width: 20%;
-  height: 100%;
-  font-size: 0.7rem;
-  padding: 5px 0;
-}
-
-.bottom-nav-icon {
-  font-size: 1.4rem;
-  margin-bottom: 3px;
-}
-
-.bottom-nav-item.active {
-  color: var(--color-primary);
-  position: relative;
-}
-
-.bottom-nav-item.active::after {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-}
-
-/* Clean mobile header */
-.mobile-view .main-nav {
-  height: 54px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 995;
-  background-color: var(--color-background);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.mobile-view .nav-container {
-  grid-template-columns: 1fr auto;
-  padding: 0;
-}
-
-.mobile-view .nav-brand {
-  padding-left: 15px;
-  height: 54px;
-  margin-right: 0;
-}
-
-/* Hide desktop navigation on mobile */
-.mobile-view .desktop-only {
-  display: none !important;
-}
-
-/* Show mobile search icon */
-.mobile-search-icon {
-  display: none;
-}
-
-.mobile-view .mobile-search-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  font-size: 1.5rem;
-  padding: 0 15px;
-  height: 54px;
-}
-
-/* Hide unused elements */
-.mobile-view .mobile-menu-toggle,
-.mobile-view .desktop-search {
-  display: none !important;
-}
-
-/* Fix for notches */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .mobile-view .bottom-nav {
-    height: calc(60px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-
-  .mobile-view .main-nav {
-    padding-top: env(safe-area-inset-top, 0);
-    height: calc(54px + env(safe-area-inset-top, 0));
-  }
-}
-
-/* Extra small mobile phones */
-@media (max-width: 360px) {
-  .bottom-nav-item {
-    font-size: 0.6rem;
-  }
-
-  .mobile-view .logo-text {
-    font-size: 1.1rem;
-  }
-
-  .mobile-view .nav-brand {
-    padding-left: 10px;
-  }
-}
-
-/* Dark mode toggle positioning and styling - consolidated */
-.dark-mode-toggle {
-  position: fixed;
-  right: 15px;
-  bottom: 80px;
-  z-index: 996;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-background);
-  border-radius: 50%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--border-color);
-  transition: all 0.3s ease;
-  opacity: 0.9;
-  cursor: pointer;
-}
-
-/* Fix dark mode toggle position - ensure it's always at the bottom */
-.mobile-view .dark-mode-toggle {
-  position: fixed !important;
-  top: auto !important;
-  right: 15px !important;
-  bottom: 80px !important;
-  z-index: 996 !important;
-  transform: none !important;
-}
-
-/* Override any conflicting dark mode toggle positions */
-.mobile-view .dark-mode-toggle,
-.dark-mode-toggle {
-  position: fixed !important;
-  top: auto !important;
-  right: 15px !important;
-  bottom: 80px !important;
-  z-index: 996 !important;
-  transform: none !important;
 }

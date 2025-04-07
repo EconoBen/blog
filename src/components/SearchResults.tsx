@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Post, postService } from '../services/PostService';
+import { unifiedSearchService } from '../services/UnifiedSearchService';
+import { SearchResult, ContentType } from '../types';
 import BlogPostCard from './BlogCard';
 
 /**
@@ -27,11 +28,12 @@ const debounce = (func: (...args: any[]) => void, wait: number) => {
 const SearchResults: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
-  const [results, setResults] = useState<Post[]>([]);
+  const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>(query);
-  const [autocompleteResults, setAutocompleteResults] = useState<Post[]>([]);
+  const [autocompleteResults, setAutocompleteResults] = useState<SearchResult[]>([]);
   const [showAutocomplete, setShowAutocomplete] = useState<boolean>(false);
+  const [activeFilter, setActiveFilter] = useState<ContentType | 'all'>('all');
   const autocompleteRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -44,10 +46,10 @@ const SearchResults: React.FC = () => {
   const performSearch = useCallback(async (searchQuery: string) => {
     setLoading(true);
     try {
-      const foundPosts = await postService.searchPosts(searchQuery);
-      setResults(foundPosts);
+      const foundResults = await unifiedSearchService.search(searchQuery);
+      setResults(foundResults);
     } catch (error) {
-      console.error('Error searching posts:', error);
+      console.error('Error searching content:', error);
       setResults([]);
     } finally {
       setLoading(false);
@@ -67,13 +69,18 @@ const SearchResults: React.FC = () => {
     }
 
     try {
-      const foundPosts = await postService.searchPosts(value);
-      setAutocompleteResults(foundPosts.slice(0, 5)); // Limit to top 5 matches
+      const foundResults = await unifiedSearchService.search(value);
+      setAutocompleteResults(foundResults.slice(0, 5)); // Limit to top 5 matches
     } catch (error) {
       console.error('Error getting autocomplete results:', error);
       setAutocompleteResults([]);
     }
   }, []);
+
+  // Filter results by content type
+  const filteredResults = activeFilter === 'all'
+    ? results
+    : results.filter(result => result.type === activeFilter);
 
   // Debounced functions
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -102,7 +109,7 @@ const SearchResults: React.FC = () => {
   };
 
   // Handle selecting a result from autocomplete
-  const handleSelectResult = (slug: string) => {
+  const handleSelectResult = () => {
     setShowAutocomplete(false);
   };
 
@@ -143,36 +150,81 @@ const SearchResults: React.FC = () => {
   }, []);
 
   /**
-   * Calculate estimated reading time based on content length
+   * Render search result item based on content type
    *
-   * @param {string} content - Post content
-   * @returns {number} Estimated reading time in minutes
+   * @param {SearchResult} result - The search result to render
+   * @returns {JSX.Element} Rendered search result item
    */
-  const calculateReadingTime = (content: string): number => {
-    const wordsPerMinute = 200; // Average reading speed
-    const wordCount = content.split(/\s+/).length;
-    return Math.max(1, Math.ceil(wordCount / wordsPerMinute));
+  const renderResultItem = (result: SearchResult) => {
+    const dateStr = new Date(result.date).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+
+    return (
+      <div key={`${result.type}-${result.id}`} className="search-result-item">
+        <Link to={result.url} className="search-result-link">
+          <div className="search-result-content">
+            {result.imageUrl && (
+              <div className="search-result-image">
+                <img src={result.imageUrl} alt={result.title} />
+              </div>
+            )}
+            <div className="search-result-details">
+              <div className="search-result-type">{getContentTypeLabel(result.type)}</div>
+              <h3 className="search-result-title">{highlightMatch(result.title, query)}</h3>
+              <p className="search-result-description">{highlightMatch(result.description, query)}</p>
+              <div className="search-result-meta">
+                <span className="search-result-date">{dateStr}</span>
+                {result.type === 'post' && result.metadata?.readingTime && (
+                  <span className="search-result-reading-time">
+                    {result.metadata.readingTime} min read
+                  </span>
+                )}
+                {result.type === 'talk' && (
+                  <span className="search-result-event">{result.metadata?.event}</span>
+                )}
+                {result.type === 'publication' && (
+                  <span className="search-result-venue">{result.metadata?.venue}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+    );
   };
 
   /**
-   * Get excerpt from post content, preferring the summary field if available
+   * Get a label for displaying content type
    *
-   * @param {string} content - Post content
-   * @param {string} [summary] - Optional summary from frontmatter
-   * @returns {string} Excerpt for display
+   * @param {ContentType} type - Content type
+   * @returns {string} Human-readable content type label
    */
-  const getExcerpt = (content: string, summary?: string): string => {
-    // If a summary is provided in frontmatter, use it
-    if (summary && summary.trim()) {
-      return summary.length <= 150 ? summary : summary.substring(0, 147) + '...';
+  const getContentTypeLabel = (type: ContentType): string => {
+    switch (type) {
+      case 'post': return 'Blog Post';
+      case 'talk': return 'Talk';
+      case 'publication': return 'Publication';
+      case 'archive': return 'Archive';
+      default: return type;
     }
+  };
 
-    // Fallback to first paragraph if no summary is available
-    const firstParagraph = content.split('\n\n')[0];
-    if (firstParagraph.length <= 150) {
-      return firstParagraph;
-    }
-    return firstParagraph.substring(0, 147) + '...';
+  /**
+   * Count the number of results by content type
+   *
+   * @returns {Record<string, number>} Count of results by type
+   */
+  const getResultCountByType = (): Record<string, number> => {
+    const counts: Record<string, number> = { all: results.length };
+
+    results.forEach(result => {
+      counts[result.type] = (counts[result.type] || 0) + 1;
+    });
+
+    return counts;
   };
 
   /**
@@ -198,6 +250,9 @@ const SearchResults: React.FC = () => {
     );
   };
 
+  // Generate result counts
+  const resultCounts = getResultCountByType();
+
   return (
     <div className="search-results-page">
       <div className="content-wrapper">
@@ -208,33 +263,31 @@ const SearchResults: React.FC = () => {
             value={inputValue}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            placeholder="Search posts..."
+            placeholder="Search across all content..."
             className="search-input-large"
             autoFocus
           />
 
           {showAutocomplete && autocompleteResults.length > 0 && (
             <div ref={autocompleteRef} className="search-autocomplete">
-              {autocompleteResults.map(post => (
+              {autocompleteResults.map(result => (
                 <Link
-                  key={post.slug}
-                  to={`/blog/${post.slug}`}
+                  key={`${result.type}-${result.id}`}
+                  to={result.url}
                   className="autocomplete-item"
-                  onClick={() => handleSelectResult(post.slug)}
+                  onClick={handleSelectResult}
                 >
+                  <div className="autocomplete-type">{getContentTypeLabel(result.type)}</div>
                   <div className="autocomplete-title">
-                    {highlightMatch(post.title, inputValue)}
+                    {highlightMatch(result.title, inputValue)}
                   </div>
                   <div className="autocomplete-meta">
                     <span className="autocomplete-date">
-                      {new Date(post.date).toLocaleDateString('en-US', {
+                      {new Date(result.date).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric'
                       })}
-                    </span>
-                    <span className="autocomplete-reading-time">
-                      {calculateReadingTime(post.content)} min read
                     </span>
                   </div>
                 </Link>
@@ -250,37 +303,59 @@ const SearchResults: React.FC = () => {
           )}
         </div>
 
-        <h1 className="page-title">
-          {loading ? 'Searching...' : `Search Results for "${query}"`}
-        </h1>
+        {inputValue && !loading && (
+          <div className="search-results-header">
+            <h1 className="search-results-title">
+              {results.length > 0
+                ? `${results.length} results for "${query}"`
+                : `No results found for "${query}"`
+              }
+            </h1>
 
-        {!loading && results.length === 0 && (
-          <div className="no-results-message">
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="8" y1="12" x2="16" y2="12"></line>
-            </svg>
-            <p>No posts found matching "{query}"</p>
+            {results.length > 0 && (
+              <div className="search-filters">
+                <button
+                  className={`filter-button ${activeFilter === 'all' ? 'active' : ''}`}
+                  onClick={() => setActiveFilter('all')}
+                >
+                  All ({resultCounts.all})
+                </button>
+                {Object.entries(resultCounts)
+                  .filter(([type]) => type !== 'all')
+                  .map(([type, count]) => (
+                    <button
+                      key={type}
+                      className={`filter-button ${activeFilter === type ? 'active' : ''}`}
+                      onClick={() => setActiveFilter(type as ContentType)}
+                    >
+                      {getContentTypeLabel(type as ContentType)} ({count})
+                    </button>
+                  ))
+                }
+              </div>
+            )}
           </div>
         )}
 
-        {!loading && results.length > 0 && (
+        {loading ? (
+          <div className="search-loading">
+            <div className="loading-spinner"></div>
+            <div>Searching...</div>
+          </div>
+        ) : (
           <>
-            <p className="results-count">{results.length} {results.length === 1 ? 'post' : 'posts'} found</p>
-
-            <div className="blog-cards-container">
-              {results.map(post => (
-                <BlogPostCard
-                  key={post.slug}
-                  slug={post.slug}
-                  title={post.title}
-                  date={post.date}
-                  tags={post.tags}
-                  excerpt={getExcerpt(post.content, post.summary)}
-                  readingTime={calculateReadingTime(post.content)}
-                />
-              ))}
-            </div>
+            {filteredResults.length > 0 ? (
+              <div className="search-results-container">
+                {filteredResults.map(result => renderResultItem(result))}
+              </div>
+            ) : (
+              inputValue && (
+                <div className="no-results">
+                  <p>No results found for your search.</p>
+                  <p>Try using different keywords or check your spelling.</p>
+                </div>
+              )
+            )}
           </>
         )}
       </div>

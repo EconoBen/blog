@@ -155,10 +155,18 @@
     width: 100%;
 }
 
+.search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
 .search-input {
     font-family: var(--font-body);
     font-size: 0.9rem;
     padding: 8px 15px;
+    padding-right: 40px; /* Make room for the search icon */
     border: none;
     border-radius: 20px;
     background: var(--search-bg);
@@ -171,6 +179,114 @@
     width: 260px;
     outline: none;
     box-shadow: 0 0 0 2px var(--accent-color-light);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.search-icon:hover {
+    color: var(--accent-color);
+}
+
+/* Autocomplete Dropdown */
+.autocomplete-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border-radius: var(--radius-medium);
+    margin-top: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 100;
+    padding: 10px 0;
+}
+
+.autocomplete-item {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 15px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid var(--border-color-light);
+}
+
+.autocomplete-item:last-child {
+    border-bottom: none;
+}
+
+.autocomplete-item:hover {
+    background-color: var(--hover-bg);
+}
+
+.autocomplete-type {
+    font-size: 0.7rem;
+    color: var(--accent-color);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+.autocomplete-title {
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.autocomplete-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.autocomplete-date {
+    margin-right: 12px;
+}
+
+.autocomplete-reading-time {
+    display: flex;
+    align-items: center;
+}
+
+.autocomplete-reading-time::before {
+    content: "•";
+    margin-right: 5px;
+}
+
+.autocomplete-view-all {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 5px;
+    transition: color 0.2s ease;
+}
+
+.autocomplete-view-all:hover {
+    color: var(--accent-color-dark);
+    text-decoration: underline;
 }
 
 /* Sidebar Navigation Components */
