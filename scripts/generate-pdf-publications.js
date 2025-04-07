@@ -21,9 +21,24 @@ const path = require('path');
 const glob = require('glob');
 
 /**
+ * Check if running in Vercel environment
+ *
+ * @returns {boolean} True if running in Vercel
+ */
+function isVercelEnvironment() {
+  return process.env.VERCEL === '1' || process.env.NOW_REGION || process.env.VERCEL_REGION;
+}
+
+/**
  * Main function to generate PDF publication entries
  */
 async function generatePdfPublications() {
+  // Skip PDF processing in Vercel environment
+  if (isVercelEnvironment()) {
+    console.log('Running in Vercel environment, skipping PDF publication generation.');
+    return;
+  }
+
   // Find all PDF files in public/posts directory
   const publicDir = path.join(__dirname, '../public');
   const postsDir = path.join(publicDir, 'posts');

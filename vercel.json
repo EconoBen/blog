@@ -1,0 +1,12 @@
+{
+  "buildCommand": "npm run build",
+  "installCommand": "npm install --no-optional",
+  "outputDirectory": "build",
+  "framework": "create-react-app",
+  "github": {
+    "silent": true
+  },
+  "env": {
+    "VERCEL": "1"
+  }
+}

@@ -27,6 +27,15 @@ const glob = require('glob');
 const { execSync } = require('child_process');
 
 /**
+ * Check if running in Vercel environment
+ *
+ * @returns {boolean} True if running in Vercel
+ */
+function isVercelEnvironment() {
+  return process.env.VERCEL === '1' || process.env.NOW_REGION || process.env.VERCEL_REGION;
+}
+
+/**
  * Converts the first page of a PDF to an image thumbnail using pdftoppm
  *
  * @param {string} pdfPath - Path to the PDF file
@@ -67,6 +76,12 @@ async function convertFirstPageToThumbnail(pdfPath, outputPath) {
  * Main function to generate thumbnails
  */
 async function generatePdfThumbnails() {
+  // Skip PDF processing in Vercel environment
+  if (isVercelEnvironment()) {
+    console.log('Running in Vercel environment, skipping PDF thumbnail generation.');
+    return;
+  }
+
   // Find all PDF files in public/posts directory
   const publicDir = path.join(__dirname, '../public');
   const postsDir = path.join(publicDir, 'posts');
