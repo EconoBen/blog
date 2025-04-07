@@ -75,10 +75,6 @@ const BottomNav: React.FC = () => {
 
   return (
     <div className="bottom-nav">
-      <Link to="/about" className={`bottom-nav-item ${isActive('/about') ? 'active' : ''}`}>
-        <div className="bottom-nav-icon">👤</div>
-        <div>About</div>
-      </Link>
       <Link to="/" className={`bottom-nav-item ${isActive('/') && !path.startsWith('/posts/') ? 'active' : ''}`}>
         <div className="bottom-nav-icon">📝</div>
         <div>Posts</div>
@@ -94,6 +90,10 @@ const BottomNav: React.FC = () => {
       <Link to="/archives" className={`bottom-nav-item ${isActive('/archives') ? 'active' : ''}`}>
         <div className="bottom-nav-icon">🗓️</div>
         <div>Archive</div>
+      </Link>
+      <Link to="/about" className={`bottom-nav-item ${isActive('/about') ? 'active' : ''}`}>
+        <div className="bottom-nav-icon">👤</div>
+        <div>About</div>
       </Link>
     </div>
   );

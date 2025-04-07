@@ -174,34 +174,10 @@ const HomePage: React.FC = () => {
    * @returns {Array<{icon: string, name: string}>} Array of tech badges
    */
   const getTechBadges = (tags: string[]): Array<{icon: string, name: string}> => {
-    // Map common tech tags to emoji icons
-    const techIcons: Record<string, string> = {
-      'docker': '🐳',
-      'kubernetes': '☸️',
-      'k8s': '☸️',
-      'cloud': '☁️',
-      'aws': '☁️',
-      'azure': '☁️',
-      'gcp': '☁️',
-      'ci/cd': '🔄',
-      'devops': '🔄',
-      'javascript': '⚡',
-      'typescript': '📘',
-      'react': '⚛️',
-      'node': '🟢',
-      'python': '🐍',
-      'go': '🚀',
-      'rust': '⚙️',
-      'database': '💾',
-      'sql': '💾',
-      'nosql': '💾',
-      'security': '🔒'
-    };
-
+    // All tech badges will use hashtag icon
     return tags.map(tag => {
-      const lowerTag = tag.toLowerCase();
       return {
-        icon: techIcons[lowerTag] || '🔧', // Default icon if tag not in mapping
+        icon: '#', // Using hashtag instead of emoji icons
         name: tag
       };
     }).slice(0, 4); // Only show maximum of 4 tech badges
@@ -243,8 +219,10 @@ const HomePage: React.FC = () => {
             <div className="tech-badges">
               {blogConfig.hero.techBadges.map((tech: TechBadge, index: number) => (
                 <div key={index} className="tech-badge">
-                  <span className="tech-icon">{tech.icon}</span>
-                  <span className="tech-name">{tech.name}</span>
+                  <Link to={`/tags/${tech.name}`} className="tech-badge-link">
+                    <span className="tech-icon">{tech.icon}</span>
+                    <span className="tech-name">{tech.name}</span>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -290,9 +268,11 @@ const HomePage: React.FC = () => {
       <section className="hero-section">
         <div className="hero-content">
           <h1 className="hero-title">
-            {titleLines.map((line: string, index: number) => (
-              <span key={index} className="hero-line">{line}</span>
-            ))}
+            <Link to={`/posts/${newestPost.slug}`} className="hero-title-link">
+              {titleLines.map((line: string, index: number) => (
+                <span key={index} className="hero-line">{line}</span>
+              ))}
+            </Link>
           </h1>
           <p className="hero-subtitle">
             {postExcerpt}
@@ -312,8 +292,10 @@ const HomePage: React.FC = () => {
           <div className="tech-badges">
             {techBadges.map((tech: TechBadge, index: number) => (
               <div key={index} className="tech-badge">
-                <span className="tech-icon">{tech.icon}</span>
-                <span className="tech-name">{tech.name}</span>
+                <Link to={`/tags/${tech.name}`} className="tech-badge-link">
+                  <span className="tech-icon">{tech.icon}</span>
+                  <span className="tech-name">{tech.name}</span>
+                </Link>
               </div>
             ))}
           </div>

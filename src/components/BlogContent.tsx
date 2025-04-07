@@ -56,10 +56,11 @@ const BlogContent: React.FC = () => {
   return (
     <div className="main-content">
       <div className="main-nav">
-        <div className="main-nav-item"><Link to="/about">About</Link></div>
         <div className="main-nav-item active"><Link to="/">Posts</Link></div>
-        <div className="main-nav-item"><Link to="/archives">Archive</Link></div>
         <div className="main-nav-item"><Link to="/talks">Talks</Link></div>
+        <div className="main-nav-item"><Link to="/publications">Publications</Link></div>
+        <div className="main-nav-item"><Link to="/archives">Archive</Link></div>
+        <div className="main-nav-item"><Link to="/about">About</Link></div>
       </div>
 
       <div className="blog-header">

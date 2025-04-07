@@ -10,20 +10,29 @@ import { Talk } from '../types';
  */
 const TalksPage: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
   const { title, subtitle, talks } = talksConfig;
 
   /**
-   * Extract all unique topics from talks
+   * Extract top 10 unique topics from talks based on frequency
    *
-   * @returns {string[]} Array of unique topics
+   * @returns {string[]} Array of top 10 unique topics
    */
-  const getUniqueTopics = (): string[] => {
-    const topics = new Set<string>();
+  const getTopTenTopics = (): string[] => {
+    // Count occurrences of each topic
+    const topicCount = new Map<string, number>();
+
     talks.forEach(talk => {
-      talk.topics.forEach(topic => topics.add(topic));
+      talk.topics.forEach(topic => {
+        topicCount.set(topic, (topicCount.get(topic) || 0) + 1);
+      });
     });
-    return Array.from(topics).sort();
+
+    // Convert to array, sort by count descending, and take top 10
+    return Array.from(topicCount.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 15)
+      .map(entry => entry[0]);
   };
 
   /**
@@ -63,7 +72,7 @@ const TalksPage: React.FC = () => {
           >
             All Topics
           </button>
-          {getUniqueTopics().map(topic => (
+          {getTopTenTopics().map(topic => (
             <button
               key={topic}
               className={`filter-button ${activeFilter === topic ? 'active' : ''}`}
@@ -82,6 +91,19 @@ const TalksPage: React.FC = () => {
           </h2>
           <div className="view-toggle">
             <button
+              className={`view-button ${viewMode === 'grid' ? 'active' : ''}`}
+              onClick={() => setViewMode('grid')}
+              aria-label="Grid View"
+              title="Grid View"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </button>
+            <button
               className={`view-button ${viewMode === 'list' ? 'active' : ''}`}
               onClick={() => setViewMode('list')}
               aria-label="List View"
@@ -94,19 +116,6 @@ const TalksPage: React.FC = () => {
                 <line x1="3" y1="6" x2="3.01" y2="6"></line>
                 <line x1="3" y1="12" x2="3.01" y2="12"></line>
                 <line x1="3" y1="18" x2="3.01" y2="18"></line>
-              </svg>
-            </button>
-            <button
-              className={`view-button ${viewMode === 'grid' ? 'active' : ''}`}
-              onClick={() => setViewMode('grid')}
-              aria-label="Grid View"
-              title="Grid View"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7"></rect>
-                <rect x="14" y="3" width="7" height="7"></rect>
-                <rect x="14" y="14" width="7" height="7"></rect>
-                <rect x="3" y="14" width="7" height="7"></rect>
               </svg>
             </button>
           </div>

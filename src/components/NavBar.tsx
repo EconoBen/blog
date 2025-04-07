@@ -186,11 +186,11 @@ const NavBar: React.FC = () => {
         {/* Desktop Navigation Items - Hidden on mobile */}
         <div className="nav-items desktop-only">
           {[
-            { path: '/about', label: 'About' },
             { path: '/', label: 'Posts' },
             { path: '/talks', label: 'Talks' },
             { path: '/publications', label: 'Publications' },
             { path: '/archives', label: 'Archive' },
+            { path: '/about', label: 'About' },
           ].map(item => (
             <div
               key={item.path}
