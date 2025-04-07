@@ -20,6 +20,7 @@ const debounce = (func: (...args: any[]) => void, wait: number) => {
 
 /**
  * Enhanced NavBar component with animations and interactive elements
+ * This is only used for desktop view, mobile uses BottomNav
  *
  * @returns {JSX.Element} The rendered NavBar component
  */
@@ -206,6 +207,14 @@ const NavBar: React.FC = () => {
     };
   }, []);
 
+  const navItems = [
+    { path: '/', label: 'Posts' },
+    { path: '/talks', label: 'Talks' },
+    { path: '/publications', label: 'Publications' },
+    { path: '/archives', label: 'Archive' },
+    { path: '/about', label: 'About' },
+  ];
+
   return (
     <nav
       className={`main-nav ${scrolled ? 'nav-scrolled' : ''}`}
@@ -221,15 +230,9 @@ const NavBar: React.FC = () => {
           </Link>
         </div>
 
-        {/* Desktop Navigation Items - Hidden on mobile */}
-        <div className="nav-items desktop-only">
-          {[
-            { path: '/', label: 'Posts' },
-            { path: '/talks', label: 'Talks' },
-            { path: '/publications', label: 'Publications' },
-            { path: '/archives', label: 'Archive' },
-            { path: '/about', label: 'About' },
-          ].map(item => (
+        {/* Desktop Navigation Items */}
+        <div className="nav-items">
+          {navItems.map(item => (
             <div
               key={item.path}
               className={`nav-item ${isActive(item.path) ? 'active' : ''}`}
@@ -250,7 +253,7 @@ const NavBar: React.FC = () => {
           ))}
         </div>
 
-        {/* Desktop Search - Always visible on desktop, hidden on mobile */}
+        {/* Desktop Search */}
         <div className="nav-search desktop-search">
           <form onSubmit={handleSearch}>
             <div className="search-container">
@@ -268,6 +271,10 @@ const NavBar: React.FC = () => {
                 className="search-icon"
                 aria-label="Submit search"
               >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
               </button>
             </div>
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Routes, Route, useParams, useLocation, Link } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import NavBar from './components/NavBar';
+import MobileNavBar from './components/MobileNavBar';
 import PostDetail from './components/PostDetail';
 import TagPage from './components/TagPage';
 import ArchivePage from './components/ArchivePage';
@@ -294,16 +295,6 @@ const App: React.FC = () => {
   };
 
   /**
-   * Closes the sidebar when clicking on the overlay
-   * (useful for mobile)
-   */
-  const closeSidebar = (): void => {
-    if (isMobile && isSidebarOpen) {
-      setIsSidebarOpen(false);
-    }
-  };
-
-  /**
    * Determine if the sidebar toggle button should be visible
    * Shows after scrolling down a bit, or if sidebar is open
    */
@@ -313,7 +304,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
-      <div className="blog-container">
+      <div className={`blog-container ${isMobile ? 'mobile-container' : ''}`}>
         {/* Sidebar Toggle Button - Only visible on desktop */}
         {!isMobile && (
           <div
@@ -332,9 +323,9 @@ const App: React.FC = () => {
           </div>
         )}
 
-        {/* Dark Mode Toggle */}
+        {/* Dark Mode Toggle - Position differs for mobile/desktop */}
         <div
-          className="dark-mode-toggle"
+          className={`dark-mode-toggle ${isMobile ? 'mobile-dark-mode-toggle' : ''}`}
           onClick={toggleDarkMode}
           aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
           role="button"
@@ -343,8 +334,8 @@ const App: React.FC = () => {
           <div className="dark-mode-icon"></div>
         </div>
 
-        {/* Social Links - Hidden on small mobile */}
-        <SocialLinks />
+        {/* Social Links - Only on desktop */}
+        {!isMobile && <SocialLinks />}
 
         {/* Sidebar Component - Only shown on desktop */}
         {!isMobile && <Sidebar width={sidebarWidth} />}
@@ -357,21 +348,17 @@ const App: React.FC = () => {
           />
         )}
 
-        {/* Overlay for mobile - closes sidebar when clicked */}
-        {isMobile && isSidebarOpen && (
-          <div className="sidebar-overlay" onClick={closeSidebar} />
-        )}
-
         {/* Main Content Component */}
         <div className="main-content" style={{
-          marginLeft: isSidebarOpen && !isMobile ? `${sidebarWidth}px` : '0',
-          maxWidth: isSidebarOpen && !isMobile ? `calc(100% - ${sidebarWidth}px)` : '100%'
+          marginLeft: isMobile ? '0' : (isSidebarOpen ? `${sidebarWidth}px` : '0'),
+          maxWidth: isMobile ? '100%' : (isSidebarOpen ? `calc(100% - ${sidebarWidth}px)` : '100%'),
+          width: '100%'
         }}>
-          {/* Navigation Bar */}
-          <NavBar />
+          {/* Navigation Bar - Desktop or Mobile */}
+          {isMobile ? <MobileNavBar /> : <NavBar />}
 
           {/* Routes */}
-          <div className="content-wrapper">
+          <div className={`content-wrapper ${isMobile ? 'mobile-content-wrapper' : ''}`}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/posts/:slug" element={<PostDetailWrapper />} />

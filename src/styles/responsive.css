@@ -40,6 +40,15 @@
         --content-padding: 25px;
     }
 
+    /* Utility classes */
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
     .main-content {
         padding: var(--content-padding);
         margin-left: 0 !important;
@@ -125,37 +134,6 @@
 
     .code-line {
         padding: 0 10px;
-    }
-
-    /* Navbar responsive adjustments */
-    .nav-container {
-        flex-direction: column;
-        padding: var(--spacing-sm);
-    }
-
-    .nav-brand {
-        margin-bottom: var(--spacing-sm);
-    }
-
-    .nav-items {
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: var(--spacing-sm) 0;
-    }
-
-    .nav-search {
-        margin-top: var(--spacing-sm);
-        margin-left: 0;
-        width: 100%;
-        max-width: 250px;
-    }
-
-    .search-input {
-        width: 100%;
-    }
-
-    .search-input:focus {
-        width: 100%;
     }
 
     /* Talks page responsive styles */
@@ -274,35 +252,6 @@
         height: 22px;
     }
 
-    /* Navbar */
-    .nav-items {
-        gap: 8px;
-    }
-
-    .nav-item a {
-        font-size: 14px;
-        padding: 6px 8px;
-    }
-
-    .logo-text {
-        font-size: 16px;
-    }
-
-    .nav-search {
-        width: 100%;
-        margin: var(--spacing-sm) 0;
-        max-width: 100%;
-    }
-
-    .search-input {
-        width: 100%;
-        padding-right: 40px;
-    }
-
-    .search-input:focus {
-        width: 100%;
-    }
-
     /* Hero */
     .hero-section {
         padding: 40px 20px;
@@ -334,111 +283,19 @@
     .featured-post-title {
         font-size: 1.3rem;
     }
-
-    /* Talks page responsive styles */
-    .talks-component-header {
-        padding: 15px;
-    }
-
-    .talks-component-title {
-        font-size: 1.1rem;
-    }
-
-    .talks-component-content {
-        padding: 15px;
-    }
-
-    .talks-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 12px;
-    }
-
-    .talk-card-grid .talk-card-title {
-        font-size: 0.95rem;
-    }
-
-    .talk-card-grid .talk-card-content {
-        padding: 10px;
-    }
-
-    .talk-card-grid .talk-play-button {
-        width: 40px;
-        height: 40px;
-    }
-
-    .talk-card-grid .talk-play-button svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .talks-filter {
-        gap: 8px;
-        margin-bottom: 25px;
-    }
-
-    .filter-button {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-
-    .talk-card-content {
-        padding: 20px;
-    }
-
-    .talk-card-title {
-        font-size: 1.2rem;
-        margin-bottom: 8px;
-    }
-
-    .talk-card-meta {
-        font-size: 0.8rem;
-        gap: 10px;
-    }
-
-    .talk-card-description {
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-    }
-
-    .talk-play-button {
-        width: 50px;
-        height: 50px;
-    }
-
-    .talk-play-button svg {
-        width: 22px;
-        height: 22px;
-    }
-
-    .talk-topic-tag {
-        font-size: 0.8rem;
-        padding: 3px 8px;
-    }
 }
 
 /* Small mobile devices */
-@media (max-width: 375px) {
-    .hero-title {
-        font-size: 2rem;
+@media (max-width: 360px) {
+    .blog-title {
+        font-size: 18px;
     }
 
-    .hero-subtitle {
-        font-size: 1rem;
+    .blog-content h2 {
+        font-size: 16px;
     }
 
-    .tech-badges {
-        gap: 8px;
-    }
-
-    .tech-badge {
-        padding: 5px 10px;
-    }
-
-    .tech-name {
-        font-size: 0.8rem;
-    }
-
-    .section-title {
-        font-size: 1.5rem;
+    .blog-content h3 {
+        font-size: 15px;
     }
 }

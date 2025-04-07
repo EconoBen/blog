@@ -181,6 +181,7 @@
     box-shadow: 0 0 0 2px var(--accent-color-light);
 }
 
+/* Search Button and Autocomplete Styles */
 .search-icon {
     position: absolute;
     right: 12px;

@@ -7,6 +7,7 @@ import './styles/navigation.css';
 import './styles/typography.css';
 import './styles/dark-mode.css';
 import './styles/responsive.css';
+import './styles/mobile.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
