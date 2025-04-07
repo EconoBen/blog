@@ -49,7 +49,7 @@ const PublicationsPage: React.FC<PublicationsPageProps> = ({ initialFilter }) =>
                 className={`filter-button ${filter === type ? 'active' : ''}`}
                 onClick={() => setFilter(type)}
               >
-                {type === 'all' ? 'All Publications' : `${type.charAt(0).toUpperCase() + type.slice(1)}s`}
+                {type === 'all' ? 'All' : `${type.charAt(0).toUpperCase() + type.slice(1)}s`}
               </button>
             ))}
           </div>

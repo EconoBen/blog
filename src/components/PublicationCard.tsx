@@ -81,13 +81,31 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
     setShowCitation(!showCitation);
   };
 
+  /**
+   * Get the primary link for the publication (URL or PDF URL)
+   *
+   * @returns {string | undefined} The URL to the publication
+   */
+  const getPublicationLink = (): string | undefined => {
+    return publication.url || publication.pdfUrl;
+  };
+
+  // Determine if publication has a link (URL or PDF URL)
+  const hasLink = !!getPublicationLink();
+
   return (
     <div className={`publication-card ${publication.featured ? 'publication-featured' : ''}`}>
       <div className="publication-card-content">
         <div className="publication-header">
           {publication.coverImage && (
             <div className="publication-cover">
-              <img src={publication.coverImage} alt={publication.title} />
+              {hasLink ? (
+                <a href={getPublicationLink()} target="_blank" rel="noopener noreferrer">
+                  <img src={publication.coverImage} alt={publication.title} />
+                </a>
+              ) : (
+                <img src={publication.coverImage} alt={publication.title} />
+              )}
             </div>
           )}
 
@@ -107,8 +125,8 @@ const PublicationCard: React.FC<PublicationCardProps> = ({ publication }) => {
             </div>
 
             <h3 className="publication-title">
-              {publication.url ? (
-                <a href={publication.url} target="_blank" rel="noopener noreferrer">
+              {hasLink ? (
+                <a href={getPublicationLink()} target="_blank" rel="noopener noreferrer">
                   {publication.title}
                 </a>
               ) : (

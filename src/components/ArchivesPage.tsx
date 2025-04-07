@@ -41,7 +41,7 @@ const ArchivesPage: React.FC = () => {
   }, []);
 
   /**
-   * Groups archive items by year
+   * Groups archive items by year and sorts months within each year from newest to oldest
    *
    * @returns {Record<string, ArchiveData[]>} Grouped archives by year
    */
@@ -56,13 +56,27 @@ const ArchivesPage: React.FC = () => {
       grouped[year].push(archive);
     });
 
-    // Sort years in descending order
-    return Object.keys(grouped)
-      .sort((a, b) => parseInt(b) - parseInt(a))
-      .reduce((result, year) => {
-        result[year] = grouped[year];
-        return result;
-      }, {} as Record<string, ArchiveData[]>);
+    // Sort months within each year from newest to oldest
+    Object.keys(grouped).forEach(year => {
+      grouped[year].sort((a, b) => {
+        const monthA = new Date(a.month);
+        const monthB = new Date(b.month);
+        return monthB.getTime() - monthA.getTime();
+      });
+    });
+
+    // Return the grouped object without sorting here
+    return grouped;
+  };
+
+  /**
+   * Get years in descending order (newest to oldest)
+   *
+   * @param {Record<string, ArchiveData[]>} grouped - Grouped archives by year
+   * @returns {string[]} Years sorted in descending order
+   */
+  const getSortedYears = (grouped: Record<string, ArchiveData[]>): string[] => {
+    return Object.keys(grouped).sort((a, b) => parseInt(b) - parseInt(a));
   };
 
   if (loading) {
@@ -94,6 +108,7 @@ const ArchivesPage: React.FC = () => {
   }
 
   const groupedArchives = groupByYear();
+  const sortedYears = getSortedYears(groupedArchives);
 
   return (
     <div className="archives-page">
@@ -103,11 +118,11 @@ const ArchivesPage: React.FC = () => {
           <p className="subtitle">Browse all blog posts by publication date</p>
         </div>
 
-        {Object.keys(groupedArchives).length === 0 ? (
+        {sortedYears.length === 0 ? (
           <div className="no-results">No archives available.</div>
         ) : (
           <div className="archives-content">
-            {Object.entries(groupedArchives).map(([year, months]) => (
+            {sortedYears.map(year => (
               <div key={year} className="archive-year-card">
                 <div className="year-header">
                   <h3>{year}</h3>
@@ -115,7 +130,7 @@ const ArchivesPage: React.FC = () => {
                 </div>
 
                 <div className="archive-months-grid">
-                  {months.map(archive => (
+                  {groupedArchives[year].map(archive => (
                     <Link
                       key={archive.month}
                       to={`/archives/${encodeURIComponent(archive.month)}`}
