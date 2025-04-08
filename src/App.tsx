@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Analytics } from "@vercel/analytics/react"
 import { BrowserRouter as Router, Routes, Route, useParams, useLocation, Link } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import NavBar from './components/NavBar';
@@ -376,6 +377,7 @@ const App: React.FC = () => {
           {isMobile && <BottomNav />}
         </div>
       </div>
+      <Analytics />
     </Router>
   );
 };

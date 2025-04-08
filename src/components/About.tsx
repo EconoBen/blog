@@ -25,12 +25,17 @@ const About: React.FC = () => {
     <div className="about-container">
       <div className="about-hero">
         <div className="about-hero-content">
-          <h1>Ben Labaschin</h1>
-          <h2>Principal Machine Learning Engineer</h2>
-          <p className="about-tagline">
-            Building intelligent systems that deliver measurable impact—from pioneering enterprise-scale
-            GenAI platforms to developing ML systems that drive millions in business value.
-          </p>
+          <div className="about-hero-text">
+            <h1>Ben Labaschin</h1>
+            <h2>Principal Machine Learning Engineer</h2>
+            <p className="about-tagline">
+              Building intelligent systems that deliver measurable impact—from pioneering enterprise-scale
+              GenAI platforms to developing ML systems that drive millions in business value.
+            </p>
+          </div>
+          <div className="about-hero-image">
+            <img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas" />
+          </div>
         </div>
       </div>
 

@@ -414,74 +414,62 @@
 
 /* Fix talk card images on mobile */
 .mobile-container .talk-thumbnail-container {
-  position: relative !important;
-  width: 100% !important;
-  height: 0 !important;
-  padding-bottom: 56.25% !important; /* 16:9 aspect ratio */
-  overflow: hidden !important;
-  background-color: rgba(0, 0, 0, 0.1) !important;
-  border-radius: 8px !important;
-  z-index: 1 !important;
-  margin-bottom: 0 !important;
-}
-
-.mobile-container .talk-thumbnail {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-  max-width: none !important;
-  border-radius: 0 !important;
-  margin: 0 !important;
-  border: none !important;
+  cursor: pointer !important;
   z-index: 1 !important;
 }
 
+.mobile-container .talk-thumbnail {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
 .mobile-container .talk-play-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
   width: 60px !important;
   height: 60px !important;
-  background-color: rgba(var(--accent-color-rgb), 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: white !important;
+  transition: all 0.2s ease !important;
 }
 
 .mobile-container .talk-play-button svg {
-  width: 24px !important;
-  height: 24px !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.mobile-container .talk-thumbnail-container:active .talk-play-button {
+  background-color: var(--accent-color) !important;
+  transform: translate(-50%, -50%) scale(0.95) !important;
 }
 
 /* Fix iframe and YouTube videos with ultra-specific rules */
 .mobile-container .talk-card-video {
   position: relative !important;
-  width: 100% !important;
   padding-bottom: 56.25% !important; /* 16:9 Aspect Ratio */
   height: 0 !important;
   overflow: hidden !important;
-  background-color: #000 !important;
-  margin-bottom: 15px !important;
-  border-radius: 8px !important;
 }
 
-.mobile-container .talk-card-video img {
-  width: 100% !important;
-  height: 100% !important;
+.mobile-container .talk-card-video iframe {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  display: block !important;
-  object-fit: cover !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
 }
 
 /* Special rule to make sure the iOS YouTube thumbnails load properly */
@@ -806,6 +794,37 @@
   padding: 15px !important;
 }
 
+.mobile-container .talk-card-actions {
+  margin-top: 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+}
+
+.mobile-container .watch-talk-button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  background-color: var(--accent-color) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 25px !important;
+  padding: 10px 20px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  width: 100% !important;
+  max-width: 200px !important;
+  text-align: center !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mobile-container .watch-talk-button svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
 /* Fix iframe for talk videos */
 .mobile-container iframe {
   max-width: 100% !important;
@@ -819,26 +838,90 @@
 
 /* About hero section styles */
 .mobile-container .about-hero {
-  padding: 20px !important;
-  border-radius: 10px !important;
+  padding: 0 !important;
+  border-radius: 12px !important;
   overflow: hidden !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 25px !important;
   width: 100% !important;
+  background-color: #fff !important;
+  box-shadow: 0 10px 20px rgba(0, 112, 243, 0.08) !important;
+  border: 1px solid #f0f7ff !important;
+  position: relative !important;
+  display: block !important;
+}
+
+.mobile-container .about-hero::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, rgba(230, 240, 255, 0.7) 0%, rgba(255, 255, 255, 0) 50%) !important;
+  z-index: 1 !important;
+}
+
+.mobile-container .about-hero-content {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.mobile-container .about-hero-text {
+  order: 2 !important;
+  padding: 25px !important;
+}
+
+.mobile-container .about-hero-image {
+  order: 1 !important;
+  width: 100% !important;
+  height: 350px !important;
+  overflow: hidden !important;
+}
+
+.mobile-container .about-hero-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  filter: brightness(1.02) !important;
 }
 
 .mobile-container .about-hero h1 {
-  font-size: 1.8rem !important;
-  margin-bottom: 10px !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 20px !important;
+  color: #111 !important;
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.mobile-container .about-hero h1::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -8px !important;
+  left: 0 !important;
+  width: 50px !important;
+  height: 4px !important;
+  background: linear-gradient(to right, var(--accent-color), var(--accent-color-secondary)) !important;
+  border-radius: 2px !important;
 }
 
 .mobile-container .about-hero h2 {
-  font-size: 1.2rem !important;
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
   margin-bottom: 15px !important;
+  color: var(--accent-color) !important;
 }
 
 .mobile-container .about-tagline {
   font-size: 1rem !important;
-  line-height: 1.5 !important;
+  line-height: 1.6 !important;
+  color: #555 !important;
+  max-width: 100% !important;
+  margin-bottom: 0 !important;
 }
 
 .mobile-container .about-social-links {
