@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { isMobileDevice } from '../utils/deviceDetection';
 
 /**
  * Props for the BlogPostCard component
@@ -100,11 +101,23 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({
 
         <footer className="blog-card-footer">
           <div className="blog-card-tags">
-            {tags.map(tag => (
-              <Link key={tag} to={`/tags/${tag}`} className="blog-card-tag">
-                #{tag}
-              </Link>
-            ))}
+            {tags.map(tag => {
+              if (isMobileDevice()) {
+                // On mobile: Just display as span, not linked
+                return (
+                  <span key={tag} className="blog-card-tag">
+                    #{tag}
+                  </span>
+                );
+              } else {
+                // On desktop: Use Link component
+                return (
+                  <Link key={tag} to={`/tags/${tag}`} className="blog-card-tag">
+                    #{tag}
+                  </Link>
+                );
+              }
+            })}
           </div>
           <div className="blog-card-action">
             <Link to={`/posts/${slug}`} className="blog-card-read-more">

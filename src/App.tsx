@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Analytics } from "@vercel/analytics/react"
-import { BrowserRouter as Router, Routes, Route, useParams, useLocation, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams, useLocation, Link, useNavigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import NavBar from './components/NavBar';
 import MobileNavBar from './components/MobileNavBar';
@@ -14,6 +14,27 @@ import HomePage from './components/HomePage';
 import SocialLinks from './components/SocialLinks';
 import PublicationsPage from './components/PublicationsPage';
 import SearchResults from './components/SearchResults';
+import { isMobileDevice } from './utils/deviceDetection';
+
+/**
+ * ScrollToTop component that resets scroll position on route changes
+ *
+ * @returns {null} This component doesn't render anything
+ */
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    // Set browser's scroll restoration to manual
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, [pathname]);
+
+  return null;
+};
 
 /**
  * Wrapper for PostDetail with route params
@@ -32,6 +53,22 @@ const PostDetailWrapper: React.FC = () => {
  */
 const TagPageWrapper: React.FC = () => {
   const { tag } = useParams<{ tag: string }>();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isMobile = isMobileDevice();
+
+  // Redirect mobile users to the home page
+  useEffect(() => {
+    if (isMobile) {
+      console.log('Mobile device detected, redirecting from tag page to home');
+      navigate('/', { replace: true });
+    }
+  }, [isMobile, navigate]);
+
+  if (isMobile) {
+    return <div>Redirecting...</div>;
+  }
+
   return tag ? <TagPage tag={tag} /> : <div>Tag not found</div>;
 };
 
@@ -43,15 +80,6 @@ const TagPageWrapper: React.FC = () => {
 const ArchivePageWrapper: React.FC = () => {
   const { month } = useParams<{ month: string }>();
   return month ? <ArchivePage month={decodeURIComponent(month)} /> : <div>Archive not found</div>;
-};
-
-/**
- * Checks if the current device is a mobile device
- *
- * @returns {boolean} True if the device is mobile
- */
-const isMobileDevice = (): boolean => {
-  return window.innerWidth <= 768;
 };
 
 /**
@@ -305,6 +333,7 @@ const App: React.FC = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className={`blog-container ${isMobile ? 'mobile-container' : ''}`}>
         {/* Sidebar Toggle Button - Only visible on desktop */}
         {!isMobile && (

@@ -3,6 +3,71 @@
  * Styles specific to mobile devices
  */
 
+/* CSS rules can't fully solve all scroll position issues - add the following JavaScript comment for the developer to implement */
+/*
+Important: Add this JavaScript to reset scroll on page navigation:
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Force scroll to top on page load
+  window.scrollTo(0, 0);
+
+  // For client-side navigation frameworks
+  if (typeof history !== 'undefined' && history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // Reset scroll position when navigating to a new page
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (!link.href.startsWith('#') && !link.target) {
+      link.addEventListener('click', function() {
+        // For frameworks that handle client-side navigation
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 10);
+      });
+    }
+  });
+});
+*/
+
+/* Stronger reset rules for iOS */
+html, body {
+  /* Added !important to strengthen these rules */
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  min-height: 100% !important;
+  max-height: none !important;
+  position: static !important;
+}
+
+/* Override any fixed positioning on body */
+body.mobile {
+  position: static !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  min-height: 100% !important;
+}
+
+/* Fix for page content to always start at the top */
+.mobile-container .main-content > *:first-child,
+.mobile-container .content-wrapper > *:first-child {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Fix for scroll restoration */
+@media screen and (max-width: 767px) {
+  html {
+    scroll-behavior: auto !important;
+    overflow-y: auto !important;
+  }
+
+  body {
+    overflow-y: auto !important;
+    min-height: 100% !important;
+  }
+}
+
 /* Core Mobile Scrolling Fixes - Simplified to work properly */
 body.mobile {
   /* Reset to normal scrolling behavior */
@@ -14,6 +79,15 @@ body.mobile {
   -webkit-overflow-scrolling: touch;
   margin: 0;
   padding: 0;
+  /* Ensure pages always start at the top */
+  scroll-behavior: auto !important;
+  scroll-padding-top: 0 !important;
+}
+
+/* Force scroll position to top on page load for mobile */
+html.mobile-device {
+  scroll-behavior: auto !important;
+  scroll-padding-top: 0 !important;
 }
 
 /* Mobile Container - Make content fully visible */
@@ -35,6 +109,28 @@ body.mobile {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Reset scroll position on navigation */
+  scroll-behavior: auto !important;
+  scroll-padding-top: 0 !important;
+}
+
+/* JavaScript helper class to reset scroll position */
+.scroll-reset {
+  scroll-behavior: auto !important;
+  scroll-padding-top: 0 !important;
+}
+
+/* Add styles to prevent focus from causing scroll jumps */
+.mobile-container * {
+  scroll-margin-top: 0 !important;
+}
+
+/* Ensure inputs don't trigger scroll position changes */
+.mobile-container input,
+.mobile-container textarea,
+.mobile-container select,
+.mobile-container button {
+  scroll-margin: 0 !important;
 }
 
 /* Main content scrolling fixes */
@@ -126,6 +222,9 @@ body.mobile {
   box-sizing: border-box !important;
   /* Remove transform that might interfere with scrolling */
   transform: none;
+  /* Ensure scroll position reset */
+  scroll-snap-align: start;
+  scroll-margin-top: 0;
 }
 
 /* Mobile dark mode toggle */
@@ -191,6 +290,9 @@ body.mobile {
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  /* Prevent scroll issue when navigating */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .mobile-navbar-top {
@@ -1121,5 +1223,693 @@ html.mobile-device body {
 
   .mobile-container .mobile-navbar {
     padding-top: env(safe-area-inset-top, 10px);
+  }
+}
+
+/* Add additional viewport height fix for iOS */
+@supports (-webkit-touch-callout: none) {
+  body.mobile,
+  html.mobile-device {
+    /* Fix iOS height issues */
+    min-height: -webkit-fill-available;
+    overflow-x: hidden;
+  }
+
+  /* Fix for iOS scroll position on page load */
+  .mobile-container {
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* iOS scroll position fix */
+@media screen and (max-width: 767px) {
+  html, body {
+    overflow-x: hidden;
+    height: auto;
+    /* Force page to top */
+    scroll-behavior: auto;
+  }
+
+  /* Force content to start at the top */
+  .mobile-container .main-content {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 0;
+  }
+
+  .mobile-container .main-content > div:first-child {
+    scroll-snap-align: start;
+    scroll-margin-top: 0;
+  }
+}
+
+/* Active hash links fix */
+.mobile-container [id] {
+  scroll-margin-top: 0;
+}
+
+/* Mobile Post Tag Styling - Fix alignment and spacing */
+.mobile-container .post-item .post-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-bottom: 15px !important;
+  align-items: center !important;
+}
+
+.mobile-container .post-item .post-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 5px !important;
+  width: 100% !important;
+}
+
+.mobile-container .post-item .post-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--color-tag-bg) !important;
+  color: var(--color-tag-text) !important;
+  padding: 4px 10px !important;
+  border-radius: 15px !important;
+  font-size: 0.8rem !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  height: 28px !important;
+}
+
+.mobile-container .post-item .post-tag a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.mobile-container .post-item .post-tag-active {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* Blog Card Tag Styling for Mobile */
+.mobile-container .blog-card-footer {
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 15px !important;
+}
+
+.mobile-container .blog-card-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.mobile-container .blog-card-tag {
+  font-size: 0.8rem !important;
+  padding: 4px 12px !important;
+  border-radius: 15px !important;
+  background-color: var(--tag-bg) !important;
+  color: var(--text-muted) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 28px !important;
+  white-space: nowrap !important;
+}
+
+.mobile-container .blog-card-action {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.mobile-container .blog-card-read-more {
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+/* Tag Page Specific Styling for Mobile */
+.mobile-container .tag-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 15px !important;
+  margin: 0 auto !important;
+  margin-bottom: 70px !important; /* Space for bottom nav */
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+.mobile-container .tag-page .tag-heading {
+  font-size: 1.4rem !important;
+  line-height: 1.3 !important;
+  margin: 0 0 15px 0 !important;
+  padding: 0 0 10px 0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--color-text) !important;
+  font-weight: 600 !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  hyphens: auto !important;
+  max-width: 100% !important;
+}
+
+/* Specifically prevent tag overflow */
+.mobile-container .tag-page .post-item .post-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 2px 0 8px 0 !important;
+  padding: 0 !important;
+}
+
+.mobile-container .tag-page .post-item .post-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0.75rem !important;
+  padding: 2px 8px !important;
+  border-radius: 10px !important;
+  height: auto !important;
+  min-height: 22px !important;
+  background-color: var(--color-tag-bg) !important;
+  color: var(--color-tag-text) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: fit-content !important;
+  margin: 0 !important;
+}
+
+/* Post Detail Page Tag Styling */
+.mobile-container .post-detail .post-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+  align-items: center !important;
+}
+
+.mobile-container .post-detail .post-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 10px !important;
+  width: 100% !important;
+}
+
+.mobile-container .post-detail .post-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--color-tag-bg) !important;
+  color: var(--color-tag-text) !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.2 !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+/* Fix for Related Posts section tags */
+.mobile-container .related-posts .post-item .post-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  margin-top: 5px !important;
+}
+
+.mobile-container .related-posts .post-tag {
+  font-size: 0.75rem !important;
+  padding: 3px 8px !important;
+  height: 24px !important;
+}
+
+.mobile-container .blog-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+  margin-top: 5px !important;
+  width: 100% !important;
+}
+
+.mobile-container .blog-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--color-tag-bg) !important;
+  color: var(--color-tag-text) !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.2 !important;
+  margin: 0 5px !important;
+  margin-top: 5px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+/* Style for tags and links inside them */
+.mobile-container a .blog-tag,
+.mobile-container span.blog-tag,
+.mobile-container .blog-tag a {
+  text-decoration: none !important;
+  color: var(--color-tag-text) !important;
+}
+
+/* Specific Post Detail Page styling */
+.mobile-container .blog-header {
+  margin-bottom: 30px !important;
+  padding-bottom: 20px !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.mobile-container .blog-title {
+  font-size: 1.8rem !important;
+  line-height: 1.3 !important;
+  margin-bottom: 15px !important;
+  font-weight: 600 !important;
+}
+
+/* Fix spacing between date and tags */
+.mobile-container .blog-meta {
+  padding: 0 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  align-items: center !important;
+}
+
+/* Ensure link text inherits color */
+.mobile-container .blog-tag a,
+.mobile-container a .blog-tag {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+/* Blog content paragraphs styling */
+.mobile-container .blog-content p {
+  margin-bottom: 1.2rem !important;
+  line-height: 1.7 !important;
+}
+
+/* Ensure blog content code blocks don't overflow */
+.mobile-container .blog-content pre,
+.mobile-container .blog-content code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  padding: 1rem !important;
+  border-radius: 6px !important;
+}
+
+/* Comprehensive tag styling for all tag variations in the blog */
+.mobile-container .blog-tag,
+.mobile-container .post-tag,
+.mobile-container span[class*="tag"],
+.mobile-container a[class*="tag"],
+.mobile-container div[class*="tag"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: var(--color-tag-bg) !important;
+  color: var(--color-tag-text) !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.2 !important;
+  margin: 5px 5px 5px 0 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  height: auto !important;
+  min-height: 28px !important;
+}
+
+/* Ensure all tag links are properly styled */
+.mobile-container a[href^="/tags/"],
+.mobile-container a[href*="/tags/"] {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* Fix tag containers */
+.mobile-container div[class*="tags"],
+.mobile-container .post-tags,
+.mobile-container .blog-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 10px !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+/* Fix mobile tag pages */
+/* Target the exact container structure */
+.mobile-container .main-content .mobile-content-wrapper {
+  width: 100vw !important;
+  max-width: 100vw !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Adjust the tag page when displayed under the mobile container */
+.mobile-container .content-wrapper .tag-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 15px !important;
+  margin: 0 0 50px 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: hidden !important;
+}
+
+/* Fix the tag heading */
+.mobile-container .content-wrapper .tag-page .tag-heading {
+  font-size: 1.6rem !important;
+  margin: 0 0 20px 0 !important;
+  padding: 0 0 15px 0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
+  width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Fix post list container */
+.mobile-container .content-wrapper .tag-page .post-list {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix individual post items */
+.mobile-container .content-wrapper .tag-page .post-item {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 12px !important;
+  margin-bottom: 0 !important; /* Changed from 15px to work with the gap in post-list */
+  border-radius: 8px !important;
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Fix post title */
+.mobile-container .content-wrapper .tag-page .post-item .post-title {
+  font-size: 1.1rem !important;
+  line-height: 1.3 !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+.mobile-container .content-wrapper .tag-page .post-item .post-title a {
+  text-decoration: none !important;
+  color: var(--color-text) !important;
+}
+
+/* Fix post metadata */
+.mobile-container .content-wrapper .tag-page .post-item .post-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 6px !important;
+  margin-bottom: 8px !important;
+  width: 100% !important;
+}
+
+/* Fix post date */
+.mobile-container .content-wrapper .tag-page .post-item .post-date {
+  font-size: 0.8rem !important;
+  color: var(--color-text-muted) !important;
+}
+
+/* Fix post tags container */
+.mobile-container .content-wrapper .tag-page .post-item .post-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Fix individual tag styling */
+.mobile-container .content-wrapper .tag-page .post-item .post-tags .post-tag {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 5px 12px !important;
+  border-radius: 20px !important;
+  font-size: 0.85rem !important;
+  background-color: var(--color-tag-bg) !important;
+  color: var(--color-tag-text) !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  min-height: 28px !important;
+}
+
+/* Style the active tag */
+.mobile-container .content-wrapper .tag-page .post-item .post-tags .post-tag-active {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* Fix post tag links */
+.mobile-container .tag-page .post-item .post-tag a,
+.mobile-container .post-tag a,
+.mobile-container .blog-tag a,
+.mobile-container a[href^="/tags/"] {
+  color: inherit !important;
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: manipulation !important;
+}
+
+/* Fix tag links to respond to touches without sticking */
+.mobile-container .post-tag:active,
+.mobile-container .blog-tag:active,
+.mobile-container .tag-page .post-item .post-tag:active {
+  opacity: 0.8 !important;
+  transform: scale(0.95) !important;
+  transition: all 0.1s ease-out !important;
+}
+
+/* Prevent scroll position issues when clicking tag links */
+.mobile-container .tag-page {
+  scroll-margin-top: 0px !important;
+}
+
+/* Fix entire post-item element to ensure proper post rendering */
+.mobile-container .tag-page .post-list {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  gap: 15px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix mobile tag rendering */
+@media screen and (max-width: 767px) {
+  /* Force scroll reset when navigating */
+  html, body {
+    scroll-behavior: auto !important;
+  }
+
+  /* Fix tag links */
+  .post-tag a,
+  .blog-tag a,
+  a[href^="/tags/"] span {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Fix tag page container */
+  .tag-page {
+    width: 100% !important;
+    padding: 15px !important;
+    margin-bottom: 70px !important; /* Space for bottom nav */
+    overflow-x: hidden !important;
+  }
+
+  /* Fix touch behavior */
+  a[href^="/tags/"] {
+    -webkit-tap-highlight-color: transparent !important;
+    touch-action: manipulation !important;
+  }
+
+  /* Fix post tags display */
+  .post-tags,
+  .blog-tags,
+  .tag-page .post-tags {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: visible !important;
+  }
+
+  /* Make tags more compact */
+  .post-tag,
+  .blog-tag,
+  .tag-page .post-tag {
+    font-size: 0.8rem !important;
+    padding: 3px 8px !important;
+    border-radius: 12px !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+    min-height: 24px !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Fix tag page heading */
+  .tag-page .tag-heading {
+    font-size: 1.4rem !important;
+    line-height: 1.3 !important;
+    margin: 0 0 15px 0 !important;
+    padding: 0 0 10px 0 !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+  }
+
+  /* Ensure tag container has appropriate width constraints */
+  .mobile-container .tag-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+}
+
+/* Force scroll position fixes */
+.mobile-container {
+  /* Basic scrolling enhancements without breaking normal behavior */
+  -webkit-overflow-scrolling: touch;
+  backface-visibility: visible;
+  transform: none;
+  will-change: auto;
+}
+
+/* Direct fixes for tag pages - override any other styles with !important flag and extreme specificity */
+@media screen and (max-width: 767px) {
+  /* Fix basic tag page container */
+  .mobile-container .content-wrapper .tag-page,
+  .mobile-container .tag-page,
+  .tag-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 15px !important;
+    margin: 0 auto !important;
+    margin-bottom: 70px !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Fix post list */
+  .mobile-container .content-wrapper .tag-page .post-list,
+  .mobile-container .tag-page .post-list,
+  .tag-page .post-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Fix post items */
+  .mobile-container .content-wrapper .tag-page .post-item,
+  .mobile-container .tag-page .post-item,
+  .tag-page .post-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px !important;
+    margin: 0 !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--card-bg) !important;
+  }
+
+  /* Fix post title */
+  .tag-page .post-item .post-title {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+    margin: 0 0 8px 0 !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Fix post meta */
+  .tag-page .post-item .post-meta {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
+  }
+
+  /* Fix post tags */
+  .tag-page .post-item .post-tags {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    width: 100% !important;
+    margin: 5px 0 !important;
+  }
+
+  /* Fix individual tags */
+  .tag-page .post-item .post-tag {
+    font-size: 0.75rem !important;
+    padding: 3px 8px !important;
+    border-radius: 12px !important;
+    height: auto !important;
+    min-height: 22px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+  }
+
+  /* Fix tag links */
+  .tag-page .post-item .post-tag a {
+    color: inherit !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }

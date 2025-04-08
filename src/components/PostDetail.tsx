@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Post, postService } from '../services/PostService';
 import MarkdownRenderer from './MarkdownRenderer';
+import { isMobileDevice } from '../utils/deviceDetection';
 
 /**
  * Props for the PostDetail component
@@ -77,11 +78,22 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
         <h1 className="blog-title">{post.title}</h1>
         <div className="blog-meta">
           {formatDate(post.date)}
-          {post.tags.map(tag => (
-            <Link to={`/tags/${tag}`} key={tag}>
-              <span className="blog-tag">{tag}</span>
-            </Link>
-          ))}
+          {post.tags.map(tag => {
+            // Check if the device is mobile
+            if (isMobileDevice()) {
+              // On mobile: Just display the tag as a span, no link
+              return (
+                <span className="blog-tag" key={tag}>{tag}</span>
+              );
+            } else {
+              // On desktop: Use the Link component
+              return (
+                <Link to={`/tags/${tag}`} key={tag}>
+                  <span className="blog-tag">{tag}</span>
+                </Link>
+              );
+            }
+          })}
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Post, postService } from '../services/PostService';
 import BlogPostCard from './BlogCard';
 import { blogConfig } from './../config/blogConfig';
+import { isMobileDevice } from '../utils/deviceDetection';
 
 /**
  * Interface for tech badge
@@ -219,10 +220,19 @@ const HomePage: React.FC = () => {
             <div className="tech-badges">
               {blogConfig.hero.techBadges.map((tech: TechBadge, index: number) => (
                 <div key={index} className="tech-badge">
-                  <Link to={`/tags/${tech.name}`} className="tech-badge-link">
-                    <span className="tech-icon">{tech.icon}</span>
-                    <span className="tech-name">{tech.name}</span>
-                  </Link>
+                  {isMobileDevice() ? (
+                    // On mobile: Just display as span, not linked
+                    <span className="tech-badge-text">
+                      <span className="tech-icon">{tech.icon}</span>
+                      <span className="tech-name">{tech.name}</span>
+                    </span>
+                  ) : (
+                    // On desktop: Use Link component
+                    <Link to={`/tags/${tech.name}`} className="tech-badge-link">
+                      <span className="tech-icon">{tech.icon}</span>
+                      <span className="tech-name">{tech.name}</span>
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>
@@ -292,10 +302,19 @@ const HomePage: React.FC = () => {
           <div className="tech-badges">
             {techBadges.map((tech: TechBadge, index: number) => (
               <div key={index} className="tech-badge">
-                <Link to={`/tags/${tech.name}`} className="tech-badge-link">
-                  <span className="tech-icon">{tech.icon}</span>
-                  <span className="tech-name">{tech.name}</span>
-                </Link>
+                {isMobileDevice() ? (
+                  // On mobile: Just display as span, not linked
+                  <span className="tech-badge-text">
+                    <span className="tech-icon">{tech.icon}</span>
+                    <span className="tech-name">{tech.name}</span>
+                  </span>
+                ) : (
+                  // On desktop: Use Link component
+                  <Link to={`/tags/${tech.name}`} className="tech-badge-link">
+                    <span className="tech-icon">{tech.icon}</span>
+                    <span className="tech-name">{tech.name}</span>
+                  </Link>
+                )}
               </div>
             ))}
           </div>

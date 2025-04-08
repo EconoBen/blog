@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Post, postService } from '../services/PostService';
+import { isMobileDevice } from '../utils/deviceDetection';
 
 /**
  * Props for the ArchivePage component
@@ -89,7 +90,13 @@ const ArchivePage: React.FC<ArchivePageProps> = ({ month }) => {
                 <div className="post-tags">
                   {post.tags.map(tag => (
                     <span key={tag} className="post-tag">
-                      <Link to={`/tags/${tag}`}>{tag}</Link>
+                      {isMobileDevice() ? (
+                        // On mobile: Just display the tag text
+                        tag
+                      ) : (
+                        // On desktop: Use Link component
+                        <Link to={`/tags/${tag}`}>{tag}</Link>
+                      )}
                     </span>
                   ))}
                 </div>
