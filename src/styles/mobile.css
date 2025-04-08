@@ -3,6 +3,19 @@
  * Styles specific to mobile devices
  */
 
+/* Core Mobile Scrolling Fixes - Simplified to work properly */
+body.mobile {
+  /* Reset to normal scrolling behavior */
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  position: static;
+  height: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+  padding: 0;
+}
+
 /* Mobile Container - Make content fully visible */
 .mobile-container {
   width: 100vw;
@@ -16,8 +29,15 @@
   position: relative;
   --mobile-font-scale: 1.05;
   --mobile-line-height: 1.6;
+  /* Basic scrolling enhancements without breaking normal behavior */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent text resizing unexpectedly */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
+/* Main content scrolling fixes */
 .mobile-container .main-content {
   flex: 1;
   width: 100% !important;
@@ -25,13 +45,18 @@
   margin: 0 !important;
   padding: 0 !important;
   padding-bottom: 70px !important; /* Space for bottom nav */
+  /* Basic touch scrolling without breaking normal behavior */
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Content wrapper styling */
 .mobile-container .content-wrapper {
   width: 100% !important;
   max-width: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
+  /* Basic touch scrolling */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Specific styles for mobile-content-wrapper */
@@ -41,6 +66,36 @@
   padding: 0 !important;
   margin: 0 auto !important;
   overflow-x: hidden !important;
+  /* Basic touch scrolling without breaking normal behavior */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Horizontal scrolling fix only for filter elements that need to scroll */
+.mobile-container .talks-filter {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  padding: 0 15px 10px 15px !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: none !important; /* Firefox */
+  gap: 8px !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+
+/* Reset all problematic transforms globally */
+.mobile-container *:not(svg):not(path) {
+  transform: none !important;
+  will-change: auto !important;
+  backface-visibility: visible !important;
+  perspective: none !important;
+}
+
+/* Reset potentially problematic scroll properties */
+.mobile-container {
+  scroll-behavior: auto !important;
+  overscroll-behavior: auto !important;
+  touch-action: auto !important;
 }
 
 /* Force all content to be full width */
@@ -69,6 +124,8 @@
   padding-left: 15px !important;
   padding-right: 15px !important;
   box-sizing: border-box !important;
+  /* Remove transform that might interfere with scrolling */
+  transform: none;
 }
 
 /* Mobile dark mode toggle */
@@ -77,11 +134,46 @@
   bottom: 80px; /* Position above the bottom nav */
   right: 16px;
   z-index: 1010;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  background-color: var(--card-bg);
+  background-color: var(--color-button-bg);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* The inner icon should match the desktop version */
+.mobile-dark-mode-toggle .dark-mode-icon {
+  width: 20px;
+  height: 20px;
+  background: #333;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-dark-mode-toggle .dark-mode-icon:after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 20px;
+  height: 20px;
+  background: var(--color-button-bg);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+/* Dark mode specific styles */
+.dark-mode .mobile-dark-mode-toggle .dark-mode-icon {
+  background: #f1c40f;
+}
+
+.dark-mode .mobile-dark-mode-toggle .dark-mode-icon:after {
+  background: var(--color-button-bg);
 }
 
 /* Mobile Navbar */
@@ -134,27 +226,48 @@
 .mobile-search-button {
   background: none;
   border: none;
-  width: 36px;
-  height: 36px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: var(--color-text);
   cursor: pointer;
   padding: 0;
+  gap: 4px;
+}
+
+.mobile-search-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.mobile-search-button span {
+  font-size: 12px;
+  font-weight: 500;
 }
 
 /* Mobile Search Panel */
 .mobile-search-panel {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
   width: 100%;
-  background-color: var(--bg-color);
+  height: 100%;
   padding: 15px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: none;
+  opacity: 1;
+  background-image: none;
+  /* Use rgba with 1.0 alpha to ensure complete opacity */
+  background-color: rgba(var(--bg-color-rgb), 1);
+  background-blend-mode: normal;
+  /* Additional fixes to prevent any transparency */
+  -webkit-backdrop-filter: none;
 }
 
 .mobile-search-container {
@@ -195,6 +308,7 @@
 .mobile-search-results {
   margin-top: 10px;
   border-top: 1px solid var(--border-color);
+  background-color: rgba(var(--bg-color-rgb), 1);
 }
 
 .mobile-search-result {
@@ -357,40 +471,6 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* Fix for iOS safe area */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .bottom-nav {
-    padding-bottom: env(safe-area-inset-bottom);
-    height: calc(60px + env(safe-area-inset-bottom));
-  }
-
-  .mobile-container .main-content {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom)) !important;
-  }
-}
-
-/* Extremely aggressive mobile overrides */
-.mobile-container *:not(input):not(button):not(img):not(svg):not(.bottom-nav):not(.bottom-nav *):not(.mobile-navbar):not(.mobile-navbar *):not(.dark-mode-toggle) {
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  box-sizing: border-box !important;
-}
-
-.mobile-container .blog-content,
-.mobile-container .post-content,
-.mobile-container .about-content,
-.mobile-container .talks-content,
-.mobile-container .publications-content,
-.mobile-container .search-results,
-.mobile-container .archive-content {
-  width: 100% !important;
-  padding: 10px 15px !important;
-  box-sizing: border-box !important;
-}
-
 /* Fix for container elements */
 .mobile-container .content-wrapper > div > div,
 .mobile-container .main-content > div > div {
@@ -398,18 +478,6 @@
   max-width: 100% !important;
   padding-left: 10px !important;
   padding-right: 10px !important;
-}
-
-/* Fix for iOS safe area */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .bottom-nav {
-    padding-bottom: env(safe-area-inset-bottom);
-    height: calc(60px + env(safe-area-inset-bottom));
-  }
-
-  .mobile-container .main-content {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom)) !important;
-  }
 }
 
 /* Fix talk card images on mobile */
@@ -688,20 +756,6 @@
   overflow: visible !important;
 }
 
-.mobile-container .talks-filter {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  padding: 0 15px 10px 15px !important;
-  -webkit-overflow-scrolling: touch !important;
-  scrollbar-width: none !important; /* Firefox */
-  gap: 8px !important;
-  width: 100% !important;
-  max-width: none !important;
-  scroll-padding: 0 !important;
-  scroll-behavior: smooth !important;
-}
-
 .mobile-container .talks-filter::-webkit-scrollbar {
   display: none !important; /* Safari and Chrome */
 }
@@ -834,6 +888,9 @@
 /* Override the aggressive selector for images */
 .mobile-container img {
   max-width: 100% !important;
+  aspect-ratio: attr(width) / attr(height);
+  display: block;
+  height: auto;
 }
 
 /* About hero section styles */
@@ -948,4 +1005,121 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+/* Add viewport hack to prevent iOS Safari layout shifts during scrolling */
+@supports (-webkit-touch-callout: none) {
+  .mobile-container {
+    height: -webkit-fill-available;
+  }
+}
+
+/* Optimize scrollable content for smoother performance */
+.mobile-container .mobile-search-results,
+.mobile-container .blog-cards-container,
+.mobile-container .post-grid,
+.mobile-container .talks-grid,
+.mobile-container .timeline {
+  /* Simplify performance optimizations */
+  -webkit-overflow-scrolling: touch;
+  backface-visibility: visible;
+  transform: none;
+  will-change: auto;
+}
+
+/* Remove problematic scrolling fixes that are breaking scrolling */
+/* Prevent rubber-banding and scrolling issues on iOS */
+body.mobile .mobile-container {
+  /* Allow normal scrolling */
+  position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Remove html.mobile-device fixed height that prevents scrolling */
+html.mobile-device {
+  height: auto;
+  overflow: auto;
+}
+
+html.mobile-device body {
+  height: auto;
+  overflow: auto;
+}
+
+/* Reset the scrollable content transformations */
+.mobile-container .mobile-search-results,
+.mobile-container .blog-cards-container,
+.mobile-container .post-grid,
+.mobile-container .talks-grid,
+.mobile-container .timeline {
+  /* Just keep the basic touch scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Disable the restrictive animation pausing during scroll */
+.mobile-container.is-scrolling * {
+  animation-play-state: running !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Remove hover effects that can cause jitters */
+.mobile-container a:hover,
+.mobile-container button:hover {
+  transition: none !important;
+}
+
+/* Disable animations during scrolling for better performance */
+.mobile-container.is-scrolling * {
+  animation-play-state: paused !important;
+  transition: none !important;
+}
+
+/* Improve click responsiveness */
+.mobile-container a:active,
+.mobile-container button:active {
+  transform: scale(0.98);
+  transition: transform 0.05s ease-out;
+}
+
+/* Fix iOS momentum scrolling for nested elements */
+.mobile-container .scrollable-content {
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-container * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize touch targets for better usability */
+.mobile-container button,
+.mobile-container a,
+.mobile-container input[type="button"],
+.mobile-container input[type="submit"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Fix iOS fixed position elements during scroll */
+.mobile-container .bottom-nav,
+.mobile-container .mobile-navbar {
+  transform: none;
+}
+
+/* Prevent scrolling issues with fixed elements */
+@supports (-webkit-touch-callout: none) {
+  .mobile-container .bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 10px);
+  }
+
+  .mobile-container .mobile-navbar {
+    padding-top: env(safe-area-inset-top, 10px);
+  }
 }

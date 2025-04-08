@@ -194,7 +194,7 @@
 
 /* Dark Mode Toggle */
 .dark-mode .dark-mode-icon {
-    background: #777; /* Lighter color instead of black in dark mode */
+    background: #f1c40f; /* Yellow sun color in dark mode */
 }
 
 .dark-mode .dark-mode-icon:after {
