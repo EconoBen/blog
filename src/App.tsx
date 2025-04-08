@@ -53,7 +53,6 @@ const PostDetailWrapper: React.FC = () => {
  */
 const TagPageWrapper: React.FC = () => {
   const { tag } = useParams<{ tag: string }>();
-  const location = useLocation();
   const navigate = useNavigate();
   const isMobile = isMobileDevice();
 
