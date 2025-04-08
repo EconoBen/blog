@@ -876,8 +876,20 @@
 .mobile-container .about-hero-image {
   order: 1 !important;
   width: 100% !important;
-  height: 350px !important;
+  height: 300px !important;
   overflow: hidden !important;
+}
+
+.mobile-container .about-hero-image::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
 }
 
 .mobile-container .about-hero-image img {
