@@ -239,7 +239,13 @@ const HomePage: React.FC = () => {
           </div>
           <div className="hero-decoration">
             <div className="hero-graphic">
-              <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                width={isMobileDevice() ? "300" : "400"}
+                height={isMobileDevice() ? "300" : "400"}
+                viewBox="0 0 400 400"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <circle cx="200" cy="200" r="180" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="4 4" />
                 <circle cx="200" cy="200" r="150" stroke="var(--accent-color-secondary)" strokeWidth="2" opacity="0.7" />
                 <circle cx="200" cy="200" r="120" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="8 8" opacity="0.5" />
@@ -321,7 +327,14 @@ const HomePage: React.FC = () => {
         </div>
         <div className="hero-decoration">
           <div className="hero-graphic">
-            <svg width="600" height="600" viewBox="-50 -50 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" className="animated-graphic">
+            <svg
+              width={isMobileDevice() ? "300" : "600"}
+              height={isMobileDevice() ? "300" : "600"}
+              viewBox="-50 -50 500 500"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="animated-graphic"
+            >
               <circle cx="200" cy="200" r="180" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="4 4" className="outer-circle" />
               <circle cx="200" cy="200" r="150" stroke="var(--accent-color-secondary)" strokeWidth="2" opacity="0.7" className="middle-circle" />
               <circle cx="200" cy="200" r="120" stroke="var(--accent-color)" strokeWidth="2" strokeDasharray="8 8" opacity="0.5" className="inner-circle" />

@@ -1913,3 +1913,63 @@ html.mobile-device body {
     height: 100% !important;
   }
 }
+
+/* Add viewport hack to prevent iOS Safari layout shifts during scrolling */
+.viewport-fix {
+  min-height: calc(100vh - 100px) !important;
+  height: auto !important;
+}
+
+/* Hero section mobile customizations */
+.mobile-container .hero-section {
+  flex-direction: column !important;
+  margin: 0 auto 30px !important; /* Reduced from 40px */
+  padding: 30px 0 20px !important; /* Reduced from 40px 0 */
+  min-height: auto !important;
+  overflow: visible !important;
+}
+
+.mobile-container .hero-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 20px !important;
+  text-align: center !important;
+  z-index: 2 !important;
+}
+
+.mobile-container .hero-decoration {
+  max-width: 100% !important;
+  margin: 10px 0 0 0 !important; /* Reduced from 20px */
+  height: 220px !important; /* Reduced from 250px */
+  overflow: visible !important;
+  padding: 0 !important;
+  animation: none !important; /* Disable float animation on mobile */
+}
+
+.mobile-container .hero-graphic {
+  height: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+/* Shrink the SVG animation on mobile */
+.mobile-container .hero-graphic svg {
+  width: 300px !important; /* Reduced from 600px */
+  height: 300px !important; /* Reduced from 600px */
+  max-width: 100% !important;
+  overflow: visible !important;
+}
+
+/* Reduce spacing after hero section */
+.mobile-container .featured-section {
+  margin-top: -20px !important; /* Increased negative margin to pull the section up */
+}
+
+/* Tech badges better mobile layout */
+.mobile-container .tech-badges {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  margin-top: 20px !important;
+}
