@@ -1940,7 +1940,7 @@ html.mobile-device body {
 .mobile-container .hero-decoration {
   max-width: 100% !important;
   margin: 10px 0 0 0 !important; /* Reduced from 20px */
-  height: 220px !important; /* Reduced from 250px */
+  height: 180px !important; /* Reduced from 220px */
   overflow: visible !important;
   padding: 0 !important;
   animation: none !important; /* Disable float animation on mobile */
@@ -1955,15 +1955,15 @@ html.mobile-device body {
 
 /* Shrink the SVG animation on mobile */
 .mobile-container .hero-graphic svg {
-  width: 300px !important; /* Reduced from 600px */
-  height: 300px !important; /* Reduced from 600px */
+  width: 250px !important; /* Reduced from 300px */
+  height: 250px !important; /* Reduced from 300px */
   max-width: 100% !important;
   overflow: visible !important;
 }
 
 /* Reduce spacing after hero section */
 .mobile-container .featured-section {
-  margin-top: -20px !important; /* Increased negative margin to pull the section up */
+  margin-top: -30px !important; /* Increased negative margin to pull the section up */
 }
 
 /* Tech badges better mobile layout */
