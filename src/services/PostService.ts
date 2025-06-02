@@ -11,6 +11,7 @@ import on_the_death_of_a_friendMd from '../posts/on_the_death_of_a_friend.md';
 import legacy_naming_conventions_are_holding_us_backMd from '../posts/legacy_naming_conventions_are_holding_us_back.md';
 import hostYourOwnPrivateLlmAccessItFromAnywhereMd from '../posts/host-your-own-private-llm-access-it-from-anywhere.md';
 import github_ssh_and_1passwordMd from '../posts/github_ssh_and_1password.md';
+import extending_GPTs_Are_GPTs_to_FirmsMd from '../posts/extending_"GPTs_Are_GPTs"_to_Firms.md';
 import building_an_https_model_apI_for_cheapMd from '../posts/building_an_https_model_apI_for_cheap.md';
 import I_paid_off_194k_in_student_loans_in_six_years__it_wasnt_easyMd from '../posts/I_paid_off_194k_in_student_loans_in_six_years._it_wasn\'t_easy.md';
 import yearInReview2024Md from '../posts/2024-year-in-review.md';
@@ -73,6 +74,7 @@ class PostService {
     'legacy_naming_conventions_are_holding_us_back': legacy_naming_conventions_are_holding_us_backMd,
     'host-your-own-private-llm-access-it-from-anywhere': hostYourOwnPrivateLlmAccessItFromAnywhereMd,
     'github_ssh_and_1password': github_ssh_and_1passwordMd,
+    'extending_"GPTs_Are_GPTs"_to_Firms': extending_GPTs_Are_GPTs_to_FirmsMd,
     'building_an_https_model_apI_for_cheap': building_an_https_model_apI_for_cheapMd,
     'I_paid_off_194k_in_student_loans_in_six_years._it_wasn\'t_easy': I_paid_off_194k_in_student_loans_in_six_years__it_wasnt_easyMd,
     '2024-year-in-review': yearInReview2024Md,

@@ -15,10 +15,30 @@ export const publicationsConfig = {
    */
   publications: [
     {
+      id: "extending_gpts_are_gpts_to_firms",
+      type: "journal",
+      title: "Extending 'GPTs Are GPTs' to Firms",
+      authors: "Benjamin Labaschin",
+      venue: "American Economic Association: Papers and Proceedings",
+      date: "2025-06-02",
+      abstract: "A new paper on the impact of AI on labor demand at the firm level.",
+      url: "https://www.aeaweb.org/articles?id=10.1257/pandp.20251045",
+      coverImage: "/posts/thumbnails/extending_gpts.png",
+      doi: "10.1257/pandp.20251045",
+      topics: ["AI", "Economics", "Labor", "Productivity", "GPTs"],
+      featured: true,
+        bibtex: `@article{labaschin2025extending,
+  title={Extending 'GPTs Are GPTs' to Firms},
+  author={Benjamin Labaschin, Tyna Eloundou, Sam Manning, Pamela Mishkin, and Daniel Rock},
+  journal={American Economic Association: Papers and Proceedings},
+  year={2025}
+}`
+    },
+    {
       id: "ai-agents-book",
       type: "book",
       title: "What Are AI Agents? When and How to Use LLM Agents",
-      authors: "Benjamin Labaschin",
+      authors: "Benjamin Labaschin, Tyna Eloundou, Sam Manning, Pamela Mishkin, and Daniel Rock",
       venue: "O'Reilly Media",
       date: "2023-11-01",
       abstract: "This report introduces AI agents, how they differ from large language models, and when to use them effectively. It provides a high-level overview of how AI agents are being applied in various domains, including document retrieval and coding assistance. The report also addresses critical questions about the nature of AI agents and discusses potential issues related to bias, legal considerations, and economic impacts.",

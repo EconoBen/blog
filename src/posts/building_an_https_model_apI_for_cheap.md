@@ -5,7 +5,6 @@ tags: ["AWS", "Docker", "ECS", "ECR", "FastAPI", "DevOps", "Cloud Infrastructure
 summary: "A straight-to-the-point guide for deploying a Dockerized FastAPI app on AWS using ECS, ECR, Route 53, and an Application Load Balancer—ideal for developers looking to get an HTTPS API live without overspending or overengineering."
 ---
 
-
 # Intro
 
 If you're reading this post then you probably want to learn how to deploy a docker container to AWS cheaply, quickly, and without much ado. Perhaps you've seen my NormConf Talk "Building an HTTPS API for Cheap: AWS, Docker, and the NormConf API".
