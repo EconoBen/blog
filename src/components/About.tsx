@@ -413,7 +413,7 @@ const About: React.FC = () => {
               <div className="publication-list">
 
                   <div className="publication-item">
-                    <div className="publication-year">2025 (Forthcoming)</div>
+                    <div className="publication-year">2025<br />(Forthcoming)</div>
                     <div className="publication-details">
                       <h3>Memory Management for AI Agents</h3>
                       <p className="publication-venue">O'Reilly Media (Book)</p>
@@ -449,9 +449,6 @@ const About: React.FC = () => {
                   <div className="publication-details">
                     <h3>What Are AI Agents?</h3>
                     <p className="publication-venue">O'Reilly Media (Book)</p>
-                    <div className="publication-badges">
-                      <span className="publication-badge">Featured</span>
-                    </div>
                   </div>
                 </div>
 
