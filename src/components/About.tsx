@@ -107,7 +107,7 @@ const About: React.FC = () => {
             <h2>Overview</h2>
             <div className="about-card">
               <p>
-                I'm a Principal Machine Learning Engineer passionate about transforming complex technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, from pioneering enterprise-scale GenAI platforms to developing novel ML systems that drive millions in business value.
+                I'm a Principal Machine Learning Engineer at Workhelix, where I've been building enterprise-scale GenAI platforms and production ML systems as a founding engineer. I wrote the O'Reilly book "What Are AI Agents?" and am currently writing a follow-up called "Managing Memory for AI Agents" about the practical considerations of working with and managing data with AI agents. I recently published research in AEA Papers and Proceedings on measuring firm-level exposure to large language models and their potential productivity impacts. I spend most of my time figuring out how to actually deploy AI systems that work reliably in production—from async LLM APIs and embedding systems to the messy real-world challenges of putting GenAI into enterprise workflows. My work spans the full stack, and I split my interests between the theory of AI and its impacts on labor, to deploying production grade LLMs and AI Agents.
               </p>
               <div className="about-highlights">
                 <div className="highlight-item">
@@ -134,8 +134,8 @@ const About: React.FC = () => {
                 <div className="highlight-item">
                   <div className="highlight-icon">🔬</div>
                   <div className="highlight-text">
-                    <h4>Published Author</h4>
-                    <p>O'Reilly book on AI Agents and industry-recognized speaker</p>
+                    <h4>Researcher & Author</h4>
+                    <p>See recent research on firm-level exposure to LLMs in AEA Papers and Proceedings, and see O'Reilly series on AI Agents</p>
                   </div>
                 </div>
               </div>
@@ -411,6 +411,23 @@ const About: React.FC = () => {
             <h2>Publications & Talks</h2>
             <div className="about-card">
               <div className="publication-list">
+
+                  <div className="publication-item">
+                    <div className="publication-year">2025 (Forthcoming)</div>
+                    <div className="publication-details">
+                      <h3>Memory Management for AI Agents</h3>
+                      <p className="publication-venue">O'Reilly Media (Book)</p>
+                    </div>
+                  </div>
+
+                  <div className="publication-item">
+                    <div className="publication-year">2025</div>
+                    <div className="publication-details">
+                      <h3>Extending "GPTs Are GPTs" to Firms</h3>
+                      <p className="publication-venue">AEA Papers and Proceedings</p>
+                    </div>
+                  </div>
+
                 <div className="publication-item">
                   <div className="publication-year">2024</div>
                   <div className="publication-details">
