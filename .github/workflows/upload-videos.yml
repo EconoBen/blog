@@ -1,0 +1,39 @@
+name: Upload Videos to Release
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'public/assets/**/*.mp4'
+      - 'public/assets/**/*.m4v'
+      - 'public/assets/**/*.mov'
+
+jobs:
+  upload-videos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Find video files
+        id: find-videos
+        run: |
+          echo "videos<<EOF" >> $GITHUB_OUTPUT
+          find public/assets -type f \( -name "*.mp4" -o -name "*.m4v" -o -name "*.mov" \) >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      
+      - name: Create or Update Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: media-assets
+          name: Media Assets
+          body: |
+            This release contains video files for the blog.
+            These files are hosted here to avoid Vercel deployment size limits.
+            
+            To use these videos in your posts, use the download URLs below.
+          files: |
+            public/assets/**/*.mp4
+            public/assets/**/*.m4v
+            public/assets/**/*.mov
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

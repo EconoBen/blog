@@ -3,6 +3,10 @@ public/assets/**/*.mp4
 public/assets/**/*.m4v
 public/assets/**/*.mov
 public/assets/**/*.avi
+*.mp4
+*.m4v
+*.mov
+*.avi
 
 # Ignore backup files
 *.backup

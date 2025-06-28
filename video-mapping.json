@@ -1,0 +1,22 @@
+{
+  "videos": [
+    {
+      "original": "/assets/2023/01/Sarah_SomebodyLikeYou.mp4",
+      "name": "Sarah_SomebodyLikeYou.mp4",
+      "size": "35.70 MB",
+      "githubUrl": "https://github.com/EconoBen/blog/releases/download/v1.0-media/Sarah_SomebodyLikeYou.mp4"
+    },
+    {
+      "original": "/assets/2023/01/sarah_singing.mp4",
+      "name": "sarah_singing.mp4",
+      "size": "35.70 MB",
+      "githubUrl": "https://github.com/EconoBen/blog/releases/download/v1.0-media/sarah_singing.mp4"
+    },
+    {
+      "original": "/assets/2023/01/sarah_vid.m4v",
+      "name": "sarah_vid.m4v",
+      "size": "2.24 MB",
+      "githubUrl": "https://github.com/EconoBen/blog/releases/download/v1.0-media/sarah_vid.m4v"
+    }
+  ]
+}
