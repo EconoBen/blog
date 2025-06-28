@@ -215,7 +215,7 @@ You'll need your loadbalancer arn and your target group arn. Here are some helpf
     - Action: `CREATE`
     - Name: `<YOUR DOMAIN>` -> e.g. `api.normconf.com`
     - Type: A
-    - DNSNAme: `<LOAD BALANACER ADDRESS>` -> e.g. `dualstack.XXX-xxxxxxxx.<REGION>.elb.amazonaws.com`
+    - DNSNAme: `<LOAD BALANACER ADDRESS>` -> e.g. `dualstack.myapp-loadbalancer-123456789.<REGION>.elb.amazonaws.com`
 
     Example Record A JSON:
     ```json
@@ -229,7 +229,7 @@ You'll need your loadbalancer arn and your target group arn. Here are some helpf
             "Type": "A",
             "AliasTarget": {
             "HostedZoneId": "<HOSTED ZONE ID>",
-            "DNSName": "dualstack.XXX-xxxxxxxx.<REGION>.elb.amazonaws.com",
+            "DNSName": "dualstack.myapp-loadbalancer-123456789.<REGION>.elb.amazonaws.com",
             "EvaluateTargetHealth": false
             }
         }

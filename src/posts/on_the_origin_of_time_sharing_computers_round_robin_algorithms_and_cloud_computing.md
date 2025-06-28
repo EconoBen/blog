@@ -17,7 +17,7 @@ summary: "An exploration of time-sharing's origins—from Cold War military inve
   </body>
   </html>
 
-<div align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/The_Fighting_Temeraire%2C_JMW_Turner%2C_National_Gallery.jpg/1024px-The_Fighting_Temeraire%2C_JMW_Turner%2C_National_Gallery.jpg" frameborder="0"><p><a href="https://commons.wikimedia.org/wiki/File:The_Fighting_Temeraire,_JMW_Turner,_National_Gallery.jpg">The Fighting Temeraire, JMW Turner, National Gallery</a></p></div>
+![The Fighting Temeraire, JMW Turner, National Gallery](/assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery.jpg)
 
 **Keywords/Topics:**
 <html>
@@ -58,7 +58,7 @@ https://www.jstor.org/stable/23406949) (about $3.7 billion in 2020 dollars), the
 One such project that received ARPA funding was the politically named Project MAC (Mathematics and Computation) out of MIT. Established by computer scientists Robert Fano and Fernando José Corbató in 1963, by calling the endeavor Project MAC [Fano and Corbató were able to attract researchers from existing labs](https://www.britannica.com/topic/Project-Mac) without anyone's loyalties (or funding) being questioned.
 
 
-<div align="center"><img src="https://www.multicians.org/reunion-04/images/jak080.jpg" frameborder="0" alt="Robert Fano (left) and Fernando Corbató (right)" style="width:250;height:400px;"><p>
+![Robert Fano (left) and Fernando Corbató (right)](/assets/2022/08/jak080.jpg)
 <a href="https://www.multicians.org/reunion-04/#g2-22">Robert Fano (left) and Fernando Corbató (right)</a></p></div>
 
 Project MAC had multiple objectives, but its main focus was Corbató's previous work on time-sharing systems. Though many strides in computer hardware and software had been made over the previous decade—the invention of the compiler<sup><a href="#fn3" id="ref3">3</a></sup>, the use of the transistor computer<sup><a href="#fn4" id="ref4">4</a></sup>, and the creation of FORTRAN, LISP, and COBOL<sup><a href="#fn5" id="ref5">5</a></sup>—there were still struggles. Despite all the progress computing had made in the previous decade, compute-time—actually using the computer—remained cumbersome.
@@ -300,7 +300,7 @@ We have Corbató's work on time-sharing to thank for the ability to process for 
 <p id="fn4" >[4]: The transistor computer followed the vacuum-tube based computers and could therefore considered the "second generation" of computers.<a href="#ref4">↩</a></p>
 <p id="fn5" >[5]: FORTRAN, LISP, and COBOL are examples of some of the first and compiled languages.<a href="#ref5">↩</a></p>
 <p id="fn6" >[6]: Debugging could have been done on computers, but that would have been considered a waste of compute-time as well.<a href="#ref6">↩</a></p>
-<p id="fn7" >[7]: So jumbled was the concept at the time that years later Stanford Professor Donald Knuth would reach out to computer scientist Christopher Strachey to figure out who had created what. <img src=../docs/static/origin_of_time_sharing.png><a href="#ref7">↩</a></p>
+<p id="fn7" >[7]: So jumbled was the concept at the time that years later Stanford Professor Donald Knuth would reach out to computer scientist Christopher Strachey to figure out who had created what. ![Origin of Time Sharing](/assets/2022/08/origin_of_time_sharing.png)<a href="#ref7">↩</a></p>
 <p id="fn8" >[8]: The first Round-Robin reference, if not analysis, researches have found was in paper published in a Navy guidebook by Leonard Kleinrock <a href="https://books.google.com/books?hl=en&lr=&id=svrkb7YPMR0C&oi=fnd&pg=PA59&ots=SyCCUcsvZp&sig=5hZK3vpjaowOMaxNEQi2C2jwnCA#v=onepage&q&f=false"></a>.<a href="#ref8">↩</a></p>
 <p id="fn9" >[9]: The large circles represent computaional systems with relatively reliable measurements, the smaller circles were not verified at the time of publication.<a href="#ref9">↩</a></p>
 

@@ -9,7 +9,7 @@ summary: "I graduated with $150k in debt and paid back over $194k in six years. 
 
 <div style="text-align: center;">
     <figure>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Song_of_the_Lark_-_Jules_Breton.png/256px-Song_of_the_Lark_-_Jules_Breton.png" style="display: block; margin: auto; width: 512px; height: auto;">
+        <img src="/assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton.png" style="display: block; margin: auto; width: 512px; height: auto;">
         <figcaption>The Song of the Lark, Jules Adolphe Breton (1884)</figcaption>
     </figure>
 </div>
@@ -93,7 +93,7 @@ You may judge the amount I paid for my education (and rightfully so!), but I'm n
 
 According to the Federal Reserve Bank of New York, [as of Q1 2023 Americans owe a combined $1.6 trillion dollars in student debt](https://www.newyorkfed.org/medialibrary/interactives/householdcredit/data/pdf/HHDC_2023Q1). And while delinquency rates have plummeted in the last few years due to a pause in student loan payments and interest rates (at least among public loans), don't expect that to last for long. Compared to their predcessors, 18-29 year olds hold the most student debt of any previous generation (see chart below). While many would prefer to ignore the plight of student loan debt upon this generation—answering the problem with whataboutism comparisons to mortgage debt and cold "they made their choice" sentiments—the consequence of ignoring balooning debt is a potential future economic crisis. After all, my student loan story is by no means indicative of the rest of the population of debt holders. But it is my story and one I'd like to tell.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/07/Screenshot-2023-07-24-at-16.38.32.png)
+![Student Debt by Generation](/assets/2023/07/Screenshot-2023-07-24-at-16.38.32.png)
 
 So about the shit load of money I paid back...
 
@@ -169,7 +169,7 @@ College was four years of my life and a rich enough experience to take up many p
 
 <div style="text-align: center;">
     <figure>
-        <img src="https://benjaminlabaschin.com/wp-content/uploads/2023/07/Pre-wedding-2007-002-300x225.jpg" alt="" width="300" height="225" class="size-medium wp-image-1063" />
+        <img src="/assets/2023/07/Pre-wedding-2007-002-300x225.jpg" alt="" width="300" height="225" class="size-medium wp-image-1063" />
         <figcaption>Dressing Up for School, 2006</figcaption>
     </figure>
 </div>
@@ -182,7 +182,7 @@ I started college in the winter of 2013. That fall I had decided to attend a sma
 
 The price of this deal was, as we now know, high. Below is the semester by semester breakdown of my loans (public and private) from 2013-2016.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/07/semesters.png)
+![Semester by Semester Breakdown](/assets/2023/07/semesters.png)
 
 Because I didn't come from money and because school was so expensive, public loans wouldn't be enough and I had to from a large, private loan provider. I won't name it directly, let's just say it that rhymes with Discover...
 
@@ -280,7 +280,7 @@ The next few years brought more work, more ML related problems and solutions, an
 
 <div style="text-align: center;">
     <figure>
-        <img src="https://benjaminlabaschin.com/wp-content/uploads/2023/07/repayments-1024x931.png" alt="" width="1024" height="931" class="size-medium wp-image-1063" />
+        <img src="/assets/2023/07/repayments-1024x931.png" alt="" width="1024" height="931" class="size-medium wp-image-1063" />
         <figcaption>Repayments Over Time (Sample)</figcaption>
     </figure>
 </div>

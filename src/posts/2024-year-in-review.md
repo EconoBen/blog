@@ -7,7 +7,7 @@ tags: ["year in review", "LLMs", "archery", "health", "personal growth", "AI"]
 
 
 
-[![Guiding my young niece through Balboa Park](https://benjaminlabaschin.com/wp-content/uploads/2025/01/niece_and_I-scaled.jpeg)](https://benjaminlabaschin.com/2024-year-in-review/)
+![Guiding my young niece through Balboa Park](/assets/2025/01/niece_and_I_optimized.jpeg)
 
 
 ## My 2024 Year In Review: AI, Archery, and Goals

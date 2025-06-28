@@ -17,13 +17,8 @@ A few months ago Sarah’s dad Andy contacted me. This wasn’t necessarily out 
 
 I said yes. But I wasn’t without reservations. The thing I’ve discovered about the death of a friend is that it evokes some pernicious questions in one’s mind. The most fundamental of which being: was I truly her friend? How can I even know I was her friend if there is no concrete way to prove it? From the outside, it may seem an odd, even teenage-like logic to seek validation from the friendship of a now-deceased person. Perhaps it’s because the death of a friend cements their temporal likeness in your mind—who they were at the time of their death is who they will ever be—in addition to cementing who you were when they passed. In essence, death freezes relations, indelibly stamping them into the sands of time. In that way, it makes a kind of sense that I’d still ask the kinds of questions natural to me at that time.
 
-```
-        <style>/*! elementor - v3.6.8 - 27-07-2022 */
-```
 
-.elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img\[src$=".svg"]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block}
-
-![A picture of Sarah, her best friend Emily, and I](https://benjaminlabaschin.com/wp-content/uploads/2023/01/Sarah_Emily_and_I-768x603.jpeg)
+![A picture of Sarah, her best friend Emily, and I](/assets/2023/01/Sarah_Emily_and_I-768x603.jpeg)
 
 A picture of Sarah, her best friend Emily, and me
 

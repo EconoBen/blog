@@ -1,46 +1,310 @@
-# Getting Started with Create React App
+# Ben Labaschin's Blog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive blog built with React, TypeScript, and Markdown. Features a mobile-first design, dark mode, visual regression testing, and automated image optimization.
 
-## Available Scripts
+## 🚀 Quick Start
 
-In the project directory, you can run:
+```bash
+# Initial setup
+make setup
 
-### `npm start`
+# Start development server (port 3001)
+make dev
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Open visual regression tests
+make test-visual
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 📱 Features
 
-### `npm test`
+### Core Features
+- **Markdown-based blog posts** with frontmatter support
+- **Responsive design** optimized for all devices
+- **Dark mode** with system preference detection
+- **Full-text search** across all posts
+- **Tag system** for categorizing content
+- **Archive view** organized by month
+- **Publications page** with PDF thumbnails
+- **Talks page** with embedded videos
+- **About page** with personal information
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Mobile Experience
+- **Touch-optimized** navigation and search
+- **Scroll-based navigation hiding** for better reading experience
+- **Bottom navigation bar** for easy access on mobile
+- **iPad-specific optimizations** for search and layout
+- **Android device support** with proper touch targets
 
-### `npm run build`
+### Performance & Optimization
+- **Automatic image optimization** with multiple sizes and WebP format
+- **PDF thumbnail generation** for publications
+- **Lazy loading** for images and content
+- **Visual regression testing** for multiple device sizes
+- **Build-time post compilation** for fast page loads
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🛠️ Technology Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Frontend**: React 19, TypeScript, React Router
+- **Styling**: CSS with mobile-first approach
+- **Content**: Markdown with gray-matter frontmatter
+- **Build**: Create React App with Craco
+- **Deployment**: Vercel
+- **Image Processing**: Sharp
+- **PDF Processing**: pdf-poppler
+- **Analytics**: Vercel Analytics
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📂 Project Structure
 
-### `npm run eject`
+```
+blog/
+├── public/
+│   ├── assets/           # Optimized images
+│   │   └── originals/    # Original high-quality images
+│   └── posts/            # PDF publications
+├── src/
+│   ├── components/       # React components
+│   ├── posts/           # Markdown blog posts
+│   ├── styles/          # CSS files
+│   ├── hooks/           # Custom React hooks
+│   ├── utils/           # Utility functions
+│   └── services/        # Data services
+├── scripts/             # Build and utility scripts
+├── tests/              # Visual regression tests
+└── docs/               # Documentation
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🔧 Development
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Using Make Commands
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+We use a Makefile for common tasks. Run `make help` to see all available commands:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+# Development
+make dev              # Start development server
+make dev-full         # Start with all preprocessing
+make build            # Build for production
+make serve            # Serve production build locally
 
-## Learn More
+# Testing
+make test             # Run tests
+make test-visual      # Open visual regression tests
+make lint             # Run ESLint
+make typecheck        # TypeScript type checking
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Deployment
+make deploy           # Deploy to Vercel preview
+make deploy-prod      # Deploy to production
+make pre-deploy       # Run all checks before deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Maintenance
+make process-images   # Optimize images
+make process-pdfs     # Generate PDF thumbnails
+make clean            # Clean build artifacts
+make reset            # Full reset (clean + reinstall)
+```
+
+### Manual Commands
+
+If you prefer npm scripts:
+
+```bash
+npm start             # Start development server
+npm run build         # Build for production
+npm test              # Run tests
+npm run optimize-images  # Process images
+npm run process-pdfs     # Process PDFs
+```
+
+## 📸 Working with Images
+
+### Adding Images
+
+1. **Using the Makefile** (recommended):
+   ```bash
+   make add-image IMG=~/Desktop/photo.jpg YEAR=2025 MONTH=01
+   ```
+
+2. **Manual process**:
+   - Add original images to `public/assets/originals/YYYY/MM/`
+   - Run `make process-images` to generate optimized versions
+
+### Image Optimization
+
+The system automatically creates:
+- Multiple sizes (150px, 300px, 768px, 1024px, 1536px, 2048px)
+- WebP format for modern browsers
+- Optimized JPEG with 85% quality
+- Preserves originals in `public/assets/originals/`
+
+## 📝 Writing Blog Posts
+
+1. Create a new `.md` file in `src/posts/`
+2. Add frontmatter:
+   ```markdown
+   ---
+   title: "Your Post Title"
+   date: "2025-01-15"
+   tags: ["tag1", "tag2"]
+   summary: "Brief description"
+   coverImage: "/assets/2025/01/image.jpg" (optional)
+   ---
+   
+   Your content here...
+   ```
+
+3. Run `npm start` - the post will be automatically imported
+
+### Supported Markdown Features
+- Standard Markdown syntax
+- GitHub Flavored Markdown
+- Raw HTML support
+- Code blocks with syntax highlighting
+- Images with captions
+- Tables
+- Task lists
+
+## 🧪 Visual Regression Testing
+
+Test the blog across multiple devices:
+
+```bash
+# Start dev server first
+make dev
+
+# In another terminal, open tests
+make test-visual
+```
+
+### Tested Devices
+- iPhone SE (375x667)
+- iPhone 12 Pro (390x844)
+- Samsung Galaxy S21 (360x800)
+- Google Pixel 5 (393x851)
+- iPad (768x1024)
+- iPad Pro 11" (834x1194)
+- Android Tablet (768x1024)
+- Desktop (1200x800)
+
+### Test Features
+- Horizontal overflow detection
+- Touch target size validation
+- Text readability checks
+- Search functionality testing
+- Fixed positioning issues
+- Android-specific requirements
+
+## 🚀 Deployment
+
+### Preview Deployment
+
+```bash
+make deploy
+```
+
+This creates a preview URL for testing changes.
+
+### Production Deployment
+
+```bash
+# Run all checks first
+make pre-deploy
+
+# If everything passes
+make deploy-prod
+```
+
+### Environment Variables
+
+Create a `.env` file:
+
+```env
+FAST_REFRESH=false
+PORT=3001
+```
+
+### Vercel Configuration
+
+The `.vercelignore` file excludes:
+- Large video files
+- Original unoptimized images
+- Test files
+- Backup files
+
+## 🎨 Customization
+
+### Styling
+
+- **Main styles**: `src/index.css`
+- **Mobile styles**: `src/styles/mobile.css`
+- **Mobile search**: `src/styles/mobile-search-fixes.css`
+- **Responsive**: `src/styles/responsive.css`
+
+### Configuration
+
+- **Blog config**: `src/config/blogConfig.ts`
+- **Publications**: `src/config/publicationsConfig.ts`
+- **Talks**: `src/config/talksConfig.ts`
+
+### Dark Mode
+
+Automatically detects system preferences. Toggle button available on all pages.
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Port 3000 already in use**
+   - The project uses port 3001 by default
+   - Change in `.env` if needed
+
+2. **Dependencies broken after npm audit fix**
+   ```bash
+   make reset
+   ```
+
+3. **Images not showing**
+   - Ensure images are in `public/assets/`
+   - Run `make process-images`
+
+4. **Build errors**
+   ```bash
+   make clean
+   npm install
+   ```
+
+5. **Visual tests not opening**
+   - Ensure dev server is running on port 3001
+   - Manually open `tests/visual-regression-test.html`
+
+### Getting Help
+
+- Run `make help` for command list
+- Run `make docs` for detailed documentation
+- Check `docs/MAKEFILE_GUIDE.md` for comprehensive guide
+- See `docs/QUICK_REFERENCE.md` for quick tips
+
+## 📚 Documentation
+
+- [Makefile Guide](docs/MAKEFILE_GUIDE.md) - Detailed command documentation
+- [Quick Reference](docs/QUICK_REFERENCE.md) - Common commands and tips
+- [Image Management](docs/image-management.md) - Image optimization guide
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run `make pre-deploy` to ensure everything works
+5. Submit a pull request
+
+## 📄 License
+
+This project is private and proprietary.
+
+## 🙏 Acknowledgments
+
+- Built with Create React App
+- Deployed on Vercel
+- Images optimized with Sharp
+- PDF processing with pdf-poppler

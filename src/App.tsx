@@ -15,6 +15,8 @@ import SocialLinks from './components/SocialLinks';
 import PublicationsPage from './components/PublicationsPage';
 import SearchResults from './components/SearchResults';
 import { isMobileDevice } from './utils/deviceDetection';
+import { initializeMobileScrollFix } from './utils/mobileScrollFix';
+import { useScrollDirection } from './hooks/useScrollDirection';
 
 /**
  * ScrollToTop component that resets scroll position on route changes
@@ -84,9 +86,11 @@ const ArchivePageWrapper: React.FC = () => {
 /**
  * Bottom navigation bar component for mobile devices
  *
+ * @param {Object} props - Component props
+ * @param {boolean} props.isVisible - Whether the nav should be visible
  * @returns {JSX.Element} The bottom navigation bar
  */
-const BottomNav: React.FC = () => {
+const BottomNav: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
   const location = useLocation();
   const path = location.pathname;
 
@@ -103,7 +107,7 @@ const BottomNav: React.FC = () => {
   };
 
   return (
-    <div className="bottom-nav">
+    <div className={`bottom-nav ${isVisible ? 'visible' : 'hidden'}`}>
       <Link to="/" className={`bottom-nav-item ${isActive('/') && !path.startsWith('/posts/') ? 'active' : ''}`}>
         <div className="bottom-nav-icon">📝</div>
         <div>Posts</div>
@@ -141,8 +145,13 @@ const App: React.FC = () => {
   const [isMobile, setIsMobile] = useState<boolean>(isMobileDevice());
   const [isOffline, setIsOffline] = useState<boolean>(!navigator.onLine);
   const [scrollPosition, setScrollPosition] = useState<number>(0);
+  const scrollDirection = useScrollDirection();
+  const [isBottomNavVisible, setIsBottomNavVisible] = useState<boolean>(true);
 
   useEffect(() => {
+    // Initialize mobile scroll fix
+    initializeMobileScrollFix();
+    
     // Check for saved dark mode preference
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setIsDarkMode(savedDarkMode);
@@ -220,6 +229,15 @@ const App: React.FC = () => {
       }
     };
   }, [isSidebarOpen, isMobile]);
+
+  // Update bottom nav visibility based on scroll direction
+  useEffect(() => {
+    if (scrollDirection === 'down') {
+      setIsBottomNavVisible(false);
+    } else if (scrollDirection === 'up') {
+      setIsBottomNavVisible(true);
+    }
+  }, [scrollDirection]);
 
   // Update body classes based on sidebar, dark mode, and offline state
   useEffect(() => {
@@ -354,7 +372,7 @@ const App: React.FC = () => {
 
         {/* Dark Mode Toggle - Position differs for mobile/desktop */}
         <div
-          className={`dark-mode-toggle ${isMobile ? 'mobile-dark-mode-toggle' : ''}`}
+          className={`dark-mode-toggle ${isMobile ? 'mobile-dark-mode-toggle' : ''} ${isMobile && !isBottomNavVisible ? 'bottom-nav-hidden' : ''}`}
           onClick={toggleDarkMode}
           aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
           role="button"
@@ -384,7 +402,7 @@ const App: React.FC = () => {
           width: '100%'
         }}>
           {/* Navigation Bar - Desktop or Mobile */}
-          {isMobile ? <MobileNavBar /> : <NavBar />}
+          {isMobile ? <MobileNavBar isVisible={isBottomNavVisible} /> : <NavBar />}
 
           {/* Routes */}
           <div className={`content-wrapper ${isMobile ? 'mobile-content-wrapper' : ''}`}>
@@ -402,7 +420,7 @@ const App: React.FC = () => {
           </div>
 
           {/* Bottom Navigation - Only on mobile */}
-          {isMobile && <BottomNav />}
+          {isMobile && <BottomNav isVisible={isBottomNavVisible} />}
         </div>
       </div>
       <Analytics />

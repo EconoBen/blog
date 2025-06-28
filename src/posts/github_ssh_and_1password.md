@@ -19,11 +19,11 @@ First, we're going to activate 1Password's SSH key generation option (that I for
 1. In your 1Password, go to your ribbon and select `1Password` -> `Preferences` (or type `CMD + ,`)
 
 	<div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/1pwd_preferences.png>
+   <img src="/assets/2022/08/1pwd_preferences.png" alt="1Password Preferences">
    </div>
 2. In the Preferecnes screen, press `Developer`, then check the `Use the SSH agent` and `Display key names when authorizing connections` boxes.
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/activate_ssh.png>
+   <img src="/assets/2022/08/activate_ssh.png" alt="Activate SSH">
    </div>
 
 ### GitHub
@@ -32,24 +32,24 @@ Next, we need to generate the key and add it to GitHub.
 1. Login to your GitHub Account
 2. Navigate to Settings
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/settings.png>
+   <img src="/assets/2022/08/settings.png" alt="GitHub Settings">
    </div>
 3. Select SSH and GPG Keys
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/ssh_gpg.png>
+   <img src="/assets/2022/08/ssh_gpg.png" alt="SSH and GPG Keys">
    </div>
 4. New SSH key
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/new_ssh_key.png>
+   <img src="/assets/2022/08/new_ssh_key.png" alt="New SSH Key">
    </div>
 5. Click into title (if not logged into 1Password, select the icon and log in)
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/1password_ssh_example.png>
+   <img src="/assets/2022/08/1password_ssh_example.png" alt="1Password SSH Example">
    </div>
 6. Select `Create SSH Key`
 7. In the 1Password prompt, enter a simple, one-word title and select ed25519
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/testgit.png>
+   <img src="/assets/2022/08/testgit.png" alt="Test Git">
    </div>
 8. Press `Create & Fill` then `Submit`.
 
@@ -59,12 +59,12 @@ Now that our key has been generated and assigned to GitHub, we need to grab the 
 1. In your 1Password, go to your newly formed ssh key and download the *private key*.
 
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/1pwd_private_key.png>
+   <img src="/assets/2022/08/1pwd_private_key.png" alt="1Password Private Key">
    </div>
 
 - Fun Fact: 1Password's instructions tell you to download the *public key*. This does not work (and should not work). *DO NOT FOLLOW THESE INSTRUCTIONS.*
    <div text-align: center>
-   <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/wrong_instructions.png>
+   <img src="/assets/2022/08/wrong_instructions.png" alt="Wrong Instructions">
    </div>
 
 ### To The Terminal! SSH and Git
@@ -73,7 +73,7 @@ Now that we have our private SSH key that we assigned to GitHub, we simply need 
 First need to move our private key to its proper folder:
 1.  Open your terminal and type `mv ~/Downloads/id_ed25519 ~/.ssh/[FILE NAME]`, where `FILE NAME` is whatever you'd like to call the private key file. I think `testgitkey` makes sense, so that's what I'll call it:
     <div text-align: center>
-    <img src=https://benjaminlabaschin.com/wp-content/uploads/2022/08/move_private_key.png>
+    <img src="/assets/2022/08/move_private_key.png" alt="Move Private Key">
     </div>
 
 Next, we need to use our `.ssh/config` file to instruct our computer how to use our `.ssh` file. If you don't have an `.ssh/config` file, simply enter `touch  ~/.ssh/config` in your terminal.

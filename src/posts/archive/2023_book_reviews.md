@@ -1,4 +1,11 @@
-Vorleserin ("His Reader), Carl Riedel (1864)
+---
+title: "2023 Book Reviews"
+date: "2023-01-15"
+summary: "A living document of book reviews from 2023, tracking my reading journey through productivity, habits, and personal growth."
+tags: ["book reviews", "reading", "productivity", "self-improvement"]
+---
+
+![Vorleserin ("His Reader"), Carl Riedel (1864)](/assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere.jpg)
 
 As I've delved deeper into the world of data science, machine learning, and math, the time I've spent reading has dwindled. While I don't expect that I will magically gain more time this year, I hope that by reviewing books after reading them, I'll be inspired to reverse that trend. So, I've created this living document in which I will add reviews of the books I read this year.
 

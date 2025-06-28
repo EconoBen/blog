@@ -1,0 +1,379 @@
+/**
+ * Mobile Search Fixes
+ * Enhanced styles for iPad and mobile search functionality
+ */
+
+/* ===========================
+   iPad-specific Search Fixes
+   =========================== */
+
+/* iPad (768px - 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* Make search panel consistent with phones on iPad */
+  .mobile-search-panel {
+    position: fixed;
+    top: 64px; /* Increased from 56px to add more space from navbar */
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 24px; /* Slightly more padding for iPad */
+    z-index: 998;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s ease;
+    transform: none; /* Remove centering transform */
+    max-width: none; /* Remove max-width */
+    border-radius: 0; /* Remove border radius for full-width */
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Larger search input on iPad */
+  .mobile-search-input {
+    flex: 1;
+    padding: 14px 20px;
+    font-size: 18px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-secondary);
+  }
+
+  .mobile-search-input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+  }
+
+  /* Better close button positioning */
+  .mobile-search-close {
+    padding: 12px;
+    margin-left: 10px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .mobile-search-close:hover {
+    background: var(--bg-hover);
+    border-color: var(--text-secondary);
+  }
+
+  /* Search container on iPad - keep consistent with mobile */
+  .mobile-search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* Enhanced search results for iPad */
+  .mobile-search-results {
+    margin-top: 16px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 0;
+  }
+
+  .mobile-search-result {
+    display: block;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background 0.2s;
+    font-size: 15px;
+  }
+
+  .mobile-result-title {
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .mobile-view-all-results {
+    padding: 14px 18px;
+    font-size: 15px;
+  }
+
+  /* iPad navbar adjustments */
+  .mobile-navbar {
+    height: 64px;
+  }
+
+  .mobile-navbar-top {
+    height: 100%;
+    padding: 0 24px;
+    gap: 24px; /* Increased gap between logo and search button */
+    justify-content: space-between;
+  }
+
+  /* Ensure logo doesn't get too close to search */
+  .mobile-logo {
+    font-size: 20px;
+    margin-right: auto; /* Push search button to the right */
+  }
+
+  .mobile-search-button {
+    padding: 10px 16px;
+    font-size: 16px;
+    border: 2px solid var(--border-color);
+    margin-left: 20px; /* Add explicit margin for extra spacing */
+  }
+}
+
+/* ===========================
+   iPad Pro and larger tablets (1024px - 1366px)
+   =========================== */
+
+@media screen and (min-width: 1024px) and (max-width: 1366px) {
+  /* Ensure proper spacing on larger iPads in portrait */
+  .mobile-navbar-top {
+    padding: 0 32px;
+    gap: 32px;
+  }
+  
+  .mobile-logo {
+    font-size: 22px;
+  }
+  
+  .mobile-search-button {
+    padding: 12px 20px;
+    font-size: 17px;
+    margin-left: 24px;
+  }
+}
+
+/* ===========================
+   Enhanced Mobile Search (< 768px)
+   =========================== */
+
+@media screen and (max-width: 767px) {
+  /* Improve search panel appearance */
+  .mobile-search-panel {
+    padding: 16px;
+    background: var(--bg-color);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Make search input more touch-friendly */
+  .mobile-search-input {
+    padding: 14px 18px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-secondary);
+    -webkit-appearance: none; /* Remove iOS default styling */
+    appearance: none;
+  }
+
+  .mobile-search-input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.1);
+  }
+
+  /* Larger close button for easier touch */
+  .mobile-search-close {
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+
+  .mobile-search-close:active {
+    transform: scale(0.95);
+  }
+
+  /* Better search results styling */
+  .mobile-search-results {
+    margin-top: 16px;
+    max-height: calc(100vh - 250px);
+    overflow-y: auto;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+
+  .mobile-search-result {
+    display: block;
+    padding: 16px 18px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--border-color);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-search-result:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-search-result:active {
+    background: var(--bg-hover);
+  }
+
+  .mobile-result-title {
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  /* View all results button enhancement */
+  .mobile-view-all-results {
+    display: block;
+    padding: 16px;
+    text-align: center;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-top: 2px solid var(--border-color);
+    margin-top: 0;
+    background: var(--bg-color);
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-view-all-results:active {
+    background: var(--bg-hover);
+  }
+}
+
+/* ===========================
+   Small Phone Adjustments (< 375px)
+   =========================== */
+
+@media screen and (max-width: 374px) {
+  .mobile-search-panel {
+    padding: 12px;
+  }
+
+  .mobile-search-input {
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  .mobile-search-close {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
+  }
+
+  .mobile-search-result {
+    padding: 14px 16px;
+    min-height: 54px;
+  }
+
+  .mobile-result-title {
+    font-size: 14px;
+  }
+}
+
+/* ===========================
+   Dark Mode Enhancements
+   =========================== */
+
+.dark-mode .mobile-search-panel {
+  background: var(--dark-bg-color);
+  border-color: var(--dark-border-color);
+}
+
+.dark-mode .mobile-search-input {
+  background: var(--dark-bg-secondary);
+  border-color: var(--dark-border-color);
+  color: var(--dark-text-primary);
+}
+
+.dark-mode .mobile-search-input:focus {
+  border-color: var(--dark-color-primary);
+  box-shadow: 0 0 0 3px rgba(var(--dark-color-primary-rgb), 0.1);
+}
+
+.dark-mode .mobile-search-close {
+  background: var(--dark-bg-secondary);
+  border-color: var(--dark-border-color);
+  color: var(--dark-text-secondary);
+}
+
+.dark-mode .mobile-search-results {
+  background: var(--dark-bg-secondary);
+  border-color: var(--dark-border-color);
+}
+
+.dark-mode .mobile-search-result {
+  color: var(--dark-text-primary);
+  border-color: var(--dark-border-color);
+}
+
+.dark-mode .mobile-search-result:active {
+  background: var(--dark-bg-hover);
+}
+
+.dark-mode .mobile-view-all-results {
+  background: var(--dark-bg-color);
+  border-color: var(--dark-border-color);
+  color: var(--dark-color-primary);
+}
+
+/* ===========================
+   Accessibility Improvements
+   =========================== */
+
+/* Focus indicators for keyboard navigation */
+.mobile-search-input:focus-visible,
+.mobile-search-close:focus-visible,
+.mobile-search-result:focus-visible,
+.mobile-view-all-results:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .mobile-search-panel {
+    border-width: 3px;
+  }
+
+  .mobile-search-input,
+  .mobile-search-close {
+    border-width: 3px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-search-panel {
+    animation: none;
+  }
+
+  .mobile-search-close:active,
+  .mobile-search-result:active {
+    transform: none;
+  }
+}

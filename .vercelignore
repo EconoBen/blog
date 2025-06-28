@@ -1,0 +1,28 @@
+# Ignore large video files
+public/assets/**/*.mp4
+public/assets/**/*.m4v
+public/assets/**/*.mov
+public/assets/**/*.avi
+
+# Ignore backup files
+*.backup
+*.bak
+
+# Ignore development files
+/tests
+/scripts/test-*.js
+
+# Ignore original images directory
+public/assets/originals
+
+# Ignore very large images (over 5MB)
+# Note: Large images are now managed via public/assets/originals/
+
+# Ignore node_modules (should already be ignored)
+node_modules
+
+# Ignore local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

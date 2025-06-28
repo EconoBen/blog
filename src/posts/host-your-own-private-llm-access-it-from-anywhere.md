@@ -6,7 +6,7 @@ tags: ["LLM", "RAG", "Synology", "Ollama", "Caddy", "Tailscale", "self-hosting",
 ---
 
 
-[![](https://benjaminlabaschin.com/wp-content/uploads/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg)](https://benjaminlabaschin.com/host-your-own-private-llm-access-it-from-anywhere/)
+![Cole Thomas - The Oxbow](/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg)
 
 **Ben Labaschin **on Jan 06, 2025 **3
 
@@ -66,7 +66,7 @@ ssh raspberrypi@<LOCAL IP>
 
 Here's an example of what that will look like.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2025/01/ssh_into_pi.png)
+![SSHing into your reverse proxy machine via CLI](/assets/2025/01/ssh_into_pi.png)
 
 SSHing into your reverse proxy machine via CLI
 
@@ -200,7 +200,7 @@ Here we'll create an API token that has permission to edit / access your DNS rec
 2. Select **Create Tokens** → **Edit Zone DNS: Use Template**
 3. Next you'll want to go to Zone Resources. For the middle drop-down, as opposed to "all zones" you'll want to select "Specific zone" and then in the next dropdown select the specific domain you'd like to dedicate to your Reverse Proxy private domain server. For more, see the image below.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2025/01/cloudflare_dns.png)
+![Cloudflare DNS Configuration](/assets/2025/01/cloudflare_dns.png)
 
 Accessing your Cloudflare DNS API key
 
@@ -474,7 +474,7 @@ curl -v https://llm.mydomain.com/api/version
 
 Let's check our output:
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2025/01/ollama_is_running.png)
+![Ollama is Running](/assets/2025/01/ollama_is_running.png)
 
 We have successfully connected to Ollama!
 
@@ -514,7 +514,7 @@ curl -X POST https://llm.mydomain.com/api/chat \
 
 With `"stream": false`, the response should arrive in one shot. If you’d rather see each token appear in real time, set `"stream": true` and watch the output scroll by.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2025/01/ollama_query.png)
+![Ollama Query](/assets/2025/01/ollama_query.png)
 
 In depth Ollama query via your CLI using Ollama. We get a successful response from the LLM!
 
@@ -533,7 +533,7 @@ alias @='f(){ \
 
 Then, just open a new terminal (or run `source ~/.bashrc`) and do: `@ "Knock knock"`
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2025/01/custom_llm_cli.png)
+![Custom LLM CLI](/assets/2025/01/custom_llm_cli.png)
 
 Response from the CLI API call to the hosted model.
 

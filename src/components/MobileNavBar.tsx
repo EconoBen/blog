@@ -21,9 +21,11 @@ const debounce = (func: (...args: any[]) => void, wait: number) => {
 /**
  * MobileNavBar component that provides navigation for mobile devices
  *
+ * @param {Object} props - Component props
+ * @param {boolean} props.isVisible - Whether the navbar should be visible
  * @returns {JSX.Element} The rendered MobileNavBar component
  */
-const MobileNavBar: React.FC = () => {
+const MobileNavBar: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchVisible, setSearchVisible] = useState<boolean>(false);
@@ -101,7 +103,7 @@ const MobileNavBar: React.FC = () => {
   };
 
   return (
-    <div className="mobile-navbar">
+    <div className={`mobile-navbar ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="mobile-navbar-top">
         <Link to="/" className="mobile-logo">
           <span className="logo-symbol">&lt;/&gt;</span>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Regression Test - Mobile CSS</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .viewport-test {
+            margin-bottom: 40px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .viewport-header {
+            background: #f5f5f5;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .viewport-size {
+            font-weight: bold;
+            color: #333;
+        }
+        .test-status {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-pass {
+            background: #d4f4dd;
+            color: #1e7e34;
+        }
+        .status-fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            background: white;
+        }
+        .test-results {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .test-results h2 {
+            margin-top: 0;
+        }
+        .result-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 4px;
+            border-left: 4px solid #ddd;
+        }
+        .result-pass {
+            border-left-color: #28a745;
+        }
+        .result-fail {
+            border-left-color: #dc3545;
+        }
+        .controls {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .screenshot-button {
+            background: #6c757d;
+        }
+        .screenshot-button:hover {
+            background: #545b62;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Visual Regression Test Suite - Mobile CSS</h1>
+        
+        <div class="controls">
+            <button onclick="runAllTests()">Run All Tests</button>
+            <button onclick="captureBaseline()" class="screenshot-button">Capture Baseline</button>
+            <button onclick="compareWithBaseline()" class="screenshot-button">Compare with Baseline</button>
+        </div>
+
+        <div id="test-viewports">
+            <!-- iPhone SE -->
+            <div class="viewport-test" data-width="375" data-height="667">
+                <div class="viewport-header">
+                    <span class="viewport-size">iPhone SE (375x667)</span>
+                    <span class="test-status status-pass" id="status-375">Ready</span>
+                </div>
+                <iframe id="frame-375" height="667"></iframe>
+            </div>
+
+            <!-- iPhone 12 Pro -->
+            <div class="viewport-test" data-width="390" data-height="844">
+                <div class="viewport-header">
+                    <span class="viewport-size">iPhone 12 Pro (390x844)</span>
+                    <span class="test-status status-pass" id="status-390">Ready</span>
+                </div>
+                <iframe id="frame-390" height="844"></iframe>
+            </div>
+
+            <!-- Samsung Galaxy S21 (Android) -->
+            <div class="viewport-test" data-width="360" data-height="800">
+                <div class="viewport-header">
+                    <span class="viewport-size">Samsung Galaxy S21 (360x800)</span>
+                    <span class="test-status status-pass" id="status-360">Ready</span>
+                </div>
+                <iframe id="frame-360" height="800"></iframe>
+            </div>
+
+            <!-- Google Pixel 5 (Android) -->
+            <div class="viewport-test" data-width="393" data-height="851">
+                <div class="viewport-header">
+                    <span class="viewport-size">Google Pixel 5 (393x851)</span>
+                    <span class="test-status status-pass" id="status-393">Ready</span>
+                </div>
+                <iframe id="frame-393" height="851"></iframe>
+            </div>
+
+            <!-- iPad -->
+            <div class="viewport-test" data-width="768" data-height="1024">
+                <div class="viewport-header">
+                    <span class="viewport-size">iPad (768x1024)</span>
+                    <span class="test-status status-pass" id="status-768">Ready</span>
+                </div>
+                <iframe id="frame-768" height="600"></iframe>
+            </div>
+
+            <!-- iPad Pro 11" -->
+            <div class="viewport-test" data-width="834" data-height="1194">
+                <div class="viewport-header">
+                    <span class="viewport-size">iPad Pro 11" (834x1194)</span>
+                    <span class="test-status status-pass" id="status-834">Ready</span>
+                </div>
+                <iframe id="frame-834" height="600"></iframe>
+            </div>
+
+            <!-- Android Tablet (Nexus 9) -->
+            <div class="viewport-test" data-width="768" data-height="1024">
+                <div class="viewport-header">
+                    <span class="viewport-size">Android Tablet (768x1024)</span>
+                    <span class="test-status status-pass" id="status-768-android">Ready</span>
+                </div>
+                <iframe id="frame-768-android" height="600"></iframe>
+            </div>
+
+            <!-- Desktop -->
+            <div class="viewport-test" data-width="1200" data-height="800">
+                <div class="viewport-header">
+                    <span class="viewport-size">Desktop (1200x800)</span>
+                    <span class="test-status status-pass" id="status-1200">Ready</span>
+                </div>
+                <iframe id="frame-1200" height="600"></iframe>
+            </div>
+        </div>
+
+        <div class="test-results" id="test-results">
+            <h2>Test Results</h2>
+            <div id="results-container">
+                <p>No tests run yet.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Test URLs to check
+        const testUrls = [
+            { path: '/', name: 'Homepage' },
+            { path: '/posts/2024-year-in-review', name: 'Blog Post' },
+            { path: '/tags', name: 'Tags Page' },
+            { path: '/about', name: 'About Page' },
+            { path: '/talks', name: 'Talks Page' }
+        ];
+
+        // Initialize iframes with local development server
+        function initializeFrames() {
+            const viewports = document.querySelectorAll('.viewport-test');
+            viewports.forEach(viewport => {
+                const width = viewport.dataset.width;
+                const iframe = viewport.querySelector('iframe');
+                iframe.src = 'http://localhost:3001'; // Updated port
+                iframe.style.width = width + 'px';
+            });
+        }
+
+        // Run visual tests
+        function runAllTests() {
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = '<p>Running tests...</p>';
+            
+            const results = [];
+            const viewports = document.querySelectorAll('.viewport-test');
+            
+            viewports.forEach((viewport, index) => {
+                const width = viewport.dataset.width;
+                const statusEl = document.getElementById(`status-${width}`);
+                
+                // Simulate test running
+                statusEl.textContent = 'Testing...';
+                statusEl.className = 'test-status';
+                
+                setTimeout(() => {
+                    // Check for common mobile CSS issues
+                    const iframe = viewport.querySelector('iframe');
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    
+                    const issues = checkForCommonIssues(iframeDoc, width);
+                    
+                    if (issues.length === 0) {
+                        statusEl.textContent = 'Pass';
+                        statusEl.className = 'test-status status-pass';
+                        results.push({
+                            viewport: width,
+                            status: 'pass',
+                            message: 'All checks passed'
+                        });
+                    } else {
+                        statusEl.textContent = 'Issues Found';
+                        statusEl.className = 'test-status status-fail';
+                        results.push({
+                            viewport: width,
+                            status: 'fail',
+                            issues: issues
+                        });
+                    }
+                    
+                    if (index === viewports.length - 1) {
+                        displayResults(results);
+                    }
+                }, 1000 + (index * 500));
+            });
+        }
+
+        // Check for common mobile CSS issues
+        function checkForCommonIssues(doc, viewportWidth) {
+            const issues = [];
+            
+            try {
+                // Check for horizontal overflow
+                if (doc.body.scrollWidth > viewportWidth) {
+                    issues.push('Horizontal overflow detected');
+                }
+                
+                // Check for fixed elements that might cause issues
+                const fixedElements = doc.querySelectorAll('*');
+                fixedElements.forEach(el => {
+                    const computed = window.getComputedStyle(el);
+                    if (computed.position === 'fixed' && viewportWidth < 768) {
+                        // Skip expected fixed elements
+                        if (!el.className.includes('mobile-navbar') && 
+                            !el.className.includes('bottom-nav') &&
+                            !el.className.includes('dark-mode-toggle')) {
+                            issues.push(`Fixed positioning on element: ${el.tagName}.${el.className}`);
+                        }
+                    }
+                });
+                
+                // Check for elements wider than viewport
+                const allElements = doc.querySelectorAll('*');
+                allElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.width > viewportWidth) {
+                        issues.push(`Element wider than viewport: ${el.tagName}.${el.className}`);
+                    }
+                });
+                
+                // Check for improper text sizing
+                const textElements = doc.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
+                textElements.forEach(el => {
+                    const computed = window.getComputedStyle(el);
+                    const fontSize = parseFloat(computed.fontSize);
+                    if (viewportWidth < 400 && fontSize > 40) {
+                        issues.push(`Text possibly too large for mobile: ${el.tagName}`);
+                    }
+                });
+
+                // Check search functionality specific issues
+                if (viewportWidth <= 1024) { // Mobile and iPad
+                    const searchPanel = doc.querySelector('.mobile-search-panel');
+                    const searchInput = doc.querySelector('.mobile-search-input');
+                    const searchButton = doc.querySelector('.mobile-search-button');
+                    
+                    if (searchButton) {
+                        const buttonRect = searchButton.getBoundingClientRect();
+                        // Check if search button is touch-friendly
+                        if (buttonRect.height < 44 || buttonRect.width < 44) {
+                            issues.push('Search button may be too small for touch (minimum 44x44px)');
+                        }
+                    }
+                    
+                    if (searchInput && viewportWidth >= 768 && viewportWidth <= 1024) {
+                        // iPad specific checks
+                        const inputStyles = window.getComputedStyle(searchInput);
+                        const fontSize = parseFloat(inputStyles.fontSize);
+                        if (fontSize < 16) {
+                            issues.push('Search input font size too small on iPad (should be at least 16px)');
+                        }
+                    }
+                }
+
+                // Android-specific checks
+                if (viewportWidth === 360 || viewportWidth === 393) { // Android devices
+                    const touchTargets = doc.querySelectorAll('button, a, input');
+                    touchTargets.forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        if (rect.height < 48 || rect.width < 48) {
+                            // Android recommends 48dp minimum touch target
+                            if (!el.className.includes('tag') && !el.className.includes('link')) {
+                                issues.push(`Touch target too small on Android: ${el.tagName}.${el.className}`);
+                            }
+                        }
+                    });
+                }
+            } catch (e) {
+                issues.push('Error accessing iframe content');
+            }
+            
+            return issues;
+        }
+
+        // Display test results
+        function displayResults(results) {
+            const container = document.getElementById('results-container');
+            container.innerHTML = '';
+            
+            results.forEach(result => {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = `result-item result-${result.status}`;
+                
+                if (result.status === 'pass') {
+                    resultDiv.innerHTML = `
+                        <strong>Viewport ${result.viewport}px:</strong> ${result.message}
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <strong>Viewport ${result.viewport}px:</strong> Issues found:
+                        <ul>
+                            ${result.issues.map(issue => `<li>${issue}</li>`).join('')}
+                        </ul>
+                    `;
+                }
+                
+                container.appendChild(resultDiv);
+            });
+        }
+
+        // Capture baseline screenshots (placeholder)
+        function captureBaseline() {
+            alert('Baseline capture would require a headless browser tool like Puppeteer or Playwright. This is a placeholder for the functionality.');
+        }
+
+        // Compare with baseline (placeholder)
+        function compareWithBaseline() {
+            alert('Visual comparison would require a tool like Percy or BackstopJS. This is a placeholder for the functionality.');
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initializeFrames);
+    </script>
+</body>
+</html>

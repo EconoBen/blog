@@ -18,7 +18,7 @@ As another year winds down, I want to take this opportunity once again to reflec
 
 👨‍🏫 I taught Intro to Machine Learning for Business at Chapman University’s Argyros College of Business and Economics to \~35 students this Fall semester. It was both grueling—including driving 90 miles there and back twice a week—but also fulfilling. I loved the students and believe I made a difference. For access to the course content, see my [GitHub repo](https://github.com/EconoBen/MGSC_310).
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/12/chapman-scaled.jpg)
+![Teaching at Chapman](/assets/2023/12/chapman-scaled.jpg)
 
 Teaching at Chapman
 
@@ -26,7 +26,7 @@ Teaching at Chapman
 
 🐥 I’m an uncle! I am very grateful that my niece, Shoshana was born. I’ve visited her now twice since October, and I intend to do so more in the coming year. 
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43.jpeg)
+![Shoshana and Me](/assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43.jpeg)
 
 Shoshana and Me
 
@@ -34,13 +34,13 @@ Shoshana and Me
 
 🎂 I turned 30! You may not think it’s an accomplishment—but I think it is. And so it makes my list. 
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c.jpeg)
+![Turning 30](/assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c.jpeg)
 
 Turning 30
 
 🗺️ I had a big European travel year! I visited: Slovenia, Croatia, Italy, and Austria in August. I also visited Canada for work, as well as a few cities I’ve never been to before: Boston and San Fransisco.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c.jpeg)
+![Ljubljana, Slovenia (August)](/assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c.jpeg)
 
 Ljubljana, Slovenia (August)
 
@@ -48,7 +48,7 @@ Ljubljana, Slovenia (August)
 
 🧬 For some people, work is a means to an end—for me it is the thing itself. I generally enjoy the process and, as I approach my second year working as Principal MLE @ Workhelix, I am still just as grateful for the time I’ve had, the team I work with, and what we are building.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c.jpeg)
+![Ice cream in Toronto—a must.](/assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c.jpeg)
 
 Ice cream in Toronto—a must.
 
@@ -56,7 +56,7 @@ Ice cream in Toronto—a must.
 
 🐶 We successfully fostered a dog and found him a loving home! He was very cute (and energetic…)
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c.jpeg)
+![Toast, being cute.](/assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c.jpeg)
 
 Toast, being cute.
 
