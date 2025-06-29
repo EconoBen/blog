@@ -1402,18 +1402,18 @@ img {
 }
 
 /* Workshop Page Styles */
-.workshop-container {
+.code-ai-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 40px 20px;
 }
 
-.workshop-header {
+.code-ai-header {
   text-align: center;
   margin-bottom: 32px;
 }
 
-.workshop-header h1 {
+.code-ai-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 16px;
@@ -1423,7 +1423,7 @@ img {
   color: transparent;
 }
 
-.workshop-subtitle {
+.code-ai-subtitle {
   font-size: 1.2rem;
   color: var(--text-secondary);
   max-width: 600px;
@@ -1431,7 +1431,7 @@ img {
   line-height: 1.6;
 }
 
-.workshop-controls {
+.code-ai-controls {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1439,12 +1439,12 @@ img {
   margin-bottom: 32px;
 }
 
-.workshop-search {
+.code-ai-search {
   flex: 1;
   max-width: 500px;
 }
 
-.workshop-search-input {
+.code-ai-search-input {
   width: 100%;
   padding: 10px 16px;
   font-size: 15px;
@@ -1455,13 +1455,13 @@ img {
   transition: all 0.2s ease;
 }
 
-.workshop-search-input:focus {
+.code-ai-search-input:focus {
   outline: none;
   border-color: var(--accent-color);
   box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.1);
 }
 
-.workshop-view-toggle {
+.code-ai-view-toggle {
   display: flex;
   gap: 4px;
   background: var(--bg-secondary);
@@ -1490,7 +1490,7 @@ img {
 }
 
 /* Workshop Layout */
-.workshop-layout {
+.code-ai-layout {
   display: grid;
   grid-template-columns: 250px 1fr;
   gap: 32px;
@@ -1498,7 +1498,7 @@ img {
 }
 
 /* Sidebar Navigation */
-.workshop-sidebar {
+.code-ai-sidebar {
   position: sticky;
   top: 20px;
   background: var(--card-bg);
@@ -1507,19 +1507,19 @@ img {
   border: 1px solid var(--card-border);
 }
 
-.workshop-sidebar h3 {
+.code-ai-sidebar h3 {
   font-size: 1.1rem;
   margin-bottom: 16px;
   color: var(--heading-color);
 }
 
-.workshop-nav {
+.code-ai-nav {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.workshop-nav-item {
+.code-ai-nav-item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1534,11 +1534,11 @@ img {
   width: 100%;
 }
 
-.workshop-nav-item:hover {
+.code-ai-nav-item:hover {
   background: var(--bg-secondary);
 }
 
-.workshop-nav-item.active {
+.code-ai-nav-item.active {
   background: rgba(var(--accent-color-rgb), 0.1);
   color: var(--accent-color);
 }
@@ -1563,18 +1563,18 @@ img {
 }
 
 /* Main Content Area */
-.workshop-main {
+.code-ai-main {
   min-height: 500px;
 }
 
 /* Compact List View */
-.workshop-list {
+.code-ai-list {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-.workshop-category-group {
+.code-ai-category-group {
   margin-bottom: 8px;
 }
 
@@ -1586,7 +1586,7 @@ img {
   border-bottom: 2px solid var(--border-color);
 }
 
-.workshop-item-compact {
+.code-ai-item-compact {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 8px;
@@ -1594,7 +1594,7 @@ img {
   transition: all 0.2s ease;
 }
 
-.workshop-item-compact:hover {
+.code-ai-item-compact:hover {
   border-color: var(--accent-color);
 }
 
@@ -1724,14 +1724,14 @@ img {
 
 /* GitHub Gist Links */
 .item-actions,
-.workshop-card-actions {
+.code-ai-card-actions {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
 .gist-link,
-.workshop-gist-link {
+.code-ai-gist-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1745,26 +1745,26 @@ img {
 }
 
 .gist-link:hover,
-.workshop-gist-link:hover {
+.code-ai-gist-link:hover {
   background: var(--bg-primary);
   color: var(--text-color);
   transform: translateY(-1px);
 }
 
 .gist-link svg,
-.workshop-gist-link svg {
+.code-ai-gist-link svg {
   width: 16px;
   height: 16px;
 }
 
 /* Full Grid View (reusing existing styles) */
-.workshop-grid {
+.code-ai-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 24px;
 }
 
-.workshop-card {
+.code-ai-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 12px;
@@ -1772,12 +1772,12 @@ img {
   transition: all 0.2s ease;
 }
 
-.workshop-card:hover {
+.code-ai-card:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
-.workshop-card-header {
+.code-ai-card-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -1785,7 +1785,7 @@ img {
   gap: 12px;
 }
 
-.workshop-card-header h3 {
+.code-ai-card-header h3 {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--heading-color);
@@ -1793,13 +1793,13 @@ img {
   flex: 1;
 }
 
-.workshop-card-badges {
+.code-ai-card-badges {
   display: flex;
   gap: 8px;
   align-items: center;
 }
 
-.workshop-language {
+.code-ai-language {
   padding: 4px 10px;
   font-size: 12px;
   font-weight: 500;
@@ -1808,34 +1808,34 @@ img {
 }
 
 
-.workshop-language.python {
+.code-ai-language.python {
   background: rgba(55, 118, 171, 0.1);
   color: #3776ab;
 }
 
-.workshop-language.bash {
+.code-ai-language.bash {
   background: rgba(76, 175, 80, 0.1);
   color: #4caf50;
 }
 
-.workshop-language.javascript {
+.code-ai-language.javascript {
   background: rgba(240, 219, 79, 0.1);
   color: #f0db4f;
 }
 
-.workshop-language.text {
+.code-ai-language.text {
   background: rgba(var(--text-color-rgb), 0.1);
   color: var(--text-secondary);
 }
 
-.workshop-card-description {
+.code-ai-card-description {
   color: var(--text-secondary);
   font-size: 0.95rem;
   margin-bottom: 16px;
   line-height: 1.5;
 }
 
-.workshop-card-content {
+.code-ai-card-content {
   background: var(--bg-secondary);
   border-radius: 8px;
   padding: 16px;
@@ -1843,30 +1843,30 @@ img {
   overflow-x: auto;
 }
 
-.workshop-card-content pre {
+.code-ai-card-content pre {
   margin: 0;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
 }
 
-.workshop-card-content code {
+.code-ai-card-content code {
   color: var(--text-color);
 }
 
-.workshop-card-footer {
+.code-ai-card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.workshop-tags {
+.code-ai-tags {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.workshop-tag {
+.code-ai-tag {
   font-size: 12px;
   color: var(--text-secondary);
   padding: 4px 8px;
@@ -1874,7 +1874,7 @@ img {
   border-radius: 4px;
 }
 
-.workshop-copy-btn {
+.code-ai-copy-btn {
   padding: 6px 16px;
   background: var(--accent-color);
   color: white;
@@ -1885,12 +1885,12 @@ img {
   transition: all 0.2s ease;
 }
 
-.workshop-copy-btn:hover {
+.code-ai-copy-btn:hover {
   background: var(--accent-color-hover);
   transform: translateY(-1px);
 }
 
-.workshop-empty {
+.code-ai-empty {
   text-align: center;
   padding: 60px 20px;
   color: var(--text-secondary);
@@ -1898,23 +1898,23 @@ img {
 
 /* Workshop Mobile Styles */
 @media (max-width: 900px) {
-  .workshop-layout {
+  .code-ai-layout {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .workshop-sidebar {
+  .code-ai-sidebar {
     position: static;
     padding: 16px;
   }
 
-  .workshop-nav {
+  .code-ai-nav {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 8px;
   }
 
-  .workshop-nav-item {
+  .code-ai-nav-item {
     flex: 1;
     min-width: 120px;
     padding: 8px 10px;
@@ -1926,36 +1926,36 @@ img {
 }
 
 @media (max-width: 767px) {
-  .workshop-container {
+  .code-ai-container {
     padding: 24px 16px;
   }
 
-  .workshop-header h1 {
+  .code-ai-header h1 {
     font-size: 2rem;
   }
 
-  .workshop-subtitle {
+  .code-ai-subtitle {
     font-size: 1rem;
   }
 
-  .workshop-controls {
+  .code-ai-controls {
     flex-direction: column;
     gap: 16px;
   }
 
-  .workshop-search {
+  .code-ai-search {
     max-width: 100%;
   }
 
-  .workshop-view-toggle {
+  .code-ai-view-toggle {
     align-self: flex-end;
   }
 
-  .workshop-sidebar {
+  .code-ai-sidebar {
     padding: 12px;
   }
 
-  .workshop-nav-item {
+  .code-ai-nav-item {
     min-width: 100px;
     padding: 6px 8px;
   }
@@ -1989,29 +1989,29 @@ img {
     font-size: 12px;
   }
 
-  .workshop-grid {
+  .code-ai-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .workshop-card {
+  .code-ai-card {
     padding: 16px;
   }
 
-  .workshop-card-header {
+  .code-ai-card-header {
     flex-direction: column;
     gap: 8px;
   }
 
-  .workshop-card-header h3 {
+  .code-ai-card-header h3 {
     font-size: 1.1rem;
   }
 
-  .workshop-card-content {
+  .code-ai-card-content {
     padding: 12px;
   }
 
-  .workshop-card-content pre {
+  .code-ai-card-content pre {
     font-size: 12px;
   }
 }

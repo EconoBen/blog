@@ -14,7 +14,7 @@ import HomePage from './components/HomePage';
 import SocialLinks from './components/SocialLinks';
 import PublicationsPage from './components/PublicationsPage';
 import SearchResults from './components/SearchResults';
-import Workshop from './components/Workshop';
+import CodeAI from './components/CodeAI';
 import { isMobileDevice } from './utils/deviceDetection';
 import { initializeMobileScrollFix } from './utils/mobileScrollFix';
 import { useScrollDirection } from './hooks/useScrollDirection';
@@ -420,7 +420,7 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/talks" element={<TalksPage />} />
               <Route path="/publications" element={<PublicationsPage />} />
-              <Route path="/workshop" element={<Workshop />} />
+              <Route path="/code-ai" element={<CodeAI />} />
               <Route path="/search" element={<SearchResults />} />
             </Routes>
           </div>

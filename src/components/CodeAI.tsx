@@ -3,9 +3,9 @@ import { workshopConfig, WorkshopItem } from '../config/workshopConfig';
 import { gistItems } from '../config/workshopGists';
 
 /**
- * Workshop component with compact, navigable layout for code snippets
+ * Code & AI component with compact, navigable layout for code snippets and AI insights
  */
-const Workshop: React.FC = () => {
+const CodeAI: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
@@ -54,26 +54,26 @@ const Workshop: React.FC = () => {
   };
 
   return (
-    <div className="workshop-container">
-      <div className="workshop-header">
+    <div className="code-ai-container">
+      <div className="code-ai-header">
         <h1>{title}</h1>
-        <p className="workshop-subtitle">
+        <p className="code-ai-subtitle">
           {subtitle}
         </p>
       </div>
 
-      <div className="workshop-controls">
-        <div className="workshop-search">
+      <div className="code-ai-controls">
+        <div className="code-ai-search">
           <input
             type="text"
             placeholder="Search snippets..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="workshop-search-input"
+            className="code-ai-search-input"
           />
         </div>
 
-        <div className="workshop-view-toggle">
+        <div className="code-ai-view-toggle">
           <button
             className={`view-toggle-btn ${viewMode === 'compact' ? 'active' : ''}`}
             onClick={() => setViewMode('compact')}
@@ -91,11 +91,11 @@ const Workshop: React.FC = () => {
         </div>
       </div>
 
-      <div className="workshop-layout">
+      <div className="code-ai-layout">
         {/* Sidebar Navigation */}
-        <aside className="workshop-sidebar">
+        <aside className="code-ai-sidebar">
           <h3>Categories</h3>
-          <nav className="workshop-nav">
+          <nav className="code-ai-nav">
             {categories.map(category => {
               const count = category.id === 'all' 
                 ? allItems.length 
@@ -104,7 +104,7 @@ const Workshop: React.FC = () => {
               return (
                 <button
                   key={category.id}
-                  className={`workshop-nav-item ${selectedCategory === category.id ? 'active' : ''}`}
+                  className={`code-ai-nav-item ${selectedCategory === category.id ? 'active' : ''}`}
                   onClick={() => setSelectedCategory(category.id)}
                 >
                   <span className="nav-icon">{category.icon}</span>
@@ -117,17 +117,17 @@ const Workshop: React.FC = () => {
         </aside>
 
         {/* Main Content Area */}
-        <main className="workshop-main">
+        <main className="code-ai-main">
           {viewMode === 'compact' ? (
             // Compact List View
-            <div className="workshop-list">
+            <div className="code-ai-list">
               {Object.entries(groupedItems).map(([category, categoryItems]) => (
-                <div key={category} className="workshop-category-group">
+                <div key={category} className="code-ai-category-group">
                   <h3 className="category-group-title">
                     {categories.find(c => c.id === category)?.label || category}
                   </h3>
                   {categoryItems.map(item => (
-                    <div key={item.id} className="workshop-item-compact">
+                    <div key={item.id} className="code-ai-item-compact">
                       <div className="item-header" onClick={() => toggleExpanded(item.id)}>
                         <div className="item-title-row">
                           <span className="expand-icon">
@@ -189,21 +189,21 @@ const Workshop: React.FC = () => {
             </div>
           ) : (
             // Full Card View (original grid layout)
-            <div className="workshop-grid">
+            <div className="code-ai-grid">
               {filteredItems.map(item => (
-                <div key={item.id} className="workshop-card">
-                  <div className="workshop-card-header">
+                <div key={item.id} className="code-ai-card">
+                  <div className="code-ai-card-header">
                     <h3>{item.title}</h3>
-                    <div className="workshop-card-badges">
-                      <span className={`workshop-language ${item.language || 'text'}`}>
+                    <div className="code-ai-card-badges">
+                      <span className={`code-ai-language ${item.language || 'text'}`}>
                         {item.language || 'text'}
                       </span>
                     </div>
                   </div>
                   
-                  <p className="workshop-card-description">{item.description}</p>
+                  <p className="code-ai-card-description">{item.description}</p>
                   
-                  <div className="workshop-card-content">
+                  <div className="code-ai-card-content">
                     <pre>
                       <code className={`language-${item.language || 'text'}`}>
                         {item.content}
@@ -211,21 +211,21 @@ const Workshop: React.FC = () => {
                     </pre>
                   </div>
 
-                  <div className="workshop-card-footer">
-                    <div className="workshop-tags">
+                  <div className="code-ai-card-footer">
+                    <div className="code-ai-tags">
                       {item.tags.map((tag: string) => (
-                        <span key={tag} className="workshop-tag">
+                        <span key={tag} className="code-ai-tag">
                           #{tag}
                         </span>
                       ))}
                     </div>
-                    <div className="workshop-card-actions">
+                    <div className="code-ai-card-actions">
                       {item.gistUrl && (
                         <a 
                           href={item.gistUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="workshop-gist-link"
+                          className="code-ai-gist-link"
                           title="View on GitHub"
                         >
                           <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -234,7 +234,7 @@ const Workshop: React.FC = () => {
                         </a>
                       )}
                       <button 
-                        className="workshop-copy-btn" 
+                        className="code-ai-copy-btn" 
                         onClick={() => copyToClipboard(item.content, item.id)}
                       >
                         Copy
@@ -247,7 +247,7 @@ const Workshop: React.FC = () => {
           )}
 
           {filteredItems.length === 0 && (
-            <div className="workshop-empty">
+            <div className="code-ai-empty">
               <p>No snippets found matching your criteria.</p>
             </div>
           )}
@@ -257,4 +257,4 @@ const Workshop: React.FC = () => {
   );
 };
 
-export default Workshop;
+export default CodeAI;

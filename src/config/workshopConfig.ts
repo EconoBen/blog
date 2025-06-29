@@ -1,5 +1,5 @@
 /**
- * Workshop configuration containing code snippets, scripts, and insights
+ * Code & AI configuration containing code snippets, ML/AI insights, and productivity tools
  */
 
 export interface WorkshopItem {
@@ -18,8 +18,8 @@ export interface WorkshopItem {
 }
 
 export const workshopConfig = {
-  title: 'Workshop',
-  subtitle: 'Code snippets, scripts, and insights I\'ve collected over the years. Feel free to use and adapt them for your own projects.',
+  title: 'Code & AI',
+  subtitle: 'Code snippets, ML/AI insights, and productivity tools I\'ve collected. From shell scripts to neural networks - practical solutions for developers and researchers.',
   
   categories: [
     { id: 'all', label: 'All', icon: '🔧' },

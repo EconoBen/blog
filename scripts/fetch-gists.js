@@ -5,6 +5,7 @@
  * 
  * Gist Description Format:
  * [workshop] category:shell tags:bash,productivity - Title here
+ * Note: We still use [workshop] tag for backwards compatibility
  */
 
 const https = require('https');
