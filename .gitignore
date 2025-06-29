@@ -21,7 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# audio files (stored in S3)
+public/audio/
 .vercel
 
 # Gist cache
 .gist-cache.json
+
+# Audio cache
+.audio-cache.json
+.s3-upload-cache.json

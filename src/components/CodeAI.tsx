@@ -16,8 +16,15 @@ const CodeAI: React.FC = () => {
   // Combine manual items with fetched gist items
   const allItems = [...workshopConfig.items, ...gistItems];
 
+  // Sort all items by date, most recent first
+  const sortedItems = allItems.sort((a, b) => {
+    const dateA = a.date ? new Date(a.date).getTime() : 0;
+    const dateB = b.date ? new Date(b.date).getTime() : 0;
+    return dateB - dateA; // Most recent first
+  });
+
   // Filter items based on category and search
-  const filteredItems = allItems.filter((item: WorkshopItem) => {
+  const filteredItems = sortedItems.filter((item: WorkshopItem) => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch = searchQuery === '' || 
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -27,7 +34,7 @@ const CodeAI: React.FC = () => {
     return matchesCategory && matchesSearch;
   });
 
-  // Group items by category for hierarchical display
+  // Group items by category for hierarchical display, maintaining date order
   const groupedItems = filteredItems.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
@@ -48,9 +55,20 @@ const CodeAI: React.FC = () => {
   };
 
   // Copy to clipboard with feedback
-  const copyToClipboard = (content: string, itemId: string) => {
+  const copyToClipboard = (content: string) => {
     navigator.clipboard.writeText(content);
     // Could add a toast notification here
+  };
+
+  // Format date for display
+  const formatDate = (date: Date | string | undefined) => {
+    if (!date) return '';
+    const d = new Date(date);
+    return d.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
   };
 
   return (
@@ -121,7 +139,14 @@ const CodeAI: React.FC = () => {
           {viewMode === 'compact' ? (
             // Compact List View
             <div className="code-ai-list">
-              {Object.entries(groupedItems).map(([category, categoryItems]) => (
+              {Object.entries(groupedItems)
+                .sort(([, itemsA], [, itemsB]) => {
+                  // Sort categories by most recent item date
+                  const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
+                  const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
+                  return latestB - latestA;
+                })
+                .map(([category, categoryItems]) => (
                 <div key={category} className="code-ai-category-group">
                   <h3 className="category-group-title">
                     {categories.find(c => c.id === category)?.label || category}
@@ -135,6 +160,11 @@ const CodeAI: React.FC = () => {
                           </span>
                           <h4>{item.title}</h4>
                           <div className="item-badges">
+                            {item.date && (
+                              <span className="date-badge">
+                                {formatDate(item.date)}
+                              </span>
+                            )}
                             <span className={`language-badge ${item.language}`}>
                               {item.language}
                             </span>
@@ -174,7 +204,7 @@ const CodeAI: React.FC = () => {
                               )}
                               <button 
                                 className="copy-btn"
-                                onClick={() => copyToClipboard(item.content, item.id)}
+                                onClick={() => copyToClipboard(item.content)}
                               >
                                 Copy
                               </button>
@@ -195,6 +225,11 @@ const CodeAI: React.FC = () => {
                   <div className="code-ai-card-header">
                     <h3>{item.title}</h3>
                     <div className="code-ai-card-badges">
+                      {item.date && (
+                        <span className="code-ai-date">
+                          {formatDate(item.date)}
+                        </span>
+                      )}
                       <span className={`code-ai-language ${item.language || 'text'}`}>
                         {item.language || 'text'}
                       </span>
@@ -235,7 +270,7 @@ const CodeAI: React.FC = () => {
                       )}
                       <button 
                         className="code-ai-copy-btn" 
-                        onClick={() => copyToClipboard(item.content, item.id)}
+                        onClick={() => copyToClipboard(item.content)}
                       >
                         Copy
                       </button>

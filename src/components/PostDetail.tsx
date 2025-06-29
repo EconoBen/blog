@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Post, postService } from '../services/PostService';
 import MarkdownRenderer from './MarkdownRenderer';
 import { isMobileDevice } from '../utils/deviceDetection';
+import AudioPlayer from './AudioPlayer';
+import audioManifest from '../config/audioManifest.json';
 
 /**
  * Props for the PostDetail component
@@ -96,6 +98,15 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
           })}
         </div>
       </div>
+
+      {/* Audio Player - only show if audio file exists */}
+      {audioManifest[slug as keyof typeof audioManifest] && (
+        <AudioPlayer 
+          audioUrl={audioManifest[slug as keyof typeof audioManifest]}
+          title="Listen to this post"
+          className="post-audio-player"
+        />
+      )}
 
       <div className="blog-content">
         <MarkdownRenderer content={post.content} />

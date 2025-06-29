@@ -8,6 +8,11 @@ public/assets/**/*.avi
 *.mov
 *.avi
 
+# Ignore audio files (hosted on S3)
+public/audio/
+*.mp3
+*.wav
+
 # Ignore backup files
 *.backup
 *.bak

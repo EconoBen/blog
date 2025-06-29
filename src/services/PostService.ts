@@ -13,6 +13,7 @@ import hostYourOwnPrivateLlmAccessItFromAnywhereMd from '../posts/host-your-own-
 import github_ssh_and_1passwordMd from '../posts/github_ssh_and_1password.md';
 import extending_GPTs_Are_GPTs_to_FirmsMd from '../posts/extending_"GPTs_Are_GPTs"_to_Firms.md';
 import building_an_https_model_apI_for_cheapMd from '../posts/building_an_https_model_apI_for_cheap.md';
+import addingTextToSpeechToYourBlogOpenaiTtsPipelineMd from '../posts/adding-text-to-speech-to-your-blog-openai-tts-pipeline.md';
 import I_paid_off_194k_in_student_loans_in_six_years__it_wasnt_easyMd from '../posts/I_paid_off_194k_in_student_loans_in_six_years._it_wasn\'t_easy.md';
 import yearInReview2024Md from '../posts/2024-year-in-review.md';
 import myYearInReview2023Md from '../posts/2023-my-year-in-review.md';
@@ -76,6 +77,7 @@ class PostService {
     'github_ssh_and_1password': github_ssh_and_1passwordMd,
     'extending_"GPTs_Are_GPTs"_to_Firms': extending_GPTs_Are_GPTs_to_FirmsMd,
     'building_an_https_model_apI_for_cheap': building_an_https_model_apI_for_cheapMd,
+    'adding-text-to-speech-to-your-blog-openai-tts-pipeline': addingTextToSpeechToYourBlogOpenaiTtsPipelineMd,
     'I_paid_off_194k_in_student_loans_in_six_years._it_wasn\'t_easy': I_paid_off_194k_in_student_loans_in_six_years__it_wasnt_easyMd,
     '2024-year-in-review': yearInReview2024Md,
     '2023-my-year-in-review': myYearInReview2023Md,
