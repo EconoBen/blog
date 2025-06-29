@@ -55,7 +55,7 @@ The first challenge is that blog posts aren't written to be read aloud. They con
 - Emojis and special characters
 - Links and images
 
-Here's how I handle text extraction using the Compromise NLP library:
+Here's how I handle text extraction using the Compromise NLP library ([full source](https://github.com/EconoBen/blog/blob/main/scripts/generate-audio.js#L61-L106)):
 
 ```javascript
 // Extract and normalize text content from markdown
@@ -126,7 +126,7 @@ The difference is subtle but crucial for natural-sounding speech.
 
 ## Chunking: Working Around OpenAI's 4096 Character Limit
 
-OpenAI's TTS API has a hard limit of 4096 characters per request. For longer posts (like my student loans story at 43,138 characters), we need intelligent chunking:
+OpenAI's TTS API has a hard limit of 4096 characters per request. For longer posts (like my student loans story at 43,138 characters), we need intelligent chunking ([view on GitHub](https://github.com/EconoBen/blog/blob/main/scripts/generate-audio.js#L132-L181)):
 
 ```javascript
 function splitTextIntoChunks(text, maxChars) {
@@ -275,7 +275,7 @@ The upload script also generates a manifest file mapping post slugs to S3 URLs:
 
 ## Frontend: The Audio Player Component
 
-The React audio player provides a clean interface with all the controls readers expect:
+The React audio player provides a clean interface with all the controls readers expect ([full component](https://github.com/EconoBen/blog/blob/main/src/components/AudioPlayer.tsx)):
 
 ```jsx
 const AudioPlayer = ({ audioUrl, title }) => {
@@ -383,5 +383,16 @@ If you want to implement this for your own blog, you'll need:
 5. About an hour to set everything up
 
 The complete implementation is running on this blog—in fact, you can listen to this very post by clicking the audio player at the top.
+
+## Source Code
+
+All the code for this TTS pipeline is available on GitHub:
+
+- **Audio Generation Script**: [scripts/generate-audio.js](https://github.com/EconoBen/blog/blob/main/scripts/generate-audio.js) - Core logic for text extraction, NLP processing, chunking, and OpenAI API integration
+- **S3 Upload Script**: [scripts/upload-audio-s3.js](https://github.com/EconoBen/blog/blob/main/scripts/upload-audio-s3.js) - Handles uploading audio files to S3 and generating the manifest
+- **Audio Player Component**: [src/components/AudioPlayer.tsx](https://github.com/EconoBen/blog/blob/main/src/components/AudioPlayer.tsx) - React component with full playback controls
+- **Post Detail Integration**: [src/components/PostDetail.tsx](https://github.com/EconoBen/blog/blob/main/src/components/PostDetail.tsx) - Shows how the audio player is integrated into blog posts
+- **Audio Manifest**: [src/config/audioManifest.json](https://github.com/EconoBen/blog/blob/main/src/config/audioManifest.json) - Maps post slugs to S3 audio URLs
+- **Setup Documentation**: [docs/AUDIO_SETUP.md](https://github.com/EconoBen/blog/blob/main/docs/AUDIO_SETUP.md) - Detailed setup instructions
 
 Happy listening!
