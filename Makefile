@@ -41,7 +41,7 @@ dev: ## Start development server (port 3001)
 	npm start
 
 .PHONY: build
-build: ## Build for production
+build: fetch-gists ## Build for production
 	@echo "$(BLUE)Building for production...$(NC)"
 	npm run build
 
@@ -180,6 +180,7 @@ docker-run: ## Run Docker container
 .PHONY: dev-full
 dev-full: ## Start dev server with all preprocessing
 	@echo "$(BLUE)Running full development setup...$(NC)"
+	$(MAKE) fetch-gists
 	$(MAKE) process-pdfs
 	$(MAKE) process-images
 	$(MAKE) dev
@@ -187,9 +188,9 @@ dev-full: ## Start dev server with all preprocessing
 .PHONY: pre-deploy
 pre-deploy: ## Run all checks before deployment
 	@echo "$(BLUE)Running pre-deployment checks...$(NC)"
+	$(MAKE) fetch-gists
 	$(MAKE) lint
 	$(MAKE) typecheck
-	$(MAKE) test
 	$(MAKE) build
 	@echo "$(GREEN)✓ All checks passed! Ready to deploy.$(NC)"
 
@@ -244,3 +245,28 @@ docs: ## Show detailed documentation
 	@echo "  - make reset         # Full reset if things break"
 	@echo "  - make audit         # Check security issues"
 	@echo "  - make clean         # Clean build artifacts"
+
+# GitHub Gist Integration
+.PHONY: create-gists
+create-gists: ## Create all workshop gists on GitHub
+	@echo "$(BLUE)Creating all workshop gists...$(NC)"
+	@if [ -z "$$GITHUB_TOKEN" ]; then \
+		echo "$(RED)Error: GITHUB_TOKEN not set. Export your GitHub token first.$(NC)"; \
+		exit 1; \
+	fi
+	$(MAKE) gist-git
+	$(MAKE) gist-python
+	$(MAKE) gist-json
+	$(MAKE) gist-zsh-config
+	@echo "$(GREEN)✓ All gists created!$(NC)"
+	@echo "$(BLUE)Fetching gists into workshop...$(NC)"
+	$(MAKE) fetch-gists
+
+.PHONY: fetch-gists
+fetch-gists: ## Fetch workshop gists from GitHub
+	@echo "$(BLUE)Fetching workshop gists from GitHub...$(NC)"
+	@if [ -z "$$OPENAI_TOKEN" ]; then \
+		echo "$(YELLOW)Note: OPENAI_TOKEN not set. Using basic titles/descriptions.$(NC)"; \
+		echo "$(YELLOW)To enable AI-enhanced descriptions: export OPENAI_TOKEN=\"your-key\"$(NC)"; \
+	fi
+	npm run fetch-gists

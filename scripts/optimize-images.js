@@ -1,3 +1,9 @@
+// Skip image optimization on Vercel to avoid Sharp issues
+if (process.env.VERCEL || process.env.CI) {
+  console.log('Skipping image optimization in CI/Vercel environment');
+  process.exit(0);
+}
+
 const sharp = require('sharp');
 const fs = require('fs-extra');
 const path = require('path');

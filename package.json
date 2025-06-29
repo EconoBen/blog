@@ -27,7 +27,6 @@
     "react-scripts": "^5.0.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
-    "sharp": "^0.34.1",
     "typescript": "^4.9.5",
     "vercel": "^28.18.5",
     "web-vitals": "^2.1.4"
@@ -46,6 +45,7 @@
     "test": "craco test",
     "eject": "react-scripts eject",
     "generate-posts": "node scripts/generate-post-imports.js",
+    "fetch-gists": "node scripts/fetch-gists.js",
     "preserve": "node scripts/generate-post-imports.js && npm run process-pdfs && npm run optimize-images",
     "serve": "serve -s build -p 3001"
   },
@@ -69,5 +69,8 @@
   },
   "devDependencies": {
     "glob": "^11.0.1"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.34.1"
   }
 }

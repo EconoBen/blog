@@ -5,6 +5,16 @@ const webpack = require('webpack');
 const PostGeneratorPlugin = require('./scripts/PostGeneratorPlugin');
 
 module.exports = {
+  jest: {
+    configure: {
+      moduleNameMapper: {
+        '@vercel/analytics/react': '<rootDir>/src/__mocks__/vercel-analytics.js'
+      },
+      transformIgnorePatterns: [
+        'node_modules/(?!(react-router-dom|@vercel)/)'
+      ]
+    }
+  },
   webpack: {
     configure: (webpackConfig) => {
       // Add loader for markdown files

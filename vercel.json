@@ -1,12 +1,20 @@
 {
   "buildCommand": "npm run build",
-  "installCommand": "npm install --no-optional",
+  "installCommand": "npm install --legacy-peer-deps",
   "outputDirectory": "build",
   "framework": "create-react-app",
   "github": {
     "silent": true
   },
   "env": {
-    "VERCEL": "1"
+    "VERCEL": "1",
+    "FAST_REFRESH": "false"
+  },
+  "build": {
+    "env": {
+      "NODE_OPTIONS": "--max_old_space_size=4096",
+      "SHARP_IGNORE_GLOBAL_LIBVIPS": "1",
+      "SKIP_PDF_PROCESSING": "1"
+    }
   }
 }

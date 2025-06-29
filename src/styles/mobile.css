@@ -534,8 +534,19 @@
 
 /* About page */
 @media screen and (max-width: 767px) {
+  /* Global overflow fix for About page */
+  body {
+    overflow-x: hidden;
+  }
+
+  .about-container * {
+    max-width: 100% !important;
+  }
+
   .about-content {
-    padding: 16px;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
   }
 
   .about-image {

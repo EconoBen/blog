@@ -14,6 +14,7 @@ import HomePage from './components/HomePage';
 import SocialLinks from './components/SocialLinks';
 import PublicationsPage from './components/PublicationsPage';
 import SearchResults from './components/SearchResults';
+import Workshop from './components/Workshop';
 import { isMobileDevice } from './utils/deviceDetection';
 import { initializeMobileScrollFix } from './utils/mobileScrollFix';
 import { useScrollDirection } from './hooks/useScrollDirection';
@@ -118,7 +119,11 @@ const BottomNav: React.FC<{ isVisible: boolean }> = ({ isVisible }) => {
       </Link>
       <Link to="/publications" className={`bottom-nav-item ${isActive('/publications') ? 'active' : ''}`}>
         <div className="bottom-nav-icon">📚</div>
-        <div>Publications</div>
+        <div>Pubs</div>
+      </Link>
+      <Link to="/workshop" className={`bottom-nav-item ${isActive('/workshop') ? 'active' : ''}`}>
+        <div className="bottom-nav-icon">🔧</div>
+        <div>Workshop</div>
       </Link>
       <Link to="/archives" className={`bottom-nav-item ${isActive('/archives') ? 'active' : ''}`}>
         <div className="bottom-nav-icon">🗓️</div>
@@ -415,6 +420,7 @@ const App: React.FC = () => {
               <Route path="/about" element={<About />} />
               <Route path="/talks" element={<TalksPage />} />
               <Route path="/publications" element={<PublicationsPage />} />
+              <Route path="/workshop" element={<Workshop />} />
               <Route path="/search" element={<SearchResults />} />
             </Routes>
           </div>
