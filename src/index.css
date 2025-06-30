@@ -2834,11 +2834,14 @@ html, body {
   display: flex;
   justify-content: center;
   min-height: 200px;
+  position: relative;
 }
 
 .mermaid-diagram svg {
   max-width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .mermaid-diagram-error {
