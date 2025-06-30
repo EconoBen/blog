@@ -25,23 +25,8 @@ Alright, let's get to it.
 
 Here's how the pipeline works end-to-end:
 
-```mermaid
-graph TD
-    A[Markdown Post<br/>.md file] --> B[Text Extraction<br/>Remove code, images, links]
-    B --> C[NLP Processing<br/>Expand 'I've' to 'I have']
-    C --> D{Text > 4096 chars?}
-    D -->|Yes| E[Chunking Logic<br/>Split by paragraphs/sentences]
-    D -->|No| F[OpenAI TTS API<br/>Generate MP3]
-    E --> F
-    F --> G{Multiple chunks?}
-    G -->|Yes| H[FFmpeg Concat<br/>Merge chunks]
-    G -->|No| I[S3 Upload &<br/>Manifest Update]
-    H --> I
-    I --> J[Audio Player UI<br/>React + HTML5]
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style J fill:#9f9,stroke:#333,stroke-width:2px
-    style F fill:#bbf,stroke:#333,stroke-width:2px
+```tts-pipeline-diagram
+# This will render our custom TTS pipeline diagram
 ```
 
 The beauty of this system is that it's fully automated. Write a post, run the build, and audio appears. No manual steps, no recording equipment, just code.

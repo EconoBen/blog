@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Post, postService } from '../services/PostService';
 import MarkdownRenderer from './MarkdownRenderer';
 import { isMobileDevice } from '../utils/deviceDetection';
@@ -74,8 +75,45 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
     return <div className="post-detail-error">{error || 'Post not found'}</div>;
   }
 
+  const postUrl = `https://labasc.blog/posts/${slug}`;
+  
+  // Generate dynamic OG image URL
+  const ogImageParams = new URLSearchParams({
+    title: post.title,
+    date: post.date.toISOString(),
+    tags: post.tags.join(','),
+    ...(post.summary && { summary: post.summary }),
+  });
+  const imageUrl = `https://labasc.blog/api/og?${ogImageParams.toString()}`;
+
   return (
     <>
+      <Helmet>
+        <title>{post.title} - Ben Labaschin</title>
+        <meta name="description" content={post.summary} />
+        
+        {/* Open Graph tags for social media previews */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.summary} />
+        <meta property="og:url" content={postUrl} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:site_name" content="Ben Labaschin's Blog" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.summary} />
+        <meta name="twitter:image" content={imageUrl} />
+        
+        {/* Article specific meta tags */}
+        <meta property="article:published_time" content={post.date.toISOString()} />
+        <meta property="article:author" content="Ben Labaschin" />
+        {post.tags.map((tag) => (
+          <meta property="article:tag" content={tag} key={tag} />
+        ))}
+      </Helmet>
+      
       <div className="blog-header">
         <h1 className="blog-title">{post.title}</h1>
         <div className="blog-meta">

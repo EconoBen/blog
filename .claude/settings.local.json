@@ -1,8 +1,9 @@
 {
-  "enableAllProjectMcpServers": false,
   "permissions": {
     "allow": [
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "mcp__playwright__browser_navigate"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": false
 }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test OG Image Generation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-case {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-case h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .og-image {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .url-display {
+            background: #f0f0f0;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+        }
+        .copy-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-button:hover {
+            background: #5a67d8;
+        }
+    </style>
+</head>
+<body>
+    <h1>OG Image Generation Test</h1>
+    <p>Test different variations of your OG images. Deploy to Vercel to see these in action.</p>
+
+    <div class="test-case">
+        <h3>1. Basic Post</h3>
+        <div class="url-display" id="url1"></div>
+        <button class="copy-button" onclick="copyUrl('url1')">Copy URL</button>
+        <br><br>
+        <img class="og-image" id="img1" alt="OG Image Test 1">
+    </div>
+
+    <div class="test-case">
+        <h3>2. Post with Summary</h3>
+        <div class="url-display" id="url2"></div>
+        <button class="copy-button" onclick="copyUrl('url2')">Copy URL</button>
+        <br><br>
+        <img class="og-image" id="img2" alt="OG Image Test 2">
+    </div>
+
+    <div class="test-case">
+        <h3>3. Post with Multiple Tags</h3>
+        <div class="url-display" id="url3"></div>
+        <button class="copy-button" onclick="copyUrl('url3')">Copy URL</button>
+        <br><br>
+        <img class="og-image" id="img3" alt="OG Image Test 3">
+    </div>
+
+    <div class="test-case">
+        <h3>4. Your TTS Blog Post</h3>
+        <div class="url-display" id="url4"></div>
+        <button class="copy-button" onclick="copyUrl('url4')">Copy URL</button>
+        <br><br>
+        <img class="og-image" id="img4" alt="OG Image Test 4">
+    </div>
+
+    <script>
+        const baseUrl = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000/api/og' 
+            : 'https://labasc.blog/api/og';
+
+        const testCases = [
+            {
+                title: 'Building a Custom Blog with React',
+                date: '2025-06-30',
+                tags: 'React,JavaScript,Web Development'
+            },
+            {
+                title: 'Machine Learning in Production',
+                date: '2025-06-15',
+                tags: 'ML,Python,DevOps',
+                summary: 'Learn how to deploy machine learning models at scale with best practices for monitoring and maintenance.'
+            },
+            {
+                title: 'The Future of Web Development',
+                date: '2025-06-01',
+                tags: 'Web,Future,Technology'
+            },
+            {
+                title: 'Adding Text-to-Speech to Your Blog: Building an OpenAI TTS Pipeline',
+                date: '2025-06-29',
+                tags: 'OpenAI,TTS,AWS',
+                summary: 'A technical deep-dive into building a production-ready text-to-speech pipeline for blog posts using OpenAI\'s TTS API.'
+            }
+        ];
+
+        testCases.forEach((testCase, index) => {
+            const params = new URLSearchParams(testCase);
+            const url = `${baseUrl}?${params.toString()}`;
+            
+            document.getElementById(`url${index + 1}`).textContent = url;
+            document.getElementById(`img${index + 1}`).src = url;
+        });
+
+        function copyUrl(urlId) {
+            const urlText = document.getElementById(urlId).textContent;
+            navigator.clipboard.writeText(urlText).then(() => {
+                alert('URL copied to clipboard!');
+            });
+        }
+    </script>
+</body>
+</html>

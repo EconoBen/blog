@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import './styles/layout.css';
 import './styles/components.css';
@@ -16,7 +17,9 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <App />
+  <HelmetProvider>
+    <App />
+  </HelmetProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

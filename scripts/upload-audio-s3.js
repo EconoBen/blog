@@ -3,16 +3,21 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { S3Client, PutObjectCommand, ListObjectsV2Command } = require('@aws-sdk/client-s3');
+const { fromIni } = require('@aws-sdk/credential-provider-ini');
 const crypto = require('crypto');
 
 // Configuration
 const BUCKET_NAME = process.env.S3_AUDIO_BUCKET || 'tech-notes-blog';
 const REGION = process.env.AWS_REGION || 'us-west-2';
+const AWS_PROFILE = process.env.AWS_PROFILE || 'bjl';
 const AUDIO_DIR = path.join(__dirname, '..', 'public', 'audio');
 const UPLOAD_CACHE_FILE = path.join(__dirname, '..', '.s3-upload-cache.json');
 
-// Initialize S3 client
-const s3Client = new S3Client({ region: REGION });
+// Initialize S3 client with profile
+const s3Client = new S3Client({ 
+  region: REGION,
+  credentials: fromIni({ profile: AWS_PROFILE })
+});
 
 // Load upload cache
 async function loadUploadCache() {
@@ -82,6 +87,7 @@ async function main() {
   console.log('=====================\n');
   console.log(`Bucket: ${BUCKET_NAME}`);
   console.log(`Region: ${REGION}`);
+  console.log(`AWS Profile: ${AWS_PROFILE}`);
   console.log(`Audio directory: ${AUDIO_DIR}\n`);
   
   try {
