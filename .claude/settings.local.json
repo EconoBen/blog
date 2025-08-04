@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(npm start)",
-      "mcp__playwright__browser_navigate"
+      "mcp__playwright__browser_navigate",
+      "mcp__sequentialthinking-tools__sequentialthinking_tools",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)"
     ]
   },
   "enableAllProjectMcpServers": false

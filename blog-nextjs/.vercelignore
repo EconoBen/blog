@@ -1,0 +1,51 @@
+# Dependencies
+node_modules
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env files
+.env*.local
+.env.development
+.env.test
+
+# Editor directories
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Source files (if not needed for build)
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Original images (we only need optimized ones)
+public/assets/originals
+
+# Development files
+.eslintrc.json
+.prettierrc
+jest.config.js
+
+# Temporary files
+*.tmp
+*.temp
+.cache

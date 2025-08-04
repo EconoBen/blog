@@ -3,9 +3,13 @@ title: "Adding Text-to-Speech to Your Blog: Building an OpenAI TTS Pipeline with
 date: "2025-06-29"
 tags: ["OpenAI", "TTS", "AWS", "S3", "React", "NLP", "Audio", "FFmpeg", "Node.js"]
 summary: "A technical deep-dive into building a production-ready text-to-speech pipeline for blog posts using OpenAI's TTS API, smart text processing with NLP, automatic chunking for long content, and AWS S3 for scalable audio hosting."
+image: "/assets/2025/06/tts-front-matter.png"
 ---
 
-# Intro
+
+![TTS Pipeline Architecture](/assets/2025/06/tts-front-matter.png)
+
+## Intro
 
 If you're reading this post then you probably want to add audio versions to your blog posts. Perhaps you've noticed more sites offering "listen to this article" features, or maybe you just want to make your content more accessible.
 

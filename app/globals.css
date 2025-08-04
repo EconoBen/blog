@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+/* CSS Variables */
+:root {
+  /* Layout */
+  --sidebar-width: 240px;
+  --content-max-width: 1400px;
+  --content-padding: 20px;
+
+  /* Colors */
+  --color-text: #333;
+  --color-text-light: #888;
+  --color-background: #fff;
+  --bg-color-rgb: 255, 255, 255;
+  --color-primary: #0070f3;
+  --color-primary-hover: #0050a3;
+  --color-sidebar-bg: #f8f8f8;
+  --color-border: #f0f0f0;
+  --color-border-light: #e0e0e0;
+  --color-code-bg: #f5f5f5;
+  --color-tag-bg: #f0f0f0;
+  --color-tag-text: #555;
+  --color-button-bg: #f4f4f4;
+  --color-button-hover: #e8e8e8;
+  --color-block-quote-bg: #f9f9f9;
+
+  /* Additional Variables */
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.05);
+  --text-secondary: #555555;
+  --tag-bg: #f0f0f0;
+  --hero-bg: linear-gradient(to bottom right, rgba(245, 247, 250, 0.8), rgba(245, 247, 250, 0.4));
+  --accent-color: #0070f3;
+  --accent-color-secondary: #0090ff;
+  --accent-color-rgb: 0, 112, 243;
+  --accent-color-dark: #0050a3;
+  --accent-color-light: #e6f0ff;
+  --text-color: #333;
+  --text-muted: #888;
+  --heading-color: #222;
+  --border-color: #eaeaea;
+  --bg-color-translucent: rgba(255, 255, 255, 0.8);
+  --search-bg: #f5f5f5;
+  --font-heading: 'Roboto Mono', 'SF Mono', 'Consolas', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --button-bg: #f0f0f0;
+  --button-hover-bg: #e0e0e0;
+
+  /* Typography */
+  --font-size-base: 16px;
+  --font-size-small: 14px;
+  --font-size-smaller: 13px;
+  --font-size-smallest: 12px;
+  --line-height-base: 1.5;
+  --line-height-content: 1.6;
+
+  /* Shadows */
+  --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 3px 12px rgba(0, 0, 0, 0.1);
+
+  /* Radius */
+  --radius-small: 3px;
+  --radius-medium: 6px;
+  --radius-large: 8px;
+  --radius-full: 50%;
+
+  /* Spacing */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 30px;
+  --spacing-2xl: 40px;
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+
+  /* iOS 100vh fix */
+  --vh: 1vh;
+}
+
+/* Dark mode variables */
+.dark-mode {
+  --color-text: #e0e0e0;
+  --color-text-light: #aaa;
+  --color-background: #121212;
+  --bg-color-rgb: 18, 18, 18;
+  --color-primary: #5e9eff;
+  --color-primary-hover: #7eaeff;
+  --color-sidebar-bg: #1e1e1e;
+  --color-border: #333;
+  --color-border-light: #444;
+  --color-code-bg: #2d2d2d;
+  --color-tag-bg: #333;
+  --color-tag-text: #ccc;
+  --color-button-bg: #333;
+  --color-button-hover: #444;
+  --color-block-quote-bg: #1e1e1e;
+  --card-bg: #1e1e1e;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --text-secondary: #aaaaaa;
+  --tag-bg: #2a2a2a;
+  --hero-bg: linear-gradient(to bottom right, rgba(30, 30, 30, 0.8), rgba(30, 30, 30, 0.4));
+  --accent-color-dark: #2a75cc;
+  --accent-color-rgb: 94, 158, 255;
+  --accent-color-light: rgba(94, 158, 255, 0.15);
+  --text-color: #e0e0e0;
+  --text-muted: #aaa;
+  --heading-color: #e0e0e0;
+  --border-color: #333;
+  --bg-color-translucent: rgba(18, 18, 18, 0.8);
+  --search-bg: #1e1e1e;
+  --button-bg: #2a2a2a;
+  --button-hover-bg: #333;
+}
+
+/* Base Styles */
+body {
+  font-family: var(--font-body);
+  line-height: var(--line-height-base);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  padding: 0;
+  margin: 0;
+}
+
+/* Reset margins and padding */
+h1, h2, h3, h4, h5, h6, p, ul, ol, figure, blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+/* Base link styles */
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Typography defaults */
+code, pre, kbd {
+  font-family: 'Roboto Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+
+/* Images default */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}

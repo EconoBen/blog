@@ -1,0 +1,1 @@
+To top it off, we saw that Pandas' powerful query function allows us to filter our data to whatever granularity we would like using boolean expressions.

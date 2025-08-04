@@ -75,16 +75,20 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
     return <div className="post-detail-error">{error || 'Post not found'}</div>;
   }
 
-  const postUrl = `https://labasc.blog/posts/${slug}`;
+  const postUrl = `https://econoben.dev/posts/${slug}`;
   
-  // Generate dynamic OG image URL
-  const ogImageParams = new URLSearchParams({
-    title: post.title,
-    date: post.date.toISOString(),
-    tags: post.tags.join(','),
-    ...(post.summary && { summary: post.summary }),
-  });
-  const imageUrl = `https://labasc.blog/api/og?${ogImageParams.toString()}`;
+  // If post has a cover image, use it; otherwise generate dynamic OG image
+  const imageUrl = post.coverImage 
+    ? `https://econoben.dev${post.coverImage}`
+    : (() => {
+        const ogImageParams = new URLSearchParams({
+          title: post.title,
+          date: post.date.toISOString(),
+          tags: post.tags.join(','),
+          ...(post.summary && { summary: post.summary }),
+        });
+        return `https://econoben.dev/api/og?${ogImageParams.toString()}`;
+      })();
 
   return (
     <>

@@ -1,0 +1,20 @@
+{
+  "totalChunks": 3,
+  "chunks": [
+    {
+      "index": 0,
+      "length": 4074,
+      "preview": "Introduction. Pandas groupbys are some of the most useful functions in a data scientist's toolkit. A..."
+    },
+    {
+      "index": 1,
+      "length": 4037,
+      "preview": "Complementary Functions. After grouping our data, we often want to operate on the values we have der..."
+    },
+    {
+      "index": 2,
+      "length": 152,
+      "preview": "To top it off, we saw that Pandas' powerful query function allows us to filter our data to whatever ..."
+    }
+  ]
+}

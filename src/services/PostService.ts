@@ -97,7 +97,7 @@ class PostService {
           tags: data.tags || [],
           content: markdownContent,
           summary: data.summary || '',
-          coverImage: data.coverImage || undefined
+          coverImage: data.coverImage || data.image || undefined
         };
       });
 

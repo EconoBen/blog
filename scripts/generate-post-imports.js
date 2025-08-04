@@ -152,6 +152,8 @@ export interface Post {
   content: string;
   /** Optional summary for displaying in previews */
   summary?: string;
+  /** Optional cover image URL */
+  coverImage?: string;
 }
 
 /**
@@ -197,7 +199,8 @@ class PostService {
           date: new Date(data.date),
           tags: data.tags || [],
           content: markdownContent,
-          summary: data.summary || ''
+          summary: data.summary || '',
+          coverImage: data.coverImage || data.image || undefined
         };
       });
 

@@ -129,7 +129,7 @@ export default function handler(req: Request) {
                     color: 'rgba(255, 255, 255, 0.8)',
                   }}
                 >
-                  labasc.blog
+                  econoben.dev
                 </span>
               </div>
             </div>
