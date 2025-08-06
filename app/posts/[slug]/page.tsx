@@ -1,25 +1,29 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { postService } from '@/app/services/PostService';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import type { Metadata } from 'next';
+import Link from 'next/link';
+import { postService } from '../../services/PostService';
+import MarkdownRenderer from '../../components/MarkdownRenderer';
+import AudioPlayer from '../../components/AudioPlayer';
+import audioManifest from '../../config/audioManifest.json';
 
-interface PostPageProps {
-  params: {
-    slug: string;
-  };
+export async function generateStaticParams() {
+  const posts = await postService.getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
-export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
-  const post = await postService.getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await postService.getPostBySlug(slug);
   
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: 'Post Not Found | Economic Notes',
     };
   }
 
+  // Generate OG image URL
   const imageUrl = post.coverImage 
     ? `https://econoben.dev${post.coverImage}`
     : (() => {
@@ -34,85 +38,112 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 
   return {
     title: `${post.title} | Economic Notes`,
-    description: post.summary || `Read "${post.title}" on Economic Notes`,
+    description: post.summary,
     openGraph: {
-      title: post.title,
-      description: post.summary || `Read "${post.title}" on Economic Notes`,
       type: 'article',
+      title: post.title,
+      description: post.summary,
+      url: `https://econoben.dev/posts/${slug}`,
+      images: [imageUrl],
+      siteName: 'Economic Notes',
       publishedTime: post.date.toISOString(),
-      authors: ['Ben Labaschin'],
+      authors: ['Benjamin Labaschin'],
       tags: post.tags,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.summary || `Read "${post.title}" on Economic Notes`,
+      description: post.summary,
       images: [imageUrl],
     },
   };
 }
 
-export async function generateStaticParams() {
-  const posts = await postService.getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-export default async function PostPage({ params }: PostPageProps) {
-  const post = await postService.getPostBySlug(params.slug);
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await postService.getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
+  const formatDate = (date: Date): string => {
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+
+  // Check if audio exists for this post
+  const audioUrl = audioManifest[slug as keyof typeof audioManifest];
+
   return (
-    <article className="container mx-auto px-4 py-8 max-w-4xl">
-      <header className="mb-8">
-        <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400">
-          <time>
-            {post.date.toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-          <span>•</span>
-          <div className="flex gap-2">
-            {post.tags.map((tag) => (
-              <span key={tag} className="text-sm">
-                #{tag}
-              </span>
-            ))}
-          </div>
+    <article className="post-detail">
+      <header className="post-header">
+        <div className="breadcrumb">
+          <Link href="/posts">← Back to all posts</Link>
+        </div>
+        
+        <h1 className="post-title">{post.title}</h1>
+        
+        <div className="post-meta">
+          <time className="post-date">{formatDate(post.date)}</time>
+          <span className="post-separator">•</span>
+          <span className="post-reading-time">{post.readingTime || 5} min read</span>
+        </div>
+
+        <div className="post-tags">
+          {post.tags.map(tag => (
+            <Link key={tag} href={`/tags/${tag}`} className="post-tag">
+              {tag}
+            </Link>
+          ))}
         </div>
       </header>
 
+      {/* Cover Image */}
       {post.coverImage && (
-        <img
-          src={post.coverImage}
-          alt={post.title}
-          className="w-full rounded-lg mb-8"
-        />
+        <div className="post-cover-image">
+          <img src={post.coverImage} alt={post.title} />
+        </div>
       )}
 
-      <div className="prose prose-lg dark:prose-invert max-w-none">
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
-        >
-          {post.content}
-        </ReactMarkdown>
+      {/* Audio Player - only show if audio file exists */}
+      {audioUrl && (
+        <div className="post-audio-section">
+          <AudioPlayer 
+            audioUrl={audioUrl}
+            title="Listen to this post"
+            className="post-audio-player"
+          />
+        </div>
+      )}
+
+      {/* Post Content */}
+      <div className="post-content">
+        <MarkdownRenderer content={post.content} />
       </div>
+
+      {/* Post Footer */}
+      <footer className="post-footer">
+        <div className="post-footer-tags">
+          <h3>Tagged with:</h3>
+          <div className="post-tags">
+            {post.tags.map(tag => (
+              <Link key={tag} href={`/tags/${tag}`} className="post-tag">
+                {tag}
+              </Link>
+            ))}
+          </div>
+        </div>
+        
+        <div className="post-navigation">
+          <Link href="/posts" className="back-to-posts">
+            ← View all posts
+          </Link>
+        </div>
+      </footer>
     </article>
   );
 }

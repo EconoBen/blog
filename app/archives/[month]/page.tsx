@@ -1,74 +1,100 @@
-import Link from 'next/link';
-import { postService } from '@/app/services/PostService';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
+import { postService } from '../../services/PostService';
+import BlogCard from '../../components/BlogCard';
 
-interface ArchiveMonthPageProps {
-  params: {
+interface ArchivePageProps {
+  params: Promise<{
     month: string;
-  };
+  }>;
 }
 
-export async function generateMetadata({ params }: ArchiveMonthPageProps): Promise<Metadata> {
-  const month = decodeURIComponent(params.month);
-  return {
-    title: `${month} | Economic Notes Archives`,
-    description: `Browse all posts from ${month}.`,
-  };
-}
-
-export async function generateStaticParams() {
-  const archives = await postService.getArchiveByMonth();
-  return archives.map((archive) => ({
-    month: encodeURIComponent(archive.month),
-  }));
-}
-
-export default async function ArchiveMonthPage({ params }: ArchiveMonthPageProps) {
-  const monthName = decodeURIComponent(params.month);
+export default async function ArchivePage({ params }: ArchivePageProps) {
+  const { month } = await params;
+  
+  // Parse month parameter (expected format: YYYY-MM)
+  const [year, monthNum] = month.split('-');
+  
+  if (!year || !monthNum || isNaN(parseInt(year)) || isNaN(parseInt(monthNum))) {
+    notFound();
+  }
+  
   const allPosts = await postService.getAllPosts();
   
   // Filter posts by month
   const monthPosts = allPosts.filter(post => {
-    const postMonth = post.date.toLocaleDateString('en-US', {
-      month: 'long',
-      year: 'numeric'
-    });
-    return postMonth === monthName;
+    const postDate = new Date(post.date);
+    const postYear = postDate.getFullYear().toString();
+    const postMonth = (postDate.getMonth() + 1).toString().padStart(2, '0');
+    
+    return postYear === year && postMonth === monthNum;
   });
-
+  
   if (monthPosts.length === 0) {
     notFound();
   }
-
+  
+  const monthName = new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long'
+  });
+  
   return (
-    <div className="archive-month-page">
-      <h1 className="page-title">{monthName}</h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">Posts from {monthName}</h1>
       
-      <div className="posts-list">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {monthPosts.map((post) => (
-          <article key={post.slug} className="archive-post-item">
-            <Link href={`/posts/${post.slug}`}>
-              <h2>{post.title}</h2>
-              <time>
-                {post.date.toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })}
-              </time>
-              {post.summary && (
-                <p className="post-summary">{post.summary}</p>
-              )}
-              <div className="post-tags">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="tag">#{tag}</span>
-                ))}
-              </div>
-            </Link>
-          </article>
+          <BlogCard 
+            key={post.slug} 
+            slug={post.slug}
+            title={post.title}
+            date={post.date}
+            tags={post.tags}
+            excerpt={post.summary || ''}
+            readingTime={post.readingTime}
+            coverImage={post.coverImage}
+          />
         ))}
       </div>
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const allPosts = await postService.getAllPosts();
+  
+  // Get unique months from all posts
+  const months = new Set<string>();
+  
+  allPosts.forEach(post => {
+    const postDate = new Date(post.date);
+    const year = postDate.getFullYear();
+    const month = (postDate.getMonth() + 1).toString().padStart(2, '0');
+    months.add(`${year}-${month}`);
+  });
+  
+  return Array.from(months).map(month => ({
+    month,
+  }));
+}
+
+export async function generateMetadata({ params }: ArchivePageProps) {
+  const { month } = await params;
+  const [year, monthNum] = month.split('-');
+  
+  if (!year || !monthNum) {
+    return {
+      title: 'Archive Not Found',
+    };
+  }
+  
+  const monthName = new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long'
+  });
+  
+  return {
+    title: `Posts from ${monthName} - Economic Notes`,
+    description: `Browse all blog posts from ${monthName}`,
+  };
 }

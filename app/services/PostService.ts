@@ -1,109 +1,90 @@
-import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
+import matter from 'gray-matter';
 
-/**
- * Interface representing a blog post
- */
 export interface Post {
-  /** Unique slug derived from filename */
   slug: string;
-  /** Post title from frontmatter */
   title: string;
-  /** Publication date */
   date: Date;
-  /** Array of tags associated with the post */
-  tags: string[];
-  /** Post content in markdown format */
-  content: string;
-  /** Optional summary for displaying in previews */
   summary?: string;
-  /** Optional cover image URL */
+  tags: string[];
+  content: string;
   coverImage?: string;
+  image?: string;
+  readingTime?: number;
 }
 
-/**
- * Service for handling blog post operations
- */
+export interface TagCount {
+  tag: string;
+  count: number;
+}
+
 class PostService {
-  private posts: Post[] = [];
-  private initialized = false;
-  
-  /**
-   * Initialize the post service by loading all posts from markdown files
-   *
-   * @returns {Promise<void>}
-   */
-  async initialize(): Promise<void> {
-    if (this.initialized) return;
+  private postsDirectory = path.join(process.cwd(), 'src', 'posts');
 
+  async getAllPosts(): Promise<Post[]> {
+    // Check if directory exists
+    if (!fs.existsSync(this.postsDirectory)) {
+      console.warn('Posts directory not found:', this.postsDirectory);
+      return [];
+    }
+
+    const fileNames = fs.readdirSync(this.postsDirectory);
+    const posts = fileNames
+      .filter(fileName => fileName.endsWith('.md'))
+      .map(fileName => this.getPostBySlug(fileName.replace(/\.md$/, '')))
+      .filter(post => post !== null) as Post[];
+
+    // Sort posts by date (newest first)
+    return posts.sort((a, b) => b.date.getTime() - a.date.getTime());
+  }
+
+  getPostBySlug(slug: string): Post | null {
     try {
-      const postsDirectory = path.join(process.cwd(), 'src/posts');
-      const filenames = fs.readdirSync(postsDirectory);
+      const fullPath = path.join(this.postsDirectory, `${slug}.md`);
       
-      this.posts = filenames
-        .filter(filename => filename.endsWith('.md'))
-        .map(filename => {
-          const slug = filename.replace(/\.md$/, '');
-          const fullPath = path.join(postsDirectory, filename);
-          const fileContents = fs.readFileSync(fullPath, 'utf8');
-          const { data, content } = matter(fileContents);
-          
-          return {
-            slug,
-            title: data.title,
-            date: new Date(data.date),
-            tags: data.tags || [],
-            content: content,
-            summary: data.summary || '',
-            coverImage: data.coverImage || data.image || undefined
-          };
-        });
+      if (!fs.existsSync(fullPath)) {
+        console.warn(`Post not found: ${slug}`);
+        return null;
+      }
 
-      console.log(`Loaded ${this.posts.length} posts from markdown files`);
-      this.initialized = true;
+      const fileContents = fs.readFileSync(fullPath, 'utf8');
+      const { data, content } = matter(fileContents);
+
+      // Calculate reading time (average 200 words per minute)
+      const words = content.split(/\s+/).length;
+      const readingTime = Math.ceil(words / 200);
+
+      return {
+        slug,
+        title: data.title || slug,
+        date: new Date(data.date || Date.now()),
+        summary: data.summary || data.description || '',
+        tags: data.tags || [],
+        content,
+        coverImage: data.coverImage || data.image || undefined,
+        readingTime
+      };
     } catch (error) {
-      console.error('Failed to load posts:', error);
-      this.posts = [];
-      this.initialized = true;
+      console.error(`Error reading post ${slug}:`, error);
+      return null;
     }
   }
 
-  /**
-   * Get all posts, sorted by date (newest first)
-   *
-   * @returns {Promise<Post[]>} Array of all posts
-   */
-  async getAllPosts(): Promise<Post[]> {
-    await this.ensureInitialized();
-    return [...this.posts].sort((a, b) => b.date.getTime() - a.date.getTime());
-  }
-
-  /**
-   * Get recent posts, limited by count
-   *
-   * @param {number} count - Number of posts to return
-   * @returns {Promise<Post[]>} Array of recent posts
-   */
-  async getRecentPosts(count: number = 5): Promise<Post[]> {
+  async getPostsByTag(tag: string): Promise<Post[]> {
     const allPosts = await this.getAllPosts();
-    return allPosts.slice(0, count);
+    return allPosts.filter(post => 
+      post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+    );
   }
 
-  /**
-   * Get all tags with post counts
-   *
-   * @returns {Promise<{tag: string, count: number}[]>} Array of tags with counts
-   */
-  async getAllTags(): Promise<{tag: string, count: number}[]> {
-    await this.ensureInitialized();
-
+  async getAllTags(): Promise<TagCount[]> {
+    const allPosts = await this.getAllPosts();
     const tagCounts = new Map<string, number>();
 
-    this.posts.forEach(post => {
+    allPosts.forEach(post => {
       post.tags.forEach(tag => {
-        const currentCount = tagCounts.get(tag) || 0;
-        tagCounts.set(tag, currentCount + 1);
+        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
       });
     });
 
@@ -112,99 +93,17 @@ class PostService {
       .sort((a, b) => b.count - a.count);
   }
 
-  /**
-   * Get posts filtered by tag
-   *
-   * @param {string} tag - Tag to filter by
-   * @returns {Promise<Post[]>} Array of posts with the specified tag
-   */
-  async getPostsByTag(tag: string): Promise<Post[]> {
-    await this.ensureInitialized();
-    return this.posts
-      .filter(post => post.tags.includes(tag))
-      .sort((a, b) => b.date.getTime() - a.date.getTime());
-  }
-
-  /**
-   * Get archive data by month
-   *
-   * @returns {Promise<{month: string, count: number}[]>} Array of months with post counts
-   */
-  async getArchiveByMonth(): Promise<{month: string, count: number}[]> {
-    await this.ensureInitialized();
-
-    const monthCounts = new Map<string, number>();
-
-    this.posts.forEach(post => {
-      const monthYear = post.date.toLocaleDateString('en-US', {
-        month: 'long',
-        year: 'numeric'
-      });
-
-      const currentCount = monthCounts.get(monthYear) || 0;
-      monthCounts.set(monthYear, currentCount + 1);
-    });
-
-    return Array.from(monthCounts.entries())
-      .map(([month, count]) => ({ month, count }))
-      .sort((a, b) => {
-        const dateA = new Date(a.month);
-        const dateB = new Date(b.month);
-        return dateB.getTime() - dateA.getTime();
-      });
-  }
-
-  /**
-   * Get a post by its slug
-   *
-   * @param {string} slug - Post slug to find
-   * @returns {Promise<Post | null>} The found post or null
-   */
-  async getPostBySlug(slug: string): Promise<Post | null> {
-    await this.ensureInitialized();
-    return this.posts.find(post => post.slug === slug) || null;
-  }
-
-  /**
-   * Search posts by query term in title, content, and tags
-   *
-   * @param {string} query - Search query
-   * @returns {Promise<Post[]>} Array of matching posts
-   */
   async searchPosts(query: string): Promise<Post[]> {
-    await this.ensureInitialized();
+    const allPosts = await this.getAllPosts();
+    const searchTerm = query.toLowerCase();
 
-    if (!query.trim()) {
-      return [];
-    }
-
-    const normalizedQuery = query.toLowerCase().trim();
-
-    return this.posts
-      .filter(post => {
-        const titleMatch = post.title.toLowerCase().includes(normalizedQuery);
-        const contentMatch = post.content.toLowerCase().includes(normalizedQuery);
-        const tagsMatch = post.tags.some(tag =>
-          tag.toLowerCase().includes(normalizedQuery)
-        );
-
-        return titleMatch || contentMatch || tagsMatch;
-      })
-      .sort((a, b) => b.date.getTime() - a.date.getTime());
-  }
-
-  /**
-   * Ensure the service is initialized before operations
-   *
-   * @private
-   * @returns {Promise<void>}
-   */
-  private async ensureInitialized(): Promise<void> {
-    if (!this.initialized) {
-      await this.initialize();
-    }
+    return allPosts.filter(post => 
+      post.title.toLowerCase().includes(searchTerm) ||
+      post.summary?.toLowerCase().includes(searchTerm) ||
+      post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
+      post.content.toLowerCase().includes(searchTerm)
+    );
   }
 }
 
-// Create and export a singleton instance
 export const postService = new PostService();

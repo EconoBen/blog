@@ -1,0 +1,332 @@
+{
+  "timestamp": "2025-08-06T19:26:38.117Z",
+  "summary": {
+    "totalIssues": 6,
+    "criticalIssues": 0,
+    "highIssues": 3,
+    "mediumIssues": 3,
+    "lowIssues": 0
+  },
+  "analysis": {
+    "nextConfig": {
+      "hasJsConfig": true,
+      "hasTsConfig": true,
+      "conflictingConfigs": true,
+      "jsConfig": {
+        "images": "{\n    domains: ['your-s3-bucket.s3.amazonaws.com'], // Add your S3 bucket domain\n    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048]",
+        "headers": "[\n          {\n            key: 'X-Frame-Options'",
+        "redirects": null,
+        "webpack": true,
+        "reactStrictMode": true,
+        "compress": true,
+        "distDir": ".next",
+        "env": "{\n    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',\n  },\n\n  // Customize build output\n  distDir: '.next',\n\n  // Enable compression\n  compress: true,\n\n  // Configure headers for security\n  async headers() {\n    return [\n      {\n        source: '/:path*'"
+      },
+      "tsConfig": {
+        "images": "{\n    domains: ['econoben.dev', 'tech-notes-blog.s3.us-west-2.amazonaws.com'],\n  },\n  async headers() {\n    return [\n      {\n        source: '/api/og'",
+        "headers": "[\n          {\n            key: 'Content-Type'",
+        "redirects": null,
+        "webpack": false,
+        "reactStrictMode": false,
+        "compress": false,
+        "distDir": null,
+        "env": null
+      }
+    },
+    "packageJson": {
+      "name": "blog",
+      "version": "0.1.0",
+      "scripts": {
+        "dev": "next dev",
+        "build": "next build && npm run post-build",
+        "start": "next start",
+        "lint": "next lint",
+        "fetch-gists": "node scripts/fetch-gists.js",
+        "generate-audio": "node scripts/generate-audio.js",
+        "upload-audio": "node scripts/upload-audio-s3.js",
+        "audio-pipeline": "npm run generate-audio && npm run upload-audio",
+        "generate-post-imports": "node scripts/generate-post-imports.js",
+        "optimize-images": "node scripts/optimize-images.js",
+        "generate-pdf-thumbnails": "node scripts/generate-pdf-thumbnails.js",
+        "generate-pdf-publications": "node scripts/generate-pdf-publications.js",
+        "process-pdfs": "npm run generate-pdf-thumbnails && npm run generate-pdf-publications",
+        "add-image": "node scripts/add-image.js",
+        "process-audio": "npm run generate-audio && npm run upload-audio",
+        "post-build": "node scripts/post-build-cleanup.js",
+        "analyze-production": "node scripts/production-analysis/run-analysis.js",
+        "capture-production-html": "node scripts/production-analysis/capture-production-data.js html",
+        "analyze-production-css": "node scripts/production-analysis/css-analyzer.js",
+        "analyze-local": "node scripts/production-analysis/local-build-analyzer.js",
+        "analyze-local-build": "node scripts/production-analysis/local-build-analyzer.js build",
+        "analyze-local-html": "node scripts/production-analysis/local-build-analyzer.js html",
+        "analyze-local-css": "node scripts/production-analysis/local-build-analyzer.js css",
+        "analyze-local-assets": "node scripts/production-analysis/local-build-analyzer.js assets",
+        "analyze-comprehensive": "node scripts/production-analysis/comprehensive-analyzer.js",
+        "analyze-differences": "node scripts/production-analysis/difference-engine.js",
+        "test-difference-engine": "node scripts/production-analysis/test-difference-engine.js"
+      },
+      "dependencies": [
+        "@aws-sdk/client-s3",
+        "@aws-sdk/credential-provider-ini",
+        "@shelf/text-normalizer",
+        "@tailwindcss/postcss",
+        "@tailwindcss/typography",
+        "@vercel/analytics",
+        "@vercel/og",
+        "buffer",
+        "compromise",
+        "fs-extra",
+        "glob",
+        "gray-matter",
+        "jsdom",
+        "next",
+        "openai",
+        "pdf-lib",
+        "pdf-poppler",
+        "pdf2pic",
+        "pdfjs-dist",
+        "react",
+        "react-dom",
+        "react-markdown",
+        "rehype-raw",
+        "remark-gfm",
+        "sharp",
+        "vercel",
+        "web-vitals"
+      ],
+      "devDependencies": [
+        "@types/node",
+        "@types/react",
+        "@types/react-dom",
+        "autoprefixer",
+        "postcss",
+        "tailwindcss",
+        "typescript"
+      ],
+      "buildScript": "next build && npm run post-build",
+      "startScript": "next start",
+      "devScript": "next dev",
+      "nodeVersion": "v24.3.0",
+      "hasPostBuild": true
+    },
+    "vercelConfig": {
+      "hasVercelJson": true,
+      "hasProjectConfig": true,
+      "vercelJson": {
+        "framework": "nextjs",
+        "buildCommand": "npm run build",
+        "outputDirectory": ".next",
+        "devCommand": "npm run dev",
+        "installCommand": "npm install",
+        "regions": [
+          "iad1"
+        ],
+        "env": {
+          "NEXT_PUBLIC_SITE_URL": "@production_url"
+        },
+        "build": {
+          "env": {
+            "OPENAI_API_KEY": "@openai_api_key",
+            "AWS_REGION": "@aws_region",
+            "AWS_ACCESS_KEY_ID": "@aws_access_key_id",
+            "AWS_SECRET_ACCESS_KEY": "@aws_secret_access_key",
+            "S3_BUCKET_NAME": "@s3_bucket_name",
+            "GITHUB_TOKEN": "@github_token"
+          }
+        },
+        "headers": [
+          {
+            "source": "/api/:path*",
+            "headers": [
+              {
+                "key": "Cache-Control",
+                "value": "no-store, must-revalidate"
+              }
+            ]
+          },
+          {
+            "source": "/rss.xml",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml; charset=utf-8"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "public, max-age=3600, s-maxage=3600"
+              }
+            ]
+          },
+          {
+            "source": "/sitemap.xml",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml; charset=utf-8"
+              },
+              {
+                "key": "Cache-Control",
+                "value": "public, max-age=86400, s-maxage=86400"
+              }
+            ]
+          },
+          {
+            "source": "/(.*)",
+            "headers": [
+              {
+                "key": "X-Frame-Options",
+                "value": "DENY"
+              },
+              {
+                "key": "X-Content-Type-Options",
+                "value": "nosniff"
+              },
+              {
+                "key": "X-XSS-Protection",
+                "value": "1; mode=block"
+              },
+              {
+                "key": "Referrer-Policy",
+                "value": "strict-origin-when-cross-origin"
+              }
+            ]
+          }
+        ],
+        "redirects": [
+          {
+            "source": "/workshop/:slug",
+            "destination": "/code-ai/:slug",
+            "permanent": true
+          }
+        ]
+      },
+      "projectConfig": {
+        "projectId": "prj_TBb6GnWz36W3WFOPljBk6654WUN2",
+        "orgId": "team_QK1I3aUvmPxtHDzSL6JPON1H",
+        "settings": {
+          "createdAt": 1743652290808,
+          "framework": "create-react-app",
+          "devCommand": null,
+          "installCommand": "npm install --legacy-peer-deps",
+          "buildCommand": "npm run build",
+          "outputDirectory": null,
+          "rootDirectory": null,
+          "directoryListing": false,
+          "nodeVersion": "22.x"
+        }
+      },
+      "deploymentInfo": {
+        "error": "Command failed: vercel ls --json\nVercel CLI 41.4.1\nError: unknown or unexpected option: --json\n"
+      }
+    },
+    "environmentVars": {
+      "files": {
+        ".env": "FAST_REFRESH=false\nPORT=3001",
+        ".env.local": "# Next.js Environment Variables\n# Add your secret environment variables here (this file is gitignored)\n\n# Development server port (default is 3000)\nPORT=3000\n\n# Add your API keys and sensitive data here:\n# OPENAI_API_KEY=your_openai_key_here\n# GITHUB_TOKEN=your_github_token_here\n# AWS_ACCESS_KEY_ID=your_aws_access_key_here\n# AWS_SECRET_ACCESS_KEY=your_aws_secret_key_here\n# AWS_REGION=us-west-2\n# S3_AUDIO_BUCKET=your_s3_bucket_name",
+        ".vercel/.env.production.local": "# Created by Vercel CLI\nNX_DAEMON=\"false\"\nTURBO_CACHE=\"remote:rw\"\nTURBO_DOWNLOAD_LOCAL_ENABLED=\"true\"\nTURBO_REMOTE_ONLY=\"true\"\nTURBO_RUN_SUMMARY=\"true\"\nVERCEL=\"1\"\nVERCEL_ENV=\"production\"\nVERCEL_GIT_COMMIT_AUTHOR_LOGIN=\"\"\nVERCEL_GIT_COMMIT_AUTHOR_NAME=\"\"\nVERCEL_GIT_COMMIT_MESSAGE=\"\"\nVERCEL_GIT_COMMIT_REF=\"\"\nVERCEL_GIT_COMMIT_SHA=\"\"\nVERCEL_GIT_PREVIOUS_SHA=\"\"\nVERCEL_GIT_PROVIDER=\"\"\nVERCEL_GIT_PULL_REQUEST_ID=\"\"\nVERCEL_GIT_REPO_ID=\"\"\nVERCEL_GIT_REPO_OWNER=\"\"\nVERCEL_GIT_REPO_SLUG=\"\"\nVERCEL_OIDC_TOKEN=\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1yay00MzAyZWMxYjY3MGY0OGE5OGFkNjFkYWRlNGEyM2JlNyJ9.eyJpc3MiOiJodHRwczovL29pZGMudmVyY2VsLmNvbS9iZW5zLXByb2plY3RzLTBiNDRlMGU0Iiwic3ViIjoib3duZXI6YmVucy1wcm9qZWN0cy0wYjQ0ZTBlNDpwcm9qZWN0OmJsb2c6ZW52aXJvbm1lbnQ6ZGV2ZWxvcG1lbnQiLCJzY29wZSI6Im93bmVyOmJlbnMtcHJvamVjdHMtMGI0NGUwZTQ6cHJvamVjdDpibG9nOmVudmlyb25tZW50OmRldmVsb3BtZW50IiwiYXVkIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2JlbnMtcHJvamVjdHMtMGI0NGUwZTQiLCJvd25lciI6ImJlbnMtcHJvamVjdHMtMGI0NGUwZTQiLCJvd25lcl9pZCI6InRlYW1fUUsxSTNhVXZtUHh0SER6U0w2SlBPTjFIIiwicHJvamVjdCI6ImJsb2ciLCJwcm9qZWN0X2lkIjoicHJqX1RCYjZHbld6MzZXM1dGT1BsakJrNjY1NFdVTjIiLCJlbnZpcm9ubWVudCI6ImRldmVsb3BtZW50IiwidXNlcl9pZCI6IkdQVDlielA3U253M3hGbmxBbEl4WGcwQiIsIm5iZiI6MTc1NDQzNjYxOSwiaWF0IjoxNzU0NDM2NjE5LCJleHAiOjE3NTQ0Nzk4MTl9.l9Q5TXJIi5qmogsXbLsILTQ8XEZr4lTS_UaGNpjQhn2RO87Hb-fR6JgtzSfHMbxt9UgM1C1co4F_PLF4ixYHB3hpGcFST-juemxlVOSD0yBCIxdJporsYGxiEyQuDsco2uXg_L-GI9_g7InYiH-I7XsdPqV06Oos7myCgKc93H4vwUaiKVPBnOTgk38se8sDfCG_sICu-VeuSc9lUQX4BZi-EJCgq_GTxzh1nM3QpcdbuYfrA-hnwSC-THe6e1pofar_PwIWd1IlSZX999srMu0CPwGJzwmrYCRwxn5ggPa_NkgyQTzVhrFBpP2Kq0Xe0AfKszByCxcyndUpYdzoxQ\"\nVERCEL_TARGET_ENV=\"production\"\nVERCEL_URL=\"\"\n"
+      },
+      "localVars": {
+        "PORT": "3000"
+      },
+      "globalVars": {
+        "FAST_REFRESH": "false",
+        "PORT": "3001"
+      },
+      "vercelVars": {
+        "NX_DAEMON": "\"false\"",
+        "TURBO_CACHE": "\"remote:rw\"",
+        "TURBO_DOWNLOAD_LOCAL_ENABLED": "\"true\"",
+        "TURBO_REMOTE_ONLY": "\"true\"",
+        "TURBO_RUN_SUMMARY": "\"true\"",
+        "VERCEL": "\"1\"",
+        "VERCEL_ENV": "\"production\"",
+        "VERCEL_GIT_COMMIT_AUTHOR_LOGIN": "\"\"",
+        "VERCEL_GIT_COMMIT_AUTHOR_NAME": "\"\"",
+        "VERCEL_GIT_COMMIT_MESSAGE": "\"\"",
+        "VERCEL_GIT_COMMIT_REF": "\"\"",
+        "VERCEL_GIT_COMMIT_SHA": "\"\"",
+        "VERCEL_GIT_PREVIOUS_SHA": "\"\"",
+        "VERCEL_GIT_PROVIDER": "\"\"",
+        "VERCEL_GIT_PULL_REQUEST_ID": "\"\"",
+        "VERCEL_GIT_REPO_ID": "\"\"",
+        "VERCEL_GIT_REPO_OWNER": "\"\"",
+        "VERCEL_GIT_REPO_SLUG": "\"\"",
+        "VERCEL_OIDC_TOKEN": "\"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Im1yay00MzAyZWMxYjY3MGY0OGE5OGFkNjFkYWRlNGEyM2JlNyJ9.eyJpc3MiOiJodHRwczovL29pZGMudmVyY2VsLmNvbS9iZW5zLXByb2plY3RzLTBiNDRlMGU0Iiwic3ViIjoib3duZXI6YmVucy1wcm9qZWN0cy0wYjQ0ZTBlNDpwcm9qZWN0OmJsb2c6ZW52aXJvbm1lbnQ6ZGV2ZWxvcG1lbnQiLCJzY29wZSI6Im93bmVyOmJlbnMtcHJvamVjdHMtMGI0NGUwZTQ6cHJvamVjdDpibG9nOmVudmlyb25tZW50OmRldmVsb3BtZW50IiwiYXVkIjoiaHR0cHM6Ly92ZXJjZWwuY29tL2JlbnMtcHJvamVjdHMtMGI0NGUwZTQiLCJvd25lciI6ImJlbnMtcHJvamVjdHMtMGI0NGUwZTQiLCJvd25lcl9pZCI6InRlYW1fUUsxSTNhVXZtUHh0SER6U0w2SlBPTjFIIiwicHJvamVjdCI6ImJsb2ciLCJwcm9qZWN0X2lkIjoicHJqX1RCYjZHbld6MzZXM1dGT1BsakJrNjY1NFdVTjIiLCJlbnZpcm9ubWVudCI6ImRldmVsb3BtZW50IiwidXNlcl9pZCI6IkdQVDlielA3U253M3hGbmxBbEl4WGcwQiIsIm5iZiI6MTc1NDQzNjYxOSwiaWF0IjoxNzU0NDM2NjE5LCJleHAiOjE3NTQ0Nzk4MTl9.l9Q5TXJIi5qmogsXbLsILTQ8XEZr4lTS_UaGNpjQhn2RO87Hb-fR6JgtzSfHMbxt9UgM1C1co4F_PLF4ixYHB3hpGcFST-juemxlVOSD0yBCIxdJporsYGxiEyQuDsco2uXg_L-GI9_g7InYiH-I7XsdPqV06Oos7myCgKc93H4vwUaiKVPBnOTgk38se8sDfCG_sICu-VeuSc9lUQX4BZi-EJCgq_GTxzh1nM3QpcdbuYfrA-hnwSC-THe6e1pofar_PwIWd1IlSZX999srMu0CPwGJzwmrYCRwxn5ggPa_NkgyQTzVhrFBpP2Kq0Xe0AfKszByCxcyndUpYdzoxQ\"",
+        "VERCEL_TARGET_ENV": "\"production\"",
+        "VERCEL_URL": "\"\""
+      },
+      "vercelEnvList": {
+        "output": ""
+      }
+    },
+    "buildProcess": {
+      "nextVersion": "15.3.4",
+      "reactVersion": "^19.0.0",
+      "tailwindVersion": "^4.1.11",
+      "typescriptVersion": "^5",
+      "nodeVersion": "v24.3.0",
+      "hasTypeScript": true,
+      "hasTailwind": true,
+      "hasPostCSS": true,
+      "buildCommand": "next build && npm run post-build"
+    },
+    "differences": [
+      {
+        "type": "configuration",
+        "severity": "high",
+        "issue": "Conflicting Next.js configuration files",
+        "description": "Both next.config.js and next.config.ts exist, which may cause unpredictable behavior",
+        "impact": "Build process may use unexpected configuration",
+        "recommendation": "Remove one of the configuration files and consolidate settings"
+      },
+      {
+        "type": "configuration",
+        "severity": "medium",
+        "issue": "Vercel configuration conflicts",
+        "description": "Conflicting settings between vercel.json and project configuration",
+        "conflicts": [
+          {
+            "property": "framework",
+            "vercelJson": "nextjs",
+            "projectConfig": "create-react-app"
+          }
+        ],
+        "impact": "Deployment may use unexpected settings",
+        "recommendation": "Align vercel.json with project configuration or vice versa"
+      },
+      {
+        "type": "environment",
+        "severity": "high",
+        "issue": "Missing environment variables",
+        "description": "Required environment variables are not set locally: NEXT_PUBLIC_SITE_URL, AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME",
+        "impact": "Features requiring these variables may not work in local development",
+        "recommendation": "Add missing environment variables to .env.local file"
+      },
+      {
+        "type": "styling",
+        "severity": "high",
+        "issue": "Empty Tailwind content configuration",
+        "description": "Tailwind config has empty content array, which will not process any styles",
+        "impact": "Tailwind styles will not be generated, causing visual differences",
+        "recommendation": "Configure content paths in tailwind.config.js to include your source files"
+      },
+      {
+        "type": "configuration",
+        "severity": "medium",
+        "issue": "Duplicate image configuration",
+        "description": "Image configuration exists in both next.config.js and next.config.ts",
+        "impact": "May cause confusion about which configuration is active",
+        "recommendation": "Consolidate image configuration into single config file"
+      },
+      {
+        "type": "configuration",
+        "severity": "medium",
+        "issue": "Duplicate header configuration",
+        "description": "Headers are configured in both vercel.json and Next.js config",
+        "impact": "May cause conflicting or duplicate headers",
+        "recommendation": "Consolidate header configuration to avoid conflicts"
+      }
+    ],
+    "recommendations": []
+  }
+}

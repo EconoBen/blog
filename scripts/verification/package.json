@@ -1,0 +1,28 @@
+{
+  "name": "production-parity-verification",
+  "version": "1.0.0",
+  "description": "Automated testing and monitoring system for production parity verification",
+  "main": "parity-verification.js",
+  "scripts": {
+    "verify": "node parity-verification.js",
+    "visual": "node visual-regression-test.js",
+    "monitor:init": "node parity-monitor.js init",
+    "monitor:check": "node parity-monitor.js check",
+    "monitor:report": "node parity-monitor.js report",
+    "install-deps": "npm install puppeteer",
+    "test:all": "npm run verify && npm run visual"
+  },
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "testing",
+    "verification",
+    "production-parity",
+    "visual-regression",
+    "monitoring"
+  ],
+  "author": "Production Parity Team",
+  "license": "MIT"
+}

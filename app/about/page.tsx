@@ -1,105 +1,91 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'About | Economic Notes',
-  description: 'Learn more about Ben Labaschin, a technology economist exploring the intersection of innovation and human behavior.',
+  description: 'Learn more about Economic Notes and Benjamin Labaschin.',
 };
 
 export default function AboutPage() {
   return (
-    <div className="about-container">
-      <div className="about-hero">
-        <div className="about-hero-content">
-          <div className="about-hero-text">
-            <h1>Ben Labaschin</h1>
-            <h2>Technology Economist & Writer</h2>
-            <p className="about-tagline">
-              Exploring the intersection of economics, technology, and human behavior through research, writing, and practical applications.
-            </p>
-          </div>
-          <div className="about-hero-image">
-            <img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin" />
-          </div>
-        </div>
+    <div className="about-page">
+      <div className="page-header">
+        <h1 className="page-title">About</h1>
       </div>
 
-      <div className="about-layout">
-        <div className="about-content">
-          <section className="about-section">
-            <h2>About Me</h2>
-            <div className="about-card">
-              <p>
-                I'm a technology economist passionate about understanding how innovation shapes our world. 
-                My work focuses on the economic implications of emerging technologies, particularly in 
-                artificial intelligence, shared mobility, and digital transformation.
-              </p>
-              <p>
-                Through this blog, I share insights from my research, personal experiences, and observations 
-                about the evolving relationship between technology and society.
-              </p>
-            </div>
-          </section>
+      <div className="about-content">
+        <section className="about-section">
+          <h2>Welcome to Economic Notes</h2>
+          <p>
+            Economic Notes is a blog exploring the intersection of economics, technology, 
+            and artificial intelligence. Here, I share insights from my work in tech, 
+            thoughts on economic trends, and explorations of how AI is reshaping our world.
+          </p>
+        </section>
 
-          <section className="about-section">
-            <h2>Experience</h2>
-            <div className="about-card">
-              <div className="timeline">
-                <div className="timeline-item">
-                  <div className="timeline-marker"></div>
-                  <div className="timeline-content">
-                    <div className="job-header">
-                      <h3>Senior Economist</h3>
-                      <div className="job-meta">
-                        <span className="company">Technology Research Firm</span>
-                        <span>2020 - Present</span>
-                      </div>
-                    </div>
-                    <ul className="job-achievements">
-                      <li>Leading research on AI economics and market dynamics</li>
-                      <li>Publishing influential reports on technology adoption patterns</li>
-                      <li>Advising Fortune 500 companies on digital transformation strategies</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+        <section className="about-section">
+          <h2>About Me</h2>
+          <p>
+            I'm Benjamin Labaschin, an economist and technologist passionate about understanding 
+            how technology transforms economic systems and human behavior. My work spans 
+            machine learning, data science, and economic analysis.
+          </p>
+          <p>
+            Through this blog, I aim to bridge the gap between technical implementation 
+            and economic theory, providing practical insights for developers, economists, 
+            and anyone interested in the future of technology and society.
+          </p>
+        </section>
 
-          <section className="about-section">
-            <h2>Skills & Expertise</h2>
-            <div className="about-card">
-              <div className="skills-grid">
-                <div className="skill-category">
-                  <h3>Economics & Analysis</h3>
-                  <div className="skill-tags">
-                    <span className="skill-tag">Econometrics</span>
-                    <span className="skill-tag">Market Analysis</span>
-                    <span className="skill-tag">Behavioral Economics</span>
-                    <span className="skill-tag">Game Theory</span>
-                  </div>
-                </div>
-                <div className="skill-category">
-                  <h3>Technology</h3>
-                  <div className="skill-tags">
-                    <span className="skill-tag">Python</span>
-                    <span className="skill-tag">Machine Learning</span>
-                    <span className="skill-tag">Data Science</span>
-                    <span className="skill-tag">Cloud Computing</span>
-                  </div>
-                </div>
-                <div className="skill-category">
-                  <h3>Communication</h3>
-                  <div className="skill-tags">
-                    <span className="skill-tag">Technical Writing</span>
-                    <span className="skill-tag">Public Speaking</span>
-                    <span className="skill-tag">Data Visualization</span>
-                    <span className="skill-tag">Research Publishing</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+        <section className="about-section">
+          <h2>Topics I Cover</h2>
+          <ul className="topics-list">
+            <li>Machine Learning & AI applications in economics</li>
+            <li>Technology trends and their economic impact</li>
+            <li>Practical coding tutorials and tools</li>
+            <li>Data science for economic analysis</li>
+            <li>Personal productivity and development workflows</li>
+          </ul>
+        </section>
+
+        <section className="about-section">
+          <h2>Connect</h2>
+          <p>
+            Feel free to reach out if you have questions, suggestions, or just want to 
+            discuss any of the topics covered here. You can find me on:
+          </p>
+          <div className="social-links">
+            <a href="https://github.com/EconoBen" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+            <a href="https://twitter.com/econoben" target="_blank" rel="noopener noreferrer">
+              Twitter
+            </a>
+            <a href="https://linkedin.com/in/benjaminlabaschin" target="_blank" rel="noopener noreferrer">
+              LinkedIn
+            </a>
+          </div>
+        </section>
+
+        <section className="about-section">
+          <h2>Technical Details</h2>
+          <p>
+            This blog is built with Next.js, React, and TypeScript. It features:
+          </p>
+          <ul className="features-list">
+            <li>Server-side rendering for optimal performance</li>
+            <li>OpenAI integration for text-to-speech capabilities</li>
+            <li>GitHub Gists integration for code snippets</li>
+            <li>Full-text search across all content</li>
+            <li>Responsive design for all devices</li>
+          </ul>
+          <p>
+            The source code is available on{' '}
+            <a href="https://github.com/EconoBen/blog" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>.
+          </p>
+        </section>
       </div>
     </div>
   );

@@ -297,6 +297,7 @@ async function generateAudio(text, outputPath) {
 
     const options = {
       hostname: 'api.openai.com',
+      port: 443,
       path: '/v1/audio/speech',
       method: 'POST',
       headers: {
@@ -311,23 +312,19 @@ async function generateAudio(text, outputPath) {
         let errorBody = '';
         res.on('data', chunk => errorBody += chunk);
         res.on('end', () => {
-          reject(new Error(`OpenAI API error (${res.statusCode}): ${errorBody}`));
+          reject(new Error(`API returned ${res.statusCode}: ${errorBody}`));
         });
         return;
       }
 
-      const fileStream = require('fs').createWriteStream(outputPath);
-      res.pipe(fileStream);
+      const writeStream = require('fs').createWriteStream(outputPath);
+      res.pipe(writeStream);
       
-      fileStream.on('finish', () => {
-        fileStream.close();
+      writeStream.on('finish', () => {
         resolve();
       });
       
-      fileStream.on('error', (err) => {
-        fs.unlink(outputPath, () => {}); // Delete the file on error
-        reject(err);
-      });
+      writeStream.on('error', reject);
     });
 
     req.on('error', reject);
@@ -338,229 +335,133 @@ async function generateAudio(text, outputPath) {
 
 // Process a single markdown file
 async function processMarkdownFile(filePath) {
+  const slug = path.basename(filePath, '.md');
+  console.log(`\nProcessing: ${slug}`);
+
   try {
-    const filename = path.basename(filePath, '.md');
-    console.log(`\nProcessing: ${filename}`);
-    
-    // Read the markdown content
+    // Read the markdown file
     const content = await fs.readFile(filePath, 'utf-8');
     
-    // Extract text for TTS
-    const textContent = extractTextFromMarkdown(content);
-    const contentHash = calculateHash(textContent);
+    // Extract and normalize text
+    const normalizedText = extractTextFromMarkdown(content);
+    const contentHash = calculateHash(normalizedText);
     
-    // Debug: write extracted text to file for inspection
-    const debugPath = path.join(AUDIO_OUTPUT_DIR, `${filename}_processed.txt`);
-    await fs.writeFile(debugPath, textContent);
-    console.log(`  Debug: Processed text saved to ${debugPath}`);
-    
-    // Load cache to check if we need to regenerate
+    // Load cache
     const cache = await loadCache();
-    const audioFilename = `${filename}.mp3`;
-    const audioPath = path.join(AUDIO_OUTPUT_DIR, audioFilename);
     
-    // Check if audio already exists and content hasn't changed (unless --force)
-    if (!forceRegenerate && cache[filename] && cache[filename].hash === contentHash) {
-      try {
-        await fs.access(audioPath);
-        console.log(`  ✓ Audio already exists and is up to date`);
-        return { filename, audioFilename, status: 'cached' };
-      } catch {
-        // File doesn't exist, need to regenerate
-        console.log(`  Audio file missing, regenerating...`);
-      }
-    } else if (forceRegenerate) {
-      console.log(`  Force regeneration requested`);
+    // Check if we need to regenerate
+    if (!forceRegenerate && cache[slug] && cache[slug].hash === contentHash) {
+      console.log(`  ✓ Already generated (cached)`);
+      return;
     }
     
-    // Split text into chunks if necessary
-    const chunks = splitTextIntoChunks(textContent, MAX_CHARS_PER_REQUEST);
+    // Split into chunks if necessary
+    const chunks = splitTextIntoChunks(normalizedText, MAX_CHARS_PER_REQUEST);
+    console.log(`  - Text length: ${normalizedText.length} characters`);
+    console.log(`  - Split into ${chunks.length} chunk(s)`);
     
-    if (chunks.length > 1) {
-      console.log(`  Text is too long, splitting into ${chunks.length} chunks...`);
+    const audioFiles = [];
+    
+    // Generate audio for each chunk
+    for (let i = 0; i < chunks.length; i++) {
+      const chunkFile = chunks.length > 1 
+        ? path.join(AUDIO_OUTPUT_DIR, `${slug}_part${i + 1}.mp3`)
+        : path.join(AUDIO_OUTPUT_DIR, `${slug}.mp3`);
       
-      // Save chunk information for debugging
-      const chunkInfoPath = path.join(AUDIO_OUTPUT_DIR, `${filename}_chunks.json`);
-      await fs.writeFile(chunkInfoPath, JSON.stringify({
-        totalChunks: chunks.length,
-        chunks: chunks.map((chunk, i) => ({
-          index: i,
-          length: chunk.length,
-          preview: chunk.substring(0, 100) + '...'
-        }))
-      }, null, 2));
+      console.log(`  - Generating audio for chunk ${i + 1}/${chunks.length}...`);
       
-      // Generate audio for each chunk
-      const chunkPaths = [];
-      for (let i = 0; i < chunks.length; i++) {
-        const chunkPath = path.join(AUDIO_OUTPUT_DIR, `${filename}_chunk_${i}.mp3`);
-        console.log(`  Generating chunk ${i + 1}/${chunks.length} (${chunks[i].length} chars)...`);
-        
-        // Save chunk text for debugging
-        const chunkTextPath = path.join(AUDIO_OUTPUT_DIR, `${filename}_chunk_${i}.txt`);
-        await fs.writeFile(chunkTextPath, chunks[i]);
-        
-        await generateAudio(chunks[i], chunkPath);
-        chunkPaths.push(chunkPath);
-        
-        // Small delay between chunks to avoid rate limiting
-        if (i < chunks.length - 1) {
-          await new Promise(resolve => setTimeout(resolve, 500));
+      try {
+        await generateAudio(chunks[i], chunkFile);
+        audioFiles.push(chunkFile);
+        console.log(`    ✓ Generated: ${path.basename(chunkFile)}`);
+      } catch (error) {
+        console.error(`    ✗ Error generating chunk ${i + 1}:`, error.message);
+        // Clean up any partial files
+        for (const file of audioFiles) {
+          try {
+            await fs.unlink(file);
+          } catch (e) {}
         }
+        throw error;
       }
-      
-      console.log(`  ✓ All chunks generated successfully`);
-      
-      // Check if ffmpeg is available
+    }
+    
+    // If multiple chunks, concatenate them
+    if (chunks.length > 1) {
       const hasFfmpeg = await checkFfmpeg();
-      
       if (hasFfmpeg) {
-        console.log(`  Concatenating ${chunks.length} chunks with ffmpeg...`);
+        const finalFile = path.join(AUDIO_OUTPUT_DIR, `${slug}.mp3`);
+        console.log(`  - Concatenating ${chunks.length} chunks...`);
+        
         try {
-          await concatenateAudioFiles(chunkPaths, audioPath);
-          console.log(`  ✓ Audio chunks concatenated successfully`);
+          await concatenateAudioFiles(audioFiles, finalFile);
+          console.log(`    ✓ Created final audio: ${path.basename(finalFile)}`);
           
-          // Clean up chunk files if not in debug mode
-          if (process.env.DEBUG !== 'true') {
-            for (const chunkPath of chunkPaths) {
-              await fs.unlink(chunkPath);
-            }
+          // Clean up individual chunk files
+          for (const file of audioFiles) {
+            await fs.unlink(file);
           }
         } catch (error) {
-          console.error(`  ✗ Failed to concatenate chunks: ${error.message}`);
-          console.log(`  Using first chunk as fallback`);
-          await fs.copyFile(chunkPaths[0], audioPath);
+          console.error(`    ✗ Error concatenating chunks:`, error.message);
+          console.log(`    ! Individual chunks kept as fallback`);
         }
       } else {
-        console.log(`  ⚠️  ffmpeg not found. Using first chunk only.`);
-        console.log(`  Install ffmpeg to concatenate all chunks automatically.`);
-        await fs.copyFile(chunkPaths[0], audioPath);
+        console.log(`  ! FFmpeg not found - keeping ${chunks.length} separate audio files`);
       }
-      
-    } else {
-      console.log(`  Generating audio (${textContent.length} characters)...`);
-      await generateAudio(textContent, audioPath);
     }
     
     // Update cache
-    cache[filename] = {
+    cache[slug] = {
       hash: contentHash,
       generatedAt: new Date().toISOString(),
-      audioFile: audioFilename,
-      characterCount: textContent.length,
-      chunks: chunks.length,
-      processor: 'compromise',
-      complete: chunks.length === 1 || (await checkFfmpeg())
+      chunks: chunks.length
     };
     await saveCache(cache);
     
-    console.log(`  ✓ Audio generated successfully: ${audioFilename}`);
-    return { filename, audioFilename, status: 'generated', chunks: chunks.length };
-    
+    console.log(`  ✓ Completed: ${slug}`);
   } catch (error) {
-    console.error(`  ✗ Error processing ${filePath}:`, error.message);
-    return { filename: path.basename(filePath, '.md'), status: 'error', error: error.message };
+    console.error(`  ✗ Error processing ${slug}:`, error.message);
   }
 }
 
 // Main function
 async function main() {
-  console.log('Audio Generation for Blog Posts (using Compromise NLP)');
-  console.log('=====================================================\n');
-  
-  // Check for API key
   if (!OPENAI_API_KEY) {
-    console.error('Error: OPENAI_API_KEY or OPENAI_TOKEN environment variable not set');
-    console.error('Please set your OpenAI API key before running this script');
+    console.error('Error: OPENAI_API_KEY or OPENAI_TOKEN environment variable is required');
     process.exit(1);
   }
-  
-  // Ensure audio directory exists
+
   await ensureAudioDirectory();
   
-  // Show options
-  if (forceRegenerate) {
-    console.log('Force regeneration: ENABLED');
-  }
-  if (process.env.DEBUG === 'true') {
-    console.log('Debug mode: ENABLED (temporary files will be kept)');
-  }
-  
-  // Check for ffmpeg
-  const hasFfmpeg = await checkFfmpeg();
-  console.log(`FFmpeg: ${hasFfmpeg ? 'Available' : 'Not found (audio chunks will not be concatenated)'}\n`);
-  
-  let markdownFiles;
   if (specificFile) {
-    // Process specific file
+    // Process a specific file
     const filePath = path.join(POSTS_DIR, specificFile.endsWith('.md') ? specificFile : `${specificFile}.md`);
-    markdownFiles = [filePath];
-    console.log(`Processing specific file: ${specificFile}`);
+    try {
+      await fs.access(filePath);
+      await processMarkdownFile(filePath);
+    } catch (error) {
+      console.error(`Error: File not found: ${filePath}`);
+      process.exit(1);
+    }
   } else {
-    // Get all markdown files
-    const files = await fs.readdir(POSTS_DIR);
-    markdownFiles = files
-      .filter(file => file.endsWith('.md'))
-      .map(file => path.join(POSTS_DIR, file));
-    console.log(`Found ${markdownFiles.length} markdown files`);
-  }
-  
-  console.log(`Audio output directory: ${AUDIO_OUTPUT_DIR}`);
-  console.log(`Using voice: ${TTS_CONFIG.voice}, model: ${TTS_CONFIG.model}`);
-  console.log(`Text processor: Compromise NLP\n`);
-  
-  // Process files
-  const results = [];
-  for (const file of markdownFiles) {
-    const result = await processMarkdownFile(file);
-    results.push(result);
-    
-    // Add a small delay to avoid rate limiting
-    if (result.status === 'generated') {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+    // Process all markdown files
+    try {
+      const files = await fs.readdir(POSTS_DIR);
+      const mdFiles = files.filter(f => f.endsWith('.md'));
+      
+      console.log(`Found ${mdFiles.length} markdown files to process`);
+      
+      for (const file of mdFiles) {
+        await processMarkdownFile(path.join(POSTS_DIR, file));
+      }
+      
+      console.log('\n✓ Audio generation complete!');
+    } catch (error) {
+      console.error('Error reading posts directory:', error);
+      process.exit(1);
     }
   }
-  
-  // Summary
-  console.log('\n\nSummary');
-  console.log('=======');
-  const generated = results.filter(r => r.status === 'generated').length;
-  const cached = results.filter(r => r.status === 'cached').length;
-  const errors = results.filter(r => r.status === 'error').length;
-  const multiChunk = results.filter(r => r.chunks && r.chunks > 1).length;
-  
-  console.log(`Generated: ${generated}`);
-  console.log(`Cached: ${cached}`);
-  console.log(`Errors: ${errors}`);
-  console.log(`Multi-chunk files: ${multiChunk}`);
-  
-  if (errors > 0) {
-    console.log('\nErrors:');
-    results
-      .filter(r => r.status === 'error')
-      .forEach(r => console.log(`  - ${r.filename}: ${r.error}`));
-  }
-  
-  if (multiChunk > 0) {
-    console.log('\nFiles requiring chunk concatenation:');
-    results
-      .filter(r => r.chunks && r.chunks > 1)
-      .forEach(r => console.log(`  - ${r.filename}: ${r.chunks} chunks`));
-  }
-  
-  const ffmpegAvailable = await checkFfmpeg();
-  if (!ffmpegAvailable && multiChunk > 0) {
-    console.log('\n⚠️  Warning: Install ffmpeg to properly concatenate multi-chunk audio files');
-    console.log('  On macOS: brew install ffmpeg');
-    console.log('  On Ubuntu: sudo apt-get install ffmpeg');
-  }
-  
-  console.log('\nAudio generation complete!');
 }
 
 // Run the script
-if (require.main === module) {
-  main().catch(console.error);
-}
-
-module.exports = { generateAudio, extractTextFromMarkdown };
+main().catch(console.error);

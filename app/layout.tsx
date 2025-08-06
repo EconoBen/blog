@@ -1,40 +1,30 @@
-import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/react";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+import ClientLayout from './components/ClientLayout';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Economic Notes - Exploring Economics, Technology, and Life",
-  description: "A blog about economics, technology, and personal experiences. Written by a technology economist exploring the intersection of innovation and human behavior.",
-  authors: [{ name: "Ben Labaschin" }],
-  keywords: ["economics", "technology", "AI", "machine learning", "personal finance", "blog"],
+  title: 'Economic Notes - Exploring Economics, Technology, and Life',
+  description: 'A blog about economics, technology, and personal experiences.',
+  authors: [{ name: 'Benjamin Labaschin' }],
+  keywords: ['economics', 'technology', 'AI', 'machine learning', 'blog'],
+  manifest: '/manifest.json',
   openGraph: {
-    title: "Economic Notes",
-    description: "Exploring Economics, Technology, and Life",
-    url: "https://econoben.dev",
-    siteName: "Economic Notes",
-    type: "website",
-    locale: "en_US",
+    title: 'Economic Notes',
+    description: 'A blog about economics, technology, and personal experiences.',
+    url: 'https://econoben.dev',
+    siteName: 'Economic Notes',
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Economic Notes",
-    description: "Exploring Economics, Technology, and Life",
-    creator: "@bjl",
+    card: 'summary_large_image',
+    title: 'Economic Notes',
+    description: 'A blog about economics, technology, and personal experiences.',
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: "https://econoben.dev",
-  },
+  metadataBase: new URL('https://econoben.dev'),
 };
 
 export default function RootLayout({
@@ -44,11 +34,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <div className="blog-container">
+      <body className={inter.className}>
+        <ClientLayout>
           {children}
-        </div>
-        <Analytics />
+        </ClientLayout>
       </body>
     </html>
   );
