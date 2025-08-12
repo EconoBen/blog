@@ -14,6 +14,15 @@ export const talksConfig = {
    * Array of talks
    */
   talks: [
+{
+      id: "talk-ai-needs-memory",
+      title: "AI Needs Memory — Here's How It Works",
+      description: "An introduction to building memory for LLM applications: persistent context, retrieval strategies, and stateful agents. Based on an MLOps.community session.",
+      date: "2025-08-12",
+      youtubeId: "IfNhL71jqYs",
+      event: "MLOps Community",
+      topics: ["AI", "LLMs", "Memory", "Agents", "RAG", "Production"]
+    },
     {
       id: "talk-validating-llm-outputs",
       title: "A Normie Approach to Validating LLM Outputs (AI.Science Talk)",
