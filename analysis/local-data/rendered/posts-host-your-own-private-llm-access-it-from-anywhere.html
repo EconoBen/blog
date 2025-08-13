@@ -1,0 +1,362 @@
+<html lang="en"><head><meta charset="utf-8"><link rel="icon" href="/favicon.ico"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><meta name="description" content="Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering."><link rel="apple-touch-icon" href="/logo192.png"><link rel="manifest" href="/manifest.json"><title>Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere - Ben Labaschin</title><script defer="defer" src="/static/js/main.ebbeebf4.js"></script><link href="/static/css/main.1e0cf8ef.css" rel="stylesheet"><script src="/_vercel/insights/script.js" defer="" data-sdkn="@vercel/analytics/react" data-sdkv="1.5.0"></script><meta name="description" content="A step-by-step guide on hosting your own private Large Language Model and RAG system using Synology, Tailscale, Caddy, and Ollama—all protected behind a lightweight VPN and accessible anywhere." data-rh="true"><meta property="og:type" content="article" data-rh="true"><meta property="og:title" content="Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere" data-rh="true"><meta property="og:description" content="A step-by-step guide on hosting your own private Large Language Model and RAG system using Synology, Tailscale, Caddy, and Ollama—all protected behind a lightweight VPN and accessible anywhere." data-rh="true"><meta property="og:url" content="https://labasc.blog/posts/host-your-own-private-llm-access-it-from-anywhere" data-rh="true"><meta property="og:image" content="https://labasc.blog/api/og?title=Host+Your+Own+Local+LLM+%2F+RAG+Behind+a+Private+VPN%2C+Access+It+From+Anywhere&amp;date=2025-01-06T00%3A00%3A00.000Z&amp;tags=LLM%2CRAG%2CSynology%2COllama%2CCaddy%2CTailscale%2Cself-hosting%2Creverse+proxy%2CVPN&amp;summary=A+step-by-step+guide+on+hosting+your+own+private+Large+Language+Model+and+RAG+system+using+Synology%2C+Tailscale%2C+Caddy%2C+and+Ollama%E2%80%94all+protected+behind+a+lightweight+VPN+and+accessible+anywhere." data-rh="true"><meta property="og:site_name" content="Ben Labaschin's Blog" data-rh="true"><meta name="twitter:card" content="summary_large_image" data-rh="true"><meta name="twitter:title" content="Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere" data-rh="true"><meta name="twitter:description" content="A step-by-step guide on hosting your own private Large Language Model and RAG system using Synology, Tailscale, Caddy, and Ollama—all protected behind a lightweight VPN and accessible anywhere." data-rh="true"><meta name="twitter:image" content="https://labasc.blog/api/og?title=Host+Your+Own+Local+LLM+%2F+RAG+Behind+a+Private+VPN%2C+Access+It+From+Anywhere&amp;date=2025-01-06T00%3A00%3A00.000Z&amp;tags=LLM%2CRAG%2CSynology%2COllama%2CCaddy%2CTailscale%2Cself-hosting%2Creverse+proxy%2CVPN&amp;summary=A+step-by-step+guide+on+hosting+your+own+private+Large+Language+Model+and+RAG+system+using+Synology%2C+Tailscale%2C+Caddy%2C+and+Ollama%E2%80%94all+protected+behind+a+lightweight+VPN+and+accessible+anywhere." data-rh="true"><meta property="article:published_time" content="2025-01-06T00:00:00.000Z" data-rh="true"><meta property="article:author" content="Ben Labaschin" data-rh="true"><meta property="article:tag" content="LLM" data-rh="true"><meta property="article:tag" content="RAG" data-rh="true"><meta property="article:tag" content="Synology" data-rh="true"><meta property="article:tag" content="Ollama" data-rh="true"><meta property="article:tag" content="Caddy" data-rh="true"><meta property="article:tag" content="Tailscale" data-rh="true"><meta property="article:tag" content="self-hosting" data-rh="true"><meta property="article:tag" content="reverse proxy" data-rh="true"><meta property="article:tag" content="VPN" data-rh="true"><style>
+      /* Neutralize motion/visual effects for deterministic screenshots (applied to both prod/local) */
+      * {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+        will-change: auto !important;
+        box-shadow: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+        text-shadow: none !important;
+      }
+      html, body {
+        scroll-behavior: auto !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
+        text-rendering: optimizeLegibility !important;
+        -webkit-text-size-adjust: 100% !important;
+      }
+
+      /* Deterministic font stack to eliminate cross-env font diffs on long pages */
+      :root, html, body,
+      .blog-container, .main-content, .content-wrapper,
+      .blog-content, .blog-title, .blog-meta,
+      .code-block, pre, code, .code-line, .line-number {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", Arial, system-ui, sans-serif !important;
+        letter-spacing: 0 !important;
+        word-spacing: 0 !important;
+        font-kerning: normal !important;
+      }
+      code, pre, .code-line, .line-number {
+        font-family: "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace !important;
+      }
+
+      /* Route-composition neutralization to reduce hero-related diffs on home */
+      .hero-section, .hero-decoration {
+        display: none !important;
+      }
+    </style><style>
+      .nav-highlight, .dark-mode-toggle, .sidebar-toggle, .sidebar-resize-handle, .social-links {
+        display: none !important;
+      }
+    </style><style>
+      /* Remove background images/gradients globally */
+      * { background-image: none !important; }
+
+      /* Force common section backgrounds to solid white to stabilize diffs */
+      .hero-section,
+      .about-hero,
+      .component-box,
+      .publication-card,
+      .talk-card,
+      .blog-card,
+      .search-result-item,
+      .archive-month-card,
+      .newsletter-container {
+        background: #ffffff !important;
+      }
+    </style></head><body class="sidebar-open" style="--sidebar-width: 240px;"><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"><div class="blog-container "><div class="sidebar-toggle visible" aria-label="Close sidebar" role="button" tabindex="0"><div class="toggle-icon active"><span></span><span></span><span></span><span></span></div></div><div class="dark-mode-toggle  " aria-label="Switch to dark mode" role="button" tabindex="0"><div class="dark-mode-icon"></div></div><div class="social-links" style="top: 5px;"> <a href="https://github.com/econoben" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://linkedin.com/in/benjamin-labaschin" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a><a href="https://bsky.app/profile/econoben.dev" target="_blank" rel="noopener noreferrer" class="social-link" title="Bluesky"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L8 6 L12 10 L16 6 Z"></path><path d="M12 9 L8 13 L12 17 L16 13 Z"></path><path d="M19 5 L19 19"></path><path d="M5 5 L5 19"></path></svg></a><a href="mailto:benjaminlabaschin@gmail.com" class="social-link" title="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a></div><div class="sidebar" style="width: 240px;"><div class="sidebar-inner"><div class="sidebar-logo">cd ~/bjl/tech-notes</div><div class="sidebar-section"><div class="sidebar-heading">RECENT POSTS</div><ul class="post-list"><li class="post-item"><div class="post-title"><a href="/posts/adding-text-to-speech-to-your-blog-openai-tts-pipeline" data-discover="true">Adding Text-to-Speech to Your Blog: Building an OpenAI TTS Pipeline with Smart Chunking and AWS S3</a></div><div class="post-meta">June 28, 2025</div><div class="post-tags"><span class="post-tag"><a href="/tags/OpenAI" data-discover="true">OpenAI</a></span><span class="post-tag"><a href="/tags/TTS" data-discover="true">TTS</a></span><span class="post-tag"><a href="/tags/AWS" data-discover="true">AWS</a></span><span class="post-tag"><a href="/tags/S3" data-discover="true">S3</a></span><span class="post-tag"><a href="/tags/React" data-discover="true">React</a></span><span class="post-tag"><a href="/tags/NLP" data-discover="true">NLP</a></span><span class="post-tag"><a href="/tags/Audio" data-discover="true">Audio</a></span><span class="post-tag"><a href="/tags/FFmpeg" data-discover="true">FFmpeg</a></span><span class="post-tag"><a href="/tags/Node.js" data-discover="true">Node.js</a></span></div></li><li class="post-item"><div class="post-title"><a href="/posts/extending_&quot;GPTs_Are_GPTs&quot;_to_Firms" data-discover="true">Extending 'GPTs Are GPTs' to Firms</a></div><div class="post-meta">June 1, 2025</div><div class="post-tags"><span class="post-tag"><a href="/tags/AI" data-discover="true">AI</a></span><span class="post-tag"><a href="/tags/Economics" data-discover="true">Economics</a></span><span class="post-tag"><a href="/tags/Labor" data-discover="true">Labor</a></span><span class="post-tag"><a href="/tags/Productivity" data-discover="true">Productivity</a></span><span class="post-tag"><a href="/tags/GPTs" data-discover="true">GPTs</a></span></div></li><li class="post-item"><div class="post-title"><a href="/posts/host-your-own-private-llm-access-it-from-anywhere" data-discover="true">Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere</a></div><div class="post-meta">January 5, 2025</div><div class="post-tags"><span class="post-tag"><a href="/tags/LLM" data-discover="true">LLM</a></span><span class="post-tag"><a href="/tags/RAG" data-discover="true">RAG</a></span><span class="post-tag"><a href="/tags/Synology" data-discover="true">Synology</a></span><span class="post-tag"><a href="/tags/Ollama" data-discover="true">Ollama</a></span><span class="post-tag"><a href="/tags/Caddy" data-discover="true">Caddy</a></span><span class="post-tag"><a href="/tags/Tailscale" data-discover="true">Tailscale</a></span><span class="post-tag"><a href="/tags/self-hosting" data-discover="true">self-hosting</a></span><span class="post-tag"><a href="/tags/reverse proxy" data-discover="true">reverse proxy</a></span><span class="post-tag"><a href="/tags/VPN" data-discover="true">VPN</a></span></div></li><li class="post-item"><div class="post-title"><a href="/posts/2024-year-in-review" data-discover="true">2024: My Year In Review — AI, Archery, and Goals</a></div><div class="post-meta">December 30, 2024</div><div class="post-tags"><span class="post-tag"><a href="/tags/year in review" data-discover="true">year in review</a></span><span class="post-tag"><a href="/tags/LLMs" data-discover="true">LLMs</a></span><span class="post-tag"><a href="/tags/archery" data-discover="true">archery</a></span><span class="post-tag"><a href="/tags/health" data-discover="true">health</a></span><span class="post-tag"><a href="/tags/personal growth" data-discover="true">personal growth</a></span><span class="post-tag"><a href="/tags/AI" data-discover="true">AI</a></span></div></li></ul></div><div class="sidebar-section"><div class="sidebar-heading">POPULAR TAGS</div><div class="tag-cloud"><div class="tag">AI</div><div class="tag">LLM</div><div class="tag">Machine Learning</div><div class="tag">AWS</div><div class="tag">student loans</div><div class="tag">machine learning</div><div class="tag">year in review</div><div class="tag">LLMs</div><div class="tag">Agents</div><div class="tag">Technology</div></div></div><div class="sidebar-section"><div class="sidebar-heading">ARCHIVES</div><ul class="post-list"><li class="post-item"><div class="post-title"><a href="/archives/June%202025">June 2025</a></div><div class="post-meta">2 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/January%202025">January 2025</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/December%202024">December 2024</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/December%202023">December 2023</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/November%202023">November 2023</a></div><div class="post-meta">2 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/July%202023">July 2023</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/January%202023">January 2023</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/December%202022">December 2022</a></div><div class="post-meta">2 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/August%202022">August 2022</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/December%202021">December 2021</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/June%202021">June 2021</a></div><div class="post-meta">1 posts</div></li><li class="post-item"><div class="post-title"><a href="/archives/August%202020">August 2020</a></div><div class="post-meta">1 posts</div></li></ul></div></div></div><div class="sidebar-resize-handle"></div><div class="main-content" style="margin-left: 240px; max-width: calc(100% - 240px); width: 100%;"><nav class="main-nav " role="navigation" aria-label="Main navigation"><div class="nav-container"><div class="nav-brand"><a class="logo-link" href="/" data-discover="true"><span class="logo-symbol">&lt;/&gt;</span><span class="logo-text">TechNotes</span></a></div><div class="nav-items"><div class="nav-item "><a href="/" data-discover="true">Posts<div class="nav-highlight " style="position: relative; bottom: -1px;"></div></a></div><div class="nav-item "><a href="/code-ai" data-discover="true">Code &amp; AI<div class="nav-highlight " style="position: relative; bottom: -1px;"></div></a></div><div class="nav-item "><a href="/talks" data-discover="true">Talks<div class="nav-highlight " style="position: relative; bottom: -1px;"></div></a></div><div class="nav-item "><a href="/publications" data-discover="true">Publications<div class="nav-highlight " style="position: relative; bottom: -1px;"></div></a></div><div class="nav-item "><a href="/archives" data-discover="true">Archive<div class="nav-highlight " style="position: relative; bottom: -1px;"></div></a></div><div class="nav-item "><a href="/about" data-discover="true">About<div class="nav-highlight " style="position: relative; bottom: -1px;"></div></a></div></div><div class="nav-search desktop-search"><form><div class="search-container"><input placeholder="Search posts..." aria-label="Search posts" class="search-input" value=""><button type="submit" class="search-icon" aria-label="Submit search"></button></div></form></div></div></nav><div class="content-wrapper "><div class="post-detail"><div class="blog-header"><h1 class="blog-title">Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere</h1><div class="blog-meta">January 5, 2025<a href="/tags/LLM" data-discover="true"><span class="blog-tag">LLM</span></a><a href="/tags/RAG" data-discover="true"><span class="blog-tag">RAG</span></a><a href="/tags/Synology" data-discover="true"><span class="blog-tag">Synology</span></a><a href="/tags/Ollama" data-discover="true"><span class="blog-tag">Ollama</span></a><a href="/tags/Caddy" data-discover="true"><span class="blog-tag">Caddy</span></a><a href="/tags/Tailscale" data-discover="true"><span class="blog-tag">Tailscale</span></a><a href="/tags/self-hosting" data-discover="true"><span class="blog-tag">self-hosting</span></a><a href="/tags/reverse proxy" data-discover="true"><span class="blog-tag">reverse proxy</span></a><a href="/tags/VPN" data-discover="true"><span class="blog-tag">VPN</span></a></div></div><div class="audio-player post-audio-player"><audio src="https://tech-notes-blog.s3.us-west-2.amazonaws.com/audio/host-your-own-private-llm-access-it-from-anywhere.mp3" preload="metadata"></audio><div class="audio-player-header"><span class="audio-player-title">Listen to this post</span></div><div class="audio-player-controls"><button class="audio-player-play-btn" aria-label="Play"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"></path></svg></button><div class="audio-player-time">0:00 / 18:57</div><div class="audio-player-progress"><div class="audio-player-progress-bar"><div class="audio-player-progress-fill" style="width: 0%;"></div></div></div><button class="audio-player-speed-btn" title="Playback speed">1x</button></div></div><div class="blog-content"><p><img alt="Cole Thomas - The Oxbow" class="blog-image" src="/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg"></p>
+<p>**Ben Labaschin **on Jan 06, 2025 **3</p>
+<h2 id="host-your-own-local-llm--rag-behind-a-private-vpn-access-it-from-anywhere">Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere</h2>
+<h2 id="part-one">Part One</h2>
+<h4>Building Our LLM: Making It Accessible To Us Alone—Anywhere</h4>
+<p>The other day, I was reading <a target="_blank" rel="noopener noreferrer" href="https://tdhopper.com/blog/accessing-my-home-server-around-the-world-with-custom-domain-names/">this</a> article by Tim Hopper about how to host your Synology and Synology services on their own (sub)domains all while hiding each service behind a personal VPN. As I was following along the article, implementing this solution on my own Synology, I realized—wait, why couldn't I use my Synology to serve my own LLM service through a custom domain too? For that matter, if I built a RAG around my Obsidian notes (also stored and served on my Synology), I could theoretically have my own note-based RAG accessible anywhere in the world, without taking up precious compute on my local computer to serve it.</p>
+<p>What followed was a few hours of tinkering and learning. After troubleshooting a few mistakes made along the way, I had it: my own local model and RAG system hidden behind a lightweight VPN (Tailscale), accessible only by me anywhere in the world (with an internet connection).</p>
+<p>In this first article, I will walk you through how I built this system up until you are able to access your own, personal LLM located safely behind a Tailscale VPN. In a follow-up article, I will describe how I built a RAG system for my notes that I can query.</p>
+<p><strong>Services Used In This Article</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Service</th><th>Description</th><th>Cost(s)</th></tr></thead><tbody><tr><td><a target="_blank" rel="noopener noreferrer" href="https://www.cloudflare.com/">Cloudflare</a></td><td>For hosting a domain.</td><td>Domain reservation, potential transfer costs from a different host</td></tr><tr><td><a target="_blank" rel="noopener noreferrer" href="https://caddyserver.com/">Caddy</a></td><td>For creating a reverse-proxy service for my sub-domains.</td><td>Free</td></tr><tr><td><a target="_blank" rel="noopener noreferrer" href="https://tailscale.com/">Tailscale</a></td><td>A lightweight VPN to hide my services behind.</td><td>Free for personal use</td></tr><tr><td><a target="_blank" rel="noopener noreferrer" href="https://ollama.com/">Ollama</a></td><td>For building and serving my LLM.</td><td>Free</td></tr><tr><td><a target="_blank" rel="noopener noreferrer" href="https://www.synology.com/en-us">Synology NAS</a></td><td>A personal home cloud solution for hosting files, services, and much more.</td><td>Pricey. Check out <a target="_blank" rel="noopener noreferrer" href="https://www.newegg.com/">NewEgg</a> or <a target="_blank" rel="noopener noreferrer" href="https://www.newegg.com/">B&amp;H</a>, they periodically have sales.</td></tr><tr><td>(Optional) <a target="_blank" rel="noopener noreferrer" href="https://www.raspberrypi.com/">Raspberry Pi</a></td><td>For hosting my reverse proxy service (you can just use Synology if you'd like).</td><td>You can get a Raspberry Pi for "cheap" these days on <a target="_blank" rel="noopener noreferrer" href="https://a.co/d/eq9d0ql">Amazon</a> or wherever you buy your tech. If you want to be really rebellious, you could even try using an old fold</td></tr></tbody></table>
+<h2 id="where-to-proxy">Where To Proxy?</h2>
+<p>A brief note about where to place your reverse proxy. Your Synology NAS (or whatever cloud solution you use) is very likely capable of hosting the reverse proxy. Most of the instructions below will apply the same way. The reason I host my reverse proxy on a separate machine than my NAS is:</p>
+<ol>
+<li><strong>Separation of concerns</strong>: My Synology already does a lot and if I can offload something lightweight to my Pi, I will.</li>
+<li><strong>Paranoia</strong>: With my reverse proxy on the Pi, that's one step away from the Synology and makes it somewhat more secure.</li>
+<li><strong>Troubleshooting</strong>: If I want to adjust the proxy in someway, I just need to mess with the Pi and not the Synology as well.</li>
+</ol>
+<h2 id="setting-up-our-reverse-proxy"><strong>Setting Up Our Reverse Proxy</strong></h2>
+<h3 id="access-your-reverse-proxy-machine">Access Your Reverse Proxy Machine</h3>
+<p>To get started, let's begin by creating our reverse proxy server. For the uninitiated, a reverse proxy server is basically just system that sits between a client device—which hopes to access certain backend services—and the services themselves. Reverse proxies are appealing for many reasons. For our purposes they're convenient because they:</p>
+<ol>
+<li>Centralize access to our services through a single, secure point of entry.</li>
+<li>Act as a central pipeline to reroute client device requests (i.e. CLI or GUI API calls) to their appropriate backend services.</li>
+</ol>
+<p>I'm going to be setting up my reverse proxy on my Raspberry Pi. Should you want to set up a different way, there are plenty of articles like <a target="_blank" rel="noopener noreferrer" href="https://www.wundertech.net/synology-reverse-proxy-setup-config/">this</a> one.</p>
+<p>The first thing you'll want to do is find your Raspberry Pi IP address (or whatever machine you plan to host your reverse proxy on). Note, the machine you host on should be an always-on server. So a personal laptop probably won't do. If you don't know what network your Pi / machine is on, you can try the following lines of code try the <a target="_blank" rel="noopener noreferrer" href="https://formulae.brew.sh/formula/arp-scan">arp-scan</a> package to scan your local network for a Raspberry Pi.</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo arp-scan --interface=eth0 --localnet # alternatively try wlan0</td></tr></tbody></table></pre></div></div></pre>
+<p>Once you see your pi, you'll want to <code>ssh</code> into the network. You'll need the hostname of the service. Usually the hostname is <code>raspberrypi</code>. Altogether you'll type:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">shell</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from shell">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">ssh raspberrypi@&lt;LOCAL IP&gt;</td></tr></tbody></table></pre></div></div></pre>
+<p>Here's an example of what that will look like.</p>
+<p><img alt="SSHing into your reverse proxy machine via CLI" class="blog-image" src="/assets/2025/01/ssh_into_pi.png"></p>
+<p>SSHing into your reverse proxy machine via CLI</p>
+<h2 id="install-and-setup-tailscale-on-your-raspberry-pi">Install and Setup Tailscale on Your Raspberry Pi</h2>
+<p>Once you’re connected to your “always-on” reverse proxy machine (in my case, a Raspberry Pi), we'll want to install <a target="_blank" rel="noopener noreferrer" href="https://tailscale.com/">Tailscale</a> to keep everything private. Tailscale creates a lightweight VPN, meaning only devices you’ve authenticated can access your reverse proxy—or any other service behind it.</p>
+<ol>
+<li>
+<p><strong>Install Tailscale</strong><br>
+If you’re on a Raspberry Pi, you can follow Tailscale’s official docs or run:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">curl -fsSL https://tailscale.com/install.sh | sh</td></tr></tbody></table></pre></div></div></pre>
+<p>That script detects your Pi’s OS and installs Tailscale for you.</p>
+</li>
+<li>
+<p><strong>Authenticate Your Pi</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo tailscale up</td></tr></tbody></table></pre></div></div></pre>
+<p>This will give you a link to tailscale.com where you log in with your own account, or SSO using a Google/GitHub/Microsoft account. Once authorized, your Pi will show up in your Tailscale admin panel.</p>
+</li>
+<li>
+<p><strong>Verify Connectivity</strong><br>
+On another device already running Tailscale (like your laptop), run:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">ping &lt;tailscale-ip-of-your-pi&gt;</td></tr></tbody></table></pre></div></div></pre>
+</li>
+</ol>
+<p>If you see responses, you’re good to go. No one else on the internet can see that IP—only your Tailscale-connected devices.</p>
+<h2 id="install-tailscale-n-your-synology"><strong>Install Tailscale n Your Synology</strong></h2>
+<p>Next, let’s do the same on your Synology, so it can join the Tailscale network and expose services via its Tailscale IP.</p>
+<ol>
+<li>Open Synology Package Center and search for <strong>Tailscale</strong> (or manually install Tailscale following official instructions).</li>
+<li>Log into Tailscal* directly from the Synology Tailscale client. The NAS should now appear in your Tailscale admin panel.</li>
+<li>Grab the Synology Tailscale IP by checking the Tailscale client UI or your admin panel. It typically looks like <code>100.x.x.x</code>.</li>
+</ol>
+<p>Keep that IP handy—we’ll need it next when we configure Caddy to reverse-proxy Synology services.</p>
+<h2 id="obtain-a-domain-name"><strong>Obtain a Domain Name</strong></h2>
+<p>If you want to access your home services at a nice custom URL (like <code>home.mydomain.com</code>), you’ll need a domain. You can purchase (or transfer) a domain in a few ways:</p>
+<ul>
+<li>Through Cloudflare directly, if you want to manage everything in one place.</li>
+<li>Via a separate registrar like Namecheap or GoDaddy. If you do this, just update your domain’s nameservers to point to Cloudflare so Cloudflare can manage the DNS records.</li>
+</ul>
+<p>Personally, every domain I have, I have now transferred to Cloudflare. I like what they're doing as a company, and appreciate all the options and quality of life use-cases afforded to me with a Cloudflare account. Whichever route you choose, once you have the domain set up in your dashboard, you’ll be ready to add DNS records for your Tailscale IP and configure Caddy.</p>
+<h2 id="add-a-cloudflare-dns-record-for-your-tailscale-ip"><strong>Add a Cloudflare DNS Record for Your Tailscale IP</strong></h2>
+<p>Before we move on to obtaining a Cloudflare API token, let’s create (or update) the DNS record for the domain/subdomain that will point to your Pi.</p>
+<ol>
+<li>Log In to your Cloudflare dashboard.</li>
+<li>Select Your Domain from the list.</li>
+<li><strong>Go to DNS</strong> → <strong>Records</strong> → Click <strong>Add record</strong>.</li>
+<li><strong>Record Type</strong>: Choose <strong>A</strong>.</li>
+<li><strong>Name</strong>: Enter the subdomain you’ll be using (e.g. <code>home</code> for <code>home.mydomain.com</code>).</li>
+<li><strong>IPv4 address</strong>: Paste the Tailscale IP of your Pi (e.g. <code>100.x.x.x</code>).</li>
+<li><strong>Proxy status</strong>: Typically set to “DNS only” so traffic goes directly to your Pi over Tailscale. <em>(Some folks prefer turning off Cloudflare’s orange-cloud proxying here, since Tailscale is handling security.)</em></li>
+</ol>
+<p>Save the record. Even though this Tailscale IP isn’t publicly routable, Cloudflare will still let you create an A record for it—this is <strong>key</strong> to how Caddy does its DNS challenge. If you are not using Cloudflare, the API token logic should similarly apply to through your domain provider.</p>
+<h2 id="add-a-wildcard-dns-record-for-your-tailscale-ip-optional"><strong>Add a Wildcard DNS Record for Your Tailscale IP (Optional)</strong></h2>
+<p>If you’d like to use multiple subdomains (e.g., <code>home.mydomain.com</code>, <code>llm.mydomain.com</code>, <code>photos.mydomain.com</code>, etc.) without adding separate A records each time, you can create a <strong>wildcard</strong> A record. This instructs Cloudflare that any subdomain of <code>mydomain.com</code> should resolve to the same IP—in our case, your Pi’s Tailscale IP.</p>
+<ol>
+<li>Log In to your Cloudflare dashboard.</li>
+<li>Select Your Domain from the list.</li>
+<li><strong>Go to DNS</strong> → <strong>Records</strong> → Click <strong>Add Record</strong>.</li>
+<li><strong>Record Type</strong>: Choose <strong>A</strong>.</li>
+<li><strong>Name</strong>: Enter <code>*</code> (this is your wildcard subdomain).</li>
+<li><strong>IPv4 address</strong>: Paste the Tailscale IP of your Pi (e.g., <code>100.x.x.x</code>).</li>
+<li><strong>Proxy status</strong>: Typically set to “DNS only” so traffic goes directly to your Pi over Tailscale.</li>
+</ol>
+<p>Click <strong>Save</strong>. Even though <code>100.x.x.x</code> isn’t publicly routable, Cloudflare will still let you create an A record for it—this is <strong>key</strong> to how Caddy does its DNS challenge. Now, <strong>any</strong> subdomain like <code>home.mydomain.com</code> or <code>llm.mydomain.com</code> will resolve to your Pi’s Tailscale IP.</p>
+<h3 id="install-and-setup-caddy">Install and Setup Caddy</h3>
+<p>Next, we install <a target="_blank" rel="noopener noreferrer" href="https://caddyserver.com/">Caddy</a> on the Pi to handle the actual reverse proxying.</p>
+<ol>
+<li>
+<p><strong>Install Caddy</strong></p>
+<p><strong>First, update your package list and install necessary tools for secure package management.</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo apt-get update</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">sudo apt-get install -y debian-keyring debian-archive-keyring apt-transport-https</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>This downloads and installs Caddy's GPG security from Cloudsmith (a package distribution platform).</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">curl -1sLf https://dl.cloudsmith.io/public/caddy/stable/gpg.key | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>Add Caddy's official repository to APT package sources.</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">curl -1sLf "https://dl.cloudsmith.io/public/caddy/stable/deb/debian.repo" | sudo tee /etc/apt/sources.list.d/caddy-stable-debian.repo</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>Install Caddy fully into your system</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo apt-get update</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">sudo apt-get install caddy</td></tr></tbody></table></pre></div></div></pre>
+</li>
+<li>
+<p><strong>Setup your Caddy</strong> folder and permissions. Caddy will need access to <code>/etc/caddy</code>.</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line"># Create the Caddy folder in /etc/</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">sudo mkdir /etc/caddy/</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>Give write permissions to the folder</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo chmod 755 /etc/caddy/</td></tr></tbody></table></pre></div></div></pre>
+</li>
+</ol>
+<h2 id="get-your-cloudflare-api-token">Get Your Cloudflare API Token</h2>
+<p>Here we'll create an API token that has permission to edit / access your DNS records for your personal domain certificate.</p>
+<ol>
+<li>Log into Cloudflare and navigate to the user icon at the top right of your homepage. Select <strong>My Profile</strong> → <strong>API Tokens</strong>.</li>
+<li>Select <strong>Create Tokens</strong> → <strong>Edit Zone DNS: Use Template</strong></li>
+<li>Next you'll want to go to Zone Resources. For the middle drop-down, as opposed to "all zones" you'll want to select "Specific zone" and then in the next dropdown select the specific domain you'd like to dedicate to your Reverse Proxy private domain server. For more, see the image below.</li>
+</ol>
+<p><img alt="Cloudflare DNS Configuration" class="blog-image" src="/assets/2025/01/cloudflare_dns.png"></p>
+<p>Accessing your Cloudflare DNS API key</p>
+<h3 id="create-a-caddy-environment-file">Create a Caddy Environment File</h3>
+<ol>
+<li>
+<p>Create a file called <code>caddy.env</code> (or <code>cloudflare.env</code>, etc.) where Caddy can read environment variables (you can keep it in <code>/etc/caddy</code>, for instance). <code>touch /etc/caddy/caddy.env &amp;&amp; nano /etc/caddy/caddy.env</code> should do fine.</p>
+</li>
+<li>
+<p>Paste your token from the previous step inside the file, like so:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">CLOUDFLARE_API_TOKEN=your_cloudflare_api_token_goes_here</td></tr></tbody></table></pre></div></div></pre>
+</li>
+<li>
+<p>Load this environment file when starting Caddy, or source it into your shell. The approach I took is to reload Caddy after exiting the file via <code>systemctl</code>, i.e. <code>sudo systemctl reload caddy</code></p>
+</li>
+</ol>
+<h3 id="configure-dns-challenge-in-caddyfile">Configure DNS Challenge in Caddyfile</h3>
+<p>At <code>/etc/caddy/Caddyfile</code>, set up your domain(s). Let’s assume you want to expose access to your Synology home screen service at <code>home.mydomain.com</code>, forwarded to Synology’s Tailscale IP on port 5001 (or whichever service port you like).</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">{</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">    email [email&nbsp;protected]</td></tr><tr class="code-row"><td class="line-number">3</td><td class="code-line">    debug</td></tr><tr class="code-row"><td class="line-number">4</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">5</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">6</td><td class="code-line">(common) {</td></tr><tr class="code-row"><td class="line-number">7</td><td class="code-line">    header {</td></tr><tr class="code-row"><td class="line-number">8</td><td class="code-line">        # Enable HSTS</td></tr><tr class="code-row"><td class="line-number">9</td><td class="code-line">        Strict-Transport-Security "max-age=31536000; includeSubDomains"</td></tr><tr class="code-row"><td class="line-number">10</td><td class="code-line">        # Prevent clickjacking</td></tr><tr class="code-row"><td class="line-number">11</td><td class="code-line">        X-Frame-Options "DENY"</td></tr><tr class="code-row"><td class="line-number">12</td><td class="code-line">        # Help prevent XSS attacks</td></tr><tr class="code-row"><td class="line-number">13</td><td class="code-line">        X-Content-Type-Options "nosniff"</td></tr><tr class="code-row"><td class="line-number">14</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">15</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">16</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">17</td><td class="code-line"># Handle domain access</td></tr><tr class="code-row"><td class="line-number">18</td><td class="code-line">home.mydomain.com {</td></tr><tr class="code-row"><td class="line-number">19</td><td class="code-line">    tls {</td></tr><tr class="code-row"><td class="line-number">20</td><td class="code-line">        dns cloudflare {env.CLOUDFLARE_API_TOKEN}</td></tr><tr class="code-row"><td class="line-number">21</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">22</td><td class="code-line">    import common</td></tr><tr class="code-row"><td class="line-number">23</td><td class="code-line">    reverse_proxy 100.xx.xx.xx:5001 {</td></tr><tr class="code-row"><td class="line-number">24</td><td class="code-line">        transport http {</td></tr><tr class="code-row"><td class="line-number">25</td><td class="code-line">            tls_insecure_skip_verify</td></tr><tr class="code-row"><td class="line-number">26</td><td class="code-line">        }</td></tr><tr class="code-row"><td class="line-number">27</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">28</td><td class="code-line">}</td></tr></tbody></table></pre></div></div></pre>
+<p>Where:</p>
+<ul>
+<li><code>home.mydomain.com</code> is the subdomain you created in Cloudflare.</li>
+<li><code>100.xx.xx.xx</code> is the <strong>Synology’s Tailscale IP</strong> you grabbed after installing Tailscale on the NAS.</li>
+<li><code>:5001</code> is an example port—adjust to match the Synology service you want to proxy.</li>
+</ul>
+<p>Caddy will automatically create and renew a <strong>publicly trusted</strong> certificate for <code>home.mydomain.com</code> using Cloudflare. The key advantage of the DNS challenge is that Caddy doesn’t need to listen on public ports 80 or 443—perfect if you’re behind Tailscale or otherwise hiding your server.</p>
+<p>Finally let's reload Caddy with our new settings.</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo systemctl reload caddy</td></tr></tbody></table></pre></div></div></pre>
+<p>or (if you prefer an alias in your <code>~/.bash_aliases</code>):</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">alias caddyreload='sudo systemctl reload caddy' # Then just do: caddyreload</td></tr></tbody></table></pre></div></div></pre>
+<p>That’s it for the reverse proxy. You now have a Pi that’s behind Tailscale and is also running Caddy to proxy any domain or subdomain you like to your home services—assuming your DNS points to your Pi’s Tailscale IP. The best part is, you can repeat this for as many subdomains as you like—maybe <code>photos.mydomain.com</code>, <code>media.mydomain.com</code>, etc.—all of them hidden behind Tailscale and fronted by a Pi running Caddy.</p>
+<h2 id="configure-caddy-for-each-subdomain"><strong>Configure Caddy for Each Subdomain</strong></h2>
+<p>If you used a wildcard record, you can define specific sites (subdomains) within Caddy:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">{</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">    email [email&nbsp;protected]</td></tr><tr class="code-row"><td class="line-number">3</td><td class="code-line">    debug</td></tr><tr class="code-row"><td class="line-number">4</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">5</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">6</td><td class="code-line">(common) {</td></tr><tr class="code-row"><td class="line-number">7</td><td class="code-line">    header {</td></tr><tr class="code-row"><td class="line-number">8</td><td class="code-line">        Strict-Transport-Security "max-age=31536000; includeSubDomains"</td></tr><tr class="code-row"><td class="line-number">9</td><td class="code-line">        X-Frame-Options "DENY"</td></tr><tr class="code-row"><td class="line-number">10</td><td class="code-line">        X-Content-Type-Options "nosniff"</td></tr><tr class="code-row"><td class="line-number">11</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">12</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">13</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">14</td><td class="code-line"># Example #1: home.mydomain.com -&gt; Synology Tailscale IP:5001</td></tr><tr class="code-row"><td class="line-number">15</td><td class="code-line">home.mydomain.com {</td></tr><tr class="code-row"><td class="line-number">16</td><td class="code-line">    tls {</td></tr><tr class="code-row"><td class="line-number">17</td><td class="code-line">        dns cloudflare {env.CLOUDFLARE_API_TOKEN}</td></tr><tr class="code-row"><td class="line-number">18</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">19</td><td class="code-line">    import common</td></tr><tr class="code-row"><td class="line-number">20</td><td class="code-line">    reverse_proxy 100.x.x.x:5001 {</td></tr><tr class="code-row"><td class="line-number">21</td><td class="code-line">        transport http {</td></tr><tr class="code-row"><td class="line-number">22</td><td class="code-line">            tls_insecure_skip_verify</td></tr><tr class="code-row"><td class="line-number">23</td><td class="code-line">        }</td></tr><tr class="code-row"><td class="line-number">24</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">25</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">26</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">27</td><td class="code-line"># Example #2: files.mydomain.com -&gt; Some other service on port 8000</td></tr><tr class="code-row"><td class="line-number">28</td><td class="code-line">files.mydomain.com {</td></tr><tr class="code-row"><td class="line-number">29</td><td class="code-line">    tls {</td></tr><tr class="code-row"><td class="line-number">30</td><td class="code-line">        dns cloudflare {env.CLOUDFLARE_API_TOKEN}</td></tr><tr class="code-row"><td class="line-number">31</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">32</td><td class="code-line">    import common</td></tr><tr class="code-row"><td class="line-number">33</td><td class="code-line">    reverse_proxy 100.x.x.x:8000 {</td></tr><tr class="code-row"><td class="line-number">34</td><td class="code-line">        transport http {</td></tr><tr class="code-row"><td class="line-number">35</td><td class="code-line">            tls_insecure_skip_verify</td></tr><tr class="code-row"><td class="line-number">36</td><td class="code-line">        }</td></tr><tr class="code-row"><td class="line-number">37</td><td class="code-line">    }</td></tr><tr class="code-row"><td class="line-number">38</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">39</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">40</td><td class="code-line"># (Add more subdomains as needed)</td></tr></tbody></table></pre></div></div></pre>
+<p>Finally, reload Caddy:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo systemctl reload caddy</td></tr></tbody></table></pre></div></div></pre>
+<p>And that’s it! Now you have a wildcard DNS setup plus a fine-grained Caddy config for each subdomain. This allows you to add or remove subdomains in Caddy at will, without needing to touch Cloudflare DNS again.</p>
+<p>One note however: you'll want to notice that with each new subdomain youn specify, you'll want to allocate a specific port for that service. That way, despite using the same underlying Synology IP, you'll be able to route to its different services.</p>
+<h2 id="building-and-serving-our-llm"><strong>Building and Serving Our LLM</strong></h2>
+<p>Now for the fun part: hosting a local LLM (Large Language Model) so you can query it from anywhere, while still keeping it private behind Tailscale.</p>
+<h3 id="install-and-setup-ollama"><strong>Install and Setup Ollama</strong></h3>
+<p><a target="_blank" rel="noopener noreferrer" href="https://ollama.com/">Ollama</a> is a neat utility that makes it easy to download and run large language models on your own hardware—CPU or GPU. We’ll run it in <a target="_blank" rel="noopener noreferrer" href="https://www.synology.com/en-global/dsm/feature/docker">Container Manager</a> on a Synology NAS in my case, but you can do the same on the Pi or any Docker-capable box.</p>
+<ol>
+<li>
+<p>Create an Ollama directory in your volume</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo mkdir /volume1/docker/</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>Give that directory permissions</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo chmod 755 /volume1/docker/</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>Create the requisite Ollama directory</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo mkdir /volume1/docker/caddy/</td></tr></tbody></table></pre></div></div></pre>
+<p><strong>Give Ollama permissions</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">sudo chmod 755 /volume1/docker/ollama</td></tr></tbody></table></pre></div></div></pre>
+</li>
+<li>
+<p><strong>Create a Docker Compose File</strong><br>
+On your Synology, open up <strong>Container Manager</strong> (or the Docker UI, depending on DSM version). Create a new <strong>Project</strong> and paste something like:</p>
+</li>
+</ol>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">yaml</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from yaml">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">version: "3"</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">3</td><td class="code-line">services:</td></tr><tr class="code-row"><td class="line-number">4</td><td class="code-line">  webui:</td></tr><tr class="code-row"><td class="line-number">5</td><td class="code-line">    image: ollamawebui/ollama-webui:latest</td></tr><tr class="code-row"><td class="line-number">6</td><td class="code-line">    ports:</td></tr><tr class="code-row"><td class="line-number">7</td><td class="code-line">      - "3000:8080"</td></tr><tr class="code-row"><td class="line-number">8</td><td class="code-line">    environment:</td></tr><tr class="code-row"><td class="line-number">9</td><td class="code-line">      - OLLAMA_API_BASE_URL=https://llm.mydomain.com</td></tr><tr class="code-row"><td class="line-number">10</td><td class="code-line">    volumes:</td></tr><tr class="code-row"><td class="line-number">11</td><td class="code-line">      - open-webui:/data</td></tr><tr class="code-row"><td class="line-number">12</td><td class="code-line">    depends_on:</td></tr><tr class="code-row"><td class="line-number">13</td><td class="code-line">      - ollama</td></tr><tr class="code-row"><td class="line-number">14</td><td class="code-line">    network_mode: synobridge</td></tr><tr class="code-row"><td class="line-number">15</td><td class="code-line"> </td></tr><tr class="code-row"><td class="line-number">16</td><td class="code-line">  ollama:</td></tr><tr class="code-row"><td class="line-number">17</td><td class="code-line">    image: ollama/ollama:latest</td></tr><tr class="code-row"><td class="line-number">18</td><td class="code-line">    container_name: ollama</td></tr><tr class="code-row"><td class="line-number">19</td><td class="code-line">    hostname: llm.mydomain.com</td></tr><tr class="code-row"><td class="line-number">20</td><td class="code-line">    environment:</td></tr><tr class="code-row"><td class="line-number">21</td><td class="code-line">      PUID: 1027</td></tr><tr class="code-row"><td class="line-number">22</td><td class="code-line">      PGID: 65536</td></tr><tr class="code-row"><td class="line-number">23</td><td class="code-line">      UMASK: 002</td></tr><tr class="code-row"><td class="line-number">24</td><td class="code-line">      TZ: 'America/Los_Angeles'</td></tr><tr class="code-row"><td class="line-number">25</td><td class="code-line">      VIRTUAL_HOST: 'llm.mydomain.com'</td></tr><tr class="code-row"><td class="line-number">26</td><td class="code-line">    volumes:</td></tr><tr class="code-row"><td class="line-number">27</td><td class="code-line">      - /volume1/docker/ollama:/root/.ollama</td></tr><tr class="code-row"><td class="line-number">28</td><td class="code-line">    ports:</td></tr><tr class="code-row"><td class="line-number">29</td><td class="code-line">      - "11434:11434"</td></tr><tr class="code-row"><td class="line-number">30</td><td class="code-line">    restart: unless-stopped</td></tr><tr class="code-row"><td class="line-number">31</td><td class="code-line">    network_mode: synobridge</td></tr><tr class="code-row"><td class="line-number">32</td><td class="code-line">volumes:</td></tr><tr class="code-row"><td class="line-number">33</td><td class="code-line">  open-webui:</td></tr></tbody></table></pre></div></div></pre>
+<p>That means:</p>
+<ul>
+<li>We’re pulling <code>ollama/ollama:latest</code>.</li>
+<li>Port <code>11434</code> is exposed, so you can hit the model with <code>http://&lt;SynologyIP&gt;:11434</code>.</li>
+<li>We store the models in <code>/volume1/docker/ollama</code>.</li>
+</ul>
+<p><strong>Deploy the Container</strong></p>
+<ul>
+<li>Once saved, start the container. Check logs in Container Manager to confirm it’s running. If you see “Ollama is running” or can <code>curl http://&lt;SynologyIP&gt;:11434</code>, you’re in business.</li>
+</ul>
+<h2 id="a-note-about-synobridge">A Note About Synobridge</h2>
+<p>In the Docker Compose file, you'll notice we're using <code>network_mode: synobridge</code>. Synobridge is Synology's bridge network driver that allows Docker containers to communicate as if they were on your local network. This means containers using <code>synobridge</code> can:</p>
+<ul>
+<li>Access your LAN resources directly using local IP addresses</li>
+<li>Be accessed by other devices on your network using the container's port</li>
+<li>Communicate with other containers using their container names as hostnames</li>
+</ul>
+<p>To use synobridge, make sure the "Use the same network as Docker Host" option is enabled in Container Manager when creating your container. You can find this under Network settings. If you prefer to use Docker's default bridge network instead, you can simply omit the <code>network_mode</code> line entirely - though you might need to set up explicit container-to-container networking if you add more services later. If you do want or need to proceed with <code>synobridge</code>, check out <a target="_blank" rel="noopener noreferrer" href="https://drfrankenstein.co.uk/step-3-setting-up-a-docker-bridge-network/">this</a> article for setup instructions.</p>
+<h3 id="download-a-model"><strong>Download a Model</strong></h3>
+<p>Ollama hosts a library of models you can pull. For instance:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">curl -X POST http://&lt;SynologyIP&gt;:11434/api/pull -d '{   "name": "llama3.2:1b" }'</td></tr></tbody></table></pre></div></div></pre>
+<p>Note: We’re using a small 1B param model so it fits in ~4GB RAM. Models like 7B, 13B, or 70B will require significantly more memory.</p>
+<h3 id="access-the-model"><strong>Access The Model</strong></h3>
+<p>If you want to pipe the model through your Pi’s reverse proxy:</p>
+<ol>
+<li>
+<p><strong>Edit Caddyfile</strong><br>
+Point <code>llm.yourdomain.com</code> to <code>&lt;SynologyIP&gt;:11434</code> (or whatever your Synology’s LAN IP is).</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">llm.yourdomain.com {</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">tls {</td></tr><tr class="code-row"><td class="line-number">3</td><td class="code-line">    dns cloudflare {env.CLOUDFLARE_API_TOKEN}</td></tr><tr class="code-row"><td class="line-number">4</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">5</td><td class="code-line">import common</td></tr><tr class="code-row"><td class="line-number">6</td><td class="code-line">reverse_proxy http://100.xx.xx.xx:11434 {</td></tr><tr class="code-row"><td class="line-number">7</td><td class="code-line">    header_up Host {http.reverse_proxy.upstream.hostport}</td></tr><tr class="code-row"><td class="line-number">8</td><td class="code-line">}</td></tr><tr class="code-row"><td class="line-number">9</td><td class="code-line">}</td></tr></tbody></table></pre></div></div></pre>
+</li>
+<li>
+<p><strong>Reload Caddy</strong></p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">caddyreload</td></tr></tbody></table></pre></div></div></pre>
+<p>Now hitting <code>https://llm.yourdomain.com/api/generate</code> will forward traffic to your Synology’s Ollama container on port 11434.</p>
+</li>
+</ol>
+<hr>
+<h2 id="testing-our-llm-from-a-local-computer">Testing Our LLM from a Local Computer</h2>
+<p>Now that our LLM is safely tucked behind Tailscale, it’s time to actually <em>use</em> it! We’ll confirm everything works by accessing the LLM from a local computer (or laptop) that’s already on our Tailscale network.</p>
+<h2 id="quick-cli-check">Quick CLI Check</h2>
+<p>First, let’s do a quick check in the terminal to ensure our output is correct:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">curl -v https://llm.mydomain.com/api/version</td></tr></tbody></table></pre></div></div></pre>
+<p>Let's check our output:</p>
+<p><img alt="Ollama is Running" class="blog-image" src="/assets/2025/01/ollama_is_running.png"></p>
+<p>We have successfully connected to Ollama!</p>
+<p>Here’s what’s happening:</p>
+<ol>
+<li>We’re using our custom domain (<code>llm.mydomain.com</code>), which points to the Raspberry Pi’s Tailscale IP.</li>
+<li>Caddy is listening for requests on HTTPS and forwarding them to Ollama on the Synology (or whichever box you’re using).</li>
+</ol>
+<h2 id="web-ui">Web UI</h2>
+<p>If you set up the Ollama Web UI and pointed a domain like <code>ui.mydomain.com</code> at it, open your browser:</p>
+<pre><code>https://ui.mydomain.com
+</code></pre>
+<p>You should see a straightforward interface listing any models you’ve downloaded. From there, you can select a model and start chatting. If you hit connection errors, double-check:</p>
+<ul>
+<li>That you’re on Tailscale and can ping your Pi.</li>
+<li>Caddy has a block in <code>/etc/caddy/Caddyfile</code> for <code>ui.mydomain.com</code>.</li>
+<li>Your Docker Compose for the WebUI maps the correct ports (<code>3000:8080</code> or however you set it up).</li>
+</ul>
+<h3 id="3-testing-the-chat-endpoint">3. Testing the Chat Endpoint</h3>
+<p>If you’re a command-line fan and want to chat via <code>curl</code>, try:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">curl -X POST https://llm.mydomain.com/api/chat \</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">  -d '{</td></tr><tr class="code-row"><td class="line-number">3</td><td class="code-line">    "model": "llama3.2:1b",</td></tr><tr class="code-row"><td class="line-number">4</td><td class="code-line">    "messages": [</td></tr><tr class="code-row"><td class="line-number">5</td><td class="code-line">      {"role": "user", "content": "Tell me a joke!"}</td></tr><tr class="code-row"><td class="line-number">6</td><td class="code-line">    ],</td></tr><tr class="code-row"><td class="line-number">7</td><td class="code-line">    "stream": false</td></tr><tr class="code-row"><td class="line-number">8</td><td class="code-line">  }'</td></tr></tbody></table></pre></div></div></pre>
+<p>With <code>"stream": false</code>, the response should arrive in one shot. If you’d rather see each token appear in real time, set <code>"stream": true</code> and watch the output scroll by.</p>
+<p><img alt="Ollama Query" class="blog-image" src="/assets/2025/01/ollama_query.png"></p>
+<p>In depth Ollama query via your CLI using Ollama. We get a successful response from the LLM!</p>
+<h3 id="4-add-a-handy-alias">4. Add a Handy Alias</h3>
+<p>For extra convenience, you can add a quick alias in your <code>~/.bashrc</code> (or <code>~/.zshrc</code>) to query the LLM without retyping <code>curl</code> all the time:</p>
+<pre><div class="code-block"><div class="code-header"><div class="code-filename">bash</div><div class="code-actions"><button class="code-action" type="button" aria-label="Copy code from bash">Copy</button></div></div><div class="code-container"><pre class="code-pre"><table class="code-table"><tbody><tr class="code-row"><td class="line-number">1</td><td class="code-line">alias @='f(){ \</td></tr><tr class="code-row"><td class="line-number">2</td><td class="code-line">  curl -s -X POST "https://llm.mydomain.com/api/chat" \</td></tr><tr class="code-row"><td class="line-number">3</td><td class="code-line">    -d "{\"model\":\"llama3.2:1b\",\"messages\":[{\"role\":\"user\",\"content\":\"$*\"}],\"stream\":false}" \</td></tr><tr class="code-row"><td class="line-number">4</td><td class="code-line">    | jq -r .message.content; \</td></tr><tr class="code-row"><td class="line-number">5</td><td class="code-line">  unset -f f; \</td></tr><tr class="code-row"><td class="line-number">6</td><td class="code-line">}; f'</td></tr></tbody></table></pre></div></div></pre>
+<p>Then, just open a new terminal (or run <code>source ~/.bashrc</code>) and do: <code>@ "Knock knock"</code></p>
+<p><img alt="Custom LLM CLI" class="blog-image" src="/assets/2025/01/custom_llm_cli.png"></p>
+<p>Response from the CLI API call to the hosted model.</p>
+<p>Voila! Instant local LLM request from your Tailscale-protected domain.</p>
+<hr>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<ul>
+<li><strong>No Response or Timeouts</strong><br>
+Confirm you can <code>ping &lt;your-pi-tailscale-ip&gt;</code> or <code>curl &lt;synology-tailscale-ip&gt;:11434</code>. If that fails, something’s up with Tailscale or your Docker container.</li>
+<li><strong>SSL or Certificate Errors</strong><br>
+Make sure your Cloudflare DNS challenge is set up correctly. Caddy automatically renews certs, but if your domain is new, it might take a few minutes to propagate.</li>
+<li><strong>Model OOM (Out of Memory)</strong><br>
+If the model fails to load, consider picking a smaller one. Check your Synology’s actual RAM; a 7B+ model likely won’t fit on a 4GB NAS.</li>
+</ul>
+<p>With this, you’ve proven your local LLM is not only up and running, but also accessible from anywhere you’re connected via Tailscale—fully encrypted, no weird firewall rules, and no random open ports to the public internet.</p>
+<hr>
+<p>Keep an eye out for part two this series in which I demonstrate how to take your LLM to the next level and operate as your own, private knowledge system you can query with natural from anywhere in the world!</p></div></div></div></div></div></div></body></html>

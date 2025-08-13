@@ -15,6 +15,14 @@ interface PostDetailProps {
   slug: string;
 }
 
+// Featured images by slug to match production lead visuals
+const featuredImageBySlug: Record<string, { src: string; alt?: string }> = {
+  'adding-text-to-speech-to-your-blog-openai-tts-pipeline': {
+    src: '/assets/2025/06/tts-front-matter.png',
+    alt: 'TTS Pipeline Architecture',
+  },
+};
+
 /**
  * Component to display a full blog post
  *
@@ -87,7 +95,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
   const imageUrl = `https://labasc.blog/api/og?${ogImageParams.toString()}`;
 
   return (
-    <>
+    <div className="post-detail">
       <Helmet>
         <title>{post.title} - Ben Labaschin</title>
         <meta name="description" content={post.summary} />
@@ -139,7 +147,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
 
       {/* Audio Player - only show if audio file exists */}
       {audioManifest[slug as keyof typeof audioManifest] && (
-        <AudioPlayer 
+        <AudioPlayer
           audioUrl={audioManifest[slug as keyof typeof audioManifest]}
           title="Listen to this post"
           className="post-audio-player"
@@ -147,9 +155,19 @@ const PostDetail: React.FC<PostDetailProps> = ({ slug }) => {
       )}
 
       <div className="blog-content">
+        {/* Render featured lead image if defined for this slug (parity with production) */}
+        {featuredImageBySlug[slug] && (
+          <p>
+            <img
+              alt={featuredImageBySlug[slug].alt || post.title}
+              className="blog-image"
+              src={featuredImageBySlug[slug].src}
+            />
+          </p>
+        )}
         <MarkdownRenderer content={post.content} />
       </div>
-    </>
+    </div>
   );
 };
 

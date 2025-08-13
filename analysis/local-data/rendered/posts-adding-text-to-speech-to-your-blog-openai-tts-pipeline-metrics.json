@@ -1,0 +1,191 @@
+{
+  "url": "http://localhost:3001/posts/adding-text-to-speech-to-your-blog-openai-tts-pipeline",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "devicePixelRatio": 1
+  },
+  "samples": {
+    "blogContainer": {
+      "selector": ".blog-container",
+      "width": 1368,
+      "height": 10877,
+      "marginTop": "5px",
+      "marginBottom": "0px",
+      "paddingTop": "10px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "mainContent": {
+      "selector": ".main-content",
+      "width": 1108,
+      "height": 10867,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "30px",
+      "paddingBottom": "20px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "contentWrapper": {
+      "selector": ".content-wrapper",
+      "width": 1015,
+      "height": 10697,
+      "marginTop": "10px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "blogContent": {
+      "selector": ".blog-content",
+      "width": 995,
+      "height": 10453,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "header": {
+      "selector": ".blog-header",
+      "width": 995,
+      "height": 90,
+      "marginTop": "0px",
+      "marginBottom": "18px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "audio": {
+      "selector": ".post-audio-player",
+      "width": 995,
+      "height": 105,
+      "marginTop": "16px",
+      "marginBottom": "18px",
+      "paddingTop": "16px",
+      "paddingBottom": "16px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "h1": null,
+    "h2": {
+      "selector": ".blog-content h2",
+      "width": 995,
+      "height": 39,
+      "marginTop": "28px",
+      "marginBottom": "16px",
+      "paddingTop": "0px",
+      "paddingBottom": "8px",
+      "lineHeight": "30px",
+      "fontSize": "20px",
+      "fontFamily": "\"Roboto Mono\", \"SF Mono\", Consolas, monospace"
+    },
+    "h3": {
+      "selector": ".blog-content h3",
+      "width": 995,
+      "height": 27,
+      "marginTop": "28px",
+      "marginBottom": "16px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "27px",
+      "fontSize": "18px",
+      "fontFamily": "\"Roboto Mono\", \"SF Mono\", Consolas, monospace"
+    },
+    "p": {
+      "selector": ".blog-content p",
+      "width": 995,
+      "height": 26,
+      "marginTop": "16px",
+      "marginBottom": "16px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "25.6px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+    },
+    "pre": {
+      "selector": ".blog-content pre",
+      "width": 995,
+      "height": 764,
+      "marginTop": "24px",
+      "marginBottom": "24px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+    },
+    "codeTable": {
+      "selector": ".code-table",
+      "width": 969,
+      "height": 966,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "19.5px",
+      "fontSize": "13px",
+      "fontFamily": "\"Roboto Mono\", Menlo, Consolas, monospace"
+    },
+    "codeRow": {
+      "selector": ".code-row",
+      "width": 969,
+      "height": 21,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "19.5px",
+      "fontSize": "13px",
+      "fontFamily": "\"Roboto Mono\", Menlo, Consolas, monospace"
+    },
+    "lineNumber": {
+      "selector": ".line-number",
+      "width": 25,
+      "height": 21,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "20.3px",
+      "fontSize": "14px",
+      "fontFamily": "Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+    },
+    "codeLine": {
+      "selector": ".code-line",
+      "width": 944,
+      "height": 21,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "20.3px",
+      "fontSize": "14px",
+      "fontFamily": "Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+    },
+    "pipeline": {
+      "selector": ".pipeline-diagram",
+      "width": 995,
+      "height": 764,
+      "marginTop": "32px",
+      "marginBottom": "32px",
+      "paddingTop": "32px",
+      "paddingBottom": "32px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace"
+    }
+  }
+}

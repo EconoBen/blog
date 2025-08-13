@@ -57,7 +57,9 @@
     "upload-audio": "node scripts/upload-audio-s3.js",
     "process-audio": "npm run generate-audio && npm run upload-audio",
     "preserve": "node scripts/generate-post-imports.js && npm run process-pdfs && npm run optimize-images",
-    "serve": "serve -s build -p 3001"
+    "serve": "serve -s build -p 3001",
+    "parity:run": "node scripts/verification/parity-runner.js",
+    "parity:run:skip-build": "node scripts/verification/parity-runner.js --skip-build"
   },
   "eslintConfig": {
     "extends": [
@@ -78,7 +80,10 @@
     ]
   },
   "devDependencies": {
-    "glob": "^11.0.1"
+    "glob": "^11.0.1",
+    "pixelmatch": "^5.3.0",
+    "pngjs": "^7.0.0",
+    "puppeteer": "^23.11.1"
   },
   "optionalDependencies": {
     "sharp": "^0.34.1"
