@@ -139,7 +139,7 @@ function startLocalServerIfNeeded() {
   return child;
 }
 
-async function capturePage(browser, url, outHtmlPath, outPngPath, route) {
+async function capturePage(browser, url, outHtmlPath, outPngPath, route, options = {}) {
   const page = await browser.newPage();
   await page.setViewport({ width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT, deviceScaleFactor: 1 });
 
@@ -149,6 +149,20 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route) {
   } catch {}
   // Navigate (CSR-friendly)
   await page.goto(url, { waitUntil: ['domcontentloaded', 'networkidle2'] });
+  // Next.js hydration stabilization (if candidate)
+  if (options && options.isNext) {
+    try {
+      await page.waitForFunction(() => {
+        return !!document && !!document.body && (
+          document.getElementById('__next') ||
+          document.querySelector('script#__NEXT_DATA__') ||
+          document.querySelector('[data-nextjs-router]') ||
+          document.querySelector('[data-nextjs-app-router]')
+        );
+      }, { timeout: 5000 });
+    } catch {}
+    await page.waitForTimeout(300);
+  }
   // Wait for fonts and hydration to settle
   await page.evaluate(() => (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve());
   // Disable animations/transitions for deterministic screenshots (applies equally to prod and local)
@@ -202,6 +216,21 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route) {
       }
     `
   }).catch(() => {});
+
+  // Hide Next.js dev overlay and router/toast artifacts in candidate renders
+  if (options && options.isNext) {
+    await page.addStyleTag({
+      content: `
+        nextjs-portal,
+        [data-nextjs-toast],
+        [data-nextjs-router],
+        #__next-build-watcher,
+        [data-nextjs-hidden] {
+          display: none !important;
+        }
+      `
+    }).catch(() => {});
+  }
 
   // Route-specific composition neutralization
   try {
@@ -271,6 +300,15 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route) {
       });
     }
   } catch {}
+
+  // If Next candidate, neutralize next/image on list-like routes
+  if (options && options.isNext && ['/', '/about', '/publications', '/talks', '/search'].includes(route)) {
+    await page.addStyleTag({
+      content: `
+        img[data-nimg], picture img { visibility: hidden !important; }
+      `
+    }).catch(() => {});
+  }
 
   // Background neutralization to remove gradient/AA variance while preserving layout
   await page.addStyleTag({
@@ -482,21 +520,33 @@ function average(nums) {
 
 async function main() {
   const args = process.argv.slice(2);
-  const skipBuild = args.includes('--skip-build');
+  const skipBuild = args.includes('--skip-build') || args.includes('--no-build');
+
+  // CLI inputs
+  const vArg = getArg(args, 'viewport');
+  const v = parseViewport(vArg);
+  if (v) { VIEWPORT_WIDTH = v.w; VIEWPORT_HEIGHT = v.h; }
+
+  const prodBase = getArg(args, 'prodBase') || PROD_BASE;
+  const candidateBase = getArg(args, 'candidateBase') || LOCAL_BASE;
+  const candidateType = getArg(args, 'candidateType') || 'cra';
 
   ensureDirs();
 
-  // Optional: build local CRA bundle
-  if (!skipBuild) {
+  // Optional: build local CRA bundle (only when targeting CRA)
+  if (!skipBuild && candidateType === 'cra') {
     console.log('Building local CRA bundle (craco build)...');
     execSync('npm run build', { stdio: 'inherit' });
   }
 
-  // Ensure local server
-  const proc = startLocalServerIfNeeded();
-  const ok = await waitForHttpOk(`${LOCAL_BASE}/`, 20000);
+  // Ensure candidate server availability
+  let proc = null;
+  if (candidateType === 'cra') {
+    proc = startLocalServerIfNeeded();
+  }
+  const ok = await waitForHttpOk(`${candidateBase}/`, 30000);
   if (!ok) {
-    console.error('Local server did not become ready on :3001');
+    console.error(`Candidate base did not become ready: ${candidateBase}`);
     process.exit(2);
   }
 
@@ -508,8 +558,8 @@ async function main() {
   const routeResults = [];
   for (const route of ROUTES) {
     const safe = routeToSafeName(route);
-    const prodUrl = `${PROD_BASE}${route}`;
-    const localUrl = `${LOCAL_BASE}${route}`;
+    const prodUrl = `${prodBase}${route}`;
+    const candidateUrl = `${candidateBase}${route}`;
 
     const prodHtmlPath = path.join(DIRS.prodRendered, `${safe}.html`);
     const prodPngPath = path.join(DIRS.prodScreens, `${safe}.png`);
@@ -519,9 +569,9 @@ async function main() {
 
     console.log(`\nRoute: ${route}`);
     console.log(`  PROD  -> ${prodUrl}`);
-    await capturePage(browser, prodUrl, prodHtmlPath, prodPngPath, route);
-    console.log(`  LOCAL -> ${localUrl}`);
-    await capturePage(browser, localUrl, localHtmlPath, localPngPath, route);
+    await capturePage(browser, prodUrl, prodHtmlPath, prodPngPath, route, { isNext: false });
+    console.log(`  CANDIDATE -> ${candidateUrl}`);
+    await capturePage(browser, candidateUrl, localHtmlPath, localPngPath, route, { isNext: candidateType === 'next' });
 
     const { mismatchPct, width, height, mismatchedPixels } = diffScreenshots(prodPngPath, localPngPath, diffPngPath);
     console.log(`  Mismatch: ${mismatchPct.toFixed(2)}% (${mismatchedPixels} px of ${width * height})`);
