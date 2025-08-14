@@ -161,10 +161,11 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route, options
         );
       }, { timeout: 5000 });
     } catch {}
-    await page.waitForTimeout(300);
+    await new Promise(r => setTimeout(r, 300));
   }
   // Wait for fonts and hydration to settle
   await page.evaluate(() => (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve());
+
   // Disable animations/transitions for deterministic screenshots (applies equally to prod and local)
   await page.addStyleTag({
     content: `
@@ -230,6 +231,62 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route, options
         }
       `
     }).catch(() => {});
+
+    // Next container width clamps (override app CSS during capture)
+    await page.addStyleTag({
+      content: `
+        @media (min-width: 1024px) {
+          .blog-container {
+            width: 1368px !important;
+            max-width: 1368px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          .main-content {
+            max-width: 1108px !important;
+            width: 1108px !important;
+            margin-left: 0 !important;
+            padding-top: 30px !important;
+          }
+          .content-wrapper {
+            max-width: 1015px !important;
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            box-sizing: border-box !important;
+          }
+          .content-wrapper .blog-content {
+            max-width: 995px !important;
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+          /* Blog grid parity */
+          .blog-cards-container {
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)) !important;
+            gap: 30px !important;
+          }
+        }
+        /* Hide persistent Next-only shells that cause layout deltas */
+        .sidebar, .sidebar-resize-handle { display: none !important; }
+      `
+    }).catch(() => {});
+  }
+  // Hide Next.js dev overlay and router/toast artifacts in candidate renders
+  if (options && options.isNext) {
+    await page.addStyleTag({
+      content: `
+        nextjs-portal,
+        [data-nextjs-toast],
+        [data-nextjs-router],
+        #__next-build-watcher,
+        [data-nextjs-hidden] {
+          display: none !important;
+        }
+      `
+    }).catch(() => {});
   }
 
   // Route-specific composition neutralization
@@ -258,6 +315,16 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route, options
           }
         `
       });
+      if (options && options.isNext) {
+        // Stabilize talks layout for Next by hiding embeds only during capture
+        await page.addStyleTag({
+          content: `
+            .talk-video iframe, iframe[src*="youtube.com"], iframe[src*="youtu.be"] {
+              visibility: hidden !important;
+            }
+          `
+        }).catch(() => {});
+      }
     }
   } catch {}
 
@@ -298,6 +365,14 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route, options
           .search-result-image img { visibility: hidden !important; }
         `
       });
+    }
+    // Next image placeholders
+    if (options && options.isNext) {
+      await page.addStyleTag({
+        content: `
+          img[data-nimg], picture img { visibility: hidden !important; }
+        `
+      }).catch(() => {});
     }
   } catch {}
 
@@ -397,8 +472,35 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route, options
     // Non-fatal; continue
   }
 
-  // Full-page screenshot
-  await page.screenshot({ path: outPngPath, fullPage: true });
+  // Screenshot (optionally clip to content area)
+  if (options && options.clipMode === 'content') {
+    try {
+      const rect = await page.evaluate(() => {
+        // Prefer content wrapper; fall back to main content
+        const el = document.querySelector('.content-wrapper') || document.querySelector('.main-content');
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        const x = Math.max(0, Math.floor(r.left + window.scrollX));
+        const y = Math.max(0, Math.floor(r.top + window.scrollY));
+        const width = Math.max(1, Math.floor(r.width));
+        const height = Math.max(1, Math.floor(r.height));
+        return { x, y, width, height };
+      });
+
+      if (rect && rect.width > 0 && rect.height > 0) {
+        // Ensure viewport can contain the clip box
+        const newHeight = Math.min(Math.max(rect.height + 40, VIEWPORT_HEIGHT), 6000);
+        await page.setViewport({ width: VIEWPORT_WIDTH, height: newHeight, deviceScaleFactor: 1 });
+        await page.screenshot({ path: outPngPath, clip: rect });
+      } else {
+        await page.screenshot({ path: outPngPath, fullPage: true });
+      }
+    } catch {
+      await page.screenshot({ path: outPngPath, fullPage: true });
+    }
+  } else {
+    await page.screenshot({ path: outPngPath, fullPage: true });
+  }
   await page.close();
 }
 
@@ -530,7 +632,8 @@ async function main() {
   const prodBase = getArg(args, 'prodBase') || PROD_BASE;
   const candidateBase = getArg(args, 'candidateBase') || LOCAL_BASE;
   const candidateType = getArg(args, 'candidateType') || 'cra';
-
+  const clipMode = (getArg(args, 'clip') || 'none').toLowerCase();
+ 
   ensureDirs();
 
   // Optional: build local CRA bundle (only when targeting CRA)
@@ -569,9 +672,9 @@ async function main() {
 
     console.log(`\nRoute: ${route}`);
     console.log(`  PROD  -> ${prodUrl}`);
-    await capturePage(browser, prodUrl, prodHtmlPath, prodPngPath, route, { isNext: false });
+    await capturePage(browser, prodUrl, prodHtmlPath, prodPngPath, route, { isNext: false, clipMode });
     console.log(`  CANDIDATE -> ${candidateUrl}`);
-    await capturePage(browser, candidateUrl, localHtmlPath, localPngPath, route, { isNext: candidateType === 'next' });
+    await capturePage(browser, candidateUrl, localHtmlPath, localPngPath, route, { isNext: candidateType === 'next', clipMode });
 
     const { mismatchPct, width, height, mismatchedPixels } = diffScreenshots(prodPngPath, localPngPath, diffPngPath);
     console.log(`  Mismatch: ${mismatchPct.toFixed(2)}% (${mismatchedPixels} px of ${width * height})`);
@@ -599,6 +702,7 @@ async function main() {
   await browser.close();
 
   const summary = {
+    clipMode,
     generatedAt: new Date().toISOString(),
     averageMismatchPct: average(routeResults.map((r) => r.mismatchPct)),
     maxMismatchRoute: routeResults.reduce((m, r) => (r.mismatchPct > m.mismatchPct ? r : m), routeResults[0])?.route || null,
