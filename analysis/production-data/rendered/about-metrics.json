@@ -9,7 +9,7 @@
     "blogContainer": {
       "selector": ".blog-container",
       "width": 1368,
-      "height": 6545,
+      "height": 6436,
       "marginTop": "5px",
       "marginBottom": "0px",
       "paddingTop": "10px",
@@ -21,7 +21,7 @@
     "mainContent": {
       "selector": ".main-content",
       "width": 1108,
-      "height": 6535,
+      "height": 6426,
       "marginTop": "0px",
       "marginBottom": "0px",
       "paddingTop": "30px",
@@ -33,7 +33,7 @@
     "contentWrapper": {
       "selector": ".content-wrapper",
       "width": 1015,
-      "height": 6381,
+      "height": 6272,
       "marginTop": "10px",
       "marginBottom": "0px",
       "paddingTop": "0px",

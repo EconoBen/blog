@@ -1,5 +1,5 @@
 {
-  "url": "http://localhost:3001/",
+  "url": "http://localhost:4000/",
   "viewport": {
     "width": 1440,
     "height": 900,
@@ -9,7 +9,7 @@
     "blogContainer": {
       "selector": ".blog-container",
       "width": 1368,
-      "height": 3898,
+      "height": 3633,
       "marginTop": "5px",
       "marginBottom": "0px",
       "paddingTop": "10px",
@@ -21,7 +21,7 @@
     "mainContent": {
       "selector": ".main-content",
       "width": 1108,
-      "height": 3888,
+      "height": 3623,
       "marginTop": "0px",
       "marginBottom": "0px",
       "paddingTop": "30px",
@@ -33,7 +33,7 @@
     "contentWrapper": {
       "selector": ".content-wrapper",
       "width": 1015,
-      "height": 3694,
+      "height": 3469,
       "marginTop": "10px",
       "marginBottom": "0px",
       "paddingTop": "0px",

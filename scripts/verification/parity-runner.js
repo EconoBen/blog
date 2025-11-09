@@ -294,7 +294,8 @@ async function capturePage(browser, url, outHtmlPath, outPngPath, route, options
     if (route === '/') {
       await page.addStyleTag({
         content: `
-          .hero-section, .hero-decoration, .featured-section {
+          /* Home: remove hero/featured-only compositions for parity with CRA */
+          .hero-section, .hero-decoration, .featured-section, .featured-post {
             display: none !important;
           }
         `
