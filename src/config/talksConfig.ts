@@ -23,7 +23,7 @@ export const talksConfig = {
       event: "ODSC West 2025",
       topics: ["AI", "LangGraph", "Redis", "Agents", "Memory Management", "Semantic Caching", "LLMs", "Production", "Optimization", "Python"]
     },
-{
+    {
       id: "talk-ai-needs-memory",
       title: "AI Needs Memory — Here's How It Works",
       description: "An introduction to building memory for LLM applications: persistent context, retrieval strategies, and stateful agents. Based on an MLOps.community session.",
