@@ -12,18 +12,21 @@ const CRAWLER_USER_AGENTS = [
 ];
 
 // Post metadata - add new posts here
-const POST_METADATA: Record<string, { title: string; summary: string; date: string; tags: string[] }> = {
+// coverImage: path to actual image (optional) - if not set, uses generated OG image
+const POST_METADATA: Record<string, { title: string; summary: string; date: string; tags: string[]; coverImage?: string }> = {
   '2025-year-in-review': {
     title: '2025: My Year In Review',
     summary: "Reflections on a year of milestones—getting engaged in Florence, publishing with O'Reilly and the AEA, raising a Series A at Workhelix, and overcoming health challenges.",
     date: '2025-12-31',
     tags: ['year in review', 'engagement', 'AI', 'LLMs', 'research'],
+    coverImage: '/assets/2026/01/florence_engagement.jpeg',
   },
   '2024-year-in-review': {
     title: '2024: My Year In Review — AI, Archery, and Goals',
     summary: 'Reflections on a year of growth, experimentation, and resilience—covering professional wins, personal pursuits like archery and lifting, and the challenges of navigating health setbacks.',
     date: '2024-12-31',
     tags: ['year in review', 'LLMs', 'archery', 'health'],
+    coverImage: '/assets/2025/01/niece_and_I_optimized.jpeg',
   },
 };
 
@@ -57,13 +60,19 @@ export default function middleware(request: Request) {
   const baseUrl = 'https://econoben.dev';
   const postUrl = `${baseUrl}/posts/${slug}`;
 
-  const ogImageParams = new URLSearchParams({
-    title: meta.title,
-    date: meta.date,
-    tags: meta.tags.join(','),
-    summary: meta.summary,
-  });
-  const imageUrl = `${baseUrl}/api/og?${ogImageParams.toString()}`;
+  // Use cover image if provided, otherwise fall back to generated OG image
+  let imageUrl: string;
+  if (meta.coverImage) {
+    imageUrl = `${baseUrl}${meta.coverImage}`;
+  } else {
+    const ogImageParams = new URLSearchParams({
+      title: meta.title,
+      date: meta.date,
+      tags: meta.tags.join(','),
+      summary: meta.summary,
+    });
+    imageUrl = `${baseUrl}/api/og?${ogImageParams.toString()}`;
+  }
 
   const html = `<!DOCTYPE html>
 <html>
