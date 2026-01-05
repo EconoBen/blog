@@ -14,6 +14,13 @@ const CRAWLER_USER_AGENTS = [
 // Post metadata - add new posts here
 // coverImage: path to actual image (optional) - if not set, uses generated OG image
 const POST_METADATA: Record<string, { title: string; summary: string; date: string; tags: string[]; coverImage?: string }> = {
+  'building-dsa-dojo': {
+    title: 'Building DSA Dojo: A CLI-Driven Approach to Learning Data Structures and Algorithms',
+    summary: "I'm building my own data structures and algorithms course—a CLI-driven, ladder-based system where mastery comes through doing, not watching.",
+    date: '2026-01-04',
+    tags: ['AI', 'LLMs', 'Developer Tooling', 'Python', 'Teaching'],
+    coverImage: '/assets/2026/01/dsa-dojo-curriculum-tree.png',
+  },
   '2025-year-in-review': {
     title: '2025: My Year In Review',
     summary: "Reflections on a year of milestones—getting engaged in Florence, publishing with O'Reilly and the AEA, raising a Series A at Workhelix, and overcoming health challenges.",
