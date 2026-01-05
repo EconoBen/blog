@@ -15,6 +15,7 @@ import extending_GPTs_Are_GPTs_to_FirmsMd from '../posts/extending_"GPTs_Are_GPT
 import building_an_https_model_apI_for_cheapMd from '../posts/building_an_https_model_apI_for_cheap.md';
 import addingTextToSpeechToYourBlogOpenaiTtsPipelineMd from '../posts/adding-text-to-speech-to-your-blog-openai-tts-pipeline.md';
 import I_paid_off_194k_in_student_loans_in_six_years__it_wasnt_easyMd from '../posts/I_paid_off_194k_in_student_loans_in_six_years._it_wasn\'t_easy.md';
+import yearInReview2025Md from '../posts/2025-year-in-review.md';
 import yearInReview2024Md from '../posts/2024-year-in-review.md';
 import myYearInReview2023Md from '../posts/2023-my-year-in-review.md';
 import reflection2022Md from '../posts/2022_reflection.md';
@@ -79,6 +80,7 @@ class PostService {
     'building_an_https_model_apI_for_cheap': building_an_https_model_apI_for_cheapMd,
     'adding-text-to-speech-to-your-blog-openai-tts-pipeline': addingTextToSpeechToYourBlogOpenaiTtsPipelineMd,
     'I_paid_off_194k_in_student_loans_in_six_years._it_wasn\'t_easy': I_paid_off_194k_in_student_loans_in_six_years__it_wasnt_easyMd,
+    '2025-year-in-review': yearInReview2025Md,
     '2024-year-in-review': yearInReview2024Md,
     '2023-my-year-in-review': myYearInReview2023Md,
     '2022_reflection': reflection2022Md,

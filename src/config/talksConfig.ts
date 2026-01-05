@@ -14,7 +14,16 @@ export const talksConfig = {
    * Array of talks
    */
   talks: [
-{
+    {
+      id: "talk-stateful-ai-agents-langgraph-redis",
+      title: "Building Stateful AI Agents: Memory Management and Optimization with LangGraph and Redis",
+      description: "Production-grade AI agent systems face two fundamental challenges: maintaining context across sessions and managing the computational costs of multi-step agentic workflows. This workshop addresses both through hands-on implementation of persistent memory systems and semantic caching. We'll build agents with long-term memory using LangGraph's recently released 1.0 memory capabilities, implementing semantic memory for storing structured facts and user preferences, episodic memory for retaining interaction history, and procedural memory for adapting agent behaviors over time. The workshop covers memory architecture patterns, checkpointing strategies, and cross-thread persistence using LangGraph's document store and LangMem SDK, as well as semantic caching using Redis LangCache to reduce LLM API costs and improve response latency.",
+      date: "2025-11-07",
+      youtubeId: "Kbd0ybX-knU",
+      event: "ODSC West 2025",
+      topics: ["AI", "LangGraph", "Redis", "Agents", "Memory Management", "Semantic Caching", "LLMs", "Production", "Optimization", "Python"]
+    },
+    {
       id: "talk-ai-needs-memory",
       title: "AI Needs Memory — Here's How It Works",
       description: "An introduction to building memory for LLM applications: persistent context, retrieval strategies, and stateful agents. Based on an MLOps.community session.",
