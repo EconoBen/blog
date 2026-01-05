@@ -9,7 +9,7 @@ tags: ["AI", "LLMs", "Developer Tooling", "Python", "Teaching", "Personal"]
 
 I've always been a tinkerer. There are so many projects I've half-started and never finished. With the advent of GenAI, I'm increasingly able to push these projects across the finish line and enjoy the fruits of this creative labor.
 
-But I've never been very open about what these projects are. Generally, it's because I perceived too bespoke to share with wider audiences. Or because I simply didn't know if I'd finish them.
+But I've never been very open about what these projects are. Generally, it's because I perceived them to be too bespoke to share with wider audiences. Or because I simply didn't know if I'd finish them.
 
 In the past months, I've noticed more and more conversations about what impact AI will have on software engineering jobs. Few people have invested more in this question than those of us at Workhelix, where the entire value proposition is being able to measure this impact. But in my free time, I try not to worry too much about this—not when I can be building incredible projects I'd never otherwise have the time to build instead.
 
