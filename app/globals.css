@@ -3259,6 +3259,43 @@ body.sidebar-open .sidebar {
 
 .sidebar-inner {
     padding: var(--spacing-xl) var(--spacing-lg);
+    position: relative;
+}
+
+/* Sidebar Close Button */
+.sidebar-close-button {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+    z-index: 10;
+}
+
+.sidebar-close-button:hover {
+    color: var(--text-primary);
+}
+
+/* Sidebar Social Links */
+.sidebar-social-links {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-social-links .social-link {
+    color: var(--text-secondary);
+    transition: color 0.2s ease;
+}
+
+.sidebar-social-links .social-link:hover {
+    color: var(--accent-color);
 }
 
 /* Sidebar Resize Handle */
@@ -7031,13 +7068,13 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 
 .hero-line {
 	display: block;
-	color: white;
+	color: var(--accent-color);
 }
 
 .hero-subtitle {
 	font-size: 1.25rem;
 	line-height: 1.6;
-	color: rgba(255, 255, 255, 0.9);
+	color: var(--text-secondary);
 	margin-bottom: 40px;
 	animation: fadeInUp 0.8s ease-out 0.4s;
 	animation-fill-mode: both;
@@ -7065,27 +7102,27 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 }
 
 .hero-button.primary {
-	background: rgba(255, 255, 255, 0.2);
-	backdrop-filter: blur(10px);
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	background: var(--accent-color);
+	border: 1px solid var(--accent-color);
 	color: white;
 }
 
 .hero-button.primary:hover {
-	background: rgba(255, 255, 255, 0.3);
+	background: var(--accent-hover);
 	transform: translateY(-2px);
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .hero-button.secondary {
 	background: transparent;
-	border: 2px solid rgba(255, 255, 255, 0.5);
-	color: white;
+	border: 2px solid var(--accent-color);
+	color: var(--accent-color);
 }
 
 .hero-button.secondary:hover {
-	background: rgba(255, 255, 255, 0.1);
-	border-color: rgba(255, 255, 255, 0.8);
+	background: var(--accent-color);
+	border-color: var(--accent-color);
+	color: white;
 	transform: translateY(-2px);
 }
 
