@@ -157,6 +157,11 @@ const nextConfig: NextConfig = {
         destination: '/code-ai/:slug',
         permanent: true,
       },
+      {
+        source: '/archives',
+        destination: '/archive',
+        permanent: true,
+      },
     ];
   },
 };

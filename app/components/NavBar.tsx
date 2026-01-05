@@ -155,7 +155,7 @@ const NavBar: React.FC = () => {
     { path: '/code-ai', label: 'Code & AI' },
     { path: '/talks', label: 'Talks' },
     { path: '/publications', label: 'Publications' },
-    { path: '/archives', label: 'Archive' },
+    { path: '/archive', label: 'Archive' },
     { path: '/about', label: 'About' },
   ];
 

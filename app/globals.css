@@ -561,6 +561,17 @@ img {
   padding: 0;
 }
 
+/* Search bar containers for absolute positioning of search button */
+.search-bar-container {
+  position: relative;
+  width: 220px;
+}
+
+.search-form {
+  position: relative;
+  width: 100%;
+}
+
 .nav-item {
   height: 100%;
   position: relative;
@@ -2457,6 +2468,179 @@ img {
   opacity: 1;
 }
 
+/* Archive Page Styles */
+.archive-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.archive-page .page-header {
+  text-align: center;
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.archive-page .page-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin-bottom: 10px;
+}
+
+.archive-page .page-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.archive-content {
+  margin-bottom: 60px;
+}
+
+.archive-year {
+  margin-bottom: 50px;
+}
+
+.year-heading {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--accent-color-light);
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.month-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.month-heading {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.month-heading .post-count {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.posts-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.archive-post {
+  margin-bottom: 10px;
+}
+
+.archive-post:last-child {
+  margin-bottom: 0;
+}
+
+.archive-post a {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  text-decoration: none;
+  padding: 8px 0;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.archive-post a:hover {
+  color: var(--accent-color);
+}
+
+.archive-post-date {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  min-width: 24px;
+}
+
+.archive-post-title {
+  color: var(--text-color);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+.archive-post a:hover .archive-post-title {
+  color: var(--accent-color);
+}
+
+/* Archive Stats Section */
+.archive-stats {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+}
+
+.stats-heading {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 30px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Loading and error states */
 .loading-spinner, .error-message, .no-results {
   padding: 40px 20px;
@@ -3725,12 +3909,13 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     border-radius: 20px;
     background: var(--search-bg);
     color: var(--text-color);
-    width: 200px;
+    width: 100%;
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
 .search-input:focus {
-    width: 260px;
+    width: 100%;
     outline: none;
     box-shadow: 0 0 0 2px var(--accent-color-light);
 }
@@ -4637,6 +4822,10 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     transform-origin: center;
     transform: scale(1.2);
     z-index: 1;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .outer-circle {
@@ -7132,28 +7321,19 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   display: flex;
   flex: 1 1;
   justify-content: center;
-  margin-right: -100px;
-  max-width: 650px;
+  max-width: 600px;
   overflow: visible;
   position: relative;
 }
 
-.hero-decoration {
-	align-items: center;
-	animation: float 6s ease-in-out infinite;
-	display: flex;
-	flex: 1 1;
-	justify-content: center;
-	max-width: 500px;
-	overflow: visible;
-	position: relative;
-}
-
 .hero-graphic {
-	height: 400px;
-	width: 400px;
-	overflow: visible;
-	position: relative;
+  height: 500px;
+  width: 500px;
+  overflow: visible;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-badge-container {
@@ -7285,18 +7465,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.featured-label {
-  background: var(--accent-color, #0070f3);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 20px;
-  display: inline-block;
-}
+/* .featured-label defined earlier at line ~4296 - uses accent-color-light background with accent-color text */
 
 .featured-post-title {
   font-size: 1.5rem;
