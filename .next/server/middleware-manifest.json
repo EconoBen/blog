@@ -1,50 +1,32 @@
 {
   "version": 3,
-  "middleware": {},
-  "functions": {
-    "/api/og/route": {
+  "middleware": {
+    "/": {
       "files": [
-        "server/server-reference-manifest.js",
-        "server/app/api/og/route_client-reference-manifest.js",
-        "server/middleware-build-manifest.js",
-        "server/middleware-react-loadable-manifest.js",
-        "server/next-font-manifest.js",
-        "server/interception-route-rewrite-manifest.js",
         "server/edge-runtime-webpack.js",
-        "server/app/api/og/route.js"
+        "server/middleware.js"
       ],
-      "name": "app/api/og/route",
-      "page": "/api/og/route",
+      "name": "middleware",
+      "page": "/",
       "matchers": [
         {
-          "regexp": "^/api/og$",
-          "originalSource": "/api/og"
+          "regexp": "^/.*$",
+          "originalSource": "/:path*"
         }
       ],
-      "wasm": [
-        {
-          "name": "wasm_77d9faebf7af9e421806970ce10a58e9d83116d7",
-          "filePath": "server/edge-chunks/wasm_77d9faebf7af9e421806970ce10a58e9d83116d7.wasm"
-        },
-        {
-          "name": "wasm_ef4866ecae192fd87727067cf2c0c0cf9fb8b020",
-          "filePath": "server/edge-chunks/wasm_ef4866ecae192fd87727067cf2c0c0cf9fb8b020.wasm"
-        }
-      ],
-      "assets": [
-        {
-          "name": "noto-sans-v27-latin-regular.5dda3fca77107598.ttf",
-          "filePath": "server/edge-chunks/asset_noto-sans-v27-latin-regular.5dda3fca77107598.ttf"
-        }
-      ],
+      "wasm": [],
+      "assets": [],
       "env": {
-        "__NEXT_BUILD_ID": "ZIsDc9NLOzuz-XovXmNxI",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "moHyeiBfxqQqNC0O45vLAhb/esO1YoUaFVutIIlK64A=",
-        "__NEXT_PREVIEW_MODE_ID": "bf176d4164ed7bb7b500aeeafbde723a",
-        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "e8f64c2f2f20a1cf36f078d3b97ed3dbd254fac187158b1028e3e6d829107fdd",
-        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "b2e9d586e03122d0eb13855604040c278b087175fb2bd7b3133dfe95b11b94a5"
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "j32IBHovDp6sbeMg0tazg02e6MBaNRO4/W4TwcnnfUs=",
+        "__NEXT_PREVIEW_MODE_ID": "248581f35566ea0a6bb27c4479af7b0e",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "be2f833ebb1be8773741d25ced283b00e15ce34b77356ea1f504319eff7810d5",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "92286980b1ba61c9dff8bfb19689496e4414fcc0f1d4d4fee5257cc0e518a7f7"
       }
     }
   },
-  "sortedMiddleware": []
+  "functions": {},
+  "sortedMiddleware": [
+    "/"
+  ]
 }
