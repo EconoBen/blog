@@ -152,7 +152,7 @@ const NavBar: React.FC = () => {
 
   const navItems = [
     { path: '/', label: 'Posts' },
-    { path: '/code-ai', label: 'Code & AI' },
+    { path: '/code-ai', label: 'Code & Tools' },
     { path: '/talks', label: 'Talks' },
     { path: '/publications', label: 'Publications' },
     { path: '/archive', label: 'Archive' },

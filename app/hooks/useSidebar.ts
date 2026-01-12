@@ -3,7 +3,13 @@
 import { useState, useCallback, useEffect } from 'react';
 
 export const useSidebar = () => {
-  const [isOpen, setIsOpen] = useState(false); // Default to closed (production parity)
+  // Default to open on desktop, closed on mobile (production parity)
+  const [isOpen, setIsOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth > 768;
+    }
+    return true; // Default to open for SSR
+  });
   
   const toggleSidebar = useCallback(() => {
     setIsOpen(prev => {
@@ -25,8 +31,8 @@ export const useSidebar = () => {
   }, []);
   
   useEffect(() => {
-    // Initialize based on screen size - sidebar closed by default on all screens (production parity)
-    const shouldOpen = false; // Always start closed to match production
+    // Initialize based on screen size - open on desktop, closed on mobile (production parity)
+    const shouldOpen = window.innerWidth > 768;
     setIsOpen(shouldOpen);
     document.body.classList.toggle('sidebar-open', shouldOpen);
   }, []);

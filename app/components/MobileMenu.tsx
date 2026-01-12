@@ -28,7 +28,7 @@ export default function MobileMenu() {
 
   const navItems = [
     { path: '/posts', label: 'Posts' },
-    { path: '/code-ai', label: 'Code & AI' },
+    { path: '/code-ai', label: 'Code & Tools' },
     { path: '/talks', label: 'Talks' },
     { path: '/publications', label: 'Publications' },
     { path: '/tags', label: 'Tags' },

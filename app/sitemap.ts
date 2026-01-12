@@ -62,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  // Code & AI (workshop) pages
+  // Code & Tools (workshop) pages
   const codeAiPages: MetadataRoute.Sitemap = gistItems.map((item: any) => ({
     url: `${baseUrl}/code-ai/${item.slug}`,
     lastModified: item.date ? new Date(item.date) : new Date(),

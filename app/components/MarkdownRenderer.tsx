@@ -3,7 +3,10 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import rehypeRaw from 'rehype-raw';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import CodeBlock from './CodeBlock';
 import TTSPipelineDiagram from './TTSPipelineDiagram';
 
@@ -71,8 +74,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
 
   return (
     <ReactMarkdown
-      remarkPlugins={[remarkGfm]}
-      rehypePlugins={[rehypeRaw]}
+      remarkPlugins={[remarkGfm, remarkMath]}
+      rehypePlugins={[rehypeRaw, rehypeKatex]}
       components={components}
     >
       {content}

@@ -36,7 +36,7 @@ export default function PublicationsPage() {
 
       {otherPublications.length > 0 && (
         <section className="publications-section">
-          <h2 className="section-title">Other Publications</h2>
+          <h2 className="section-title">Other Reports</h2>
           <div className="publications-grid">
             {otherPublications.map((pub) => (
               <PublicationCard key={pub.id} publication={pub} />

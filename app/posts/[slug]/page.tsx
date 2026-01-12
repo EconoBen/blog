@@ -79,71 +79,31 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const audioUrl = audioManifest[slug as keyof typeof audioManifest];
 
   return (
-    <article className="post-detail">
-      <header className="post-header">
-        <div className="breadcrumb">
-          <Link href="/posts">← Back to all posts</Link>
-        </div>
-        
-        <h1 className="post-title">{post.title}</h1>
-        
-        <div className="post-meta">
-          <time className="post-date">{formatDate(post.date)}</time>
-          <span className="post-separator">•</span>
-          <span className="post-reading-time">{post.readingTime || 5} min read</span>
-        </div>
-
-        <div className="post-tags">
+    <div className="post-detail">
+      <div className="blog-header">
+        <h1 className="blog-title">{post.title}</h1>
+        <div className="blog-meta">
+          {formatDate(post.date)}
           {post.tags.map(tag => (
-            <Link key={tag} href={`/tags/${tag}`} className="post-tag">
-              {tag}
+            <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
+              <span className="blog-tag">{tag}</span>
             </Link>
           ))}
         </div>
-      </header>
-
-      {/* Cover Image */}
-      {post.coverImage && (
-        <div className="post-cover-image">
-          <img src={post.coverImage} alt={post.title} />
-        </div>
-      )}
+      </div>
 
       {/* Audio Player - only show if audio file exists */}
       {audioUrl && (
-        <div className="post-audio-section">
-          <AudioPlayer 
-            audioUrl={audioUrl}
-            title="Listen to this post"
-            className="post-audio-player"
-          />
-        </div>
+        <AudioPlayer
+          audioUrl={audioUrl}
+          title="Listen to this post"
+          className="post-audio-player"
+        />
       )}
 
-      {/* Post Content */}
-      <div className="post-content">
+      <div className="blog-content">
         <MarkdownRenderer content={post.content} />
       </div>
-
-      {/* Post Footer */}
-      <footer className="post-footer">
-        <div className="post-footer-tags">
-          <h3>Tagged with:</h3>
-          <div className="post-tags">
-            {post.tags.map(tag => (
-              <Link key={tag} href={`/tags/${tag}`} className="post-tag">
-                {tag}
-              </Link>
-            ))}
-          </div>
-        </div>
-        
-        <div className="post-navigation">
-          <Link href="/posts" className="back-to-posts">
-            ← View all posts
-          </Link>
-        </div>
-      </footer>
-    </article>
+    </div>
   );
 }

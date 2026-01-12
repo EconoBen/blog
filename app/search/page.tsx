@@ -50,7 +50,7 @@ function SearchContent() {
     talk: 'Talk',
     publication: 'Publication',
     archive: 'Archive',
-    'code-ai': 'Code & AI'
+    'code-ai': 'Code & Tools'
   };
 
   const typeColors: Record<string, string> = {

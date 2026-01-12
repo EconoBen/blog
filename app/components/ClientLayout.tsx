@@ -11,7 +11,13 @@ interface ClientLayoutProps {
 }
 
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // Default to open on desktop (production parity)
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768;
+    }
+    return true; // Default to open for SSR
+  });
   const [sidebarWidth, setSidebarWidth] = useState(240);
   const [isResizing, setIsResizing] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -30,10 +36,14 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
       setSidebarWidth(parseInt(savedWidth, 10));
     }
 
-    // Load saved sidebar state
+    // Load saved sidebar state, but default to open on desktop if no saved state
     const savedState = localStorage.getItem('sidebarOpen');
+    const isDesktop = window.innerWidth >= 768;
     if (savedState !== null) {
       setSidebarOpen(savedState === 'true');
+    } else if (isDesktop) {
+      // Default to open on desktop if no saved preference
+      setSidebarOpen(true);
     }
 
     return () => {

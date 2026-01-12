@@ -135,7 +135,7 @@ class UnifiedSearchService {
       }
     });
 
-    // Search Code & AI (workshop) items
+    // Search Code & Tools (workshop) items
     gistItems.forEach((item: any) => {
       if (
         item.title.toLowerCase().includes(searchTerm) ||

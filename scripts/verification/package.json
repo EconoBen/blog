@@ -13,9 +13,10 @@
     "test:all": "npm run verify && npm run visual"
   },
   "dependencies": {
+    "pixelmatch": "^7.1.0",
+    "pngjs": "^7.0.0",
     "puppeteer": "^21.0.0"
   },
-  "devDependencies": {},
   "keywords": [
     "testing",
     "verification",

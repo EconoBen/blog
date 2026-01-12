@@ -97,12 +97,39 @@ class PostService {
     const allPosts = await this.getAllPosts();
     const searchTerm = query.toLowerCase();
 
-    return allPosts.filter(post => 
+    return allPosts.filter(post =>
       post.title.toLowerCase().includes(searchTerm) ||
       post.summary?.toLowerCase().includes(searchTerm) ||
       post.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
       post.content.toLowerCase().includes(searchTerm)
     );
+  }
+
+  async getRecentPosts(limit: number = 4): Promise<Post[]> {
+    const allPosts = await this.getAllPosts();
+    return allPosts.slice(0, limit);
+  }
+
+  async getArchiveByMonth(): Promise<{ month: string; count: number }[]> {
+    const allPosts = await this.getAllPosts();
+    const archiveCounts = new Map<string, number>();
+
+    allPosts.forEach(post => {
+      const monthYear = post.date.toLocaleDateString('en-US', {
+        month: 'long',
+        year: 'numeric'
+      });
+      archiveCounts.set(monthYear, (archiveCounts.get(monthYear) || 0) + 1);
+    });
+
+    return Array.from(archiveCounts.entries())
+      .map(([month, count]) => ({ month, count }))
+      .sort((a, b) => {
+        // Sort by date descending (newest first)
+        const dateA = new Date(a.month);
+        const dateB = new Date(b.month);
+        return dateB.getTime() - dateA.getTime();
+      });
   }
 }
 

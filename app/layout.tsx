@@ -6,23 +6,23 @@ import ClientLayout from './components/ClientLayout';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Economic Notes - Exploring Economics, Technology, and Life',
-  description: 'A blog about economics, technology, and personal experiences.',
+  title: 'Ben Labaschin - Economics, AI & Tech Blog',
+  description: 'A blog about economics, technology, AI, and personal experiences.',
   authors: [{ name: 'Benjamin Labaschin' }],
   keywords: ['economics', 'technology', 'AI', 'machine learning', 'blog'],
   manifest: '/manifest.json',
   openGraph: {
-    title: 'Economic Notes',
-    description: 'A blog about economics, technology, and personal experiences.',
+    title: 'Ben Labaschin - Economics, AI & Tech Blog',
+    description: 'A blog about economics, technology, AI, and personal experiences.',
     url: 'https://econoben.dev',
-    siteName: 'Economic Notes',
+    siteName: 'Ben Labaschin - Economics, AI & Tech Blog',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Economic Notes',
-    description: 'A blog about economics, technology, and personal experiences.',
+    title: 'Ben Labaschin - Economics, AI & Tech Blog',
+    description: 'A blog about economics, technology, AI, and personal experiences.',
   },
   metadataBase: new URL('https://econoben.dev'),
 };

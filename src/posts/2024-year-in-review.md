@@ -35,7 +35,7 @@ Below is a list containing some of my 2024 professional successes:
 
 ## Personal
 
-Like every year, this year I wanted to take more risks and try new things. After thinking about it for a while, I tested a few hobbies that I had been considering for a while: the first was lifting, which I discuss more below (see \[\[#Health]]). The other was archery, for which I quickly gained an affinity and for which I quickly determined I have an aptitude! After two practice sessions at my local range, I decided I’d buy a compound bow of my own. I’m now fully ensconced in the practice. In the coming year, I hope to practice even more.
+Like every year, this year I wanted to take more risks and try new things. After thinking about it for a while, I tested a few hobbies that I had been considering for a while: the first was lifting, which I discuss more below (see [Health](#health)). The other was archery, for which I quickly gained an affinity and for which I quickly determined I have an aptitude! After two practice sessions at my local range, I decided I’d buy a compound bow of my own. I’m now fully ensconced in the practice. In the coming year, I hope to practice even more.
 
 Below is a list containing some of my 2024 successes:
 

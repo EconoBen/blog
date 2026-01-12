@@ -759,6 +759,24 @@ img {
   color: var(--text-color);
 }
 
+.cv-download-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--accent-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.cv-download-link:hover {
+  background: var(--accent-color-secondary);
+  text-decoration: none;
+}
+
 .about-sidebar {
   position: sticky;
   top: 100px;
@@ -1688,6 +1706,69 @@ img {
   border-top: 1px solid var(--border-color);
 }
 
+.item-writeup {
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.item-writeup h2,
+.item-writeup h3,
+.item-writeup h4 {
+  color: var(--text-primary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.item-writeup h2:first-child,
+.item-writeup h3:first-child,
+.item-writeup h4:first-child {
+  margin-top: 0;
+}
+
+.item-writeup p {
+  margin-bottom: 0.75rem;
+}
+
+.item-writeup p:last-child {
+  margin-bottom: 0;
+}
+
+.item-writeup ul,
+.item-writeup ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.item-writeup li {
+  margin-bottom: 0.25rem;
+}
+
+.item-writeup code {
+  background: var(--code-bg, rgba(0, 0, 0, 0.2));
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+
+.item-writeup strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.item-writeup a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.item-writeup a:hover {
+  text-decoration: underline;
+}
+
 .item-content {
   padding: 16px;
   background: var(--bg-secondary);
@@ -1756,13 +1837,15 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
+  gap: 4px;
+  padding: 4px 10px;
   height: 32px;
   border-radius: 6px;
   background: var(--bg-secondary);
   color: var(--text-secondary);
   transition: all 0.2s ease;
   text-decoration: none;
+  font-size: 0.8rem;
 }
 
 .gist-link:hover,
@@ -4305,6 +4388,8 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 .blog-card-accent {
     height: 6px;
     width: 100%;
+    border-radius: 12px 12px 0 0;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-color-secondary));
 }
 
 .blog-card-content {
@@ -4653,27 +4738,28 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 /* Code Block Components */
 .code-block {
     margin: var(--spacing-xl) 0;
-    border-radius: var(--radius-large);
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--shadow-medium);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    background: #fafafa;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #282c34;
 }
 
 .code-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 16px;
-    background: #f0f0f0;
-    font-family: 'Roboto Mono', 'Menlo', 'Consolas', monospace;
-    font-size: var(--font-size-smaller);
-    color: var(--color-text);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 10px 16px;
+    background: #21252b;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.8rem;
+    color: #abb2bf;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .code-filename {
     font-weight: 500;
+    color: #61afef;
 }
 
 .code-actions {
@@ -4681,24 +4767,26 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 }
 
 .code-action {
-    padding: 4px 8px;
-    background: #e0e0e0;
-    color: var(--color-text);
-    border-radius: var(--radius-small);
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #abb2bf;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: var(--font-size-smallest);
+    font-size: 0.75rem;
     border: none;
-    transition: background var(--transition-fast), color var(--transition-fast);
+    transition: all 0.2s ease;
+    font-family: inherit;
 }
 
 .code-action:hover {
-    background: #d0d0d0;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
 }
 
 .code-container {
     overflow-x: auto;
     max-width: 100%;
-    background: #fefefe;
+    background: #282c34;
 }
 
 .code-pre {
@@ -5445,6 +5533,72 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Spotify podcast styles */
+.spotify-container {
+    background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%);
+    cursor: pointer;
+}
+
+.spotify-embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+}
+
+.spotify-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s ease;
+}
+
+.spotify-container:hover .spotify-placeholder {
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+.spotify-label {
+    color: #b3b3b3;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.spotify-button {
+    background-color: #1DB954 !important;
+}
+
+.spotify-button:hover {
+    background-color: #1ed760 !important;
+}
+
+.transcript-button {
+    background-color: transparent !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-color) !important;
+}
+
+.transcript-button:hover {
+    background-color: var(--hover-bg) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.talk-card-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .talk-card-content {
     padding: 25px;
     display: flex;
@@ -5510,12 +5664,6 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     border-radius: 20px;
     font-size: 0.85rem;
     color: var(--text-secondary);
-}
-
-.talk-card-actions {
-    margin-top: 16px;
-    display: flex;
-    justify-content: flex-start;
 }
 
 .watch-talk-button {
@@ -5818,48 +5966,18 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* Code blocks */
+/* Code blocks - already dark themed, minimal dark mode adjustments */
 .dark-mode .code-block {
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.1);
-    background: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.05);
 }
 
-.dark-mode .code-header {
-    background: #2d2d2d;
-    color: #ccc;
-    border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-.dark-mode .code-action {
-    background: #444;
-    color: #ccc;
-}
-
-.dark-mode .code-action:hover {
-    background: #555;
-}
-
-.dark-mode .code-container {
-    background: #282a36;
-}
-
-.dark-mode .line-number {
-    background: #252525;
-    border-right-color: #3d3d3d;
-    color: #777;
-}
-
-.dark-mode .code-line {
-    color: #f8f8f2;
-}
-
-.dark-mode .code-row:nth-child(odd) {
-    background-color: rgba(255,255,255,0.02);
-}
-
-/* Code syntax highlighting in dark mode */
-.dark-mode .blog-content code {
+/* Inline code in dark mode */
+.dark-mode .blog-content > code,
+.dark-mode .blog-content p code,
+.dark-mode .blog-content li code,
+.dark-mode .blog-content td code,
+.dark-mode .blog-content th code {
     background: #2d2d2d;
     color: #ff79c6;
 }
@@ -7044,14 +7162,27 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
     gap: 10px;
 }
 
-/* Code Typography */
-.blog-content code {
+/* Code Typography - inline code only (not code blocks) */
+.blog-content > code,
+.blog-content p code,
+.blog-content li code,
+.blog-content td code,
+.blog-content th code {
     font-family: 'Roboto Mono', 'Menlo', 'Consolas', monospace;
     background: var(--color-code-bg);
-    padding: 2px 4px;
+    padding: 2px 6px;
     border-radius: var(--radius-small);
-    font-size: var(--font-size-small);
+    font-size: 0.9em;
     color: #d33682;
+}
+
+/* Ensure code blocks don't inherit inline code styles */
+.code-block code,
+.code-block pre,
+.code-block pre code {
+    background: transparent !important;
+    padding: 0 !important;
+    /* Don't set color - let syntax highlighter inline styles work */
 }
 
 /* Lists */
@@ -7162,7 +7293,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 
 /* Blog Images */
 .blog-content img {
-  max-width: 100%;
+  max-width: min(100%, 800px);
   height: auto;
   border-radius: var(--radius-medium);
   margin: 30px auto;
@@ -7171,7 +7302,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 }
 
 .blog-image {
-  max-width: 100%;
+  max-width: min(100%, 800px);
   height: auto;
   border-radius: var(--radius-medium);
   margin: 30px auto;
@@ -7205,6 +7336,39 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   color: var(--color-text-light);
   font-style: italic;
 }
+
+/* Image captions - paragraphs containing only a link that follow image-only paragraphs */
+/* This pattern is specific to caption links like [Caption text](source-url) */
+.blog-content p:has(> img:only-child) + p:has(> a:only-child) {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text-light);
+  font-size: 0.9em;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+
+/* Footnote styles */
+.blog-content p[id^="fn"] {
+  font-size: 0.85em;
+  color: var(--color-text-light);
+  padding: 8px 0;
+  border-top: 1px solid var(--color-border, #e5e7eb);
+  margin-top: 0;
+}
+
+.blog-content p[id^="fn"]:first-of-type {
+  margin-top: 40px;
+  border-top: 2px solid var(--color-border, #e5e7eb);
+  padding-top: 20px;
+}
+
+.blog-content p[id^="fn"] a[href^="#ref"] {
+  margin-left: 8px;
+  text-decoration: none;
+  color: var(--accent-color, #667eea);
+}
+
 /* Home page specific styles */
 .home-container {
 	max-width: 1200px;

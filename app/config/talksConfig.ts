@@ -4,6 +4,8 @@ export interface Talk {
   description: string;
   date: string;
   youtubeId?: string;
+  spotifyUrl?: string;
+  transcriptUrl?: string;
   event: string;
   topics: string[];
 }
@@ -22,6 +24,34 @@ export const talksConfig = {
    * Array of talks
    */
   talks: [
+    {
+      id: "podcast-into-the-hopper-ai-agents",
+      title: "The Evolution of AI Agents (Into the Hopper Podcast)",
+      description: "A conversation with Tim Hopper about how AI agents are changing the day-to-day work of building software. We got into spec-driven development, managing agent memory effectively, and the shift from writing code to reviewing it. If you're thinking about how to integrate agents into your workflow or curious about measuring AI's impact on productivity, give it a listen.",
+      date: "2026-01-09",
+      spotifyUrl: "https://open.spotify.com/episode/2IcWcUKJRdjaXsLKh2J4ca",
+      transcriptUrl: "https://tdhopper.com/blog/the-evolution-of-ai-agents-with-ben-labaschin/",
+      event: "Into the Hopper Podcast",
+      topics: ["AI", "Agents", "LLMs", "Productivity", "Developer Experience", "Spec-Driven Development", "Memory"]
+    },
+    {
+      id: "talk-ai-needs-memory",
+      title: "AI Needs Memory: Here's How It Works",
+      description: "A deep dive into why AI agents need memory to be truly useful, and the practical techniques for implementing memory systems. Covers short-term, long-term, and episodic memory patterns for building more capable and context-aware AI applications.",
+      date: "2025-06-15",
+      youtubeId: "IfNhL71jqYs",
+      event: "MLOps Community",
+      topics: ["AI", "Memory", "Agents", "LLMs", "Architecture", "LangGraph"]
+    },
+    {
+      id: "talk-stateful-ai-agents-langgraph-redis",
+      title: "Building Stateful AI Agents: Memory Management & Optimization with LangGraph and Redis",
+      description: "A comprehensive walkthrough of building production-ready stateful AI agents using LangGraph for orchestration and Redis for persistent memory. Covers memory optimization strategies, state management patterns, and practical implementation details for scalable agent systems.",
+      date: "2025-10-29",
+      youtubeId: "Kbd0ybX-knU",
+      event: "ODSC West 2025",
+      topics: ["AI", "Agents", "LangGraph", "Redis", "Memory", "State Management", "Production", "MLOps"]
+    },
     {
       id: "talk-validating-llm-outputs",
       title: "A Normie Approach to Validating LLM Outputs (AI.Science Talk)",

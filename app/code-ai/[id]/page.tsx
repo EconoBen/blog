@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   }
 
   return {
-    title: `${item.title} | Code & AI | Economic Notes`,
+    title: `${item.title} | Code & Tools | Economic Notes`,
     description: item.description,
     openGraph: {
       title: item.title,
@@ -46,7 +46,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
     <article className="code-ai-detail">
       <div className="code-ai-detail-header">
         <div className="breadcrumb">
-          <Link href="/code-ai">← Back to Code & AI</Link>
+          <Link href="/code-ai">← Back to Code & Tools</Link>
         </div>
 
         <div className="code-ai-detail-meta">
@@ -100,7 +100,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
 
       <div className="code-ai-detail-footer">
         <p className="footer-note">
-          This snippet is part of the Code & AI collection. 
+          This snippet is part of the Code & Tools collection. 
           {item.gistUrl && (
             <>
               {' '}You can also{' '}

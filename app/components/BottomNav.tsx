@@ -20,7 +20,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({ isVisible = true }) => {
     },
     {
       href: '/code-ai',
-      label: 'Code & AI',
+      label: 'Code & Tools',
       icon: '💻',
       isActive: pathname.startsWith('/code-ai')
     },

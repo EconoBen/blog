@@ -305,35 +305,47 @@ const DefaultHomeContent: React.FC<DefaultHomeContentProps> = ({ posts }) => {
         </div>
 
         <div className="blog-cards-container">
-          {getFilteredPosts().map(post => (
+          {getFilteredPosts().map((post, index) => (
             <div key={post.slug} className="blog-card">
-              <Link href={`/posts/${post.slug}`}>
-                <div className="blog-card-content">
-                  <h3 className="blog-card-title">{post.title}</h3>
-                  <div className="blog-card-meta">
-                    <span className="blog-card-date">
-                      {post.date.toLocaleDateString('en-US', {
-                        month: 'long',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
-                    </span>
-                    <span className="blog-card-reading-time">
-                      {calculateReadingTime(post.content)} min read
-                    </span>
-                  </div>
-                  <p className="blog-card-excerpt">
-                    {getExcerpt(post.content, post.summary)}
-                  </p>
+              <div className="blog-card-accent"></div>
+              <div className="blog-card-content">
+                <h3 className="blog-card-title">
+                  <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+                </h3>
+                <div className="blog-card-meta">
+                  <span className="blog-card-date">
+                    {post.date.toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric'
+                    })}
+                  </span>
+                  <span className="blog-card-reading-time">
+                    {calculateReadingTime(post.content)} min read
+                  </span>
+                </div>
+                <p className="blog-card-excerpt">
+                  {getExcerpt(post.content, post.summary)}
+                </p>
+                <div className="blog-card-footer">
                   <div className="blog-card-tags">
                     {post.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="blog-card-tag">
-                        {tag}
-                      </span>
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="blog-card-tag">
+                        #{tag}
+                      </Link>
                     ))}
                   </div>
+                  <div className="blog-card-action">
+                    <Link href={`/posts/${post.slug}`} className="blog-card-read-more">
+                      Read Article
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </Link>
+                  </div>
                 </div>
-              </Link>
+              </div>
             </div>
           ))}
         </div>

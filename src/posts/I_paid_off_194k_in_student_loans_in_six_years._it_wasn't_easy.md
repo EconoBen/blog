@@ -236,7 +236,7 @@ I ended up getting the job. It paid something like 12 dollars an hour. In realit
 
 When my loan repayments began, a few weeks later, I was in for a shock. My private loan payments came to $1106.42 per month, my public loans $387.02. Altogether, I would owe $1493.22 per month. I did the calculations in my mind. At a 40 hour work week, I'd earn around $1902 per month before taxes. Subtract my loan payments, and I'd take home around $425 per month before taxes. On the one hand, great at least I'd be able to pay off my loans. On the other, I'd never be able to leave the garden, let alone my parent's house, at this rate. It soon became clear to me that the only way I was going to get out of this mess was to get a better paying job. I wasn't done with the job application process.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/07/garden_pay-2.png)
+![Garden pay calculations](/assets/2023/07/garden_pay.png)
 
 My schedule only shifted slightly with my new job. Every day I'd wake up, write a few applications to better paying jobs, go to work, pull weeds, come back, eat dinner, apply more and sleep. This continued for 4 more months. In the meantime, I dutifully went to work. Luckily, I had a colleague who ended up becoming a close friend. Her name was Jess and she was a very patient indivudal. When you're pulling weeds in the sun, you mostly have audiobooks or each other to talk to. Often I would talk to Jess about my favorite passtime: economics. I know it sounds annoying, but these were (are) my genuine interests and Jess didn't seem to be against these conversations. I would talk to her about different aspects of economics I was interested in, different theories, how they applied to the books I was listening to or to world events, all while we pulled weeds. Jess was a great listener. I tried to be the same for her.
 
@@ -248,11 +248,11 @@ The job, if I agreed to take it, was as an economic researcher at Arity, a telem
 
 The positive feedback fueled me. My next paper, part one of a two part report, I released  a few weeks after that. It was a 38 page single-spaced diatribe about the impending semiconductor crisis and labor and parts shortages of American motor companies. Part 2, released in January 2018, balooned to 78 pages single-spaced (table of contents below). It covered everything from the history of automobile use in America, millenial debt (I've been on this train for a while), spatial and urban economics, and more. As I've said, I was monomanical. I wouldn't stop. All I wanted to do was to prove myself, to push myself.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/07/Screenshot-2023-07-24-at-18.14.59.png)
+![Report table of contents](/assets/2023/07/Screenshot-2023-07-24-at-18.14.59.png)
 
 By April 2018, my final report was published (less fancy table of contents below). At this point I slowly came to realize that I was pretty much writing for myself. No product manager was going to read an 88 page, single-space report on the origins and uses of Pigouvian taxes on traffic congestion mitigation, regardless of how well written it was. One day I looked up from all my writing and realized my data scientist colleagues across the way were simply more impactful than me. It became clear to me that it wasn't economic report writing that was going to affect change, but modeling.
 
-![](https://benjaminlabaschin.com/wp-content/uploads/2023/07/Screenshot-2023-07-24-at-18.17.49.png)
+![Final report table of contents](/assets/2023/07/Screenshot-2023-07-24-at-18.17.49.png)
 
 Far from an inconvenient reality, I viewed this as good news. After all, there was a lot of math and modeling in data science. And seeing as how I didn't have an extensive background in math—I only really started getting into math my Junior year of college, maybe this would finally get all those grad school economics professors to look my way when I eventually, some day, applied to grad school. Suddenly I saw it. This was an oblique means to my ultimate ends: to one day become an economist.
 
