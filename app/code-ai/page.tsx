@@ -30,8 +30,9 @@ const languageMap: Record<string, string> = {
 };
 
 // Get a display-friendly language name
-const getDisplayLanguage = (lang: string): string => {
-  const normalized = languageMap[lang?.toLowerCase()] || lang?.toLowerCase() || 'text';
+const getDisplayLanguage = (lang: string | undefined): string => {
+  const lowered = lang?.toLowerCase() || 'text';
+  const normalized = languageMap[lowered] || lowered;
   const displayNames: Record<string, string> = {
     'javascript': 'JavaScript',
     'typescript': 'TypeScript',

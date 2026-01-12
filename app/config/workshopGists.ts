@@ -8,7 +8,8 @@
  * 2. Run: npm run fetch-gists
  */
 
-import { WorkshopItem } from './workshopConfig';
+import type { WorkshopItem } from './workshopConfig';
+export type { WorkshopItem };
 
 export const gistItems: (WorkshopItem & { gistUrl: string; gistId: string })[] = [
   {

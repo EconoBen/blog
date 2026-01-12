@@ -51,7 +51,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
 
         <div className="code-ai-detail-meta">
           <span className="code-ai-detail-category">
-            {categoryConfig?.icon} {categoryConfig?.name || item.category}
+            {categoryConfig?.icon} {categoryConfig?.label || item.category}
           </span>
           <time className="code-ai-detail-date">
             {item.date ? new Date(item.date).toLocaleDateString('en-US', {
