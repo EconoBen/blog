@@ -5,9 +5,6 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "regions": ["iad1"],
-  "env": {
-    "NEXT_PUBLIC_SITE_URL": "@production_url"
-  },
   "build": {
     "env": {
       "OPENAI_API_KEY": "@openai_api_key",

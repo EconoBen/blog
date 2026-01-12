@@ -1,0 +1,30 @@
+# Snapshot Summary
+- Production HTML: 8
+- Local HTML: 8
+- Production CSS: 1
+- Local CSS: 1
+Production HTML files:
+about.html
+archive.html
+home.html
+posts.html
+publications.html
+search.html
+tags.html
+talks.html
+
+Local HTML files:
+about.html
+archive.html
+home.html
+posts.html
+publications.html
+search.html
+tags.html
+talks.html
+
+Production CSS files:
+main.da68fc15.css
+
+Local CSS files:
+main.da68fc15.css

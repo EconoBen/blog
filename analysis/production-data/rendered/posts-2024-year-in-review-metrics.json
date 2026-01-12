@@ -1,0 +1,114 @@
+{
+  "url": "https://econoben.dev/posts/2024-year-in-review",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "devicePixelRatio": 1
+  },
+  "samples": {
+    "blogContainer": {
+      "selector": ".blog-container",
+      "width": 1368,
+      "height": 4665,
+      "marginTop": "5px",
+      "marginBottom": "0px",
+      "paddingTop": "10px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "mainContent": {
+      "selector": ".main-content",
+      "width": 1108,
+      "height": 4655,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "30px",
+      "paddingBottom": "20px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "contentWrapper": {
+      "selector": ".content-wrapper",
+      "width": 1015,
+      "height": 4485,
+      "marginTop": "10px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "blogContent": {
+      "selector": ".blog-content",
+      "width": 995,
+      "height": 4273,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "header": {
+      "selector": ".blog-header",
+      "width": 995,
+      "height": 59,
+      "marginTop": "0px",
+      "marginBottom": "18px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "audio": {
+      "selector": ".post-audio-player",
+      "width": 995,
+      "height": 105,
+      "marginTop": "16px",
+      "marginBottom": "18px",
+      "paddingTop": "16px",
+      "paddingBottom": "16px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "h1": null,
+    "h2": {
+      "selector": ".blog-content h2",
+      "width": 995,
+      "height": 39,
+      "marginTop": "28px",
+      "marginBottom": "16px",
+      "paddingTop": "0px",
+      "paddingBottom": "8px",
+      "lineHeight": "30px",
+      "fontSize": "20px",
+      "fontFamily": "\"Roboto Mono\", \"SF Mono\", Consolas, monospace"
+    },
+    "h3": null,
+    "p": {
+      "selector": ".blog-content p",
+      "width": 995,
+      "height": 1080,
+      "marginTop": "16px",
+      "marginBottom": "16px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "25.6px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+    },
+    "pre": null,
+    "codeTable": null,
+    "codeRow": null,
+    "lineNumber": null,
+    "codeLine": null,
+    "pipeline": null
+  }
+}

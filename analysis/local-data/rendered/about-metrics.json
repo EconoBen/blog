@@ -1,0 +1,59 @@
+{
+  "url": "http://localhost:4000/about",
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "devicePixelRatio": 1
+  },
+  "samples": {
+    "blogContainer": {
+      "selector": ".blog-container",
+      "width": 1368,
+      "height": 1323,
+      "marginTop": "5px",
+      "marginBottom": "0px",
+      "paddingTop": "10px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "mainContent": {
+      "selector": ".main-content",
+      "width": 1108,
+      "height": 1313,
+      "marginTop": "0px",
+      "marginBottom": "0px",
+      "paddingTop": "30px",
+      "paddingBottom": "20px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "contentWrapper": {
+      "selector": ".content-wrapper",
+      "width": 1015,
+      "height": 1109,
+      "marginTop": "10px",
+      "marginBottom": "0px",
+      "paddingTop": "0px",
+      "paddingBottom": "0px",
+      "lineHeight": "24px",
+      "fontSize": "16px",
+      "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Helvetica Neue\", Arial, system-ui, sans-serif"
+    },
+    "blogContent": null,
+    "header": null,
+    "audio": null,
+    "h1": null,
+    "h2": null,
+    "h3": null,
+    "p": null,
+    "pre": null,
+    "codeTable": null,
+    "codeRow": null,
+    "lineNumber": null,
+    "codeLine": null,
+    "pipeline": null
+  }
+}
