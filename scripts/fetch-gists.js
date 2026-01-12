@@ -15,7 +15,7 @@ const path = require('path');
 // Configuration
 const GITHUB_USERNAME = 'econoben'; // Your GitHub username
 const GIST_TAG = '[workshop]'; // Tag to identify workshop gists
-const OUTPUT_FILE = path.join(__dirname, '../src/config/workshopGists.ts');
+const OUTPUT_FILE = path.join(__dirname, '../app/config/workshopGists.ts');
 const CACHE_FILE = path.join(__dirname, '../.gist-cache.json');
 
 // Category mapping
@@ -306,7 +306,6 @@ async function generateConfig(items) {
   
   const content = `/**
  * Auto-generated from GitHub Gists
- * Generated on: ${new Date().toISOString()}
  * 
  * To add a new snippet:
  * 1. Create a gist with description format:
@@ -314,9 +313,22 @@ async function generateConfig(items) {
  * 2. Run: npm run fetch-gists
  */
 
-import { WorkshopItem } from './workshopConfig';
+export interface WorkshopItem {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  tags: string[];
+  language?: string;
+  content: string;
+  date: Date;
+  featured?: boolean;
+  gistUrl?: string;
+  gistId?: string;
+  filename?: string;
+}
 
-export const gistItems: (WorkshopItem & { gistUrl: string; gistId: string })[] = ${JSON.stringify(validItems, null, 2)
+export const gistItems: WorkshopItem[] = ${JSON.stringify(validItems, null, 2)
     .replace(/"date":\s*"([^"]+)"/g, '"date": new Date("$1")')};
 
 export const gistCategories = ${JSON.stringify(Array.from(new Set(validItems.map(item => item.category))).map(cat => CATEGORY_MAP[cat] || { id: cat, label: cat, icon: '📝' }), null, 2)};

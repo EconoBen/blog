@@ -1,0 +1,3070 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-06T20:11:27.057Z",
+    "version": "1.0.0"
+  },
+  "htmlComparison": {
+    "pageComparisons": {
+      "about.html": {
+        "pageName": "about.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 5,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 5"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "active",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "about-page",
+              "page-header",
+              "page-title",
+              "about-content",
+              "about-section",
+              "topics-list",
+              "social-links",
+              "features-list",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "About | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Learn more about Economic Notes and Benjamin Labaschin.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 10808,
+            "difference": 10762,
+            "severity": "medium",
+            "description": "Text content length differs by 10762 characters"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 7 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 5,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 5"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "active",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "about-page",
+              "page-header",
+              "page-title",
+              "about-content",
+              "about-section",
+              "topics-list",
+              "social-links",
+              "features-list",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 10808,
+            "difference": 10762,
+            "severity": "medium",
+            "description": "Text content length differs by 10762 characters"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "About | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Learn more about Economic Notes and Benjamin Labaschin.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 17249,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 7 scripts"
+            }
+          ]
+        }
+      },
+      "archive.html": {
+        "pageName": "archive.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 6,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 6"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "archive-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "archive-content",
+              "archive-year",
+              "year-heading",
+              "months-grid",
+              "month-section",
+              "month-heading",
+              "post-count",
+              "posts-list",
+              "archive-post",
+              "archive-post-date",
+              "archive-post-title",
+              "archive-stats",
+              "stats-heading",
+              "stats-grid",
+              "stat-card",
+              "stat-value",
+              "stat-label",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Archive | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Browse all posts by year and month in the Economic Notes archive.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 19925,
+            "difference": 19879,
+            "severity": "medium",
+            "description": "Text content length differs by 19879 characters"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 8 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 6,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 6"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "archive-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "archive-content",
+              "archive-year",
+              "year-heading",
+              "months-grid",
+              "month-section",
+              "month-heading",
+              "post-count",
+              "posts-list",
+              "archive-post",
+              "archive-post-date",
+              "archive-post-title",
+              "archive-stats",
+              "stats-heading",
+              "stats-grid",
+              "stat-card",
+              "stat-value",
+              "stat-label",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 19925,
+            "difference": 19879,
+            "severity": "medium",
+            "description": "Text content length differs by 19879 characters"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Archive | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Browse all posts by year and month in the Economic Notes archive.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 31001,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 8 scripts"
+            }
+          ]
+        }
+      },
+      "home.html": {
+        "pageName": "home.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 2,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 2"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 5,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 5"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "active",
+              "nav-highlight",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "blog-container",
+              "post-item",
+              "post-title",
+              "post-meta",
+              "post-tags",
+              "post-tag",
+              "recent-section",
+              "section-header",
+              "section-title",
+              "see-all-link",
+              "posts-list",
+              "post-item-content",
+              "post-item-title",
+              "post-item-date",
+              "post-item-summary",
+              "post-item-footer",
+              "post-item-tags",
+              "tag-small",
+              "read-more",
+              "explore-section",
+              "explore-grid",
+              "explore-card",
+              "explore-icon",
+              "sidebar-toggle",
+              "toggle-icon",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Economic Notes - Exploring Economics, Technology, and Life",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "A blog about economics, technology, and personal experiences.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 152830,
+            "difference": 152784,
+            "severity": "medium",
+            "description": "Text content length differs by 152784 characters"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/app/page-820feba9c25c191a.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 8 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 2,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 2"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 5,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 5"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "active",
+              "nav-highlight",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "blog-container",
+              "post-item",
+              "post-title",
+              "post-meta",
+              "post-tags",
+              "post-tag",
+              "recent-section",
+              "section-header",
+              "section-title",
+              "see-all-link",
+              "posts-list",
+              "post-item-content",
+              "post-item-title",
+              "post-item-date",
+              "post-item-summary",
+              "post-item-footer",
+              "post-item-tags",
+              "tag-small",
+              "read-more",
+              "explore-section",
+              "explore-grid",
+              "explore-card",
+              "explore-icon",
+              "sidebar-toggle",
+              "toggle-icon",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 152830,
+            "difference": 152784,
+            "severity": "medium",
+            "description": "Text content length differs by 152784 characters"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Economic Notes - Exploring Economics, Technology, and Life",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "A blog about economics, technology, and personal experiences.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 165042,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/page-820feba9c25c191a.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/page-820feba9c25c191a.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/app/page-820feba9c25c191a.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 8 scripts"
+            }
+          ]
+        }
+      },
+      "posts.html": {
+        "pageName": "posts.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 15,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 15"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "posts-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "posts-grid",
+              "blog-card",
+              "blog-card-content",
+              "blog-card-image",
+              "blog-card-title",
+              "blog-card-date",
+              "blog-card-summary",
+              "blog-card-footer",
+              "blog-card-tags",
+              "tag",
+              "tag-more",
+              "read-more-link",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "All Posts | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Browse all blog posts on economics, technology, and AI.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 31199,
+            "difference": 31153,
+            "severity": "medium",
+            "description": "Text content length differs by 31153 characters"
+          },
+          {
+            "type": "content",
+            "element": "images",
+            "subtype": "extra",
+            "images": [
+              "/assets/2025/06/tts-front-matter.png"
+            ],
+            "severity": "low",
+            "description": "Extra images in local: 1 images"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 8 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 15,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 15"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "posts-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "posts-grid",
+              "blog-card",
+              "blog-card-content",
+              "blog-card-image",
+              "blog-card-title",
+              "blog-card-date",
+              "blog-card-summary",
+              "blog-card-footer",
+              "blog-card-tags",
+              "tag",
+              "tag-more",
+              "read-more-link",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 31199,
+            "difference": 31153,
+            "severity": "medium",
+            "description": "Text content length differs by 31153 characters"
+          },
+          {
+            "type": "content",
+            "element": "images",
+            "subtype": "extra",
+            "images": [
+              "/assets/2025/06/tts-front-matter.png"
+            ],
+            "severity": "low",
+            "description": "Extra images in local: 1 images"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "All Posts | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Browse all blog posts on economics, technology, and AI.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 44166,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 8 scripts"
+            }
+          ]
+        }
+      },
+      "publications.html": {
+        "pageName": "publications.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 2,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 2"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 6,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 6"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "active",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "publications-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "publications-section",
+              "section-title",
+              "publications-grid",
+              "publication-card",
+              "publication-featured",
+              "publication-card-content",
+              "publication-header",
+              "publication-cover",
+              "publication-meta",
+              "publication-type-and-date",
+              "publication-type",
+              "type-badge-journal",
+              "publication-date",
+              "publication-title",
+              "publication-authors",
+              "publication-venue",
+              "publication-body",
+              "publication-abstract",
+              "publication-footer",
+              "publication-topics",
+              "publication-topic-tag",
+              "publication-actions",
+              "publication-action-button",
+              "doi-button",
+              "type-badge-book",
+              "type-badge-report",
+              "pdf-button",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Publications | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Articles, whitepapers, and books on economics, technology, and AI.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 24077,
+            "difference": 24031,
+            "severity": "medium",
+            "description": "Text content length differs by 24031 characters"
+          },
+          {
+            "type": "content",
+            "element": "images",
+            "subtype": "extra",
+            "images": [
+              "/posts/thumbnails/extending_gpts.png",
+              "/posts/oreilly_what_are_ai_agents.png",
+              "/posts/thumbnails/Future Report.png",
+              "/posts/thumbnails/The Economics of Shared Mobility Past.png",
+              "/posts/thumbnails/The Economics of Shared Mobility Series Present Part 1.png",
+              "/posts/thumbnails/The Economics of Shared Mobility Present Part 2.png"
+            ],
+            "severity": "low",
+            "description": "Extra images in local: 6 images"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 7 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "section",
+            "production": 0,
+            "local": 2,
+            "severity": "medium",
+            "description": "section element count differs: production has 0, local has 2"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 6,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 6"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "active",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "publications-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "publications-section",
+              "section-title",
+              "publications-grid",
+              "publication-card",
+              "publication-featured",
+              "publication-card-content",
+              "publication-header",
+              "publication-cover",
+              "publication-meta",
+              "publication-type-and-date",
+              "publication-type",
+              "type-badge-journal",
+              "publication-date",
+              "publication-title",
+              "publication-authors",
+              "publication-venue",
+              "publication-body",
+              "publication-abstract",
+              "publication-footer",
+              "publication-topics",
+              "publication-topic-tag",
+              "publication-actions",
+              "publication-action-button",
+              "doi-button",
+              "type-badge-book",
+              "type-badge-report",
+              "pdf-button",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 24077,
+            "difference": 24031,
+            "severity": "medium",
+            "description": "Text content length differs by 24031 characters"
+          },
+          {
+            "type": "content",
+            "element": "images",
+            "subtype": "extra",
+            "images": [
+              "/posts/thumbnails/extending_gpts.png",
+              "/posts/oreilly_what_are_ai_agents.png",
+              "/posts/thumbnails/Future Report.png",
+              "/posts/thumbnails/The Economics of Shared Mobility Past.png",
+              "/posts/thumbnails/The Economics of Shared Mobility Series Present Part 1.png",
+              "/posts/thumbnails/The Economics of Shared Mobility Present Part 2.png"
+            ],
+            "severity": "low",
+            "description": "Extra images in local: 6 images"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Publications | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Articles, whitepapers, and books on economics, technology, and AI.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 37482,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 7 scripts"
+            }
+          ]
+        }
+      },
+      "search.html": {
+        "pageName": "search.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "loading",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Economic Notes - Exploring Economics, Technology, and Life",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "A blog about economics, technology, and personal experiences.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 6107,
+            "difference": 6061,
+            "severity": "medium",
+            "description": "Text content length differs by 6061 characters"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/app/search/page-83da3d55dc75fc1e.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 8 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "loading",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 6107,
+            "difference": 6061,
+            "severity": "medium",
+            "description": "Text content length differs by 6061 characters"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Economic Notes - Exploring Economics, Technology, and Life",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "A blog about economics, technology, and personal experiences.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 11805,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/search/page-83da3d55dc75fc1e.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/app/search/page-83da3d55dc75fc1e.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/app/search/page-83da3d55dc75fc1e.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 8 scripts"
+            }
+          ]
+        }
+      },
+      "talks.html": {
+        "pageName": "talks.html",
+        "status": "compared",
+        "differences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 8,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 8"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "active",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "talks-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "talks-grid",
+              "talk-card",
+              "talk-video",
+              "youtube-embed",
+              "talk-content",
+              "talk-title",
+              "talk-meta",
+              "talk-event",
+              "talk-date",
+              "talk-description",
+              "talk-topics",
+              "topic-tag",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          },
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Talks | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Conference talks, presentations, and live streams on tech topics.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          },
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 29858,
+            "difference": 29812,
+            "severity": "medium",
+            "description": "Text content length differs by 29812 characters"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "missing",
+            "stylesheets": [
+              "/static/css/main.da68fc15.css"
+            ],
+            "severity": "high",
+            "description": "Missing CSS references: 1 stylesheets"
+          },
+          {
+            "type": "css-reference",
+            "subtype": "extra",
+            "stylesheets": [
+              "/_next/static/css/c65842d9d4a38ec8.css"
+            ],
+            "severity": "low",
+            "description": "Extra CSS references: 1 stylesheets"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "missing",
+            "scripts": [
+              "/static/js/main.20b67842.js"
+            ],
+            "severity": "high",
+            "description": "Missing JavaScript references: 1 scripts"
+          },
+          {
+            "type": "js-reference",
+            "subtype": "extra",
+            "scripts": [
+              "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+              "/_next/static/chunks/684-492f2152231b6c7a.js",
+              "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+              "/_next/static/chunks/874-218abc435b2ae46c.js",
+              "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+              "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+              "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+            ],
+            "severity": "low",
+            "description": "Extra JavaScript references: 7 scripts"
+          }
+        ],
+        "structuralDifferences": [
+          {
+            "type": "structural",
+            "element": "nav",
+            "production": 0,
+            "local": 1,
+            "severity": "medium",
+            "description": "nav element count differs: production has 0, local has 1"
+          },
+          {
+            "type": "structural",
+            "element": "article",
+            "production": 0,
+            "local": 8,
+            "severity": "medium",
+            "description": "article element count differs: production has 0, local has 8"
+          },
+          {
+            "type": "structural",
+            "element": "classes",
+            "subtype": "extra",
+            "classes": [
+              "__className_e8ce0c",
+              "sidebar",
+              "sidebar-inner",
+              "sidebar-section",
+              "sidebar-heading",
+              "post-list",
+              "main-content",
+              "main-nav",
+              "nav-container",
+              "nav-brand",
+              "logo-link",
+              "logo-symbol",
+              "logo-text",
+              "nav-items",
+              "nav-item",
+              "nav-highlight",
+              "active",
+              "visible",
+              "nav-search",
+              "desktop-search",
+              "search-container",
+              "search-input",
+              "search-icon",
+              "content-wrapper",
+              "talks-page",
+              "page-header",
+              "page-title",
+              "page-subtitle",
+              "talks-grid",
+              "talk-card",
+              "talk-video",
+              "youtube-embed",
+              "talk-content",
+              "talk-title",
+              "talk-meta",
+              "talk-event",
+              "talk-date",
+              "talk-description",
+              "talk-topics",
+              "topic-tag",
+              "social-links",
+              "social-link",
+              "dark-mode-toggle",
+              "dark-mode-icon"
+            ],
+            "severity": "low",
+            "description": "Extra CSS classes in local: __className_e8ce0c, sidebar, sidebar-inner, sidebar-section, sidebar-heading, post-list, main-content, main-nav, nav-container, nav-brand..."
+          }
+        ],
+        "contentDifferences": [
+          {
+            "type": "content",
+            "element": "text-length",
+            "production": 46,
+            "local": 29858,
+            "difference": 29812,
+            "severity": "medium",
+            "description": "Text content length differs by 29812 characters"
+          }
+        ],
+        "metaDifferences": [
+          {
+            "type": "meta",
+            "element": "title",
+            "production": "Ben Labaschin - Economics, AI & Tech Blog",
+            "local": "Talks | Economic Notes",
+            "severity": "high",
+            "description": "Page titles differ"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "viewport",
+            "production": "width=device-width,initial-scale=1",
+            "local": "width=device-width, initial-scale=1",
+            "severity": "medium",
+            "description": "Meta tag value differs: viewport"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "missing",
+            "key": "theme-color",
+            "value": "#000000",
+            "severity": "medium",
+            "description": "Missing meta tag: theme-color"
+          },
+          {
+            "type": "meta",
+            "element": "meta-tag",
+            "subtype": "different",
+            "key": "description",
+            "production": "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+            "local": "Conference talks, presentations, and live streams on tech topics.",
+            "severity": "medium",
+            "description": "Meta tag value differs: description"
+          }
+        ],
+        "sizeDifference": 42534,
+        "similarity": 1,
+        "cssReferences": {
+          "production": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "local": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "missing": [
+            "/static/css/main.da68fc15.css"
+          ],
+          "extra": [
+            "/_next/static/css/c65842d9d4a38ec8.css"
+          ],
+          "differences": [
+            {
+              "type": "css-reference",
+              "subtype": "missing",
+              "stylesheets": [
+                "/static/css/main.da68fc15.css"
+              ],
+              "severity": "high",
+              "description": "Missing CSS references: 1 stylesheets"
+            },
+            {
+              "type": "css-reference",
+              "subtype": "extra",
+              "stylesheets": [
+                "/_next/static/css/c65842d9d4a38ec8.css"
+              ],
+              "severity": "low",
+              "description": "Extra CSS references: 1 stylesheets"
+            }
+          ]
+        },
+        "jsReferences": {
+          "production": [
+            "/static/js/main.20b67842.js"
+          ],
+          "local": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "missing": [
+            "/static/js/main.20b67842.js"
+          ],
+          "extra": [
+            "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+            "/_next/static/chunks/684-492f2152231b6c7a.js",
+            "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+            "/_next/static/chunks/874-218abc435b2ae46c.js",
+            "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+            "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+            "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+          ],
+          "differences": [
+            {
+              "type": "js-reference",
+              "subtype": "missing",
+              "scripts": [
+                "/static/js/main.20b67842.js"
+              ],
+              "severity": "high",
+              "description": "Missing JavaScript references: 1 scripts"
+            },
+            {
+              "type": "js-reference",
+              "subtype": "extra",
+              "scripts": [
+                "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+                "/_next/static/chunks/684-492f2152231b6c7a.js",
+                "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+                "/_next/static/chunks/874-218abc435b2ae46c.js",
+                "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+                "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+                "/_next/static/chunks/webpack-7dbb97f49842b046.js"
+              ],
+              "severity": "low",
+              "description": "Extra JavaScript references: 7 scripts"
+            }
+          ]
+        }
+      }
+    },
+    "structuralDifferences": [],
+    "contentDifferences": [],
+    "metaDifferences": [],
+    "summary": {
+      "totalPages": 7,
+      "totalDifferences": 87,
+      "averageSimilarity": 1,
+      "pagesWithIssues": 7
+    }
+  },
+  "cssComparison": {
+    "frameworkDifferences": [
+      {
+        "type": "framework",
+        "subtype": "missing",
+        "frameworks": [
+          "Foundation"
+        ],
+        "severity": "high",
+        "description": "Missing CSS frameworks in local: Foundation"
+      }
+    ],
+    "styleDifferences": [],
+    "selectorDifferences": [
+      {
+        "type": "selectors",
+        "subtype": "missing",
+        "count": 769,
+        "selectors": [
+          ".mobile-search-panel",
+          "0%",
+          "to",
+          ".mobile-search-input",
+          ".mobile-search-input:focus",
+          ".mobile-search-close",
+          ".mobile-search-close:hover",
+          ".mobile-search-container",
+          ".mobile-search-results",
+          ".mobile-search-result",
+          ".mobile-result-title",
+          ".mobile-view-all-results",
+          ".mobile-navbar",
+          ".mobile-navbar-top",
+          ".mobile-logo",
+          ".mobile-search-button",
+          ".mobile-search-close:active",
+          ".mobile-search-result:last-child",
+          ".mobile-search-result:active",
+          ".mobile-view-all-results:active"
+        ],
+        "severity": "high",
+        "description": "Missing CSS selectors in local: 769 selectors"
+      }
+    ],
+    "propertyDifferences": [
+      {
+        "type": "properties",
+        "subtype": "missing",
+        "count": 175,
+        "properties": [
+          "animation",
+          "background",
+          "border-bottom",
+          "border-radius",
+          "box-shadow",
+          "left",
+          "max-width",
+          "padding",
+          "position",
+          "right",
+          "top",
+          "transform",
+          "width",
+          "z-index",
+          "opacity",
+          "border",
+          "flex",
+          "font-size",
+          "border-color",
+          "outline",
+          "color",
+          "cursor",
+          "margin-left",
+          "transition",
+          "align-items",
+          "display",
+          "gap",
+          "margin-top",
+          "max-height",
+          "overflow-y",
+          "text-decoration",
+          "font-weight",
+          "line-height",
+          "height",
+          "justify-content",
+          "margin-right",
+          "backdrop-filter",
+          "-webkit-backdrop-filter",
+          "-webkit-appearance",
+          "appearance",
+          "min-height",
+          "min-width",
+          "-webkit-overflow-scrolling",
+          "border-top",
+          "text-align",
+          "outline-offset",
+          "border-width",
+          "--sidebar-width",
+          "--content-max-width",
+          "--content-padding",
+          "--color-text",
+          "--color-text-light",
+          "--color-background",
+          "--bg-color-rgb",
+          "--color-primary",
+          "--color-primary-hover",
+          "--color-sidebar-bg",
+          "--color-border",
+          "--color-border-light",
+          "--color-code-bg",
+          "--color-tag-bg",
+          "--color-tag-text",
+          "--color-button-bg",
+          "--color-button-hover",
+          "--color-block-quote-bg",
+          "--card-bg",
+          "--card-border",
+          "--text-secondary",
+          "--tag-bg",
+          "--hero-bg",
+          "--accent-color",
+          "--accent-color-secondary",
+          "--accent-color-rgb",
+          "--accent-color-dark",
+          "--accent-color-light",
+          "--text-color",
+          "--text-muted",
+          "--heading-color",
+          "--border-color",
+          "--bg-color-translucent",
+          "--search-bg",
+          "--font-heading",
+          "--font-body",
+          "--button-bg",
+          "--button-hover-bg",
+          "--font-size-base",
+          "--font-size-small",
+          "--font-size-smaller",
+          "--font-size-smallest",
+          "--line-height-base",
+          "--line-height-content",
+          "--shadow-small",
+          "--shadow-medium",
+          "--radius-small",
+          "--radius-medium",
+          "--radius-large",
+          "--radius-full",
+          "--spacing-xs",
+          "--spacing-sm",
+          "--spacing-md",
+          "--spacing-lg",
+          "--spacing-xl",
+          "xl",
+          "--transition-fast",
+          "--transition-medium",
+          "--vh",
+          "background-color",
+          "font-family",
+          "margin",
+          "box-sizing",
+          "margin-bottom",
+          "padding-bottom",
+          "flex-wrap",
+          "overflow",
+          "border-left",
+          "flex-shrink",
+          "object-fit",
+          "flex-grow",
+          "text-transform",
+          "padding-top",
+          "overflow-x",
+          "white-space",
+          "font-style",
+          "grid-template-columns",
+          "padding-right",
+          "justify-self",
+          "bottom",
+          "list-style",
+          "flex-direction",
+          "grid-gap",
+          "background-clip",
+          "-webkit-background-clip",
+          "content",
+          "padding-left",
+          "order",
+          "word-wrap",
+          "overflow-wrap",
+          "align-self",
+          "transform-origin",
+          "grid-column",
+          "border-left-color",
+          "text-overflow",
+          "letter-spacing",
+          "border-top-color",
+          "list-style-type",
+          "background-image",
+          "background-position",
+          "background-repeat",
+          "background-size",
+          "animation-fill-mode",
+          "border-collapse",
+          "table-layout",
+          "font-feature-settings",
+          "border-right",
+          "font-variant-numeric",
+          "-webkit-user-select",
+          "user-select",
+          "vertical-align",
+          "word-break",
+          "animation-delay",
+          "cx",
+          "cy",
+          "r",
+          "fill-opacity",
+          "stroke-dasharray",
+          "pointer-events",
+          "filter",
+          "object-position",
+          "-webkit-hyphens",
+          "hyphens",
+          "border-bottom-color",
+          "border-right-color",
+          "overscroll-behavior-y",
+          "flex-basis",
+          "touch-action"
+        ],
+        "severity": "medium",
+        "description": "Missing CSS properties in local: animation, background, border-bottom, border-radius, box-shadow, left, max-width, padding, position, right, top, transform, width, z-index, opacity, border, flex, font-size, border-color, outline, color, cursor, margin-left, transition, align-items, display, gap, margin-top, max-height, overflow-y, text-decoration, font-weight, line-height, height, justify-content, margin-right, backdrop-filter, -webkit-backdrop-filter, -webkit-appearance, appearance, min-height, min-width, -webkit-overflow-scrolling, border-top, text-align, outline-offset, border-width, --sidebar-width, --content-max-width, --content-padding, --color-text, --color-text-light, --color-background, --bg-color-rgb, --color-primary, --color-primary-hover, --color-sidebar-bg, --color-border, --color-border-light, --color-code-bg, --color-tag-bg, --color-tag-text, --color-button-bg, --color-button-hover, --color-block-quote-bg, --card-bg, --card-border, --text-secondary, --tag-bg, --hero-bg, --accent-color, --accent-color-secondary, --accent-color-rgb, --accent-color-dark, --accent-color-light, --text-color, --text-muted, --heading-color, --border-color, --bg-color-translucent, --search-bg, --font-heading, --font-body, --button-bg, --button-hover-bg, --font-size-base, --font-size-small, --font-size-smaller, --font-size-smallest, --line-height-base, --line-height-content, --shadow-small, --shadow-medium, --radius-small, --radius-medium, --radius-large, --radius-full, --spacing-xs, --spacing-sm, --spacing-md, --spacing-lg, --spacing-xl, xl, --transition-fast, --transition-medium, --vh, background-color, font-family, margin, box-sizing, margin-bottom, padding-bottom, flex-wrap, overflow, border-left, flex-shrink, object-fit, flex-grow, text-transform, padding-top, overflow-x, white-space, font-style, grid-template-columns, padding-right, justify-self, bottom, list-style, flex-direction, grid-gap, background-clip, -webkit-background-clip, content, padding-left, order, word-wrap, overflow-wrap, align-self, transform-origin, grid-column, border-left-color, text-overflow, letter-spacing, border-top-color, list-style-type, background-image, background-position, background-repeat, background-size, animation-fill-mode, border-collapse, table-layout, font-feature-settings, border-right, font-variant-numeric, -webkit-user-select, user-select, vertical-align, word-break, animation-delay, cx, cy, r, fill-opacity, stroke-dasharray, pointer-events, filter, object-position, -webkit-hyphens, hyphens, border-bottom-color, border-right-color, overscroll-behavior-y, flex-basis, touch-action"
+      }
+    ],
+    "sizeDifferences": [
+      {
+        "type": "size",
+        "production": 95148,
+        "local": 0,
+        "difference": -95148,
+        "percentageDiff": -100,
+        "severity": "high",
+        "description": "CSS size differs by -92.92 KB (smaller locally)"
+      }
+    ],
+    "summary": {
+      "totalDifferences": 5,
+      "highSeverityIssues": 4,
+      "mediumSeverityIssues": 1,
+      "lowSeverityIssues": 0
+    },
+    "fileDifferences": [
+      {
+        "type": "files",
+        "subtype": "missing",
+        "files": [
+          "main.da68fc15.css"
+        ],
+        "severity": "high",
+        "description": "Missing CSS files in local: main.da68fc15.css"
+      }
+    ]
+  },
+  "assetComparison": {
+    "imageDifferences": [
+      {
+        "type": "images",
+        "subtype": "extra",
+        "count": 7,
+        "assets": [
+          "/assets/2025/06/tts-front-matter.png",
+          "/posts/thumbnails/extending_gpts.png",
+          "/posts/oreilly_what_are_ai_agents.png",
+          "/posts/thumbnails/Future Report.png",
+          "/posts/thumbnails/The Economics of Shared Mobility Past.png",
+          "/posts/thumbnails/The Economics of Shared Mobility Series Present Part 1.png",
+          "/posts/thumbnails/The Economics of Shared Mobility Present Part 2.png"
+        ],
+        "severity": "low",
+        "description": "Extra images in local: 7 images"
+      }
+    ],
+    "fontDifferences": [
+      {
+        "type": "fonts",
+        "subtype": "extra",
+        "count": 7,
+        "assets": [
+          "/_next/static/media/55c55f0601d81cf3-s.woff2",
+          "/_next/static/media/26a46d62cd723877-s.woff2",
+          "/_next/static/media/97e0cb1ae144a2a9-s.woff2",
+          "/_next/static/media/581909926a08bbc8-s.woff2",
+          "/_next/static/media/df0a9ae256c0569c-s.woff2",
+          "/_next/static/media/8e9860b6e62d6359-s.woff2",
+          "/_next/static/media/e4af272ccee01ff0-s.p.woff2"
+        ],
+        "severity": "low",
+        "description": "Extra fonts in local: 7 fonts"
+      }
+    ],
+    "scriptDifferences": [
+      {
+        "type": "scripts",
+        "subtype": "missing",
+        "count": 1,
+        "assets": [
+          "https://econoben.dev/static/js/main.20b67842.js"
+        ],
+        "severity": "high",
+        "description": "Missing scripts in local: 1 scripts"
+      },
+      {
+        "type": "scripts",
+        "subtype": "extra",
+        "count": 11,
+        "assets": [
+          "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+          "/_next/static/chunks/684-492f2152231b6c7a.js",
+          "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+          "/_next/static/chunks/874-218abc435b2ae46c.js",
+          "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+          "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+          "/_next/static/chunks/webpack-7dbb97f49842b046.js",
+          "/_next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+          "/_next/static/chunks/app/page-820feba9c25c191a.js",
+          "/_next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+          "/_next/static/chunks/app/search/page-83da3d55dc75fc1e.js"
+        ],
+        "severity": "low",
+        "description": "Extra scripts in local: 11 scripts"
+      }
+    ],
+    "pathDifferences": [
+      {
+        "type": "path-pattern",
+        "subtype": "relative-paths",
+        "production": 0,
+        "local": 18,
+        "severity": "medium",
+        "description": "Relative path usage differs significantly"
+      }
+    ],
+    "availabilityDifferences": [],
+    "summary": {
+      "totalDifferences": 5,
+      "highSeverityIssues": 1,
+      "mediumSeverityIssues": 1,
+      "lowSeverityIssues": 3
+    }
+  },
+  "configComparison": {
+    "nextConfigDifferences": [],
+    "packageJsonDifferences": [],
+    "vercelConfigDifferences": [],
+    "buildConfigDifferences": [],
+    "summary": {
+      "totalDifferences": 0,
+      "highSeverityIssues": 0,
+      "mediumSeverityIssues": 0,
+      "lowSeverityIssues": 0
+    }
+  },
+  "summary": {
+    "totalDifferences": 97,
+    "highSeverityIssues": 5,
+    "htmlIssues": 87,
+    "cssIssues": 5,
+    "assetIssues": 5,
+    "configIssues": 0,
+    "overallHealth": "fair"
+  }
+}

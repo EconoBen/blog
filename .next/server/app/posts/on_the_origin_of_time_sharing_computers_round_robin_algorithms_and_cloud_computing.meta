@@ -1,0 +1,7 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/posts/layout,_N_T_/posts/[slug]/layout,_N_T_/posts/[slug]/page,_N_T_/posts/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing"
+  }
+}

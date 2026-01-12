@@ -12,6 +12,7 @@ const REGION = process.env.AWS_REGION || 'us-west-2';
 const AWS_PROFILE = process.env.AWS_PROFILE || 'bjl';
 const AUDIO_DIR = path.join(__dirname, '..', 'public', 'audio');
 const UPLOAD_CACHE_FILE = path.join(__dirname, '..', '.s3-upload-cache.json');
+const AUDIO_MANIFEST_FILE = path.join(__dirname, '..', 'app', 'config', 'audioManifest.json');
 
 // Initialize S3 client with profile
 const s3Client = new S3Client({ 
@@ -98,113 +99,86 @@ async function main() {
     process.exit(1);
   }
   
-  // Load cache
+  // List existing objects in S3
+  console.log('Checking existing files in S3...');
+  const existingObjects = await listS3Objects('audio/');
+  const existingKeys = new Set(existingObjects.map(obj => obj.Key));
+  console.log(`Found ${existingObjects.length} existing audio files in S3\n`);
+  
+  // Load upload cache
   const uploadCache = await loadUploadCache();
   
-  // Get all audio files (excluding chunk files)
-  const files = await fs.readdir(AUDIO_DIR);
-  const audioFiles = files.filter(file => 
-    (file.endsWith('.mp3') || file.endsWith('.wav')) && 
-    !file.includes('_chunk_')
-  );
+  // Get all audio files
+  const audioFiles = await fs.readdir(AUDIO_DIR);
+  const mp3Files = audioFiles.filter(f => f.endsWith('.mp3'));
   
-  if (audioFiles.length === 0) {
-    console.log('No audio files found to upload.');
-    return;
-  }
+  console.log(`Found ${mp3Files.length} audio files to process\n`);
   
-  console.log(`Found ${audioFiles.length} audio files\n`);
+  const audioManifest = {};
+  let uploadCount = 0;
+  let skipCount = 0;
   
-  // Check S3 bucket exists
-  try {
-    await listS3Objects();
-  } catch (error) {
-    process.exit(1);
-  }
-  
-  // Upload files
-  const results = [];
-  for (const filename of audioFiles) {
-    const filePath = path.join(AUDIO_DIR, filename);
-    const s3Key = `audio/${filename}`;
+  for (const file of mp3Files) {
+    const filePath = path.join(AUDIO_DIR, file);
+    const key = `audio/${file}`;
+    const slug = file.replace('.mp3', '');
     
     try {
       // Calculate file hash
       const fileHash = await calculateFileHash(filePath);
       
       // Check if file needs to be uploaded
-      if (uploadCache[filename] && uploadCache[filename].hash === fileHash) {
-        console.log(`✓ ${filename} - Already uploaded (unchanged)`);
-        results.push({
-          filename,
-          status: 'skipped',
-          url: uploadCache[filename].url
-        });
-        continue;
+      if (uploadCache[file] && uploadCache[file].hash === fileHash && existingKeys.has(key)) {
+        console.log(`✓ Skipping ${file} (already uploaded)`);
+        audioManifest[slug] = uploadCache[file].url;
+        skipCount++;
+      } else {
+        console.log(`⬆ Uploading ${file}...`);
+        const url = await uploadFileToS3(filePath, key);
+        console.log(`  ✓ Uploaded to: ${url}`);
+        
+        // Update cache
+        uploadCache[file] = {
+          hash: fileHash,
+          url: url,
+          uploadedAt: new Date().toISOString()
+        };
+        
+        audioManifest[slug] = url;
+        uploadCount++;
       }
-      
-      // Upload file
-      console.log(`↑ Uploading ${filename}...`);
-      const url = await uploadFileToS3(filePath, s3Key);
-      
-      // Update cache
-      uploadCache[filename] = {
-        hash: fileHash,
-        url,
-        uploadedAt: new Date().toISOString(),
-        size: (await fs.stat(filePath)).size
-      };
-      
-      console.log(`✓ ${filename} - Uploaded successfully`);
-      results.push({
-        filename,
-        status: 'uploaded',
-        url
-      });
-      
     } catch (error) {
-      console.error(`✗ ${filename} - Upload failed: ${error.message}`);
-      results.push({
-        filename,
-        status: 'error',
-        error: error.message
-      });
+      console.error(`✗ Error uploading ${file}:`, error.message);
     }
   }
   
-  // Save updated cache
+  // Save upload cache
   await saveUploadCache(uploadCache);
   
-  // Summary
-  console.log('\n\nSummary');
-  console.log('=======');
-  const uploaded = results.filter(r => r.status === 'uploaded').length;
-  const skipped = results.filter(r => r.status === 'skipped').length;
-  const errors = results.filter(r => r.status === 'error').length;
+  // Save audio manifest for the React app
+  await fs.writeFile(AUDIO_MANIFEST_FILE, JSON.stringify(audioManifest, null, 2));
   
-  console.log(`Uploaded: ${uploaded}`);
-  console.log(`Skipped: ${skipped}`);
-  console.log(`Errors: ${errors}`);
+  console.log('\n=============================');
+  console.log(`✓ Upload complete!`);
+  console.log(`  - Uploaded: ${uploadCount} files`);
+  console.log(`  - Skipped: ${skipCount} files`);
+  console.log(`  - Manifest saved to: ${AUDIO_MANIFEST_FILE}`);
+  console.log('=============================\n');
   
-  // Generate manifest file for the app
-  const manifest = results.reduce((acc, result) => {
-    if (result.status !== 'error') {
-      const postName = result.filename.replace('.mp3', '').replace('.wav', '');
-      acc[postName] = result.url;
+  // Display URLs for testing
+  if (Object.keys(audioManifest).length > 0) {
+    console.log('Audio URLs for testing:');
+    Object.entries(audioManifest).slice(0, 3).forEach(([slug, url]) => {
+      console.log(`  ${slug}: ${url}`);
+    });
+    if (Object.keys(audioManifest).length > 3) {
+      console.log(`  ... and ${Object.keys(audioManifest).length - 3} more`);
     }
-    return acc;
-  }, {});
-  
-  const manifestPath = path.join(__dirname, '..', 'src', 'config', 'audioManifest.json');
-  await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
-  console.log(`\nGenerated audio manifest at: ${manifestPath}`);
-  
-  console.log('\nUpload complete!');
+  }
 }
 
-// Run if called directly
-if (require.main === module) {
-  main().catch(console.error);
-}
-
-module.exports = { uploadFileToS3 };
+// Run the script
+main().catch(error => {
+  console.error('Fatal error:', error);
+  process.exit(1);
+});

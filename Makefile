@@ -36,9 +36,9 @@ install: ## Install dependencies
 	npm install
 
 .PHONY: dev
-dev: ## Start development server (port 3001)
-	@echo "$(BLUE)Starting development server on port $(PORT)...$(NC)"
-	npm start
+dev: ## Start development server (port 3000)
+	@echo "$(BLUE)Starting Next.js development server...$(NC)"
+	npm run dev
 
 .PHONY: build
 build: fetch-gists ## Build for production
@@ -47,8 +47,8 @@ build: fetch-gists ## Build for production
 
 .PHONY: serve
 serve: build ## Build and serve production build locally
-	@echo "$(BLUE)Serving production build on port 3001...$(NC)"
-	npm run serve
+	@echo "$(BLUE)Serving Next.js production build...$(NC)"
+	npm start
 
 # Testing Commands
 .PHONY: test
@@ -65,7 +65,7 @@ test-visual: ## Open visual regression test in browser
 .PHONY: lint
 lint: ## Run ESLint
 	@echo "$(BLUE)Running ESLint...$(NC)"
-	npx eslint src --ext .js,.jsx,.ts,.tsx
+	npm run lint
 
 .PHONY: typecheck
 typecheck: ## Run TypeScript type checking
@@ -133,7 +133,7 @@ commit: ## Create a commit with AI-generated message
 .PHONY: clean
 clean: ## Clean build artifacts and caches
 	@echo "$(BLUE)Cleaning build artifacts...$(NC)"
-	rm -rf build/
+	rm -rf .next/
 	rm -rf node_modules/.cache/
 	rm -rf .eslintcache
 
@@ -205,13 +205,13 @@ check-links: ## Check for broken links (requires server running)
 setup: ## Initial project setup
 	@echo "$(BLUE)Setting up project...$(NC)"
 	$(MAKE) install
-	@echo "$(GREEN)Creating .env file...$(NC)"
-	@if [ ! -f .env ]; then \
-		echo "FAST_REFRESH=false" > .env; \
-		echo "PORT=$(PORT)" >> .env; \
-		echo "$(GREEN)✓ Created .env file$(NC)"; \
+	@echo "$(GREEN)Creating .env.local file...$(NC)"
+	@if [ ! -f .env.local ]; then \
+		echo "# Next.js Environment Variables" > .env.local; \
+		echo "# Add your environment variables here" >> .env.local; \
+		echo "$(GREEN)✓ Created .env.local file$(NC)"; \
 	else \
-		echo "$(YELLOW).env file already exists$(NC)"; \
+		echo "$(YELLOW).env.local file already exists$(NC)"; \
 	fi
 	@echo "$(GREEN)✓ Setup complete!$(NC)"
 

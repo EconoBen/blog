@@ -1,0 +1,33 @@
+{
+  "buildCSS": [
+    {
+      "name": "c65842d9d4a38ec8.css",
+      "path": "static/css/c65842d9d4a38ec8.css",
+      "size": 95276,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/build-c65842d9d4a38ec8.css"
+    }
+  ],
+  "inlineCSS": [],
+  "tailwindConfig": {
+    "path": "/Users/blabaschin/Documents/GitHub/blog/tailwind.config.js",
+    "content": "/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  content: [\n    './app/**/*.{js,ts,jsx,tsx,mdx}',\n    './pages/**/*.{js,ts,jsx,tsx,mdx}',\n    './components/**/*.{js,ts,jsx,tsx,mdx}',\n    './src/**/*.{js,ts,jsx,tsx,mdx}',\n    './posts/**/*.{md,mdx}',\n  ],\n  theme: {\n    extend: {\n      colors: {\n        primary: 'var(--color-primary)',\n        'primary-hover': 'var(--color-primary-hover)',\n        'text-main': 'var(--color-text)',\n        'text-light': 'var(--color-text-light)',\n        'bg-main': 'var(--color-background)',\n        'sidebar-bg': 'var(--color-sidebar-bg)',\n        'border-main': 'var(--color-border)',\n        'border-light': 'var(--color-border-light)',\n        'code-bg': 'var(--color-code-bg)',\n        'tag-bg': 'var(--color-tag-bg)',\n        'tag-text': 'var(--color-tag-text)',\n        'button-bg': 'var(--color-button-bg)',\n        'button-hover': 'var(--color-button-hover)',\n        'blockquote-bg': 'var(--color-block-quote-bg)',\n      },\n      fontFamily: {\n        'heading': 'var(--font-heading)',\n        'body': 'var(--font-body)',\n      },\n      spacing: {\n        'sidebar': 'var(--sidebar-width)',\n      },\n      maxWidth: {\n        'content': 'var(--content-max-width)',\n      },\n    },\n  },\n  plugins: [\n    require('@tailwindcss/typography'),\n  ],\n}\n\n",
+    "exists": true
+  },
+  "customCSS": [
+    {
+      "name": "globals.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/globals.css",
+      "size": 130107,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/globals.css"
+    },
+    {
+      "name": "mobile-search-fixes.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/mobile-search-fixes.css",
+      "size": 8648,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-mobile-search-fixes.css"
+    }
+  ],
+  "references": [
+    "/_next/static/css/c65842d9d4a38ec8.css"
+  ]
+}

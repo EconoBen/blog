@@ -45,7 +45,8 @@ const ROUTES = [
   // Detail pages to validate content parity across multiple posts
   '/posts/adding-text-to-speech-to-your-blog-openai-tts-pipeline',
   '/posts/host-your-own-private-llm-access-it-from-anywhere',
-  '/posts/2024-year-in-review'
+  '/posts/2024-year-in-review',
+  '/posts/2025-year-in-review'
 ];
 
 // Route-specific visual thresholds (percent). Default is 0.5% if not listed.
@@ -61,7 +62,8 @@ const THRESHOLDS = {
   // Temporarily loosen detail-page thresholds to unblock CI while spacing is tuned
   '/posts/adding-text-to-speech-to-your-blog-openai-tts-pipeline': 5.0,
   '/posts/host-your-own-private-llm-access-it-from-anywhere': 7.0,
-  '/posts/2024-year-in-review': 1.0
+  '/posts/2024-year-in-review': 1.0,
+  '/posts/2025-year-in-review': 5.0  // New post, higher threshold for initial testing
 };
 const DEFAULT_THRESHOLD = 0.5;
 

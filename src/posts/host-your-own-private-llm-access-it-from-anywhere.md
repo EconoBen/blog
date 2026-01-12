@@ -8,8 +8,6 @@ tags: ["LLM", "RAG", "Synology", "Ollama", "Caddy", "Tailscale", "self-hosting",
 
 ![Cole Thomas - The Oxbow](/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg)
 
-**Ben Labaschin **on Jan 06, 2025 **3
-
 ## Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywhere
 
 # Part One

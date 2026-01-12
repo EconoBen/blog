@@ -1,310 +1,276 @@
-# Ben Labaschin's Blog
+# Economic Notes Blog
 
-A modern, responsive blog built with React, TypeScript, and Markdown. Features a mobile-first design, dark mode, visual regression testing, and automated image optimization.
+A modern, feature-rich blog built with Next.js 15, featuring AI-generated audio content, dynamic search, and comprehensive content management.
 
-## 🚀 Quick Start
+## Features
+
+- 📝 **Markdown Blog Posts** with full metadata support
+- 🎙️ **Text-to-Speech Integration** using OpenAI TTS
+- 🔍 **Advanced Search** with fuzzy matching across posts, talks, and publications
+- 🎤 **Talks & Publications** management
+- 🔧 **Code Workshop** with GitHub Gists integration
+- 🌙 **Dark Mode** support
+- 📱 **Mobile-First** responsive design
+- 🚀 **Static Site Generation** with Next.js App Router
+- 📊 **Analytics** integration with Vercel Analytics
+- 🖼️ **Automatic Image Optimization**
+- 📄 **PDF Processing** for publications
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Git
+
+### Installation
 
 ```bash
-# Initial setup
-make setup
+# Clone the repository
+git clone <your-repo-url>
+cd blog
 
-# Start development server (port 3001)
-make dev
+# Install dependencies
+npm install
 
-# Open visual regression tests
-make test-visual
+# Set up environment variables
+cp .env.local.example .env.local
+# Edit .env.local with your API keys
 ```
 
-## 📱 Features
+### Development
 
-### Core Features
-- **Markdown-based blog posts** with frontmatter support
-- **Responsive design** optimized for all devices
-- **Dark mode** with system preference detection
-- **Full-text search** across all posts
-- **Tag system** for categorizing content
-- **Archive view** organized by month
-- **Publications page** with PDF thumbnails
-- **Talks page** with embedded videos
-- **About page** with personal information
+```bash
+# Start development server
+npm run dev
+# or
+make dev
 
-### Mobile Experience
-- **Touch-optimized** navigation and search
-- **Scroll-based navigation hiding** for better reading experience
-- **Bottom navigation bar** for easy access on mobile
-- **iPad-specific optimizations** for search and layout
-- **Android device support** with proper touch targets
+# Open http://localhost:3000 (or 3001 if 3000 is in use)
+```
 
-### Performance & Optimization
-- **Automatic image optimization** with multiple sizes and WebP format
-- **PDF thumbnail generation** for publications
-- **Lazy loading** for images and content
-- **Visual regression testing** for multiple device sizes
-- **Build-time post compilation** for fast page loads
+### Building for Production
 
-## 🛠️ Technology Stack
+```bash
+# Build the application
+npm run build
+# or  
+make build
 
-- **Frontend**: React 19, TypeScript, React Router
-- **Styling**: CSS with mobile-first approach
-- **Content**: Markdown with gray-matter frontmatter
-- **Build**: Create React App with Craco
-- **Deployment**: Vercel
-- **Image Processing**: Sharp
-- **PDF Processing**: pdf-poppler
-- **Analytics**: Vercel Analytics
+# Serve production build locally
+npm start
+# or
+make serve
+```
 
-## 📂 Project Structure
+## Environment Variables
+
+Create a `.env.local` file with the following variables:
+
+```bash
+# OpenAI API (for TTS generation)
+OPENAI_API_KEY=your_openai_api_key
+
+# GitHub (for Gists integration)
+GITHUB_TOKEN=your_github_token
+
+# AWS S3 (for audio storage)
+AWS_ACCESS_KEY_ID=your_aws_access_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+AWS_REGION=us-west-2
+S3_AUDIO_BUCKET=your_s3_bucket_name
+
+# Analytics
+NEXT_PUBLIC_GA_ID=your_google_analytics_id
+```
+
+## Project Structure
 
 ```
 blog/
-├── public/
-│   ├── assets/           # Optimized images
-│   │   └── originals/    # Original high-quality images
-│   └── posts/            # PDF publications
-├── src/
-│   ├── components/       # React components
-│   ├── posts/           # Markdown blog posts
-│   ├── styles/          # CSS files
-│   ├── hooks/           # Custom React hooks
-│   ├── utils/           # Utility functions
-│   └── services/        # Data services
-├── scripts/             # Build and utility scripts
-├── tests/              # Visual regression tests
-└── docs/               # Documentation
+├── app/                    # Next.js App Router
+│   ├── components/         # React components
+│   ├── config/            # Configuration files
+│   ├── services/          # Business logic
+│   └── utils/             # Utility functions
+├── posts/                 # Markdown blog posts
+├── public/                # Static assets
+│   ├── assets/           # Images and media
+│   └── audio/            # Generated TTS audio files
+├── scripts/               # Build and utility scripts
+└── config/               # Global configuration
 ```
 
-## 🔧 Development
+## Content Management
 
-### Using Make Commands
+### Adding Blog Posts
 
-We use a Makefile for common tasks. Run `make help` to see all available commands:
+1. Create a new `.md` file in the `posts/` directory
+2. Add frontmatter metadata:
 
-```bash
-# Development
-make dev              # Start development server
-make dev-full         # Start with all preprocessing
-make build            # Build for production
-make serve            # Serve production build locally
+```yaml
+---
+title: "Your Post Title"
+date: "2025-01-01"
+tags: ["tag1", "tag2"]
+excerpt: "Brief description"
+featured: true
+tts: true  # Enable text-to-speech
+---
 
-# Testing
-make test             # Run tests
-make test-visual      # Open visual regression tests
-make lint             # Run ESLint
-make typecheck        # TypeScript type checking
-
-# Deployment
-make deploy           # Deploy to Vercel preview
-make deploy-prod      # Deploy to production
-make pre-deploy       # Run all checks before deployment
-
-# Maintenance
-make process-images   # Optimize images
-make process-pdfs     # Generate PDF thumbnails
-make clean            # Clean build artifacts
-make reset            # Full reset (clean + reinstall)
+Your post content here...
 ```
 
-### Manual Commands
-
-If you prefer npm scripts:
-
-```bash
-npm start             # Start development server
-npm run build         # Build for production
-npm test              # Run tests
-npm run optimize-images  # Process images
-npm run process-pdfs     # Process PDFs
-```
-
-## 📸 Working with Images
+3. Run `npm run dev` to see your post
 
 ### Adding Images
 
-1. **Using the Makefile** (recommended):
-   ```bash
-   make add-image IMG=~/Desktop/photo.jpg YEAR=2025 MONTH=01
-   ```
-
-2. **Manual process**:
-   - Add original images to `public/assets/originals/YYYY/MM/`
-   - Run `make process-images` to generate optimized versions
-
-### Image Optimization
-
-The system automatically creates:
-- Multiple sizes (150px, 300px, 768px, 1024px, 1536px, 2048px)
-- WebP format for modern browsers
-- Optimized JPEG with 85% quality
-- Preserves originals in `public/assets/originals/`
-
-## 📝 Writing Blog Posts
-
-1. Create a new `.md` file in `src/posts/`
-2. Add frontmatter:
-   ```markdown
-   ---
-   title: "Your Post Title"
-   date: "2025-01-15"
-   tags: ["tag1", "tag2"]
-   summary: "Brief description"
-   coverImage: "/assets/2025/01/image.jpg" (optional)
-   ---
-   
-   Your content here...
-   ```
-
-3. Run `npm start` - the post will be automatically imported
-
-### Supported Markdown Features
-- Standard Markdown syntax
-- GitHub Flavored Markdown
-- Raw HTML support
-- Code blocks with syntax highlighting
-- Images with captions
-- Tables
-- Task lists
-
-## 🧪 Visual Regression Testing
-
-Test the blog across multiple devices:
-
 ```bash
-# Start dev server first
-make dev
+# Add images to originals directory
+make add-image IMG=path/to/image.jpg YEAR=2025 MONTH=01
 
-# In another terminal, open tests
-make test-visual
+# Or process existing images
+make process-images
 ```
 
-### Tested Devices
-- iPhone SE (375x667)
-- iPhone 12 Pro (390x844)
-- Samsung Galaxy S21 (360x800)
-- Google Pixel 5 (393x851)
-- iPad (768x1024)
-- iPad Pro 11" (834x1194)
-- Android Tablet (768x1024)
-- Desktop (1200x800)
+### Managing Publications
 
-### Test Features
-- Horizontal overflow detection
-- Touch target size validation
-- Text readability checks
-- Search functionality testing
-- Fixed positioning issues
-- Android-specific requirements
-
-## 🚀 Deployment
-
-### Preview Deployment
+Edit `config/publicationsConfig.ts` to add new publications, or place PDF files in `public/posts/` and run:
 
 ```bash
+npm run process-pdfs
+```
+
+## Available Scripts
+
+### Development
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+
+### Content Processing
+- `npm run fetch-gists` - Fetch GitHub Gists for code workshop
+- `npm run generate-audio` - Generate TTS audio for posts
+- `npm run upload-audio` - Upload audio files to S3
+- `npm run process-pdfs` - Generate PDF thumbnails
+- `npm run optimize-images` - Optimize images
+
+### Utility
+- `npm run post-build` - Post-build cleanup
+
+## Makefile Commands
+
+For convenience, you can use make commands:
+
+```bash
+make help              # Show available commands
+make dev               # Start development server
+make build             # Build for production
+make deploy            # Deploy to Vercel (preview)
+make deploy-prod       # Deploy to production
+make clean             # Clean build artifacts
+make setup             # Initial project setup
+```
+
+## Deployment
+
+### Vercel (Recommended)
+
+```bash
+# Deploy preview
 make deploy
-```
 
-This creates a preview URL for testing changes.
-
-### Production Deployment
-
-```bash
-# Run all checks first
-make pre-deploy
-
-# If everything passes
+# Deploy to production
 make deploy-prod
 ```
 
-### Environment Variables
+### Manual Deployment
 
-Create a `.env` file:
-
-```env
-FAST_REFRESH=false
-PORT=3001
+```bash
+npm run build
+# Upload .next/ and public/ directories to your hosting provider
 ```
 
-### Vercel Configuration
+## Features in Detail
 
-The `.vercelignore` file excludes:
-- Large video files
-- Original unoptimized images
-- Test files
-- Backup files
+### Text-to-Speech
 
-## 🎨 Customization
+Posts with `tts: true` in frontmatter automatically generate audio versions using OpenAI's TTS API. Audio files are uploaded to S3 and served via CDN.
 
-### Styling
+### Search Functionality
 
-- **Main styles**: `src/index.css`
-- **Mobile styles**: `src/styles/mobile.css`
-- **Mobile search**: `src/styles/mobile-search-fixes.css`
-- **Responsive**: `src/styles/responsive.css`
+The blog includes a powerful search system that indexes:
+- Blog post content and metadata
+- Talk descriptions
+- Publication abstracts
+- Code workshop snippets
 
-### Configuration
+### Mobile Experience
 
-- **Blog config**: `src/config/blogConfig.ts`
-- **Publications**: `src/config/publicationsConfig.ts`
-- **Talks**: `src/config/talksConfig.ts`
+Fully responsive design with:
+- Mobile-optimized navigation
+- Touch-friendly interfaces
+- Performance optimizations
+- Progressive loading
 
-### Dark Mode
+## Development Guidelines
 
-Automatically detects system preferences. Toggle button available on all pages.
+### Adding New Features
 
-## 🐛 Troubleshooting
+1. Create feature branch from main
+2. Implement changes with TypeScript
+3. Test thoroughly on mobile and desktop
+4. Update documentation
+5. Submit pull request
+
+### Code Style
+
+- TypeScript for type safety
+- ESLint for code quality
+- Responsive design principles
+- Component-based architecture
+
+## Troubleshooting
 
 ### Common Issues
 
-1. **Port 3000 already in use**
-   - The project uses port 3001 by default
-   - Change in `.env` if needed
+**Build fails with module errors:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
 
-2. **Dependencies broken after npm audit fix**
-   ```bash
-   make reset
-   ```
+**Images not optimizing:**
+```bash
+make process-images
+```
 
-3. **Images not showing**
-   - Ensure images are in `public/assets/`
-   - Run `make process-images`
-
-4. **Build errors**
-   ```bash
-   make clean
-   npm install
-   ```
-
-5. **Visual tests not opening**
-   - Ensure dev server is running on port 3001
-   - Manually open `tests/visual-regression-test.html`
+**Search not working:**
+Check that all content files have proper frontmatter and run:
+```bash
+npm run build
+```
 
 ### Getting Help
 
-- Run `make help` for command list
-- Run `make docs` for detailed documentation
-- Check `docs/MAKEFILE_GUIDE.md` for comprehensive guide
-- See `docs/QUICK_REFERENCE.md` for quick tips
+- Check the [Next.js documentation](https://nextjs.org/docs)
+- Review error logs in `.next/`
+- Use `make clean` to reset build cache
 
-## 📚 Documentation
+## License
 
-- [Makefile Guide](docs/MAKEFILE_GUIDE.md) - Detailed command documentation
-- [Quick Reference](docs/QUICK_REFERENCE.md) - Common commands and tips
-- [Image Management](docs/image-management.md) - Image optimization guide
+This project is licensed under the MIT License.
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Run `make pre-deploy` to ensure everything works
+4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+---
 
-This project is private and proprietary.
-
-## 🙏 Acknowledgments
-
-- Built with Create React App
-- Deployed on Vercel
-- Images optimized with Sharp
-- PDF processing with pdf-poppler
+Built with ❤️ using Next.js, TypeScript, and modern web technologies.

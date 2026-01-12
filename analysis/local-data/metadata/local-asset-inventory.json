@@ -1,0 +1,3806 @@
+{
+  "images": [
+    "/assets/2025/06/tts-front-matter.png",
+    "/posts/thumbnails/extending_gpts.png",
+    "/posts/oreilly_what_are_ai_agents.png",
+    "/posts/thumbnails/Future Report.png",
+    "/posts/thumbnails/The Economics of Shared Mobility Past.png",
+    "/posts/thumbnails/The Economics of Shared Mobility Series Present Part 1.png",
+    "/posts/thumbnails/The Economics of Shared Mobility Present Part 2.png"
+  ],
+  "fonts": [
+    "/_next/static/media/55c55f0601d81cf3-s.woff2",
+    "/_next/static/media/26a46d62cd723877-s.woff2",
+    "/_next/static/media/97e0cb1ae144a2a9-s.woff2",
+    "/_next/static/media/581909926a08bbc8-s.woff2",
+    "/_next/static/media/df0a9ae256c0569c-s.woff2",
+    "/_next/static/media/8e9860b6e62d6359-s.woff2",
+    "/_next/static/media/e4af272ccee01ff0-s.p.woff2"
+  ],
+  "scripts": [
+    "/_next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+    "/_next/static/chunks/684-492f2152231b6c7a.js",
+    "/_next/static/chunks/main-app-6fefa8addff99bde.js",
+    "/_next/static/chunks/874-218abc435b2ae46c.js",
+    "/_next/static/chunks/app/layout-04a0c423dc4c7100.js",
+    "/_next/static/chunks/polyfills-42372ed130431b0a.js",
+    "/_next/static/chunks/webpack-7dbb97f49842b046.js",
+    "/_next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+    "/_next/static/chunks/app/page-820feba9c25c191a.js",
+    "/_next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+    "/_next/static/chunks/app/search/page-83da3d55dc75fc1e.js"
+  ],
+  "other": [],
+  "publicAssets": [
+    {
+      "name": "Pandas_logo.svg",
+      "path": "assets/2021/07/Pandas_logo.svg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2021/07/Pandas_logo.svg",
+      "size": 2623,
+      "extension": ".svg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-Robert_Salmon_-_Ferryboat-150x150.jpg",
+      "path": "assets/2021/12/1024px-Robert_Salmon_-_Ferryboat-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2021/12/1024px-Robert_Salmon_-_Ferryboat-150x150.jpg",
+      "size": 8402,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-Robert_Salmon_-_Ferryboat-300x238.jpg",
+      "path": "assets/2021/12/1024px-Robert_Salmon_-_Ferryboat-300x238.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2021/12/1024px-Robert_Salmon_-_Ferryboat-300x238.jpg",
+      "size": 17055,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-Robert_Salmon_-_Ferryboat-768x611.jpg",
+      "path": "assets/2021/12/1024px-Robert_Salmon_-_Ferryboat-768x611.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2021/12/1024px-Robert_Salmon_-_Ferryboat-768x611.jpg",
+      "size": 88515,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-Robert_Salmon_-_Ferryboat.jpg",
+      "path": "assets/2021/12/1024px-Robert_Salmon_-_Ferryboat.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2021/12/1024px-Robert_Salmon_-_Ferryboat.jpg",
+      "size": 175215,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-150x150.jpg",
+      "path": "assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-150x150.jpg",
+      "size": 3620,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-300x223.jpg",
+      "path": "assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-300x223.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-300x223.jpg",
+      "size": 9062,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-768x571.jpg",
+      "path": "assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-768x571.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery-768x571.jpg",
+      "size": 54862,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery.jpg",
+      "path": "assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery.jpg",
+      "size": 144513,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1password_ssh_example-150x150.png",
+      "path": "assets/2022/08/1password_ssh_example-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1password_ssh_example-150x150.png",
+      "size": 3929,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1password_ssh_example-300x108.png",
+      "path": "assets/2022/08/1password_ssh_example-300x108.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1password_ssh_example-300x108.png",
+      "size": 9247,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1password_ssh_example.png",
+      "path": "assets/2022/08/1password_ssh_example.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1password_ssh_example.png",
+      "size": 19286,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1pwd_preferences-150x150.png",
+      "path": "assets/2022/08/1pwd_preferences-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1pwd_preferences-150x150.png",
+      "size": 21025,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1pwd_preferences-300x169.png",
+      "path": "assets/2022/08/1pwd_preferences-300x169.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1pwd_preferences-300x169.png",
+      "size": 52648,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1pwd_preferences.png",
+      "path": "assets/2022/08/1pwd_preferences.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1pwd_preferences.png",
+      "size": 178484,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1pwd_private_key-150x150.png",
+      "path": "assets/2022/08/1pwd_private_key-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1pwd_private_key-150x150.png",
+      "size": 11703,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1pwd_private_key-300x228.png",
+      "path": "assets/2022/08/1pwd_private_key-300x228.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1pwd_private_key-300x228.png",
+      "size": 30344,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "1pwd_private_key.png",
+      "path": "assets/2022/08/1pwd_private_key.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/1pwd_private_key.png",
+      "size": 43599,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "32266092-C74F-4416-981A-469124D6606A_1_105_c-150x150.jpeg",
+      "path": "assets/2022/08/32266092-C74F-4416-981A-469124D6606A_1_105_c-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/32266092-C74F-4416-981A-469124D6606A_1_105_c-150x150.jpeg",
+      "size": 9507,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "32266092-C74F-4416-981A-469124D6606A_1_105_c-225x300.jpeg",
+      "path": "assets/2022/08/32266092-C74F-4416-981A-469124D6606A_1_105_c-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/32266092-C74F-4416-981A-469124D6606A_1_105_c-225x300.jpeg",
+      "size": 19153,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "32266092-C74F-4416-981A-469124D6606A_1_105_c.jpeg",
+      "path": "assets/2022/08/32266092-C74F-4416-981A-469124D6606A_1_105_c.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/32266092-C74F-4416-981A-469124D6606A_1_105_c.jpeg",
+      "size": 227796,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "ChurchFredericEdwinNewportMountain-150x150.jpeg",
+      "path": "assets/2022/08/ChurchFredericEdwinNewportMountain-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/ChurchFredericEdwinNewportMountain-150x150.jpeg",
+      "size": 5130,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "ChurchFredericEdwinNewportMountain-300x201.jpeg",
+      "path": "assets/2022/08/ChurchFredericEdwinNewportMountain-300x201.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/ChurchFredericEdwinNewportMountain-300x201.jpeg",
+      "size": 12637,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "ChurchFredericEdwinNewportMountain.jpeg",
+      "path": "assets/2022/08/ChurchFredericEdwinNewportMountain.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/ChurchFredericEdwinNewportMountain.jpeg",
+      "size": 56745,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_Cost_per_Computation-150x150.png",
+      "path": "assets/2022/08/Nordhaus_Cost_per_Computation-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_Cost_per_Computation-150x150.png",
+      "size": 5329,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_Cost_per_Computation-300x264.png",
+      "path": "assets/2022/08/Nordhaus_Cost_per_Computation-300x264.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_Cost_per_Computation-300x264.png",
+      "size": 33358,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_Cost_per_Computation-768x677.png",
+      "path": "assets/2022/08/Nordhaus_Cost_per_Computation-768x677.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_Cost_per_Computation-768x677.png",
+      "size": 134793,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_Cost_per_Computation.png",
+      "path": "assets/2022/08/Nordhaus_Cost_per_Computation.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_Cost_per_Computation.png",
+      "size": 108618,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_computing_power-1-150x150.png",
+      "path": "assets/2022/08/Nordhaus_computing_power-1-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_computing_power-1-150x150.png",
+      "size": 12965,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_computing_power-1-300x269.png",
+      "path": "assets/2022/08/Nordhaus_computing_power-1-300x269.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_computing_power-1-300x269.png",
+      "size": 33418,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_computing_power-1.png",
+      "path": "assets/2022/08/Nordhaus_computing_power-1.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_computing_power-1.png",
+      "size": 85477,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_computing_power-150x150.png",
+      "path": "assets/2022/08/Nordhaus_computing_power-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_computing_power-150x150.png",
+      "size": 12965,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_computing_power-300x269.png",
+      "path": "assets/2022/08/Nordhaus_computing_power-300x269.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_computing_power-300x269.png",
+      "size": 33418,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Nordhaus_computing_power.png",
+      "path": "assets/2022/08/Nordhaus_computing_power.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/Nordhaus_computing_power.png",
+      "size": 85477,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "acorn-oak-nuts-5796936-150x150.jpg",
+      "path": "assets/2022/08/acorn-oak-nuts-5796936-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/acorn-oak-nuts-5796936-150x150.jpg",
+      "size": 6338,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "acorn-oak-nuts-5796936-255x300.jpg",
+      "path": "assets/2022/08/acorn-oak-nuts-5796936-255x300.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/acorn-oak-nuts-5796936-255x300.jpg",
+      "size": 15509,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "acorn-oak-nuts-5796936-768x903.jpg",
+      "path": "assets/2022/08/acorn-oak-nuts-5796936-768x903.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/acorn-oak-nuts-5796936-768x903.jpg",
+      "size": 108554,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "acorn-oak-nuts-5796936-871x1024.jpg",
+      "path": "assets/2022/08/acorn-oak-nuts-5796936-871x1024.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/acorn-oak-nuts-5796936-871x1024.jpg",
+      "size": 138192,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "acorn-oak-nuts-5796936.jpg",
+      "path": "assets/2022/08/acorn-oak-nuts-5796936.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/acorn-oak-nuts-5796936.jpg",
+      "size": 388815,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "activate_ssh-150x150.png",
+      "path": "assets/2022/08/activate_ssh-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/activate_ssh-150x150.png",
+      "size": 12509,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "activate_ssh-300x179.png",
+      "path": "assets/2022/08/activate_ssh-300x179.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/activate_ssh-300x179.png",
+      "size": 27016,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "activate_ssh-768x459.png",
+      "path": "assets/2022/08/activate_ssh-768x459.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/activate_ssh-768x459.png",
+      "size": 197946,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "activate_ssh.png",
+      "path": "assets/2022/08/activate_ssh.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/activate_ssh.png",
+      "size": 154620,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954-150x150.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954-150x150.png",
+      "size": 25332,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954-180x180.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954-180x180.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954-180x180.png",
+      "size": 35166,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954-192x192.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954-192x192.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954-192x192.png",
+      "size": 39448,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954-270x270.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954-270x270.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954-270x270.png",
+      "size": 71310,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954-300x300.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954-300x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954-300x300.png",
+      "size": 85246,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954-32x32.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954-32x32.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954-32x32.png",
+      "size": 1897,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cropped-acorn-nut-oak-1299954.png",
+      "path": "assets/2022/08/cropped-acorn-nut-oak-1299954.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/cropped-acorn-nut-oak-1299954.png",
+      "size": 210694,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "jak080-150x150.jpg",
+      "path": "assets/2022/08/jak080-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/jak080-150x150.jpg",
+      "size": 5936,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "jak080-195x300.jpg",
+      "path": "assets/2022/08/jak080-195x300.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/jak080-195x300.jpg",
+      "size": 13622,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "jak080.jpg",
+      "path": "assets/2022/08/jak080.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/jak080.jpg",
+      "size": 65462,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "move_private_key-150x85.png",
+      "path": "assets/2022/08/move_private_key-150x85.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/move_private_key-150x85.png",
+      "size": 1887,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "move_private_key-300x47.png",
+      "path": "assets/2022/08/move_private_key-300x47.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/move_private_key-300x47.png",
+      "size": 4578,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "move_private_key.png",
+      "path": "assets/2022/08/move_private_key.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/move_private_key.png",
+      "size": 14904,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "new_ssh_key-150x150.png",
+      "path": "assets/2022/08/new_ssh_key-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/new_ssh_key-150x150.png",
+      "size": 14716,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "new_ssh_key-300x60.png",
+      "path": "assets/2022/08/new_ssh_key-300x60.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/new_ssh_key-300x60.png",
+      "size": 12037,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "new_ssh_key-768x153.png",
+      "path": "assets/2022/08/new_ssh_key-768x153.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/new_ssh_key-768x153.png",
+      "size": 49898,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "new_ssh_key.png",
+      "path": "assets/2022/08/new_ssh_key.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/new_ssh_key.png",
+      "size": 54892,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "origin_of_time_sharing-1-150x150.png",
+      "path": "assets/2022/08/origin_of_time_sharing-1-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/origin_of_time_sharing-1-150x150.png",
+      "size": 8918,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "origin_of_time_sharing-1-260x300.png",
+      "path": "assets/2022/08/origin_of_time_sharing-1-260x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/origin_of_time_sharing-1-260x300.png",
+      "size": 23131,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "origin_of_time_sharing-1.png",
+      "path": "assets/2022/08/origin_of_time_sharing-1.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/origin_of_time_sharing-1.png",
+      "size": 153237,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "origin_of_time_sharing-150x150.png",
+      "path": "assets/2022/08/origin_of_time_sharing-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/origin_of_time_sharing-150x150.png",
+      "size": 8918,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "origin_of_time_sharing-260x300.png",
+      "path": "assets/2022/08/origin_of_time_sharing-260x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/origin_of_time_sharing-260x300.png",
+      "size": 23131,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "origin_of_time_sharing.png",
+      "path": "assets/2022/08/origin_of_time_sharing.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/origin_of_time_sharing.png",
+      "size": 153237,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time-1024x410.png",
+      "path": "assets/2022/08/response_time-1024x410.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time-1024x410.png",
+      "size": 72337,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time-150x150.png",
+      "path": "assets/2022/08/response_time-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time-150x150.png",
+      "size": 8216,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time-1536x614.png",
+      "path": "assets/2022/08/response_time-1536x614.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time-1536x614.png",
+      "size": 122136,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time-2048x819.png",
+      "path": "assets/2022/08/response_time-2048x819.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time-2048x819.png",
+      "size": 173532,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time-300x120.png",
+      "path": "assets/2022/08/response_time-300x120.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time-300x120.png",
+      "size": 11805,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time-768x307.png",
+      "path": "assets/2022/08/response_time-768x307.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time-768x307.png",
+      "size": 48797,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "response_time.png",
+      "path": "assets/2022/08/response_time.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/response_time.png",
+      "size": 146314,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "round_robin-1024x439.png",
+      "path": "assets/2022/08/round_robin-1024x439.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/round_robin-1024x439.png",
+      "size": 76187,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "round_robin-150x150.png",
+      "path": "assets/2022/08/round_robin-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/round_robin-150x150.png",
+      "size": 8142,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "round_robin-1536x658.png",
+      "path": "assets/2022/08/round_robin-1536x658.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/round_robin-1536x658.png",
+      "size": 123429,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "round_robin-300x129.png",
+      "path": "assets/2022/08/round_robin-300x129.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/round_robin-300x129.png",
+      "size": 14518,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "round_robin-768x329.png",
+      "path": "assets/2022/08/round_robin-768x329.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/round_robin-768x329.png",
+      "size": 52387,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "round_robin.png",
+      "path": "assets/2022/08/round_robin.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/round_robin.png",
+      "size": 94292,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "settings-138x300.png",
+      "path": "assets/2022/08/settings-138x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/settings-138x300.png",
+      "size": 35013,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "settings-150x150.png",
+      "path": "assets/2022/08/settings-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/settings-150x150.png",
+      "size": 19086,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "settings.png",
+      "path": "assets/2022/08/settings.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/settings.png",
+      "size": 120860,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_gpg-150x150.png",
+      "path": "assets/2022/08/ssh_gpg-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/ssh_gpg-150x150.png",
+      "size": 16368,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_gpg-203x300.png",
+      "path": "assets/2022/08/ssh_gpg-203x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/ssh_gpg-203x300.png",
+      "size": 47545,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_gpg.png",
+      "path": "assets/2022/08/ssh_gpg.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/ssh_gpg.png",
+      "size": 73283,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgit-150x150.png",
+      "path": "assets/2022/08/testgit-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgit-150x150.png",
+      "size": 9003,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgit-300x253.png",
+      "path": "assets/2022/08/testgit-300x253.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgit-300x253.png",
+      "size": 20486,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgit.png",
+      "path": "assets/2022/08/testgit.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgit.png",
+      "size": 42064,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgitresults-150x150.png",
+      "path": "assets/2022/08/testgitresults-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgitresults-150x150.png",
+      "size": 3405,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgitresults-300x161.png",
+      "path": "assets/2022/08/testgitresults-300x161.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgitresults-300x161.png",
+      "size": 8921,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgitresults-768x411.png",
+      "path": "assets/2022/08/testgitresults-768x411.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgitresults-768x411.png",
+      "size": 37627,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "testgitresults.png",
+      "path": "assets/2022/08/testgitresults.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/testgitresults.png",
+      "size": 32120,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "wrong_instructions-150x130.png",
+      "path": "assets/2022/08/wrong_instructions-150x130.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/wrong_instructions-150x130.png",
+      "size": 9013,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "wrong_instructions-300x41.png",
+      "path": "assets/2022/08/wrong_instructions-300x41.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/wrong_instructions-300x41.png",
+      "size": 6127,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "wrong_instructions-768x105.png",
+      "path": "assets/2022/08/wrong_instructions-768x105.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/wrong_instructions-768x105.png",
+      "size": 31623,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "wrong_instructions.png",
+      "path": "assets/2022/08/wrong_instructions.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/wrong_instructions.png",
+      "size": 55309,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "wxr.xml",
+      "path": "assets/2022/08/wxr.xml",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/08/wxr.xml",
+      "size": 376480,
+      "extension": ".xml",
+      "type": "other"
+    },
+    {
+      "name": "family-1-1024x768.jpeg",
+      "path": "assets/2022/12/family-1-1024x768.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1-1024x768.jpeg",
+      "size": 83275,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-1-150x150.jpeg",
+      "path": "assets/2022/12/family-1-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1-150x150.jpeg",
+      "size": 11482,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-1-300x225.jpeg",
+      "path": "assets/2022/12/family-1-300x225.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1-300x225.jpeg",
+      "size": 17985,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-1-768x576.jpeg",
+      "path": "assets/2022/12/family-1-768x576.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1-768x576.jpeg",
+      "size": 54981,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-1-scaled.jpeg",
+      "path": "assets/2022/12/family-1-scaled.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1-scaled.jpeg",
+      "size": 467709,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-1.jpeg",
+      "path": "assets/2022/12/family-1.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1.jpeg",
+      "size": 2490961,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-1024x768.jpeg",
+      "path": "assets/2022/12/family-1024x768.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-1024x768.jpeg",
+      "size": 83275,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-150x150.jpeg",
+      "path": "assets/2022/12/family-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-150x150.jpeg",
+      "size": 11482,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-300x225.jpeg",
+      "path": "assets/2022/12/family-300x225.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-300x225.jpeg",
+      "size": 17985,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-768x576.jpeg",
+      "path": "assets/2022/12/family-768x576.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-768x576.jpeg",
+      "size": 54981,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family-scaled.jpeg",
+      "path": "assets/2022/12/family-scaled.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family-scaled.jpeg",
+      "size": 467709,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "family.jpeg",
+      "path": "assets/2022/12/family.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/family.jpeg",
+      "size": 2490961,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration-1024x768.jpeg",
+      "path": "assets/2022/12/first_exploration-1024x768.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration-1024x768.jpeg",
+      "size": 135226,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration-150x150.jpeg",
+      "path": "assets/2022/12/first_exploration-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration-150x150.jpeg",
+      "size": 10463,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration-1536x1152.jpeg",
+      "path": "assets/2022/12/first_exploration-1536x1152.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration-1536x1152.jpeg",
+      "size": 278467,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration-300x225.jpeg",
+      "path": "assets/2022/12/first_exploration-300x225.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration-300x225.jpeg",
+      "size": 19415,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration-768x576.jpeg",
+      "path": "assets/2022/12/first_exploration-768x576.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration-768x576.jpeg",
+      "size": 82476,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration-scaled.jpeg",
+      "path": "assets/2022/12/first_exploration-scaled.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration-scaled.jpeg",
+      "size": 724526,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "first_exploration.jpeg",
+      "path": "assets/2022/12/first_exploration.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2022/12/first_exploration.jpeg",
+      "size": 3149855,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "41QxNYEgWUL._AC_SY780_-150x150.jpg",
+      "path": "assets/2023/01/41QxNYEgWUL._AC_SY780_-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/41QxNYEgWUL._AC_SY780_-150x150.jpg",
+      "size": 6244,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "41QxNYEgWUL._AC_SY780_-197x300.jpg",
+      "path": "assets/2023/01/41QxNYEgWUL._AC_SY780_-197x300.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/41QxNYEgWUL._AC_SY780_-197x300.jpg",
+      "size": 14223,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "41QxNYEgWUL._AC_SY780_.jpg",
+      "path": "assets/2023/01/41QxNYEgWUL._AC_SY780_.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/41QxNYEgWUL._AC_SY780_.jpg",
+      "size": 26906,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-150x150.jpg",
+      "path": "assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-150x150.jpg",
+      "size": 6823,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-236x300.jpg",
+      "path": "assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-236x300.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-236x300.jpg",
+      "size": 17267,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-768x978.jpg",
+      "path": "assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-768x978.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere-768x978.jpg",
+      "size": 172063,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere.jpg",
+      "path": "assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/800px-Carl_Riedel_-_Vorleserin_-_32_-_Osterreichische_Galerie_Belvedere.jpg",
+      "size": 277239,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Sarah_Emily_and_I-1024x804.jpeg",
+      "path": "assets/2023/01/Sarah_Emily_and_I-1024x804.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/Sarah_Emily_and_I-1024x804.jpeg",
+      "size": 104606,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "Sarah_Emily_and_I-150x150.jpeg",
+      "path": "assets/2023/01/Sarah_Emily_and_I-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/Sarah_Emily_and_I-150x150.jpeg",
+      "size": 8544,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "Sarah_Emily_and_I-300x236.jpeg",
+      "path": "assets/2023/01/Sarah_Emily_and_I-300x236.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/Sarah_Emily_and_I-300x236.jpeg",
+      "size": 16304,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "Sarah_Emily_and_I-768x603.jpeg",
+      "path": "assets/2023/01/Sarah_Emily_and_I-768x603.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/Sarah_Emily_and_I-768x603.jpeg",
+      "size": 65566,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "Sarah_Emily_and_I.jpeg",
+      "path": "assets/2023/01/Sarah_Emily_and_I.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/Sarah_Emily_and_I.jpeg",
+      "size": 210896,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-1028x1536.jpeg",
+      "path": "assets/2023/01/sarah_front_page-1028x1536.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-1028x1536.jpeg",
+      "size": 189744,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-1371x2048.jpeg",
+      "path": "assets/2023/01/sarah_front_page-1371x2048.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-1371x2048.jpeg",
+      "size": 318122,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-150x150.jpeg",
+      "path": "assets/2023/01/sarah_front_page-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-150x150.jpeg",
+      "size": 8952,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-201x300.jpeg",
+      "path": "assets/2023/01/sarah_front_page-201x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-201x300.jpeg",
+      "size": 14818,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-685x1024.jpeg",
+      "path": "assets/2023/01/sarah_front_page-685x1024.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-685x1024.jpeg",
+      "size": 92468,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-768x1147.jpeg",
+      "path": "assets/2023/01/sarah_front_page-768x1147.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-768x1147.jpeg",
+      "size": 112706,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140171295-150x150.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140171295-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140171295-150x150.jpeg",
+      "size": 8859,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140171295-201x300.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140171295-201x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140171295-201x300.jpeg",
+      "size": 14598,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140171295.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140171295.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140171295.jpeg",
+      "size": 54084,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425-1028x1536.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425-1028x1536.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425-1028x1536.jpeg",
+      "size": 186513,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425-1371x2048.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425-1371x2048.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425-1371x2048.jpeg",
+      "size": 305862,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425-150x150.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425-150x150.jpeg",
+      "size": 8940,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425-201x300.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425-201x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425-201x300.jpeg",
+      "size": 14796,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425-686x1024.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425-686x1024.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425-686x1024.jpeg",
+      "size": 91280,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425-768x1147.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425-768x1147.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425-768x1147.jpeg",
+      "size": 111306,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled-e1675140238425.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled-e1675140238425.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled-e1675140238425.jpeg",
+      "size": 483586,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page-scaled.jpeg",
+      "path": "assets/2023/01/sarah_front_page-scaled.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page-scaled.jpeg",
+      "size": 483787,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_front_page.jpeg",
+      "path": "assets/2023/01/sarah_front_page.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_front_page.jpeg",
+      "size": 2120439,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-1173x1536.jpeg",
+      "path": "assets/2023/01/sarah_smiling-1173x1536.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-1173x1536.jpeg",
+      "size": 216609,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-150x150.jpeg",
+      "path": "assets/2023/01/sarah_smiling-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-150x150.jpeg",
+      "size": 9315,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-1563x2048.jpeg",
+      "path": "assets/2023/01/sarah_smiling-1563x2048.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-1563x2048.jpeg",
+      "size": 363424,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-229x300.jpeg",
+      "path": "assets/2023/01/sarah_smiling-229x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-229x300.jpeg",
+      "size": 17047,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-768x1006.jpeg",
+      "path": "assets/2023/01/sarah_smiling-768x1006.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-768x1006.jpeg",
+      "size": 105205,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-782x1024.jpeg",
+      "path": "assets/2023/01/sarah_smiling-782x1024.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-782x1024.jpeg",
+      "size": 108438,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-e1675140498243-1173x1536.jpeg",
+      "path": "assets/2023/01/sarah_smiling-e1675140498243-1173x1536.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-e1675140498243-1173x1536.jpeg",
+      "size": 207895,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-e1675140498243-150x150.jpeg",
+      "path": "assets/2023/01/sarah_smiling-e1675140498243-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-e1675140498243-150x150.jpeg",
+      "size": 9288,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-e1675140498243-229x300.jpeg",
+      "path": "assets/2023/01/sarah_smiling-e1675140498243-229x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-e1675140498243-229x300.jpeg",
+      "size": 16995,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-e1675140498243-768x1006.jpeg",
+      "path": "assets/2023/01/sarah_smiling-e1675140498243-768x1006.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-e1675140498243-768x1006.jpeg",
+      "size": 103397,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-e1675140498243-782x1024.jpeg",
+      "path": "assets/2023/01/sarah_smiling-e1675140498243-782x1024.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-e1675140498243-782x1024.jpeg",
+      "size": 106445,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling-e1675140498243.jpeg",
+      "path": "assets/2023/01/sarah_smiling-e1675140498243.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling-e1675140498243.jpeg",
+      "size": 347484,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "sarah_smiling.jpeg",
+      "path": "assets/2023/01/sarah_smiling.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/01/sarah_smiling.jpeg",
+      "size": 933392,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "512px-Song_of_the_Lark_-_Jules_Breton-150x150.png",
+      "path": "assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton-150x150.png",
+      "size": 44192,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "512px-Song_of_the_Lark_-_Jules_Breton-199x300.png",
+      "path": "assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton-199x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton-199x300.png",
+      "size": 111459,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "512px-Song_of_the_Lark_-_Jules_Breton.png",
+      "path": "assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/512px-Song_of_the_Lark_-_Jules_Breton.png",
+      "size": 784265,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Pre-wedding-2007-002-1024x768.jpg",
+      "path": "assets/2023/07/Pre-wedding-2007-002-1024x768.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Pre-wedding-2007-002-1024x768.jpg",
+      "size": 164702,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Pre-wedding-2007-002-150x150.jpg",
+      "path": "assets/2023/07/Pre-wedding-2007-002-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Pre-wedding-2007-002-150x150.jpg",
+      "size": 12817,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Pre-wedding-2007-002-1536x1152.jpg",
+      "path": "assets/2023/07/Pre-wedding-2007-002-1536x1152.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Pre-wedding-2007-002-1536x1152.jpg",
+      "size": 341157,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Pre-wedding-2007-002-300x225.jpg",
+      "path": "assets/2023/07/Pre-wedding-2007-002-300x225.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Pre-wedding-2007-002-300x225.jpg",
+      "size": 23744,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Pre-wedding-2007-002-768x576.jpg",
+      "path": "assets/2023/07/Pre-wedding-2007-002-768x576.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Pre-wedding-2007-002-768x576.jpg",
+      "size": 99187,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Pre-wedding-2007-002.jpg",
+      "path": "assets/2023/07/Pre-wedding-2007-002.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Pre-wedding-2007-002.jpg",
+      "size": 1450566,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-16.38.32-1024x687.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-16.38.32-1024x687.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-16.38.32-1024x687.png",
+      "size": 78472,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-16.38.32-150x150.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-16.38.32-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-16.38.32-150x150.png",
+      "size": 8845,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-16.38.32-1536x1030.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-16.38.32-1536x1030.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-16.38.32-1536x1030.png",
+      "size": 127469,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-16.38.32-300x201.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-16.38.32-300x201.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-16.38.32-300x201.png",
+      "size": 17858,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-16.38.32-768x515.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-16.38.32-768x515.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-16.38.32-768x515.png",
+      "size": 54405,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-16.38.32.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-16.38.32.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-16.38.32.png",
+      "size": 166245,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.14.59-150x150.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.14.59-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.14.59-150x150.png",
+      "size": 12514,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.14.59-185x300.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.14.59-185x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.14.59-185x300.png",
+      "size": 22758,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.14.59-633x1024.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.14.59-633x1024.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.14.59-633x1024.png",
+      "size": 202918,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.14.59-768x1243.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.14.59-768x1243.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.14.59-768x1243.png",
+      "size": 273479,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.14.59.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.14.59.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.14.59.png",
+      "size": 357820,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.17.49-1024x620.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.17.49-1024x620.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.17.49-1024x620.png",
+      "size": 105566,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.17.49-150x150.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.17.49-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.17.49-150x150.png",
+      "size": 5781,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.17.49-300x182.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.17.49-300x182.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.17.49-300x182.png",
+      "size": 13756,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.17.49-768x465.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.17.49-768x465.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.17.49-768x465.png",
+      "size": 72168,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Screenshot-2023-07-24-at-18.17.49.png",
+      "path": "assets/2023/07/Screenshot-2023-07-24-at-18.17.49.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/Screenshot-2023-07-24-at-18.17.49.png",
+      "size": 164788,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1-1024x768.png",
+      "path": "assets/2023/07/garden_pay-1-1024x768.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1-1024x768.png",
+      "size": 96265,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1-150x150.png",
+      "path": "assets/2023/07/garden_pay-1-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1-150x150.png",
+      "size": 7565,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1-1536x1152.png",
+      "path": "assets/2023/07/garden_pay-1-1536x1152.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1-1536x1152.png",
+      "size": 157689,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1-300x225.png",
+      "path": "assets/2023/07/garden_pay-1-300x225.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1-300x225.png",
+      "size": 18788,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1-768x576.png",
+      "path": "assets/2023/07/garden_pay-1-768x576.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1-768x576.png",
+      "size": 66894,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1.png",
+      "path": "assets/2023/07/garden_pay-1.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1.png",
+      "size": 135846,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1024x768.png",
+      "path": "assets/2023/07/garden_pay-1024x768.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1024x768.png",
+      "size": 97053,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-150x150.png",
+      "path": "assets/2023/07/garden_pay-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-150x150.png",
+      "size": 7660,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-1536x1152.png",
+      "path": "assets/2023/07/garden_pay-1536x1152.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-1536x1152.png",
+      "size": 158426,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-300x225.png",
+      "path": "assets/2023/07/garden_pay-300x225.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-300x225.png",
+      "size": 18967,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay-768x576.png",
+      "path": "assets/2023/07/garden_pay-768x576.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay-768x576.png",
+      "size": 67499,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "garden_pay.png",
+      "path": "assets/2023/07/garden_pay.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/garden_pay.png",
+      "size": 136590,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "repayments-1024x931.png",
+      "path": "assets/2023/07/repayments-1024x931.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/repayments-1024x931.png",
+      "size": 98142,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "repayments-150x150.png",
+      "path": "assets/2023/07/repayments-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/repayments-150x150.png",
+      "size": 2784,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "repayments-300x273.png",
+      "path": "assets/2023/07/repayments-300x273.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/repayments-300x273.png",
+      "size": 6635,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "repayments-768x698.png",
+      "path": "assets/2023/07/repayments-768x698.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/repayments-768x698.png",
+      "size": 65502,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "repayments.png",
+      "path": "assets/2023/07/repayments.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/repayments.png",
+      "size": 69850,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1-1024x610.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1-1024x610.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1-1024x610.png",
+      "size": 82021,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1-150x150.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1-150x150.png",
+      "size": 3129,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1-1536x915.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1-1536x915.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1-1536x915.png",
+      "size": 142168,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1-2048x1221.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1-2048x1221.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1-2048x1221.png",
+      "size": 207941,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1-300x179.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1-300x179.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1-300x179.png",
+      "size": 14714,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1-768x458.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1-768x458.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1-768x458.png",
+      "size": 55494,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1.png",
+      "size": 199164,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1024x610.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1024x610.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1024x610.png",
+      "size": 83298,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-150x150.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-150x150.png",
+      "size": 3214,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-1536x915.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-1536x915.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-1536x915.png",
+      "size": 149983,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-300x179.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-300x179.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-300x179.png",
+      "size": 14716,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown-768x458.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown-768x458.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown-768x458.png",
+      "size": 58441,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semester_by_semester_breakdown.png",
+      "path": "assets/2023/07/semester_by_semester_breakdown.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semester_by_semester_breakdown.png",
+      "size": 123494,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semesters-1024x768.png",
+      "path": "assets/2023/07/semesters-1024x768.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semesters-1024x768.png",
+      "size": 161221,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semesters-150x150.png",
+      "path": "assets/2023/07/semesters-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semesters-150x150.png",
+      "size": 12172,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semesters-1536x1152.png",
+      "path": "assets/2023/07/semesters-1536x1152.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semesters-1536x1152.png",
+      "size": 269221,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semesters-300x225.png",
+      "path": "assets/2023/07/semesters-300x225.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semesters-300x225.png",
+      "size": 29422,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semesters-768x576.png",
+      "path": "assets/2023/07/semesters-768x576.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semesters-768x576.png",
+      "size": 108786,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "semesters.png",
+      "path": "assets/2023/07/semesters.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/07/semesters.png",
+      "size": 201972,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa-1024x1536.png",
+      "path": "assets/2023/11/waaa-1024x1536.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa-1024x1536.png",
+      "size": 641980,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa-1365x2048.png",
+      "path": "assets/2023/11/waaa-1365x2048.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa-1365x2048.png",
+      "size": 1004718,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa-150x150.png",
+      "path": "assets/2023/11/waaa-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa-150x150.png",
+      "size": 27509,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa-200x300.png",
+      "path": "assets/2023/11/waaa-200x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa-200x300.png",
+      "size": 58998,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa-683x1024.png",
+      "path": "assets/2023/11/waaa-683x1024.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa-683x1024.png",
+      "size": 346609,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa-768x1152.png",
+      "path": "assets/2023/11/waaa-768x1152.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa-768x1152.png",
+      "size": 413847,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "waaa.png",
+      "path": "assets/2023/11/waaa.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/waaa.png",
+      "size": 1840786,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "what_are_ai_agents-1083x1536.png",
+      "path": "assets/2023/11/what_are_ai_agents-1083x1536.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/what_are_ai_agents-1083x1536.png",
+      "size": 204543,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "what_are_ai_agents-150x150.png",
+      "path": "assets/2023/11/what_are_ai_agents-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/what_are_ai_agents-150x150.png",
+      "size": 4873,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "what_are_ai_agents-212x300.png",
+      "path": "assets/2023/11/what_are_ai_agents-212x300.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/what_are_ai_agents-212x300.png",
+      "size": 10259,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "what_are_ai_agents-722x1024.png",
+      "path": "assets/2023/11/what_are_ai_agents-722x1024.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/what_are_ai_agents-722x1024.png",
+      "size": 60352,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "what_are_ai_agents-768x1089.png",
+      "path": "assets/2023/11/what_are_ai_agents-768x1089.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/what_are_ai_agents-768x1089.png",
+      "size": 65995,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "what_are_ai_agents.png",
+      "path": "assets/2023/11/what_are_ai_agents.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/11/what_are_ai_agents.png",
+      "size": 540589,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c-150x150.jpeg",
+      "path": "assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c-150x150.jpeg",
+      "size": 14377,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c-225x300.jpeg",
+      "path": "assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c-225x300.jpeg",
+      "size": 26034,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c.jpeg",
+      "path": "assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/11944B3A-BE52-4820-BE89-D780ADC6464E_1_105_c.jpeg",
+      "size": 306298,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c-150x150.jpeg",
+      "path": "assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c-150x150.jpeg",
+      "size": 15335,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c-225x300.jpeg",
+      "path": "assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c-225x300.jpeg",
+      "size": 22478,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c.jpeg",
+      "path": "assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/50816F92-A0CE-46E8-AE75-63A90FBF74AF_1_105_c.jpeg",
+      "size": 203892,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-150x150.jpeg",
+      "path": "assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-150x150.jpeg",
+      "size": 21860,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-300x225.jpeg",
+      "path": "assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-300x225.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-300x225.jpeg",
+      "size": 33393,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-768x576.jpeg",
+      "path": "assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-768x576.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c-768x576.jpeg",
+      "size": 108792,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c.jpeg",
+      "path": "assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/5FE0EE9F-9806-4513-972F-5FCEA8F82B6B_1_105_c.jpeg",
+      "size": 371973,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c-150x150.jpeg",
+      "path": "assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c-150x150.jpeg",
+      "size": 7376,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c-225x300.jpeg",
+      "path": "assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c-225x300.jpeg",
+      "size": 13511,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c.jpeg",
+      "path": "assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/82896869-8FFA-4810-BCDF-071FA3CC0949_1_105_c.jpeg",
+      "size": 153146,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c-150x150.jpeg",
+      "path": "assets/2023/12/9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c-150x150.jpeg",
+      "size": 16947,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c-225x300.jpeg",
+      "path": "assets/2023/12/9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c-225x300.jpeg",
+      "size": 25369,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c.jpeg",
+      "path": "assets/2023/12/9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/9A3C00C7-F1D6-4857-84F3-2F0A22BC4E12_1_105_c.jpeg",
+      "size": 209691,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "D2420EE3-9737-4667-AE43-3F1AE6183F43-150x150.jpeg",
+      "path": "assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43-150x150.jpeg",
+      "size": 7081,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "D2420EE3-9737-4667-AE43-3F1AE6183F43-225x300.jpeg",
+      "path": "assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43-225x300.jpeg",
+      "size": 17142,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "D2420EE3-9737-4667-AE43-3F1AE6183F43.jpeg",
+      "path": "assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/D2420EE3-9737-4667-AE43-3F1AE6183F43.jpeg",
+      "size": 166958,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-1024x768.jpg",
+      "path": "assets/2023/12/chapman-1024x768.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-1024x768.jpg",
+      "size": 90215,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-150x150.jpg",
+      "path": "assets/2023/12/chapman-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-150x150.jpg",
+      "size": 11691,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-1536x1152.jpg",
+      "path": "assets/2023/12/chapman-1536x1152.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-1536x1152.jpg",
+      "size": 162070,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-2048x1536.jpg",
+      "path": "assets/2023/12/chapman-2048x1536.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-2048x1536.jpg",
+      "size": 255337,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-300x225.jpg",
+      "path": "assets/2023/12/chapman-300x225.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-300x225.jpg",
+      "size": 19837,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-768x576.jpg",
+      "path": "assets/2023/12/chapman-768x576.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-768x576.jpg",
+      "size": 61068,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman-scaled.jpg",
+      "path": "assets/2023/12/chapman-scaled.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman-scaled.jpg",
+      "size": 374500,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "chapman.jpg",
+      "path": "assets/2023/12/chapman.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2023/12/chapman.jpg",
+      "size": 2623671,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-1024x696.jpg",
+      "path": "assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-1024x696.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-1024x696.jpg",
+      "size": 131627,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-150x150.jpg",
+      "path": "assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-150x150.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-150x150.jpg",
+      "size": 5118,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-300x204.jpg",
+      "path": "assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-300x204.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-300x204.jpg",
+      "size": 12151,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-768x522.jpg",
+      "path": "assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-768x522.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1-768x522.jpg",
+      "size": 74072,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg",
+      "path": "assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/1060px-Cole_Thomas_The_Oxbow_The_Connecticut_River_near_Northampton_1836-1.jpg",
+      "size": 201455,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "cloudflare_dns-1024x950.png",
+      "path": "assets/2025/01/cloudflare_dns-1024x950.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/cloudflare_dns-1024x950.png",
+      "size": 143765,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cloudflare_dns-150x150.png",
+      "path": "assets/2025/01/cloudflare_dns-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/cloudflare_dns-150x150.png",
+      "size": 7558,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cloudflare_dns-1536x1425.png",
+      "path": "assets/2025/01/cloudflare_dns-1536x1425.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/cloudflare_dns-1536x1425.png",
+      "size": 246128,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cloudflare_dns-300x278.png",
+      "path": "assets/2025/01/cloudflare_dns-300x278.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/cloudflare_dns-300x278.png",
+      "size": 22993,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cloudflare_dns-768x712.png",
+      "path": "assets/2025/01/cloudflare_dns-768x712.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/cloudflare_dns-768x712.png",
+      "size": 97379,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "cloudflare_dns.png",
+      "path": "assets/2025/01/cloudflare_dns.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/cloudflare_dns.png",
+      "size": 221351,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "custom_llm_cli-150x96.png",
+      "path": "assets/2025/01/custom_llm_cli-150x96.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/custom_llm_cli-150x96.png",
+      "size": 907,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "custom_llm_cli-300x77.png",
+      "path": "assets/2025/01/custom_llm_cli-300x77.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/custom_llm_cli-300x77.png",
+      "size": 6684,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "custom_llm_cli.png",
+      "path": "assets/2025/01/custom_llm_cli.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/custom_llm_cli.png",
+      "size": 7708,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-1024.jpeg",
+      "path": "assets/2025/01/niece_and_I-1024.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-1024.jpeg",
+      "size": 296977,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-1152x1536.jpeg",
+      "path": "assets/2025/01/niece_and_I-1152x1536.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-1152x1536.jpeg",
+      "size": 366310,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-150.jpeg",
+      "path": "assets/2025/01/niece_and_I-150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-150.jpeg",
+      "size": 11398,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-150x150.jpeg",
+      "path": "assets/2025/01/niece_and_I-150x150.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-150x150.jpeg",
+      "size": 41261,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-1536.jpeg",
+      "path": "assets/2025/01/niece_and_I-1536.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-1536.jpeg",
+      "size": 561306,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-1536x2048.jpeg",
+      "path": "assets/2025/01/niece_and_I-1536x2048.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-1536x2048.jpeg",
+      "size": 559569,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-225x300.jpeg",
+      "path": "assets/2025/01/niece_and_I-225x300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-225x300.jpeg",
+      "size": 54493,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-300.jpeg",
+      "path": "assets/2025/01/niece_and_I-300.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-300.jpeg",
+      "size": 36030,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-768.jpeg",
+      "path": "assets/2025/01/niece_and_I-768.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-768.jpeg",
+      "size": 180725,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-768x1024.jpeg",
+      "path": "assets/2025/01/niece_and_I-768x1024.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-768x1024.jpeg",
+      "size": 204405,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I-scaled.jpeg",
+      "path": "assets/2025/01/niece_and_I-scaled.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I-scaled.jpeg",
+      "size": 777771,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I.jpeg",
+      "path": "assets/2025/01/niece_and_I.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I.jpeg",
+      "size": 871099,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I.webp",
+      "path": "assets/2025/01/niece_and_I.webp",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I.webp",
+      "size": 456610,
+      "extension": ".webp",
+      "type": "image"
+    },
+    {
+      "name": "niece_and_I_optimized.jpeg",
+      "path": "assets/2025/01/niece_and_I_optimized.jpeg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/niece_and_I_optimized.jpeg",
+      "size": 198534,
+      "extension": ".jpeg",
+      "type": "image"
+    },
+    {
+      "name": "ollama_is_running-150x79.png",
+      "path": "assets/2025/01/ollama_is_running-150x79.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_is_running-150x79.png",
+      "size": 1608,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_is_running-300x65.png",
+      "path": "assets/2025/01/ollama_is_running-300x65.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_is_running-300x65.png",
+      "size": 8770,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_is_running.png",
+      "path": "assets/2025/01/ollama_is_running.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_is_running.png",
+      "size": 9232,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_query-1024x218.png",
+      "path": "assets/2025/01/ollama_query-1024x218.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_query-1024x218.png",
+      "size": 98490,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_query-150x150.png",
+      "path": "assets/2025/01/ollama_query-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_query-150x150.png",
+      "size": 10234,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_query-300x64.png",
+      "path": "assets/2025/01/ollama_query-300x64.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_query-300x64.png",
+      "size": 14143,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_query-768x163.png",
+      "path": "assets/2025/01/ollama_query-768x163.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_query-768x163.png",
+      "size": 64183,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ollama_query.png",
+      "path": "assets/2025/01/ollama_query.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ollama_query.png",
+      "size": 64539,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_into_pi-1024x401.png",
+      "path": "assets/2025/01/ssh_into_pi-1024x401.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ssh_into_pi-1024x401.png",
+      "size": 90546,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_into_pi-150x150.png",
+      "path": "assets/2025/01/ssh_into_pi-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ssh_into_pi-150x150.png",
+      "size": 7697,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_into_pi-1536x601.png",
+      "path": "assets/2025/01/ssh_into_pi-1536x601.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ssh_into_pi-1536x601.png",
+      "size": 148354,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_into_pi-300x117.png",
+      "path": "assets/2025/01/ssh_into_pi-300x117.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ssh_into_pi-300x117.png",
+      "size": 14241,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_into_pi-768x301.png",
+      "path": "assets/2025/01/ssh_into_pi-768x301.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ssh_into_pi-768x301.png",
+      "size": 61639,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ssh_into_pi.png",
+      "path": "assets/2025/01/ssh_into_pi.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ssh_into_pi.png",
+      "size": 132088,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ui_ollama-1024x702.png",
+      "path": "assets/2025/01/ui_ollama-1024x702.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ui_ollama-1024x702.png",
+      "size": 81130,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ui_ollama-150x150.png",
+      "path": "assets/2025/01/ui_ollama-150x150.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ui_ollama-150x150.png",
+      "size": 6200,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ui_ollama-1536x1053.png",
+      "path": "assets/2025/01/ui_ollama-1536x1053.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ui_ollama-1536x1053.png",
+      "size": 155192,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ui_ollama-300x206.png",
+      "path": "assets/2025/01/ui_ollama-300x206.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ui_ollama-300x206.png",
+      "size": 12019,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ui_ollama-768x526.png",
+      "path": "assets/2025/01/ui_ollama-768x526.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ui_ollama-768x526.png",
+      "size": 51836,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "ui_ollama.png",
+      "path": "assets/2025/01/ui_ollama.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/01/ui_ollama.png",
+      "size": 153589,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "tts-front-matter.png",
+      "path": "assets/2025/06/tts-front-matter.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/2025/06/tts-front-matter.png",
+      "size": 1865019,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "atlas_and_I.jpg",
+      "path": "assets/atlas_and_I.jpg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/assets/atlas_and_I.jpg",
+      "size": 227796,
+      "extension": ".jpg",
+      "type": "image"
+    },
+    {
+      "name": "2022_reflection.mp3",
+      "path": "audio/2022_reflection.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2022_reflection.mp3",
+      "size": 5639084,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "2022_reflection_chunk_0.txt",
+      "path": "audio/2022_reflection_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2022_reflection_chunk_0.txt",
+      "size": 4105,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2022_reflection_chunk_1.txt",
+      "path": "audio/2022_reflection_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2022_reflection_chunk_1.txt",
+      "size": 376,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2022_reflection_chunks.json",
+      "path": "audio/2022_reflection_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2022_reflection_chunks.json",
+      "size": 393,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "2022_reflection_processed.txt",
+      "path": "audio/2022_reflection_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2022_reflection_processed.txt",
+      "size": 4482,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2023-my-year-in-review.mp3",
+      "path": "audio/2023-my-year-in-review.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2023-my-year-in-review.mp3",
+      "size": 5450444,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "2023-my-year-in-review_chunk_0.txt",
+      "path": "audio/2023-my-year-in-review_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2023-my-year-in-review_chunk_0.txt",
+      "size": 4097,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2023-my-year-in-review_chunk_1.txt",
+      "path": "audio/2023-my-year-in-review_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2023-my-year-in-review_chunk_1.txt",
+      "size": 266,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2023-my-year-in-review_chunks.json",
+      "path": "audio/2023-my-year-in-review_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2023-my-year-in-review_chunks.json",
+      "size": 395,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "2023-my-year-in-review_processed.txt",
+      "path": "audio/2023-my-year-in-review_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2023-my-year-in-review_processed.txt",
+      "size": 4364,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2024-year-in-review.mp3",
+      "path": "audio/2024-year-in-review.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2024-year-in-review.mp3",
+      "size": 9742604,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "2024-year-in-review_chunk_0.txt",
+      "path": "audio/2024-year-in-review_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2024-year-in-review_chunk_0.txt",
+      "size": 4064,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2024-year-in-review_chunk_1.txt",
+      "path": "audio/2024-year-in-review_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2024-year-in-review_chunk_1.txt",
+      "size": 3700,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "2024-year-in-review_chunks.json",
+      "path": "audio/2024-year-in-review_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2024-year-in-review_chunks.json",
+      "size": 394,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "2024-year-in-review_processed.txt",
+      "path": "audio/2024-year-in-review_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/2024-year-in-review_processed.txt",
+      "size": 7765,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy.mp3",
+      "size": 5034720,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_0.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_0.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_0.mp3",
+      "size": 5034720,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_0.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_0.txt",
+      "size": 3896,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_1.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_1.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_1.mp3",
+      "size": 5004000,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_1.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_1.txt",
+      "size": 4066,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_10.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_10.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_10.mp3",
+      "size": 3600480,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_10.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_10.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_10.txt",
+      "size": 2835,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_2.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_2.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_2.mp3",
+      "size": 4947360,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_2.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_2.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_2.txt",
+      "size": 4012,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_3.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_3.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_3.mp3",
+      "size": 5024640,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_3.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_3.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_3.txt",
+      "size": 4094,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_4.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_4.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_4.mp3",
+      "size": 5060160,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_4.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_4.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_4.txt",
+      "size": 4090,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_5.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_5.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_5.mp3",
+      "size": 5093760,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_5.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_5.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_5.txt",
+      "size": 4057,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_6.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_6.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_6.mp3",
+      "size": 5067840,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_6.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_6.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_6.txt",
+      "size": 4090,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_7.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_7.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_7.mp3",
+      "size": 5009280,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_7.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_7.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_7.txt",
+      "size": 3961,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_8.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_8.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_8.mp3",
+      "size": 5068320,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_8.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_8.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_8.txt",
+      "size": 4043,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_9.mp3",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_9.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_9.mp3",
+      "size": 4953120,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_9.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_9.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunk_9.txt",
+      "size": 4034,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunks.json",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_chunks.json",
+      "size": 1980,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_processed.txt",
+      "path": "audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/I_paid_off_194k_in_student_loans_in_six_years._it_wasn't_easy_processed.txt",
+      "size": 43188,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "adding-text-to-speech-to-your-blog-openai-tts-pipeline.mp3",
+      "path": "audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline.mp3",
+      "size": 6891884,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunk_0.txt",
+      "path": "audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunk_0.txt",
+      "size": 3779,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunk_1.txt",
+      "path": "audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunk_1.txt",
+      "size": 1502,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunks.json",
+      "path": "audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_chunks.json",
+      "size": 392,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "adding-text-to-speech-to-your-blog-openai-tts-pipeline_processed.txt",
+      "path": "audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/adding-text-to-speech-to-your-blog-openai-tts-pipeline_processed.txt",
+      "size": 5282,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "building_an_https_model_apI_for_cheap.mp3",
+      "path": "audio/building_an_https_model_apI_for_cheap.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/building_an_https_model_apI_for_cheap.mp3",
+      "size": 14265164,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "building_an_https_model_apI_for_cheap_chunk_0.txt",
+      "path": "audio/building_an_https_model_apI_for_cheap_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/building_an_https_model_apI_for_cheap_chunk_0.txt",
+      "size": 4027,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "building_an_https_model_apI_for_cheap_chunk_1.txt",
+      "path": "audio/building_an_https_model_apI_for_cheap_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/building_an_https_model_apI_for_cheap_chunk_1.txt",
+      "size": 4048,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "building_an_https_model_apI_for_cheap_chunk_2.txt",
+      "path": "audio/building_an_https_model_apI_for_cheap_chunk_2.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/building_an_https_model_apI_for_cheap_chunk_2.txt",
+      "size": 2843,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "building_an_https_model_apI_for_cheap_chunks.json",
+      "path": "audio/building_an_https_model_apI_for_cheap_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/building_an_https_model_apI_for_cheap_chunks.json",
+      "size": 569,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "building_an_https_model_apI_for_cheap_processed.txt",
+      "path": "audio/building_an_https_model_apI_for_cheap_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/building_an_https_model_apI_for_cheap_processed.txt",
+      "size": 10920,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "extending_\"GPTs_Are_GPTs\"_to_Firms.mp3",
+      "path": "audio/extending_\"GPTs_Are_GPTs\"_to_Firms.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/extending_\"GPTs_Are_GPTs\"_to_Firms.mp3",
+      "size": 4501920,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "extending_\"GPTs_Are_GPTs\"_to_Firms_processed.txt",
+      "path": "audio/extending_\"GPTs_Are_GPTs\"_to_Firms_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/extending_\"GPTs_Are_GPTs\"_to_Firms_processed.txt",
+      "size": 3516,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "github_ssh_and_1password.mp3",
+      "path": "audio/github_ssh_and_1password.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/github_ssh_and_1password.mp3",
+      "size": 4391520,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "github_ssh_and_1password_processed.txt",
+      "path": "audio/github_ssh_and_1password_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/github_ssh_and_1password_processed.txt",
+      "size": 3454,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere.mp3",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere.mp3",
+      "size": 22746284,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_chunk_0.txt",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_chunk_0.txt",
+      "size": 3978,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_chunk_1.txt",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_chunk_1.txt",
+      "size": 4120,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_chunk_2.txt",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_chunk_2.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_chunk_2.txt",
+      "size": 3940,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_chunk_3.txt",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_chunk_3.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_chunk_3.txt",
+      "size": 4059,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_chunk_4.txt",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_chunk_4.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_chunk_4.txt",
+      "size": 2298,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_chunks.json",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_chunks.json",
+      "size": 922,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "host-your-own-private-llm-access-it-from-anywhere_processed.txt",
+      "path": "audio/host-your-own-private-llm-access-it-from-anywhere_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/host-your-own-private-llm-access-it-from-anywhere_processed.txt",
+      "size": 18399,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "legacy_naming_conventions_are_holding_us_back.mp3",
+      "path": "audio/legacy_naming_conventions_are_holding_us_back.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/legacy_naming_conventions_are_holding_us_back.mp3",
+      "size": 7377644,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "legacy_naming_conventions_are_holding_us_back_chunk_0.txt",
+      "path": "audio/legacy_naming_conventions_are_holding_us_back_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/legacy_naming_conventions_are_holding_us_back_chunk_0.txt",
+      "size": 4096,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "legacy_naming_conventions_are_holding_us_back_chunk_1.txt",
+      "path": "audio/legacy_naming_conventions_are_holding_us_back_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/legacy_naming_conventions_are_holding_us_back_chunk_1.txt",
+      "size": 1917,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "legacy_naming_conventions_are_holding_us_back_chunks.json",
+      "path": "audio/legacy_naming_conventions_are_holding_us_back_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/legacy_naming_conventions_are_holding_us_back_chunks.json",
+      "size": 394,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "legacy_naming_conventions_are_holding_us_back_processed.txt",
+      "path": "audio/legacy_naming_conventions_are_holding_us_back_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/legacy_naming_conventions_are_holding_us_back_processed.txt",
+      "size": 6014,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend.mp3",
+      "path": "audio/on_the_death_of_a_friend.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend.mp3",
+      "size": 19528364,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend_chunk_0.txt",
+      "path": "audio/on_the_death_of_a_friend_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend_chunk_0.txt",
+      "size": 4115,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend_chunk_1.txt",
+      "path": "audio/on_the_death_of_a_friend_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend_chunk_1.txt",
+      "size": 3542,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend_chunk_2.txt",
+      "path": "audio/on_the_death_of_a_friend_chunk_2.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend_chunk_2.txt",
+      "size": 4043,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend_chunk_3.txt",
+      "path": "audio/on_the_death_of_a_friend_chunk_3.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend_chunk_3.txt",
+      "size": 3893,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend_chunks.json",
+      "path": "audio/on_the_death_of_a_friend_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend_chunks.json",
+      "size": 744,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "on_the_death_of_a_friend_processed.txt",
+      "path": "audio/on_the_death_of_a_friend_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_death_of_a_friend_processed.txt",
+      "size": 15596,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing.mp3",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing.mp3",
+      "size": 24752204,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_0.txt",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_0.txt",
+      "size": 4064,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_1.txt",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_1.txt",
+      "size": 3832,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_2.txt",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_2.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_2.txt",
+      "size": 4093,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_3.txt",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_3.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_3.txt",
+      "size": 4100,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_4.txt",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_4.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunk_4.txt",
+      "size": 3146,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunks.json",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_chunks.json",
+      "size": 921,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_processed.txt",
+      "path": "audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/on_the_origin_of_time_sharing_computers_round_robin_algorithms_and_cloud_computing_processed.txt",
+      "size": 19239,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "pandas_functions_advanced_groupbys_with_grouper_assign_and_query.mp3",
+      "path": "audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query.mp3",
+      "size": 10322924,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_0.txt",
+      "path": "audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_0.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_0.txt",
+      "size": 4076,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_1.txt",
+      "path": "audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_1.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_1.txt",
+      "size": 4039,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_2.txt",
+      "path": "audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_2.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunk_2.txt",
+      "size": 152,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunks.json",
+      "path": "audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunks.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_chunks.json",
+      "size": 567,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "pandas_functions_advanced_groupbys_with_grouper_assign_and_query_processed.txt",
+      "path": "audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/pandas_functions_advanced_groupbys_with_grouper_assign_and_query_processed.txt",
+      "size": 8269,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "publishing_for_oreilly.mp3",
+      "path": "audio/publishing_for_oreilly.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/publishing_for_oreilly.mp3",
+      "size": 2708640,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "publishing_for_oreilly_processed.txt",
+      "path": "audio/publishing_for_oreilly_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/publishing_for_oreilly_processed.txt",
+      "size": 2193,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "what_are_ai_agents_an_introduction.mp3",
+      "path": "audio/what_are_ai_agents_an_introduction.mp3",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/what_are_ai_agents_an_introduction.mp3",
+      "size": 2696640,
+      "extension": ".mp3",
+      "type": "other"
+    },
+    {
+      "name": "what_are_ai_agents_an_introduction_processed.txt",
+      "path": "audio/what_are_ai_agents_an_introduction_processed.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/audio/what_are_ai_agents_an_introduction_processed.txt",
+      "size": 2138,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "favicon.ico",
+      "path": "favicon.ico",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/favicon.ico",
+      "size": 3870,
+      "extension": ".ico",
+      "type": "other"
+    },
+    {
+      "name": "file.svg",
+      "path": "file.svg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/file.svg",
+      "size": 391,
+      "extension": ".svg",
+      "type": "image"
+    },
+    {
+      "name": "globe.svg",
+      "path": "globe.svg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/globe.svg",
+      "size": 1035,
+      "extension": ".svg",
+      "type": "image"
+    },
+    {
+      "name": "icon-192.png",
+      "path": "icon-192.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/icon-192.png",
+      "size": 5347,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "icon-512.png",
+      "path": "icon-512.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/icon-512.png",
+      "size": 9664,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "index.html",
+      "path": "index.html",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/index.html",
+      "size": 1787,
+      "extension": ".html",
+      "type": "other"
+    },
+    {
+      "name": "logo192.png",
+      "path": "logo192.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/logo192.png",
+      "size": 5347,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "logo512.png",
+      "path": "logo512.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/logo512.png",
+      "size": 9664,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "manifest.json",
+      "path": "manifest.json",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/manifest.json",
+      "size": 660,
+      "extension": ".json",
+      "type": "other"
+    },
+    {
+      "name": "next.svg",
+      "path": "next.svg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/next.svg",
+      "size": 1375,
+      "extension": ".svg",
+      "type": "image"
+    },
+    {
+      "name": "Future Report.pdf",
+      "path": "posts/Future Report.pdf",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/Future Report.pdf",
+      "size": 5177374,
+      "extension": ".pdf",
+      "type": "other"
+    },
+    {
+      "name": "The Economics of Shared Mobility Past.pdf",
+      "path": "posts/The Economics of Shared Mobility Past.pdf",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/The Economics of Shared Mobility Past.pdf",
+      "size": 1199519,
+      "extension": ".pdf",
+      "type": "other"
+    },
+    {
+      "name": "The Economics of Shared Mobility Present Part 2.pdf",
+      "path": "posts/The Economics of Shared Mobility Present Part 2.pdf",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/The Economics of Shared Mobility Present Part 2.pdf",
+      "size": 3457456,
+      "extension": ".pdf",
+      "type": "other"
+    },
+    {
+      "name": "The Economics of Shared Mobility Series Present Part 1.pdf",
+      "path": "posts/The Economics of Shared Mobility Series Present Part 1.pdf",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/The Economics of Shared Mobility Series Present Part 1.pdf",
+      "size": 1419857,
+      "extension": ".pdf",
+      "type": "other"
+    },
+    {
+      "name": "oreilly_what_are_ai_agents.png",
+      "path": "posts/oreilly_what_are_ai_agents.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/oreilly_what_are_ai_agents.png",
+      "size": 1840786,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "Future Report.png",
+      "path": "posts/thumbnails/Future Report.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/thumbnails/Future Report.png",
+      "size": 18842,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "The Economics of Shared Mobility Past.png",
+      "path": "posts/thumbnails/The Economics of Shared Mobility Past.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/thumbnails/The Economics of Shared Mobility Past.png",
+      "size": 15163,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "The Economics of Shared Mobility Present Part 2.png",
+      "path": "posts/thumbnails/The Economics of Shared Mobility Present Part 2.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/thumbnails/The Economics of Shared Mobility Present Part 2.png",
+      "size": 18593,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "The Economics of Shared Mobility Series Present Part 1.png",
+      "path": "posts/thumbnails/The Economics of Shared Mobility Series Present Part 1.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/thumbnails/The Economics of Shared Mobility Series Present Part 1.png",
+      "size": 18447,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "extending_gpts.png",
+      "path": "posts/thumbnails/extending_gpts.png",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/posts/thumbnails/extending_gpts.png",
+      "size": 1023855,
+      "extension": ".png",
+      "type": "image"
+    },
+    {
+      "name": "robots.txt",
+      "path": "robots.txt",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/robots.txt",
+      "size": 84,
+      "extension": ".txt",
+      "type": "other"
+    },
+    {
+      "name": "vercel.svg",
+      "path": "vercel.svg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/vercel.svg",
+      "size": 128,
+      "extension": ".svg",
+      "type": "image"
+    },
+    {
+      "name": "window.svg",
+      "path": "window.svg",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/window.svg",
+      "size": 385,
+      "extension": ".svg",
+      "type": "image"
+    }
+  ],
+  "buildAssets": [
+    {
+      "name": "4bd1b696-4e0ef8e861551a30.js",
+      "path": "chunks/4bd1b696-4e0ef8e861551a30.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/4bd1b696-4e0ef8e861551a30.js",
+      "size": 168413,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "601-bda34c32a07f1aee.js",
+      "path": "chunks/601-bda34c32a07f1aee.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/601-bda34c32a07f1aee.js",
+      "size": 336480,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "684-492f2152231b6c7a.js",
+      "path": "chunks/684-492f2152231b6c7a.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/684-492f2152231b6c7a.js",
+      "size": 174820,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "874-218abc435b2ae46c.js",
+      "path": "chunks/874-218abc435b2ae46c.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/874-218abc435b2ae46c.js",
+      "size": 8483,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-a65918d5c4eed466.js",
+      "path": "chunks/app/_not-found/page-a65918d5c4eed466.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/_not-found/page-a65918d5c4eed466.js",
+      "size": 2237,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-73e166788e7c7521.js",
+      "path": "chunks/app/about/page-73e166788e7c7521.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/about/page-73e166788e7c7521.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-eadd947e7b01ee68.js",
+      "path": "chunks/app/api/og/route-eadd947e7b01ee68.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/api/og/route-eadd947e7b01ee68.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-60d4bc3949514d00.js",
+      "path": "chunks/app/api/openai/route-60d4bc3949514d00.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/api/openai/route-60d4bc3949514d00.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-0f33ee729ae4870e.js",
+      "path": "chunks/app/api/search/route-0f33ee729ae4870e.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/api/search/route-0f33ee729ae4870e.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-1fc88afed61deeee.js",
+      "path": "chunks/app/api/sidebar/route-1fc88afed61deeee.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/api/sidebar/route-1fc88afed61deeee.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-666e6a630821f90a.js",
+      "path": "chunks/app/api/tts/route-666e6a630821f90a.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/api/tts/route-666e6a630821f90a.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-a009019f2fcb922c.js",
+      "path": "chunks/app/archive/page-a009019f2fcb922c.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/archive/page-a009019f2fcb922c.js",
+      "size": 213,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-cc43ede94b9a1539.js",
+      "path": "chunks/app/archives/[month]/page-cc43ede94b9a1539.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/archives/[month]/page-cc43ede94b9a1539.js",
+      "size": 2261,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-787557e4546db574.js",
+      "path": "chunks/app/code-ai/[id]/page-787557e4546db574.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/code-ai/[id]/page-787557e4546db574.js",
+      "size": 213,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-a5461acd2b362d09.js",
+      "path": "chunks/app/code-ai/page-a5461acd2b362d09.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/code-ai/page-a5461acd2b362d09.js",
+      "size": 8247,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "layout-04a0c423dc4c7100.js",
+      "path": "chunks/app/layout-04a0c423dc4c7100.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/layout-04a0c423dc4c7100.js",
+      "size": 10935,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-820feba9c25c191a.js",
+      "path": "chunks/app/page-820feba9c25c191a.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/page-820feba9c25c191a.js",
+      "size": 5861,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-9394db66ac0edac0.js",
+      "path": "chunks/app/posts/[slug]/page-9394db66ac0edac0.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/posts/[slug]/page-9394db66ac0edac0.js",
+      "size": 11968,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-0b8f33ac5edf9e9f.js",
+      "path": "chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/posts/page-0b8f33ac5edf9e9f.js",
+      "size": 213,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-41c26bab38decb3d.js",
+      "path": "chunks/app/publications/page-41c26bab38decb3d.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/publications/page-41c26bab38decb3d.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-725c3ad386f28ef9.js",
+      "path": "chunks/app/robots.txt/route-725c3ad386f28ef9.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/robots.txt/route-725c3ad386f28ef9.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-127d2d547e303e8b.js",
+      "path": "chunks/app/rss.xml/route-127d2d547e303e8b.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/rss.xml/route-127d2d547e303e8b.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-83da3d55dc75fc1e.js",
+      "path": "chunks/app/search/page-83da3d55dc75fc1e.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/search/page-83da3d55dc75fc1e.js",
+      "size": 3316,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "route-8572993244492ee2.js",
+      "path": "chunks/app/sitemap.xml/route-8572993244492ee2.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/sitemap.xml/route-8572993244492ee2.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-e91bac1928966c04.js",
+      "path": "chunks/app/tags/[tag]/page-e91bac1928966c04.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/tags/[tag]/page-e91bac1928966c04.js",
+      "size": 213,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-b4172b635e358e01.js",
+      "path": "chunks/app/tags/page-b4172b635e358e01.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/tags/page-b4172b635e358e01.js",
+      "size": 213,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "page-11998a5f054aab77.js",
+      "path": "chunks/app/talks/page-11998a5f054aab77.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/talks/page-11998a5f054aab77.js",
+      "size": 182,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "framework-29ac49a6a3fd316f.js",
+      "path": "chunks/framework-29ac49a6a3fd316f.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/framework-29ac49a6a3fd316f.js",
+      "size": 182764,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "main-62413949f466c6df.js",
+      "path": "chunks/main-62413949f466c6df.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/main-62413949f466c6df.js",
+      "size": 119369,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "main-app-6fefa8addff99bde.js",
+      "path": "chunks/main-app-6fefa8addff99bde.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/main-app-6fefa8addff99bde.js",
+      "size": 518,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "_app-da15c11dea942c36.js",
+      "path": "chunks/pages/_app-da15c11dea942c36.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/pages/_app-da15c11dea942c36.js",
+      "size": 233,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "_error-cc3f077a18ea1793.js",
+      "path": "chunks/pages/_error-cc3f077a18ea1793.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/pages/_error-cc3f077a18ea1793.js",
+      "size": 232,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "polyfills-42372ed130431b0a.js",
+      "path": "chunks/polyfills-42372ed130431b0a.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/polyfills-42372ed130431b0a.js",
+      "size": 112594,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "webpack-7dbb97f49842b046.js",
+      "path": "chunks/webpack-7dbb97f49842b046.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/webpack-7dbb97f49842b046.js",
+      "size": 3417,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "c65842d9d4a38ec8.css",
+      "path": "css/c65842d9d4a38ec8.css",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/css/c65842d9d4a38ec8.css",
+      "size": 95276,
+      "extension": ".css",
+      "type": "stylesheet"
+    },
+    {
+      "name": "_buildManifest.js",
+      "path": "kHGsQb2G_t4fc8aw0ltCL/_buildManifest.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/kHGsQb2G_t4fc8aw0ltCL/_buildManifest.js",
+      "size": 1279,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "_ssgManifest.js",
+      "path": "kHGsQb2G_t4fc8aw0ltCL/_ssgManifest.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/kHGsQb2G_t4fc8aw0ltCL/_ssgManifest.js",
+      "size": 185,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "26a46d62cd723877-s.woff2",
+      "path": "media/26a46d62cd723877-s.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/26a46d62cd723877-s.woff2",
+      "size": 18820,
+      "extension": ".woff2",
+      "type": "font"
+    },
+    {
+      "name": "55c55f0601d81cf3-s.woff2",
+      "path": "media/55c55f0601d81cf3-s.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/55c55f0601d81cf3-s.woff2",
+      "size": 25908,
+      "extension": ".woff2",
+      "type": "font"
+    },
+    {
+      "name": "581909926a08bbc8-s.woff2",
+      "path": "media/581909926a08bbc8-s.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/581909926a08bbc8-s.woff2",
+      "size": 19072,
+      "extension": ".woff2",
+      "type": "font"
+    },
+    {
+      "name": "8e9860b6e62d6359-s.woff2",
+      "path": "media/8e9860b6e62d6359-s.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/8e9860b6e62d6359-s.woff2",
+      "size": 85272,
+      "extension": ".woff2",
+      "type": "font"
+    },
+    {
+      "name": "97e0cb1ae144a2a9-s.woff2",
+      "path": "media/97e0cb1ae144a2a9-s.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/97e0cb1ae144a2a9-s.woff2",
+      "size": 11220,
+      "extension": ".woff2",
+      "type": "font"
+    },
+    {
+      "name": "df0a9ae256c0569c-s.woff2",
+      "path": "media/df0a9ae256c0569c-s.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/df0a9ae256c0569c-s.woff2",
+      "size": 10280,
+      "extension": ".woff2",
+      "type": "font"
+    },
+    {
+      "name": "e4af272ccee01ff0-s.p.woff2",
+      "path": "media/e4af272ccee01ff0-s.p.woff2",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/media/e4af272ccee01ff0-s.p.woff2",
+      "size": 48432,
+      "extension": ".woff2",
+      "type": "font"
+    }
+  ],
+  "summary": {
+    "totalImages": 7,
+    "totalFonts": 7,
+    "totalScripts": 11,
+    "totalOther": 0,
+    "totalPublicAssets": 426,
+    "totalBuildAssets": 44
+  }
+}
