@@ -103,11 +103,11 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Code & tools</p>
+          <p className="editorial-home-kicker">Code & Tools</p>
           <h1 className="editorial-page-title">{item.title}</h1>
           <p className="editorial-page-copy">{item.description}</p>
           <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
-            The detail view keeps the writeup and code together, so the route behaves like the rest of the editorial site instead of a separate utility app.
+            The writeup stays with the code, so the page reads like part of the site instead of a separate utility app.
           </p>
 
           <div className="editorial-home-actions">
@@ -116,7 +116,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
             </Link>
             {item.gistUrl && (
               <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" className="editorial-home-button editorial-home-button-primary">
-                View on GitHub
+                Open source
               </a>
             )}
           </div>
@@ -131,7 +131,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
         </div>
 
         <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">At a glance</p>
+          <p className="editorial-home-card-label">Details</p>
           <div className="editorial-page-metric-list">
             <div>
               <span className="editorial-page-metric-value">{categoryConfig?.label || item.category}</span>
@@ -153,22 +153,12 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
         </aside>
       </section>
 
-      <section className="editorial-home-proof-strip" aria-label="Code & Tools context">
-        <span>{categoryConfig?.label || item.category}</span>
-        <span>/</span>
-        <span>{dateLabel}</span>
-        <span>/</span>
-        <span>{lineCount} lines</span>
-        <span>/</span>
-        <span>{item.tags.length} tags</span>
-      </section>
-
       <section className="editorial-list-section">
         <div className="editorial-two-column">
           <section style={{ display: 'grid', gap: '18px' }}>
             {item.writeup && (
               <div className="editorial-post-card" style={{ background: 'rgba(255, 255, 255, 0.58)' }}>
-                <p className="editorial-home-card-label">Writeup</p>
+                <p className="editorial-home-card-label">Notes</p>
                 <div className="item-writeup" style={{ marginTop: '12px' }}>
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
                 </div>
@@ -176,9 +166,27 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
             )}
 
             <div style={codeBlockStyle}>
-              <div style={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'space-between', padding: '0.85rem 1rem' }}>
+              <div
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.75rem',
+                  justifyContent: 'space-between',
+                  padding: '0.85rem 1rem',
+                }}
+              >
                 <div style={{ display: 'grid', gap: '0.18rem' }}>
-                  <div style={{ color: 'var(--editorial-ink)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                  <div
+                    style={{
+                      color: 'var(--editorial-ink)',
+                      fontFamily: 'IBM Plex Mono, Roboto Mono, monospace',
+                      fontSize: '0.78rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
                     {getCodeToolsLanguageLabel(item.language)}
                   </div>
                   <div style={{ color: 'var(--editorial-slate)', fontFamily: 'Inter, var(--font-body)', fontSize: '0.88rem' }}>
@@ -222,10 +230,18 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
 
           <aside style={{ display: 'grid', gap: '18px' }}>
             <section className="editorial-page-aside">
-              <p className="editorial-home-card-label">Collection note</p>
+              <p className="editorial-home-card-label">How to read it</p>
               <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-                This snippet stays in the editorial index alongside the rest of the collection, which keeps the browsing model stable as the presentation changes.
+                Start with the notes if you want context, then scan the code block. The route stays quick to read and easy to return from.
               </p>
+              <div className="editorial-link-row">
+                <Link href="/code-ai" className="editorial-post-link">
+                  Back to the catalog
+                </Link>
+                <Link href="/search" className="editorial-post-link">
+                  Search the site
+                </Link>
+              </div>
             </section>
 
             {relatedItems.length > 0 && (
@@ -234,7 +250,15 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                 <div style={{ display: 'grid', gap: '14px', marginTop: '12px' }}>
                   {relatedItems.map((relatedItem) => (
                     <article key={relatedItem.id} style={{ paddingBottom: '14px', borderBottom: '1px solid rgba(16, 34, 54, 0.08)' }}>
-                      <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.2rem', letterSpacing: '-0.04em' }}>
+                      <h3
+                        style={{
+                          margin: 0,
+                          color: 'var(--editorial-ink)',
+                          fontFamily: 'Space Grotesk, Inter, sans-serif',
+                          fontSize: '1.2rem',
+                          letterSpacing: '-0.04em',
+                        }}
+                      >
                         <Link href={getCodeToolsUrl(relatedItem.id)}>{relatedItem.title}</Link>
                       </h3>
                       <p className="editorial-post-summary" style={{ marginTop: '8px' }}>
