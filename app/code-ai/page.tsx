@@ -207,9 +207,8 @@ export default function CodeAIPage() {
 
   return (
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
-      <div className="editorial-home-content">
-        <section className="editorial-page-hero">
-          <div className="editorial-page-hero-copy">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
             <p className="editorial-home-kicker">Code library</p>
             <h1 className="editorial-page-title">{title}</h1>
             <p className="editorial-page-copy">{subtitle}</p>
@@ -217,14 +216,14 @@ export default function CodeAIPage() {
               Browse snippets, configs, and lightweight tools in the same editorial shell as the rest of the site.
             </p>
 
-            <div className="editorial-home-actions">
-              <Link href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
-                Browse the index
-              </Link>
-              <Link href="/search" className="editorial-home-button editorial-home-button-secondary">
-                Search the archive
-              </Link>
-            </div>
+          <div className="editorial-home-actions">
+            <a href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
+              Browse the index
+            </a>
+            <Link href="/search" className="editorial-home-button editorial-home-button-secondary">
+              Search the archive
+            </Link>
+          </div>
 
             <div className="editorial-chip-row">
               <span className="editorial-chip">{allItems.length} snippets</span>
@@ -234,9 +233,9 @@ export default function CodeAIPage() {
                 {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' }) : 'No latest item'}
               </span>
             </div>
-          </div>
+        </div>
 
-          <aside className="editorial-page-aside">
+        <aside className="editorial-page-aside">
             <p className="editorial-home-card-label">At a glance</p>
             <div className="editorial-page-metric-list">
               <div>
@@ -263,26 +262,26 @@ export default function CodeAIPage() {
               <span className="editorial-chip">searchable</span>
               <span className="editorial-chip">gists linked</span>
             </div>
-          </aside>
-        </section>
+        </aside>
+      </section>
 
-        <section className="editorial-home-proof-strip" aria-label="Code & Tools summary">
-          <span>code notes</span>
-          <span>/</span>
-          <span>snippets + configs</span>
-          <span>/</span>
-          <span>search + filter</span>
-          <span>/</span>
-          <span>code rendering</span>
-          <span>/</span>
-          <span>mobile-friendly shell</span>
-        </section>
+      <section className="editorial-home-proof-strip" aria-label="Code & Tools summary">
+        <span>code notes</span>
+        <span>/</span>
+        <span>snippets + configs</span>
+        <span>/</span>
+        <span>search + filter</span>
+        <span>/</span>
+        <span>code rendering</span>
+        <span>/</span>
+        <span>mobile-friendly shell</span>
+      </section>
 
-        <section className="editorial-list-section" id="code-tools-index">
-          <div className="editorial-list-heading">
-            <p className="editorial-home-section-label">Browse</p>
-            <h2 className="editorial-page-section-title">Search by title, tag, or category, then open a card to keep the writeup and code in view.</h2>
-          </div>
+      <section className="editorial-list-section" id="code-tools-index">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Browse</p>
+          <h2 className="editorial-page-section-title">Search by title, tag, or category, then open a card to keep the writeup and code in view.</h2>
+        </div>
 
           <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
             <div className="search-input-container" role="search" aria-label="Code & Tools search">
@@ -571,8 +570,7 @@ export default function CodeAIPage() {
               </p>
             </div>
           )}
-        </section>
-      </div>
+      </section>
     </EditorialPageFrame>
   );
 }
