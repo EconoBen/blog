@@ -4,7 +4,7 @@ import { publicationsConfig, Publication } from '../config/publicationsConfig';
 
 export const metadata: Metadata = {
   title: 'Publications | Ben Labaschin',
-  description: 'Reports, research, and long-form publications across AI systems and economics.',
+  description: "Reports, research, and long-form publications that anchor the site's technical and economic writing.",
 };
 
 export default function PublicationsPage() {
@@ -21,7 +21,7 @@ export default function PublicationsPage() {
           <p className="editorial-home-kicker">Public record</p>
           <h1 className="editorial-page-title">Publications</h1>
           <p className="editorial-page-copy">
-            O&apos;Reilly work, formal research, and longer-form pieces that anchor the writing and talks elsewhere on the site.
+            The technical record behind the site: O&apos;Reilly work, formal research, and longer-form pieces that ground the essays and talks.
           </p>
           <div className="editorial-chip-row">
             <span className="editorial-chip">O&apos;Reilly</span>
@@ -47,7 +47,7 @@ export default function PublicationsPage() {
             </div>
           </div>
           <p className="editorial-post-summary">
-            Featured work appears first so the newest or most central pieces are easy to find.
+            Featured work appears first so the most important pieces are easy to find before you dig into the archive.
           </p>
         </aside>
       </section>
@@ -56,7 +56,7 @@ export default function PublicationsPage() {
         <section className="editorial-list-section">
           <div className="editorial-list-heading">
             <p className="editorial-home-section-label">Featured</p>
-            <h2 className="editorial-page-section-title">The work most likely to orient a first-time reader.</h2>
+            <h2 className="editorial-page-section-title">The work that best frames the site&apos;s technical point of view.</h2>
           </div>
           <div className="editorial-publication-grid">
             {featuredPublications.map((pub) => (
@@ -70,7 +70,7 @@ export default function PublicationsPage() {
         <section className="editorial-list-section">
           <div className="editorial-list-heading">
             <p className="editorial-home-section-label">Archive</p>
-            <h2 className="editorial-page-section-title">Background reports and earlier writing.</h2>
+            <h2 className="editorial-page-section-title">Background reports and earlier writing, kept for completeness.</h2>
           </div>
           <div className="editorial-publication-grid">
             {otherPublications.map((pub) => (
@@ -103,7 +103,15 @@ function PublicationCard({ publication, featured = false }: {
   })();
 
   const actionHref = publication.url || publication.pdfUrl || (publication.doi ? `https://doi.org/${publication.doi}` : undefined);
-  const actionLabel = publication.url ? 'View publication' : publication.pdfUrl ? 'Open PDF' : publication.doi ? 'View DOI' : undefined;
+  const actionLabel = publication.url
+    ? publication.venue === "O'Reilly Media"
+      ? 'Read the report'
+      : 'Read online'
+    : publication.pdfUrl
+      ? 'Open PDF'
+      : publication.doi
+        ? 'View DOI record'
+        : undefined;
 
   return (
     <article

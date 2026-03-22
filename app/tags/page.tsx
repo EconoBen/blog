@@ -4,8 +4,8 @@ import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
-  title: 'Tags | Economic Notes',
-  description: 'Browse all tags and topics covered in Economic Notes blog.',
+  title: 'Tags | Ben Labaschin',
+  description: 'Browse every topic covered across the writing archive.',
 };
 
 export default async function TagsPage() {
@@ -31,6 +31,7 @@ export default async function TagsPage() {
 
   const sortedLetters = Array.from(tagsByLetter.keys()).sort();
   const topTagCount = sortedTags[0]?.[1] || 0;
+  const topTags = sortedTags.slice(0, 6);
 
   return (
     <EditorialPageFrame currentPath="/tags" pageClassName="editorial-book-page">
@@ -41,6 +42,13 @@ export default async function TagsPage() {
           <p className="editorial-page-copy">
             Explore topics across {posts.length} posts, with links preserved to every tag-specific archive.
           </p>
+          <div className="editorial-chip-row">
+            {topTags.map(([tag, count]) => (
+              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                {tag} <span>({count})</span>
+              </Link>
+            ))}
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Tag index</p>
@@ -54,6 +62,9 @@ export default async function TagsPage() {
               <span className="editorial-page-metric-label">posts for the most-used tag</span>
             </div>
           </div>
+          <p className="editorial-post-summary">
+            Every tag resolves to its own index, so topic browsing stays one click away from the underlying posts.
+          </p>
         </aside>
       </section>
 

@@ -5,7 +5,7 @@ import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
   title: 'Posts | Ben Labaschin',
-  description: 'Essays on AI systems, engineering, memory, and adjacent technical work.',
+  description: 'Essays, field notes, and technical writing on AI systems, memory, engineering practice, and adjacent work.',
 };
 
 const formatter = new Intl.DateTimeFormat('en-US', {
@@ -14,11 +14,25 @@ const formatter = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
 });
 
-const getPrimaryTag = (tags: string[]): string => tags[0] ?? 'Essay';
+const countTags = (posts: Awaited<ReturnType<typeof postService.getAllPosts>>) => {
+  const counts = new Map<string, number>();
+
+  posts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    });
+  });
+
+  return Array.from(counts.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4);
+};
 
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
   const featuredPost = posts[0];
+  const topTags = countTags(posts);
+  const publicationYears = new Set(posts.map((post) => post.date.getFullYear())).size;
 
   return (
     <EditorialPageFrame currentPath="/posts">
@@ -27,21 +41,35 @@ export default async function PostsPage() {
           <p className="editorial-home-kicker">Writing archive</p>
           <h1 className="editorial-page-title">Posts</h1>
           <p className="editorial-page-copy">
-            Essays on agent memory, AI systems, developer tooling, and the occasional detour into economics.
+            Essays, field notes, and working-throughs on agent memory, AI systems, engineering practice, and the occasional economics detour.
           </p>
+          <div className="editorial-chip-row">
+            {topTags.map(([tag, count]) => (
+              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                {tag} <span>({count})</span>
+              </Link>
+            ))}
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">At a glance</p>
           <div className="editorial-page-metric-list">
             <div>
               <span className="editorial-page-metric-value">{posts.length}</span>
-              <span className="editorial-page-metric-label">published posts</span>
+              <span className="editorial-page-metric-label">published essays</span>
             </div>
             <div>
-              <span className="editorial-page-metric-value">{featuredPost?.tags[0] ?? 'AI'}</span>
-              <span className="editorial-page-metric-label">current leading theme</span>
+              <span className="editorial-page-metric-value">
+                {featuredPost ? formatter.format(featuredPost.date) : 'n/a'}
+              </span>
+              <span className="editorial-page-metric-label">latest post</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{publicationYears}</span>
+              <span className="editorial-page-metric-label">years of writing</span>
             </div>
           </div>
+          {featuredPost?.summary && <p className="editorial-post-summary">{featuredPost.summary}</p>}
           {featuredPost && (
             <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-button editorial-home-button-secondary">
               Start with the latest essay
@@ -53,17 +81,17 @@ export default async function PostsPage() {
       <section className="editorial-home-proof-strip" aria-label="Posts summary">
         <span>{posts.length} posts</span>
         <span>/</span>
-        <span>systems + infrastructure</span>
+        <span>essays + field notes</span>
         <span>/</span>
         <span>agent memory</span>
         <span>/</span>
-        <span>developer workflow</span>
+        <span>systems + workflow</span>
       </section>
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Archive</p>
-          <h2 className="editorial-page-section-title">Recent writing with enough room to read.</h2>
+          <h2 className="editorial-page-section-title">Recent writing, newest first, with tags and context left visible.</h2>
         </div>
 
         <div className="editorial-post-grid">
@@ -79,6 +107,7 @@ export default async function PostsPage() {
                 )}
                 <span>{formatter.format(post.date)}</span>
                 {post.readingTime && <span>{post.readingTime} min read</span>}
+                <span>{post.tags.length} tags</span>
               </div>
               <h2>
                 <Link href={`/posts/${post.slug}`}>{post.title}</Link>

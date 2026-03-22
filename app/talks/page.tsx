@@ -4,7 +4,7 @@ import { talksConfig } from '../config/talksConfig';
 
 export const metadata: Metadata = {
   title: 'Talks | Ben Labaschin',
-  description: 'Conference talks, podcasts, and public talks on AI systems, memory, and engineering.',
+  description: 'Conference talks, podcasts, and recorded appearances on AI systems, memory, and engineering.',
 };
 
 const formatDate = (dateStr: string) =>
@@ -27,7 +27,7 @@ export default function TalksPage() {
           <p className="editorial-home-kicker">Speaking</p>
           <h1 className="editorial-page-title">Talks</h1>
           <p className="editorial-page-copy">
-            A running record of talks, podcasts, and community appearances on memory systems, AI engineering, and production workflows.
+            Talks, podcast conversations, and community appearances on memory systems, AI engineering, and the realities of production workflows.
           </p>
           <div className="editorial-chip-row">
             <span className="editorial-chip">Podcasts</span>
@@ -49,7 +49,7 @@ export default function TalksPage() {
             </div>
           </div>
           <p className="editorial-post-summary">
-            Newest entries appear first, with watch and read links preserved where they exist.
+            Newest entries appear first, with watch, listen, and read links preserved where they exist.
           </p>
         </aside>
       </section>
@@ -67,7 +67,7 @@ export default function TalksPage() {
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Appearances</p>
-          <h2 className="editorial-page-section-title">Selected talks and recordings, newest first.</h2>
+          <h2 className="editorial-page-section-title">Selected talks and recordings, organized newest first.</h2>
         </div>
         <div className="editorial-talk-grid">
           {talks.map((talk) => {
@@ -100,7 +100,7 @@ export default function TalksPage() {
                       rel="noopener noreferrer"
                       className="editorial-post-link"
                     >
-                      {talk.spotifyUrl ? 'Listen' : 'Watch'}
+                      {talk.spotifyUrl ? 'Listen to recording' : 'Watch recording'}
                     </a>
                   )}
                   {talk.transcriptUrl && (
