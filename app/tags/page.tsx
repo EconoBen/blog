@@ -30,17 +30,16 @@ export default async function TagsPage() {
   });
 
   const sortedLetters = Array.from(tagsByLetter.keys()).sort();
-  const topTagCount = sortedTags[0]?.[1] || 0;
   const topTags = sortedTags.slice(0, 6);
 
   return (
     <EditorialPageFrame currentPath="/tags" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
+        <div className="editorial-page-hero-copy" style={{ maxWidth: '46rem' }}>
           <p className="editorial-home-kicker">Topics</p>
           <h1 className="editorial-page-title">Tags</h1>
           <p className="editorial-page-copy">
-            Explore topics across {posts.length} posts, with links preserved to every tag-specific archive and the broadest themes surfaced first.
+            Explore topics across {posts.length} posts, with every tag resolving to a real archive and the broader themes surfaced first.
           </p>
           <div className="editorial-chip-row">
             {topTags.map(([tag, count]) => (
@@ -49,64 +48,30 @@ export default async function TagsPage() {
               </Link>
             ))}
           </div>
-        </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Tag index</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{sortedTags.length}</span>
-              <span className="editorial-page-metric-label">unique tags</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{topTagCount}</span>
-              <span className="editorial-page-metric-label">posts for the most-used tag</span>
-            </div>
+          <div className="editorial-link-row" style={{ marginTop: '0.5rem' }}>
+            <Link href="/posts" className="editorial-post-link">
+              Posts
+            </Link>
+            <Link href="/archive" className="editorial-post-link">
+              Archive
+            </Link>
+            <Link href="/search" className="editorial-post-link">
+              Search
+            </Link>
           </div>
-          <p className="editorial-post-summary">
-            Every tag resolves to its own index, so topic browsing stays one click away from the underlying posts.
-          </p>
-        </aside>
+        </div>
       </section>
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">All tags</p>
-          <h2 className="editorial-page-section-title">A weighted cloud for broad browsing.</h2>
+          <h2 className="editorial-page-section-title">A simple index of the archive topics.</h2>
         </div>
-        <div className="tag-cloud">
-          <div className="tag-cloud-container">
-            {sortedTags.map(([tag, count]) => {
-              const maxCount = topTagCount || 1;
-              const minSize = 0.95;
-              const maxSize = 1.85;
-              const size = minSize + (count / maxCount) * (maxSize - minSize);
-
-              return (
-                <Link
-                  key={tag}
-                  href={`/tags/${encodeURIComponent(tag)}`}
-                  className="tag-cloud-item"
-                  style={{ fontSize: `${size}rem` }}
-                  title={`${count} post${count !== 1 ? 's' : ''}`}
-                >
-                  {tag}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Alphabetical</p>
-          <h2 className="editorial-page-section-title">The same index, re-sorted for precision.</h2>
-        </div>
-        <div className="tags-alphabetical">
+        <div style={{ display: 'grid', gap: '1rem' }}>
           {sortedLetters.map((letter) => (
-            <div key={letter} className="letter-group">
-              <h3 className="letter-heading">{letter}</h3>
-              <div className="letter-tags">
+            <section key={letter} className="editorial-home-card">
+              <p className="editorial-home-card-label">{letter}</p>
+              <div style={{ display: 'grid', gap: '0.75rem' }}>
                 {tagsByLetter.get(letter)!.map(([tag, count]) => (
                   <Link
                     key={tag}
@@ -117,7 +82,7 @@ export default async function TagsPage() {
                   </Link>
                 ))}
               </div>
-            </div>
+            </section>
           ))}
         </div>
       </section>

@@ -30,6 +30,41 @@ const countTags = (posts: Posts) => {
     .slice(0, 4);
 };
 
+const rowStyle = {
+  paddingTop: '1rem',
+  borderTop: '1px solid rgba(26, 36, 51, 0.12)',
+  display: 'grid',
+  gap: '0.75rem',
+} as const;
+
+function PostRow({ post }: { post: Posts[number] }) {
+  return (
+    <article style={rowStyle}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
+        <div style={{ minWidth: 0 }}>
+          <p className="editorial-home-card-label">{formatter.format(post.date)}</p>
+          <h3 style={{ margin: 0 }}>
+            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+          </h3>
+        </div>
+        <span className="editorial-post-summary" style={{ whiteSpace: 'nowrap' }}>
+          {post.readingTime ? `${post.readingTime} min read` : 'Post'}
+        </span>
+      </div>
+
+      {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
+
+      <div className="editorial-chip-row">
+        {post.tags.slice(0, 4).map((tag) => (
+          <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+            {tag}
+          </Link>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 const groupPostsByYear = (posts: Posts) => {
   const groups = new Map<number, Posts>();
 
@@ -50,19 +85,17 @@ const groupPostsByYear = (posts: Posts) => {
 
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
-  const featuredPost = posts[0];
   const topTags = countTags(posts);
   const postsByYear = groupPostsByYear(posts);
-  const publicationYears = postsByYear.length;
 
   return (
     <EditorialPageFrame currentPath="/posts">
       <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Writing archive</p>
-          <h1 className="editorial-page-title">Posts</h1>
+        <div className="editorial-page-hero-copy" style={{ maxWidth: '46rem' }}>
+          <p className="editorial-home-kicker">Posts</p>
+          <h1 className="editorial-page-title">Technical posts.</h1>
           <p className="editorial-page-copy">
-            Posts, field notes, and working-throughs on agent memory, AI systems, engineering practice, and the occasional economics detour, arranged so the newest work stays easy to find.
+            A chronological index of posts on AI systems, memory, engineering practice, and the occasional economics detour. The archive stays list-led so the newest work is easy to scan, but the older posts remain one click away.
           </p>
           <div className="editorial-chip-row">
             {topTags.map(([tag, count]) => (
@@ -71,104 +104,40 @@ export default async function PostsPage() {
               </Link>
             ))}
           </div>
-        </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">At a glance</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{posts.length}</span>
-              <span className="editorial-page-metric-label">posts in the archive</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{publicationYears}</span>
-              <span className="editorial-page-metric-label">years represented</span>
-            </div>
+          <div className="editorial-link-row" style={{ marginTop: '0.5rem' }}>
+            <Link href="/archive" className="editorial-post-link">
+              Browse archive
+            </Link>
+            <Link href="/tags" className="editorial-post-link">
+              Browse tags
+            </Link>
+            <Link href="/search" className="editorial-post-link">
+              Search posts
+            </Link>
           </div>
-          {featuredPost && (
-            <p className="editorial-post-summary">
-              Latest: {featuredPost.title} on {formatter.format(featuredPost.date)}.
-            </p>
-          )}
-          {featuredPost && (
-            <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-button editorial-home-button-secondary">
-              Start with the latest post
-            </Link>
-          )}
-        </aside>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Latest post</p>
-          <h2 className="editorial-page-section-title">Start with the latest post, then move backward by year.</h2>
         </div>
-        {featuredPost ? (
-          <article className="editorial-home-card">
-            <p className="editorial-home-card-label">{formatter.format(featuredPost.date)}</p>
-            <h3>
-              <Link href={`/posts/${featuredPost.slug}`}>{featuredPost.title}</Link>
-            </h3>
-            {featuredPost.summary && <p>{featuredPost.summary}</p>}
-            <div className="editorial-post-meta">
-              {featuredPost.tags[0] ? (
-                <Link href={`/tags/${encodeURIComponent(featuredPost.tags[0])}`} className="editorial-chip">
-                  <span>{featuredPost.tags[0]}</span>
-                </Link>
-              ) : (
-                <span className="editorial-chip">Post</span>
-              )}
-              <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Long-form note'}</span>
-            </div>
-            <div className="editorial-chip-row">
-              {featuredPost.tags.slice(0, 3).map((tag) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                  {tag}
-                </Link>
-              ))}
-            </div>
-            <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-card-link">
-              Read the post
-            </Link>
-          </article>
-        ) : null}
       </section>
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">By year</p>
-          <h2 className="editorial-page-section-title">A compact index that keeps each year readable on mobile.</h2>
+          <h2 className="editorial-page-section-title">A compact list that keeps each year readable without hiding the details.</h2>
         </div>
-
-        <div className="editorial-two-column">
-          {postsByYear.map(({ year, posts: yearPosts }) => (
-            <article key={year} className="editorial-home-card">
-              <p className="editorial-home-card-label">Year {year}</p>
-              <h3>{yearPosts.length} post{yearPosts.length !== 1 ? 's' : ''}</h3>
-              <p>Newest first, with each post left visible so the archive can be scanned without opening every page.</p>
-              {yearPosts[0] ? (
-                <div>
-                  <p className="editorial-home-card-label">Featured post</p>
-                  <Link href={`/posts/${yearPosts[0].slug}`} className="editorial-home-card-link">
-                    {yearPosts[0].title}
-                  </Link>
-                  {yearPosts[0].summary && <p className="editorial-post-summary">{yearPosts[0].summary}</p>}
-                </div>
-              ) : null}
-              <ul className="posts-list">
-                {yearPosts.slice(1).map((post) => (
-                  <li key={post.slug} className="archive-post">
-                    <Link href={`/posts/${post.slug}`}>
-                      <time className="archive-post-date">
-                        {post.date.getDate().toString().padStart(2, '0')}
-                      </time>
-                      <span className="archive-post-title">{post.title}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
+        {postsByYear.map(({ year, posts: yearPosts }) => (
+          <section key={year} className="editorial-list-section" style={{ paddingTop: 0 }}>
+            <div className="editorial-list-heading">
+              <p className="editorial-home-section-label">Year {year}</p>
+              <h3 className="editorial-page-section-title" style={{ fontSize: '1.4rem' }}>
+                {yearPosts.length} post{yearPosts.length !== 1 ? 's' : ''}
+              </h3>
+            </div>
+            <div style={{ display: 'grid', gap: '0.25rem' }}>
+              {yearPosts.map((post) => (
+                <PostRow key={post.slug} post={post} />
+              ))}
+            </div>
+          </section>
+        ))}
       </section>
     </EditorialPageFrame>
   );

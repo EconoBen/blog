@@ -87,14 +87,25 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <EditorialPageFrame currentPath="/posts">
       <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">{primaryTag ?? 'Essay'}</p>
+        <div className="editorial-page-hero-copy" style={{ maxWidth: '46rem' }}>
+          <p className="editorial-home-kicker">{primaryTag ?? 'Post'}</p>
           <h1 className="editorial-page-title">{post.title}</h1>
           {post.summary && <p className="editorial-page-copy">{post.summary}</p>}
-          <p className="editorial-post-summary">
-            Published {longDateFormatter.format(post.date)}{post.readingTime ? ` · ${post.readingTime} min read` : ''} and filed with the post archive.
-          </p>
-          <div className="editorial-home-actions">
+          <div className="editorial-post-meta" style={{ marginTop: '1rem' }}>
+            <span>{longDateFormatter.format(post.date)}</span>
+            <span>{post.readingTime ? `${post.readingTime} min read` : 'Post'}</span>
+            <span>{monthYearFormatter.format(post.date)}</span>
+          </div>
+          <div className="editorial-chip-row">
+            {post.tags.length > 0
+              ? post.tags.map((tag) => (
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                    {tag}
+                  </Link>
+                ))
+              : <span className="editorial-chip">Post</span>}
+          </div>
+          <div className="editorial-home-actions" style={{ marginTop: '1rem' }}>
             <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
               Back to posts
             </Link>
@@ -108,43 +119,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </Link>
           </div>
         </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Reading frame</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{longDateFormatter.format(post.date)}</span>
-              <span className="editorial-page-metric-label">publication date</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{post.readingTime ? `${post.readingTime} min` : 'Essay'}</span>
-              <span className="editorial-page-metric-label">reading length</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{monthYearFormatter.format(post.date)}</span>
-              <span className="editorial-page-metric-label">filed in</span>
-            </div>
-          </div>
-          <div className="editorial-chip-row">
-            {post.tags.length > 0
-              ? post.tags.map((tag) => (
-                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                    {tag}
-                  </Link>
-                ))
-              : <span className="editorial-chip">Essay</span>}
-          </div>
-        </aside>
       </section>
 
-      <section className="editorial-home-proof-strip" aria-label="Post context">
-        <span>{primaryTag ?? 'Essay'}</span>
-        <span>/</span>
-        <span>{monthYearFormatter.format(post.date)}</span>
-        <span>/</span>
-        <span>{post.readingTime ? `${post.readingTime} minute read` : 'long-form note'}</span>
-      </section>
-
-      <section className="editorial-list-section">
+      <section className="editorial-list-section" style={{ maxWidth: '46rem', marginInline: 'auto' }}>
         {audioUrl && (
           <AudioPlayer
             audioUrl={audioUrl}
