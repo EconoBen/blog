@@ -19,6 +19,13 @@ function formatResultDate(date?: Date) {
 
 const resultTypeOrder: SearchResult['type'][] = ['post', 'publication', 'talk', 'code-ai'];
 
+const rowStyle = {
+  paddingTop: '1rem',
+  borderTop: '1px solid rgba(26, 36, 51, 0.12)',
+  display: 'grid',
+  gap: '0.75rem',
+} as const;
+
 const groupResultsByType = (results: SearchResult[]) => {
   const groups = new Map<SearchResult['type'], SearchResult[]>();
 
@@ -42,7 +49,7 @@ function SearchContent() {
   const query = searchParams.get('q') || '';
   const normalizedQuery = query.trim();
   const typeLabels: Record<SearchResult['type'], string> = {
-    post: 'Blog post',
+    post: 'Post',
     talk: 'Talk',
     publication: 'Publication',
     'code-ai': 'Code & tools',
@@ -98,34 +105,30 @@ function SearchContent() {
   return (
     <EditorialPageFrame currentPath="/search" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
+        <div className="editorial-page-hero-copy" style={{ maxWidth: '46rem' }}>
           <p className="editorial-home-kicker">Search</p>
-          <h1 className="editorial-page-title">Search Results</h1>
+          <h1 className="editorial-page-title">Search</h1>
           <p className="editorial-page-copy">
-            Search posts, talks, publications, and code notes without leaving the editorial index, with results grouped so the page reads in sections instead of one long feed.
+            Search posts, talks, publications, and code notes without leaving the site. Results stay grouped so the page stays readable as the corpus grows.
           </p>
-          <p className="editorial-post-summary">
+          <p className="editorial-post-summary" aria-live="polite">
             {normalizedQuery ? `Showing results for “${normalizedQuery}”.` : 'Search the archive by topic, title, or theme.'}
           </p>
-        </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Search status</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{loading ? '...' : results.length}</span>
-              <span className="editorial-page-metric-label">results on the current query</span>
-            </div>
-            <div>
-              <Link href="/archive" className="editorial-post-link">
-                Browse archive
-              </Link>
-              <span className="editorial-page-metric-label">archive index</span>
-            </div>
+          <div className="editorial-link-row" style={{ marginTop: '0.5rem' }}>
+            <Link href="/posts" className="editorial-post-link">
+              Posts
+            </Link>
+            <Link href="/tags" className="editorial-post-link">
+              Tags
+            </Link>
+            <Link href="/archive" className="editorial-post-link">
+              Archive
+            </Link>
           </div>
-        </aside>
+        </div>
       </section>
 
-      <section className="editorial-list-section">
+      <section className="editorial-list-section" style={{ maxWidth: '58rem', marginInline: 'auto' }}>
         <form onSubmit={handleSearch} className="search-input-container" role="search" aria-label="Site search">
           <input
             type="text"
@@ -138,7 +141,7 @@ function SearchContent() {
         </form>
 
         {!normalizedQuery ? (
-          <div className="editorial-page-aside">
+          <div className="editorial-home-card">
             <p className="editorial-home-card-label">Try searching for</p>
             <div className="editorial-chip-row">
               {['memory', 'retrieval', 'economics', 'forecasting'].map((term) => (
@@ -159,7 +162,7 @@ function SearchContent() {
             <p>Searching...</p>
           </div>
         ) : results.length === 0 ? (
-          <div className="editorial-page-aside">
+          <div className="editorial-home-card">
             <p className="editorial-home-card-label">No results</p>
             <p className="editorial-post-summary">
               No results found for “{normalizedQuery}”. Try a broader keyword or search one of the suggested topics below.
@@ -179,8 +182,6 @@ function SearchContent() {
             </p>
 
             {groupedResults.map(({ type, results: typeResults }) => {
-              const [featuredResult, ...moreResults] = typeResults;
-
               return (
                 <section key={type} className="editorial-list-section">
                   <div className="editorial-list-heading">
@@ -190,51 +191,34 @@ function SearchContent() {
                     </h2>
                   </div>
 
-                  {featuredResult ? (
-                    <article className="editorial-home-card">
-                      <p className="editorial-home-card-label">{typeLabels[featuredResult.type]}</p>
-                      <h3>
-                        <Link href={featuredResult.url}>{featuredResult.title}</Link>
-                      </h3>
-                      {featuredResult.description && <p>{featuredResult.description}</p>}
-                      <div className="editorial-post-meta">
-                        {featuredResult.date ? (
-                          <span>{formatResultDate(featuredResult.date)}</span>
-                        ) : (
-                          <span>{typeLabels[featuredResult.type]}</span>
-                        )}
-                        <span>{featuredResult.tags?.length ? `${featuredResult.tags.length} tags` : 'No tags listed'}</span>
-                      </div>
-                      <div className="editorial-chip-row">
-                        {featuredResult.tags?.slice(0, 3).map((tag) => (
-                          <span key={tag} className="editorial-chip">
-                            {tag}
+                  <div style={{ display: 'grid', gap: '1rem' }}>
+                    {typeResults.map((result) => (
+                      <article key={`${result.type}-${result.title}`} style={rowStyle}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
+                          <div>
+                            <p className="editorial-home-card-label">{typeLabels[result.type]}</p>
+                            <h3 style={{ margin: 0 }}>
+                              <Link href={result.url}>{result.title}</Link>
+                            </h3>
+                          </div>
+                          <span className="editorial-post-summary">
+                            {result.date ? formatResultDate(result.date) ?? typeLabels[result.type] : typeLabels[result.type]}
                           </span>
-                        ))}
-                      </div>
-                      <Link href={featuredResult.url} className="editorial-home-card-link">
-                        Open result
-                      </Link>
-                    </article>
-                  ) : null}
-
-                  {moreResults.length > 0 ? (
-                    <article className="editorial-home-card">
-                      <p className="editorial-home-card-label">More {typeLabels[type]}</p>
-                      <ul className="posts-list">
-                        {moreResults.map((result) => (
-                          <li key={`${result.type}-${result.title}`} className="archive-post">
-                            <Link href={result.url}>
-                              <time className="archive-post-date">
-                                {result.date ? formatResultDate(result.date) ?? typeLabels[result.type] : typeLabels[result.type]}
-                              </time>
-                              <span className="archive-post-title">{result.title}</span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </article>
-                  ) : null}
+                        </div>
+                        {result.description && <p className="editorial-post-summary">{result.description}</p>}
+                        <div className="editorial-chip-row">
+                          {result.tags?.slice(0, 4).map((tag) => (
+                            <span key={tag} className="editorial-chip">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <Link href={result.url} className="editorial-post-link">
+                          Open result
+                        </Link>
+                      </article>
+                    ))}
+                  </div>
                 </section>
               );
             })}
