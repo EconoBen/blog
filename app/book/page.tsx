@@ -1,6 +1,21 @@
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 
+const bookNotes = [
+  {
+    label: 'What the book covers',
+    title: 'How AI systems remember, retrieve, compress, and decide what to act on.',
+    summary:
+      'The book is a practical guide to the mechanics behind durable agent behavior: storing useful context, retrieving it at the right time, and keeping the system understandable once it is in production.',
+  },
+  {
+    label: 'Why it belongs here',
+    title: 'It extends the same editorial arc as the essays, reports, and talks.',
+    summary:
+      'This page should make the book legible before launch without turning it into a separate identity. The subject, audience, and technical point of view all stay connected to the rest of the site.',
+  },
+];
+
 export default function BookPage() {
   return (
     <EditorialPageFrame currentPath="/book">
@@ -29,19 +44,14 @@ export default function BookPage() {
 
         <aside className="editorial-home-book-card">
           <p className="editorial-home-card-label">Working direction</p>
-          <h2>Why it belongs here</h2>
+          <h2>Practical memory systems for production agents.</h2>
           <p>
             One domain, one body of work, one list. The book should reinforce the site&apos;s technical arc, not split it into a second identity.
           </p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">one</span>
-              <span className="editorial-page-metric-label">coherent public arc</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">O&apos;Reilly</span>
-              <span className="editorial-page-metric-label">publisher and home base</span>
-            </div>
+          <div className="editorial-home-book-meta">
+            <span>in progress</span>
+            <span>O&apos;Reilly</span>
+            <span>agent memory</span>
           </div>
         </aside>
       </section>
@@ -56,21 +66,20 @@ export default function BookPage() {
         <span>production AI</span>
       </section>
 
-      <section className="editorial-home-grid">
-        <article className="editorial-home-card">
-          <p className="editorial-home-card-label">What belongs here</p>
-          <h3>Context, audience, and ongoing updates.</h3>
-          <p>
-            This page should make the book legible before launch: what problem it solves, who it is for, and why it belongs in the same public arc as the essays and talks.
-          </p>
-        </article>
-        <article className="editorial-home-card">
-          <p className="editorial-home-card-label">How it connects</p>
-          <h3>The reports, talks, and book should read as one arc.</h3>
-          <p>
-            Use this page to point back to the O&apos;Reilly reports, talks, and essays so the book reads as the next step in the same body of work.
-          </p>
-        </article>
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Working notes</p>
+          <h2 className="editorial-page-section-title">The book page should answer three things quickly: what, why, and where it connects.</h2>
+        </div>
+        <div className="editorial-two-column">
+          {bookNotes.map((item) => (
+            <article key={item.label} className="editorial-home-card">
+              <p className="editorial-home-card-label">{item.label}</p>
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </EditorialPageFrame>
   );
