@@ -32,78 +32,76 @@ const getExcerpt = (content: string, summary?: string): string => {
   return firstParagraph.substring(0, 147) + '...';
 };
 
-const getPrimaryTag = (post: Post): string => post.tags[0] ?? 'Post';
-
 const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
   if (!posts || posts.length === 0) {
     return (
       <div className="home-loading">
         <div className="loading-spinner"></div>
-        <p>Preparing the latest writing.</p>
+        <p>Preparing the latest posts.</p>
       </div>
     );
   }
 
-  const newestPost = posts[0];
-  const featuredPosts = posts.slice(0, 3);
-  const newestExcerpt = getExcerpt(newestPost.content, newestPost.summary);
+  const selectedPosts = posts.slice(0, 2);
 
   return (
     <EditorialPageFrame currentPath="/" pageClassName="editorial-home-page">
       <section className="editorial-home-hero">
         <div className="editorial-home-hero-copy">
-          <p className="editorial-home-kicker">Technical writing archive</p>
-          <h1>Posts on how AI systems remember, fail, and scale in production.</h1>
+          <p className="editorial-home-kicker">Technical editorial platform</p>
+          <h1>Writing about how AI systems remember, fail, and stay useful.</h1>
           <p className="editorial-home-subtitle">
-            Posts, talks, and book notes on the engineering choices that separate demos from durable products.
+            A public platform for posts, talks, O&apos;Reilly reports, code, and the forthcoming book on agent memory.
           </p>
           <div className="editorial-home-actions">
-            <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-primary">
-              Read the newest post
+            <Link href="/book" className="editorial-home-button editorial-home-button-primary">
+              Follow the book
             </Link>
             <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
-              Browse the archive
+              Browse posts
             </Link>
           </div>
         </div>
 
         <aside className="editorial-home-book-card">
-          <p className="editorial-home-card-label">Latest post</p>
-          <h2>{newestPost.title}</h2>
-          <p>{newestExcerpt}</p>
+          <p className="editorial-home-card-label">Book in progress</p>
+          <h2>Agent Memory</h2>
+          <p>A forthcoming O&apos;Reilly book on how modern AI systems structure retrieval, context, and long-running memory.</p>
           <div className="editorial-home-book-meta">
-            <span>{dateFormatter.format(newestPost.date)}</span>
-            <span>{newestPost.readingTime ? `${newestPost.readingTime} min read` : 'Read now'}</span>
-            <span>{getPrimaryTag(newestPost)}</span>
+            <span>Drafting</span>
+            <span>O&apos;Reilly</span>
+            <span>Updates</span>
           </div>
-          <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-accent">
-            Read the post
+          <Link href="/book" className="editorial-home-button editorial-home-button-accent">
+            Open book page
           </Link>
         </aside>
       </section>
 
-      <section className="editorial-home-proof-strip" aria-label="Proof of work">
-        <span>{posts.length} published posts</span>
+      <section className="editorial-home-scope-line" aria-label="Site areas">
+        <span>Posts</span>
         <span>/</span>
-        <span>Principal ML Engineer</span>
+        <span>Talks</span>
         <span>/</span>
-        <span>O&apos;Reilly reports</span>
+        <span>Publications</span>
         <span>/</span>
-        <span>forthcoming book on agent memory</span>
+        <span>Code &amp; Tools</span>
+        <span>/</span>
+        <span>Book</span>
       </section>
 
       <section className="editorial-home-section">
-        <p className="editorial-home-section-label">Selected writing</p>
-        <h2>Recent posts with enough context to know where to go next.</h2>
+        <p className="editorial-home-section-label">Selected posts</p>
+        <h2>A homepage that keeps the useful posts up front.</h2>
         <div className="editorial-home-grid">
-          {featuredPosts.map((post, index) => {
+          {selectedPosts.map((post) => {
             const excerpt = getExcerpt(post.content, post.summary);
             return (
               <article
                 key={post.slug}
-                className={`editorial-home-card ${index === 0 ? 'editorial-home-card-featured' : 'editorial-home-card-compact'}`}
+                className="editorial-home-card"
               >
-                <p className="editorial-home-card-label">{getPrimaryTag(post)}</p>
+                <p className="editorial-home-card-label">Post</p>
                 <h3>
                   <Link href={`/posts/${post.slug}`} className="editorial-home-card-link">
                     {post.title}
@@ -112,7 +110,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
                 <p>{excerpt}</p>
                 <div className="editorial-home-book-meta">
                   <span>{dateFormatter.format(post.date)}</span>
-                  <span>{post.readingTime ? `${post.readingTime} min read` : 'Essay'}</span>
+                  <span>{post.readingTime ? `${post.readingTime} min read` : 'Read now'}</span>
                 </div>
                 <div className="editorial-chip-row">
                   {post.tags.slice(0, 3).map((tag) => (
@@ -129,14 +127,14 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
 
       <section className="editorial-home-cta-band">
         <div>
-          <p className="editorial-home-card-label">Book notes + archive</p>
-          <h3>Follow the longer arc without losing the thread.</h3>
+          <p className="editorial-home-card-label">Book updates</p>
+          <h3>Follow the book without losing the rest of the site.</h3>
           <p>
-            Start with the book notes, then move through the archive, talks, and publications if you want the broader technical context.
+            Get occasional updates on the book, then use the rest of the site for posts, talks, publications, and code.
           </p>
         </div>
         <Link href="/book" className="editorial-home-button editorial-home-button-primary">
-          Follow the book
+          Get updates
         </Link>
       </section>
     </EditorialPageFrame>

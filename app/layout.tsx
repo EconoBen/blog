@@ -1,28 +1,28 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import './globals.css';
 import ClientLayout from './components/ClientLayout';
 
-const inter = Inter({ subsets: ['latin'] });
+const manrope = Manrope({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ben Labaschin - Economics, AI & Tech Blog',
-  description: 'A blog about economics, technology, AI, and personal experiences.',
+  title: 'Ben Labaschin | Technical Editorial Platform',
+  description: 'Posts, talks, publications, code, and a forthcoming book on agent memory.',
   authors: [{ name: 'Benjamin Labaschin' }],
-  keywords: ['economics', 'technology', 'AI', 'machine learning', 'blog'],
+  keywords: ['agent memory', 'AI systems', 'machine learning', 'technical writing', 'talks', 'publications'],
   manifest: '/manifest.json',
   openGraph: {
-    title: 'Ben Labaschin - Economics, AI & Tech Blog',
-    description: 'A blog about economics, technology, AI, and personal experiences.',
+    title: 'Ben Labaschin | Technical Editorial Platform',
+    description: 'Posts, talks, publications, code, and a forthcoming book on agent memory.',
     url: 'https://econoben.dev',
-    siteName: 'Ben Labaschin - Economics, AI & Tech Blog',
+    siteName: 'Ben Labaschin | Technical Editorial Platform',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ben Labaschin - Economics, AI & Tech Blog',
-    description: 'A blog about economics, technology, AI, and personal experiences.',
+    title: 'Ben Labaschin | Technical Editorial Platform',
+    description: 'Posts, talks, publications, code, and a forthcoming book on agent memory.',
   },
   metadataBase: new URL('https://econoben.dev'),
 };
@@ -34,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={manrope.className}>
         <ClientLayout>
           {children}
         </ClientLayout>
