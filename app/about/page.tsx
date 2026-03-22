@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 
 export const metadata: Metadata = {
   title: 'About | Ben Labaschin',
-  description: "Background, current work, and the through-line across Ben Labaschin's writing, talks, and engineering work.",
+  description: 'Practical CV and contact page for Ben Labaschin, with resume download and work history.',
 };
 
 const experience = [
@@ -12,36 +13,74 @@ const experience = [
     company: 'Workhelix',
     period: '2022 to present',
     summary:
-      'Founding engineer on enterprise-scale GenAI and agent systems, building async LLM infrastructure, analytics platforms, and production workflows for major customers.',
+      'Founding engineer on enterprise GenAI and agent systems. I build async LLM infrastructure, retrieval, memory, and internal tools used in customer workflows.',
   },
   {
     role: 'Senior Data Scientist',
     company: 'Hopper',
     period: '2021 to 2022',
     summary:
-      'Led machine-learning work for Hopper Cloud partnerships and helped build the platform systems that supported travel intelligence products at scale.',
+      'Led machine-learning work for Hopper Cloud partnerships and helped build platform systems for travel products and partner workflows.',
   },
   {
     role: 'Earlier data science work',
     company: 'XPO Logistics, Revantage, Arity',
     period: '2017 to 2021',
     summary:
-      'Worked across forecasting, experimentation, optimization, and business-facing ML systems, with a parallel thread of economics and transportation writing.',
+      'Worked across forecasting, experimentation, optimization, and business-facing ML systems, alongside economics and transportation writing.',
   },
 ];
 
-const currentFocus = [
+const practicalCards = [
   {
-    label: 'What I spend time on',
-    title: 'Production AI, memory, retrieval, and the messy middle.',
+    label: 'Resume',
+    title: 'Download the PDF first.',
     summary:
-      'Most of my current work sits between research ideas and the engineering realities of enterprise systems: memory management, async LLM infrastructure, evaluation, developer workflows, and the trade-offs that show up once systems leave the demo stage.',
+      'This is the fastest way to get the full CV, including work history and the usual contact details.',
+    href: '/benjamin_labaschin_resume.pdf',
+    action: 'Download resume',
+    external: true,
   },
   {
-    label: 'What this site is for',
-    title: 'A public record, not just a resume.',
+    label: 'Work history',
+    title: 'Recent roles, kept short and readable.',
     summary:
-      'The site keeps the professional signal, but its job is to make the writing, talks, reports, and upcoming book read as one coherent body of work.',
+      'A practical summary of where I’ve worked and what I’ve spent time building there.',
+    href: '#work-history',
+    action: 'Jump to work history',
+    external: false,
+  },
+  {
+    label: 'Contact',
+    title: 'Email or LinkedIn if you need to reach me.',
+    summary:
+      'For work, speaking, or writing, those two links are usually the quickest route.',
+    href: 'mailto:benjaminlabaschin@gmail.com',
+    action: 'Email me',
+    external: true,
+  },
+];
+
+const contactLinks = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/econoben',
+  },
+  {
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/benjamin-labaschin',
+  },
+  {
+    label: 'Email',
+    href: 'mailto:benjaminlabaschin@gmail.com',
+  },
+  {
+    label: 'Publications',
+    href: '/publications',
+  },
+  {
+    label: 'Talks',
+    href: '/talks',
   },
 ];
 
@@ -50,66 +89,38 @@ export default function AboutPage() {
     <EditorialPageFrame currentPath="/about">
       <section className="editorial-page-hero editorial-about-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">About</p>
+          <p className="editorial-home-kicker">About / CV</p>
           <h1 className="editorial-page-title">Ben Labaschin</h1>
           <p className="editorial-page-copy">
-            I work where AI systems, technical writing, and research meet. This site is the public record of that work: essays, talks, reports, and the forthcoming book on agent memory.
+            I build practical AI systems and write about the trade-offs that show up once they have to work in production.
+            If you need the short version, use the resume download or jump straight to the work history below.
           </p>
-          <div className="editorial-chip-row">
-            <span className="editorial-chip">AI systems</span>
-            <span className="editorial-chip">Writing</span>
-            <span className="editorial-chip">Research</span>
-            <span className="editorial-chip">Speaking</span>
+          <div className="editorial-home-actions">
+            <a href="/benjamin_labaschin_resume.pdf" download className="editorial-home-button editorial-home-button-primary">
+              Download resume
+            </a>
+            <a href="#work-history" className="editorial-home-button editorial-home-button-secondary">
+              Work history
+            </a>
+            <Link href="/publications" className="editorial-home-button editorial-home-button-secondary">
+              Publications
+            </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Current focus</p>
-          <h2 className="editorial-page-section-title">The through-line is practical AI systems that keep working after the demo.</h2>
-        </div>
-        <div className="editorial-two-column">
-          {currentFocus.map((item) => (
-            <article key={item.label} className="editorial-home-card">
-              <p className="editorial-home-card-label">{item.label}</p>
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              {item.label === 'What this site is for' && (
-                <a href="/benjamin_labaschin_resume.pdf" download className="editorial-post-link">
-                  Download resume
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="editorial-home-proof-strip" aria-label="About summary">
-        <span>Principal ML Engineer</span>
-        <span>/</span>
-        <span>writer and speaker</span>
-        <span>/</span>
-        <span>AI systems and memory</span>
-        <span>/</span>
-        <span>economics background</span>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">At a glance</p>
-          <h2 className="editorial-page-section-title">A small visual pause before the work history.</h2>
         </div>
         <aside className="editorial-page-aside editorial-about-photo-card">
           <img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas" />
           <div className="editorial-page-metric-list">
             <div>
-              <span className="editorial-page-metric-value">systems</span>
-              <span className="editorial-page-metric-label">AI platforms and memory</span>
+              <span className="editorial-page-metric-value">Principal ML</span>
+              <span className="editorial-page-metric-label">Workhelix and earlier product ML roles</span>
             </div>
             <div>
-              <span className="editorial-page-metric-value">public</span>
-              <span className="editorial-page-metric-label">writing, talks, and reports</span>
+              <span className="editorial-page-metric-value">Resume</span>
+              <span className="editorial-page-metric-label">Download the PDF or scan the work history</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">Contact</span>
+              <span className="editorial-page-metric-label">Email, LinkedIn, GitHub, publications, talks</span>
             </div>
           </div>
         </aside>
@@ -117,8 +128,33 @@ export default function AboutPage() {
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Experience</p>
-          <h2 className="editorial-page-section-title">A concise view of the operating history behind the public work.</h2>
+          <p className="editorial-home-section-label">Practical summary</p>
+          <h2 className="editorial-page-section-title">What I do, in plain language.</h2>
+        </div>
+        <div className="editorial-two-column">
+          {practicalCards.map((item) => (
+            <article key={item.label} className="editorial-home-card">
+              <p className="editorial-home-card-label">{item.label}</p>
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+              {item.external ? (
+                <a href={item.href} className="editorial-post-link" {...(item.label === 'Resume' ? { download: true } : {})}>
+                  {item.action}
+                </a>
+              ) : (
+                <a href={item.href} className="editorial-post-link">
+                  {item.action}
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="work-history" className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Work history</p>
+          <h2 className="editorial-page-section-title">Recent roles and the work attached to them.</h2>
         </div>
         <div className="editorial-timeline">
           {experience.map((item) => (
@@ -131,6 +167,45 @@ export default function AboutPage() {
               <p className="editorial-post-summary">{item.summary}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Useful links</p>
+          <h2 className="editorial-page-section-title">The rest of the profile, without hunting around the site.</h2>
+        </div>
+        <div className="editorial-two-column">
+          <article className="editorial-home-card">
+            <p className="editorial-home-card-label">Contact</p>
+            <h3>Reach out directly.</h3>
+            <p>Email works best. GitHub and LinkedIn are here if that is easier.</p>
+            <div className="editorial-link-row">
+              {contactLinks.slice(0, 3).map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="editorial-post-link"
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </article>
+          <article className="editorial-home-card">
+            <p className="editorial-home-card-label">More context</p>
+            <h3>Publications and talks.</h3>
+            <p>If you want the longer version of the profile, those pages show the writing and speaking side of the work.</p>
+            <div className="editorial-link-row">
+              {contactLinks.slice(3).map((link) => (
+                <Link key={link.label} href={link.href} className="editorial-post-link">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </article>
         </div>
       </section>
     </EditorialPageFrame>
