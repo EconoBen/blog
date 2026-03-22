@@ -53,3 +53,11 @@
 - [ ] 8.3 Refine `/posts`, `/posts/[slug]`, `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, and `/search` to reduce density and improve hierarchy where the combined preview still feels list-heavy
 - [ ] 8.4 Reconcile `/code-ai` and `/code-ai/[id]` with the shared editorial shell so they no longer feel like a separate site while preserving their browsing affordances
 - [ ] 8.5 Publish another integrated preview branch and local review server after the next polish wave so the whole system can be judged together again
+
+## 9. Practical Refinement Pass
+
+- [ ] 9.1 Replace self-conscious labels and brag metrics with direct, practical navigation language across shared surfaces and posts
+- [ ] 9.2 Rebuild `/talks` around embedded watch/listen utility, remove venue summary stripes and "latest appearance" framing, and keep the page easy to browse
+- [ ] 9.3 Rework `/publications` to remove empty metric holes and summary filler, using content-driven layout and plain labels instead
+- [ ] 9.4 Restore `/about` as a useful CV page first, while still supporting the broader public-work narrative
+- [ ] 9.5 Add an explicit `Home` destination to the editorial shell and run another integrated preview after the practical pass
