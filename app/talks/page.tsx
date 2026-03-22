@@ -1,159 +1,39 @@
 import type { Metadata } from 'next';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
-import { talksConfig } from '../config/talksConfig';
+import TalksClient from './TalksClient';
 
 export const metadata: Metadata = {
   title: 'Talks | Ben Labaschin',
-  description: 'Conference talks, podcasts, and recorded appearances on AI systems, memory, and engineering.',
+  description: 'Recorded talks, podcasts, and livestreams with inline playback, transcripts, and direct source links.',
 };
 
-const formatDate = (dateStr: string) =>
-  new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  }).format(new Date(dateStr));
-
 export default function TalksPage() {
-  const talks = [...talksConfig.talks].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-  const latestTalk = talks[0];
-  const earlierTalks = talks.slice(1);
-
   return (
     <EditorialPageFrame currentPath="/talks">
       <section className="editorial-page-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Speaking</p>
+          <p className="editorial-home-kicker">Watch and listen</p>
           <h1 className="editorial-page-title">Talks</h1>
           <p className="editorial-page-copy">
-            Talks, podcast conversations, and community appearances on memory systems, AI engineering, and the realities of production workflows.
+            Recorded talks, podcast conversations, and livestreams with inline playback, transcripts when available, and direct links back to the source.
           </p>
           <div className="editorial-chip-row">
-            <span className="editorial-chip">Podcasts</span>
-            <span className="editorial-chip">Conferences</span>
-            <span className="editorial-chip">Streams</span>
+            <span className="editorial-chip">Inline playback</span>
             <span className="editorial-chip">Transcripts</span>
+            <span className="editorial-chip">Source links</span>
           </div>
         </div>
         <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">At a glance</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{talks.length}</span>
-              <span className="editorial-page-metric-label">recorded appearances</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{latestTalk ? formatDate(latestTalk.date) : 'n/a'}</span>
-              <span className="editorial-page-metric-label">latest appearance</span>
-            </div>
-          </div>
           <p className="editorial-post-summary">
-            Newest entries appear first, with watch, listen, and read links preserved where they exist.
+            Open a card, play it in place, and use the watch, listen, or transcript links that matter for that recording.
           </p>
-          {latestTalk && (
-            <a href={getTalkHref(latestTalk)} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
-              Open the latest appearance
-            </a>
-          )}
+          <p className="editorial-post-summary">
+            The page stays practical on purpose: no appearance counts, no latest-item badge, just a browsable set of recordings.
+          </p>
         </aside>
       </section>
 
-      <section className="editorial-home-proof-strip" aria-label="Talks summary">
-        <span>MLOps Community</span>
-        <span>/</span>
-        <span>ODSC West</span>
-        <span>/</span>
-        <span>Normconf</span>
-        <span>/</span>
-        <span>podcasts and streams</span>
-      </section>
-
-      {latestTalk && (
-        <section className="editorial-list-section">
-          <div className="editorial-list-heading">
-            <p className="editorial-home-section-label">Featured appearance</p>
-            <h2 className="editorial-page-section-title">The most recent recording, expanded enough to set the tone.</h2>
-          </div>
-          <div className="editorial-timeline">
-            <TalkEntry talk={latestTalk} featured />
-          </div>
-        </section>
-      )}
-
-      {earlierTalks.length > 0 && (
-        <section className="editorial-list-section">
-          <div className="editorial-list-heading">
-            <p className="editorial-home-section-label">Earlier appearances</p>
-            <h2 className="editorial-page-section-title">Selected talks and recordings, organized newest first.</h2>
-          </div>
-          <div className="editorial-timeline">
-            {earlierTalks.map((talk) => (
-              <TalkEntry key={talk.id} talk={talk} />
-            ))}
-          </div>
-        </section>
-      )}
+      <TalksClient />
     </EditorialPageFrame>
-  );
-}
-
-function getTalkHref(talk: (typeof talksConfig.talks)[number]) {
-  return talk.spotifyUrl
-    ? talk.spotifyUrl
-    : talk.youtubeId
-      ? `https://www.youtube.com/watch?v=${talk.youtubeId}`
-      : undefined;
-}
-
-function TalkEntry({
-  talk,
-  featured = false,
-}: {
-  talk: (typeof talksConfig.talks)[number];
-  featured?: boolean;
-}) {
-  const primaryUrl = getTalkHref(talk);
-
-  return (
-    <article className={`editorial-timeline-item ${featured ? 'is-featured' : ''}`}>
-      <div className="editorial-post-meta">
-        <span>{talk.event}</span>
-        <span>{formatDate(talk.date)}</span>
-        {featured && <span>Featured</span>}
-      </div>
-      <h3>{talk.title}</h3>
-      <p className="editorial-post-summary">{talk.description}</p>
-      <div className="editorial-chip-row">
-        {talk.topics.slice(0, 4).map((topic) => (
-          <span key={topic} className="editorial-chip">
-            {topic}
-          </span>
-        ))}
-      </div>
-      <div className="editorial-link-row">
-        {primaryUrl && (
-          <a
-            href={primaryUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="editorial-post-link"
-          >
-            {talk.spotifyUrl ? 'Listen to recording' : 'Watch recording'}
-          </a>
-        )}
-        {talk.transcriptUrl && (
-          <a
-            href={talk.transcriptUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="editorial-post-link"
-          >
-            Read transcript
-          </a>
-        )}
-      </div>
-    </article>
   );
 }

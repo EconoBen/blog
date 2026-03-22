@@ -17,8 +17,8 @@ export const talksConfig = {
   /**
    * Page title and description
    */
-  title: "Conference Talks, Presentations, and Live Streams",
-  subtitle: "A collection of my conference talks, workshops, and presentations on tech topics.",
+  title: "Talks and Recordings",
+  subtitle: "Watch, listen, and open the source or transcript without leaving the page.",
 
   /**
    * Array of talks
