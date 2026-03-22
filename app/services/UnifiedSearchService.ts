@@ -181,6 +181,7 @@ class UnifiedSearchService {
 
     const searchTerm = query.toLowerCase().trim();
     const suggestions = new Set<string>();
+    const codeToolsItems = getCodeToolsItems();
 
     // Get suggestions from post titles and tags
     const posts = await postService.getAllPosts();
