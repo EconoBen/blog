@@ -19,6 +19,7 @@ export default function TalksPage() {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const latestTalk = talks[0];
+  const earlierTalks = talks.slice(1);
 
   return (
     <EditorialPageFrame currentPath="/talks">
@@ -51,6 +52,11 @@ export default function TalksPage() {
           <p className="editorial-post-summary">
             Newest entries appear first, with watch, listen, and read links preserved where they exist.
           </p>
+          {latestTalk && (
+            <a href={getTalkHref(latestTalk)} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
+              Open the latest appearance
+            </a>
+          )}
         </aside>
       </section>
 
@@ -64,61 +70,90 @@ export default function TalksPage() {
         <span>podcasts and streams</span>
       </section>
 
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Appearances</p>
-          <h2 className="editorial-page-section-title">Selected talks and recordings, organized newest first.</h2>
-        </div>
-        <div className="editorial-talk-grid">
-          {talks.map((talk) => {
-            const primaryUrl = talk.spotifyUrl
-              ? talk.spotifyUrl
-              : talk.youtubeId
-                ? `https://www.youtube.com/watch?v=${talk.youtubeId}`
-                : undefined;
+      {latestTalk && (
+        <section className="editorial-list-section">
+          <div className="editorial-list-heading">
+            <p className="editorial-home-section-label">Featured appearance</p>
+            <h2 className="editorial-page-section-title">The most recent recording, expanded enough to set the tone.</h2>
+          </div>
+          <div className="editorial-timeline">
+            <TalkEntry talk={latestTalk} featured />
+          </div>
+        </section>
+      )}
 
-            return (
-              <article key={talk.id} className="editorial-talk-card">
-                <div className="editorial-post-meta">
-                  <span>{talk.event}</span>
-                  <span>{formatDate(talk.date)}</span>
-                </div>
-                <h3>{talk.title}</h3>
-                <p className="editorial-post-summary">{talk.description}</p>
-                <div className="editorial-chip-row">
-                  {talk.topics.slice(0, 4).map((topic) => (
-                    <span key={topic} className="editorial-chip">
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-                <div className="editorial-link-row">
-                  {primaryUrl && (
-                    <a
-                      href={primaryUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="editorial-post-link"
-                    >
-                      {talk.spotifyUrl ? 'Listen to recording' : 'Watch recording'}
-                    </a>
-                  )}
-                  {talk.transcriptUrl && (
-                    <a
-                      href={talk.transcriptUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="editorial-post-link"
-                    >
-                      Read transcript
-                    </a>
-                  )}
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      </section>
+      {earlierTalks.length > 0 && (
+        <section className="editorial-list-section">
+          <div className="editorial-list-heading">
+            <p className="editorial-home-section-label">Earlier appearances</p>
+            <h2 className="editorial-page-section-title">Selected talks and recordings, organized newest first.</h2>
+          </div>
+          <div className="editorial-timeline">
+            {earlierTalks.map((talk) => (
+              <TalkEntry key={talk.id} talk={talk} />
+            ))}
+          </div>
+        </section>
+      )}
     </EditorialPageFrame>
+  );
+}
+
+function getTalkHref(talk: (typeof talksConfig.talks)[number]) {
+  return talk.spotifyUrl
+    ? talk.spotifyUrl
+    : talk.youtubeId
+      ? `https://www.youtube.com/watch?v=${talk.youtubeId}`
+      : undefined;
+}
+
+function TalkEntry({
+  talk,
+  featured = false,
+}: {
+  talk: (typeof talksConfig.talks)[number];
+  featured?: boolean;
+}) {
+  const primaryUrl = getTalkHref(talk);
+
+  return (
+    <article className={`editorial-timeline-item ${featured ? 'is-featured' : ''}`}>
+      <div className="editorial-post-meta">
+        <span>{talk.event}</span>
+        <span>{formatDate(talk.date)}</span>
+        {featured && <span>Featured</span>}
+      </div>
+      <h3>{talk.title}</h3>
+      <p className="editorial-post-summary">{talk.description}</p>
+      <div className="editorial-chip-row">
+        {talk.topics.slice(0, 4).map((topic) => (
+          <span key={topic} className="editorial-chip">
+            {topic}
+          </span>
+        ))}
+      </div>
+      <div className="editorial-link-row">
+        {primaryUrl && (
+          <a
+            href={primaryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="editorial-post-link"
+          >
+            {talk.spotifyUrl ? 'Listen to recording' : 'Watch recording'}
+          </a>
+        )}
+        {talk.transcriptUrl && (
+          <a
+            href={talk.transcriptUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="editorial-post-link"
+          >
+            Read transcript
+          </a>
+        )}
+      </div>
+    </article>
   );
 }
