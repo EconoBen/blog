@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
@@ -9,33 +10,30 @@ export const metadata: Metadata = {
 
 export default async function ArchivePage() {
   const posts = await postService.getAllPosts();
-  
-  // Group posts by year and month
   const postsByYearMonth = posts.reduce((acc, post) => {
     const year = post.date.getFullYear();
     const month = post.date.getMonth();
-    const key = `${year}-${month}`;
-    
-    if (!acc[key]) {
-      acc[key] = {
+    const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
+
+    if (!acc[monthKey]) {
+      acc[monthKey] = {
         year,
         month,
-        monthName: post.date.toLocaleDateString('en-US', { month: 'long' }),
-        posts: []
+        monthLabel: post.date.toLocaleDateString('en-US', { month: 'long' }),
+        monthHref: `/archives/${monthKey}`,
+        posts: [],
       };
     }
-    
-    acc[key].posts.push(post);
-    return acc;
-  }, {} as Record<string, { year: number; month: number; monthName: string; posts: typeof posts }>);
 
-  // Sort by year and month
+    acc[monthKey].posts.push(post);
+    return acc;
+  }, {} as Record<string, { year: number; month: number; monthLabel: string; monthHref: string; posts: typeof posts }>);
+
   const sortedEntries = Object.values(postsByYearMonth).sort((a, b) => {
     if (a.year !== b.year) return b.year - a.year;
     return b.month - a.month;
   });
 
-  // Group by year for display
   const postsByYear = sortedEntries.reduce((acc, entry) => {
     if (!acc[entry.year]) {
       acc[entry.year] = [];
@@ -45,73 +43,67 @@ export default async function ArchivePage() {
   }, {} as Record<number, typeof sortedEntries>);
 
   const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+  const uniqueTags = new Set(posts.flatMap((post) => post.tags)).size;
 
   return (
-    <div className="archive-page">
-      <div className="page-header">
-        <h1 className="page-title">Archive</h1>
-        <p className="page-subtitle">
-          {posts.length} posts across {years.length} years
-        </p>
-      </div>
-
-      <div className="archive-content">
-        {years.map(year => (
-          <section key={year} className="archive-year">
-            <h2 className="year-heading">{year}</h2>
-            
-            <div className="months-grid">
-              {postsByYear[year].map(({ monthName, posts: monthPosts }) => (
-                <div key={`${year}-${monthName}`} className="month-section">
-                  <h3 className="month-heading">
-                    {monthName} 
-                    <span className="post-count">({monthPosts.length})</span>
-                  </h3>
-                  
-                  <ul className="posts-list">
-                    {monthPosts.map(post => (
-                      <li key={post.slug} className="archive-post">
-                        <Link href={`/posts/${post.slug}`}>
-                          <time className="archive-post-date">
-                            {post.date.getDate().toString().padStart(2, '0')}
-                          </time>
-                          <span className="archive-post-title">{post.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-
-      <div className="archive-stats">
-        <h2 className="stats-heading">Post Statistics</h2>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-value">{posts.length}</div>
-            <div className="stat-label">Total Posts</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">{years.length}</div>
-            <div className="stat-label">Years Active</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">
-              {Math.round(posts.length / years.length)}
-            </div>
-            <div className="stat-label">Posts per Year</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">
-              {new Set(posts.flatMap(p => p.tags)).size}
-            </div>
-            <div className="stat-label">Unique Tags</div>
-          </div>
+    <EditorialPageFrame currentPath="/archive" pageClassName="editorial-book-page">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
+          <p className="editorial-home-kicker">Archive</p>
+          <h1 className="editorial-page-title">Archive</h1>
+          <p className="editorial-page-copy">
+            Browse the full post history by year and month, with links preserved at both the month and individual post level.
+          </p>
         </div>
-      </div>
-    </div>
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">Archive at a glance</p>
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">{posts.length}</span>
+              <span className="editorial-page-metric-label">total posts</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{years.length}</span>
+              <span className="editorial-page-metric-label">years represented</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{uniqueTags}</span>
+              <span className="editorial-page-metric-label">unique tags across the archive</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      {years.map((year) => (
+        <section key={year} className="editorial-list-section">
+          <div className="editorial-list-heading">
+            <p className="editorial-home-section-label">Year {year}</p>
+            <h2 className="editorial-page-section-title">Monthly index for {year}.</h2>
+          </div>
+          <div className="months-grid">
+            {postsByYear[year].map(({ monthLabel, monthHref, posts: monthPosts }) => (
+              <div key={`${year}-${monthLabel}`} className="month-section">
+                <h3 className="month-heading">
+                  <Link href={monthHref}>{monthLabel}</Link>
+                  <span className="post-count">({monthPosts.length})</span>
+                </h3>
+                <ul className="posts-list">
+                  {monthPosts.map((post) => (
+                    <li key={post.slug} className="archive-post">
+                      <Link href={`/posts/${post.slug}`}>
+                        <time className="archive-post-date">
+                          {post.date.getDate().toString().padStart(2, '0')}
+                        </time>
+                        <span className="archive-post-title">{post.title}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </EditorialPageFrame>
   );
 }
