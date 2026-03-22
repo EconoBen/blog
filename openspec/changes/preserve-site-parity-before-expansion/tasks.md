@@ -45,6 +45,10 @@
 - [ ] 7.2 Refine the shared shell, global styles, and homepage toward the intended end-state visual system
 - [ ] 7.3 Refine the language and narrative positioning across the homepage and key top-level pages
 - [ ] 7.4 Refine posts, discovery routes, and code/tools subpages so they feel consistent with the final-direction theme
+- [ ] 7.5 Capture the Stitch multi-page design brief and outputs as a refinement input, using the desktop/web screens as the implementation reference
+- [ ] 7.6 Apply the Stitch desktop direction to the shared shell, homepage, and core top-level routes without dropping continuity guarantees
+- [ ] 7.7 Normalize search, archive, tags, and code/tools into a more unified discovery family based on the Stitch desktop patterns
+- [ ] 7.8 Review the generated book, publications, talks, and about patterns for what should be adopted, what should be rejected, and what must remain tied to real site behavior
 
 ## 8. Combined Preview Refinement
 

@@ -8,6 +8,8 @@ This change exists to prevent content loss while the redesign moves forward. Wit
 
 The first implementation wave is already split into stacked draft PRs for the shared foundation, structured pages, posts, discovery routes, and continuity-backed surfaces. The next wave should move from "safe continuity" toward "closer to final" by using an integrated preview branch plus focused polish branches for shared visual fidelity, language, and subpage refinement.
 
+The latest design input is a Stitch-generated multi-page site family built from the active OpenSpec brief plus uploaded Figma references. That pass produced both mobile and desktop route families, but the desktop/web outputs are the more useful implementation target. They reinforce a calmer editorial shell, a Ben-first homepage, cleaner list-based discovery pages, narrower long-form reading layouts, and more normalized archive/tag/search/code-tool families. They should guide implementation, but not be treated as codegen or content truth.
+
 The combined preview makes the remaining issues concrete. The site is now directionally coherent, but several routes still reveal their transitional state: `About` is cramped, `Book` still reads like a placeholder, `Publications` and `Talks` are still card-grid heavy, `Posts` remains too dense, and `Code & Tools` still feels like a separate product rather than part of the same editorial platform.
 
 The latest review adds a sharper constraint: the redesign must become more practical and less self-conscious. In the current preview, the site gets weaker when it starts narrating itself with labels like "essays," "pieces," "appearances," "major publications," and "featured entries," or when it introduces visual devices such as proof strips and metric sidebars that do not help people actually use the page. The old site handled some of this better, especially on `Talks`, where embedded media made the page immediately useful and about-page content still behaved like a real CV.
@@ -62,6 +64,13 @@ Automated build/runtime checks plus targeted human review are enough, as long as
 Alternatives considered:
 - Rely only on `next build`: rejected because content loss can still slip through.
 - Require exhaustive visual parity review for every route before building new surfaces: rejected because it over-constrains progress.
+
+### 6. Use Stitch desktop outputs as design reference, not implementation truth
+The Stitch project is useful as a design extraction step because it extends the homepage direction into a complete site family. The correct use is to borrow information architecture, hierarchy, pacing, and calmer visual language from the desktop outputs while keeping the real site's content, behaviors, and tone constraints.
+
+Alternatives considered:
+- Ignore Stitch and continue from ad hoc editorial exploration: rejected because the multi-page desktop pass clarifies the page family more concretely.
+- Treat Stitch as direct codegen or literal copy source: rejected because it invents fake content and occasionally drifts into generic product/newsletter patterns.
 
 ### 6. The design thesis is practical, direct, and content-first
 The site should feel useful, grounded, and easy to navigate. Labels should describe what the content is in plain terms: posts, talks, publications, resume. Visual emphasis should come from the content itself, not from self-promotional metrics or decorative summary bands.
@@ -120,6 +129,7 @@ flowchart TD
 4. Verify dynamic systems and outputs: search, tags, archives, code-and-tools, metadata, RSS, sitemap, and robots.
 5. Review the redesigned site for continuity gaps, then queue copy/book/newsletter refinements for the next pass.
 6. Create an integrated preview branch from the active stacked slices and run a second pass for shared visual fidelity, language, and subpage polish.
+7. Use the Stitch desktop outputs to define the next refinement wave for the shared shell, homepage, long-form reading, talks, discovery surfaces, and code/tool pages.
 7. Run a combined-preview review, then launch another polish wave for structured pages, discovery density, and code/tools shell alignment.
 8. Run a practical-refinement wave that removes pretentious language, restores useful embedded media where the old site was stronger, and re-centers the about page on CV utility.
 
