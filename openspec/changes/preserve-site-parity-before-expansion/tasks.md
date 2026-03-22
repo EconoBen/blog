@@ -38,3 +38,10 @@
 - [ ] 6.1 Review redesigned pages on desktop and mobile with targeted evidence for changed surfaces
 - [ ] 6.2 Confirm that no posts, routes, or feature surfaces were lost during the redesign
 - [ ] 6.3 Queue the next round of copy, book, newsletter, and aesthetic refinements after continuity review
+
+## 7. End-State Polish
+
+- [ ] 7.1 Create an integrated preview branch that stacks the active redesign slices without merging into `main`
+- [ ] 7.2 Refine the shared shell, global styles, and homepage toward the intended end-state visual system
+- [ ] 7.3 Refine the language and narrative positioning across the homepage and key top-level pages
+- [ ] 7.4 Refine posts, discovery routes, and code/tools subpages so they feel consistent with the final-direction theme

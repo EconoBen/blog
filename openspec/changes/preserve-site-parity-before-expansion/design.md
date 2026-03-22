@@ -6,6 +6,8 @@ The current working tree already contains exploratory editorial redesign work, i
 
 This change exists to prevent content loss while the redesign moves forward. Without continuity guardrails, the migration can easily drop posts, routes, metadata, or feature surfaces while the new visual system is being built.
 
+The first implementation wave is already split into stacked draft PRs for the shared foundation, structured pages, posts, discovery routes, and continuity-backed surfaces. The next wave should move from "safe continuity" toward "closer to final" by using an integrated preview branch plus focused polish branches for shared visual fidelity, language, and subpage refinement.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -92,6 +94,7 @@ flowchart TD
 3. Modernize content routes and expansion surfaces in parallel while preserving existing content sources and wording by default.
 4. Verify dynamic systems and outputs: search, tags, archives, code-and-tools, metadata, RSS, sitemap, and robots.
 5. Review the redesigned site for continuity gaps, then queue copy/book/newsletter refinements for the next pass.
+6. Create an integrated preview branch from the active stacked slices and run a second pass for shared visual fidelity, language, and subpage polish.
 
 ## Execution Constraints
 
@@ -99,6 +102,7 @@ flowchart TD
 - Parallel implementation should use git worktrees so multiple route families can advance independently.
 - Each parallel slice should land in its own PR and remain unmerged until human review approves the branch set.
 - Shared foundation work that changes common files such as layout shells, shared components, or global styles should establish the integration base first; page-specific work should branch from that base to reduce conflicts.
+- Once multiple draft slices exist, an integration preview branch may stack them together so later polish work can target the real combined experience without merging anything into `main`.
 - PRs created for this change are review checkpoints, not merge signals. Nothing should be merged into `main` until the user explicitly approves it.
 
 Rollback strategy:
