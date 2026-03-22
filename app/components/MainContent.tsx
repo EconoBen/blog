@@ -39,7 +39,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
     return (
       <div className="home-loading">
         <div className="loading-spinner"></div>
-        <p>Loading amazing content...</p>
+        <p>Preparing the latest writing.</p>
       </div>
     );
   }
@@ -52,14 +52,14 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
     <EditorialPageFrame currentPath="/" pageClassName="editorial-home-page">
       <section className="editorial-home-hero">
         <div className="editorial-home-hero-copy">
-          <p className="editorial-home-kicker">Writing archive</p>
-          <h1>Writing about how AI systems remember, fail, and scale.</h1>
+          <p className="editorial-home-kicker">Technical writing archive</p>
+          <h1>Writing about how AI systems remember, fail, and scale in production.</h1>
           <p className="editorial-home-subtitle">
-            A public platform for essays, talks, O&apos;Reilly reports, and the forthcoming book on agent memory.
+            A public body of work on AI systems, agent memory, and the engineering decisions that separate demos from durable products.
           </p>
           <div className="editorial-home-actions">
             <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-primary">
-              Read the latest post
+              Read the newest essay
             </Link>
             <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
               Browse the archive
@@ -68,7 +68,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
         </div>
 
         <aside className="editorial-home-book-card">
-          <p className="editorial-home-card-label">Latest post</p>
+          <p className="editorial-home-card-label">Newest essay</p>
           <h2>{newestPost.title}</h2>
           <p>{newestExcerpt}</p>
           <div className="editorial-home-book-meta">
@@ -77,7 +77,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
             <span>{getPrimaryTag(newestPost)}</span>
           </div>
           <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-accent">
-            Open the essay
+            Read the full piece
           </Link>
         </aside>
       </section>
@@ -89,12 +89,12 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
         <span>/</span>
         <span>O&apos;Reilly reports</span>
         <span>/</span>
-        <span>forthcoming book</span>
+        <span>forthcoming book on agent memory</span>
       </section>
 
       <section className="editorial-home-section">
-        <p className="editorial-home-section-label">Selected work</p>
-        <h2>Recent posts with enough room to decide what to read next.</h2>
+        <p className="editorial-home-section-label">Selected writing</p>
+        <h2>Recent essays with enough context to know where to go next.</h2>
         <div className="editorial-home-grid">
           {featuredPosts.map((post) => {
             const excerpt = getExcerpt(post.content, post.summary);
@@ -126,14 +126,14 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
 
       <section className="editorial-home-cta-band">
         <div>
-          <p className="editorial-home-card-label">Newsletter + book</p>
-          <h3>A lightweight conversion layer, not a hard sell.</h3>
+          <p className="editorial-home-card-label">Book notes + archive</p>
+          <h3>Follow the longer arc without losing the thread.</h3>
           <p>
-            Follow the book, browse the archive, or move into talks and publications if you want the broader context.
+            Start with the book notes, then move through the archive, talks, and publications if you want the broader technical context.
           </p>
         </div>
         <Link href="/book" className="editorial-home-button editorial-home-button-primary">
-          Read book updates
+          Follow the book
         </Link>
       </section>
     </EditorialPageFrame>
