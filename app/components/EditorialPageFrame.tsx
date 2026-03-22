@@ -21,8 +21,9 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
     <header className="editorial-home-topbar">
       <div className="editorial-home-brand">
         <p className="editorial-home-brand-name">BEN LABASCHIN</p>
+        <p className="editorial-home-brand-note">AI systems, memory, and editorial writing</p>
       </div>
-      <nav className="editorial-home-nav" aria-label="Editorial navigation">
+      <nav className="editorial-home-nav" aria-label="Primary">
         {navItems.map((item) => (
           <Link
             key={item.href}
@@ -47,7 +48,7 @@ export function EditorialPageFrame({
     <div className={pageClassName}>
       <div className="editorial-home-shell">
         <EditorialTopbar currentPath={currentPath} />
-        {children}
+        <main className="editorial-home-content">{children}</main>
       </div>
     </div>
   );
