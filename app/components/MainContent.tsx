@@ -32,7 +32,7 @@ const getExcerpt = (content: string, summary?: string): string => {
   return firstParagraph.substring(0, 147) + '...';
 };
 
-const getPrimaryTag = (post: Post): string => post.tags[0] ?? 'Essay';
+const getPrimaryTag = (post: Post): string => post.tags[0] ?? 'Post';
 
 const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
   if (!posts || posts.length === 0) {
@@ -53,13 +53,13 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
       <section className="editorial-home-hero">
         <div className="editorial-home-hero-copy">
           <p className="editorial-home-kicker">Technical writing archive</p>
-          <h1>Writing about how AI systems remember, fail, and scale in production.</h1>
+          <h1>Posts on how AI systems remember, fail, and scale in production.</h1>
           <p className="editorial-home-subtitle">
-            Essays, talks, and book notes on the engineering decisions that separate demos from durable products.
+            Posts, talks, and book notes on the engineering choices that separate demos from durable products.
           </p>
           <div className="editorial-home-actions">
             <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-primary">
-              Read the newest essay
+              Read the newest post
             </Link>
             <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
               Browse the archive
@@ -68,7 +68,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
         </div>
 
         <aside className="editorial-home-book-card">
-          <p className="editorial-home-card-label">Newest essay</p>
+          <p className="editorial-home-card-label">Latest post</p>
           <h2>{newestPost.title}</h2>
           <p>{newestExcerpt}</p>
           <div className="editorial-home-book-meta">
@@ -77,7 +77,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
             <span>{getPrimaryTag(newestPost)}</span>
           </div>
           <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-accent">
-            Read the full piece
+            Read the post
           </Link>
         </aside>
       </section>
@@ -94,7 +94,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
 
       <section className="editorial-home-section">
         <p className="editorial-home-section-label">Selected writing</p>
-        <h2>Recent essays with enough context to know where to go next.</h2>
+        <h2>Recent posts with enough context to know where to go next.</h2>
         <div className="editorial-home-grid">
           {featuredPosts.map((post, index) => {
             const excerpt = getExcerpt(post.content, post.summary);

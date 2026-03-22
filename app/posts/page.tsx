@@ -5,7 +5,7 @@ import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
   title: 'Posts | Ben Labaschin',
-  description: 'Essays, field notes, and technical writing on AI systems, memory, engineering practice, and adjacent work.',
+  description: 'Posts, field notes, and technical writing on AI systems, memory, engineering practice, and adjacent work.',
 };
 
 type Posts = Awaited<ReturnType<typeof postService.getAllPosts>>;
@@ -62,7 +62,7 @@ export default async function PostsPage() {
           <p className="editorial-home-kicker">Writing archive</p>
           <h1 className="editorial-page-title">Posts</h1>
           <p className="editorial-page-copy">
-            Essays, field notes, and working-throughs on agent memory, AI systems, engineering practice, and the occasional economics detour, arranged so the newest work stays easy to find.
+            Posts, field notes, and working-throughs on agent memory, AI systems, engineering practice, and the occasional economics detour, arranged so the newest work stays easy to find.
           </p>
           <div className="editorial-chip-row">
             {topTags.map(([tag, count]) => (
@@ -91,7 +91,7 @@ export default async function PostsPage() {
           )}
           {featuredPost && (
             <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-button editorial-home-button-secondary">
-              Start with the latest essay
+              Start with the latest post
             </Link>
           )}
         </aside>
@@ -99,8 +99,8 @@ export default async function PostsPage() {
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Featured reading</p>
-          <h2 className="editorial-page-section-title">Start with the latest essay, then move backward by year.</h2>
+          <p className="editorial-home-section-label">Latest post</p>
+          <h2 className="editorial-page-section-title">Start with the latest post, then move backward by year.</h2>
         </div>
         {featuredPost ? (
           <article className="editorial-home-card">
@@ -115,7 +115,7 @@ export default async function PostsPage() {
                   <span>{featuredPost.tags[0]}</span>
                 </Link>
               ) : (
-                <span className="editorial-chip">Essay</span>
+                <span className="editorial-chip">Post</span>
               )}
               <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Long-form note'}</span>
             </div>
