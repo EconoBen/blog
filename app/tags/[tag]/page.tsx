@@ -10,12 +10,18 @@ interface TagPageProps {
   }>;
 }
 
+const longDateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
   const { tag: encodedTag } = await params;
   const tag = decodeURIComponent(encodedTag);
 
   return {
-    title: `${tag} | Economic Notes`,
+    title: `${tag} | Ben Labaschin`,
     description: `Browse all posts tagged with "${tag}".`,
   };
 }
@@ -45,6 +51,11 @@ export default async function TagPage({ params }: TagPageProps) {
           <p className="editorial-page-copy">
             {posts.length} post{posts.length !== 1 ? 's' : ''} found for this topic, ordered newest first.
           </p>
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">{posts.length} posts</span>
+            <span className="editorial-chip">Newest first</span>
+            <span className="editorial-chip">Related tags linked</span>
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Browse links</p>
@@ -52,6 +63,10 @@ export default async function TagPage({ params }: TagPageProps) {
             <div>
               <span className="editorial-page-metric-value">{posts.length}</span>
               <span className="editorial-page-metric-label">posts in this tag</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{new Set(posts.map((post) => post.date.getFullYear())).size}</span>
+              <span className="editorial-page-metric-label">years represented</span>
             </div>
             <div>
               <Link href="/tags" className="editorial-post-link">
@@ -71,20 +86,16 @@ export default async function TagPage({ params }: TagPageProps) {
           {posts.map((post) => (
             <article key={post.slug} className="editorial-post-card">
               <div className="editorial-post-meta">
-                <span>{post.date.toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}</span>
-                <span>{post.tags.length} tags</span>
+                <span>{longDateFormatter.format(post.date)}</span>
+                <span>{post.readingTime ? `${post.readingTime} min read` : `${post.tags.length} tags`}</span>
               </div>
               <h2>{post.title}</h2>
               {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
               <div className="editorial-chip-row">
                 {post.tags.map((postTag) => (
-                  <span key={postTag} className="editorial-chip">
+                  <Link key={postTag} href={`/tags/${encodeURIComponent(postTag)}`} className="editorial-chip">
                     {postTag}
-                  </span>
+                  </Link>
                 ))}
               </div>
               <Link href={`/posts/${post.slug}`} className="editorial-post-link">

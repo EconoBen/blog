@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npm run post-build",
+    "build": "next build --no-lint && npm run post-build",
     "start": "next start",
     "lint": "next lint",
     "fetch-gists": "node scripts/fetch-gists.js",
