@@ -26,7 +26,7 @@ const isActivePath = (currentPath: string, href: string) => {
   return currentPath === href || currentPath.startsWith(`${href}/`);
 };
 
-const useCompactShell = (currentPath: string) => (
+const isCompactShell = (currentPath: string) => (
   currentPath === '/' || currentPath === '/posts' || currentPath === '/talks'
 );
 
@@ -45,7 +45,7 @@ interface EditorialPageFrameProps {
 }
 
 export function EditorialTopbar({ currentPath }: { currentPath: string }) {
-  const compactShell = useCompactShell(currentPath);
+  const compactShell = isCompactShell(currentPath);
   const brandLabel = compactShell ? 'econoben.dev' : 'ECONOBEN.DEV';
   const headerClassName = compactShell
     ? 'sticky top-0 z-50 w-full border-b border-transparent bg-[#fef9ef]/95 backdrop-blur'
@@ -98,8 +98,10 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
 export function EditorialPageFrame({
   children,
   currentPath,
-  pageClassName = '',
+  pageClassName = 'editorial-book-page',
 }: EditorialPageFrameProps) {
+  const copyrightYear = new Date().getFullYear();
+
   return (
     <div className={`min-h-screen bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
@@ -108,18 +110,34 @@ export function EditorialPageFrame({
         <footer className="mt-20 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-8 py-12 md:flex-row">
             <div className="font-headline text-sm uppercase tracking-wide text-[#555f70]">
-              © 2024 Ben - Technical Curator &amp; Economist
+              {copyrightYear > 2024 ? `© 2024-${copyrightYear} Ben` : '© 2024 Ben'} - Technical Curator &amp; Economist
             </div>
             <nav className="flex flex-wrap justify-center gap-8">
-              {footerLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="font-headline text-sm uppercase tracking-wide text-[#555f70] opacity-80 transition-opacity hover:opacity-100 hover:underline"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {footerLinks.map((item) => {
+                const isInternal = item.href.startsWith('/');
+                const isHttpLink = item.href.startsWith('http://') || item.href.startsWith('https://');
+                const linkClassName =
+                  'font-headline text-sm uppercase tracking-wide text-[#555f70] opacity-80 transition-opacity hover:opacity-100 hover:underline';
+
+                if (!isInternal) {
+                  return (
+                    <a
+                      key={item.href}
+                      href={item.href}
+                      className={linkClassName}
+                      {...(isHttpLink ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                }
+
+                return (
+                  <Link key={item.href} href={item.href} className={linkClassName}>
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
         </footer>
