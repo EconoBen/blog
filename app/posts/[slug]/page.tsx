@@ -92,7 +92,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           <h1 className="editorial-page-title">{post.title}</h1>
           {post.summary && <p className="editorial-page-copy">{post.summary}</p>}
           <p className="editorial-post-summary">
-            Published {longDateFormatter.format(post.date)}{post.readingTime ? ` · ${post.readingTime} min read` : ''}
+            Published {longDateFormatter.format(post.date)}{post.readingTime ? ` · ${post.readingTime} min read` : ''} and filed with the post archive.
           </p>
           <div className="editorial-home-actions">
             <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
@@ -109,19 +109,19 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
         </div>
         <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Post details</p>
+          <p className="editorial-home-card-label">Reading frame</p>
           <div className="editorial-page-metric-list">
             <div>
               <span className="editorial-page-metric-value">{longDateFormatter.format(post.date)}</span>
-              <span className="editorial-page-metric-label">published date</span>
+              <span className="editorial-page-metric-label">publication date</span>
             </div>
             <div>
               <span className="editorial-page-metric-value">{post.readingTime ? `${post.readingTime} min` : 'Essay'}</span>
-              <span className="editorial-page-metric-label">reading time</span>
+              <span className="editorial-page-metric-label">reading length</span>
             </div>
             <div>
               <span className="editorial-page-metric-value">{monthYearFormatter.format(post.date)}</span>
-              <span className="editorial-page-metric-label">archive month</span>
+              <span className="editorial-page-metric-label">filed in</span>
             </div>
           </div>
           <div className="editorial-chip-row">
