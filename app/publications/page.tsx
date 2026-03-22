@@ -23,86 +23,33 @@ export default function PublicationsPage() {
   const publicationYears = Object.keys(publicationsByYear)
     .map(Number)
     .sort((a, b) => b - a);
-  const publicationTypeCounts = sortedPublications.reduce<Record<Publication['type'], number>>(
-    (counts, publication) => {
-      counts[publication.type] += 1;
-      return counts;
-    },
-    {
-      book: 0,
-      journal: 0,
-      conference: 0,
-      report: 0,
-      workshop: 0,
-      other: 0,
-    }
-  );
-  const latestPublication = sortedPublications[0];
-  const summaryItems = [
-    publicationTypeCounts.book > 0 ? `${publicationTypeCounts.book} books` : null,
-    publicationTypeCounts.journal > 0 ? `${publicationTypeCounts.journal} journal article${publicationTypeCounts.journal > 1 ? 's' : ''}` : null,
-    publicationTypeCounts.report > 0 ? `${publicationTypeCounts.report} reports` : null,
-    publicationTypeCounts.conference > 0 ? `${publicationTypeCounts.conference} conference paper${publicationTypeCounts.conference > 1 ? 's' : ''}` : null,
-    publicationTypeCounts.workshop > 0 ? `${publicationTypeCounts.workshop} workshop paper${publicationTypeCounts.workshop > 1 ? 's' : ''}` : null,
-    publicationTypeCounts.other > 0 ? `${publicationTypeCounts.other} other pieces` : null,
-  ].filter((item): item is string => Boolean(item));
 
   return (
     <EditorialPageFrame currentPath="/publications">
       <section className="editorial-page-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Writing</p>
+          <p className="editorial-home-kicker">Books, reports, papers</p>
           <h1 className="editorial-page-title">Publications</h1>
           <p className="editorial-page-copy">
-            Books, reports, and papers, newest first.
+            Browse the writing by year, then open the item you need. Reports, papers, and the forthcoming book all live in the same list.
           </p>
           <div className="editorial-chip-row">
-            <span className="editorial-chip">Books</span>
-            <span className="editorial-chip">Papers</span>
-            <span className="editorial-chip">Reports</span>
-            <span className="editorial-chip">PDFs</span>
-          </div>
-        </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Quick access</p>
-          <p className="editorial-post-summary">
-            Jump by year or open the newest publication directly.
-          </p>
-          {latestPublication && (
-            <a href={getPublicationHref(latestPublication)} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
-              Open latest: {latestPublication.title}
-            </a>
-          )}
-          <div className="editorial-chip-row" style={{ marginTop: '16px' }}>
             {publicationYears.map((year) => (
               <a key={year} href={`#publication-year-${year}`} className="editorial-chip" style={{ textDecoration: 'none' }}>
                 {year}
               </a>
             ))}
           </div>
-          <div style={{ display: 'grid', gap: '10px', marginTop: '18px' }}>
-            {sortedPublications.slice(0, 3).map((publication) => (
-              <a
-                key={publication.id}
-                href={`#${publication.id}`}
-                className="editorial-post-link"
-                style={{ marginTop: 0 }}
-              >
-                {formatPublicationDate(publication.date)} · {publication.title}
-              </a>
-            ))}
-          </div>
+        </div>
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">Browse-first</p>
+          <p className="editorial-post-summary">
+            Use the year jump links or scan the latest publications below. No summary strip, just the work.
+          </p>
+          <a href={`#publication-year-${publicationYears[0]}`} className="editorial-post-link">
+            Start with {publicationYears[0]}
+          </a>
         </aside>
-      </section>
-
-      <section className="editorial-home-proof-strip" aria-label="Publications summary">
-        <span>{publications.length} publications</span>
-        <span>/</span>
-        <span>{summaryItems[0] ?? 'books'}</span>
-        <span>/</span>
-        <span>{summaryItems[1] ?? 'journal articles'}</span>
-        <span>/</span>
-        <span>{summaryItems[2] ?? 'reports'}</span>
       </section>
 
       {publicationYears.map((year) => {
@@ -200,9 +147,11 @@ function PublicationEntry({
       </div>
 
       {actionHref && actionLabel && (
-        <a href={actionHref} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
-          {actionLabel}
-        </a>
+        <div className="editorial-link-row">
+          <a href={actionHref} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
+            {actionLabel}
+          </a>
+        </div>
       )}
     </article>
   );

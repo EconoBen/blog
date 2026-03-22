@@ -23,14 +23,6 @@ export default function TalksPage() {
             <span className="editorial-chip">Source links</span>
           </div>
         </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-post-summary">
-            Open a card, play it in place, and use the watch, listen, or transcript links that matter for that recording.
-          </p>
-          <p className="editorial-post-summary">
-            The page stays practical on purpose: no appearance counts, no latest-item badge, just a browsable set of recordings.
-          </p>
-        </aside>
       </section>
 
       <TalksClient />
