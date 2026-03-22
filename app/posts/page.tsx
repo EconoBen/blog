@@ -1,72 +1,91 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
-  title: 'All Posts | Economic Notes',
-  description: 'Browse all blog posts on economics, technology, and AI.',
+  title: 'Posts | Ben Labaschin',
+  description: 'Essays on AI systems, engineering, memory, and adjacent technical work.',
 };
 
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+  const featuredPost = posts[0];
 
   return (
-    <div className="posts-page">
-      <div className="page-header">
-        <h1 className="page-title">All Posts</h1>
-        <p className="page-subtitle">
-          {posts.length} posts on economics, technology, and more
-        </p>
-      </div>
+    <EditorialPageFrame currentPath="/posts">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
+          <p className="editorial-home-kicker">Writing archive</p>
+          <h1 className="editorial-page-title">Posts</h1>
+          <p className="editorial-page-copy">
+            Essays on agent memory, AI systems, developer tooling, and the occasional detour into economics.
+          </p>
+        </div>
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">At a glance</p>
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">{posts.length}</span>
+              <span className="editorial-page-metric-label">published posts</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{featuredPost?.tags[0] ?? 'AI'}</span>
+              <span className="editorial-page-metric-label">current leading theme</span>
+            </div>
+          </div>
+          {featuredPost && (
+            <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-button editorial-home-button-secondary">
+              Start with the latest essay
+            </Link>
+          )}
+        </aside>
+      </section>
 
-      <div className="posts-grid">
+      <section className="editorial-home-proof-strip" aria-label="Posts summary">
+        <span>long-form essays</span>
+        <span>/</span>
+        <span>systems + infrastructure</span>
+        <span>/</span>
+        <span>agent memory</span>
+        <span>/</span>
+        <span>developer workflow</span>
+      </section>
+
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Archive</p>
+          <h2 className="editorial-page-section-title">Recent writing with enough room to read.</h2>
+        </div>
+
+        <div className="editorial-post-grid">
         {posts.map((post) => (
-          <article key={post.slug} className="blog-card">
-            <Link href={`/posts/${post.slug}`}>
-              <div className="blog-card-content">
-                {post.coverImage && (
-                  <div className="blog-card-image">
-                    <img src={post.coverImage} alt={post.title} />
-                  </div>
-                )}
-                
-                <h2 className="blog-card-title">{post.title}</h2>
-                
-                <time className="blog-card-date">
-                  {post.date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </time>
-                
-                {post.summary && (
-                  <p className="blog-card-summary">{post.summary}</p>
-                )}
-                
-                <div className="blog-card-footer">
-                  <div className="blog-card-tags">
-                    {post.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="tag">
-                        {tag}
-                      </span>
-                    ))}
-                    {post.tags.length > 3 && (
-                      <span className="tag tag-more">
-                        +{post.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  
-                  <span className="read-more-link">
-                    Read more →
-                  </span>
-                </div>
-              </div>
+          <article key={post.slug} className="editorial-post-card">
+            <div className="editorial-post-meta">
+              <span>{post.tags[0] ?? 'Essay'}</span>
+              <span>{formatter.format(post.date)}</span>
+            </div>
+            <h2>{post.title}</h2>
+            {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
+            <div className="editorial-chip-row">
+              {post.tags.slice(0, 3).map((tag) => (
+                <span key={tag} className="editorial-chip">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <Link href={`/posts/${post.slug}`} className="editorial-post-link">
+              Read the post
             </Link>
           </article>
         ))}
-      </div>
-    </div>
+        </div>
+      </section>
+    </EditorialPageFrame>
   );
 }

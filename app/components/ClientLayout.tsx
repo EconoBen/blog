@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import Sidebar from './Sidebar';
 import SocialLinks from './SocialLinks';
 import DarkModeToggle from './DarkModeToggle';
@@ -11,6 +12,7 @@ interface ClientLayoutProps {
 }
 
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
+  const pathname = usePathname();
   // Default to open on desktop (production parity)
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -90,8 +92,11 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     };
   }, [isResizing, sidebarWidth]);
 
+  const editorialShellRoutes = new Set(['/', '/book', '/posts', '/publications', '/talks', '/about']);
+  const useEditorialShell = editorialShellRoutes.has(pathname);
+
   // Don't render sidebar on mobile
-  if (isMobile) {
+  if (isMobile || useEditorialShell) {
     return (
       <>
         {children}
