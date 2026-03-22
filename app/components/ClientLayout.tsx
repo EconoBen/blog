@@ -11,6 +11,19 @@ interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
+const editorialShellRoutes = [
+  '/',
+  '/book',
+  '/posts',
+  '/publications',
+  '/talks',
+  '/about',
+  '/search',
+  '/tags',
+  '/archive',
+  '/archives',
+];
+
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   const pathname = usePathname();
   // Default to open on desktop (production parity)
@@ -92,8 +105,21 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     };
   }, [isResizing, sidebarWidth]);
 
-  const editorialShellRoutes = new Set(['/', '/book', '/posts', '/publications', '/talks', '/about']);
-  const useEditorialShell = editorialShellRoutes.has(pathname);
+  const useEditorialShell = editorialShellRoutes.some((route) => {
+    if (route === '/') {
+      return pathname === route;
+    }
+
+    return pathname === route || pathname.startsWith(`${route}/`);
+  });
+
+  useEffect(() => {
+    document.body.classList.toggle('shell-editorial', useEditorialShell);
+
+    return () => {
+      document.body.classList.remove('shell-editorial');
+    };
+  }, [useEditorialShell]);
 
   // Don't render sidebar on mobile
   if (isMobile || useEditorialShell) {
