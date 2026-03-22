@@ -75,6 +75,11 @@ export default function AboutPage() {
               <p className="editorial-home-card-label">{item.label}</p>
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
+              {item.label === 'What this site is for' && (
+                <a href="/benjamin_labaschin_resume.pdf" download className="editorial-post-link">
+                  Download resume
+                </a>
+              )}
             </article>
           ))}
         </div>
