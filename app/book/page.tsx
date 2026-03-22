@@ -19,7 +19,7 @@ export default function BookPage() {
           </div>
           <div className="editorial-home-actions">
             <a href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates" className="editorial-home-button editorial-home-button-primary">
-              Get updates
+              Get book updates
             </a>
             <Link href="/publications" className="editorial-home-button editorial-home-button-secondary">
               See related work
@@ -31,7 +31,7 @@ export default function BookPage() {
           <p className="editorial-home-card-label">Working direction</p>
           <h2>Why it belongs here</h2>
           <p>
-            One domain, one body of work, one list. The book should strengthen the platform, not split it into a second identity.
+            One domain, one body of work, one list. The book should reinforce the site&apos;s technical arc, not split it into a second identity.
           </p>
           <div className="editorial-page-metric-list">
             <div>
@@ -59,16 +59,16 @@ export default function BookPage() {
       <section className="editorial-home-grid">
         <article className="editorial-home-card">
           <p className="editorial-home-card-label">What belongs here</p>
-          <h3>Context, audience, and updates.</h3>
+          <h3>Context, audience, and ongoing updates.</h3>
           <p>
-            Explain why the book matters, who it is for, and why readers should follow the project now instead of waiting for launch week.
+            This page should make the book legible before launch: what problem it solves, who it is for, and why it belongs in the same public arc as the essays and talks.
           </p>
         </article>
         <article className="editorial-home-card">
           <p className="editorial-home-card-label">How it connects</p>
           <h3>The reports, talks, and book should read as one arc.</h3>
           <p>
-            This page should point back to the O&apos;Reilly reports, talks, and essays so the book feels like the next step in the same public body of work.
+            Use this page to point back to the O&apos;Reilly reports, talks, and essays so the book reads as the next step in the same body of work.
           </p>
         </article>
       </section>
