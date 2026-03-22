@@ -6,9 +6,8 @@ const navItems = [
   { href: '/posts', label: 'Posts' },
   { href: '/talks', label: 'Talks' },
   { href: '/publications', label: 'Publications' },
+  { href: '/code-ai', label: 'Code & Tools' },
   { href: '/book', label: 'Book' },
-  { href: '/archive', label: 'Archive' },
-  { href: '/search', label: 'Search' },
   { href: '/about', label: 'About' },
 ];
 
@@ -33,7 +32,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         <Link href="/" className="editorial-home-brand-link" aria-label="Go to home">
           <p className="editorial-home-brand-name">BEN LABASCHIN</p>
         </Link>
-        <p className="editorial-home-brand-note">AI systems, memory, and editorial writing</p>
+        <p className="editorial-home-brand-note">Technical editorial platform</p>
       </div>
       <nav className="editorial-home-nav" aria-label="Primary">
         {navItems.map((item) => (
