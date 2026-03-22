@@ -12,6 +12,13 @@ const monthFormatter = new Intl.DateTimeFormat('en-US', {
   month: 'long',
 });
 
+const rowStyle = {
+  paddingTop: '1rem',
+  borderTop: '1px solid rgba(26, 36, 51, 0.12)',
+  display: 'grid',
+  gap: '0.75rem',
+} as const;
+
 export default async function ArchivePage() {
   const posts = await postService.getAllPosts();
   const postsByYearMonth = posts.reduce((acc, post) => {
@@ -47,56 +54,47 @@ export default async function ArchivePage() {
   }, {} as Record<number, typeof sortedEntries>);
 
   const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
-  const uniqueTags = new Set(posts.flatMap((post) => post.tags)).size;
 
   return (
     <EditorialPageFrame currentPath="/archive" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
+        <div className="editorial-page-hero-copy" style={{ maxWidth: '46rem' }}>
           <p className="editorial-home-kicker">Archive</p>
           <h1 className="editorial-page-title">Archive</h1>
           <p className="editorial-page-copy">
-            Browse the full post history by year and month, with each month arranged like a compact table of contents rather than a flat index.
+            Browse the full post history by year and month, with each month kept close to the underlying posts instead of hidden behind a heavier archive view.
           </p>
           <div className="editorial-chip-row">
             <span className="editorial-chip">By year</span>
             <span className="editorial-chip">By month</span>
             <span className="editorial-chip">Every post linked</span>
+            <Link href="/posts" className="editorial-chip">
+              Posts
+            </Link>
           </div>
         </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Archive at a glance</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{posts.length}</span>
-              <span className="editorial-page-metric-label">total posts</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{years.length}</span>
-              <span className="editorial-page-metric-label">years represented</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{uniqueTags}</span>
-              <span className="editorial-page-metric-label">unique tags across the archive</span>
-            </div>
-          </div>
-        </aside>
       </section>
 
       {years.map((year) => (
         <section key={year} className="editorial-list-section">
           <div className="editorial-list-heading">
             <p className="editorial-home-section-label">Year {year}</p>
-            <h2 className="editorial-page-section-title">Monthly index for {year}, with every post still available below each month.</h2>
+            <h2 className="editorial-page-section-title">Monthly index for {year}.</h2>
           </div>
-          <div className="months-grid">
+          <div style={{ display: 'grid', gap: '1rem' }}>
             {postsByYear[year].map(({ monthLabel, monthHref, posts: monthPosts }) => (
-              <article key={`${year}-${monthLabel}`} className="editorial-home-card">
-                <p className="editorial-home-card-label">{monthLabel}</p>
-                <h3>
-                  <Link href={monthHref}>{monthLabel}</Link>
-                </h3>
-                <p>{monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''} in this month, linked by title below.</p>
+              <article key={`${year}-${monthLabel}`} style={rowStyle}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
+                  <div>
+                    <p className="editorial-home-card-label">{monthLabel}</p>
+                    <h3 style={{ margin: 0 }}>
+                      <Link href={monthHref}>{monthLabel}</Link>
+                    </h3>
+                  </div>
+                  <span className="editorial-post-summary">
+                    {monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''}
+                  </span>
+                </div>
                 <ul className="posts-list">
                   {monthPosts.map((post) => (
                     <li key={post.slug} className="archive-post">
@@ -109,6 +107,9 @@ export default async function ArchivePage() {
                     </li>
                   ))}
                 </ul>
+                <Link href={monthHref} className="editorial-post-link">
+                  Open month
+                </Link>
               </article>
             ))}
           </div>

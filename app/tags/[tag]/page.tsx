@@ -16,6 +16,13 @@ const longDateFormatter = new Intl.DateTimeFormat('en-US', {
   day: 'numeric',
 });
 
+const rowStyle = {
+  paddingTop: '1rem',
+  borderTop: '1px solid rgba(26, 36, 51, 0.12)',
+  display: 'grid',
+  gap: '0.75rem',
+} as const;
+
 type Posts = Awaited<ReturnType<typeof postService.getPostsByTag>>;
 
 const groupPostsByYear = (posts: Posts) => {
@@ -58,7 +65,6 @@ export default async function TagPage({ params }: TagPageProps) {
   const tag = decodeURIComponent(encodedTag);
   const posts = await postService.getPostsByTag(tag);
   const postsByYear = groupPostsByYear(posts);
-  const featuredPost = posts[0];
 
   if (posts.length === 0) {
     notFound();
@@ -67,101 +73,58 @@ export default async function TagPage({ params }: TagPageProps) {
   return (
     <EditorialPageFrame currentPath="/tags" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
+        <div className="editorial-page-hero-copy" style={{ maxWidth: '46rem' }}>
           <p className="editorial-home-kicker">Tag archive</p>
           <h1 className="editorial-page-title">{tag}</h1>
           <p className="editorial-page-copy">
-            {posts.length} post{posts.length !== 1 ? 's' : ''} found for this topic, ordered newest first and arranged so the topic reads like a guided trail.
+            {posts.length} post{posts.length !== 1 ? 's' : ''} found for this topic, ordered newest first and kept in the same utility-first format as the broader archive.
           </p>
           <div className="editorial-chip-row">
             <span className="editorial-chip">{posts.length} posts</span>
             <span className="editorial-chip">Newest first</span>
             <span className="editorial-chip">Related tags linked</span>
-          </div>
-        </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Browse links</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{posts.length}</span>
-              <span className="editorial-page-metric-label">posts in this tag</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{postsByYear.length}</span>
-              <span className="editorial-page-metric-label">years represented</span>
-            </div>
-            <div>
-              <Link href="/tags" className="editorial-post-link">
-                Back to tags
-              </Link>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Featured match</p>
-          <h2 className="editorial-page-section-title">Start with the newest post, then move through the year-by-year trail.</h2>
-        </div>
-        {featuredPost ? (
-          <article className="editorial-home-card">
-            <p className="editorial-home-card-label">{longDateFormatter.format(featuredPost.date)}</p>
-            <h3>
-              <Link href={`/posts/${featuredPost.slug}`}>{featuredPost.title}</Link>
-            </h3>
-            {featuredPost.summary && <p>{featuredPost.summary}</p>}
-            <div className="editorial-post-meta">
-              <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : `${featuredPost.tags.length} tags`}</span>
-              <span>{featuredPost.tags.length} topic tag{featuredPost.tags.length !== 1 ? 's' : ''}</span>
-            </div>
-            <div className="editorial-chip-row">
-              {featuredPost.tags.map((postTag) => (
-                <Link key={postTag} href={`/tags/${encodeURIComponent(postTag)}`} className="editorial-chip">
-                  {postTag}
-                </Link>
-              ))}
-            </div>
-            <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-card-link">
-              Read post
+            <Link href="/tags" className="editorial-chip">
+              Back to tags
             </Link>
-          </article>
-        ) : null}
+          </div>
+        </div>
       </section>
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">By year</p>
-          <h2 className="editorial-page-section-title">A lighter index that keeps every tagged post visible on mobile.</h2>
+          <h2 className="editorial-page-section-title">All matching posts, grouped by year.</h2>
         </div>
-        <div className="editorial-two-column">
+        <div style={{ display: 'grid', gap: '1rem' }}>
           {postsByYear.map(({ year, posts: yearPosts }) => (
-            <article key={year} className="editorial-home-card">
+            <section key={year} className="editorial-home-card">
               <p className="editorial-home-card-label">Year {year}</p>
-              <h3>{yearPosts.length} post{yearPosts.length !== 1 ? 's' : ''}</h3>
-              <p>Newest first, with titles and summaries kept together so the topic stays scannable.</p>
-              {yearPosts[0] ? (
-                <div>
-                  <p className="editorial-home-card-label">Featured post</p>
-                  <Link href={`/posts/${yearPosts[0].slug}`} className="editorial-home-card-link">
-                    {yearPosts[0].title}
-                  </Link>
-                  {yearPosts[0].summary && <p className="editorial-post-summary">{yearPosts[0].summary}</p>}
-                </div>
-              ) : null}
-              <ul className="posts-list">
-                {yearPosts.slice(1).map((post) => (
-                  <li key={post.slug} className="archive-post">
-                    <Link href={`/posts/${post.slug}`}>
-                      <time className="archive-post-date">
-                        {post.date.getDate().toString().padStart(2, '0')}
-                      </time>
-                      <span className="archive-post-title">{post.title}</span>
-                    </Link>
-                  </li>
+              <div style={{ display: 'grid', gap: '1rem' }}>
+                {yearPosts.map((post) => (
+                  <article key={post.slug} style={rowStyle}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
+                      <div>
+                        <p className="editorial-home-card-label">{longDateFormatter.format(post.date)}</p>
+                        <h3 style={{ margin: 0 }}>
+                          <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+                        </h3>
+                      </div>
+                      <span className="editorial-post-summary">
+                        {post.readingTime ? `${post.readingTime} min read` : 'Post'}
+                      </span>
+                    </div>
+                    {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
+                    <div className="editorial-chip-row">
+                      {post.tags.slice(0, 4).map((postTag) => (
+                        <Link key={postTag} href={`/tags/${encodeURIComponent(postTag)}`} className="editorial-chip">
+                          {postTag}
+                        </Link>
+                      ))}
+                    </div>
+                  </article>
                 ))}
-              </ul>
-            </article>
+              </div>
+            </section>
           ))}
         </div>
       </section>
