@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { EditorialPageFrame } from '../../components/EditorialPageFrame';
 import { postService } from '../../services/PostService';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import AudioPlayer from '../../components/AudioPlayer';
@@ -16,7 +17,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = await postService.getPostBySlug(slug);
-  
+
   if (!post) {
     return {
       title: 'Post Not Found | Economic Notes',
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   // Generate OG image URL
-  const imageUrl = post.coverImage 
+  const imageUrl = post.coverImage
     ? `https://econoben.dev${post.coverImage}`
     : (() => {
         const ogImageParams = new URLSearchParams({
@@ -75,35 +76,64 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
     });
   };
 
-  // Check if audio exists for this post
+  const primaryTag = post.tags[0];
   const audioUrl = audioManifest[slug as keyof typeof audioManifest];
 
   return (
-    <div className="post-detail">
-      <div className="blog-header">
-        <h1 className="blog-title">{post.title}</h1>
-        <div className="blog-meta">
-          {formatDate(post.date)}
-          {post.tags.map(tag => (
-            <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>
-              <span className="blog-tag">{tag}</span>
+    <EditorialPageFrame currentPath="/posts">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
+          <p className="editorial-home-kicker">{primaryTag}</p>
+          <h1 className="editorial-page-title">{post.title}</h1>
+          {post.summary && <p className="editorial-page-copy">{post.summary}</p>}
+          <div className="editorial-home-actions">
+            <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
+              Back to posts
             </Link>
-          ))}
+            {primaryTag ? (
+              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="editorial-home-button editorial-home-button-primary">
+                Browse this topic
+              </Link>
+            ) : null}
+          </div>
         </div>
-      </div>
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">Post details</p>
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">{formatDate(post.date)}</span>
+              <span className="editorial-page-metric-label">published date</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{post.readingTime ? `${post.readingTime} min` : 'Essay'}</span>
+              <span className="editorial-page-metric-label">reading time</span>
+            </div>
+          </div>
+          <div className="editorial-chip-row">
+            {post.tags.length > 0
+              ? post.tags.map((tag) => (
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                    {tag}
+                  </Link>
+                ))
+              : <span className="editorial-chip">Essay</span>}
+          </div>
+        </aside>
+      </section>
 
-      {/* Audio Player - only show if audio file exists */}
-      {audioUrl && (
-        <AudioPlayer
-          audioUrl={audioUrl}
-          title="Listen to this post"
-          className="post-audio-player"
-        />
-      )}
+      <section className="editorial-list-section">
+        {audioUrl && (
+          <AudioPlayer
+            audioUrl={audioUrl}
+            title="Listen to this post"
+            className="post-audio-player"
+          />
+        )}
 
-      <div className="blog-content">
-        <MarkdownRenderer content={post.content} />
-      </div>
-    </div>
+        <div className="blog-content">
+          <MarkdownRenderer content={post.content} />
+        </div>
+      </section>
+    </EditorialPageFrame>
   );
 }
