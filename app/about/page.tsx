@@ -31,36 +31,6 @@ const experience = [
   },
 ];
 
-const practicalCards = [
-  {
-    label: 'Resume',
-    title: 'Download the PDF first.',
-    summary:
-      'This is the fastest way to get the full CV, including work history and the usual contact details.',
-    href: '/benjamin_labaschin_resume.pdf',
-    action: 'Download resume',
-    external: true,
-  },
-  {
-    label: 'Work history',
-    title: 'Recent roles, kept short and readable.',
-    summary:
-      'A practical summary of where I’ve worked and what I’ve spent time building there.',
-    href: '#work-history',
-    action: 'Jump to work history',
-    external: false,
-  },
-  {
-    label: 'Contact',
-    title: 'Email or LinkedIn if you need to reach me.',
-    summary:
-      'For work, speaking, or writing, those two links are usually the quickest route.',
-    href: 'mailto:benjaminlabaschin@gmail.com',
-    action: 'Email me',
-    external: true,
-  },
-];
-
 const contactLinks = [
   {
     label: 'GitHub',
@@ -93,7 +63,7 @@ export default function AboutPage() {
           <h1 className="editorial-page-title">Ben Labaschin</h1>
           <p className="editorial-page-copy">
             I build practical AI systems and write about the trade-offs that show up once they have to work in production.
-            If you need the short version, use the resume download or jump straight to the work history below.
+            Use the resume download for the fastest version, or jump to the work history if you want the fuller CV.
           </p>
           <div className="editorial-home-actions">
             <a href="/benjamin_labaschin_resume.pdf" download className="editorial-home-button editorial-home-button-primary">
@@ -109,46 +79,23 @@ export default function AboutPage() {
         </div>
         <aside className="editorial-page-aside editorial-about-photo-card">
           <img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas" />
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">Principal ML</span>
-              <span className="editorial-page-metric-label">Workhelix and earlier product ML roles</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">Resume</span>
-              <span className="editorial-page-metric-label">Download the PDF or scan the work history</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">Contact</span>
-              <span className="editorial-page-metric-label">Email, LinkedIn, GitHub, publications, talks</span>
-            </div>
+          <div className="editorial-post-summary">
+            Principal ML engineer at Workhelix. Earlier work spans Hopper, logistics, and applied data science.
+          </div>
+          <div className="editorial-link-row">
+            {contactLinks.slice(0, 3).map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="editorial-post-link"
+                target={link.href.startsWith('http') ? '_blank' : undefined}
+                rel={link.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         </aside>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Practical summary</p>
-          <h2 className="editorial-page-section-title">What I do, in plain language.</h2>
-        </div>
-        <div className="editorial-two-column">
-          {practicalCards.map((item) => (
-            <article key={item.label} className="editorial-home-card">
-              <p className="editorial-home-card-label">{item.label}</p>
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              {item.external ? (
-                <a href={item.href} className="editorial-post-link" {...(item.label === 'Resume' ? { download: true } : {})}>
-                  {item.action}
-                </a>
-              ) : (
-                <a href={item.href} className="editorial-post-link">
-                  {item.action}
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
       </section>
 
       <section id="work-history" className="editorial-list-section">
@@ -177,22 +124,12 @@ export default function AboutPage() {
         </div>
         <div className="editorial-two-column">
           <article className="editorial-home-card">
-            <p className="editorial-home-card-label">Contact</p>
-            <h3>Reach out directly.</h3>
-            <p>Email works best. GitHub and LinkedIn are here if that is easier.</p>
-            <div className="editorial-link-row">
-              {contactLinks.slice(0, 3).map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="editorial-post-link"
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={link.href.startsWith('http') ? 'noreferrer noopener' : undefined}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
+            <p className="editorial-home-card-label">Resume</p>
+            <h3>Keep the PDF handy.</h3>
+            <p>The fastest version of the CV is still the downloadable resume, followed by the work history above.</p>
+            <a href="/benjamin_labaschin_resume.pdf" download className="editorial-post-link">
+              Download resume
+            </a>
           </article>
           <article className="editorial-home-card">
             <p className="editorial-home-card-label">More context</p>
