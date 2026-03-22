@@ -66,8 +66,10 @@ function TalkMediaPreview({
         src={spotifyEmbedUrl}
         title={talk.title}
         frameBorder="0"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         allowFullScreen
+        referrerPolicy="strict-origin-when-cross-origin"
         loading="lazy"
         className="h-full w-full"
       />
@@ -80,8 +82,10 @@ function TalkMediaPreview({
         src={youtubeEmbedUrl}
         title={talk.title}
         frameBorder="0"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
+        referrerPolicy="strict-origin-when-cross-origin"
         className="h-full w-full"
       />
     );
@@ -232,8 +236,10 @@ function TalkCard({
             src={spotifyEmbedUrl}
             title={talk.title}
             frameBorder="0"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             loading="lazy"
             className="h-full w-full"
           />
@@ -242,8 +248,10 @@ function TalkCard({
             src={youtubeEmbedUrl}
             title={talk.title}
             frameBorder="0"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
             className="h-full w-full"
           />
         ) : (
@@ -430,6 +438,7 @@ export default function TalksClient() {
                 : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
             }`}
             onClick={() => setActiveFilter('all')}
+            aria-pressed={activeFilter === 'all'}
           >
             All talks
           </button>
@@ -443,6 +452,7 @@ export default function TalksClient() {
                   : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
               }`}
               onClick={() => setActiveFilter(topic)}
+              aria-pressed={activeFilter === topic}
             >
               {topic}
             </button>
@@ -457,6 +467,7 @@ export default function TalksClient() {
                 viewMode === 'grid' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
               }`}
               onClick={() => setViewMode('grid')}
+              aria-pressed={viewMode === 'grid'}
             >
               Grid
             </button>
@@ -466,6 +477,7 @@ export default function TalksClient() {
                 viewMode === 'list' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
               }`}
               onClick={() => setViewMode('list')}
+              aria-pressed={viewMode === 'list'}
             >
               List
             </button>

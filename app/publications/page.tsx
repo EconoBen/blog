@@ -147,16 +147,24 @@ export default function PublicationsPage() {
                   </div>
                 </div>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  {getPublicationHref(featuredPublication) && (
-                    <a
-                      href={getPublicationHref(featuredPublication)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-lg bg-primary-container px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-primary"
-                    >
-                      {getPublicationActionLabel(featuredPublication)}
-                    </a>
-                  )}
+                  {(() => {
+                    const href = getPublicationHref(featuredPublication);
+
+                    if (!href) {
+                      return null;
+                    }
+
+                    return (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-lg bg-primary-container px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-primary"
+                      >
+                        {getPublicationActionLabel(featuredPublication)}
+                      </a>
+                    );
+                  })()}
                   {featuredPublication.bibtex && (
                     <a
                       href={`data:text/plain;charset=utf-8,${encodeURIComponent(featuredPublication.bibtex)}`}
@@ -295,7 +303,10 @@ function PublicationCard({
   const actionLabel = getPublicationActionLabel(publication);
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1">
+    <article
+      id={publication.id}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1"
+    >
       {publication.coverImage ? (
         <div className="aspect-[4/3] overflow-hidden bg-surface-container-low">
           <img

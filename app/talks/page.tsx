@@ -67,6 +67,10 @@ export default function TalksPage() {
               <p className="mt-2 font-headline text-3xl font-bold text-on-surface">{sourceCounts.video}</p>
             </div>
             <div className="rounded-xl bg-surface-container-highest p-4">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Audio sessions</p>
+              <p className="mt-2 font-headline text-3xl font-bold text-on-surface">{sourceCounts.audio}</p>
+            </div>
+            <div className="rounded-xl bg-surface-container-highest p-4">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Transcript links</p>
               <p className="mt-2 font-headline text-3xl font-bold text-on-surface">{sourceCounts.transcripts}</p>
             </div>
