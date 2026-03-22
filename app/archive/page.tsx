@@ -56,7 +56,7 @@ export default async function ArchivePage() {
           <p className="editorial-home-kicker">Archive</p>
           <h1 className="editorial-page-title">Archive</h1>
           <p className="editorial-page-copy">
-            Browse the full post history by year and month, with links preserved at both the month and individual post level.
+            Browse the full post history by year and month, with each month arranged like a compact table of contents rather than a flat index.
           </p>
           <div className="editorial-chip-row">
             <span className="editorial-chip">By year</span>
@@ -87,19 +87,16 @@ export default async function ArchivePage() {
         <section key={year} className="editorial-list-section">
           <div className="editorial-list-heading">
             <p className="editorial-home-section-label">Year {year}</p>
-            <h2 className="editorial-page-section-title">Monthly index for {year}.</h2>
+            <h2 className="editorial-page-section-title">Monthly index for {year}, with every post still available below each month.</h2>
           </div>
           <div className="months-grid">
             {postsByYear[year].map(({ monthLabel, monthHref, posts: monthPosts }) => (
-              <article key={`${year}-${monthLabel}`} className="editorial-post-card">
-                <div className="editorial-post-meta">
-                  <span>{monthLabel}</span>
-                  <span>{monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''}</span>
-                </div>
-                <h3 className="month-heading">
+              <article key={`${year}-${monthLabel}`} className="editorial-home-card">
+                <p className="editorial-home-card-label">{monthLabel}</p>
+                <h3>
                   <Link href={monthHref}>{monthLabel}</Link>
-                  <span className="post-count">({monthPosts.length})</span>
                 </h3>
+                <p>{monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''} in this month, linked by title below.</p>
                 <ul className="posts-list">
                   {monthPosts.map((post) => (
                     <li key={post.slug} className="archive-post">
