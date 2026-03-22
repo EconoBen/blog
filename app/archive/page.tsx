@@ -4,9 +4,13 @@ import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
-  title: 'Archive | Economic Notes',
-  description: 'Browse all posts by year and month in the Economic Notes archive.',
+  title: 'Archive | Ben Labaschin',
+  description: 'Browse the full writing archive by year and month.',
 };
+
+const monthFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+});
 
 export default async function ArchivePage() {
   const posts = await postService.getAllPosts();
@@ -19,7 +23,7 @@ export default async function ArchivePage() {
       acc[monthKey] = {
         year,
         month,
-        monthLabel: post.date.toLocaleDateString('en-US', { month: 'long' }),
+        monthLabel: monthFormatter.format(post.date),
         monthHref: `/archives/${monthKey}`,
         posts: [],
       };
@@ -54,6 +58,11 @@ export default async function ArchivePage() {
           <p className="editorial-page-copy">
             Browse the full post history by year and month, with links preserved at both the month and individual post level.
           </p>
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">By year</span>
+            <span className="editorial-chip">By month</span>
+            <span className="editorial-chip">Every post linked</span>
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Archive at a glance</p>
@@ -82,7 +91,11 @@ export default async function ArchivePage() {
           </div>
           <div className="months-grid">
             {postsByYear[year].map(({ monthLabel, monthHref, posts: monthPosts }) => (
-              <div key={`${year}-${monthLabel}`} className="month-section">
+              <article key={`${year}-${monthLabel}`} className="editorial-post-card">
+                <div className="editorial-post-meta">
+                  <span>{monthLabel}</span>
+                  <span>{monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''}</span>
+                </div>
                 <h3 className="month-heading">
                   <Link href={monthHref}>{monthLabel}</Link>
                   <span className="post-count">({monthPosts.length})</span>
@@ -99,7 +112,7 @@ export default async function ArchivePage() {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
           </div>
         </section>

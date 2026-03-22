@@ -10,14 +10,29 @@ interface ArchivePageProps {
   }>;
 }
 
-export default async function ArchivePage({ params }: ArchivePageProps) {
-  const { month } = await params;
+const longDateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+function getMonthParts(month: string) {
   const [year, monthNum] = month.split('-');
 
   if (!year || !monthNum || isNaN(parseInt(year)) || isNaN(parseInt(monthNum))) {
-    notFound();
+    return null;
   }
 
+  return { year, monthNum };
+}
+
+async function getPostsForMonth(month: string) {
+  const parts = getMonthParts(month);
+  if (!parts) {
+    return null;
+  }
+
+  const { year, monthNum } = parts;
   const allPosts = await postService.getAllPosts();
   const monthPosts = allPosts.filter((post) => {
     const postDate = new Date(post.date);
@@ -26,6 +41,19 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
 
     return postYear === year && postMonth === monthNum;
   });
+
+  return { year, monthNum, monthPosts };
+}
+
+export default async function ArchivePage({ params }: ArchivePageProps) {
+  const { month } = await params;
+  const monthData = await getPostsForMonth(month);
+
+  if (!monthData) {
+    notFound();
+  }
+
+  const { year, monthNum, monthPosts } = monthData;
 
   if (monthPosts.length === 0) {
     notFound();
@@ -45,6 +73,11 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
           <p className="editorial-page-copy">
             Posts published in {monthName}, ordered newest first and linked back to the archive index.
           </p>
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">{monthPosts.length} posts</span>
+            <span className="editorial-chip">Newest first</span>
+            <span className="editorial-chip">Archive link preserved</span>
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Month at a glance</p>
@@ -52,6 +85,12 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
             <div>
               <span className="editorial-page-metric-value">{monthPosts.length}</span>
               <span className="editorial-page-metric-label">posts in this month</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">
+                {new Set(monthPosts.flatMap((post) => post.tags)).size}
+              </span>
+              <span className="editorial-page-metric-label">unique tags in month</span>
             </div>
             <div>
               <Link href="/archive" className="editorial-post-link">
@@ -71,16 +110,16 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
           {monthPosts.map((post) => (
             <article key={post.slug} className="editorial-post-card">
               <div className="editorial-post-meta">
-                <span>{post.date.toLocaleDateString('en-US', { month: 'long' })}</span>
-                <span>{post.date.getFullYear()}</span>
+                <span>{longDateFormatter.format(post.date)}</span>
+                {post.readingTime && <span>{post.readingTime} min read</span>}
               </div>
               <h2>{post.title}</h2>
               {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
               <div className="editorial-chip-row">
                 {post.tags.slice(0, 4).map((tag) => (
-                  <span key={tag} className="editorial-chip">
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
                     {tag}
-                  </span>
+                  </Link>
                 ))}
               </div>
               <Link href={`/posts/${post.slug}`} className="editorial-post-link">
@@ -113,21 +152,22 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ArchivePageProps): Promise<Metadata> {
   const { month } = await params;
-  const [year, monthNum] = month.split('-');
+  const monthData = await getPostsForMonth(month);
 
-  if (!year || !monthNum) {
+  if (!monthData) {
     return {
       title: 'Archive Not Found',
     };
   }
 
+  const { year, monthNum, monthPosts } = monthData;
   const monthName = new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
   });
 
   return {
-    title: `Posts from ${monthName} - Economic Notes`,
-    description: `Browse all blog posts from ${monthName}`,
+    title: `Posts from ${monthName} | Ben Labaschin`,
+    description: `Browse ${monthPosts.length} post${monthPosts.length === 1 ? '' : 's'} from ${monthName}.`,
   };
 }

@@ -21,6 +21,7 @@ function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
+  const normalizedQuery = query.trim();
 
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -68,11 +69,10 @@ function SearchContent() {
     router.replace(`/search?q=${encodeURIComponent(nextQuery)}`);
   };
 
-  const typeLabels: Record<string, string> = {
+  const typeLabels: Record<SearchResult['type'], string> = {
     post: 'Blog post',
     talk: 'Talk',
     publication: 'Publication',
-    archive: 'Archive',
     'code-ai': 'Code & tools',
   };
 
@@ -85,36 +85,40 @@ function SearchContent() {
           <p className="editorial-page-copy">
             Search posts, talks, publications, and code notes without leaving the editorial index.
           </p>
+          <p className="editorial-post-summary">
+            {normalizedQuery ? `Showing results for “${normalizedQuery}”.` : 'Search the archive by topic, title, or theme.'}
+          </p>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Search status</p>
           <div className="editorial-page-metric-list">
             <div>
-              <span className="editorial-page-metric-value">{results.length}</span>
+              <span className="editorial-page-metric-value">{loading ? '...' : results.length}</span>
               <span className="editorial-page-metric-label">results on the current query</span>
             </div>
             <div>
               <Link href="/archive" className="editorial-post-link">
                 Browse archive
               </Link>
+              <span className="editorial-page-metric-label">archive index</span>
             </div>
           </div>
         </aside>
       </section>
 
       <section className="editorial-list-section">
-        <form onSubmit={handleSearch} className="search-input-container">
+        <form onSubmit={handleSearch} className="search-input-container" role="search" aria-label="Site search">
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search posts, talks, publications..."
+            placeholder="Search posts, talks, publications, and tools"
             className="search-input-large"
             autoFocus
           />
         </form>
 
-        {!query ? (
+        {!normalizedQuery ? (
           <div className="editorial-page-aside">
             <p className="editorial-home-card-label">Try searching for</p>
             <div className="editorial-chip-row">
@@ -124,6 +128,11 @@ function SearchContent() {
                 </Link>
               ))}
             </div>
+            <div className="editorial-chip-row">
+              <Link href="/posts" className="editorial-chip">Posts</Link>
+              <Link href="/tags" className="editorial-chip">Tags</Link>
+              <Link href="/archive" className="editorial-chip">Archive</Link>
+            </div>
           </div>
         ) : loading ? (
           <div className="search-loading">
@@ -131,16 +140,23 @@ function SearchContent() {
             <p>Searching...</p>
           </div>
         ) : results.length === 0 ? (
-          <div className="no-results">
-            <p>No results found for "{query}"</p>
-            <p className="text-sm text-gray-600 mt-2">
-              Try different keywords or check your spelling
+          <div className="editorial-page-aside">
+            <p className="editorial-home-card-label">No results</p>
+            <p className="editorial-post-summary">
+              No results found for “{normalizedQuery}”. Try a broader keyword or search one of the suggested topics below.
             </p>
+            <div className="editorial-chip-row">
+              {['memory', 'llm', 'forecasting', 'tooling'].map((term) => (
+                <Link key={term} href={`/search?q=${encodeURIComponent(term)}`} className="editorial-chip">
+                  {term}
+                </Link>
+              ))}
+            </div>
           </div>
         ) : (
           <>
-            <p className="results-count">
-              Found {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+            <p className="results-count" aria-live="polite">
+              Found {results.length} result{results.length !== 1 ? 's' : ''} for “{normalizedQuery}”
             </p>
 
             <div className="editorial-post-grid">
@@ -152,7 +168,7 @@ function SearchContent() {
                 >
                   <div className="editorial-post-meta">
                     <span>{typeLabels[result.type]}</span>
-                    {formatResultDate(result.date) && <span>{formatResultDate(result.date)}</span>}
+                    {result.date && <span>{formatResultDate(result.date)}</span>}
                   </div>
 
                   <h2>{result.title}</h2>
