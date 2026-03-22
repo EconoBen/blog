@@ -10,9 +10,9 @@ const bookNotes = [
   },
   {
     label: 'Why it belongs here',
-    title: 'It extends the same editorial arc as the essays, reports, and talks.',
+    title: 'It extends the same practical arc as the posts, reports, and talks.',
     summary:
-      'This page should make the book legible before launch without turning it into a separate identity. The subject, audience, and technical point of view all stay connected to the rest of the site.',
+      'The page should make the book easy to understand before launch without turning it into a separate identity. The subject, audience, and technical point of view stay tied to the rest of the site.',
   },
 ];
 
