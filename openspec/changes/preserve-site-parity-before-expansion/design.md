@@ -10,6 +10,8 @@ The first implementation wave is already split into stacked draft PRs for the sh
 
 The combined preview makes the remaining issues concrete. The site is now directionally coherent, but several routes still reveal their transitional state: `About` is cramped, `Book` still reads like a placeholder, `Publications` and `Talks` are still card-grid heavy, `Posts` remains too dense, and `Code & Tools` still feels like a separate product rather than part of the same editorial platform.
 
+The latest review adds a sharper constraint: the redesign must become more practical and less self-conscious. In the current preview, the site gets weaker when it starts narrating itself with labels like "essays," "pieces," "appearances," "major publications," and "featured entries," or when it introduces visual devices such as proof strips and metric sidebars that do not help people actually use the page. The old site handled some of this better, especially on `Talks`, where embedded media made the page immediately useful and about-page content still behaved like a real CV.
+
 ## Goals / Non-Goals
 
 **Goals:**
@@ -61,6 +63,27 @@ Alternatives considered:
 - Rely only on `next build`: rejected because content loss can still slip through.
 - Require exhaustive visual parity review for every route before building new surfaces: rejected because it over-constrains progress.
 
+### 6. The design thesis is practical, direct, and content-first
+The site should feel useful, grounded, and easy to navigate. Labels should describe what the content is in plain terms: posts, talks, publications, resume. Visual emphasis should come from the content itself, not from self-promotional metrics or decorative summary bands.
+
+Alternatives considered:
+- Keep the more self-consciously editorial language: rejected because it reads as pretentious and obscures what the pages actually are.
+- Lean harder into metrics and "at a glance" cards: rejected because the current review shows they create awkward empty space and bragging cues more often than useful orientation.
+- Treat the about page as a pure narrative page instead of a CV: rejected because the old site’s resume-first utility is still part of what the page needs to do.
+
+### 7. Talks should prioritize watch/listen utility over summary framing
+The current rewritten talks page degrades compared with the old implementation because it removes the embedded media experience and replaces it with summary metrics and generic framing. The correct direction is to restore embedded playback and make the page easy to browse and consume directly.
+
+Alternatives considered:
+- Keep the "latest appearance" / "recorded appearances" framing: rejected because it reads as bragging and is less useful than embedded media.
+- Keep abstract proof strips about venues: rejected because they do not help the user decide what to watch.
+
+### 8. Navigation should include an explicit Home destination
+The brand link is not enough as the only way back to the homepage once the site has more destinations. The editorial shell should expose a clear `Home` entry in navigation.
+
+Alternatives considered:
+- Rely on the site title/brand only: rejected because explicit wayfinding is clearer and more practical.
+
 ## Architecture
 
 ```mermaid
@@ -98,6 +121,7 @@ flowchart TD
 5. Review the redesigned site for continuity gaps, then queue copy/book/newsletter refinements for the next pass.
 6. Create an integrated preview branch from the active stacked slices and run a second pass for shared visual fidelity, language, and subpage polish.
 7. Run a combined-preview review, then launch another polish wave for structured pages, discovery density, and code/tools shell alignment.
+8. Run a practical-refinement wave that removes pretentious language, restores useful embedded media where the old site was stronger, and re-centers the about page on CV utility.
 
 ## Execution Constraints
 

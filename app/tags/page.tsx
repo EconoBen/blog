@@ -40,7 +40,7 @@ export default async function TagsPage() {
           <p className="editorial-home-kicker">Topics</p>
           <h1 className="editorial-page-title">Tags</h1>
           <p className="editorial-page-copy">
-            Explore topics across {posts.length} posts, with links preserved to every tag-specific archive.
+            Explore topics across {posts.length} posts, with links preserved to every tag-specific archive and the broadest themes surfaced first.
           </p>
           <div className="editorial-chip-row">
             {topTags.map(([tag, count]) => (
@@ -71,7 +71,7 @@ export default async function TagsPage() {
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">All tags</p>
-          <h2 className="editorial-page-section-title">A weighted cloud with direct links.</h2>
+          <h2 className="editorial-page-section-title">A weighted cloud for broad browsing.</h2>
         </div>
         <div className="tag-cloud">
           <div className="tag-cloud-container">
@@ -100,7 +100,7 @@ export default async function TagsPage() {
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Alphabetical</p>
-          <h2 className="editorial-page-section-title">Browse the same index by first letter.</h2>
+          <h2 className="editorial-page-section-title">The same index, re-sorted for precision.</h2>
         </div>
         <div className="tags-alphabetical">
           {sortedLetters.map((letter) => (

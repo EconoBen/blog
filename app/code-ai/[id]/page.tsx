@@ -1,10 +1,11 @@
-import Link from 'next/link';
 import { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { EditorialPageFrame } from '../../components/EditorialPageFrame';
 import { getSiteUrl } from '../../utils/siteUrl';
 import {
   formatCodeToolsDate,
@@ -18,6 +19,40 @@ import {
   normalizeCodeToolsLanguage,
 } from '../../utils/codeTools';
 
+const codeBlockStyle = {
+  background: 'rgba(246, 242, 233, 0.94)',
+  border: '1px solid rgba(16, 34, 54, 0.08)',
+  borderRadius: '18px',
+  boxShadow: '0 16px 32px rgba(24, 36, 49, 0.08)',
+  overflow: 'hidden',
+} as const;
+
+const syntaxStyle = {
+  margin: 0,
+  padding: '1rem',
+  fontSize: '0.9rem',
+  lineHeight: '1.72',
+  background: 'transparent',
+} as const;
+
+const codeActionStyle = {
+  alignItems: 'center',
+  background: 'rgba(255, 255, 255, 0.72)',
+  border: '1px solid rgba(16, 34, 54, 0.08)',
+  borderRadius: '999px',
+  color: 'var(--editorial-ink)',
+  cursor: 'pointer',
+  display: 'inline-flex',
+  fontFamily: 'Inter, var(--font-body)',
+  fontSize: '0.82rem',
+  fontWeight: 700,
+  gap: '0.35rem',
+  justifyContent: 'center',
+  minHeight: '34px',
+  padding: '0 12px',
+  textDecoration: 'none',
+} as const;
+
 export async function generateStaticParams() {
   return getCodeToolsStaticParams();
 }
@@ -28,14 +63,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
   if (!item) {
     return {
-      title: 'Not Found | Economic Notes',
+      title: 'Not Found | Code & Tools',
     };
   }
 
   const canonicalUrl = `${getSiteUrl()}${getCodeToolsUrl(id)}`;
 
   return {
-    title: `${item.title} | Code & Tools | Economic Notes`,
+    title: `${item.title} | Code & Tools | Ben Labaschin`,
     description: item.description,
     alternates: {
       canonical: canonicalUrl,
@@ -65,96 +100,105 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
   const dateLabel = item.date ? formatCodeToolsDate(item.date, { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date';
 
   return (
-    <article
-      className="code-ai-detail"
-      style={{
-        display: 'grid',
-        gap: '1.5rem',
-        maxWidth: '1120px',
-        margin: '0 auto',
-      }}
-    >
-      <div className="code-ai-detail-header" style={{ display: 'grid', gap: '1rem' }}>
-        <div className="breadcrumb">
-          <Link href="/code-ai">← Back to Code & Tools</Link>
+    <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
+          <p className="editorial-home-kicker">Code & tools</p>
+          <h1 className="editorial-page-title">{item.title}</h1>
+          <p className="editorial-page-copy">{item.description}</p>
+          <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
+            The detail view keeps the writeup and code together, so the route behaves like the rest of the editorial site instead of a separate utility app.
+          </p>
+
+          <div className="editorial-home-actions">
+            <Link href="/code-ai" className="editorial-home-button editorial-home-button-secondary">
+              Back to Code & Tools
+            </Link>
+            {item.gistUrl && (
+              <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" className="editorial-home-button editorial-home-button-primary">
+                View on GitHub
+              </a>
+            )}
+          </div>
+
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">{categoryConfig?.label || item.category}</span>
+            <span className="editorial-chip">{dateLabel}</span>
+            <span className="editorial-chip">{getCodeToolsLanguageLabel(item.language)}</span>
+            {item.filename && <span className="editorial-chip">{item.filename}</span>}
+            <span className="editorial-chip">{lineCount} lines</span>
+          </div>
         </div>
 
-        <div
-          className="code-ai-detail-meta"
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', alignItems: 'center' }}
-        >
-          <span className="code-ai-detail-category">
-            {categoryConfig?.icon} {categoryConfig?.label || item.category}
-          </span>
-          <time className="code-ai-detail-date">{dateLabel}</time>
-          <span className="code-ai-detail-date">{getCodeToolsLanguageLabel(item.language)}</span>
-          {item.filename && <span className="code-ai-detail-date">{item.filename}</span>}
-          <span className="code-ai-detail-date">{lineCount} lines</span>
-        </div>
-
-        <div style={{ maxWidth: '70ch' }}>
-          <h1 className="code-ai-detail-title" style={{ marginBottom: '0.5rem' }}>
-            {item.title}
-          </h1>
-          <p className="code-ai-detail-description">{item.description}</p>
-        </div>
-
-        <div className="code-ai-detail-tags">
-          {item.tags.map((tag) => (
-            <span key={tag} className="code-ai-detail-tag">
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="code-ai-detail-actions">
-          {item.gistUrl && (
-            <a
-              href={item.gistUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="action-button github-button"
-            >
-              <svg className="icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
-              </svg>
-              View on GitHub
-            </a>
-          )}
-          <Link href="/code-ai" className="action-button">
-            Browse all snippets
-          </Link>
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(0, 1.6fr) minmax(280px, 0.9fr)',
-          gap: '1.25rem',
-          alignItems: 'start',
-        }}
-      >
-        <section style={{ display: 'grid', gap: '1rem' }}>
-          {item.writeup && (
-            <div className="item-writeup" style={{ padding: '1.1rem 1.15rem', borderRadius: '16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">At a glance</p>
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">{categoryConfig?.label || item.category}</span>
+              <span className="editorial-page-metric-label">category</span>
             </div>
-          )}
+            <div>
+              <span className="editorial-page-metric-value">{getCodeToolsLanguageLabel(item.language)}</span>
+              <span className="editorial-page-metric-label">language</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{item.filename || 'Inline snippet'}</span>
+              <span className="editorial-page-metric-label">source</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{item.tags.length}</span>
+              <span className="editorial-page-metric-label">tags</span>
+            </div>
+          </div>
+        </aside>
+      </section>
 
-          <div className="code-block">
-            <div className="code-header">
-              <div className="code-filename">{getCodeToolsLanguageLabel(item.language)}</div>
-              <div className="code-actions">
-                <span className="code-action" style={{ pointerEvents: 'none' }}>
-                  {lineCount} lines
-                </span>
+      <section className="editorial-home-proof-strip" aria-label="Code & Tools context">
+        <span>{categoryConfig?.label || item.category}</span>
+        <span>/</span>
+        <span>{dateLabel}</span>
+        <span>/</span>
+        <span>{lineCount} lines</span>
+        <span>/</span>
+        <span>{item.tags.length} tags</span>
+      </section>
+
+      <section className="editorial-list-section">
+        <div className="editorial-two-column">
+          <section style={{ display: 'grid', gap: '18px' }}>
+            {item.writeup && (
+              <div className="editorial-post-card" style={{ background: 'rgba(255, 255, 255, 0.58)' }}>
+                <p className="editorial-home-card-label">Writeup</p>
+                <div className="item-writeup" style={{ marginTop: '12px' }}>
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                </div>
               </div>
-            </div>
-            <div className="code-container">
+            )}
+
+            <div style={codeBlockStyle}>
+              <div style={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'space-between', padding: '0.85rem 1rem' }}>
+                <div style={{ display: 'grid', gap: '0.18rem' }}>
+                  <div style={{ color: 'var(--editorial-ink)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                    {getCodeToolsLanguageLabel(item.language)}
+                  </div>
+                  <div style={{ color: 'var(--editorial-slate)', fontFamily: 'Inter, var(--font-body)', fontSize: '0.88rem' }}>
+                    {item.filename || 'Inline snippet'}
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                  {item.gistUrl && (
+                    <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" style={codeActionStyle}>
+                      Gist
+                    </a>
+                  )}
+                  <span style={{ ...codeActionStyle, cursor: 'default' }}>{lineCount} lines</span>
+                </div>
+              </div>
+
               <SyntaxHighlighter
                 language={normalizeCodeToolsLanguage(item.language)}
-                style={oneDark}
+                style={oneLight}
                 showLineNumbers
                 wrapLines
                 lineNumberStyle={{
@@ -162,75 +206,59 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                   paddingRight: '1em',
                   textAlign: 'right',
                   userSelect: 'none',
-                  opacity: 0.5,
+                  opacity: 0.45,
                 }}
-                customStyle={{
-                  margin: 0,
-                  padding: '1rem',
-                  fontSize: '0.9rem',
-                  lineHeight: '1.7',
-                  borderRadius: '0 0 8px 8px',
-                  background: '#282c34',
-                }}
+                customStyle={syntaxStyle}
                 codeTagProps={{
                   style: {
-                    fontFamily: "'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace",
+                    fontFamily: "'IBM Plex Mono', 'Roboto Mono', 'Consolas', 'Monaco', monospace",
                   },
                 }}
               >
                 {item.content}
               </SyntaxHighlighter>
             </div>
-          </div>
-        </section>
-
-        <aside style={{ display: 'grid', gap: '1rem' }}>
-          <section style={{ padding: '1rem 1.1rem', borderRadius: '16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <h2 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1rem' }}>At a glance</h2>
-            <div style={{ display: 'grid', gap: '0.7rem' }}>
-              <div>
-                <div style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.12em', opacity: 0.7 }}>Category</div>
-                <div style={{ marginTop: '0.2rem' }}>{categoryConfig?.label || item.category}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.12em', opacity: 0.7 }}>Language</div>
-                <div style={{ marginTop: '0.2rem' }}>{getCodeToolsLanguageLabel(item.language)}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.12em', opacity: 0.7 }}>Source</div>
-                <div style={{ marginTop: '0.2rem' }}>{item.filename || 'Inline snippet'}</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.76rem', textTransform: 'uppercase', letterSpacing: '0.12em', opacity: 0.7 }}>Tags</div>
-                <div style={{ marginTop: '0.2rem' }}>{item.tags.length}</div>
-              </div>
-            </div>
           </section>
 
-          {relatedItems.length > 0 && (
-            <section style={{ padding: '1rem 1.1rem', borderRadius: '16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <h2 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1rem' }}>Related snippets</h2>
-              <div style={{ display: 'grid', gap: '0.75rem' }}>
-                {relatedItems.map((relatedItem) => (
-                  <article key={relatedItem.id} style={{ paddingBottom: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
-                    <h3 style={{ margin: 0, fontSize: '0.98rem' }}>
-                      <Link href={getCodeToolsUrl(relatedItem.id)}>{relatedItem.title}</Link>
-                    </h3>
-                    <p style={{ margin: '0.35rem 0 0', opacity: 0.78 }}>{relatedItem.description}</p>
-                  </article>
+          <aside style={{ display: 'grid', gap: '18px' }}>
+            <section className="editorial-page-aside">
+              <p className="editorial-home-card-label">Collection note</p>
+              <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
+                This snippet stays in the editorial index alongside the rest of the collection, which keeps the browsing model stable as the presentation changes.
+              </p>
+            </section>
+
+            {relatedItems.length > 0 && (
+              <section className="editorial-page-aside">
+                <p className="editorial-home-card-label">Related snippets</p>
+                <div style={{ display: 'grid', gap: '14px', marginTop: '12px' }}>
+                  {relatedItems.map((relatedItem) => (
+                    <article key={relatedItem.id} style={{ paddingBottom: '14px', borderBottom: '1px solid rgba(16, 34, 54, 0.08)' }}>
+                      <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.2rem', letterSpacing: '-0.04em' }}>
+                        <Link href={getCodeToolsUrl(relatedItem.id)}>{relatedItem.title}</Link>
+                      </h3>
+                      <p className="editorial-post-summary" style={{ marginTop: '8px' }}>
+                        {relatedItem.description}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="editorial-page-aside">
+              <p className="editorial-home-card-label">Tags</p>
+              <div className="editorial-chip-row" style={{ marginTop: '12px' }}>
+                {item.tags.map((tag) => (
+                  <span key={tag} className="editorial-chip">
+                    {tag}
+                  </span>
                 ))}
               </div>
             </section>
-          )}
-
-          <section style={{ padding: '1rem 1.1rem', borderRadius: '16px', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-            <h2 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1rem' }}>Collection note</h2>
-            <p style={{ margin: 0, opacity: 0.82 }}>
-              This snippet lives in the Code & Tools library alongside the rest of the collection, so the route structure stays stable even as the presentation gets more editorial.
-            </p>
-          </section>
-        </aside>
-      </div>
-    </article>
+          </aside>
+        </div>
+      </section>
+    </EditorialPageFrame>
   );
 }

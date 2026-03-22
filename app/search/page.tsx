@@ -17,11 +17,36 @@ function formatResultDate(date?: Date) {
   }).format(new Date(date));
 }
 
+const resultTypeOrder: SearchResult['type'][] = ['post', 'publication', 'talk', 'code-ai'];
+
+const groupResultsByType = (results: SearchResult[]) => {
+  const groups = new Map<SearchResult['type'], SearchResult[]>();
+
+  results.forEach((result) => {
+    const typeResults = groups.get(result.type) ?? [];
+    typeResults.push(result);
+    groups.set(result.type, typeResults);
+  });
+
+  return resultTypeOrder
+    .filter((type) => groups.has(type))
+    .map((type) => ({
+      type,
+      results: groups.get(type) ?? [],
+    }));
+};
+
 function SearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
   const normalizedQuery = query.trim();
+  const typeLabels: Record<SearchResult['type'], string> = {
+    post: 'Blog post',
+    talk: 'Talk',
+    publication: 'Publication',
+    'code-ai': 'Code & tools',
+  };
 
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
@@ -68,13 +93,7 @@ function SearchContent() {
 
     router.replace(`/search?q=${encodeURIComponent(nextQuery)}`);
   };
-
-  const typeLabels: Record<SearchResult['type'], string> = {
-    post: 'Blog post',
-    talk: 'Talk',
-    publication: 'Publication',
-    'code-ai': 'Code & tools',
-  };
+  const groupedResults = groupResultsByType(results);
 
   return (
     <EditorialPageFrame currentPath="/search" pageClassName="editorial-book-page">
@@ -83,7 +102,7 @@ function SearchContent() {
           <p className="editorial-home-kicker">Search</p>
           <h1 className="editorial-page-title">Search Results</h1>
           <p className="editorial-page-copy">
-            Search posts, talks, publications, and code notes without leaving the editorial index.
+            Search posts, talks, publications, and code notes without leaving the editorial index, with results grouped so the page reads in sections instead of one long feed.
           </p>
           <p className="editorial-post-summary">
             {normalizedQuery ? `Showing results for “${normalizedQuery}”.` : 'Search the archive by topic, title, or theme.'}
@@ -159,34 +178,66 @@ function SearchContent() {
               Found {results.length} result{results.length !== 1 ? 's' : ''} for “{normalizedQuery}”
             </p>
 
-            <div className="editorial-post-grid">
-              {results.map((result) => (
-                <Link
-                  key={`${result.type}-${result.title}`}
-                  href={result.url}
-                  className="editorial-post-card search-result-item"
-                >
-                  <div className="editorial-post-meta">
-                    <span>{typeLabels[result.type]}</span>
-                    {result.date && <span>{formatResultDate(result.date)}</span>}
+            {groupedResults.map(({ type, results: typeResults }) => {
+              const [featuredResult, ...moreResults] = typeResults;
+
+              return (
+                <section key={type} className="editorial-list-section">
+                  <div className="editorial-list-heading">
+                    <p className="editorial-home-section-label">{typeLabels[type]}</p>
+                    <h2 className="editorial-page-section-title">
+                      {typeResults.length} result{typeResults.length !== 1 ? 's' : ''} in this section.
+                    </h2>
                   </div>
 
-                  <h2>{result.title}</h2>
+                  {featuredResult ? (
+                    <article className="editorial-home-card">
+                      <p className="editorial-home-card-label">{typeLabels[featuredResult.type]}</p>
+                      <h3>
+                        <Link href={featuredResult.url}>{featuredResult.title}</Link>
+                      </h3>
+                      {featuredResult.description && <p>{featuredResult.description}</p>}
+                      <div className="editorial-post-meta">
+                        {featuredResult.date ? (
+                          <span>{formatResultDate(featuredResult.date)}</span>
+                        ) : (
+                          <span>{typeLabels[featuredResult.type]}</span>
+                        )}
+                        <span>{featuredResult.tags?.length ? `${featuredResult.tags.length} tags` : 'No tags listed'}</span>
+                      </div>
+                      <div className="editorial-chip-row">
+                        {featuredResult.tags?.slice(0, 3).map((tag) => (
+                          <span key={tag} className="editorial-chip">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <Link href={featuredResult.url} className="editorial-home-card-link">
+                        Open result
+                      </Link>
+                    </article>
+                  ) : null}
 
-                  {result.description && <p className="editorial-post-summary">{result.description}</p>}
-
-                  <div className="editorial-chip-row">
-                    {result.tags?.slice(0, 3).map((tag) => (
-                      <span key={tag} className="editorial-chip">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <span className="editorial-post-link">Open result</span>
-                </Link>
-              ))}
-            </div>
+                  {moreResults.length > 0 ? (
+                    <article className="editorial-home-card">
+                      <p className="editorial-home-card-label">More {typeLabels[type]}</p>
+                      <ul className="posts-list">
+                        {moreResults.map((result) => (
+                          <li key={`${result.type}-${result.title}`} className="archive-post">
+                            <Link href={result.url}>
+                              <time className="archive-post-date">
+                                {result.date ? formatResultDate(result.date) ?? typeLabels[result.type] : typeLabels[result.type]}
+                              </time>
+                              <span className="archive-post-title">{result.title}</span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </article>
+                  ) : null}
+                </section>
+              );
+            })}
           </>
         )}
       </section>
