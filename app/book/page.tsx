@@ -1,25 +1,46 @@
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 
-const bookSections = [
+const bookThesis = [
   {
-    label: 'What it covers',
-    title: 'How AI systems remember, retrieve, compress, and decide what to act on.',
+    label: 'Working thesis',
+    title: 'Memory is not a feature add-on. It is the control surface that keeps an agent useful over time.',
     summary:
-      'The book is a practical guide to the mechanics behind durable agent behavior: storing useful context, retrieving it at the right time, and keeping the system understandable once it is in production.',
+      'The book treats memory as a runtime problem: what to store, when to retrieve, how to compress, and how to keep the system explainable after it starts changing state.',
   },
   {
-    label: 'Why it belongs here',
-    title: 'It extends the same practical arc as the posts, reports, and talks.',
+    label: 'Grounding',
+    title: 'The page stays tied to the same site family, not to a separate product story.',
     summary:
-      'The page stays within the same site family. It introduces the book, but it also points back to the rest of the work so the project reads as one body of writing instead of a separate brand.',
+      'It points back to the posts, publications, and talks that already exist here, so the book feels like part of an ongoing practice rather than a standalone launch page.',
+  },
+];
+
+const chapterInsights = [
+  {
+    label: 'Chapter insight 01',
+    title: 'Start with simple memory primitives before layering policy on top.',
+    summary:
+      'The useful part is not the store itself; it is the decision tree that decides what should survive, what should be retrieved, and what should be summarized away.',
   },
   {
-    label: 'What to read next',
-    title: 'Use the rest of the site as context for the book.',
+    label: 'Chapter insight 02',
+    title: 'Retrieval is where the system stops being generic and starts having opinions.',
     summary:
-      'Posts explain the day-to-day thinking, publications show the longer-form work, and talks show how the ideas are presented live.',
+      'Relevance, freshness, cost, and context length all compete here. The book should make that tradeoff visible instead of hiding it behind a single vector search story.',
   },
+  {
+    label: 'Chapter insight 03',
+    title: 'Compression only helps if the agent can still explain what it kept and why.',
+    summary:
+      'Summaries, pruning, and handoff rules are useful only when they preserve enough structure for the next turn, the next tool, or the next person who has to debug the system.',
+  },
+];
+
+const followUpLinks = [
+  { href: '/posts', label: 'Browse posts', summary: 'See the day-to-day thinking that feeds the book.' },
+  { href: '/publications', label: 'Read publications', summary: 'Follow the longer-form work around the same technical arc.' },
+  { href: '/talks', label: 'Watch talks', summary: 'See how the ideas are presented publicly.' },
 ];
 
 export default function BookPage() {
@@ -32,6 +53,10 @@ export default function BookPage() {
           <p className="editorial-page-copy">
             A practical guide to how AI systems should remember, retrieve, compress, and act on information in production.
           </p>
+          <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '62ch' }}>
+            The page reflects the book as a working project. It stays honest about the current status and keeps the focus on the ideas rather than on launch-day copy.
+          </p>
+
           <div className="editorial-home-actions">
             <a
               href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
@@ -43,7 +68,9 @@ export default function BookPage() {
               See related work
             </Link>
           </div>
+
           <div className="editorial-chip-row">
+            <span className="editorial-chip">In progress</span>
             <span className="editorial-chip">Memory</span>
             <span className="editorial-chip">Retrieval</span>
             <span className="editorial-chip">Compression</span>
@@ -51,11 +78,30 @@ export default function BookPage() {
           </div>
         </div>
 
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Working direction</p>
-          <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-            The book stays inside the same site family and points back to the rest of the work instead of standing apart as a separate product.
+        <aside className="editorial-page-aside" style={{ display: 'grid', gap: '16px' }}>
+          <p className="editorial-home-card-label">Current status</p>
+          <h2 style={{ margin: 0, fontSize: '2rem', lineHeight: 1.02 }}>
+            <Link href="/publications">Works best as part of the same editorial site.</Link>
+          </h2>
+          <p className="editorial-post-summary">
+            The site keeps the book grounded in ongoing posts, talks, and publications instead of pretending it is already a finished product.
           </p>
+
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">Working draft</span>
+              <span className="editorial-page-metric-label">status</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">O&apos;Reilly</span>
+              <span className="editorial-page-metric-label">publisher</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">Updates by email</span>
+              <span className="editorial-page-metric-label">follow-up</span>
+            </div>
+          </div>
+
           <div className="editorial-link-row">
             <Link href="/posts" className="editorial-post-link">
               Browse posts
@@ -72,12 +118,12 @@ export default function BookPage() {
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Book focus</p>
-          <h2 className="editorial-page-section-title">The page should answer what the book is, why it matters, and where it connects.</h2>
+          <p className="editorial-home-section-label">Thesis</p>
+          <h2 className="editorial-page-section-title">The book should explain why memory matters before it tries to prescribe a single architecture.</h2>
         </div>
 
-        <div className="editorial-two-column">
-          {bookSections.map((item) => (
+        <div className="editorial-two-column" style={{ alignItems: 'stretch' }}>
+          {bookThesis.map((item) => (
             <article key={item.label} className="editorial-home-card" style={{ display: 'grid', gap: '14px' }}>
               <p className="editorial-home-card-label">{item.label}</p>
               <h3>{item.title}</h3>
@@ -89,58 +135,69 @@ export default function BookPage() {
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Chapter insights</p>
+          <h2 className="editorial-page-section-title">Working chapter directions, not fake table-of-contents copy.</h2>
+        </div>
+
+        <div className="editorial-two-column">
+          {chapterInsights.map((item) => (
+            <article key={item.label} className="editorial-home-card" style={{ display: 'grid', gap: '14px' }}>
+              <p className="editorial-home-card-label">{item.label}</p>
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="editorial-home-cta-band">
+        <div>
+          <p className="editorial-home-card-label">Follow along</p>
+          <h3>Get updates when the book changes, then keep reading the rest of the site for the current work.</h3>
+          <p>
+            The book page stays small on purpose. It gives you a clear path to updates, while the posts, publications, and talks carry the live context.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gap: '12px' }}>
+          <a
+            href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
+            className="editorial-home-button editorial-home-button-primary"
+          >
+            Get book updates
+          </a>
+          <Link href="/publications" className="editorial-home-button editorial-home-button-secondary">
+            See publications
+          </Link>
+          <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+            <span className="editorial-chip">No release-date promise</span>
+            <span className="editorial-chip">Grounded in current work</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Read next</p>
           <h2 className="editorial-page-section-title">Use the rest of the site as context for the book.</h2>
         </div>
 
         <div className="editorial-post-grid">
-          <article className="editorial-post-card">
-            <div className="editorial-post-meta">
-              <span>Posts</span>
-              <span>ongoing writing</span>
-            </div>
-            <h3>
-              <Link href="/posts">Browse the posts</Link>
-            </h3>
-            <p className="editorial-post-summary">
-              The posts show the day-to-day thinking that feeds into the book and keep the site grounded in current work.
-            </p>
-            <Link href="/posts" className="editorial-post-link">
-              Open posts
-            </Link>
-          </article>
-
-          <article className="editorial-post-card">
-            <div className="editorial-post-meta">
-              <span>Publications</span>
-              <span>reports and longer work</span>
-            </div>
-            <h3>
-              <Link href="/publications">Read the publications</Link>
-            </h3>
-            <p className="editorial-post-summary">
-              Publications give the longer-form context around the same technical arc and help separate the book from prior work.
-            </p>
-            <Link href="/publications" className="editorial-post-link">
-              Open publications
-            </Link>
-          </article>
-
-          <article className="editorial-post-card">
-            <div className="editorial-post-meta">
-              <span>Talks</span>
-              <span>live appearances</span>
-            </div>
-            <h3>
-              <Link href="/talks">Watch the talks</Link>
-            </h3>
-            <p className="editorial-post-summary">
-              Talks show how the ideas are explained out loud and give the book a public trail back to the site.
-            </p>
-            <Link href="/talks" className="editorial-post-link">
-              Open talks
-            </Link>
-          </article>
+          {followUpLinks.map((item) => (
+            <article key={item.href} className="editorial-post-card">
+              <div className="editorial-post-meta">
+                <span>{item.label}</span>
+                <span>current work</span>
+              </div>
+              <h3>
+                <Link href={item.href}>{item.label}</Link>
+              </h3>
+              <p className="editorial-post-summary">{item.summary}</p>
+              <Link href={item.href} className="editorial-post-link">
+                Open {item.label.toLowerCase()}
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
     </EditorialPageFrame>

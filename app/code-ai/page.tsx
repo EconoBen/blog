@@ -58,9 +58,18 @@ const controlPanelStyle = {
   gap: '18px',
 } as const;
 
-const featuredCardStyle = {
+const spotlightCardStyle = {
   display: 'grid',
-  gap: '14px',
+  gap: '18px',
+} as const;
+
+const spotlightSummaryStyle = {
+  background: 'rgba(255, 255, 255, 0.56)',
+  border: '1px solid rgba(16, 34, 54, 0.08)',
+  borderRadius: '18px',
+  display: 'grid',
+  gap: '12px',
+  padding: '18px',
 } as const;
 
 function SnippetCodeBlock({
@@ -74,7 +83,16 @@ function SnippetCodeBlock({
 }) {
   return (
     <div style={codeBlockStyle}>
-      <div style={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'space-between', padding: '0.85rem 1rem' }}>
+      <div
+        style={{
+          alignItems: 'center',
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: '0.75rem',
+          justifyContent: 'space-between',
+          padding: '0.85rem 1rem',
+        }}
+      >
         <div style={{ display: 'grid', gap: '0.18rem' }}>
           <div
             style={{
@@ -127,6 +145,113 @@ function SnippetCodeBlock({
         {item.content}
       </SyntaxHighlighter>
     </div>
+  );
+}
+
+function CodeToolsSpotlightCard({
+  item,
+  onCopy,
+  copyLabel,
+}: {
+  item: WorkshopItem;
+  onCopy: () => void;
+  copyLabel: string;
+}) {
+  return (
+    <article className="editorial-home-card" style={{ ...spotlightCardStyle, minHeight: '0' }}>
+      <div style={{ display: 'grid', gap: '18px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'space-between', alignItems: 'start' }}>
+          <div style={{ maxWidth: '52ch' }}>
+            <p className="editorial-home-card-label">Featured utility</p>
+            <h3 style={{ margin: '10px 0 10px', fontSize: 'clamp(2rem, 2.8vw, 3rem)', lineHeight: 0.98, maxWidth: '11ch' }}>
+              <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+            </h3>
+            <p className="editorial-post-summary">{item.description}</p>
+          </div>
+
+          <div className="editorial-chip-row" style={{ marginTop: 0, justifyContent: 'flex-end' }}>
+            {item.featured && <span className="editorial-chip">Featured</span>}
+            {item.filename && <span className="editorial-chip">{item.filename}</span>}
+            <span className="editorial-chip">{getCodeToolsLanguageLabel(item.language)}</span>
+            <span className="editorial-chip">{getCodeToolsItemLineCount(item)} lines</span>
+          </div>
+        </div>
+
+        <div className="editorial-two-column" style={{ gap: '16px' }}>
+          <div style={spotlightSummaryStyle}>
+            <p className="editorial-home-card-label">Why it matters</p>
+            {item.writeup ? (
+              <div className="item-writeup">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+              </div>
+            ) : (
+              <p className="editorial-post-summary" style={{ marginBottom: 0 }}>
+                This item is a direct utility, so the page keeps the code visible and the summary short.
+              </p>
+            )}
+          </div>
+
+          <aside className="editorial-page-aside" style={{ margin: 0 }}>
+            <p className="editorial-home-card-label">Quick facts</p>
+            <div className="editorial-page-metric-list">
+              <div>
+                <span className="editorial-page-metric-value">{item.category}</span>
+                <span className="editorial-page-metric-label">category</span>
+              </div>
+              <div>
+                <span className="editorial-page-metric-value">{getCodeToolsLanguageLabel(item.language)}</span>
+                <span className="editorial-page-metric-label">language</span>
+              </div>
+              <div>
+                <span className="editorial-page-metric-value">{item.filename || 'Inline snippet'}</span>
+                <span className="editorial-page-metric-label">source</span>
+              </div>
+            </div>
+
+            <div className="editorial-link-row">
+              <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
+                Open detail page
+              </Link>
+              {item.gistUrl && (
+                <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
+                  Open source
+                </a>
+              )}
+            </div>
+          </aside>
+        </div>
+
+        <SnippetCodeBlock item={item} onCopy={onCopy} copyLabel={copyLabel} />
+      </div>
+    </article>
+  );
+}
+
+function CodeToolsSupportCard({ item }: { item: WorkshopItem }) {
+  return (
+    <article className="editorial-home-card" style={{ display: 'grid', gap: '14px', minHeight: '0' }}>
+      <div className="editorial-post-meta">
+        {item.category && <span>{item.category}</span>}
+        {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
+        <span>{getCodeToolsLanguageLabel(item.language)}</span>
+      </div>
+
+      <h3 style={{ margin: 0, fontSize: '1.4rem', lineHeight: 1.04 }}>
+        <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+      </h3>
+
+      <p className="editorial-post-summary">{item.description}</p>
+
+      <div className="editorial-chip-row">
+        {item.filename && <span className="editorial-chip">{item.filename}</span>}
+        <span className="editorial-chip">{item.tags.length} tags</span>
+        <span className="editorial-chip">{getCodeToolsItemLineCount(item)} lines</span>
+      </div>
+
+      <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
+        Open detail page
+      </Link>
+    </article>
   );
 }
 
@@ -186,9 +311,7 @@ function CodeToolsCard({
         </div>
       )}
 
-      {showCode && (
-        <SnippetCodeBlock item={item} onCopy={onCopy} copyLabel={copyLabel} />
-      )}
+      {showCode && <SnippetCodeBlock item={item} onCopy={onCopy} copyLabel={copyLabel} />}
 
       <div className="editorial-home-actions" style={{ marginTop: 0 }}>
         <Link href={getCodeToolsUrl(item.id)} className="editorial-home-button editorial-home-button-secondary">
@@ -233,6 +356,8 @@ export default function CodeAIPage() {
   });
 
   const selectedCategoryLabel = categories.find((category) => category.id === selectedCategory)?.label ?? 'All';
+  const spotlightItem = filteredItems.find((item) => item.featured) ?? filteredItems[0] ?? featuredItems[0] ?? latestItem;
+  const supportingSpotlightItems = filteredItems.filter((item) => item.id !== spotlightItem?.id).slice(0, 3);
 
   const groupedItems = filteredItems.reduce<Record<string, WorkshopItem[]>>((acc, item) => {
     if (!acc[item.category]) {
@@ -265,9 +390,13 @@ export default function CodeAIPage() {
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Code & Tools</p>
+          <p className="editorial-home-kicker">Code &amp; Tools</p>
           <h1 className="editorial-page-title">{title}</h1>
           <p className="editorial-page-copy">{subtitle}</p>
+          <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
+            Search by title, tag, or category. Switch between compact and full views depending on whether you want the index or the code canvas.
+          </p>
+
           <div className="editorial-home-actions">
             <Link href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
               Browse the index
@@ -276,36 +405,62 @@ export default function CodeAIPage() {
               Search the site
             </Link>
           </div>
+
           <div className="editorial-chip-row">
             <span className="editorial-chip">{allItems.length} snippets</span>
             <span className="editorial-chip">{activeCategoryCount} active categories</span>
             <span className="editorial-chip">{featuredItems.length} featured</span>
-            <span className="editorial-chip">{latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' }) : 'No latest item'}</span>
+            <span className="editorial-chip">
+              {latestItem
+                ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' })
+                : 'No latest item'}
+            </span>
           </div>
         </div>
 
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">How to use it</p>
-          <p className="editorial-post-summary">
-            Search by title, tag, or category, then open a detail page when you want the writeup and code together.
-          </p>
-          <div className="editorial-link-row">
-            <Link href="#code-tools-index" className="editorial-post-link">
-              Open the catalog
-            </Link>
-            {latestItem && (
-              <Link href={getCodeToolsUrl(latestItem.id)} className="editorial-post-link">
-                Open latest item
-              </Link>
-            )}
-          </div>
+        <aside className="editorial-page-aside" style={{ display: 'grid', gap: '16px' }}>
+          <p className="editorial-home-card-label">Current spotlight</p>
+          {spotlightItem ? (
+            <>
+              <h2 style={{ margin: 0, fontSize: '2rem', lineHeight: 1.02 }}>
+                <Link href={getCodeToolsUrl(spotlightItem.id)}>{spotlightItem.title}</Link>
+              </h2>
+              <p className="editorial-post-summary">{spotlightItem.description}</p>
+              <div className="editorial-page-metric-list">
+                <div>
+                  <span className="editorial-page-metric-value">{getCodeToolsLanguageLabel(spotlightItem.language)}</span>
+                  <span className="editorial-page-metric-label">language</span>
+                </div>
+                <div>
+                  <span className="editorial-page-metric-value">{spotlightItem.category}</span>
+                  <span className="editorial-page-metric-label">category</span>
+                </div>
+                <div>
+                  <span className="editorial-page-metric-value">{getCodeToolsItemLineCount(spotlightItem)}</span>
+                  <span className="editorial-page-metric-label">lines</span>
+                </div>
+              </div>
+              <div className="editorial-link-row">
+                <Link href={getCodeToolsUrl(spotlightItem.id)} className="editorial-post-link">
+                  Open spotlight
+                </Link>
+                {spotlightItem.gistUrl && (
+                  <a href={spotlightItem.gistUrl} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
+                    Open source
+                  </a>
+                )}
+              </div>
+            </>
+          ) : (
+            <p className="editorial-post-summary">No items are available for the current filter.</p>
+          )}
         </aside>
       </section>
 
       <section className="editorial-list-section" id="code-tools-index">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Browse</p>
-          <h2 className="editorial-page-section-title">Filter by category or search the catalog, then open a detail page for the code and notes.</h2>
+          <h2 className="editorial-page-section-title">Filter the catalog, then switch between a compact index and a full code view.</h2>
         </div>
 
         <div className="editorial-home-card" style={controlPanelStyle}>
@@ -392,41 +547,25 @@ export default function CodeAIPage() {
         </div>
       </section>
 
-      {featuredItems.length > 0 && (
+      {spotlightItem && supportingSpotlightItems.length > 0 && (
         <section className="editorial-list-section">
           <div className="editorial-list-heading">
             <p className="editorial-home-section-label">Featured</p>
-            <h2 className="editorial-page-section-title">A small set of items worth opening first.</h2>
+            <h2 className="editorial-page-section-title">One utility gets the full treatment. The others stay close behind it.</h2>
           </div>
 
-          <div className="editorial-two-column">
-            {featuredItems.slice(0, 2).map((item) => (
-              <article key={item.id} className="editorial-home-card" style={featuredCardStyle}>
-                <div className="editorial-post-meta">
-                  <span>{getCodeToolsLanguageLabel(item.language)}</span>
-                  {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
-                  <span>{getCodeToolsItemLineCount(item)} lines</span>
-                </div>
+          <div className="editorial-two-column" style={{ alignItems: 'start' }}>
+            <CodeToolsSpotlightCard
+              item={spotlightItem}
+              onCopy={() => copyToClipboard(spotlightItem.content, spotlightItem.id)}
+              copyLabel={copyStates[spotlightItem.id] || 'Copy'}
+            />
 
-                <h3>
-                  <Link href={getCodeToolsUrl(item.id)} className="editorial-home-card-link">
-                    {item.title}
-                  </Link>
-                </h3>
-
-                <p>{item.description}</p>
-
-                <div className="editorial-chip-row">
-                  <span className="editorial-chip">Featured</span>
-                  <span className="editorial-chip">{item.filename || 'Inline snippet'}</span>
-                  <span className="editorial-chip">{item.tags.length} tags</span>
-                </div>
-
-                <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
-                  Open detail page
-                </Link>
-              </article>
-            ))}
+            <div style={{ display: 'grid', gap: '18px' }}>
+              {supportingSpotlightItems.map((item) => (
+                <CodeToolsSupportCard key={item.id} item={item} />
+              ))}
+            </div>
           </div>
         </section>
       )}
@@ -448,7 +587,16 @@ export default function CodeAIPage() {
                   <section key={category.id} className="editorial-home-card" style={{ display: 'grid', gap: '16px' }}>
                     <h3 style={{ margin: 0, fontSize: '1.55rem' }}>
                       {category.icon} {category.label}
-                      <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                      <span
+                        style={{
+                          marginLeft: '0.5rem',
+                          color: 'var(--editorial-slate)',
+                          fontFamily: 'IBM Plex Mono, Roboto Mono, monospace',
+                          fontSize: '0.72rem',
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                        }}
+                      >
                         ({categoryItems.length})
                       </span>
                     </h3>

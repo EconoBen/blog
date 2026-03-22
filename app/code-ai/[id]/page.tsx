@@ -19,11 +19,11 @@ import {
   normalizeCodeToolsLanguage,
 } from '../../utils/codeTools';
 
-const codeBlockStyle = {
-  background: 'rgba(246, 242, 233, 0.94)',
+const codeCanvasStyle = {
+  background: 'linear-gradient(180deg, rgba(251, 247, 240, 0.98), rgba(244, 237, 226, 0.96))',
   border: '1px solid rgba(16, 34, 54, 0.08)',
-  borderRadius: '18px',
-  boxShadow: '0 16px 32px rgba(24, 36, 49, 0.08)',
+  borderRadius: '24px',
+  boxShadow: '0 18px 42px rgba(10, 16, 24, 0.12)',
   overflow: 'hidden',
 } as const;
 
@@ -51,6 +51,22 @@ const codeActionStyle = {
   minHeight: '34px',
   padding: '0 12px',
   textDecoration: 'none',
+} as const;
+
+const canvasHeaderStyle = {
+  alignItems: 'start',
+  borderBottom: '1px solid rgba(16, 34, 54, 0.08)',
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '0.75rem',
+  justifyContent: 'space-between',
+  padding: '1rem 1.15rem',
+} as const;
+
+const panelStackStyle = {
+  display: 'grid',
+  gap: '18px',
+  alignContent: 'start',
 } as const;
 
 export async function generateStaticParams() {
@@ -86,6 +102,43 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
+function RelatedUtilityCard({
+  item,
+}: {
+  item: NonNullable<ReturnType<typeof getCodeToolsItemById>>;
+}) {
+  return (
+    <article style={relatedUtilityStyle}>
+      <div className="editorial-post-meta">
+        <span>{getCodeToolsLanguageLabel(item.language)}</span>
+        <span>{item.category}</span>
+      </div>
+      <h3
+        style={{
+          margin: 0,
+          color: 'var(--editorial-ink)',
+          fontFamily: 'var(--font-heading)',
+          fontSize: '1.2rem',
+          letterSpacing: '-0.04em',
+          lineHeight: 1.06,
+        }}
+      >
+        <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+      </h3>
+      <p className="editorial-post-summary" style={{ marginTop: '8px' }}>
+        {item.description}
+      </p>
+    </article>
+  );
+}
+
+const relatedUtilityStyle = {
+  display: 'grid',
+  gap: '12px',
+  paddingBottom: '14px',
+  borderBottom: '1px solid rgba(16, 34, 54, 0.08)',
+} as const;
+
 export default async function CodeAIDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const item = getCodeToolsItemById(id);
@@ -103,16 +156,16 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Code & Tools</p>
+          <p className="editorial-home-kicker">Code &amp; Tools</p>
           <h1 className="editorial-page-title">{item.title}</h1>
           <p className="editorial-page-copy">{item.description}</p>
           <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
-            The writeup stays with the code, so the page reads like part of the site instead of a separate utility app.
+            The writeup stays with the code, so the page reads like part of the site instead of a detached utility view.
           </p>
 
           <div className="editorial-home-actions">
             <Link href="/code-ai" className="editorial-home-button editorial-home-button-secondary">
-              Back to Code & Tools
+              Back to Code &amp; Tools
             </Link>
             {item.gistUrl && (
               <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" className="editorial-home-button editorial-home-button-primary">
@@ -130,8 +183,8 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
           </div>
         </div>
 
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Details</p>
+        <aside className="editorial-page-aside" style={{ display: 'grid', gap: '16px' }}>
+          <p className="editorial-home-card-label">Metadata</p>
           <div className="editorial-page-metric-list">
             <div>
               <span className="editorial-page-metric-value">{categoryConfig?.label || item.category}</span>
@@ -154,29 +207,21 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
       </section>
 
       <section className="editorial-list-section">
-        <div className="editorial-two-column">
+        <div className="editorial-two-column" style={{ alignItems: 'start' }}>
           <section style={{ display: 'grid', gap: '18px' }}>
             {item.writeup && (
-              <div className="editorial-post-card" style={{ background: 'rgba(255, 255, 255, 0.58)' }}>
+              <article className="editorial-home-card" style={{ display: 'grid', gap: '14px' }}>
                 <p className="editorial-home-card-label">Notes</p>
-                <div className="item-writeup" style={{ marginTop: '12px' }}>
+                <div className="item-writeup">
                   <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
                 </div>
-              </div>
+              </article>
             )}
 
-            <div style={codeBlockStyle}>
-              <div
-                style={{
-                  alignItems: 'center',
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '0.75rem',
-                  justifyContent: 'space-between',
-                  padding: '0.85rem 1rem',
-                }}
-              >
+            <article style={codeCanvasStyle}>
+              <div style={canvasHeaderStyle}>
                 <div style={{ display: 'grid', gap: '0.18rem' }}>
+                  <p className="editorial-home-card-label">Code canvas</p>
                   <div
                     style={{
                       color: 'var(--editorial-ink)',
@@ -225,14 +270,14 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
               >
                 {item.content}
               </SyntaxHighlighter>
-            </div>
+            </article>
           </section>
 
-          <aside style={{ display: 'grid', gap: '18px' }}>
+          <aside style={panelStackStyle}>
             <section className="editorial-page-aside">
               <p className="editorial-home-card-label">How to read it</p>
               <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-                Start with the notes if you want context, then scan the code block. The route stays quick to read and easy to return from.
+                Start with the notes if you want context, then scan the code canvas. The route stays quick to read and easy to return to.
               </p>
               <div className="editorial-link-row">
                 <Link href="/code-ai" className="editorial-post-link">
@@ -246,25 +291,10 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
 
             {relatedItems.length > 0 && (
               <section className="editorial-page-aside">
-                <p className="editorial-home-card-label">Related snippets</p>
+                <p className="editorial-home-card-label">Related utilities</p>
                 <div style={{ display: 'grid', gap: '14px', marginTop: '12px' }}>
                   {relatedItems.map((relatedItem) => (
-                    <article key={relatedItem.id} style={{ paddingBottom: '14px', borderBottom: '1px solid rgba(16, 34, 54, 0.08)' }}>
-                      <h3
-                        style={{
-                          margin: 0,
-                          color: 'var(--editorial-ink)',
-                          fontFamily: 'Space Grotesk, Inter, sans-serif',
-                          fontSize: '1.2rem',
-                          letterSpacing: '-0.04em',
-                        }}
-                      >
-                        <Link href={getCodeToolsUrl(relatedItem.id)}>{relatedItem.title}</Link>
-                      </h3>
-                      <p className="editorial-post-summary" style={{ marginTop: '8px' }}>
-                        {relatedItem.description}
-                      </p>
-                    </article>
+                    <RelatedUtilityCard key={relatedItem.id} item={relatedItem} />
                   ))}
                 </div>
               </section>
