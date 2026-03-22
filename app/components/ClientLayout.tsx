@@ -11,7 +11,18 @@ interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
-const editorialShellRoutes = new Set(['/', '/book', '/posts', '/publications', '/talks', '/about']);
+const editorialShellRoutes = [
+  '/',
+  '/book',
+  '/posts',
+  '/publications',
+  '/talks',
+  '/about',
+  '/search',
+  '/tags',
+  '/archive',
+  '/archives',
+];
 
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   const pathname = usePathname();
@@ -94,7 +105,13 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     };
   }, [isResizing, sidebarWidth]);
 
-  const useEditorialShell = editorialShellRoutes.has(pathname);
+  const useEditorialShell = editorialShellRoutes.some((route) => {
+    if (route === '/') {
+      return pathname === route;
+    }
+
+    return pathname === route || pathname.startsWith(`${route}/`);
+  });
 
   useEffect(() => {
     document.body.classList.toggle('shell-editorial', useEditorialShell);
