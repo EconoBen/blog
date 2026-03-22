@@ -12,6 +12,7 @@ export default function PublicationsPage() {
   const sortedPublications = [...publications].sort((a, b) => b.year - a.year);
   const featuredPublications = sortedPublications.filter(pub => pub.featured);
   const otherPublications = sortedPublications.filter(pub => !pub.featured);
+  const latestPublication = sortedPublications[0];
 
   return (
     <EditorialPageFrame currentPath="/publications">
@@ -22,6 +23,12 @@ export default function PublicationsPage() {
           <p className="editorial-page-copy">
             O&apos;Reilly work, formal research, and longer-form pieces that anchor the writing and talks elsewhere on the site.
           </p>
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">O&apos;Reilly</span>
+            <span className="editorial-chip">Research</span>
+            <span className="editorial-chip">Reports</span>
+            <span className="editorial-chip">Long-form writing</span>
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">What&apos;s here</p>
@@ -31,10 +38,17 @@ export default function PublicationsPage() {
               <span className="editorial-page-metric-label">major publications</span>
             </div>
             <div>
-              <span className="editorial-page-metric-value">2025</span>
+              <span className="editorial-page-metric-value">{latestPublication?.year ?? 'n/a'}</span>
               <span className="editorial-page-metric-label">latest release year</span>
             </div>
+            <div>
+              <span className="editorial-page-metric-value">{featuredPublications.length}</span>
+              <span className="editorial-page-metric-label">featured entries</span>
+            </div>
           </div>
+          <p className="editorial-post-summary">
+            Featured work appears first so the newest or most central pieces are easy to find.
+          </p>
         </aside>
       </section>
 
