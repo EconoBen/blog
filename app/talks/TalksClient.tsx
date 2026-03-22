@@ -17,7 +17,7 @@ const getYouTubeUrl = (talk: Talk): string | null => {
 
 const getYouTubeEmbedUrl = (talk: Talk): string | null => {
   if (!talk.youtubeId) return null;
-  return `https://www.youtube.com/embed/${talk.youtubeId}?autoplay=1`;
+  return `https://www.youtube.com/embed/${talk.youtubeId}`;
 };
 
 const getSpotifyEmbedUrl = (talk: Talk): string | null => {
@@ -83,9 +83,10 @@ function TalkMediaPreview({
         title={talk.title}
         frameBorder="0"
         sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
+        loading="lazy"
         className="h-full w-full"
       />
     );
@@ -249,9 +250,10 @@ function TalkCard({
             title={talk.title}
             frameBorder="0"
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
+            loading="lazy"
             className="h-full w-full"
           />
         ) : (
