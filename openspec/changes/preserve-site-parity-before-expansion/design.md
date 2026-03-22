@@ -8,7 +8,25 @@ This change exists to prevent content loss while the redesign moves forward. Wit
 
 The first implementation wave is already split into stacked draft PRs for the shared foundation, structured pages, posts, discovery routes, and continuity-backed surfaces. The next wave should move from "safe continuity" toward "closer to final" by using an integrated preview branch plus focused polish branches for shared visual fidelity, language, and subpage refinement.
 
-The latest design input is a Stitch-generated multi-page site family built from the active OpenSpec brief plus uploaded Figma references. That pass produced both mobile and desktop route families, but the desktop/web outputs are the more useful implementation target. They reinforce a calmer editorial shell, a Ben-first homepage, cleaner list-based discovery pages, narrower long-form reading layouts, and more normalized archive/tag/search/code-tool families. They should guide implementation, but not be treated as codegen or content truth.
+The latest design input is a Stitch-generated multi-page site family built from the active OpenSpec brief plus uploaded Figma references. That pass produced both mobile and desktop route families, but the desktop/web outputs are the more useful implementation target. They reinforce a calmer editorial shell, a Ben-first homepage, cleaner list-based discovery pages, narrower long-form reading layouts, and more normalized archive/tag/search/code-tool families.
+
+As of March 22, 2026, the project also has pasted raw Stitch desktop HTML exports for the main route family. Those exported page structures are now the closest available expression of the intended visual system. They should be treated as the current design-reference baseline for layout, spacing, typography pairing, color tokens, and page hierarchy across:
+
+- `/`
+- `/posts`
+- `/posts/[slug]`
+- `/talks`
+- `/publications`
+- `/about`
+- `/search`
+- `/tags`
+- `/archive`
+- `/archives/[month]`
+- `/code-ai`
+- `/code-ai/[id]`
+- `/book`
+
+They are still not implementation truth. They invent sample content, overstate some book/newsletter states, and occasionally drift in labels or copy. The implementation rule is: match the shell and page structure closely, while preserving real site content, routes, behaviors, and wording unless a deliberate copy change is approved.
 
 The combined preview makes the remaining issues concrete. The site is now directionally coherent, but several routes still reveal their transitional state: `About` is cramped, `Book` still reads like a placeholder, `Publications` and `Talks` are still card-grid heavy, `Posts` remains too dense, and `Code & Tools` still feels like a separate product rather than part of the same editorial platform.
 
@@ -65,12 +83,13 @@ Alternatives considered:
 - Rely only on `next build`: rejected because content loss can still slip through.
 - Require exhaustive visual parity review for every route before building new surfaces: rejected because it over-constrains progress.
 
-### 6. Use Stitch desktop outputs as design reference, not implementation truth
-The Stitch project is useful as a design extraction step because it extends the homepage direction into a complete site family. The correct use is to borrow information architecture, hierarchy, pacing, and calmer visual language from the desktop outputs while keeping the real site's content, behaviors, and tone constraints.
+### 6. Use Stitch desktop exports as the current page-family reference, not implementation truth
+The Stitch project is useful because it extends the homepage direction into a complete desktop site family. The correct use is to match its information architecture, hierarchy, pacing, type pairing, spacing, and calmer visual language route by route, while keeping the real site's content, behaviors, and tone constraints.
 
 Alternatives considered:
 - Ignore Stitch and continue from ad hoc editorial exploration: rejected because the multi-page desktop pass clarifies the page family more concretely.
 - Treat Stitch as direct codegen or literal copy source: rejected because it invents fake content and occasionally drifts into generic product/newsletter patterns.
+- Use only abstract screenshots or moodboards as reference: rejected because the raw Stitch desktop HTML gives a much more precise implementation target.
 
 ### 6. The design thesis is practical, direct, and content-first
 The site should feel useful, grounded, and easy to navigate. Labels should describe what the content is in plain terms: posts, talks, publications, resume. Visual emphasis should come from the content itself, not from self-promotional metrics or decorative summary bands.
@@ -92,6 +111,20 @@ The brand link is not enough as the only way back to the homepage once the site 
 
 Alternatives considered:
 - Rely on the site title/brand only: rejected because explicit wayfinding is clearer and more practical.
+
+### 9. Route-family implementation should align to the exported Stitch pages in parallel
+The next execution wave should split along page families that mirror the available Stitch references:
+
+- shared shell and homepage
+- reading and discovery routes
+- structured content routes
+- code/tools and book routes
+
+Each slice can move in parallel in separate worktrees, but they should all treat the exported Stitch desktop HTML as the common visual target so the integrated preview converges instead of drifting.
+
+Alternatives considered:
+- Continue with one combined preview branch only: rejected because it slows route-family iteration and makes it harder to use multiple agents safely.
+- Let each route family interpret the design independently: rejected because that already caused visible drift from the intended visual system.
 
 ## Architecture
 
@@ -129,9 +162,9 @@ flowchart TD
 4. Verify dynamic systems and outputs: search, tags, archives, code-and-tools, metadata, RSS, sitemap, and robots.
 5. Review the redesigned site for continuity gaps, then queue copy/book/newsletter refinements for the next pass.
 6. Create an integrated preview branch from the active stacked slices and run a second pass for shared visual fidelity, language, and subpage polish.
-7. Use the Stitch desktop outputs to define the next refinement wave for the shared shell, homepage, long-form reading, talks, discovery surfaces, and code/tool pages.
-7. Run a combined-preview review, then launch another polish wave for structured pages, discovery density, and code/tools shell alignment.
-8. Run a practical-refinement wave that removes pretentious language, restores useful embedded media where the old site was stronger, and re-centers the about page on CV utility.
+7. Use the exported Stitch desktop HTML to define the next implementation wave for the shared shell, homepage, long-form reading, talks, discovery surfaces, structured pages, archive views, and code/tool pages.
+8. Run a combined-preview review, then launch another polish wave for remaining route-family drift, wording cleanup, and behavior gaps.
+9. Run a practical-refinement wave that removes pretentious language, restores useful embedded media where the old site was stronger, and re-centers the about page on CV utility.
 
 ## Execution Constraints
 

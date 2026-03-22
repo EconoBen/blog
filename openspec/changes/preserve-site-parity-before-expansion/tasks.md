@@ -65,3 +65,12 @@
 - [ ] 9.3 Rework `/publications` to remove empty metric holes and summary filler, using content-driven layout and plain labels instead
 - [ ] 9.4 Restore `/about` as a useful CV page first, while still supporting the broader public-work narrative
 - [ ] 9.5 Add an explicit `Home` destination to the editorial shell and run another integrated preview after the practical pass
+
+## 10. Stitch HTML Parity Pass
+
+- [ ] 10.1 Capture the pasted Stitch desktop HTML export as the active implementation reference for the redesign route family
+- [ ] 10.2 Update the shared shell, home page, and global tokens to match the exported Stitch desktop HTML more literally
+- [ ] 10.3 Update `/posts`, `/posts/[slug]`, `/search`, `/tags`, `/archive`, and `/archives/[month]` to the exported Stitch desktop hierarchy while preserving real site content and behaviors
+- [ ] 10.4 Update `/talks`, `/publications`, and `/about` to the exported Stitch desktop structure where it helps, while keeping the practical-language constraints from review
+- [ ] 10.5 Update `/code-ai`, `/code-ai/[id]`, and `/book` to the exported Stitch desktop structure where it helps, without adopting invented sample copy or fake metadata
+- [ ] 10.6 Publish a new integrated preview branch and local review server specifically for the Stitch HTML parity pass
