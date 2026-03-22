@@ -23,6 +23,17 @@ export default function TalksPage() {
             <span className="editorial-chip">Source links</span>
           </div>
         </div>
+
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">How to use this page</p>
+          <p>
+            Open one player inline, then use the transcript or source link if you need the original context. Topic chips below narrow the list.
+          </p>
+          <div className="editorial-link-row">
+            <span className="editorial-chip">Player opens in place</span>
+            <span className="editorial-chip">Transcript when available</span>
+          </div>
+        </aside>
       </section>
 
       <TalksClient />

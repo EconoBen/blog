@@ -12,6 +12,7 @@ export default function PublicationsPage() {
   const sortedPublications = [...publications].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+  const featuredPublications = sortedPublications.filter((publication) => publication.featured);
   const publicationsByYear = sortedPublications.reduce<Record<number, Publication[]>>((groups, publication) => {
     if (!groups[publication.year]) {
       groups[publication.year] = [];
@@ -31,7 +32,7 @@ export default function PublicationsPage() {
           <p className="editorial-home-kicker">Books, reports, papers</p>
           <h1 className="editorial-page-title">Publications</h1>
           <p className="editorial-page-copy">
-            Browse the writing by year, then open the item you need. Reports, papers, and the forthcoming book all live in the same list.
+            Browse the work directly. Featured items appear first, then the full list stays grouped by year so the page still works like an index.
           </p>
           <div className="editorial-chip-row">
             {publicationYears.map((year) => (
@@ -44,13 +45,32 @@ export default function PublicationsPage() {
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Browse-first</p>
           <p className="editorial-post-summary">
-            Use the year jump links or scan the latest publications below. No summary strip, just the work.
+            Start with the featured publications, then jump by year. Each entry keeps its source link, PDF, or DOI if one exists.
           </p>
-          <a href={`#publication-year-${publicationYears[0]}`} className="editorial-post-link">
-            Start with {publicationYears[0]}
-          </a>
+          <div className="editorial-link-row">
+            <a href="#featured-publications" className="editorial-post-link">
+              Featured work
+            </a>
+            <a href={`#publication-year-${publicationYears[0]}`} className="editorial-post-link">
+              Start with {publicationYears[0]}
+            </a>
+          </div>
         </aside>
       </section>
+
+      {featuredPublications.length > 0 && (
+        <section id="featured-publications" className="editorial-list-section">
+          <div className="editorial-list-heading">
+            <p className="editorial-home-section-label">Featured publications</p>
+            <h2 className="editorial-page-section-title">The most useful items, shown with the cover when there is one.</h2>
+          </div>
+          <div className="editorial-publication-grid">
+            {featuredPublications.map((publication) => (
+              <PublicationSpotlight key={publication.id} publication={publication} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {publicationYears.map((year) => {
         const yearPublications = publicationsByYear[year];
@@ -82,10 +102,6 @@ function formatPublicationDate(date: string) {
 }
 
 function getPublicationType(publication: Publication) {
-  if (publication.venue === "O'Reilly Media") {
-    return "O'Reilly report";
-  }
-
   const labels: Record<Publication['type'], string> = {
     book: 'Book',
     journal: 'Journal',
@@ -104,7 +120,7 @@ function getPublicationHref(publication: Publication) {
 
 function getPublicationActionLabel(publication: Publication) {
   if (publication.url) {
-    return publication.venue === "O'Reilly Media" ? 'Read the report' : 'Read online';
+    return 'Read online';
   }
 
   if (publication.pdfUrl) {
@@ -118,14 +134,66 @@ function getPublicationActionLabel(publication: Publication) {
   return undefined;
 }
 
+function PublicationActions({ publication }: { publication: Publication }) {
+  const actionHref = getPublicationHref(publication);
+  const actionLabel = getPublicationActionLabel(publication);
+
+  if (!actionHref || !actionLabel) {
+    return null;
+  }
+
+  return (
+    <div className="editorial-link-row">
+      <a href={actionHref} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
+        {actionLabel}
+      </a>
+    </div>
+  );
+}
+
+function PublicationSpotlight({
+  publication,
+}: {
+  publication: Publication;
+}) {
+  return (
+    <article className="editorial-publication-card is-featured">
+      {publication.coverImage ? (
+        <div className="editorial-publication-cover">
+          <img src={publication.coverImage} alt={publication.title} />
+        </div>
+      ) : null}
+
+      <div>
+        <div className="editorial-post-meta">
+          <span>{getPublicationType(publication)}</span>
+          <span>{formatPublicationDate(publication.date)}</span>
+        </div>
+
+        <h3>{publication.title}</h3>
+        <p className="editorial-publication-authors">{publication.authors}</p>
+        {publication.venue && <p className="editorial-publication-venue">{publication.venue}</p>}
+        {publication.abstract && <p className="editorial-post-summary">{publication.abstract}</p>}
+
+        <div className="editorial-chip-row">
+          {publication.topics.slice(0, 4).map((topic) => (
+            <span key={topic} className="editorial-chip">
+              {topic}
+            </span>
+          ))}
+        </div>
+
+        <PublicationActions publication={publication} />
+      </div>
+    </article>
+  );
+}
+
 function PublicationEntry({
   publication,
 }: {
   publication: Publication;
 }) {
-  const actionHref = getPublicationHref(publication);
-  const actionLabel = getPublicationActionLabel(publication);
-
   return (
     <article id={publication.id} className="editorial-timeline-item">
       <div className="editorial-post-meta">
@@ -146,13 +214,7 @@ function PublicationEntry({
         ))}
       </div>
 
-      {actionHref && actionLabel && (
-        <div className="editorial-link-row">
-          <a href={actionHref} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
-            {actionLabel}
-          </a>
-        </div>
-      )}
+      <PublicationActions publication={publication} />
     </article>
   );
 }

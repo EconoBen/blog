@@ -29,17 +29,9 @@ const getSpotifyEmbedUrl = (talk: Talk): string | null => {
   return `https://open.spotify.com/embed/episode/${match[1]}?utm_source=generator&theme=0`;
 };
 
-const getPrimaryActionLabel = (talk: Talk): string => {
-  if (talk.spotifyUrl && !talk.youtubeId) {
-    return 'Open player';
-  }
-
-  return 'Play in page';
-};
-
 const getPrimarySourceLabel = (talk: Talk): string => {
   if (talk.spotifyUrl && !talk.youtubeId) {
-    return 'Listen on Spotify';
+    return 'Open on Spotify';
   }
 
   return 'Watch on YouTube';
@@ -48,11 +40,13 @@ const getPrimarySourceLabel = (talk: Talk): string => {
 function TalkCard({
   talk,
   featured = false,
+  compact = false,
   isOpen,
   onOpen,
 }: {
   talk: Talk;
   featured?: boolean;
+  compact?: boolean;
   isOpen: boolean;
   onOpen: () => void;
 }) {
@@ -66,7 +60,7 @@ function TalkCard({
 
   return (
     <article
-      className={`talk-card ${featured ? 'talk-card-featured' : ''} ${isHovered ? 'talk-card-hovered' : ''} ${isOpen ? 'is-open' : ''}`}
+      className={`talk-card ${featured ? 'talk-card-featured' : ''} ${compact ? 'talk-card-grid' : ''} ${isHovered ? 'talk-card-hovered' : ''} ${isOpen ? 'is-open' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -140,9 +134,9 @@ function TalkCard({
         <div className="talk-card-header">
           <h3 className="talk-card-title">{talk.title}</h3>
           <div className="talk-card-meta">
-            <span className="talk-card-event">{talk.event}</span>
+            <span>{talk.event}</span>
             <span className="talk-card-date">{formatDate(talk.date)}</span>
-            {isOpen && <span>Playing in page</span>}
+            {talk.transcriptUrl && <span>Transcript available</span>}
           </div>
         </div>
 
@@ -177,9 +171,11 @@ function TalkCard({
               <span>Read transcript</span>
             </a>
           )}
-          <button type="button" className="watch-talk-button" onClick={onOpen}>
-            <span>{getPrimaryActionLabel(talk)}</span>
-          </button>
+          {!isOpen && (
+            <button type="button" className="watch-talk-button" onClick={onOpen}>
+              <span>Open in page</span>
+            </button>
+          )}
         </div>
       </div>
     </article>
@@ -252,8 +248,8 @@ export default function TalksClient() {
       {activeTalk && (
         <section className="editorial-list-section">
           <div className="editorial-list-heading">
-            <p className="editorial-home-section-label">Featured recording</p>
-            <h2 className="editorial-page-section-title">Open one session in place, then browse the rest.</h2>
+            <p className="editorial-home-section-label">Featured talk</p>
+            <h2 className="editorial-page-section-title">Open the player inline, then use the source or transcript links if you need them.</h2>
           </div>
           <TalkCard
             key={activeTalk.id}
@@ -273,11 +269,12 @@ export default function TalksClient() {
           </h2>
         </div>
 
-        <div className="talks-container">
+        <div className="editorial-talk-grid">
           {secondaryTalks.map((talk) => (
             <TalkCard
               key={talk.id}
               talk={talk}
+              compact
               isOpen={false}
               onOpen={() => setActiveTalkId(talk.id)}
             />
