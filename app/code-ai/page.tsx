@@ -5,8 +5,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { workshopConfig, WorkshopItem } from '../config/workshopConfig';
-import { gistItems } from '../config/workshopGists';
+import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
+import { getCodeToolsItems } from '../utils/codeTools';
 
 // Map common language aliases to Prism language names
 const languageMap: Record<string, string> = {
@@ -73,18 +73,10 @@ export default function CodeAIPage() {
 
   const { title, subtitle, categories } = workshopConfig;
 
-  // Combine manual items with fetched gist items
-  const allItems = [...workshopConfig.items, ...gistItems];
-
-  // Sort all items by date, most recent first
-  const sortedItems = allItems.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0;
-    const dateB = b.date ? new Date(b.date).getTime() : 0;
-    return dateB - dateA; // Most recent first
-  });
+  const allItems = getCodeToolsItems();
 
   // Filter items based on category and search
-  const filteredItems = sortedItems.filter((item: WorkshopItem) => {
+  const filteredItems = allItems.filter((item: WorkshopItem) => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch = searchQuery === '' ||
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
