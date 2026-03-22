@@ -1,5 +1,7 @@
 ## Context
 
+> Status note (March 22, 2026): the literal Stitch-to-TSX preview pass now exists on the isolated preview branch `feat/site-stitch-html-preview` and is reviewable locally on `http://localhost:3007`. That branch intentionally uses exported sample copy and placeholder states where needed so the desktop layout family can be judged in-browser without treating the exported content as production truth. A follow-up render fix was required after the first pass: the preview initially served with missing utility styling because `app/globals.css` did not import Tailwind, and the old `body.shell-editorial` rule still forced a dark shell background. The current preview state includes both fixes and has been visually rechecked on the main top-level route set.
+
 The `blog` repo is the implementation target for the public site at `econoben.dev`. It is a Next.js App Router application with content and behavior spread across route components in `app/`, config-driven sections in `app/config/`, markdown posts in `src/posts/`, and service logic in `app/services/`.
 
 The current working tree already contains exploratory editorial redesign work, including a new shell and a `/book` route. That work should continue, but it must not cause silent loss of content or features from the existing site. The canonical baseline is still the current site as currently implemented and shipped: its routes, wording, content corpus, metadata, feeds, and user-visible behaviors.
@@ -31,6 +33,16 @@ They are still not implementation truth. They invent sample content, overstate s
 The combined preview makes the remaining issues concrete. The site is now directionally coherent, but several routes still reveal their transitional state: `About` is cramped, `Book` still reads like a placeholder, `Publications` and `Talks` are still card-grid heavy, `Posts` remains too dense, and `Code & Tools` still feels like a separate product rather than part of the same editorial platform.
 
 The latest review adds a sharper constraint: the redesign must become more practical and less self-conscious. In the current preview, the site gets weaker when it starts narrating itself with labels like "essays," "pieces," "appearances," "major publications," and "featured entries," or when it introduces visual devices such as proof strips and metric sidebars that do not help people actually use the page. The old site handled some of this better, especially on `Talks`, where embedded media made the page immediately useful and about-page content still behaved like a real CV.
+
+The latest implementation instruction is more concrete than that: stop treating the exported Stitch HTML as a loose design moodboard and instead translate the pasted desktop route family into real Next.js TSX so the user can inspect the exact layouts in-browser. This preview-first translation pass is allowed to be more literal than the continuity-safe rewrite, as long as it stays isolated to non-`main` preview branches and the planning artifacts clearly distinguish "literal design preview" from "final production integration."
+
+The latest execution instruction now goes one step further: begin the real integration wave immediately, use parallel worktrees and as many background agents as practical, open PRs for every slice, and do not merge anything into `main` until the human reviews the resulting branch set. The working rule is:
+
+- `feat/site-practical-review-preview` is the real integration base
+- `feat/site-stitch-html-preview` is the visual/design reference
+- each implementation slice gets its own worktree and PR
+- slices must have disjoint write ownership
+- no branch merges without explicit review approval
 
 ## Goals / Non-Goals
 
@@ -126,6 +138,22 @@ Alternatives considered:
 - Continue with one combined preview branch only: rejected because it slows route-family iteration and makes it harder to use multiple agents safely.
 - Let each route family interpret the design independently: rejected because that already caused visible drift from the intended visual system.
 
+### 10. Add a literal Stitch-to-TSX preview pass before more interpretation
+The exported desktop HTML should be translated into actual Next.js TSX route components so the user can inspect what the design looks like when rendered by the app. This is a preview artifact, not proof that the content model or production behavior has been reconciled. The point is to remove ambiguity about the visual target before another interpretation layer is added.
+
+Alternatives considered:
+- Continue adapting the export loosely route by route: rejected because the user explicitly asked to see the exported pages converted directly.
+- Keep the HTML outside the app and inspect it separately: rejected because the user wants the design rendered inside the actual Next.js codebase.
+- Merge literal preview code directly toward production without an explicit preview phase: rejected because it would blur fake sample content and real site behavior too early.
+
+### 11. Execute the real integration in parallel worktrees, not by merging preview code
+The accepted Stitch direction should now be integrated into the real route implementations through parallel worktree slices. Each slice should target a route family, own a disjoint set of files, and end in its own draft PR. The preview branch stays a reference; it is not merged directly. Instead, workers translate the approved direction into real route code that preserves current content and behaviors.
+
+Alternatives considered:
+- Merge the literal preview branch and clean it up later: rejected because it would bring exported sample content and placeholder assumptions too close to production.
+- Implement sequentially in one long-running branch: rejected because the user explicitly wants parallel execution and reviewable PR slices.
+- Let multiple workers edit the same shared files freely: rejected because it creates preventable merge conflicts and destroys the value of parallel worktrees.
+
 ## Architecture
 
 ```mermaid
@@ -165,6 +193,10 @@ flowchart TD
 7. Use the exported Stitch desktop HTML to define the next implementation wave for the shared shell, homepage, long-form reading, talks, discovery surfaces, structured pages, archive views, and code/tool pages.
 8. Run a combined-preview review, then launch another polish wave for remaining route-family drift, wording cleanup, and behavior gaps.
 9. Run a practical-refinement wave that removes pretentious language, restores useful embedded media where the old site was stronger, and re-centers the about page on CV utility.
+10. Run a literal Stitch translation wave that turns the pasted desktop HTML into TSX route components in the preview branch so the exported layouts can be judged directly.
+11. After that preview exists, decide route by route what should stay literal, what should be replaced with real site data, and what should be discarded.
+12. Launch a parallel integration wave from `feat/site-practical-review-preview`, using the literal preview branch as reference and separate worktrees for shell, reading, structured, and discovery/tools slices.
+13. Open draft PRs for those slices, review them together, and keep all merges blocked until the human approves the combined direction.
 
 ## Execution Constraints
 
@@ -174,6 +206,10 @@ flowchart TD
 - Shared foundation work that changes common files such as layout shells, shared components, or global styles should establish the integration base first; page-specific work should branch from that base to reduce conflicts.
 - Once multiple draft slices exist, an integration preview branch may stack them together so later polish work can target the real combined experience without merging anything into `main`.
 - Combined previews should drive refinement work. New polish slices should be based on rendered-page review rather than on abstract theme descriptions once a stacked preview exists.
+- Literal Stitch translations are allowed in preview branches even when they still contain sample copy or static placeholders from the export, but those branches must be treated as design-preview artifacts rather than production-ready route implementations.
+- Real integration work should branch from `feat/site-practical-review-preview`, not from `main`, and should use `feat/site-stitch-html-preview` only as a visual reference.
+- Use as many background agents as practical, but only when each agent has a disjoint write set and a bounded route-family scope.
+- Every implementation slice should end in a draft PR. Review happens before any merge, and no merge to `main` is allowed during this wave.
 - PRs created for this change are review checkpoints, not merge signals. Nothing should be merged into `main` until the user explicitly approves it.
 
 Rollback strategy:

@@ -1,6 +1,6 @@
 ## 1. Content Continuity Guardrails
 
-- [ ] 0.1 Establish the execution model: non-`main` branches only, worktrees for parallel slices, PRs for every slice, and no merges before explicit review
+- [x] 0.1 Establish the execution model: non-`main` branches only, worktrees for parallel slices, PRs for every slice, and no merges before explicit review
 - [ ] 1.1 Inventory canonical content sources and public site surfaces without building a formal parity chart
 - [ ] 1.2 Add lightweight checks so posts, slugs, metadata, and feature-backed content cannot disappear silently
 - [ ] 1.3 Record the wording-freeze-by-default rule for existing pages and content
@@ -74,3 +74,26 @@
 - [ ] 10.4 Update `/talks`, `/publications`, and `/about` to the exported Stitch desktop structure where it helps, while keeping the practical-language constraints from review
 - [ ] 10.5 Update `/code-ai`, `/code-ai/[id]`, and `/book` to the exported Stitch desktop structure where it helps, without adopting invented sample copy or fake metadata
 - [ ] 10.6 Publish a new integrated preview branch and local review server specifically for the Stitch HTML parity pass
+
+## 11. Literal Stitch TSX Translation Pass
+
+- [x] 11.1 Convert the pasted Stitch desktop HTML shell into actual shared Next.js TSX layout/components so the exported chrome can be reviewed directly
+- [x] 11.2 Convert the pasted Stitch desktop route family for `/`, `/posts`, `/posts/[slug]`, `/talks`, `/publications`, `/about`, `/search`, `/tags`, `/archive`, `/archives/[month]`, `/code-ai`, `/code-ai/[id]`, and `/book` into actual TSX page implementations on the preview branch
+- [x] 11.3 Keep the literal translation pass isolated as a preview artifact by clearly separating exported sample content from real production content decisions
+- [x] 11.4 Update Beads and branch structure so the literal translation pass can be executed and reviewed independently of the continuity-safe integration work
+- [x] 11.5 Publish a fresh local review server from the literal-translation preview so the exported desktop layouts can be judged inside the app
+
+Post-completion note (March 22, 2026): the first “published server” state was not visually reviewable. Follow-up implementation work on `feat/site-stitch-html-preview` had to restore the actual preview by:
+- adding `@import "tailwindcss";` to `app/globals.css` so Tailwind utility classes compiled into the rendered app CSS
+- overriding the legacy `body.shell-editorial` dark shell background so the literal Stitch pages were not rendered as dark text on a dark surface
+- rechecking `/`, `/posts`, `/talks`, `/code-ai`, and `/book` in-browser on `http://localhost:3007` after the CSS fixes
+
+## 12. Parallel Stitch Integration Pass
+
+- [ ] 12.1 Treat `feat/site-practical-review-preview` as the integration base branch, keep `feat/site-stitch-html-preview` as the design-reference branch, and do not merge either branch into `main`
+- [ ] 12.2 Launch a shared-shell slice in its own worktree/PR to carry the accepted Stitch shell, global tokens, and homepage direction into the real site implementation
+- [ ] 12.3 Launch a reading-routes slice in its own worktree/PR to integrate the accepted Stitch direction into `/posts` and `/posts/[slug]` using real site content and behaviors
+- [ ] 12.4 Launch a structured-routes slice in its own worktree/PR to integrate the accepted Stitch direction into `/talks`, `/publications`, and `/about` while preserving practical-language and real-data constraints
+- [ ] 12.5 Launch a discovery-and-tools slice in its own worktree/PR to integrate the accepted Stitch direction into `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/code-ai`, `/code-ai/[id]`, and `/book`
+- [ ] 12.6 Use as many background agents as practical, but keep every worker on a disjoint write set so parallel work does not collide
+- [ ] 12.7 Open draft PRs for every slice and hold all merges until a human review approves the combined direction
