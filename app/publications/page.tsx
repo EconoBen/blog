@@ -4,98 +4,134 @@ import { publicationsConfig, type Publication } from '../config/publicationsConf
 
 export const metadata: Metadata = {
   title: 'Publications | Ben Labaschin',
-  description: "Reports, research, and long-form publications that anchor the site's technical and economic writing.",
+  description: 'Books, reports, and papers, newest first.',
 };
 
 export default function PublicationsPage() {
   const { publications } = publicationsConfig;
-  const sortedPublications = [...publications].sort((a, b) => b.year - a.year);
-  const featuredPublications = sortedPublications.filter((pub) => pub.featured);
-  const otherPublications = sortedPublications.filter((pub) => !pub.featured);
+  const sortedPublications = [...publications].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+  const publicationsByYear = sortedPublications.reduce<Record<number, Publication[]>>((groups, publication) => {
+    if (!groups[publication.year]) {
+      groups[publication.year] = [];
+    }
+
+    groups[publication.year].push(publication);
+    return groups;
+  }, {});
+  const publicationYears = Object.keys(publicationsByYear)
+    .map(Number)
+    .sort((a, b) => b - a);
+  const publicationTypeCounts = sortedPublications.reduce<Record<Publication['type'], number>>(
+    (counts, publication) => {
+      counts[publication.type] += 1;
+      return counts;
+    },
+    {
+      book: 0,
+      journal: 0,
+      conference: 0,
+      report: 0,
+      workshop: 0,
+      other: 0,
+    }
+  );
   const latestPublication = sortedPublications[0];
+  const summaryItems = [
+    publicationTypeCounts.book > 0 ? `${publicationTypeCounts.book} books` : null,
+    publicationTypeCounts.journal > 0 ? `${publicationTypeCounts.journal} journal article${publicationTypeCounts.journal > 1 ? 's' : ''}` : null,
+    publicationTypeCounts.report > 0 ? `${publicationTypeCounts.report} reports` : null,
+    publicationTypeCounts.conference > 0 ? `${publicationTypeCounts.conference} conference paper${publicationTypeCounts.conference > 1 ? 's' : ''}` : null,
+    publicationTypeCounts.workshop > 0 ? `${publicationTypeCounts.workshop} workshop paper${publicationTypeCounts.workshop > 1 ? 's' : ''}` : null,
+    publicationTypeCounts.other > 0 ? `${publicationTypeCounts.other} other pieces` : null,
+  ].filter((item): item is string => Boolean(item));
 
   return (
     <EditorialPageFrame currentPath="/publications">
       <section className="editorial-page-hero">
         <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Public record</p>
+          <p className="editorial-home-kicker">Writing</p>
           <h1 className="editorial-page-title">Publications</h1>
           <p className="editorial-page-copy">
-            The technical record behind the site: O&apos;Reilly work, formal research, and longer-form pieces that ground the essays and talks.
+            Books, reports, and papers, newest first.
           </p>
           <div className="editorial-chip-row">
-            <span className="editorial-chip">O&apos;Reilly</span>
-            <span className="editorial-chip">Research</span>
+            <span className="editorial-chip">Books</span>
+            <span className="editorial-chip">Papers</span>
             <span className="editorial-chip">Reports</span>
-            <span className="editorial-chip">Long-form writing</span>
+            <span className="editorial-chip">PDFs</span>
           </div>
         </div>
         <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">What&apos;s here</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{publications.length}</span>
-              <span className="editorial-page-metric-label">major publications</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{latestPublication?.year ?? 'n/a'}</span>
-              <span className="editorial-page-metric-label">latest release year</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{featuredPublications.length}</span>
-              <span className="editorial-page-metric-label">featured entries</span>
-            </div>
-          </div>
+          <p className="editorial-home-card-label">Quick access</p>
           <p className="editorial-post-summary">
-            Featured work appears first so the most important pieces are easy to find before you dig into the archive.
+            Jump by year or open the newest publication directly.
           </p>
           {latestPublication && (
             <a href={getPublicationHref(latestPublication)} target="_blank" rel="noopener noreferrer" className="editorial-post-link">
-              Open the latest publication
+              Open latest: {latestPublication.title}
             </a>
           )}
+          <div className="editorial-chip-row" style={{ marginTop: '16px' }}>
+            {publicationYears.map((year) => (
+              <a key={year} href={`#publication-year-${year}`} className="editorial-chip" style={{ textDecoration: 'none' }}>
+                {year}
+              </a>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gap: '10px', marginTop: '18px' }}>
+            {sortedPublications.slice(0, 3).map((publication) => (
+              <a
+                key={publication.id}
+                href={`#${publication.id}`}
+                className="editorial-post-link"
+                style={{ marginTop: 0 }}
+              >
+                {formatPublicationDate(publication.date)} · {publication.title}
+              </a>
+            ))}
+          </div>
         </aside>
       </section>
 
       <section className="editorial-home-proof-strip" aria-label="Publications summary">
         <span>{publications.length} publications</span>
         <span>/</span>
-        <span>technical reports</span>
+        <span>{summaryItems[0] ?? 'books'}</span>
         <span>/</span>
-        <span>formal research</span>
+        <span>{summaryItems[1] ?? 'journal articles'}</span>
         <span>/</span>
-        <span>long-form writing</span>
+        <span>{summaryItems[2] ?? 'reports'}</span>
       </section>
 
-      {featuredPublications.length > 0 && (
-        <section className="editorial-list-section">
-          <div className="editorial-list-heading">
-            <p className="editorial-home-section-label">Featured</p>
-            <h2 className="editorial-page-section-title">The work that best frames the site&apos;s technical point of view.</h2>
-          </div>
-          <div className="editorial-timeline">
-            {featuredPublications.map((pub) => (
-              <PublicationEntry key={pub.id} publication={pub} featured />
-            ))}
-          </div>
-        </section>
-      )}
+      {publicationYears.map((year) => {
+        const yearPublications = publicationsByYear[year];
 
-      {otherPublications.length > 0 && (
-        <section className="editorial-list-section">
-          <div className="editorial-list-heading">
-            <p className="editorial-home-section-label">Archive</p>
-            <h2 className="editorial-page-section-title">Background reports and earlier writing, kept for completeness.</h2>
-          </div>
-          <div className="editorial-timeline">
-            {otherPublications.map((pub) => (
-              <PublicationEntry key={pub.id} publication={pub} />
-            ))}
-          </div>
-        </section>
-      )}
+        return (
+          <section key={year} className="editorial-list-section" id={`publication-year-${year}`}>
+            <div className="editorial-list-heading">
+              <p className="editorial-home-section-label">{year}</p>
+              <h2 className="editorial-page-section-title">Publications from {year}.</h2>
+            </div>
+            <div className="editorial-timeline">
+              {yearPublications.map((publication) => (
+                <PublicationEntry key={publication.id} publication={publication} />
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </EditorialPageFrame>
   );
+}
+
+function formatPublicationDate(date: string) {
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }).format(new Date(date));
 }
 
 function getPublicationType(publication: Publication) {
@@ -137,25 +173,17 @@ function getPublicationActionLabel(publication: Publication) {
 
 function PublicationEntry({
   publication,
-  featured = false,
 }: {
   publication: Publication;
-  featured?: boolean;
 }) {
   const actionHref = getPublicationHref(publication);
   const actionLabel = getPublicationActionLabel(publication);
 
   return (
-    <article id={publication.id} className={`editorial-timeline-item ${featured ? 'is-featured' : ''}`}>
-      {featured && publication.coverImage && (
-        <div className="editorial-publication-cover">
-          <img src={publication.coverImage} alt={`Cover for ${publication.title}`} />
-        </div>
-      )}
+    <article id={publication.id} className="editorial-timeline-item">
       <div className="editorial-post-meta">
         <span>{getPublicationType(publication)}</span>
-        <span>{publication.year}</span>
-        {featured && <span>Featured</span>}
+        <span>{formatPublicationDate(publication.date)}</span>
       </div>
 
       <h3>{publication.title}</h3>
