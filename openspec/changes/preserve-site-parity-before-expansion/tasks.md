@@ -45,3 +45,11 @@
 - [ ] 7.2 Refine the shared shell, global styles, and homepage toward the intended end-state visual system
 - [ ] 7.3 Refine the language and narrative positioning across the homepage and key top-level pages
 - [ ] 7.4 Refine posts, discovery routes, and code/tools subpages so they feel consistent with the final-direction theme
+
+## 8. Combined Preview Refinement
+
+- [ ] 8.1 Use the stacked end-state preview branch to identify the remaining visual and narrative gaps before another polish wave
+- [ ] 8.2 Refine `/about`, `/book`, `/publications`, and `/talks` so they read as finished editorial destinations rather than transitional grids or placeholder shells
+- [ ] 8.3 Refine `/posts`, `/posts/[slug]`, `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, and `/search` to reduce density and improve hierarchy where the combined preview still feels list-heavy
+- [ ] 8.4 Reconcile `/code-ai` and `/code-ai/[id]` with the shared editorial shell so they no longer feel like a separate site while preserving their browsing affordances
+- [ ] 8.5 Publish another integrated preview branch and local review server after the next polish wave so the whole system can be judged together again
