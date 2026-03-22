@@ -55,7 +55,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
           <p className="editorial-home-kicker">Technical writing archive</p>
           <h1>Writing about how AI systems remember, fail, and scale in production.</h1>
           <p className="editorial-home-subtitle">
-            A public body of work on AI systems, agent memory, and the engineering decisions that separate demos from durable products.
+            Essays, talks, and book notes on the engineering decisions that separate demos from durable products.
           </p>
           <div className="editorial-home-actions">
             <Link href={`/posts/${newestPost.slug}`} className="editorial-home-button editorial-home-button-primary">
@@ -96,10 +96,13 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
         <p className="editorial-home-section-label">Selected writing</p>
         <h2>Recent essays with enough context to know where to go next.</h2>
         <div className="editorial-home-grid">
-          {featuredPosts.map((post) => {
+          {featuredPosts.map((post, index) => {
             const excerpt = getExcerpt(post.content, post.summary);
             return (
-              <article key={post.slug} className="editorial-home-card">
+              <article
+                key={post.slug}
+                className={`editorial-home-card ${index === 0 ? 'editorial-home-card-featured' : 'editorial-home-card-compact'}`}
+              >
                 <p className="editorial-home-card-label">{getPrimaryTag(post)}</p>
                 <h3>
                   <Link href={`/posts/${post.slug}`} className="editorial-home-card-link">
