@@ -47,12 +47,12 @@ const getPrimarySourceLabel = (talk: Talk): string => {
 
 function TalkCard({
   talk,
-  viewMode,
+  featured = false,
   isOpen,
   onOpen,
 }: {
   talk: Talk;
-  viewMode: 'list' | 'grid';
+  featured?: boolean;
   isOpen: boolean;
   onOpen: () => void;
 }) {
@@ -62,12 +62,11 @@ function TalkCard({
   const youtubeUrl = getYouTubeUrl(talk);
   const isSpotifyOnly = Boolean(talk.spotifyUrl && !talk.youtubeId);
   const primarySourceUrl = talk.spotifyUrl ?? youtubeUrl;
+  const topicLimit = featured ? 6 : 4;
 
   return (
     <article
-      className={`talk-card ${isHovered ? 'talk-card-hovered' : ''} ${
-        viewMode === 'grid' ? 'talk-card-grid' : ''
-      } ${isOpen ? 'is-open' : ''}`}
+      className={`talk-card ${featured ? 'talk-card-featured' : ''} ${isHovered ? 'talk-card-hovered' : ''} ${isOpen ? 'is-open' : ''}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -84,17 +83,10 @@ function TalkCard({
               className="spotify-embed"
             />
           ) : (
-            <div
+            <button
+              type="button"
               className="talk-thumbnail-container spotify-container"
-              role="button"
-              tabIndex={0}
               onClick={onOpen}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                  event.preventDefault();
-                  onOpen();
-                }
-              }}
               aria-label={`Open ${talk.title} in the inline player`}
             >
               <div className="spotify-placeholder">
@@ -106,7 +98,7 @@ function TalkCard({
                 </div>
                 <span className="spotify-label">Open player</span>
               </div>
-            </div>
+            </button>
           )
         ) : isOpen && youtubeEmbedUrl ? (
           <iframe
@@ -117,17 +109,10 @@ function TalkCard({
             allowFullScreen
           />
         ) : (
-          <div
+          <button
+            type="button"
             className="talk-thumbnail-container"
-            role="button"
-            tabIndex={0}
             onClick={onOpen}
-            onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                onOpen();
-              }
-            }}
             aria-label={`Open ${talk.title} in the inline player`}
           >
             {talk.youtubeId ? (
@@ -147,7 +132,7 @@ function TalkCard({
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-          </div>
+          </button>
         )}
       </div>
 
@@ -161,10 +146,10 @@ function TalkCard({
           </div>
         </div>
 
-        {viewMode !== 'grid' && <p className="talk-card-description">{talk.description}</p>}
+        <p className="talk-card-description">{talk.description}</p>
 
         <div className="talk-card-topics">
-          {talk.topics.slice(0, viewMode === 'grid' ? 4 : 6).map((topic) => (
+          {talk.topics.slice(0, topicLimit).map((topic) => (
             <span key={topic} className="talk-topic-tag">
               {topic}
             </span>
@@ -203,7 +188,6 @@ function TalkCard({
 
 export default function TalksClient() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
   const { talks } = talksConfig;
 
   const sortedTalks = [...talks].sort(
@@ -219,7 +203,7 @@ export default function TalksClient() {
 
   const topicFilters = Array.from(topicCounts.entries())
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 12)
+    .slice(0, 10)
     .map(([topic]) => topic);
 
   const filteredTalks =
@@ -240,94 +224,77 @@ export default function TalksClient() {
     }
   }, [activeTalkId, filteredTalks]);
 
+  const activeTalk = filteredTalks.find((talk) => talk.id === activeTalkId) ?? filteredTalks[0] ?? null;
+  const secondaryTalks = filteredTalks.filter((talk) => talk.id !== activeTalk?.id);
+
   return (
     <div className="talks-page">
-      <div className="talks-controls">
-        <div className="talks-filter" aria-label="Talk topics">
+      <div className="talks-controls" aria-label="Talk topics">
+        <button
+          type="button"
+          className={`filter-button ${activeFilter === 'all' ? 'active' : ''}`}
+          onClick={() => setActiveFilter('all')}
+        >
+          All talks
+        </button>
+        {topicFilters.map((topic) => (
           <button
             type="button"
-            className={`filter-button ${activeFilter === 'all' ? 'active' : ''}`}
-            onClick={() => setActiveFilter('all')}
+            key={topic}
+            className={`filter-button ${activeFilter === topic ? 'active' : ''}`}
+            onClick={() => setActiveFilter(topic)}
           >
-            All talks
+            {topic}
           </button>
-          {topicFilters.map((topic) => (
-            <button
-              type="button"
-              key={topic}
-              className={`filter-button ${activeFilter === topic ? 'active' : ''}`}
-              onClick={() => setActiveFilter(topic)}
-            >
-              {topic}
-            </button>
+        ))}
+      </div>
+
+      {activeTalk && (
+        <section className="editorial-list-section">
+          <div className="editorial-list-heading">
+            <p className="editorial-home-section-label">Featured recording</p>
+            <h2 className="editorial-page-section-title">Open one session in place, then browse the rest.</h2>
+          </div>
+          <TalkCard
+            key={activeTalk.id}
+            talk={activeTalk}
+            featured
+            isOpen
+            onOpen={() => setActiveTalkId(activeTalk.id)}
+          />
+        </section>
+      )}
+
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Browse recordings</p>
+          <h2 className="editorial-page-section-title">
+            {activeFilter === 'all' ? 'Recent talks, podcasts, and livestreams.' : `More on ${activeFilter}.`}
+          </h2>
+        </div>
+
+        <div className="talks-container">
+          {secondaryTalks.map((talk) => (
+            <TalkCard
+              key={talk.id}
+              talk={talk}
+              isOpen={false}
+              onOpen={() => setActiveTalkId(talk.id)}
+            />
           ))}
         </div>
-      </div>
 
-      <div className="talks-component-box">
-        <div className="talks-component-header">
-          <h2 className="talks-component-title">
-            {activeFilter === 'all' ? 'Browse recordings' : `Talks about ${activeFilter}`}
-          </h2>
-          <div className="view-toggle" aria-label="Talk view mode">
-            <button
-              type="button"
-              className={`view-button ${viewMode === 'grid' ? 'active' : ''}`}
-              onClick={() => setViewMode('grid')}
-              aria-label="Grid view"
-              title="Grid view"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              className={`view-button ${viewMode === 'list' ? 'active' : ''}`}
-              onClick={() => setViewMode('list')}
-              aria-label="List view"
-              title="List view"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="8" y1="6" x2="21" y2="6" />
-                <line x1="8" y1="12" x2="21" y2="12" />
-                <line x1="8" y1="18" x2="21" y2="18" />
-                <line x1="3" y1="6" x2="3.01" y2="6" />
-                <line x1="3" y1="12" x2="3.01" y2="12" />
-                <line x1="3" y1="18" x2="3.01" y2="18" />
-              </svg>
-            </button>
+        {filteredTalks.length === 0 && (
+          <div className="no-talks-message">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <p>No talks found for that topic.</p>
           </div>
-        </div>
-
-        <div className="talks-component-content">
-          <div className={`talks-container ${viewMode === 'list' ? 'talks-list' : 'talks-grid'}`}>
-            {filteredTalks.map((talk) => (
-              <TalkCard
-                key={talk.id}
-                talk={talk}
-                viewMode={viewMode}
-                isOpen={talk.id === activeTalkId}
-                onOpen={() => setActiveTalkId(talk.id)}
-              />
-            ))}
-          </div>
-
-          {filteredTalks.length === 0 && (
-            <div className="no-talks-message">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-              <p>No talks found for that topic.</p>
-            </div>
-          )}
-        </div>
-      </div>
+        )}
+      </section>
     </div>
   );
 }
