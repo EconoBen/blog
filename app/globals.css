@@ -1,5 +1,8 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import './styles/mobile-search-fixes.css';
 
 /* CSS Variables */
@@ -153,12 +156,55 @@ body {
 }
 
 body.shell-editorial {
-	background: var(--site-shell-bg);
+	--font-heading: 'Inter', sans-serif;
+	--font-body: 'Newsreader', serif;
+	--color-text: #1d1c16;
+	--color-text-light: #555f70;
+	--color-background: #fef9ef;
+	--color-primary: #004ac6;
+	--color-primary-hover: #003ea8;
+	--heading-color: #1d1c16;
+	--text-color: #1d1c16;
+	--text-muted: #555f70;
+	--site-shell-bg: #fef9ef;
+	background: #fef9ef;
+	background-image: none;
 	background-attachment: fixed;
+	color: #1d1c16;
+	font-family: var(--font-body);
 }
 
 body.shell-editorial.dark-mode {
-	background: var(--site-shell-bg);
+	background: #fef9ef;
+	background-image: none;
+	color: #1d1c16;
+}
+
+body.shell-editorial .dark-mode-toggle {
+	display: none !important;
+}
+
+.font-headline,
+.font-label,
+.font-inter {
+	font-family: var(--font-heading);
+}
+
+.font-body {
+	font-family: var(--font-body);
+}
+
+.material-symbols-outlined {
+	font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
 }
 
 /* Reset margins and padding */
