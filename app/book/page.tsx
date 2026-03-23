@@ -113,14 +113,19 @@ export default function BookPage() {
                 </p>
               </div>
               <div className="mt-8 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#dbe1ff]">
-                  <span className="material-symbols-outlined text-[#00174b]" aria-hidden="true">
-                    psychology
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#dbe1ff] text-[#00174b]">
+                  <span className="font-headline text-[10px] font-black uppercase tracking-[0.25em]">
+                    AM
                   </span>
                 </div>
-                <span className="font-headline text-sm font-bold uppercase tracking-tight text-[#1d1c16]">
-                  Architectural Deep-Dive
-                </span>
+                <div className="space-y-1">
+                  <span className="block font-headline text-sm font-bold uppercase tracking-tight text-[#1d1c16]">
+                    Architectural Deep-Dive
+                  </span>
+                  <span className="block font-label text-[10px] uppercase tracking-widest text-[#555f70]">
+                    Memory systems, retrieval, and production trade-offs
+                  </span>
+                </div>
               </div>
             </div>
             <div className="flex flex-col justify-center rounded-xl bg-[#e7e2d8] p-10">

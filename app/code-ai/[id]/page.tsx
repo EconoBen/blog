@@ -35,14 +35,6 @@ const syntaxStyle = {
   background: 'transparent',
 } as const;
 
-function MaterialIcon({ name, className = '' }: { name: string; className?: string }) {
-  return (
-    <span className={`material-symbols-outlined ${className}`.trim()} aria-hidden="true">
-      {name}
-    </span>
-  );
-}
-
 function DetailStat({ label, value }: { label: string; value: string | number }) {
   return (
     <div>
@@ -157,7 +149,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                   href="/code-ai"
                   className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#c3c6d7] px-4 py-3 font-headline text-sm font-bold text-[#1d1c16] transition-colors hover:bg-white"
                 >
-                  <MaterialIcon name="arrow_back" className="text-sm" />
+                  <span aria-hidden="true">←</span>
                   Back to Code &amp; Tools
                 </Link>
                 {item.gistUrl && (
@@ -167,7 +159,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                     rel="noopener noreferrer"
                     className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-4 py-3 font-headline text-sm font-bold text-white transition-opacity hover:opacity-90"
                   >
-                    <MaterialIcon name="terminal" className="text-sm" />
+                    <span aria-hidden="true">{'</>'}</span>
                     View on GitHub
                   </a>
                 )}
@@ -299,7 +291,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                     className="inline-flex items-center gap-1 font-headline font-bold text-[#004ac6] hover:underline"
                   >
                     View full catalog
-                    <MaterialIcon name="arrow_forward" className="text-sm" />
+                    <span aria-hidden="true">→</span>
                   </Link>
                 </div>
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -319,12 +311,10 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                         {relatedItem.description}
                       </p>
                       <div className="flex items-center gap-4 font-label text-xs font-bold text-[#555f70]">
-                        <span className="flex items-center gap-1">
-                          <MaterialIcon name="code" className="text-xs" />
+                        <span className="rounded-full bg-white px-2.5 py-1">
                           {getCodeToolsLanguageLabel(relatedItem.language)}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <MaterialIcon name="history" className="text-xs" />
+                        <span className="rounded-full bg-white px-2.5 py-1">
                           {relatedItem.date ? formatCodeToolsDate(relatedItem.date) : 'Undated'}
                         </span>
                       </div>
