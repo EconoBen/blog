@@ -1,8 +1,14 @@
 ## Context
 
+> Status note (March 23, 2026, wave-3 implementation recheck): the follow-up remediation pass from the wave-3 route audit is now applied locally and revalidated in production mode with a fresh `npm run build`, a restarted `next start` preview on `http://127.0.0.1:3017`, and updated screenshots under `.playwright-discovery/tab-audit-20260323-wave3-final/`. The shared mobile shell blocker is resolved: active-route pills render correctly, the active mobile route is promoted forward, and the primary nav no longer clips at 390px. Home, talks/publications, discovery, and code-tools all improved, but the remaining debt is now narrower and more honest: the homepage still needs a final second-screen composition pass, talks/publications are close rather than finished, and the code-tools family still needs another desktop hierarchy pass before it can be considered review-ready.
+
+> Status note (March 23, 2026, wave-3 route review): a third production-mode Playwright pass focused on the still-unsettled tabs using both full-page and first-viewport captures under `.playwright-discovery/tab-audit-20260323-wave3/`. That pass made the remaining frontend debt more specific: the mobile shell/header consumes too much space across top-level tabs, the homepage still duplicates its lead story, talks/publications still bury the primary artifact too far down the page, code-tools still reads like a product dashboard, and tags/search still have route-readiness gaps. Those findings are now split into narrower Beads/issues (`#61`, `#63`, `#65`, `#62`, `#64`) and separate worktree slices branched from `feat/site-stitch-polish-discovery`.
+
 > Status note (March 23, 2026, second frontend wave): the first tab-audit remediation wave is now applied locally across the reading/archive routes, tags/search, talks/publications/about, and code-tools/book surfaces. The branch remains runtime-clean in production mode, and the follow-up screenshots show materially better mobile hierarchy on posts, post detail, month archives, tags/search, about, book, and code-tools. Remaining frontend debt is now narrower: the homepage’s lower-half composition still needs direct work in `ShellHomePage`, and a few route families still have aesthetic polish left even after the hierarchy improvements.
 
 > Status note (March 23, 2026, tab-by-tab frontend audit): a second production-mode QA pass reviewed each major tab with a persistent Playwright browser session and fresh desktop/mobile screenshots under `.playwright-discovery/tab-audit-20260323/`. That pass confirmed the site is runtime-clean but not yet frontend-complete. The remaining issues are now grouped as route-family polish work rather than generic “more refinement”: home/posts/archive reading hierarchy, tags/search navigation strength, talks/publications/about hierarchy and dead-space cleanup, code-tools editorial flattening, and a smaller book-only mobile follow-up.
+
+> Status note (March 23, 2026, planning method): frontend work is now organized by a per-tab review matrix inside OpenSpec rather than by vague route-family intuition. Every major route is expected to have desktop and mobile Playwright evidence, an explicit status, and a linked implementation bead/issue before it is considered ready.
 
 > Status note (March 23, 2026, route-family polish): the `feat/site-stitch-polish-discovery` branch now includes the first production-verified polish pass for the remaining page families identified in the March 23 sweep. `/talks` and `/publications` were flattened to reduce metric-heavy side rails, `/about` metadata and copy were aligned with the ECONOBEN.DEV shell, `/code-ai` and `/code-ai/[id]` were tightened for mobile density, and `/book` moved to a calmer editorial hero treatment. A second clean production rebuild and Playwright sweep on `http://127.0.0.1:3017` confirmed the route set stayed runtime-clean after those edits.
 
@@ -163,6 +169,20 @@ Alternatives considered:
 - Merge the literal preview branch and clean it up later: rejected because it would bring exported sample content and placeholder assumptions too close to production.
 - Implement sequentially in one long-running branch: rejected because the user explicitly wants parallel execution and reviewable PR slices.
 - Let multiple workers edit the same shared files freely: rejected because it creates preventable merge conflicts and destroys the value of parallel worktrees.
+
+### 12. Frontend review is tab-by-tab, not page-family-by-vibe
+The unit of frontend QA is now the individual tab/route. Each major tab must have:
+
+- a desktop screenshot
+- a mobile screenshot
+- a route status in OpenSpec
+- a linked bead/issue if it is not ready
+
+Route families are still useful for implementation ownership, but they are no longer sufficient as the planning unit. The review process should be able to answer, explicitly, whether `/`, `/posts`, `/posts/[slug]`, `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/talks`, `/publications`, `/about`, `/book`, `/code-ai`, and `/code-ai/[id]` are each review-ready.
+
+Alternatives considered:
+- Continue with route-family-only notes: rejected because it hides which specific tabs still fail review.
+- Use only broad “site feels better/worse” commentary: rejected because it is not actionable enough for parallel implementation.
 
 ## Architecture
 

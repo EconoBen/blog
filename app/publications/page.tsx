@@ -9,13 +9,16 @@ export const metadata: Metadata = {
 };
 
 export default function PublicationsPage() {
-  const { publications, subtitle } = publicationsConfig;
+  const { publications } = publicationsConfig;
   const sortedPublications = [...publications].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
   const featuredPublication =
     sortedPublications.find((publication) => publication.featured) ?? sortedPublications[0];
-  const publicationsByYear = sortedPublications.reduce<Record<number, Publication[]>>((groups, publication) => {
+  const archivePublications = featuredPublication
+    ? sortedPublications.filter((publication) => publication.id !== featuredPublication.id)
+    : sortedPublications;
+  const publicationsByYear = archivePublications.reduce<Record<number, Publication[]>>((groups, publication) => {
     if (!groups[publication.year]) {
       groups[publication.year] = [];
     }
@@ -29,72 +32,14 @@ export default function PublicationsPage() {
 
   return (
     <EditorialPageFrame currentPath="/publications">
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-12 pt-16 lg:grid-cols-12 lg:items-start">
-        <div className="space-y-5 lg:col-span-8">
-          <span className="mb-6 block font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
-            Archive and research
-          </span>
-          <h1 className="max-w-4xl font-headline text-5xl font-black tracking-tighter text-on-surface md:text-7xl">
-            Publications
-          </h1>
-          <p className="mt-6 max-w-3xl font-body text-xl leading-relaxed text-secondary md:text-2xl">
-            {subtitle}
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <span className="rounded-full bg-surface-container-low px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider text-secondary">
-              Books
-            </span>
-            <span className="rounded-full bg-surface-container-low px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider text-secondary">
-              Papers
-            </span>
-            <span className="rounded-full bg-surface-container-low px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider text-secondary">
-              Reports
-            </span>
-            <span className="rounded-full bg-surface-container-low px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider text-secondary">
-              DOI records
-            </span>
-          </div>
-        </div>
-
-        <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-low p-4 lg:col-span-4 lg:sticky lg:top-24">
-          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse the archive</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {publicationYears.map((year) => (
-              <Link
-                key={year}
-                href={`#publication-year-${year}`}
-                className="rounded-full bg-surface-container-highest px-4 py-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-primary"
-              >
-                {year}
-              </Link>
-            ))}
-          </div>
-          <div className="mt-5 space-y-3 border-t border-outline-variant/30 pt-5">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Featured publication</p>
-            {featuredPublication && (
-              <>
-                <p className="font-headline text-lg font-bold leading-snug text-on-surface">{featuredPublication.title}</p>
-                <p className="font-body text-sm leading-relaxed text-secondary">{featuredPublication.venue ?? featuredPublication.authors}</p>
-                <Link
-                  href="#featured-publication"
-                  className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-primary"
-                >
-                  Jump to feature
-                </Link>
-              </>
-            )}
-          </div>
-        </aside>
-      </section>
-
       {featuredPublication && (
-        <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-8 lg:grid-cols-12">
+        <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-8 lg:grid-cols-12 lg:items-start">
           <article
             id="featured-publication"
-            className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)] lg:col-span-12"
+            className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)] lg:col-span-8"
           >
-            <div className="grid gap-0 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)]">
-              <div className="bg-surface-container-low p-8 md:p-10">
+            <div className="grid gap-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(280px,1.1fr)]">
+              <div className="bg-surface-container-low p-6 md:p-8">
                 {featuredPublication.coverImage ? (
                   <img
                     src={featuredPublication.coverImage}
@@ -110,8 +55,8 @@ export default function PublicationsPage() {
                   </div>
                 )}
               </div>
-              <div className="flex flex-col justify-between p-8 lg:p-10">
-                <div className="space-y-6">
+              <div className="flex flex-col justify-between p-6 md:p-8">
+                <div className="space-y-5">
                   <div className="flex flex-wrap items-center gap-3">
                     <span className="rounded-sm bg-secondary-fixed-dim px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-secondary-fixed-variant">
                       Featured work
@@ -143,7 +88,7 @@ export default function PublicationsPage() {
                     ))}
                   </div>
                 </div>
-                <div className="mt-8 flex flex-wrap gap-3">
+                <div className="mt-6 flex flex-wrap gap-3">
                   {(() => {
                     const href = getPublicationHref(featuredPublication);
 
@@ -175,14 +120,48 @@ export default function PublicationsPage() {
               </div>
             </div>
           </article>
+          <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-low p-4 lg:col-span-4 lg:sticky lg:top-24">
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse the archive</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {publicationYears.map((year) => (
+                <Link
+                  key={year}
+                  href={`#publication-year-${year}`}
+                  className="rounded-full bg-surface-container-highest px-4 py-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-primary"
+                >
+                  {year}
+                </Link>
+              ))}
+            </div>
+            <div className="mt-5 space-y-3 border-t border-outline-variant/30 pt-5">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Featured publication</p>
+              {featuredPublication && (
+                <>
+                  <p className="font-headline text-lg font-bold leading-snug text-on-surface">{featuredPublication.title}</p>
+                  <p className="font-body text-sm leading-relaxed text-secondary">{featuredPublication.venue ?? featuredPublication.authors}</p>
+                  <Link
+                    href="#featured-publication"
+                    className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-primary"
+                  >
+                    Jump to feature
+                  </Link>
+                </>
+              )}
+            </div>
+          </aside>
         </section>
       )}
 
       {publicationYears.map((year) => {
         const yearPublications = publicationsByYear[year];
+        const isSparseYear = yearPublications.length < 3;
 
         return (
-          <section key={year} className="mx-auto max-w-7xl px-8 pb-16" id={`publication-year-${year}`}>
+          <section
+            key={year}
+            className={`mx-auto px-8 pb-16 ${isSparseYear ? 'max-w-5xl' : 'max-w-7xl'}`}
+            id={`publication-year-${year}`}
+          >
             <div className="mb-8 grid gap-4 lg:grid-cols-12 lg:items-end">
               <div className="lg:col-span-8">
                 <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">{year}</p>
@@ -195,7 +174,7 @@ export default function PublicationsPage() {
               </div>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">
               {yearPublications.map((publication) => (
                 <PublicationCard key={publication.id} publication={publication} />
               ))}

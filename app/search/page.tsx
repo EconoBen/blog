@@ -19,9 +19,10 @@ function formatResultDate(date?: Date | string) {
   }).format(new Date(date));
 }
 
-const resultTypeOrder: SearchResult['type'][] = ['post', 'publication', 'talk', 'code-ai'];
+const resultTypeOrder: SearchResult['type'][] = ['tag', 'post', 'publication', 'talk', 'code-ai'];
 
 const typeLabels: Record<SearchResult['type'], string> = {
+  tag: 'Tags',
   post: 'Posts',
   publication: 'Publications',
   talk: 'Talks',
@@ -32,7 +33,7 @@ const quickQueries = ['memory', 'retrieval', 'economics', 'tooling'];
 const starterTips = [
   ['Specific titles', 'Use part of a post or talk title when you know the wording already.'],
   ['Subjects', 'Try themes like memory, retrieval, or economics to widen the result set.'],
-  ['Route names', 'Search for tools, publications, or topic terms to jump directly to the surface you want.'],
+  ['Route jumps', 'Search for tools, publications, or topic terms to land on the most direct route.'],
 ];
 
 function groupResultsByType(results: SearchResult[]) {
@@ -117,7 +118,7 @@ function SearchContent() {
             Search the archive.
           </h1>
           <p className="max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
-            Search across posts, talks, publications, and tools with a plain query. The results stay grouped, but the page keeps the interface quiet.
+            Search across posts, tags, talks, publications, and tools with a plain query. Post matches now check title, summary, content, slug, and tags, so the page can route you more directly instead of pretending everything is the same.
           </p>
 
           <form action="/search" className="group relative mt-7" onSubmit={handleSearch} role="search" aria-label="Site search">
@@ -161,6 +162,10 @@ function SearchContent() {
               </Link>
             ))}
           </div>
+
+          <p className="mt-6 max-w-2xl font-body text-sm leading-relaxed text-on-surface-variant">
+            Indexed surfaces: posts, tags, talks, publications, and Code &amp; Tools. Compact search uses the same endpoint, but trims that list in the dropdown so the route stays predictable on mobile.
+          </p>
         </header>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
@@ -220,7 +225,11 @@ function SearchContent() {
                               <span className="rounded bg-primary-fixed px-2 py-0.5 font-label text-[10px] font-bold uppercase tracking-widest text-primary">
                                 {typeLabels[result.type]}
                               </span>
-                              {result.date ? (
+                              {result.type === 'tag' && typeof result.relatedCount === 'number' ? (
+                                <span className="font-label text-xs text-secondary">
+                                  {result.relatedCount} site item{result.relatedCount === 1 ? '' : 's'}
+                                </span>
+                              ) : result.date ? (
                                 <time className="font-label text-xs text-secondary">
                                   {formatResultDate(result.date)}
                                 </time>

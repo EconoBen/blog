@@ -140,3 +140,43 @@ Second-wave progress note (March 23, 2026): the first remediation pass from that
 - Code-tools/book routes: `/code-ai`, `/code-ai/[id]`, and `/book` now front-load content sooner and read less like a dashboard/product landing mix.
 - A fresh production rebuild passed after the combined second-wave edits, and updated Playwright screenshots were captured under `.playwright-discovery/tab-audit-20260323-wave2/`.
 - The branch is improved, but the frontend backlog is not empty yet; `blog-mkj` in particular remains open because the homepage itself still needs a dedicated pass.
+
+Wave-3 frontend review note (March 23, 2026): a third Playwright pass focused on the still-unsettled tabs using fresh full-page and first-viewport captures under `.playwright-discovery/tab-audit-20260323-wave3/`.
+- The new findings are now tracked as narrower Beads and GitHub issues instead of broad route-family polish only:
+  - `blog-2xw` / `#61`: compact the mobile shell and expose current-route state in navigation
+  - `blog-01k` / `#63`: remove homepage lead-story duplication and settle the second-screen hierarchy
+  - `blog-r0j` / `#65`: bring talks and publications content into the first viewport
+  - `blog-vt2` / `#62`: remove dashboard chrome from the code-and-tools route family
+  - `blog-5rm` / `#64`: finish tags and search review readiness
+- Implementation is now splitting again into separate worktree slices branched from `feat/site-stitch-polish-discovery`:
+  - `feat/site-stitch-wave3-shell-nav`
+  - `feat/site-stitch-wave3-home-hierarchy`
+  - `feat/site-stitch-wave3-media-first-view`
+  - `feat/site-stitch-wave3-code-tools-cleanup`
+  - `feat/site-stitch-wave3-discovery-finish`
+
+Wave-3 implementation note (March 23, 2026, final production recheck): the next route-family remediation pass is now applied locally on `feat/site-stitch-polish-discovery`, verified with a fresh `npm run build`, a restarted `next start` preview on `http://127.0.0.1:3017`, and updated screenshots under `.playwright-discovery/tab-audit-20260323-wave3-final/`.
+- Shared shell: active nav pills render correctly again, the current mobile route is promoted to the front of the nav ordering, and the mobile primary nav now wraps instead of clipping at 390px.
+- Homepage: lead-story duplication remains fixed, second-screen card density is tighter, and the mobile entry spacing is calmer than the previous wave-3 state.
+- Talks/publications: the redundant lower talks intro is gone, the featured media block is tighter, and publications now lead directly with the featured artifact plus year-jump rail instead of a second intro band.
+- Discovery: `/search` is flatter and less dashboard-like, while `/tags/[tag]` now exposes route actions and summary cues near the top on mobile instead of assuming a desktop sidebar.
+- Code & Tools: the hero is calmer than the earlier wave-3 pass, but this family is still not settled enough to call done.
+
+Per-tab frontend review matrix (March 23, 2026):
+
+| Route | Evidence | Current status | Tracking |
+| --- | --- | --- | --- |
+| `/` | `.playwright-discovery/tab-audit-20260323-wave3-final/home-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/home-mobile.png` | Improved, but still not fully ready. Lead-story duplication is gone and mobile density is better, but the second-screen composition still needs another deliberate pass. | `blog-mkj` / `#57`, `blog-01k` / `#63` |
+| `/posts` | `.playwright-discovery/tab-audit-20260323-wave2/posts-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave2/posts-mobile.png` | Improved. Archive starts sooner; may still need final polish after homepage work. | `blog-mkj` / `#57` |
+| `/posts/[slug]` | `.playwright-discovery/tab-audit-20260323-wave2/post-detail-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave2/post-detail-mobile.png` | Improved. Reading starts sooner; monitor for any remaining top-of-article chrome. | `blog-mkj` / `#57` |
+| `/archive` | `.playwright-discovery/tab-audit-20260323-wave2/archive-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave2/archive-mobile.png` | Improved. Mobile controls are better, but the route still shares residual reading-family polish with home/posts. | `blog-mkj` / `#57` |
+| `/archives/[month]` | `.playwright-discovery/tab-audit-20260323-wave2/archive-month-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave2/archive-month-mobile.png` | Improved. Competing stats rail removed; likely close after another whole-site review pass. | `blog-mkj` / `#57` |
+| `/tags` | `.playwright-discovery/tab-audit-20260323-wave3-final/tags-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/tags-mobile.png` | Improved. Mobile shell clipping is resolved and the route now reads clearly as part of discovery; hold only for any final whole-site polish pass. | `blog-5rm` / `#64`, `blog-2xw` / `#61` |
+| `/tags/[tag]` | `.playwright-discovery/tab-audit-20260323-wave2/tag-detail-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave2/tag-detail-mobile.png` | Improved. Related navigation moved higher; monitor in next review pass. | `blog-ylv` / `#59` |
+| `/search` | `.playwright-discovery/tab-audit-20260323-wave3-final/search-memory-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/search-memory-mobile.png` | Improved. Search scope is clearer and the route is calmer; keep under observation, but it is no longer one of the primary blockers. | `blog-5rm` / `#64`, `blog-2xw` / `#61` |
+| `/talks` | `.playwright-discovery/tab-audit-20260323-wave3-final/talks-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/talks-mobile.png` | Improved, but not fully settled. Playback and browse content enter sooner, though the route still leans a little showcase-heavy on mobile. | `blog-qxn` / `#58`, `blog-r0j` / `#65` |
+| `/publications` | `.playwright-discovery/tab-audit-20260323-wave3-final/publications-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/publications-mobile.png` | Improved, but not fully settled. The featured artifact now leads properly, and sparse years waste less space, but the family still wants one more calm-down pass. | `blog-qxn` / `#58`, `blog-r0j` / `#65` |
+| `/about` | `.playwright-discovery/tab-audit-20260323-wave2/about-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave2/about-mobile.png` | Improved. Desktop hero is more deliberate; may still want final polish later. | `blog-qxn` / `#58` |
+| `/book` | `.playwright-discovery/tab-audit-20260323-wave3-final/book-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/book-mobile.png` | Close. The shell is cleaner and the earlier mobile interruption is gone; keep for final editorial polish only. | `blog-2kf` / `#56` |
+| `/code-ai` | `.playwright-discovery/tab-audit-20260323-wave3-final/code-ai-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/code-ai-mobile.png` | Still not ready. The family is calmer than before, but `/code-ai` desktop still leaves too much dead space and the index still carries too much control weight for an editorial archive. | `blog-t75` / `#60`, `blog-vt2` / `#62` |
+| `/code-ai/[id]` | `.playwright-discovery/tab-audit-20260323-wave3-final/code-ai-detail-desktop.png`, `.playwright-discovery/tab-audit-20260323-wave3-final/code-ai-detail-mobile.png` | Improved, but still tied to the broader code-tools cleanup. The detail route no longer has the worst chrome issues, yet the family is not ready to close until the index settles. | `blog-t75` / `#60`, `blog-vt2` / `#62` |

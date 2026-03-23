@@ -159,10 +159,6 @@ export default function CodeAIPage() {
   const allItems = getCodeToolsItems();
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
   const featuredItems = getCodeToolsFeaturedItems(allItems);
-  const latestItem = allItems[0];
-  const activeCategoryCount = categories.filter(
-    (category) => category.id !== 'all' && (categoryCounts[category.id] ?? 0) > 0,
-  ).length;
 
   const filteredItems = allItems.filter((item: WorkshopItem) => {
     const query = searchQuery.toLowerCase();
@@ -209,15 +205,21 @@ export default function CodeAIPage() {
     <EditorialPageFrame currentPath="/code-ai">
       <div className="editorial-home-page">
         <main className="editorial-home-content">
-          <section className="editorial-page-hero" style={{ gap: 'clamp(1rem, 2.5vw, 2rem)' }}>
+          <section
+            className="editorial-page-hero"
+            style={{
+              gap: 'clamp(1rem, 2.5vw, 2rem)',
+              gridTemplateColumns: 'minmax(0, 1fr)',
+            }}
+          >
             <div className="editorial-page-hero-copy">
-              <p className="editorial-home-kicker">Code library</p>
+              <p className="editorial-home-kicker">Editorial archive</p>
               <h1 className="editorial-page-title" style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}>
                 {title}
               </h1>
               <p className="editorial-page-copy">{subtitle}</p>
               <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '48ch' }}>
-                Browse snippets, configs, and tools in a quieter editorial layout that keeps the writing and code in one view.
+                Browse snippets, configs, and tools as an archive of notes, references, and working code rather than a dashboard of metrics.
               </p>
 
               <div className="editorial-home-actions" style={{ marginTop: '1rem' }}>
@@ -229,70 +231,36 @@ export default function CodeAIPage() {
                 </Link>
               </div>
 
-              <div className="editorial-chip-row">
-                <span className="editorial-chip">
-                  {allItems.length} snippets
-                </span>
-                <span className="editorial-chip">
-                  {activeCategoryCount} active categories
-                </span>
-                <span className="editorial-chip">
-                  {featuredItems.length} selected
-                </span>
-                <span className="editorial-chip">
-                  {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' }) : 'No latest item'}
-                </span>
+              <div
+                className="editorial-page-aside"
+                style={{
+                  marginTop: '1rem',
+                  maxWidth: '34rem',
+                  padding: 'clamp(0.8rem, 2vw, 1.2rem)',
+                  background: 'rgba(255, 255, 255, 0.46)',
+                  boxShadow: 'none',
+                }}
+              >
+                <p className="editorial-home-card-label">Archive note</p>
+                <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
+                  Entries are arranged like reading notes: title first, then context, then source and
+                  code, so the page opens as an archive instead of a control panel.
+                </p>
               </div>
             </div>
-
-            <aside
-              className="editorial-page-aside"
-              style={{
-                padding: 'clamp(0.8rem, 2vw, 1.2rem)',
-                background: 'rgba(255, 255, 255, 0.46)',
-                boxShadow: 'none',
-              }}
-            >
-              <p className="editorial-home-card-label">At a glance</p>
-              <div className="editorial-page-metric-list" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.8rem' }}>
-                <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>{allItems.length}</span>
-                  <span className="editorial-page-metric-label">snippets and tools</span>
-                </div>
-                <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>{activeCategoryCount}</span>
-                  <span className="editorial-page-metric-label">active categories</span>
-                </div>
-                <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>{featuredItems.length}</span>
-                  <span className="editorial-page-metric-label">selected items</span>
-                </div>
-                <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>
-                    {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric' }) : 'n/a'}
-                  </span>
-                  <span className="editorial-page-metric-label">latest addition</span>
-                </div>
-              </div>
-              <div className="editorial-chip-row" style={{ marginTop: '18px' }}>
-                <span className="editorial-chip">copy-ready</span>
-                <span className="editorial-chip">searchable</span>
-                <span className="editorial-chip">gists linked</span>
-              </div>
-            </aside>
           </section>
 
           <section className="editorial-list-section" id="code-tools-index">
             <div className="editorial-list-heading">
               <p className="editorial-home-section-label">Browse</p>
-              <h2 className="editorial-page-section-title">Search by title, tag, or category, then open a card to keep the writeup and code in view.</h2>
+              <h2 className="editorial-page-section-title">Search by title, tag, or category, then open an entry to keep the writeup and code together.</h2>
             </div>
 
             <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
               <div className="search-input-container" role="search" aria-label="Code & Tools search">
                 <input
                   type="text"
-                  placeholder="Search snippets, tags, filenames, or descriptions..."
+                  placeholder="Search entries, tags, filenames, or descriptions..."
                   value={searchQuery}
                   onChange={(event) => setSearchQuery(event.target.value)}
                   className="search-input-large"
@@ -336,7 +304,7 @@ export default function CodeAIPage() {
 
                 <div>
                   <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
-                    View mode
+                    Browse mode
                   </p>
                   <div className="editorial-chip-row" style={{ marginTop: 0 }}>
                     <button
@@ -352,7 +320,7 @@ export default function CodeAIPage() {
                       onClick={() => setViewMode('compact')}
                       aria-pressed={viewMode === 'compact'}
                     >
-                      Compact
+                      Archive
                     </button>
                     <button
                       type="button"
@@ -367,7 +335,7 @@ export default function CodeAIPage() {
                       onClick={() => setViewMode('full')}
                       aria-pressed={viewMode === 'full'}
                     >
-                      Full
+                      Reader
                     </button>
                   </div>
                 </div>
@@ -380,7 +348,7 @@ export default function CodeAIPage() {
                 {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
               </div>
               <div className="editorial-post-summary" style={{ margin: 0 }}>
-                Compact mode keeps the index scannable. Full mode keeps the writeup and code visible.
+                Archive mode keeps the index scannable. Reader mode keeps the writeup and code visible.
               </div>
             </div>
 
@@ -570,7 +538,7 @@ export default function CodeAIPage() {
               <div className="editorial-page-aside" style={{ marginTop: '20px' }}>
                 <p className="editorial-home-card-label">No matches</p>
                 <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-                  No snippets match the current filter. Try a different category, clear the search, or switch to full view to browse the whole collection.
+                  No snippets match the current filter. Try a different category, clear the search, or switch to Reader mode to browse the whole collection.
                 </p>
               </div>
             )}

@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
 
-const navItems = [
+const primaryNavItems = [
   { href: '/', label: 'Home' },
   { href: '/posts', label: 'Posts' },
   { href: '/talks', label: 'Talks' },
@@ -9,6 +9,11 @@ const navItems = [
   { href: '/book', label: 'Book' },
   { href: '/code-ai', label: 'Code & Tools' },
   { href: '/about', label: 'About' },
+];
+
+const discoveryNavItems = [
+  { href: '/tags', label: 'Tags' },
+  { href: '/search', label: 'Search' },
 ];
 
 const footerLinks = [
@@ -31,46 +36,86 @@ const isCompactShell = (currentPath: string) => (
   currentPath === '/' || currentPath === '/posts' || currentPath === '/talks'
 );
 
+const prioritizeActiveItem = <T extends { href: string }>(items: T[], currentPath: string) => {
+  const activeIndex = items.findIndex((item) => isActivePath(currentPath, item.href));
+
+  if (activeIndex <= 0) {
+    return items;
+  }
+
+  return [
+    items[activeIndex],
+    ...items.slice(0, activeIndex),
+    ...items.slice(activeIndex + 1),
+  ];
+};
+
 interface EditorialPageFrameProps {
   children: ReactNode;
   currentPath: string;
   pageClassName?: string;
 }
 
+const activeNavStyle: CSSProperties = {
+  color: '#fef9ef',
+  WebkitTextFillColor: '#fef9ef',
+};
+
 export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const compactShell = isCompactShell(currentPath);
+  const mobilePrimaryNavItems = prioritizeActiveItem(primaryNavItems, currentPath);
+  const mobileDiscoveryNavItems = prioritizeActiveItem(discoveryNavItems, currentPath);
   const brandLabel = compactShell ? 'econoben.dev' : 'ECONOBEN.DEV';
   const headerClassName = compactShell
-    ? 'sticky top-0 z-50 w-full border-b border-transparent bg-[#fef9ef]/95 backdrop-blur'
-    : 'sticky top-0 z-50 w-full bg-[#f8f3e9] shadow-[0_24px_40px_rgba(29,28,22,0.04)]';
+    ? 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/5 bg-[#fef9ef]/95 backdrop-blur'
+    : 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/5 bg-[#f8f3e9]/95 shadow-[0_24px_40px_rgba(29,28,22,0.04)] backdrop-blur';
   const brandClassName = compactShell
-    ? 'font-headline text-2xl font-bold tracking-tighter text-[#1d1c16]'
-    : 'font-headline text-2xl font-black tracking-tighter text-[#1d1c16]';
-  const navClassName = compactShell
-    ? 'hidden md:flex items-center gap-8 font-label text-xs font-bold uppercase tracking-widest'
-    : 'hidden md:flex items-center gap-8 font-headline text-sm font-medium tracking-tight';
+    ? 'font-headline text-xl font-bold tracking-tighter text-[#1d1c16] md:text-2xl'
+    : 'font-headline text-xl font-black tracking-tighter text-[#1d1c16] md:text-2xl';
+  const desktopNavItemClassName = (active: boolean) =>
+    active
+      ? 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-transparent bg-transparent px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/20 hover:bg-[#004ac6]/10 hover:text-[#004ac6]';
   const mobileNavItemClassName = (active: boolean) =>
     active
-      ? 'inline-flex min-h-[34px] items-center justify-center rounded-full bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-widest whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-widest whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:text-[#004ac6]';
+      ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:bg-[#004ac6]/10 hover:text-[#004ac6]';
 
   return (
     <header className={headerClassName}>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-8 py-6">
-        <Link href="/" className={brandClassName} aria-label="Go to home">
-          {brandLabel}
-        </Link>
-        <nav className={navClassName} aria-label="Primary">
-          {navItems.map((item) => {
+      <div className="mx-auto flex max-w-7xl flex-col gap-2.5 px-4 py-2.5 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-6">
+        <div className="flex items-center justify-between gap-3">
+          <Link href="/" className={brandClassName} aria-label="Go to home">
+            {brandLabel}
+          </Link>
+          <nav className="flex items-center gap-2 md:hidden" aria-label="Discovery">
+            {mobileDiscoveryNavItems.map((item) => {
+              const active = isActivePath(currentPath, item.href);
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={mobileNavItemClassName(active)}
+                  style={active ? activeNavStyle : undefined}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+        <nav className="hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Primary">
+          {primaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={active
-                  ? 'border-b-2 border-[#004ac6] pb-1 text-[#004ac6]'
-                  : 'pb-1 text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'}
+                className={desktopNavItemClassName(active)}
+                style={active ? activeNavStyle : undefined}
                 aria-current={active ? 'page' : undefined}
               >
                 {item.label}
@@ -78,34 +123,45 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             );
           })}
         </nav>
-        <Link
-          href="/search"
-          className={compactShell
-            ? 'font-label text-xs font-bold uppercase tracking-widest text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'
-            : 'text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'}
-        >
-          Search
-        </Link>
+        <nav className="hidden items-center gap-2 md:flex" aria-label="Discovery">
+          {discoveryNavItems.map((item) => {
+            const active = isActivePath(currentPath, item.href);
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={desktopNavItemClassName(active)}
+                style={active ? activeNavStyle : undefined}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
       <nav
-        className="mx-auto flex max-w-7xl flex-wrap gap-2 px-8 pb-4 md:hidden"
+        className="mx-auto max-w-7xl px-4 pb-2.5 md:hidden sm:px-6"
         aria-label="Primary"
       >
-        {navItems.map((item) => {
-          const active = isActivePath(currentPath, item.href);
+        <div className="flex flex-wrap gap-2 pb-1">
+          {mobilePrimaryNavItems.map((item) => {
+            const active = isActivePath(currentPath, item.href);
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={mobileNavItemClassName(active)}
-              style={{ color: active ? '#fef9ef' : '#555f70' }}
-              aria-current={active ? 'page' : undefined}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={mobileNavItemClassName(active)}
+                style={active ? activeNavStyle : undefined}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
       </nav>
     </header>
   );

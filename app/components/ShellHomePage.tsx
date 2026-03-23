@@ -72,8 +72,10 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
   }
 
   const [featuredPost, ...restPosts] = posts;
-  const supportingPosts = restPosts.slice(0, 2);
-  const secondaryPost = restPosts[2] ?? null;
+  const discoveryPosts = restPosts.slice(0, 4);
+  const leadDiscoveryPost = discoveryPosts[0] ?? featuredPost;
+  const supportingPosts = discoveryPosts.slice(1, 3);
+  const secondaryPost = discoveryPosts[3] ?? null;
   const topTags = topTagsFor(posts);
   const uniqueTags = new Set(posts.flatMap((post) => post.tags)).size;
   const yearsRepresented = new Set(posts.map((post) => post.date.getFullYear())).size;
@@ -81,7 +83,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
   return (
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
-      <section className="mx-auto max-w-7xl px-8 pb-20 pt-20 md:pb-24 md:pt-28">
+      <section className="mx-auto max-w-7xl px-8 pb-20 pt-14 md:pb-24 md:pt-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
@@ -179,15 +181,15 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="bg-[#f8f3e9] py-20 md:py-28">
+      <section className="bg-[#f8f3e9] py-16 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-8">
-          <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div className="mb-10 flex flex-col gap-4 sm:mb-12 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
                 Selected work
               </p>
               <h2 className="mt-4 max-w-2xl font-headline text-4xl font-bold tracking-tight text-[#1d1c16] md:text-5xl">
-                Recent posts and the next place to go.
+                Recent writing and where to go next.
               </h2>
             </div>
             <Link href="/archive" className="border-b-2 border-[#004ac6] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#004ac6]">
@@ -195,60 +197,60 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             </Link>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-12">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-12">
             <article className="group overflow-hidden rounded-3xl bg-[#ede8de] shadow-[0_24px_70px_rgba(16,34,54,0.08)] md:col-span-8">
-              {imageSourceFor(featuredPost) ? (
-                <div className="relative h-72 overflow-hidden md:h-80">
+              {imageSourceFor(leadDiscoveryPost) ? (
+                <div className="relative h-64 overflow-hidden sm:h-72 md:h-80">
                   <img
-                    src={imageSourceFor(featuredPost) as string}
-                    alt={featuredPost.title}
+                    src={imageSourceFor(leadDiscoveryPost) as string}
+                    alt={leadDiscoveryPost.title}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,28,22,0)_40%,rgba(29,28,22,0.35)_100%)]" />
                 </div>
               ) : null}
-              <div className="p-10 md:p-12">
+              <div className="p-7 sm:p-8 md:p-12">
                 <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
-                  {primaryTag(featuredPost)}
+                  {primaryTag(leadDiscoveryPost)}
                 </p>
                 <h3 className="mt-4 max-w-3xl font-headline text-3xl font-bold leading-tight text-[#1d1c16] transition-colors group-hover:text-[#004ac6] md:text-4xl">
-                  <Link href={`/posts/${featuredPost.slug}`}>
-                    {featuredPost.title}
+                  <Link href={`/posts/${leadDiscoveryPost.slug}`}>
+                    {leadDiscoveryPost.title}
                   </Link>
                 </h3>
-                <p className="mt-4 max-w-3xl text-xl leading-relaxed text-[#555f70]">
-                  {excerptFor(featuredPost)}
+                <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[#555f70] md:text-xl">
+                  {excerptFor(leadDiscoveryPost)}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  {featuredPost.tags.slice(0, 4).map((tag) => (
+                  {leadDiscoveryPost.tags.slice(0, 4).map((tag) => (
                     <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#f8f3e9] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70] transition-colors hover:bg-[#e7e2d8]">
                       {tag}
                     </Link>
                   ))}
                 </div>
                 <div className="mt-8 flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
-                  <span>{dateFormatter.format(featuredPost.date)}</span>
-                  <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Long-form note'}</span>
-                  <Link href={`/posts/${featuredPost.slug}`} className="font-bold text-[#004ac6] transition-transform hover:translate-x-1">
+                  <span>{dateFormatter.format(leadDiscoveryPost.date)}</span>
+                  <span>{leadDiscoveryPost.readingTime ? `${leadDiscoveryPost.readingTime} min read` : 'Long-form note'}</span>
+                  <Link href={`/posts/${leadDiscoveryPost.slug}`} className="font-bold text-[#004ac6] transition-transform hover:translate-x-1">
                     Read the post
                   </Link>
                 </div>
               </div>
             </article>
 
-            <div className="flex flex-col gap-8 md:col-span-4">
+            <div className="flex flex-col gap-6 sm:gap-8 md:col-span-4">
               {supportingPosts.map((post) => (
-                <article key={post.slug} className="group flex-1 rounded-3xl bg-[#ede8de] p-8 shadow-[0_24px_70px_rgba(16,34,54,0.06)]">
+                <article key={post.slug} className="group flex-1 rounded-3xl bg-[#ede8de] p-6 shadow-[0_24px_70px_rgba(16,34,54,0.06)] sm:p-7">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                     {primaryTag(post)}
                   </p>
-                  <h3 className="mt-4 font-headline text-2xl font-bold leading-tight text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
+                  <h3 className="mt-4 font-headline text-xl font-bold leading-tight text-[#1d1c16] transition-colors group-hover:text-[#004ac6] sm:text-2xl">
                     <Link href={`/posts/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h3>
-                  <p className="mt-4 text-lg leading-relaxed text-[#555f70]">
-                    {excerptFor(post)}
+                  <p className="mt-4 text-base leading-relaxed text-[#555f70] sm:text-lg">
+                    {excerptFor(post, 140)}
                   </p>
                   <div className="mt-8 flex flex-wrap gap-2">
                     {post.tags.slice(0, 2).map((tag) => (
@@ -263,17 +265,17 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
             {secondaryPost && (
               <article className="overflow-hidden rounded-3xl bg-[#1d1c16] text-[#fef9ef] shadow-[0_24px_70px_rgba(16,34,54,0.12)] md:col-span-5">
-                <div className="p-10">
+                <div className="p-7 sm:p-8 md:p-10">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#b4c5ff]">
-                    {secondaryPost.tags[0] ? secondaryPost.tags[0] : 'Related work'}
+                    {secondaryPost.tags[0] ? secondaryPost.tags[0] : 'Later in the archive'}
                   </p>
-                  <h3 className="mt-4 max-w-xl font-headline text-3xl font-bold leading-tight">
+                  <h3 className="mt-4 max-w-xl font-headline text-2xl font-bold leading-tight sm:text-3xl">
                     <Link href={`/posts/${secondaryPost.slug}`} className="transition-colors hover:text-[#b4c5ff]">
                       {secondaryPost.title}
                     </Link>
                   </h3>
-                  <p className="mt-4 text-lg leading-relaxed text-[#e7e2d8]">
-                    {excerptFor(secondaryPost)}
+                  <p className="mt-4 text-base leading-relaxed text-[#e7e2d8] sm:text-lg">
+                    {excerptFor(secondaryPost, 140)}
                   </p>
                   <div className="mt-8 flex flex-wrap gap-3">
                     <Link href="/book" className="rounded-lg bg-[#2563eb] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-white transition-colors hover:bg-[#004ac6]">
@@ -287,17 +289,17 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               </article>
             )}
 
-            <article className="overflow-hidden rounded-3xl bg-[#ede8de] p-10 shadow-[0_24px_70px_rgba(16,34,54,0.06)] md:col-span-7">
+            <article className="overflow-hidden rounded-3xl bg-[#ede8de] p-7 shadow-[0_24px_70px_rgba(16,34,54,0.06)] sm:p-8 md:col-span-7 md:p-10">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#004ac6]">
                 Upcoming publication
               </p>
-              <h3 className="mt-4 max-w-2xl font-headline text-4xl font-black leading-tight text-[#1d1c16] md:text-5xl">
+              <h3 className="mt-4 max-w-2xl font-headline text-3xl font-black leading-tight text-[#1d1c16] sm:text-4xl md:text-5xl">
                 Agent Memory.
               </h3>
-              <p className="mt-6 max-w-2xl text-xl leading-relaxed text-[#555f70]">
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#555f70] sm:mt-6 sm:text-xl">
                 A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
               </p>
-              <div className="mt-10 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-4 sm:mt-10">
                 <Link href="/book" className="rounded-lg bg-[#1d1c16] px-8 py-4 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#fef9ef] transition-transform hover:-translate-y-1">
                   Notify me when it&apos;s ready
                 </Link>
