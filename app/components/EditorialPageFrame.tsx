@@ -49,6 +49,10 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const navClassName = compactShell
     ? 'hidden md:flex items-center gap-8 font-label text-xs font-bold uppercase tracking-widest'
     : 'hidden md:flex items-center gap-8 font-headline text-sm font-medium tracking-tight';
+  const mobileNavItemClassName = (active: boolean) =>
+    active
+      ? 'rounded-full bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-2 text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:text-[#004ac6]';
 
   return (
     <header className={headerClassName}>
@@ -83,6 +87,25 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
           Search
         </Link>
       </div>
+      <nav
+        className="mx-auto flex max-w-7xl flex-wrap gap-2 px-8 pb-4 md:hidden"
+        aria-label="Primary"
+      >
+        {navItems.map((item) => {
+          const active = isActivePath(currentPath, item.href);
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={mobileNavItemClassName(active)}
+              aria-current={active ? 'page' : undefined}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+      </nav>
     </header>
   );
 }
