@@ -19,6 +19,7 @@ import {
 } from '../utils/codeTools';
 
 const editorialNavItems = [
+  { href: '/', label: 'Home' },
   { href: '/posts', label: 'Posts' },
   { href: '/talks', label: 'Talks' },
   { href: '/publications', label: 'Publications' },
@@ -278,7 +279,7 @@ export default function CodeAIPage() {
                   {activeCategoryCount} active categories
                 </span>
                 <span className="editorial-chip">
-                  {featuredItems.length} featured
+                  {featuredItems.length} selected
                 </span>
                 <span className="editorial-chip">
                   {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' }) : 'No latest item'}
@@ -299,7 +300,7 @@ export default function CodeAIPage() {
                 </div>
                 <div>
                   <span className="editorial-page-metric-value">{featuredItems.length}</span>
-                  <span className="editorial-page-metric-label">featured entries</span>
+                  <span className="editorial-page-metric-label">selected items</span>
                 </div>
                 <div>
                   <span className="editorial-page-metric-value">
