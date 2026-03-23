@@ -97,7 +97,7 @@ Post-completion note (March 22, 2026): the first “published server” state wa
 - [ ] 12.5 Launch a discovery-and-tools slice in its own worktree/PR to integrate the accepted Stitch direction into `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/code-ai`, `/code-ai/[id]`, and `/book`
 - [x] 12.6 Use as many background agents as practical, but keep every worker on a disjoint write set so parallel work does not collide
 - [x] 12.7 Open draft PRs for every slice and hold all merges until a human review approves the combined direction
-- [ ] 12.8 Run a Playwright-driven review pass against the live local Stitch preview and the active integration slices to identify concrete shell, mobile, and route-coherence gaps before the next implementation wave
+- [x] 12.8 Run a Playwright-driven review pass against the live local Stitch preview and the active integration slices to identify concrete shell, mobile, and route-coherence gaps before the next implementation wave
 - [ ] 12.9 Launch a second integration wave in separate worktrees/PRs for the routes still outside the first draft stack: `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, and `/code-ai/[id]`
 - [ ] 12.10 Reconcile shared-shell drift revealed by review, including editorial-shell route coverage, nav completeness, duplicate shell chrome, and preview-only icon/font regressions that obscure the intended design
 
@@ -106,3 +106,12 @@ Execution note (March 22, 2026): the first four draft PRs are real progress, but
 - `/code-ai` still shows a double-shell state in the literal preview because it is not treated as an editorial-shell route there
 - the first-wave PR stack still does not cover `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, or `/code-ai/[id]`
 - the next implementation wave must therefore extend the PR stack instead of pretending the first wave is sufficient
+
+Follow-up note (later on March 22, 2026): the second-wave branches are now real draft PRs as well:
+- `#35` for `/book` and `/code-ai/[id]`, stacked on `feat/site-stitch-integrate-shell-home`
+- `#36` for `/archive`, `/archives/[month]`, `/search`, `/tags`, and `/tags/[tag]`, also stacked on `feat/site-stitch-integrate-shell-home`
+
+The shared-shell PR `#31` also received Playwright-driven follow-up fixes so the active shell now:
+- includes `Code & Tools` in the primary nav
+- treats `/code-ai` as an editorial-shell destination instead of leaking old chrome
+- suppresses the floating dark-mode affordance on editorial-shell routes
