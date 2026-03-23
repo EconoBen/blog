@@ -159,7 +159,6 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                 <div className="mt-8">
                   <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#b4c5ff] transition-transform hover:translate-x-1">
                     Read the post
-                    <span className="material-symbols-outlined text-sm">arrow_forward</span>
                   </Link>
                 </div>
               </div>
