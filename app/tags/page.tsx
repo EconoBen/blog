@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
-import { postService } from '../services/PostService';
+import { postService, type Post, type TagCount } from '../services/PostService';
 
 export const metadata: Metadata = {
   title: 'Tags | ECONOBEN.DEV',
@@ -10,8 +10,17 @@ export const metadata: Metadata = {
 
 export default async function TagsPage() {
   const posts = await postService.getAllPosts();
-  const allTags = await postService.getAllTags();
-  const sortedTags = [...allTags].sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+  const tagCountMap = new Map<string, number>();
+
+  posts.forEach((post: Post) => {
+    post.tags.forEach((tag) => {
+      tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
+    });
+  });
+
+  const sortedTags = Array.from(tagCountMap.entries())
+    .map(([tag, count]): TagCount => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
   const topTags = sortedTags.slice(0, 8);
 
   const tagsByLetter = sortedTags.reduce<Record<string, typeof sortedTags>>((acc, tagEntry) => {

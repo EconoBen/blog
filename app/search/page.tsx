@@ -134,6 +134,7 @@ function SearchContent() {
               className="block w-full rounded-xl bg-surface-container-lowest py-6 pl-16 pr-6 font-body text-xl text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none"
               name="q"
               onChange={(event) => setSearchQuery(event.target.value)}
+              aria-label="Search site"
               placeholder="Search for a title, topic, or phrase"
               type="text"
               value={searchQuery}
