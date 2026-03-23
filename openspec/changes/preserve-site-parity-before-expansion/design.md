@@ -6,6 +6,8 @@
 
 > Status note (latest on March 22, 2026): Playwright review against the active integration branches on `3008`, `3011`, and `3015` surfaced another pair of concrete issues that should now be treated as explicit implementation work, not vague polish. First, the editorial shell still leaves mobile users with only the brand link and `Search` visible in the header; the full primary navigation remains hidden until the footer, which is not acceptable for a real reviewable site. Second, the active second-wave branch for `/book` and `/code-ai/[id]` still leaks raw Material Symbols token text into visible UI (`psychology`, `arrow_back`, `terminal`, `arrow_forward`), which means those controls need a stable font-independent treatment instead of assuming the icon font will always render.
 
+> Status note (same review session, after broader PR inspection): Playwright review of the current reading and structured PRs also showed that the active review stack is still split between two shells. `/posts`, `/posts/[slug]`, `/talks`, `/publications`, and `/about` still render under the older `BEN LABASCHIN` frame because those PRs are based on `feat/site-practical-review-preview` rather than the newer shell branch. Explorer review shows the route-specific deltas are disjoint enough to restack cleanly onto `feat/site-stitch-integrate-shell-home`, so the next practical move is to create successor reading and structured branches from the new shell instead of continuing to review the old-shell PRs as if they were current.
+
 The `blog` repo is the implementation target for the public site at `econoben.dev`. It is a Next.js App Router application with content and behavior spread across route components in `app/`, config-driven sections in `app/config/`, markdown posts in `src/posts/`, and service logic in `app/services/`.
 
 The current working tree already contains exploratory editorial redesign work, including a new shell and a `/book` route. That work should continue, but it must not cause silent loss of content or features from the existing site. The canonical baseline is still the current site as currently implemented and shipped: its routes, wording, content corpus, metadata, feeds, and user-visible behaviors.
@@ -178,6 +180,13 @@ Once the route family is visible in real browser review, some problems stop bein
 Alternatives considered:
 - Leave mobile users with footer-only navigation until a later menu redesign: rejected because the active shell is already being judged in-browser and must support practical wayfinding now.
 - Keep relying on Material Symbols for critical button UI in these routes: rejected because the active review environment already proved that brittle icon-font rendering degrades into visible placeholder text.
+
+### 14. Restack route-family tips onto the current shell instead of preserving stale PR bases
+Once the shell/home direction becomes the accepted visual baseline, route-family branches that still inherit the old shell stop being useful review artifacts. The reading and structured slices should therefore be replayed as successor branches on top of `feat/site-stitch-integrate-shell-home`, carrying only their route-specific deltas and not their older shell history.
+
+Alternatives considered:
+- Keep reviewing the existing reading and structured PRs on their old base: rejected because they no longer represent the shell the site is actually moving toward.
+- Rebase the old branches wholesale: rejected because explorer review showed the safer path is to replay only the route-specific tip commits/files, avoiding historical old-shell work.
 
 ## Architecture
 

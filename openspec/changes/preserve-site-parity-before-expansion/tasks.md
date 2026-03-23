@@ -102,6 +102,8 @@ Post-completion note (March 22, 2026): the first “published server” state wa
 - [ ] 12.10 Reconcile shared-shell drift revealed by review, including editorial-shell route coverage, nav completeness, duplicate shell chrome, and preview-only icon/font regressions that obscure the intended design
 - [ ] 12.11 Add a practical mobile primary-navigation treatment for editorial-shell routes so the active stitch shell does not hide every destination except Search above the fold on small screens
 - [ ] 12.12 Remove raw Material Symbols token leakage from `/book` and `/code-ai/[id]` so critical buttons and callouts do not render icon names such as `psychology`, `arrow_back`, `terminal`, or `arrow_forward`
+- [ ] 12.13 Create a successor reading-slice branch stacked on `feat/site-stitch-integrate-shell-home` so `/posts` and `/posts/[slug]` inherit the new shell instead of the legacy `BEN LABASCHIN` frame
+- [ ] 12.14 Create a successor structured-slice branch stacked on `feat/site-stitch-integrate-shell-home` so `/talks`, `/publications`, and `/about` inherit the new shell instead of the legacy `BEN LABASCHIN` frame
 
 Execution note (March 22, 2026): the first four draft PRs are real progress, but they are not the whole site. Playwright review of the current local Stitch preview and source comparison against the active PR stack showed that:
 - the shared shell still needs reconciliation work (`EditorialPageFrame.tsx` overlap between shell and discovery slices)
@@ -121,3 +123,5 @@ The shared-shell PR `#31` also received Playwright-driven follow-up fixes so the
 Latest review note (later still on March 22, 2026): Playwright review of the active PR branches found two more concrete defects that still need implementation follow-up:
 - the editorial shell still hides all primary destinations on mobile except the brand link and `Search`, leaving no above-the-fold navigation treatment for small screens
 - `/book` and `/code-ai/[id]` still leak raw Material Symbols token text in visible UI on the active second-wave branch, so those routes need a font-independent cleanup instead of relying on icon rendering to work
+
+Additional stack note (same review session): Playwright review of the still-open reading and structured PRs also showed that the review stack is not yet one coherent site. Those PRs still render under the old `BEN LABASCHIN` shell because they are based on `feat/site-practical-review-preview`, not the newer shell branch. The next step is to restack the route-only tips for reading and structured content on top of `feat/site-stitch-integrate-shell-home` instead of pretending the old-shell PRs are still review-ready.
