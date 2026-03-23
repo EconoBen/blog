@@ -51,8 +51,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
     : 'hidden md:flex items-center gap-8 font-headline text-sm font-medium tracking-tight';
   const mobileNavItemClassName = (active: boolean) =>
     active
-      ? 'rounded-full bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase tracking-widest text-white shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-2 text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:text-[#004ac6]';
+      ? 'inline-flex min-h-[34px] items-center justify-center rounded-full bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-widest whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-widest whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:text-[#004ac6]';
 
   return (
     <header className={headerClassName}>
