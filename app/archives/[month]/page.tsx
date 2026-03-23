@@ -19,7 +19,7 @@ const longDateFormatter = new Intl.DateTimeFormat('en-US', {
 function getMonthParts(month: string) {
   const [year, monthNum] = month.split('-');
 
-  if (!year || !monthNum || isNaN(parseInt(year)) || isNaN(parseInt(monthNum))) {
+  if (!year || !monthNum || Number.isNaN(Number.parseInt(year, 10)) || Number.isNaN(Number.parseInt(monthNum, 10))) {
     return null;
   }
 
@@ -35,153 +35,189 @@ async function getPostsForMonth(month: string) {
   const { year, monthNum } = parts;
   const allPosts = await postService.getAllPosts();
   const monthPosts = allPosts.filter((post) => {
-    const postDate = new Date(post.date);
-    const postYear = postDate.getFullYear().toString();
-    const postMonth = (postDate.getMonth() + 1).toString().padStart(2, '0');
-
+    const postYear = post.date.getFullYear().toString();
+    const postMonth = `${post.date.getMonth() + 1}`.padStart(2, '0');
     return postYear === year && postMonth === monthNum;
   });
 
   return { year, monthNum, monthPosts };
 }
 
-export default async function ArchivePage({ params }: ArchivePageProps) {
+export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
   const { month } = await params;
   const monthData = await getPostsForMonth(month);
 
-  if (!monthData) {
+  if (!monthData || monthData.monthPosts.length === 0) {
     notFound();
   }
 
   const { year, monthNum, monthPosts } = monthData;
-
-  if (monthPosts.length === 0) {
-    notFound();
-  }
-
-  const monthName = new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleDateString('en-US', {
+  const label = new Date(Number.parseInt(year, 10), Number.parseInt(monthNum, 10) - 1).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
   });
+  const [monthName, yearLabel] = label.split(' ');
+  const [featuredPost, ...remainingPosts] = monthPosts;
+  const uniqueTags = new Set(monthPosts.flatMap((post) => post.tags)).size;
 
   return (
-    <EditorialPageFrame currentPath="/archive" pageClassName="editorial-book-page">
-      <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Archive month</p>
-          <h1 className="editorial-page-title">{monthName}</h1>
-          <p className="editorial-page-copy">
-            Posts published in {monthName}, ordered newest first and framed as a single reading pass instead of a long list.
+    <EditorialPageFrame currentPath="/archive">
+      <main className="mx-auto max-w-7xl px-8 py-16">
+        <div className="mb-20">
+          <div className="mb-6 flex items-center gap-2 font-headline text-[10px] uppercase tracking-[0.2em] text-secondary">
+            <Link href="/archive" className="transition-colors hover:text-primary">Archive</Link>
+            <span>/</span>
+            <span className="font-bold text-on-surface">{yearLabel}</span>
+            <span>/</span>
+            <span className="font-bold text-on-surface">{monthName}</span>
+          </div>
+          <h1 className="mb-4 font-headline text-6xl font-black tracking-tighter text-on-surface md:text-8xl">
+            {monthName} <span className="font-body font-light italic text-primary">{yearLabel}</span>
+          </h1>
+          <p className="max-w-2xl font-body text-xl leading-relaxed text-on-surface-variant md:text-2xl">
+            A month view of the archive with the full set of posts preserved, but framed around the strongest entry first so the page reads like a curated issue.
           </p>
-          <div className="editorial-chip-row">
-            <span className="editorial-chip">{monthPosts.length} posts</span>
-            <span className="editorial-chip">Newest first</span>
-            <span className="editorial-chip">Archive link preserved</span>
-          </div>
         </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Month at a glance</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{monthPosts.length}</span>
-              <span className="editorial-page-metric-label">posts in this month</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">
-                {new Set(monthPosts.flatMap((post) => post.tags)).size}
-              </span>
-              <span className="editorial-page-metric-label">unique tags in month</span>
-            </div>
-            <div>
-              <Link href="/archive" className="editorial-post-link">
-                Back to archive
-              </Link>
-            </div>
-          </div>
-        </aside>
-      </section>
 
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Posts</p>
-          <h2 className="editorial-page-section-title">Everything published during this month, kept in one readable stack.</h2>
-        </div>
-        <article className="editorial-home-card">
-          <p className="editorial-home-card-label">Month index</p>
-          <h3>{monthName}</h3>
-          <p>
-            {monthPosts.length} post{monthPosts.length !== 1 ? 's' : ''} arranged newest first, with summaries and topic links left visible for scanning.
-          </p>
-          {monthPosts[0] ? (
-            <div>
-              <p className="editorial-home-card-label">Featured post</p>
-              <Link href={`/posts/${monthPosts[0].slug}`} className="editorial-home-card-link">
-                {monthPosts[0].title}
-              </Link>
-              {monthPosts[0].summary && <p className="editorial-post-summary">{monthPosts[0].summary}</p>}
-              <div className="editorial-chip-row">
-                {monthPosts[0].tags.slice(0, 4).map((tag) => (
-                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                    {tag}
-                  </Link>
-                ))}
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+          <article className="rounded-xl bg-surface-container-low p-8 transition-colors duration-300 hover:bg-surface-container-high lg:col-span-8 md:p-12">
+            <div className="flex flex-col gap-10 md:flex-row">
+              <div className="md:w-1/3">
+                <div className="rounded-lg bg-surface-container-highest p-6">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Featured Post</p>
+                  <p className="mt-6 font-headline text-5xl font-black text-on-surface">{monthPosts.length}</p>
+                  <p className="mt-3 font-body text-sm leading-relaxed text-on-surface-variant">
+                    Post{monthPosts.length === 1 ? '' : 's'} published in {label}.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-1 flex-col justify-center">
+                <time className="mb-4 font-headline text-xs font-bold uppercase tracking-widest text-secondary">
+                  {featuredPost ? longDateFormatter.format(featuredPost.date) : label}
+                </time>
+                <h2 className="mb-6 font-headline text-3xl font-extrabold leading-tight text-on-surface transition-colors hover:text-primary md:text-4xl">
+                  <Link href={`/posts/${featuredPost.slug}`}>{featuredPost.title}</Link>
+                </h2>
+                {featuredPost.summary ? (
+                  <p className="mb-8 font-body text-lg leading-relaxed text-on-surface-variant">
+                    {featuredPost.summary}
+                  </p>
+                ) : null}
+                <div className="flex flex-wrap gap-2">
+                  {featuredPost.tags.slice(0, 5).map((tag) => (
+                    <Link
+                      key={tag}
+                      href={`/tags/${encodeURIComponent(tag)}`}
+                      className="rounded-sm bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-surface-container-highest hover:text-on-surface"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
-          ) : null}
-          <ul className="posts-list">
-            {monthPosts.slice(1).map((post) => (
-              <li key={post.slug} className="archive-post">
-                <Link href={`/posts/${post.slug}`}>
-                  <time className="archive-post-date">{longDateFormatter.format(post.date)}</time>
-                  <span className="archive-post-title">{post.title}</span>
+          </article>
+
+          <aside className="space-y-8 lg:col-span-4 lg:sticky lg:top-32">
+            <div className="rounded-xl bg-surface-container-highest p-8">
+              <h3 className="mb-6 font-headline text-xs font-bold uppercase tracking-widest text-secondary">In This Month</h3>
+              <ul className="space-y-4">
+                {[
+                  ['Posts', `${monthPosts.length}`],
+                  ['Unique tags', `${uniqueTags}`],
+                  ['Year', yearLabel ?? year],
+                ].map(([labelText, value]) => (
+                  <li key={labelText} className="flex items-center justify-between border-b border-on-surface/5 pb-3">
+                    <span className="font-headline text-sm font-medium text-on-surface">{labelText}</span>
+                    <span className="font-body text-lg italic text-primary">{value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-xl border border-outline-variant/20 bg-surface p-8">
+              <h3 className="mb-4 font-headline text-xs font-bold uppercase tracking-widest text-secondary">Navigate</h3>
+              <div className="flex flex-col gap-3">
+                <Link href="/archive" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
+                  Back to archive
                 </Link>
-              </li>
-            ))}
-          </ul>
-          <Link href="/archive" className="editorial-home-card-link">
-            Back to archive
-          </Link>
-        </article>
-      </section>
+                <Link href="/tags" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
+                  Browse tags
+                </Link>
+              </div>
+            </div>
+          </aside>
+
+          {remainingPosts.length > 0 ? (
+            <div className="grid grid-cols-1 gap-8 lg:col-span-8 md:grid-cols-2">
+              {remainingPosts.map((post) => (
+                <article
+                  key={post.slug}
+                  className="rounded-xl bg-surface-container-low p-8 transition-colors duration-300 hover:bg-surface-container-high"
+                >
+                  <time className="mb-3 block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+                    {longDateFormatter.format(post.date)}
+                  </time>
+                  <h3 className="mb-3 font-headline text-2xl font-bold leading-tight text-on-surface">
+                    <Link href={`/posts/${post.slug}`} className="transition-colors hover:text-primary">
+                      {post.title}
+                    </Link>
+                  </h3>
+                  {post.summary ? (
+                    <p className="mb-5 font-body text-base leading-relaxed text-on-surface-variant">
+                      {post.summary}
+                    </p>
+                  ) : null}
+                  <div className="flex flex-wrap gap-2">
+                    {post.tags.slice(0, 4).map((tag) => (
+                      <Link
+                        key={`${post.slug}-${tag}`}
+                        href={`/tags/${encodeURIComponent(tag)}`}
+                        className="rounded-sm bg-surface px-2 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary transition-colors hover:bg-surface-container-highest hover:text-on-surface"
+                      >
+                        {tag}
+                      </Link>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </main>
     </EditorialPageFrame>
   );
 }
 
 export async function generateStaticParams() {
   const allPosts = await postService.getAllPosts();
-
   const months = new Set<string>();
 
   allPosts.forEach((post) => {
-    const postDate = new Date(post.date);
-    const year = postDate.getFullYear();
-    const month = (postDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = post.date.getFullYear();
+    const month = `${post.date.getMonth() + 1}`.padStart(2, '0');
     months.add(`${year}-${month}`);
   });
 
-  return Array.from(months).map((month) => ({
-    month,
-  }));
+  return Array.from(months).map((month) => ({ month }));
 }
 
 export async function generateMetadata({ params }: ArchivePageProps): Promise<Metadata> {
   const { month } = await params;
   const monthData = await getPostsForMonth(month);
 
-  if (!monthData) {
-    return {
-      title: 'Archive Not Found',
-    };
+  if (!monthData || monthData.monthPosts.length === 0) {
+    return { title: 'Archive Not Found | ECONOBEN.DEV' };
   }
 
-  const { year, monthNum, monthPosts } = monthData;
-  const monthName = new Date(parseInt(year), parseInt(monthNum) - 1).toLocaleDateString('en-US', {
+  const label = new Date(Number.parseInt(monthData.year, 10), Number.parseInt(monthData.monthNum, 10) - 1).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
   });
 
   return {
-    title: `Posts from ${monthName} | Ben Labaschin`,
-    description: `Browse ${monthPosts.length} post${monthPosts.length === 1 ? '' : 's'} from ${monthName}.`,
+    title: `${label} | Archive | ECONOBEN.DEV`,
+    description: `Browse ${monthData.monthPosts.length} post${monthData.monthPosts.length === 1 ? '' : 's'} from ${label}.`,
   };
 }
