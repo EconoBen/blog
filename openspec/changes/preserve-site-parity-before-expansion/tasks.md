@@ -100,6 +100,8 @@ Post-completion note (March 22, 2026): the first “published server” state wa
 - [x] 12.8 Run a Playwright-driven review pass against the live local Stitch preview and the active integration slices to identify concrete shell, mobile, and route-coherence gaps before the next implementation wave
 - [ ] 12.9 Launch a second integration wave in separate worktrees/PRs for the routes still outside the first draft stack: `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, and `/code-ai/[id]`
 - [ ] 12.10 Reconcile shared-shell drift revealed by review, including editorial-shell route coverage, nav completeness, duplicate shell chrome, and preview-only icon/font regressions that obscure the intended design
+- [ ] 12.11 Add a practical mobile primary-navigation treatment for editorial-shell routes so the active stitch shell does not hide every destination except Search above the fold on small screens
+- [ ] 12.12 Remove raw Material Symbols token leakage from `/book` and `/code-ai/[id]` so critical buttons and callouts do not render icon names such as `psychology`, `arrow_back`, `terminal`, or `arrow_forward`
 
 Execution note (March 22, 2026): the first four draft PRs are real progress, but they are not the whole site. Playwright review of the current local Stitch preview and source comparison against the active PR stack showed that:
 - the shared shell still needs reconciliation work (`EditorialPageFrame.tsx` overlap between shell and discovery slices)
@@ -115,3 +117,7 @@ The shared-shell PR `#31` also received Playwright-driven follow-up fixes so the
 - includes `Code & Tools` in the primary nav
 - treats `/code-ai` as an editorial-shell destination instead of leaking old chrome
 - suppresses the floating dark-mode affordance on editorial-shell routes
+
+Latest review note (later still on March 22, 2026): Playwright review of the active PR branches found two more concrete defects that still need implementation follow-up:
+- the editorial shell still hides all primary destinations on mobile except the brand link and `Search`, leaving no above-the-fold navigation treatment for small screens
+- `/book` and `/code-ai/[id]` still leak raw Material Symbols token text in visible UI on the active second-wave branch, so those routes need a font-independent cleanup instead of relying on icon rendering to work

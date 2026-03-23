@@ -4,6 +4,8 @@
 
 > Status note (later on March 22, 2026): the first parallel integration wave is now open as draft PRs, but Playwright review and source comparison show it is still incomplete. The active draft stack covers the shared shell/home direction, posts, talks/publications/about, and the code index, but it does not yet carry the Stitch direction into `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, or `/code-ai/[id]`. The review also surfaced concrete shell defects in the preview/reference branch that should inform the real integration work: `/code-ai` still presents a double-shell state when it falls outside editorial-shell routing, the shared top bar can degrade into duplicate search text when icon/font wiring is brittle, and the floating dark-mode affordance still leaks into pages that are meant to read as standalone editorial destinations.
 
+> Status note (latest on March 22, 2026): Playwright review against the active integration branches on `3008`, `3011`, and `3015` surfaced another pair of concrete issues that should now be treated as explicit implementation work, not vague polish. First, the editorial shell still leaves mobile users with only the brand link and `Search` visible in the header; the full primary navigation remains hidden until the footer, which is not acceptable for a real reviewable site. Second, the active second-wave branch for `/book` and `/code-ai/[id]` still leaks raw Material Symbols token text into visible UI (`psychology`, `arrow_back`, `terminal`, `arrow_forward`), which means those controls need a stable font-independent treatment instead of assuming the icon font will always render.
+
 The `blog` repo is the implementation target for the public site at `econoben.dev`. It is a Next.js App Router application with content and behavior spread across route components in `app/`, config-driven sections in `app/config/`, markdown posts in `src/posts/`, and service logic in `app/services/`.
 
 The current working tree already contains exploratory editorial redesign work, including a new shell and a `/book` route. That work should continue, but it must not cause silent loss of content or features from the existing site. The canonical baseline is still the current site as currently implemented and shipped: its routes, wording, content corpus, metadata, feeds, and user-visible behaviors.
@@ -169,6 +171,13 @@ Alternatives considered:
 - Keep extending only the already-open first-wave PRs: rejected because that would broaden their ownership, make review harder, and erode the parallel worktree model.
 - Ignore preview-only defects until after production integration: rejected because the preview is the clearest available expression of the intended experience, so broken shell behavior there is useful evidence, not noise.
 - Treat the first four PRs as “good enough” and wait for review: rejected because the uncovered route families are still directly linked from the shell and will make the site feel unfinished immediately.
+
+### 13. Treat mobile nav access and icon-token leakage as production-facing defects
+Once the route family is visible in real browser review, some problems stop being subjective design polish and become hard usability defects. Two current examples are: hiding the full primary nav on mobile until the footer, and leaking raw icon token text into buttons/callouts on `/book` and `/code-ai/[id]`. These should be fixed directly in the active PR branches instead of being deferred to a later aesthetic pass.
+
+Alternatives considered:
+- Leave mobile users with footer-only navigation until a later menu redesign: rejected because the active shell is already being judged in-browser and must support practical wayfinding now.
+- Keep relying on Material Symbols for critical button UI in these routes: rejected because the active review environment already proved that brittle icon-font rendering degrades into visible placeholder text.
 
 ## Architecture
 
