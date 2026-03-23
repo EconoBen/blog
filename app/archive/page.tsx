@@ -102,38 +102,41 @@ export default async function ArchivePage() {
                 <h2 className="mb-6 font-label text-[10px] uppercase tracking-[0.3em] text-secondary">
                   Years
                 </h2>
-                <ul className="space-y-3 font-label text-sm">
+                <ul className="space-y-3">
                   {yearEntries.map((entry, index) => (
                     <li key={entry.year}>
                       <a
                         href={`#year-${entry.year}`}
                         className={index === 0
-                          ? 'flex items-center justify-between border-l-2 border-primary pl-4 font-bold text-primary'
-                          : 'flex items-center justify-between pl-4 text-on-surface-variant transition-colors hover:text-on-surface'}
+                          ? 'block rounded-2xl border border-primary/40 bg-primary/5 px-4 py-4 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08]'
+                          : 'block rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high'}
                       >
-                        <span>{entry.year}</span>
-                        <span className="text-[10px] uppercase tracking-[0.2em]">{entry.months.length} month{entry.months.length === 1 ? '' : 's'}</span>
+                        <div className="flex items-baseline justify-between gap-4">
+                          <span className="font-headline text-2xl font-bold tracking-tighter">{entry.year}</span>
+                          <span className="font-label text-[10px] uppercase tracking-[0.2em]">{entry.months.length} month{entry.months.length === 1 ? '' : 's'}</span>
+                        </div>
+                        <p className="mt-2 font-body text-sm leading-relaxed">
+                          {entry.postCount} post{entry.postCount === 1 ? '' : 's'} in this year.
+                        </p>
                       </a>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="rounded-xl border border-outline-variant/20 bg-surface p-6">
+              <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5">
                 <h3 className="mb-4 font-headline text-sm font-bold text-on-surface">Archive at a glance</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between gap-4 border-b border-outline-variant/20 pb-3">
-                    <span className="font-label text-[10px] uppercase tracking-widest text-secondary">Total posts</span>
-                    <span className="font-headline text-lg font-bold text-on-surface">{posts.length}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-4 border-b border-outline-variant/20 pb-3">
-                    <span className="font-label text-[10px] uppercase tracking-widest text-secondary">Years covered</span>
-                    <span className="font-headline text-lg font-bold text-on-surface">{years.length}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-4 border-b border-outline-variant/20 pb-3">
-                    <span className="font-label text-[10px] uppercase tracking-widest text-secondary">Unique tags</span>
-                    <span className="font-headline text-lg font-bold text-on-surface">{uniqueTags}</span>
-                  </div>
+                <div className="grid gap-3">
+                  {[
+                    ['Total posts', `${posts.length}`],
+                    ['Years covered', `${years.length}`],
+                    ['Unique tags', `${uniqueTags}`],
+                  ].map(([labelText, value]) => (
+                    <div key={labelText} className="flex items-center justify-between rounded-xl border border-outline-variant/20 bg-surface px-4 py-3">
+                      <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">{labelText}</span>
+                      <span className="font-headline text-lg font-bold text-on-surface">{value}</span>
+                    </div>
+                  ))}
                 </div>
                 {latestMonth ? (
                   <Link

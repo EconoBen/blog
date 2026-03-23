@@ -29,6 +29,11 @@ const typeLabels: Record<SearchResult['type'], string> = {
 };
 
 const quickQueries = ['memory', 'retrieval', 'economics', 'tooling'];
+const starterTips = [
+  ['Specific titles', 'Use part of a post or talk title when you know the wording already.'],
+  ['Subjects', 'Try themes like memory, retrieval, or economics to widen the result set.'],
+  ['Route names', 'Search for tools, publications, or topic terms to jump directly to the surface you want.'],
+];
 
 function groupResultsByType(results: SearchResult[]) {
   const groups = new Map<SearchResult['type'], SearchResult[]>();
@@ -103,19 +108,19 @@ function SearchContent() {
 
   return (
     <EditorialPageFrame currentPath="/search">
-      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16">
-        <header className="mb-16 max-w-3xl">
+      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16 md:py-20">
+        <header className="mb-12 max-w-3xl">
           <div className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
             Search &amp; Discovery
           </div>
-          <h1 className="mb-6 font-headline text-5xl font-black tracking-tighter text-on-surface">
+          <h1 className="mb-5 font-headline text-5xl font-black tracking-tighter text-on-surface md:text-6xl">
             Search the archive.
           </h1>
           <p className="max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
             Search across posts, talks, publications, and tools with a plain query. The results stay grouped, but the page keeps the interface quiet.
           </p>
 
-          <form action="/search" className="group relative mt-8" onSubmit={handleSearch} role="search" aria-label="Site search">
+          <form action="/search" className="group relative mt-7" onSubmit={handleSearch} role="search" aria-label="Site search">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-6">
               <svg
                 aria-hidden="true"
@@ -131,7 +136,7 @@ function SearchContent() {
             </div>
             <input
               autoFocus
-              className="block w-full rounded-xl bg-surface-container-lowest py-6 pl-16 pr-6 font-body text-xl text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none"
+              className="block w-full rounded-2xl bg-surface-container-lowest py-5 pl-16 pr-6 font-body text-lg text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none md:py-6 md:text-xl"
               name="q"
               onChange={(event) => setSearchQuery(event.target.value)}
               aria-label="Search site"
@@ -158,21 +163,17 @@ function SearchContent() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
-          <div className="space-y-12 md:col-span-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="space-y-10 lg:col-span-8">
             {!normalizedQuery ? (
-              <section className="rounded-xl border border-outline-variant/10 bg-surface-container-low p-10">
+              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-6 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">Start with a topic, title fragment, or name.</h2>
-                <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant">
+                <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
                   Search is broad by design. Exact titles, tag terms, and short phrases all work, and the results stay grouped by content type.
                 </p>
-                <div className="mt-8 grid gap-6 sm:grid-cols-3">
-                  {[
-                    ['Specific titles', 'Use part of a post or talk title when you know the wording already.'],
-                    ['Subjects', 'Try themes like memory, retrieval, or economics to widen the result set.'],
-                    ['Route names', 'Search for tools, publications, or topic terms to jump directly to the surface you want.'],
-                  ].map(([label, description]) => (
-                    <div key={label} className="rounded-lg bg-surface p-5">
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {starterTips.map(([label, description]) => (
+                    <div key={label} className="rounded-xl bg-surface p-4">
                       <h3 className="font-headline text-sm font-bold uppercase tracking-widest text-secondary">{label}</h3>
                       <p className="mt-3 font-body text-sm leading-relaxed text-on-surface-variant">{description}</p>
                     </div>
@@ -180,16 +181,16 @@ function SearchContent() {
                 </div>
               </section>
             ) : loading ? (
-              <section className="rounded-xl border border-outline-variant/10 bg-surface-container-highest p-10">
+              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-highest p-6 md:p-8">
                 <p className="font-headline text-xl font-bold text-on-surface">Searching…</p>
                 <p className="mt-3 font-body text-base text-on-surface-variant">
                   Gathering results for “{normalizedQuery}”.
                 </p>
               </section>
             ) : results.length === 0 ? (
-              <section className="rounded-xl border border-outline-variant/10 bg-surface-container-highest p-10">
+              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-highest p-6 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">No results for “{normalizedQuery}”.</h2>
-                <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant">
+                <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
                   Try a broader phrase, a title fragment, or one of the suggested terms in the side rail.
                 </p>
               </section>
@@ -211,7 +212,7 @@ function SearchContent() {
                     {typeResults.map((result) => (
                       <article
                         key={`${result.type}-${result.url}`}
-                        className="rounded-xl border border-outline-variant/10 bg-surface-container-low px-6 py-6 transition-colors hover:bg-surface-container-high"
+                        className="rounded-2xl border border-outline-variant/10 bg-surface-container-low px-5 py-5 transition-colors hover:bg-surface-container-high md:px-6 md:py-6"
                       >
                         <Link href={result.url} className="block">
                           <div className="flex flex-col gap-3">
@@ -255,50 +256,57 @@ function SearchContent() {
             )}
           </div>
 
-          <aside className="space-y-8 md:col-span-4">
-            <div className="rounded-xl bg-surface-container-low p-8">
+          <aside className="space-y-6 lg:col-span-4 lg:sticky lg:top-32">
+            <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
               <h2 className="mb-6 font-headline text-lg font-bold text-on-surface">Search summary</h2>
-              <div className="space-y-4">
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {[
                   ['Query', normalizedQuery || 'None'],
                   ['Results', loading ? 'Searching' : `${results.length}`],
                   ['Sections', `${groupedResults.length}`],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex items-start justify-between gap-6 border-b border-outline-variant/20 pb-3">
-                    <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
-                    <span className="text-right font-body text-sm text-on-surface-variant">{value}</span>
+                  <div key={label} className="rounded-xl bg-surface-container-highest px-4 py-3">
+                    <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
+                    <span className="mt-2 block font-body text-sm text-on-surface-variant">{value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-xl bg-surface p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Try another route</h2>
+            <div className="rounded-2xl bg-surface p-6 md:p-8">
+              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Navigate elsewhere</h2>
+              <p className="mb-5 font-body text-sm leading-relaxed text-on-surface-variant">
+                If search is not the fastest route, jump directly to the archive, tags, or tools surface.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  ['Open archive', '/archive'],
+                  ['Browse tags', '/tags'],
+                  ['Code & tools', '/code-ai'],
+                ].map(([label, href]) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+
+              <h3 className="mb-3 mt-6 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+                Suggested queries
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {quickQueries.concat(['openai', 'python']).map((term) => (
                   <Link
                     key={term}
                     href={`/search?q=${encodeURIComponent(term)}`}
-                    className="rounded-md bg-surface-container-low px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                    className="rounded-full bg-surface-container-low px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high"
                   >
                     {term}
                   </Link>
                 ))}
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-outline-variant/20 bg-surface p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse instead</h2>
-              <div className="flex flex-col gap-3">
-                <Link href="/archive" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
-                  Open archive
-                </Link>
-                <Link href="/tags" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
-                  Browse tags
-                </Link>
-                <Link href="/code-ai" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
-                  Code &amp; tools
-                </Link>
               </div>
             </div>
           </aside>

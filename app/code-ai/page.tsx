@@ -209,18 +209,18 @@ export default function CodeAIPage() {
     <EditorialPageFrame currentPath="/code-ai">
       <div className="editorial-home-page">
         <main className="editorial-home-content">
-          <section className="editorial-page-hero" style={{ gap: 'clamp(1.5rem, 4vw, 2.75rem)' }}>
+          <section className="editorial-page-hero" style={{ gap: 'clamp(1rem, 2.5vw, 2rem)' }}>
             <div className="editorial-page-hero-copy">
               <p className="editorial-home-kicker">Code library</p>
-              <h1 className="editorial-page-title" style={{ fontSize: 'clamp(2.75rem, 8vw, 5.75rem)' }}>
+              <h1 className="editorial-page-title" style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}>
                 {title}
               </h1>
               <p className="editorial-page-copy">{subtitle}</p>
-              <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
-                Browse snippets, configs, and lightweight tools in an editorial layout that stays aligned with the rest of the site on desktop and mobile.
+              <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '48ch' }}>
+                Browse snippets, configs, and tools in a quieter editorial layout that keeps the writing and code in one view.
               </p>
 
-              <div className="editorial-home-actions">
+              <div className="editorial-home-actions" style={{ marginTop: '1rem' }}>
                 <Link href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
                   Browse the index
                 </Link>
@@ -245,23 +245,30 @@ export default function CodeAIPage() {
               </div>
             </div>
 
-            <aside className="editorial-page-aside" style={{ padding: 'clamp(1rem, 3vw, 1.5rem)' }}>
+            <aside
+              className="editorial-page-aside"
+              style={{
+                padding: 'clamp(0.8rem, 2vw, 1.2rem)',
+                background: 'rgba(255, 255, 255, 0.46)',
+                boxShadow: 'none',
+              }}
+            >
               <p className="editorial-home-card-label">At a glance</p>
-              <div className="editorial-page-metric-list" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
+              <div className="editorial-page-metric-list" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '0.8rem' }}>
                 <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>{allItems.length}</span>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>{allItems.length}</span>
                   <span className="editorial-page-metric-label">snippets and tools</span>
                 </div>
                 <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>{activeCategoryCount}</span>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>{activeCategoryCount}</span>
                   <span className="editorial-page-metric-label">active categories</span>
                 </div>
                 <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>{featuredItems.length}</span>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>{featuredItems.length}</span>
                   <span className="editorial-page-metric-label">selected items</span>
                 </div>
                 <div>
-                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.2rem, 4vw, 2rem)' }}>
                     {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric' }) : 'n/a'}
                   </span>
                   <span className="editorial-page-metric-label">latest addition</span>
@@ -273,18 +280,6 @@ export default function CodeAIPage() {
                 <span className="editorial-chip">gists linked</span>
               </div>
             </aside>
-          </section>
-
-          <section className="editorial-home-proof-strip hidden md:flex" aria-label="Code & Tools summary">
-            <span>code notes</span>
-            <span>/</span>
-            <span>snippets + configs</span>
-            <span>/</span>
-            <span>search + filter</span>
-            <span>/</span>
-            <span>code rendering</span>
-            <span>/</span>
-            <span>mobile-friendly shell</span>
           </section>
 
           <section className="editorial-list-section" id="code-tools-index">
@@ -392,7 +387,7 @@ export default function CodeAIPage() {
             {featuredItems.length > 0 && (
               <section style={{ marginBottom: '28px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '12px' }}>
-                  <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.5rem', letterSpacing: '-0.04em' }}>
+                  <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.35rem', letterSpacing: '-0.04em' }}>
                     Featured picks
                   </h3>
                   <span className="editorial-post-summary" style={{ margin: 0 }}>Curated snippets with the strongest editorial value.</span>
@@ -400,14 +395,14 @@ export default function CodeAIPage() {
 
                 <div className="editorial-post-grid">
                   {featuredItems.slice(0, 3).map((item) => (
-                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '14px' }}>
+                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '12px' }}>
                       <div className="editorial-post-meta">
                         <span>{getCodeToolsLanguageLabel(item.language)}</span>
                         {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
                         <span>{getCodeToolsItemLineCount(item)} lines</span>
                       </div>
 
-                      <h2 style={{ fontSize: '1.75rem', marginBottom: 0 }}>
+                      <h2 style={{ fontSize: '1.55rem', marginBottom: 0 }}>
                         <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
                       </h2>
 
@@ -460,7 +455,7 @@ export default function CodeAIPage() {
                                       <span>{getCodeToolsItemLineCount(item)} lines</span>
                                     </div>
 
-                                    <h3 style={{ margin: 0, fontSize: '1.55rem' }}>
+                                    <h3 style={{ margin: 0, fontSize: '1.4rem' }}>
                                       <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
                                     </h3>
                                     <p className="editorial-post-summary" style={{ marginTop: '10px' }}>{item.description}</p>
@@ -520,8 +515,6 @@ export default function CodeAIPage() {
             ) : (
               <div className="editorial-post-grid">
                 {filteredItems.map((item) => {
-                  const isExpanded = true;
-
                   return (
                     <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '16px' }}>
                       <div className="editorial-post-meta">
@@ -533,7 +526,7 @@ export default function CodeAIPage() {
                         <span>{getCodeToolsItemLineCount(item)} lines</span>
                       </div>
 
-                      <h2 style={{ fontSize: '1.75rem', marginBottom: 0 }}>
+                      <h2 style={{ fontSize: '1.55rem', marginBottom: 0 }}>
                         <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
                       </h2>
                       <p className="editorial-post-summary">{item.description}</p>
@@ -558,13 +551,11 @@ export default function CodeAIPage() {
                         </div>
                       )}
 
-                      {isExpanded && (
-                        <SnippetCodeBlock
-                          item={item}
-                          onCopy={() => copyToClipboard(item.content, item.id)}
-                          copyLabel={copyStates[item.id] || 'Copy'}
-                        />
-                      )}
+                      <SnippetCodeBlock
+                        item={item}
+                        onCopy={() => copyToClipboard(item.content, item.id)}
+                        copyLabel={copyStates[item.id] || 'Copy'}
+                      />
 
                       <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
                         Read detail

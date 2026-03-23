@@ -54,11 +54,11 @@ const groupPostsByYear = (posts: Posts) => {
 
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
-  const featuredPost = posts[0];
+  const latestPost = posts[0];
   const topTags = countTags(posts).slice(0, 4);
   const postsByYear = groupPostsByYear(posts);
   const uniqueTagCount = new Set(posts.flatMap((post) => post.tags)).size;
-  const mostRecentMonth = featuredPost ? monthFormatter.format(featuredPost.date) : 'No posts yet';
+  const mostRecentMonth = latestPost ? monthFormatter.format(latestPost.date) : 'No posts yet';
 
   return (
     <EditorialPageFrame currentPath="/posts">
@@ -76,69 +76,48 @@ export default async function PostsPage() {
               </Link>
             ))}
           </div>
+          <div className="editorial-home-actions">
+            <Link href="#archive-years" className="editorial-home-button editorial-home-button-secondary">
+              Jump to years
+            </Link>
+            {latestPost ? (
+              <Link href={`/posts/${latestPost.slug}`} className="editorial-home-button editorial-home-button-primary">
+                Read latest post
+              </Link>
+            ) : null}
+          </div>
         </div>
         <aside className="editorial-page-aside">
           <p className="editorial-home-card-label">Archive details</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{posts.length}</span>
-              <span className="editorial-page-metric-label">posts</span>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-4">
+              <span className="block font-headline text-2xl font-bold text-on-surface">{posts.length}</span>
+              <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">posts</span>
             </div>
-            <div>
-              <span className="editorial-page-metric-value">{uniqueTagCount}</span>
-              <span className="editorial-page-metric-label">topics</span>
+            <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-4">
+              <span className="block font-headline text-2xl font-bold text-on-surface">{uniqueTagCount}</span>
+              <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">topics</span>
             </div>
-            <div>
-              <span className="editorial-page-metric-value">{postsByYear.length}</span>
-              <span className="editorial-page-metric-label">years</span>
+            <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-4">
+              <span className="block font-headline text-2xl font-bold text-on-surface">{postsByYear.length}</span>
+              <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">years</span>
             </div>
           </div>
           <p className="editorial-post-summary">
             Latest month: {mostRecentMonth}
           </p>
-          {featuredPost ? (
-            <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-button editorial-home-button-secondary">
+          {latestPost ? (
+            <Link href={`/posts/${latestPost.slug}`} className="editorial-home-button editorial-home-button-secondary">
               Read the latest post
             </Link>
           ) : null}
         </aside>
       </section>
 
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Featured post</p>
-          <h2 className="editorial-page-section-title">The newest post stays up front so you can jump straight into the current thread.</h2>
-        </div>
-
-        {featuredPost ? (
-          <article className="editorial-home-card">
-            <p className="editorial-home-card-label">{shortDateFormatter.format(featuredPost.date)}</p>
-            <h3>
-              <Link href={`/posts/${featuredPost.slug}`}>{featuredPost.title}</Link>
-            </h3>
-            {featuredPost.summary && <p>{featuredPost.summary}</p>}
-            <div className="editorial-post-meta">
-              <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Long-form post'}</span>
-              <span>{featuredPost.tags.length} topic{featuredPost.tags.length === 1 ? '' : 's'}</span>
-            </div>
-            <div className="editorial-chip-row">
-              {featuredPost.tags.slice(0, 4).map((tag) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                  {tag}
-                </Link>
-              ))}
-            </div>
-            <Link href={`/posts/${featuredPost.slug}`} className="editorial-home-card-link">
-              Read the post
-            </Link>
-          </article>
-        ) : null}
-      </section>
-
-      <section className="editorial-list-section">
+      <section className="editorial-list-section" id="archive-years">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Archive by year</p>
-          <h2 className="editorial-page-section-title">Browse the rest of the archive in compact yearly groups.</h2>
+          <h2 className="editorial-page-section-title">Browse the archive in compact yearly groups.</h2>
         </div>
 
         <div className="editorial-two-column">

@@ -124,3 +124,19 @@ Implementation note (March 23, 2026): the five follow-up polish items above are 
 - `/code-ai` and `/code-ai/[id]`: mobile density reduced in hero controls, stats, and CTA stacking; route metadata now explicitly uses `Code & Tools | ECONOBEN.DEV`.
 - `/book`: hero naming and mobile spacing refined; route metadata now explicitly uses `Agent Memory | Book | ECONOBEN.DEV`.
 - A fresh `npm run build` passed after the route-family pass, and a second production-mode Playwright sweep on `http://127.0.0.1:3017` rechecked the main route family with no runtime overlays.
+
+Frontend-audit note (March 23, 2026): the site is still not review-ready from a frontend polish standpoint even though the production preview is stable. A persistent Playwright tab audit across home, reading routes, discovery routes, talks/publications/about, book, and code-tools produced the next wave of Beads and GitHub issues:
+- `blog-mkj` / `#57`: unify the homepage and reading-route hierarchy for `/`, `/posts`, `/posts/[slug]`, `/archive`, and `/archives/[month]`
+- `blog-ylv` / `#59`: rework `/tags`, `/tags/[tag]`, and `/search` into stronger navigation surfaces
+- `blog-qxn` / `#58`: tighten `/talks`, `/publications`, and `/about` hierarchy for review readiness
+- `blog-t75` / `#60`: flatten `/code-ai` and `/code-ai/[id]` into a calmer editorial surface
+- `blog-2kf` / `#56`: resolve the remaining `/book` hero and mobile-balance issues
+- Implementation on the next wave is now active in parallel workers, using those screenshot-backed findings as the source of truth.
+
+Second-wave progress note (March 23, 2026): the first remediation pass from that tab audit is now implemented locally.
+- Reading/archive routes: `/posts`, `/posts/[slug]`, `/archive`, and `/archives/[month]` now start content sooner and carry less competing chrome. The explicit remaining gap in this family is the homepage lower-half composition, which lives in `app/components/ShellHomePage.tsx` and still needs direct work.
+- Discovery routes: `/tags`, `/tags/[tag]`, and `/search` now have stronger navigation hierarchy and reduced block competition, especially on mobile.
+- Structured/editorial routes: `/talks`, `/publications`, and `/about` now have tighter intro zones, less detached utility chrome, and better mobile scanability.
+- Code-tools/book routes: `/code-ai`, `/code-ai/[id]`, and `/book` now front-load content sooner and read less like a dashboard/product landing mix.
+- A fresh production rebuild passed after the combined second-wave edits, and updated Playwright screenshots were captured under `.playwright-discovery/tab-audit-20260323-wave2/`.
+- The branch is improved, but the frontend backlog is not empty yet; `blog-mkj` in particular remains open because the homepage itself still needs a dedicated pass.

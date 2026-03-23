@@ -389,17 +389,17 @@ export default function TalksClient() {
   return (
     <section className="mx-auto max-w-7xl px-8 pb-32">
       {featuredTalk && (
-        <div className="mb-16 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
+        <div className="mb-12 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
           <FeaturedTalk talk={featuredTalk} isOpen={featuredTalk.id === activeTalkId} onOpen={() => setActiveTalkId(featuredTalk.id)} />
-          <aside className="rounded-2xl bg-surface-container-low p-6 md:p-7">
+          <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 md:p-6 lg:p-7">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse recordings</p>
-            <h2 className="mt-4 font-headline text-2xl font-bold leading-tight text-on-surface">
+            <h2 className="mt-4 font-headline text-xl font-bold leading-tight text-on-surface md:text-2xl">
               {activeFilter === 'all' ? 'All talks, newest first.' : `Talks about ${activeFilter}.`}
             </h2>
-            <p className="mt-4 font-body text-base leading-relaxed text-secondary">
+            <p className="mt-3 font-body text-sm leading-relaxed text-secondary md:mt-4 md:text-base">
               Open a card, play it in place, and keep transcripts and source links close to the recording.
             </p>
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               <span className="rounded-full bg-surface-container-high px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
                 Inline playback
               </span>
@@ -410,7 +410,7 @@ export default function TalksClient() {
                 Source links
               </span>
             </div>
-            <div className="mt-6 space-y-2">
+            <div className="mt-5 hidden space-y-2 md:block">
               {filteredTalks.slice(0, 3).map((talk) => (
                 <button
                   key={talk.id}
@@ -430,11 +430,14 @@ export default function TalksClient() {
         </div>
       )}
 
-      <div className="mb-8 flex flex-col gap-6 border-b border-outline-variant/30 pb-8 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap gap-3" aria-label="Talk topics">
+      <div className="mb-8 flex flex-col gap-4 border-b border-outline-variant/30 pb-7 lg:flex-row lg:items-center lg:justify-between">
+        <div
+          className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:overflow-visible lg:pb-0"
+          aria-label="Talk topics"
+        >
           <button
             type="button"
-            className={`rounded-full px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+            className={`shrink-0 rounded-full px-4 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
               activeFilter === 'all'
                 ? 'bg-surface-container-highest text-on-surface'
                 : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
@@ -448,7 +451,7 @@ export default function TalksClient() {
             <button
               type="button"
               key={topic}
-              className={`rounded-full px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+              className={`shrink-0 rounded-full px-4 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                 activeFilter === topic
                   ? 'bg-surface-container-highest text-on-surface'
                   : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
@@ -461,8 +464,8 @@ export default function TalksClient() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 rounded-lg bg-surface-container-low p-1">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 rounded-lg bg-surface-container-low p-1">
             <button
               type="button"
               className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${

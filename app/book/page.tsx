@@ -39,8 +39,8 @@ export default function BookPage() {
   return (
     <EditorialPageFrame currentPath="/book">
       <main className="mx-auto max-w-7xl px-8">
-        <header className="grid grid-cols-1 items-start gap-10 py-16 md:grid-cols-12 md:items-center md:gap-12 md:py-28">
-          <div className="space-y-7 md:col-span-7">
+        <header className="grid grid-cols-1 items-start gap-6 py-12 md:grid-cols-12 md:items-center md:gap-12 md:py-28">
+          <div className="order-1 space-y-6 md:col-span-7 md:order-none">
             <div className="inline-flex items-center gap-3 rounded-sm bg-[#bdc7db] px-3 py-1">
               <span className="font-label text-xs font-bold uppercase tracking-[0.28em] text-[#121c2b]">
                 Book / Research
@@ -50,12 +50,10 @@ export default function BookPage() {
                 Working title
               </span>
             </div>
-            <h1 className="max-w-[8ch] font-headline text-5xl font-black leading-[0.92] tracking-tighter text-[#1d1c16] sm:text-6xl md:text-8xl">
-              Agent
-              <br />
-              Memory
+            <h1 className="max-w-none font-headline text-4xl font-black leading-[0.92] tracking-tighter text-[#1d1c16] sm:text-5xl md:max-w-[7ch] md:text-8xl md:leading-none">
+              Agent Memory
             </h1>
-            <p className="max-w-xl font-body text-xl italic leading-relaxed text-[#555f70] md:text-3xl">
+            <p className="max-w-xl font-body text-lg italic leading-relaxed text-[#555f70] sm:text-xl md:text-3xl">
               A practical guide to how AI systems should remember, retrieve, compress, and act on
               information in production.
             </p>
@@ -75,21 +73,19 @@ export default function BookPage() {
             </div>
           </div>
 
-          <div className="relative md:col-span-5">
-            <div className="relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl bg-[#e7e2d8] p-8 shadow-[0_24px_40px_rgba(29,28,22,0.05)] md:p-12">
-              <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-sm bg-[#1d1c16] p-7 text-[#fef9ef] sm:p-8">
+          <div className="relative order-2 mt-0 hidden md:col-span-5 md:order-none md:mt-0 md:block">
+            <div className="relative mx-auto flex aspect-[4/5] max-w-[12.5rem] items-center justify-center overflow-hidden rounded-xl bg-[#e7e2d8] p-3 shadow-[0_24px_40px_rgba(29,28,22,0.05)] sm:max-w-[18rem] sm:p-6 md:max-w-none md:p-12">
+              <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-sm bg-[#1d1c16] p-4 text-[#fef9ef] sm:p-8">
                 <div className="space-y-2">
                   <p className="font-headline text-[10px] uppercase tracking-[0.34em] opacity-60">
                     Working manuscript
                   </p>
-                  <h2 className="max-w-[6ch] font-headline text-3xl font-black leading-[0.9] tracking-tight sm:text-4xl">
-                    AGENT
-                    <br />
-                    MEMORY
+                  <h2 className="max-w-[7ch] font-headline text-xl font-black leading-[0.9] tracking-tight sm:text-4xl">
+                    AGENT MEMORY
                   </h2>
                 </div>
                 <div className="space-y-4">
-                  <p className="max-w-[16ch] font-body text-base italic leading-relaxed opacity-80 sm:text-lg">
+                  <p className="max-w-[15ch] font-body text-[0.8rem] italic leading-relaxed opacity-80 sm:text-lg">
                     Practical memory systems for production agents.
                   </p>
                   <div className="h-px w-12 bg-[#fef9ef]/20" />
@@ -105,24 +101,48 @@ export default function BookPage() {
           </div>
         </header>
 
-        <section className="py-16 md:py-20">
+        <section className="md:hidden">
+          <div className="mx-auto mt-2 flex max-w-[15rem] items-center justify-center overflow-hidden rounded-xl bg-[#e7e2d8] p-3 shadow-[0_24px_40px_rgba(29,28,22,0.05)]">
+            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-sm bg-[#1d1c16] p-4 text-[#fef9ef]">
+              <div className="space-y-2">
+                <p className="font-headline text-[10px] uppercase tracking-[0.34em] opacity-60">
+                  Working manuscript
+                </p>
+                <h2 className="font-headline text-lg font-black leading-[0.9] tracking-tight">
+                  AGENT MEMORY
+                </h2>
+              </div>
+              <div className="space-y-3">
+                <p className="max-w-[15ch] font-body text-[0.8rem] italic leading-relaxed opacity-80">
+                  Practical memory systems for production agents.
+                </p>
+                <div className="h-px w-12 bg-[#fef9ef]/20" />
+                <p className="font-headline text-[11px] font-bold uppercase tracking-[0.22em]">
+                  ECONOBEN.DEV
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-20">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-            <div className="flex min-h-[340px] flex-col justify-between rounded-xl bg-[#f8f3e9] p-8 sm:p-10 md:col-span-2 md:min-h-[400px] md:p-12">
+            <div className="flex min-h-[300px] flex-col justify-between rounded-xl bg-[#f8f3e9] p-6 sm:p-10 md:col-span-2 md:min-h-[400px] md:p-12">
               <div className="max-w-xl">
                 <span className="mb-4 block font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#004ac6]">
                   Central Thesis
                 </span>
-                <h3 className="mb-5 font-headline text-3xl font-bold tracking-tight text-[#1d1c16] sm:text-4xl">
+                <h3 className="mb-4 font-headline text-3xl font-bold tracking-tight text-[#1d1c16] sm:text-4xl">
                   The memory problem is really a systems problem.
                 </h3>
-                <p className="font-body text-lg leading-relaxed text-[#434655] sm:text-xl">
+                <p className="font-body text-base leading-relaxed text-[#434655] sm:text-xl">
                   The book is about the mechanics that sit between a one-shot model call and a
                   durable agent: what should be remembered, how it should be compressed, when it
                   should be retrieved, and how those choices affect reliability once the system is
                   live.
                 </p>
               </div>
-              <div className="mt-8 flex items-center gap-4">
+              <div className="mt-7 flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#dbe1ff]">
                   <span className="material-symbols-outlined text-[#00174b]" aria-hidden="true">
                     psychology
@@ -133,8 +153,8 @@ export default function BookPage() {
                 </span>
               </div>
             </div>
-            <div className="flex flex-col justify-center rounded-xl bg-[#e7e2d8] p-8 sm:p-10">
-              <h4 className="mb-6 font-headline text-4xl font-black text-[#1d1c16]/10 sm:text-5xl">01.</h4>
+            <div className="flex flex-col justify-center rounded-xl bg-[#e7e2d8] p-7 sm:p-10">
+              <h4 className="mb-5 font-headline text-4xl font-black text-[#1d1c16]/10 sm:text-5xl">01.</h4>
               <p className="font-body text-base italic leading-relaxed text-[#434655] sm:text-lg">
                 Memory is not just storage. It is the structure that decides what historical intent
                 remains available to the agent when the next decision matters.

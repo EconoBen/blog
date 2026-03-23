@@ -83,28 +83,28 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto max-w-7xl px-8 py-20">
-        <section className="mb-16 max-w-3xl">
-          <div className="flex flex-col gap-4">
-            <span className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
-              Topic archive
-            </span>
-            <h1 className="font-headline text-6xl font-black tracking-tighter text-on-surface">
-              {tag}
-            </h1>
-            <p className="max-w-2xl text-xl leading-relaxed text-on-surface-variant">
-              {posts.length} post{posts.length === 1 ? '' : 's'} collected under this topic, grouped by year and left fully linked for browsing.
-            </p>
-          </div>
-        </section>
+      <main className="mx-auto max-w-7xl px-8 py-16 md:py-20">
+        <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
+          <div className="space-y-10 lg:col-span-8 lg:order-first">
+            <div className="max-w-3xl">
+              <span className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
+                Topic archive
+              </span>
+              <h1 className="mt-4 font-headline text-5xl font-black tracking-tighter text-on-surface md:text-6xl">
+                {tag}
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
+                {posts.length} post{posts.length === 1 ? '' : 's'} collected under this topic, grouped by year and left fully linked for browsing.
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="space-y-12 lg:col-span-8">
             {postsByYear.map((yearGroup) => (
-              <section key={yearGroup.year} className="space-y-6">
+              <section key={yearGroup.year} className="space-y-5">
                 <div className="flex items-end justify-between gap-4 border-b border-outline-variant/10 pb-4">
                   <div>
-                    <h2 className="font-headline text-3xl font-bold tracking-tight text-on-surface">{yearGroup.year}</h2>
+                    <h2 className="font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
+                      {yearGroup.year}
+                    </h2>
                     <p className="mt-2 font-body text-sm text-on-surface-variant">
                       {yearGroup.posts.length} post{yearGroup.posts.length === 1 ? '' : 's'} in this year.
                     </p>
@@ -115,7 +115,7 @@ export default async function TagPage({ params }: TagPageProps) {
                   {yearGroup.posts.map((post) => (
                     <article
                       key={post.slug}
-                      className="rounded-xl border border-outline-variant/10 bg-surface-container-low px-6 py-6 transition-colors hover:bg-surface-container-high"
+                      className="rounded-2xl border border-outline-variant/10 bg-surface-container-low px-5 py-5 transition-colors hover:bg-surface-container-high md:px-6 md:py-6"
                     >
                       <div className="flex flex-col gap-4">
                         <div className="flex flex-wrap items-center gap-4 font-label text-xs uppercase tracking-widest text-secondary">
@@ -123,7 +123,7 @@ export default async function TagPage({ params }: TagPageProps) {
                           <span className="h-1 w-1 rounded-full bg-outline-variant" />
                           <span>{post.readingTime ? `${post.readingTime} min read` : `${post.tags.length} tags`}</span>
                         </div>
-                        <h3 className="font-headline text-3xl font-bold tracking-tight text-on-surface">
+                        <h3 className="font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
                           <Link href={`/posts/${post.slug}`} className="transition-colors hover:text-primary">
                             {post.title}
                           </Link>
@@ -138,7 +138,7 @@ export default async function TagPage({ params }: TagPageProps) {
                             <Link
                               key={`${post.slug}-${postTag}`}
                               href={`/tags/${encodeURIComponent(postTag)}`}
-                              className="rounded-sm bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                              className="rounded-full bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
                             >
                               {postTag}
                             </Link>
@@ -152,32 +152,32 @@ export default async function TagPage({ params }: TagPageProps) {
             ))}
           </div>
 
-          <aside className="space-y-8 lg:col-span-4 lg:sticky lg:top-32">
-            <div className="rounded-xl bg-surface-container-highest p-8">
+          <aside className="space-y-6 lg:col-span-4 lg:order-last lg:sticky lg:top-32">
+            <div className="rounded-2xl bg-surface-container-highest p-6 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Topic notes</h2>
-              <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
                   ['Posts', `${posts.length}`],
                   ['Years covered', `${postsByYear.length}`],
                   ['Related tags', `${relatedTags.length}`],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex items-start justify-between gap-4 border-b border-on-surface/5 pb-3">
-                    <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
-                    <span className="font-body text-sm text-on-surface-variant">{value}</span>
+                  <div key={label} className="rounded-xl bg-surface-container-low p-4">
+                    <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
+                    <span className="mt-2 block font-body text-lg text-on-surface-variant">{value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {relatedTags.length > 0 ? (
-              <div className="rounded-xl bg-surface-container-low p-8">
+              <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
                 <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Related tags</h2>
                 <div className="flex flex-wrap gap-2">
                   {relatedTags.map(([relatedTag, count]) => (
                     <Link
                       key={relatedTag}
                       href={`/tags/${encodeURIComponent(relatedTag)}`}
-                      className="inline-flex items-center gap-2 rounded-md bg-surface px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                      className="inline-flex items-center gap-2 rounded-full bg-surface px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
                     >
                       <span>{relatedTag}</span>
                       <span className="text-secondary">{count}</span>
@@ -187,22 +187,22 @@ export default async function TagPage({ params }: TagPageProps) {
               </div>
             ) : null}
 
-            <div className="rounded-xl border border-outline-variant/20 bg-surface p-8">
+            <div className="rounded-2xl border border-outline-variant/20 bg-surface p-6 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse beyond this topic</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
                 Switch from this topic trail to the full archive or run a direct search if you want a broader slice of the same material.
               </p>
-              <div className="mt-6 flex flex-col gap-3">
-                <Link href="/archive" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
                   Open archive
                 </Link>
-                <Link href={`/search?q=${encodeURIComponent(tag)}`} className="font-label text-xs font-bold uppercase tracking-widest text-primary">
+                <Link href={`/search?q=${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
                   Search this topic
                 </Link>
               </div>
             </div>
           </aside>
-        </div>
+        </section>
       </main>
     </EditorialPageFrame>
   );

@@ -29,8 +29,8 @@ export default function PublicationsPage() {
 
   return (
     <EditorialPageFrame currentPath="/publications">
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-12 pt-20 lg:grid-cols-12 lg:items-start">
-        <div className="space-y-6 lg:col-span-8">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-12 pt-16 lg:grid-cols-12 lg:items-start">
+        <div className="space-y-5 lg:col-span-8">
           <span className="mb-6 block font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
             Archive and research
           </span>
@@ -56,7 +56,7 @@ export default function PublicationsPage() {
           </div>
         </div>
 
-        <aside className="rounded-2xl bg-surface-container-low p-6 lg:col-span-4">
+        <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-low p-4 lg:col-span-4 lg:sticky lg:top-24">
           <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse the archive</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {publicationYears.map((year) => (
@@ -69,11 +69,11 @@ export default function PublicationsPage() {
               </Link>
             ))}
           </div>
-          <div className="mt-6 space-y-3 border-t border-outline-variant/30 pt-6">
+          <div className="mt-5 space-y-3 border-t border-outline-variant/30 pt-5">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Featured publication</p>
             {featuredPublication && (
               <>
-                <p className="font-headline text-xl font-bold leading-snug text-on-surface">{featuredPublication.title}</p>
+                <p className="font-headline text-lg font-bold leading-snug text-on-surface">{featuredPublication.title}</p>
                 <p className="font-body text-sm leading-relaxed text-secondary">{featuredPublication.venue ?? featuredPublication.authors}</p>
                 <Link
                   href="#featured-publication"
@@ -186,7 +186,7 @@ export default function PublicationsPage() {
             <div className="mb-8 grid gap-4 lg:grid-cols-12 lg:items-end">
               <div className="lg:col-span-8">
                 <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">{year}</p>
-                <h2 className="mt-3 font-headline text-3xl font-bold tracking-tight text-on-surface">
+                <h2 className="mt-3 font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
                   Publications from {year}
                 </h2>
               </div>
@@ -195,7 +195,7 @@ export default function PublicationsPage() {
               </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
               {yearPublications.map((publication) => (
                 <PublicationCard key={publication.id} publication={publication} />
               ))}
@@ -275,7 +275,7 @@ function PublicationCard({
       className="group flex h-full flex-col overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1"
     >
       {publication.coverImage ? (
-        <div className="aspect-[4/3] overflow-hidden bg-surface-container-low">
+        <div className="hidden aspect-[4/3] overflow-hidden bg-surface-container-low md:block">
           <img
             src={publication.coverImage}
             alt={publication.title}
@@ -291,11 +291,11 @@ function PublicationCard({
         </div>
       )}
 
-      <div className="flex flex-1 flex-col space-y-4 p-8">
+      <div className="flex flex-1 flex-col space-y-4 p-6 md:p-8">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{getPublicationType(publication)}</p>
-            <h3 className="mt-2 font-headline text-2xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
+            <h3 className="mt-2 font-headline text-xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary md:text-2xl">
               {publication.title}
             </h3>
           </div>
@@ -306,7 +306,11 @@ function PublicationCard({
 
         <p className="font-body text-sm leading-relaxed text-secondary">{publication.authors}</p>
         {publication.venue && <p className="font-label text-[11px] font-bold uppercase tracking-widest text-secondary">{publication.venue}</p>}
-        {publication.abstract && <p className="font-body text-base leading-relaxed text-on-surface-variant">{publication.abstract}</p>}
+        {publication.abstract && (
+          <p className="hidden font-body text-sm leading-relaxed text-on-surface-variant md:block md:text-base">
+            {publication.abstract}
+          </p>
+        )}
 
         <div className="mt-auto flex flex-wrap gap-2 pt-2">
           {publication.topics.slice(0, 4).map((topic) => (
