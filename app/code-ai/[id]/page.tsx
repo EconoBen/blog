@@ -1,4 +1,4 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ReactMarkdown from 'react-markdown';
@@ -35,23 +35,41 @@ const syntaxStyle = {
   background: 'transparent',
 } as const;
 
-const codeActionStyle = {
-  alignItems: 'center',
-  background: 'rgba(255, 255, 255, 0.72)',
-  border: '1px solid rgba(16, 34, 54, 0.08)',
-  borderRadius: '999px',
-  color: 'var(--editorial-ink)',
-  cursor: 'pointer',
-  display: 'inline-flex',
-  fontFamily: 'Inter, var(--font-body)',
-  fontSize: '0.82rem',
-  fontWeight: 700,
-  gap: '0.35rem',
-  justifyContent: 'center',
-  minHeight: '34px',
-  padding: '0 12px',
-  textDecoration: 'none',
-} as const;
+function MaterialIcon({ name, className = '' }: { name: string; className?: string }) {
+  return (
+    <span className={`material-symbols-outlined ${className}`.trim()} aria-hidden="true">
+      {name}
+    </span>
+  );
+}
+
+function DetailStat({ label, value }: { label: string; value: string | number }) {
+  return (
+    <div>
+      <span className="block font-headline text-xl font-bold text-[#1d1c16]">{value}</span>
+      <span className="mt-1 block font-label text-[10px] font-bold uppercase tracking-widest text-[#555f70]">
+        {label}
+      </span>
+    </div>
+  );
+}
+
+function SidebarBlock({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="rounded-xl bg-[#f8f3e9] p-6">
+      <h3 className="mb-4 font-headline text-sm font-bold uppercase tracking-widest text-[#555f70]">
+        {title}
+      </h3>
+      {children}
+    </section>
+  );
+}
 
 export async function generateStaticParams() {
   return getCodeToolsStaticParams();
@@ -70,7 +88,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const canonicalUrl = `${getSiteUrl()}${getCodeToolsUrl(id)}`;
 
   return {
-    title: `${item.title} | Code & Tools | Ben Labaschin`,
+    title: `${item.title} | Code & Tools | ECONOBEN.DEV`,
     description: item.description,
     alternates: {
       canonical: canonicalUrl,
@@ -97,168 +115,227 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
   const categoryConfig = getCodeToolsCategoryMeta(item.category);
   const relatedItems = getCodeToolsRelatedItems(item, 3);
   const lineCount = getCodeToolsItemLineCount(item);
-  const dateLabel = item.date ? formatCodeToolsDate(item.date, { year: 'numeric', month: 'long', day: 'numeric' }) : 'No date';
+  const dateLabel = item.date
+    ? formatCodeToolsDate(item.date, { year: 'numeric', month: 'long', day: 'numeric' })
+    : 'Undated';
+  const languageLabel = getCodeToolsLanguageLabel(item.language);
 
   return (
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
-      <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">Code & tools</p>
-          <h1 className="editorial-page-title">{item.title}</h1>
-          <p className="editorial-page-copy">{item.description}</p>
-          <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
-            The detail view keeps the writeup and code together, so the route behaves like the rest of the editorial site instead of a separate utility app.
-          </p>
-
-          <div className="editorial-home-actions">
-            <Link href="/code-ai" className="editorial-home-button editorial-home-button-secondary">
-              Back to Code & Tools
-            </Link>
-            {item.gistUrl && (
-              <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" className="editorial-home-button editorial-home-button-primary">
-                View on GitHub
-              </a>
-            )}
+      <main className="mx-auto max-w-7xl px-8 py-16">
+        <section className="mb-20 grid grid-cols-1 gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-8">
+            <div className="mb-6 flex flex-wrap items-center gap-3">
+              <span className="rounded-sm bg-[#bdc7db] px-3 py-1 font-label text-xs font-bold uppercase tracking-widest text-[#121c2b]">
+                {categoryConfig?.label || item.category}
+              </span>
+              <span className="font-label text-sm italic text-[#555f70]">{dateLabel}</span>
+            </div>
+            <h1 className="mb-6 font-headline text-5xl font-extrabold tracking-tight text-[#1d1c16]">
+              {item.title}
+            </h1>
+            <p className="max-w-2xl font-body text-xl italic leading-relaxed text-[#434655]">
+              {item.description}
+            </p>
+            <p className="mt-6 max-w-3xl font-body text-lg leading-relaxed text-[#555f70]">
+              The detail page keeps the writeup and source together, so the route behaves like the
+              rest of the editorial site instead of falling back to a disconnected tools surface.
+            </p>
           </div>
 
-          <div className="editorial-chip-row">
-            <span className="editorial-chip">{categoryConfig?.label || item.category}</span>
-            <span className="editorial-chip">{dateLabel}</span>
-            <span className="editorial-chip">{getCodeToolsLanguageLabel(item.language)}</span>
-            {item.filename && <span className="editorial-chip">{item.filename}</span>}
-            <span className="editorial-chip">{lineCount} lines</span>
-          </div>
-        </div>
-
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">At a glance</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{categoryConfig?.label || item.category}</span>
-              <span className="editorial-page-metric-label">category</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{getCodeToolsLanguageLabel(item.language)}</span>
-              <span className="editorial-page-metric-label">language</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{item.filename || 'Inline snippet'}</span>
-              <span className="editorial-page-metric-label">source</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{item.tags.length}</span>
-              <span className="editorial-page-metric-label">tags</span>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section className="editorial-home-proof-strip" aria-label="Code & Tools context">
-        <span>{categoryConfig?.label || item.category}</span>
-        <span>/</span>
-        <span>{dateLabel}</span>
-        <span>/</span>
-        <span>{lineCount} lines</span>
-        <span>/</span>
-        <span>{item.tags.length} tags</span>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-two-column">
-          <section style={{ display: 'grid', gap: '18px' }}>
-            {item.writeup && (
-              <div className="editorial-post-card" style={{ background: 'rgba(255, 255, 255, 0.58)' }}>
-                <p className="editorial-home-card-label">Writeup</p>
-                <div className="item-writeup" style={{ marginTop: '12px' }}>
-                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
-                </div>
-              </div>
-            )}
-
-            <div style={codeBlockStyle}>
-              <div style={{ alignItems: 'center', display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'space-between', padding: '0.85rem 1rem' }}>
-                <div style={{ display: 'grid', gap: '0.18rem' }}>
-                  <div style={{ color: 'var(--editorial-ink)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                    {getCodeToolsLanguageLabel(item.language)}
-                  </div>
-                  <div style={{ color: 'var(--editorial-slate)', fontFamily: 'Inter, var(--font-body)', fontSize: '0.88rem' }}>
-                    {item.filename || 'Inline snippet'}
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'flex-end' }}>
-                  {item.gistUrl && (
-                    <a href={item.gistUrl} target="_blank" rel="noopener noreferrer" style={codeActionStyle}>
-                      Gist
-                    </a>
-                  )}
-                  <span style={{ ...codeActionStyle, cursor: 'default' }}>{lineCount} lines</span>
-                </div>
+          <div className="flex flex-col justify-end lg:col-span-4">
+            <div className="space-y-6 rounded-xl bg-[#f8f3e9] p-8">
+              <div className="grid grid-cols-2 gap-6">
+                <DetailStat label="Language" value={languageLabel} />
+                <DetailStat label="Lines" value={lineCount} />
+                <DetailStat label="Tags" value={item.tags.length} />
+                <DetailStat label="Related" value={relatedItems.length} />
               </div>
 
-              <SyntaxHighlighter
-                language={normalizeCodeToolsLanguage(item.language)}
-                style={oneLight}
-                showLineNumbers
-                wrapLines
-                lineNumberStyle={{
-                  minWidth: '3em',
-                  paddingRight: '1em',
-                  textAlign: 'right',
-                  userSelect: 'none',
-                  opacity: 0.45,
-                }}
-                customStyle={syntaxStyle}
-                codeTagProps={{
-                  style: {
-                    fontFamily: "'IBM Plex Mono', 'Roboto Mono', 'Consolas', 'Monaco', monospace",
-                  },
-                }}
-              >
-                {item.content}
-              </SyntaxHighlighter>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/code-ai"
+                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#c3c6d7] px-4 py-3 font-headline text-sm font-bold text-[#1d1c16] transition-colors hover:bg-white"
+                >
+                  <MaterialIcon name="arrow_back" className="text-sm" />
+                  Back to Code &amp; Tools
+                </Link>
+                {item.gistUrl && (
+                  <a
+                    href={item.gistUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-4 py-3 font-headline text-sm font-bold text-white transition-opacity hover:opacity-90"
+                  >
+                    <MaterialIcon name="terminal" className="text-sm" />
+                    View on GitHub
+                  </a>
+                )}
+              </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-          <aside style={{ display: 'grid', gap: '18px' }}>
-            <section className="editorial-page-aside">
-              <p className="editorial-home-card-label">Collection note</p>
-              <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-                This snippet stays in the editorial index alongside the rest of the collection, which keeps the browsing model stable as the presentation changes.
-              </p>
-            </section>
+        <section className="grid grid-cols-1 gap-16 lg:grid-cols-12">
+          <aside className="space-y-6 lg:col-span-3">
+            <SidebarBlock title="Overview">
+              <ul className="space-y-3 font-label text-sm text-[#1d1c16]">
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  {categoryConfig?.label || item.category}
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  {languageLabel}
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  {dateLabel}
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  {lineCount} lines
+                </li>
+              </ul>
+            </SidebarBlock>
 
-            {relatedItems.length > 0 && (
-              <section className="editorial-page-aside">
-                <p className="editorial-home-card-label">Related snippets</p>
-                <div style={{ display: 'grid', gap: '14px', marginTop: '12px' }}>
-                  {relatedItems.map((relatedItem) => (
-                    <article key={relatedItem.id} style={{ paddingBottom: '14px', borderBottom: '1px solid rgba(16, 34, 54, 0.08)' }}>
-                      <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.2rem', letterSpacing: '-0.04em' }}>
-                        <Link href={getCodeToolsUrl(relatedItem.id)}>{relatedItem.title}</Link>
-                      </h3>
-                      <p className="editorial-post-summary" style={{ marginTop: '8px' }}>
-                        {relatedItem.description}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            )}
+            <SidebarBlock title="Source">
+              <div className="rounded-lg bg-[#e7e2d8] p-4 font-mono text-xs text-[#434655]">
+                <div>{item.filename || 'Inline snippet'}</div>
+                <div className="mt-2 break-all">{getCodeToolsUrl(item.id)}</div>
+              </div>
+            </SidebarBlock>
 
-            <section className="editorial-page-aside">
-              <p className="editorial-home-card-label">Tags</p>
-              <div className="editorial-chip-row" style={{ marginTop: '12px' }}>
+            <SidebarBlock title="Tags">
+              <div className="flex flex-wrap gap-2">
                 {item.tags.map((tag) => (
-                  <span key={tag} className="editorial-chip">
+                  <span
+                    key={tag}
+                    className="rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[#555f70]"
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
-            </section>
+            </SidebarBlock>
+
+            <SidebarBlock title="Collection note">
+              <p className="font-body text-sm leading-relaxed text-[#434655]">
+                This snippet stays in the same catalog as the rest of the workshop collection, so
+                browsing remains stable even as the presentation gets closer to the accepted Stitch
+                direction.
+              </p>
+            </SidebarBlock>
           </aside>
-        </div>
-      </section>
+
+          <div className="space-y-12 lg:col-span-9">
+            <article>
+              <h2 className="mb-6 font-headline text-3xl font-bold text-[#1d1c16]">
+                The implementation
+              </h2>
+              <p className="mb-8 font-body text-lg leading-relaxed text-[#434655]">
+                The detail page preserves the practical behavior of the original route: the writeup
+                stays readable, the source remains copyable and syntax highlighted, and the item can
+                still link back into the rest of the catalog.
+              </p>
+
+              {item.writeup && (
+                <div className="mb-10 rounded-xl bg-white/70 p-8 shadow-[0_16px_32px_rgba(24,36,49,0.08)]">
+                  <div className="item-writeup">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                  </div>
+                </div>
+              )}
+
+              <div style={codeBlockStyle}>
+                <div className="flex items-center justify-between border-b border-[#d7d0c4] bg-[#f8f3e9] px-6 py-3">
+                  <div className="flex gap-2">
+                    <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+                    <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+                    <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
+                  </div>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#737686]">
+                    {item.filename || item.id}
+                  </span>
+                </div>
+                <SyntaxHighlighter
+                  language={normalizeCodeToolsLanguage(item.language)}
+                  style={oneLight}
+                  showLineNumbers
+                  wrapLines
+                  lineNumberStyle={{
+                    minWidth: '3em',
+                    paddingRight: '1em',
+                    textAlign: 'right',
+                    userSelect: 'none',
+                    opacity: 0.45,
+                  }}
+                  customStyle={syntaxStyle}
+                  codeTagProps={{
+                    style: {
+                      fontFamily:
+                        "'IBM Plex Mono', 'Roboto Mono', 'Consolas', 'Monaco', monospace",
+                    },
+                  }}
+                >
+                  {item.content}
+                </SyntaxHighlighter>
+              </div>
+            </article>
+
+            {relatedItems.length > 0 && (
+              <section className="mt-32 border-t border-[#1d1c16]/5 pt-16">
+                <div className="mb-12 flex items-end justify-between">
+                  <div>
+                    <h3 className="mb-2 font-headline text-xs font-black uppercase tracking-widest text-[#555f70]">
+                      More from the lab
+                    </h3>
+                    <h2 className="font-headline text-3xl font-bold text-[#1d1c16]">
+                      Related utilities
+                    </h2>
+                  </div>
+                  <Link
+                    href="/code-ai"
+                    className="inline-flex items-center gap-1 font-headline font-bold text-[#004ac6] hover:underline"
+                  >
+                    View full catalog
+                    <MaterialIcon name="arrow_forward" className="text-sm" />
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+                  {relatedItems.map((relatedItem) => (
+                    <Link
+                      key={relatedItem.id}
+                      href={getCodeToolsUrl(relatedItem.id)}
+                      className="rounded-xl bg-[#e7e2d8] p-8 transition-all hover:-translate-y-1"
+                    >
+                      <div className="mb-4 text-xs font-label font-bold uppercase tracking-widest text-[#004ac6]">
+                        {getCodeToolsCategoryMeta(relatedItem.category)?.label || relatedItem.category}
+                      </div>
+                      <h4 className="mb-2 font-headline text-xl font-bold text-[#1d1c16]">
+                        {relatedItem.title}
+                      </h4>
+                      <p className="mb-6 font-body text-sm text-[#434655]">
+                        {relatedItem.description}
+                      </p>
+                      <div className="flex items-center gap-4 font-label text-xs font-bold text-[#555f70]">
+                        <span className="flex items-center gap-1">
+                          <MaterialIcon name="code" className="text-xs" />
+                          {getCodeToolsLanguageLabel(relatedItem.language)}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <MaterialIcon name="history" className="text-xs" />
+                          {relatedItem.date ? formatCodeToolsDate(relatedItem.date) : 'Undated'}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        </section>
+      </main>
     </EditorialPageFrame>
   );
 }
