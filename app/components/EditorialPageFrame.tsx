@@ -99,6 +99,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
               key={item.href}
               href={item.href}
               className={mobileNavItemClassName(active)}
+              style={{ color: active ? '#fef9ef' : '#555f70' }}
               aria-current={active ? 'page' : undefined}
             >
               {item.label}
