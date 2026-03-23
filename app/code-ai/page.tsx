@@ -209,10 +209,12 @@ export default function CodeAIPage() {
     <EditorialPageFrame currentPath="/code-ai">
       <div className="editorial-home-page">
         <main className="editorial-home-content">
-          <section className="editorial-page-hero">
+          <section className="editorial-page-hero" style={{ gap: 'clamp(1.5rem, 4vw, 2.75rem)' }}>
             <div className="editorial-page-hero-copy">
               <p className="editorial-home-kicker">Code library</p>
-              <h1 className="editorial-page-title">{title}</h1>
+              <h1 className="editorial-page-title" style={{ fontSize: 'clamp(2.75rem, 8vw, 5.75rem)' }}>
+                {title}
+              </h1>
               <p className="editorial-page-copy">{subtitle}</p>
               <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
                 Browse snippets, configs, and lightweight tools in an editorial layout that stays aligned with the rest of the site on desktop and mobile.
@@ -243,23 +245,23 @@ export default function CodeAIPage() {
               </div>
             </div>
 
-            <aside className="editorial-page-aside">
+            <aside className="editorial-page-aside" style={{ padding: 'clamp(1rem, 3vw, 1.5rem)' }}>
               <p className="editorial-home-card-label">At a glance</p>
-              <div className="editorial-page-metric-list">
+              <div className="editorial-page-metric-list" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
                 <div>
-                  <span className="editorial-page-metric-value">{allItems.length}</span>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>{allItems.length}</span>
                   <span className="editorial-page-metric-label">snippets and tools</span>
                 </div>
                 <div>
-                  <span className="editorial-page-metric-value">{activeCategoryCount}</span>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>{activeCategoryCount}</span>
                   <span className="editorial-page-metric-label">active categories</span>
                 </div>
                 <div>
-                  <span className="editorial-page-metric-value">{featuredItems.length}</span>
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>{featuredItems.length}</span>
                   <span className="editorial-page-metric-label">selected items</span>
                 </div>
                 <div>
-                  <span className="editorial-page-metric-value">
+                  <span className="editorial-page-metric-value" style={{ fontSize: 'clamp(1.5rem, 5vw, 2.6rem)' }}>
                     {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric' }) : 'n/a'}
                   </span>
                   <span className="editorial-page-metric-label">latest addition</span>
@@ -273,7 +275,7 @@ export default function CodeAIPage() {
             </aside>
           </section>
 
-          <section className="editorial-home-proof-strip" aria-label="Code & Tools summary">
+          <section className="editorial-home-proof-strip hidden md:flex" aria-label="Code & Tools summary">
             <span>code notes</span>
             <span>/</span>
             <span>snippets + configs</span>
@@ -320,6 +322,7 @@ export default function CodeAIPage() {
                           className="editorial-chip"
                           style={{
                             ...categoryButtonStyle,
+                            padding: '0.56rem 0.8rem',
                             background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.08)',
                             borderColor: active ? 'rgba(33, 78, 230, 0.2)' : 'rgba(33, 78, 230, 0.08)',
                             color: 'var(--editorial-blue)',
@@ -346,6 +349,7 @@ export default function CodeAIPage() {
                       className="editorial-chip"
                       style={{
                         ...controlButtonStyle,
+                        padding: '0.56rem 0.8rem',
                         background: viewMode === 'compact' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
                         color: viewMode === 'compact' ? '#fff' : 'var(--editorial-ink)',
                         borderColor: 'rgba(16, 34, 54, 0.08)',
@@ -360,6 +364,7 @@ export default function CodeAIPage() {
                       className="editorial-chip"
                       style={{
                         ...controlButtonStyle,
+                        padding: '0.56rem 0.8rem',
                         background: viewMode === 'full' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
                         color: viewMode === 'full' ? '#fff' : 'var(--editorial-ink)',
                         borderColor: 'rgba(16, 34, 54, 0.08)',

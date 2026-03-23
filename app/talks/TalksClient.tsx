@@ -149,11 +149,11 @@ function FeaturedTalk({
 
   return (
     <article className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)]">
-      <div className="grid h-full gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
+      <div className="grid h-full gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
         <div className="min-h-[340px] bg-surface-container-low">
           <TalkMediaPreview talk={talk} isOpen={isOpen} onOpen={onOpen} />
         </div>
-        <div className="flex flex-col justify-between p-8 lg:p-10">
+        <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
           <div className="space-y-6">
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-sm bg-secondary-fixed-dim px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-secondary-fixed-variant">
@@ -389,15 +389,15 @@ export default function TalksClient() {
   return (
     <section className="mx-auto max-w-7xl px-8 pb-32">
       {featuredTalk && (
-        <div className="mb-16 grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]">
+        <div className="mb-16 grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
           <FeaturedTalk talk={featuredTalk} isOpen={featuredTalk.id === activeTalkId} onOpen={() => setActiveTalkId(featuredTalk.id)} />
-          <aside className="rounded-2xl bg-surface-container-low p-8">
+          <aside className="rounded-2xl bg-surface-container-low p-6 md:p-7">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse recordings</p>
-            <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-on-surface">
+            <h2 className="mt-4 font-headline text-2xl font-bold leading-tight text-on-surface">
               {activeFilter === 'all' ? 'All talks, newest first.' : `Talks about ${activeFilter}.`}
             </h2>
-            <p className="mt-4 font-body text-lg leading-relaxed text-secondary">
-              Open a card, play it in place, and use the source links that matter for that recording.
+            <p className="mt-4 font-body text-base leading-relaxed text-secondary">
+              Open a card, play it in place, and keep transcripts and source links close to the recording.
             </p>
             <div className="mt-8 flex flex-wrap gap-2">
               <span className="rounded-full bg-surface-container-high px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
@@ -410,13 +410,13 @@ export default function TalksClient() {
                 Source links
               </span>
             </div>
-            <div className="mt-8 space-y-3">
+            <div className="mt-6 space-y-2">
               {filteredTalks.slice(0, 3).map((talk) => (
                 <button
                   key={talk.id}
                   type="button"
                   onClick={() => setActiveTalkId(talk.id)}
-                  className="flex w-full items-start justify-between gap-4 rounded-xl bg-surface-container-high/60 px-4 py-3 text-left transition-colors hover:bg-surface-container-high"
+                  className="flex w-full items-start justify-between gap-3 rounded-xl bg-surface-container-high/60 px-4 py-3 text-left transition-colors hover:bg-surface-container-high"
                 >
                   <span className="min-w-0">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-primary">{talk.event}</span>

@@ -107,3 +107,20 @@ Progress note (March 22, 2026): the discovery half of 12.5 is now active on `fea
 - `npm run build` passed on the branch after the combined pass. A local Playwright sweep on desktop and mobile rechecked `/archive`, `/archives/2026-01`, `/tags`, `/tags/AI`, and `/search?q=memory`.
 - Dev-server note: running `npm run build` in the same worktree can still corrupt the live Next dev state, so the local review server needed a restart on `3017` after the build before browser validation stabilized again.
 - Remaining scope before 12.5 can close: `/code-ai`, `/code-ai/[id]`, `/book`, plus the discovery slice draft PR.
+
+Production-review note (March 23, 2026): the `next dev` server on `3017` was not stable enough to serve as a trustworthy review surface. Runtime chunk errors repeatedly appeared around `ClientLayout`, page CSS delivery, and hot-reload state, even after spot checks looked healthy. The review baseline is now a production preview (`npm run build` + `npm run start`) on `http://127.0.0.1:3017`.
+- A production-mode Playwright sweep across the main route set (`/`, `/posts`, `/posts/[slug]`, `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/talks`, `/publications`, `/about`, `/book`, `/code-ai`, `/code-ai/[id]`) completed without runtime overlays.
+- That sweep generated the next backlog items as Beads and GitHub issues:
+  - `blog-2xk` / `#54`: fix the talks page mobile collapse and simplify its desktop utility rail
+  - `blog-8rm` / `#51`: fix the publications page mobile collapse and remove stale metric-heavy framing
+  - `blog-gmp` / `#52`: normalize metadata and branding across about, talks, and publications
+  - `blog-dz3` / `#55`: reduce mobile density in the code-and-tools route family
+  - `blog-4uw` / `#53`: refine the book page hero naming and mobile hierarchy
+
+Implementation note (March 23, 2026): the five follow-up polish items above are now implemented on `feat/site-stitch-polish-discovery`.
+- `/talks`: lighter hero rail, calmer mobile counters, improved browse card spacing, and route metadata normalized to `Talks | ECONOBEN.DEV`.
+- `/publications`: metric-heavy quick-access rail removed, year navigation simplified into chips, featured publication kept intact, and route metadata normalized to `Publications | ECONOBEN.DEV`.
+- `/about`: metadata normalized to `About | ECONOBEN.DEV` and hero framing copy aligned with the site shell while preserving CV/contact behavior.
+- `/code-ai` and `/code-ai/[id]`: mobile density reduced in hero controls, stats, and CTA stacking; route metadata now explicitly uses `Code & Tools | ECONOBEN.DEV`.
+- `/book`: hero naming and mobile spacing refined; route metadata now explicitly uses `Agent Memory | Book | ECONOBEN.DEV`.
+- A fresh `npm run build` passed after the route-family pass, and a second production-mode Playwright sweep on `http://127.0.0.1:3017` rechecked the main route family with no runtime overlays.

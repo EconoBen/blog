@@ -46,8 +46,8 @@ function MaterialIcon({ name, className = '' }: { name: string; className?: stri
 function DetailStat({ label, value }: { label: string; value: string | number }) {
   return (
     <div>
-      <span className="block font-headline text-xl font-bold text-[#1d1c16]">{value}</span>
-      <span className="mt-1 block font-label text-[10px] font-bold uppercase tracking-widest text-[#555f70]">
+      <span className="block font-headline text-lg font-bold text-[#1d1c16] sm:text-xl">{value}</span>
+      <span className="mt-1 block font-label text-[9px] font-bold uppercase tracking-widest text-[#555f70] sm:text-[10px]">
         {label}
       </span>
     </div>
@@ -123,7 +123,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
   return (
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
       <main className="mx-auto max-w-7xl px-8 py-16">
-        <section className="mb-20 grid grid-cols-1 gap-16 lg:grid-cols-12">
+        <section className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-8">
             <div className="mb-6 flex flex-wrap items-center gap-3">
               <span className="rounded-sm bg-[#bdc7db] px-3 py-1 font-label text-xs font-bold uppercase tracking-widest text-[#121c2b]">
@@ -131,31 +131,31 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
               </span>
               <span className="font-label text-sm italic text-[#555f70]">{dateLabel}</span>
             </div>
-            <h1 className="mb-6 font-headline text-5xl font-extrabold tracking-tight text-[#1d1c16]">
+            <h1 className="mb-6 font-headline text-4xl font-extrabold tracking-tight text-[#1d1c16] sm:text-5xl lg:text-6xl">
               {item.title}
             </h1>
-            <p className="max-w-2xl font-body text-xl italic leading-relaxed text-[#434655]">
+            <p className="max-w-2xl font-body text-lg italic leading-relaxed text-[#434655] sm:text-xl">
               {item.description}
             </p>
-            <p className="mt-6 max-w-3xl font-body text-lg leading-relaxed text-[#555f70]">
+            <p className="mt-6 max-w-3xl font-body text-base leading-relaxed text-[#555f70] sm:text-lg">
               The detail page keeps the writeup and source together, so the route behaves like the
               rest of the editorial site instead of falling back to a disconnected tools surface.
             </p>
           </div>
 
           <div className="flex flex-col justify-end lg:col-span-4">
-            <div className="space-y-6 rounded-xl bg-[#f8f3e9] p-8">
-              <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-5 rounded-xl bg-[#f8f3e9] p-6 sm:p-8">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6">
                 <DetailStat label="Language" value={languageLabel} />
                 <DetailStat label="Lines" value={lineCount} />
                 <DetailStat label="Tags" value={item.tags.length} />
                 <DetailStat label="Related" value={relatedItems.length} />
               </div>
 
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
                   href="/code-ai"
-                  className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#c3c6d7] px-4 py-3 font-headline text-sm font-bold text-[#1d1c16] transition-colors hover:bg-white"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#c3c6d7] px-4 py-3 font-headline text-sm font-bold text-[#1d1c16] transition-colors hover:bg-white sm:flex-1"
                 >
                   <MaterialIcon name="arrow_back" className="text-sm" />
                   Back to Code &amp; Tools
@@ -165,7 +165,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                     href={item.gistUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-4 py-3 font-headline text-sm font-bold text-white transition-opacity hover:opacity-90"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-4 py-3 font-headline text-sm font-bold text-white transition-opacity hover:opacity-90 sm:flex-1"
                   >
                     <MaterialIcon name="terminal" className="text-sm" />
                     View on GitHub

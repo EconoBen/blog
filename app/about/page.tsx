@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 
 export const metadata: Metadata = {
-  title: 'About | Ben Labaschin',
-  description: 'Practical CV and contact page for Ben Labaschin, with resume download and work history.',
+  title: 'About | ECONOBEN.DEV',
+  description: 'Ben Labaschin’s CV, contact details, and work history on ECONOBEN.DEV.',
 };
 
 const experience = [
@@ -108,7 +108,7 @@ export default function AboutPage() {
           </h1>
           <p className="mt-6 max-w-3xl font-body text-xl leading-relaxed text-secondary md:text-2xl">
             I build practical AI systems and write about the trade-offs that show up once they have to work in production.
-            The page keeps the CV readable, the links obvious, and the story tied to real work.
+            This page keeps the CV readable, the links obvious, and the story anchored in the ECONOBEN.DEV editorial system.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { publicationsConfig, type Publication } from '../config/publicationsConfig';
 
 export const metadata: Metadata = {
-  title: 'Publications | Ben Labaschin',
-  description: 'Books, reports, and papers, newest first.',
+  title: 'Publications | ECONOBEN.DEV',
+  description: 'Books, reports, and papers from ECONOBEN.DEV, newest first.',
 };
 
 export default function PublicationsPage() {
@@ -25,25 +26,11 @@ export default function PublicationsPage() {
   const publicationYears = Object.keys(publicationsByYear)
     .map(Number)
     .sort((a, b) => b - a);
-  const publicationTypeCounts = sortedPublications.reduce<Record<Publication['type'], number>>(
-    (counts, publication) => {
-      counts[publication.type] += 1;
-      return counts;
-    },
-    {
-      book: 0,
-      journal: 0,
-      conference: 0,
-      report: 0,
-      workshop: 0,
-      other: 0,
-    }
-  );
 
   return (
     <EditorialPageFrame currentPath="/publications">
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-8 pb-12 pt-20 lg:grid-cols-12 lg:items-end">
-        <div className="lg:col-span-8">
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-12 pt-20 lg:grid-cols-12 lg:items-start">
+        <div className="space-y-6 lg:col-span-8">
           <span className="mb-6 block font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
             Archive and research
           </span>
@@ -53,7 +40,7 @@ export default function PublicationsPage() {
           <p className="mt-6 max-w-3xl font-body text-xl leading-relaxed text-secondary md:text-2xl">
             {subtitle}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3">
             <span className="rounded-full bg-surface-container-low px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider text-secondary">
               Books
             </span>
@@ -64,22 +51,23 @@ export default function PublicationsPage() {
               Reports
             </span>
             <span className="rounded-full bg-surface-container-low px-5 py-2 font-label text-[11px] font-bold uppercase tracking-wider text-secondary">
-              PDFs and DOI records
+              DOI records
             </span>
           </div>
         </div>
 
-        <aside className="rounded-2xl bg-surface-container-low p-8 lg:col-span-4">
-          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Quick access</p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-            <div className="rounded-xl bg-surface-container-highest p-4">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Entries</p>
-              <p className="mt-2 font-headline text-3xl font-bold text-on-surface">{publications.length}</p>
-            </div>
-            <div className="rounded-xl bg-surface-container-highest p-4">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Books</p>
-              <p className="mt-2 font-headline text-3xl font-bold text-on-surface">{publicationTypeCounts.book}</p>
-            </div>
+        <aside className="rounded-2xl bg-surface-container-low p-6 lg:col-span-4">
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse the archive</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {publicationYears.map((year) => (
+              <Link
+                key={year}
+                href={`#publication-year-${year}`}
+                className="rounded-full bg-surface-container-highest px-4 py-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-primary"
+              >
+                {year}
+              </Link>
+            ))}
           </div>
           <div className="mt-6 space-y-3 border-t border-outline-variant/30 pt-6">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Featured publication</p>
@@ -87,6 +75,12 @@ export default function PublicationsPage() {
               <>
                 <p className="font-headline text-xl font-bold leading-snug text-on-surface">{featuredPublication.title}</p>
                 <p className="font-body text-sm leading-relaxed text-secondary">{featuredPublication.venue ?? featuredPublication.authors}</p>
+                <Link
+                  href="#featured-publication"
+                  className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-primary"
+                >
+                  Jump to feature
+                </Link>
               </>
             )}
           </div>
@@ -95,9 +89,12 @@ export default function PublicationsPage() {
 
       {featuredPublication && (
         <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-8 lg:grid-cols-12">
-          <article className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)] lg:col-span-8">
+          <article
+            id="featured-publication"
+            className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)] lg:col-span-12"
+          >
             <div className="grid gap-0 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,1.05fr)]">
-              <div className="bg-surface-container-low p-10">
+              <div className="bg-surface-container-low p-8 md:p-10">
                 {featuredPublication.coverImage ? (
                   <img
                     src={featuredPublication.coverImage}
@@ -178,38 +175,8 @@ export default function PublicationsPage() {
               </div>
             </div>
           </article>
-
-          <aside className="flex flex-col gap-4 rounded-2xl bg-surface-container-low p-8 lg:col-span-4">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Index</p>
-            {publicationYears.map((year) => (
-              <a
-                key={year}
-                href={`#publication-year-${year}`}
-                className="flex items-center justify-between rounded-xl bg-surface-container-highest px-4 py-3 transition-colors hover:bg-secondary-container hover:text-primary"
-              >
-                <span className="font-headline text-base font-bold text-on-surface">{year}</span>
-                <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-                  {publicationsByYear[year].length} items
-                </span>
-              </a>
-            ))}
-          </aside>
         </section>
       )}
-
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-8 pb-16 lg:grid-cols-12">
-        <div className="rounded-2xl bg-surface-container-low p-8 lg:col-span-12">
-          <div className="flex flex-wrap items-center gap-4 text-xs font-bold uppercase tracking-widest text-secondary">
-            <span>{publications.length} publications</span>
-            <span className="h-1 w-1 rounded-full bg-outline-variant" />
-            <span>{publicationTypeCounts.book} books</span>
-            <span className="h-1 w-1 rounded-full bg-outline-variant" />
-            <span>{publicationTypeCounts.journal} journal articles</span>
-            <span className="h-1 w-1 rounded-full bg-outline-variant" />
-            <span>{publicationTypeCounts.report} reports</span>
-          </div>
-        </div>
-      </section>
 
       {publicationYears.map((year) => {
         const yearPublications = publicationsByYear[year];
