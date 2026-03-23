@@ -14,6 +14,7 @@ interface ClientLayoutProps {
 const editorialShellRoutes = [
   '/',
   '/book',
+  '/code-ai',
   '/posts',
   '/publications',
   '/talks',
@@ -121,8 +122,12 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     };
   }, [useEditorialShell]);
 
+  if (useEditorialShell) {
+    return <>{children}</>;
+  }
+
   // Don't render sidebar on mobile
-  if (isMobile || useEditorialShell) {
+  if (isMobile) {
     return (
       <>
         {children}

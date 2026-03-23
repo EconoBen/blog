@@ -1,10 +1,10 @@
 import { postService } from './services/PostService';
-import { MainContent } from './components/MainContent';
+import { ShellHomePage } from './components/ShellHomePage';
 
 export default async function HomePage() {
   const posts = await postService.getAllPosts();
 
   return (
-    <MainContent posts={posts} />
+    <ShellHomePage posts={posts} />
   );
 }
