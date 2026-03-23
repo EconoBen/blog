@@ -31,14 +31,6 @@ const isCompactShell = (currentPath: string) => (
   currentPath === '/' || currentPath === '/posts' || currentPath === '/talks'
 );
 
-function MaterialIcon({ name, className = '' }: { name: string; className?: string }) {
-  return (
-    <span className={`material-symbols-outlined ${className}`.trim()} aria-hidden="true">
-      {name}
-    </span>
-  );
-}
-
 interface EditorialPageFrameProps {
   children: ReactNode;
   currentPath: string;
@@ -85,11 +77,10 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         <Link
           href="/search"
           className={compactShell
-            ? 'flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'
-            : 'flex items-center gap-2 text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'}
+            ? 'font-label text-xs font-bold uppercase tracking-widest text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'
+            : 'text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]'}
         >
-          <MaterialIcon name="search" />
-          <span>Search</span>
+          Search
         </Link>
       </div>
     </header>
