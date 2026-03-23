@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
 import {
   formatCodeToolsDate,
@@ -17,18 +18,6 @@ import {
   getCodeToolsUrl,
   normalizeCodeToolsLanguage,
 } from '../utils/codeTools';
-
-const editorialNavItems = [
-  { href: '/', label: 'Home' },
-  { href: '/posts', label: 'Posts' },
-  { href: '/talks', label: 'Talks' },
-  { href: '/publications', label: 'Publications' },
-  { href: '/book', label: 'Book' },
-  { href: '/archive', label: 'Archive' },
-  { href: '/search', label: 'Search' },
-  { href: '/about', label: 'About' },
-  { href: '/code-ai', label: 'Code & Tools' },
-];
 
 const codeBlockStyle = {
   background: 'rgba(246, 242, 233, 0.94)',
@@ -106,14 +95,6 @@ const compactCardStyle = {
   boxShadow: '0 16px 32px rgba(24, 36, 49, 0.08)',
   padding: '22px 24px 24px',
 } as const;
-
-function isActivePath(currentPath: string, href: string) {
-  if (href === '/') {
-    return currentPath === href;
-  }
-
-  return currentPath === href || currentPath.startsWith(`${href}/`);
-}
 
 function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onCopy: () => void; copyLabel: string }) {
   return (
@@ -225,406 +206,371 @@ export default function CodeAIPage() {
   };
 
   return (
-    <div className="editorial-home-page">
-      <div className="editorial-home-shell">
-        <header className="editorial-home-topbar">
-          <div className="editorial-home-brand">
-            <Link href="/" className="editorial-home-brand-link" aria-label="Go to home">
-              <p className="editorial-home-brand-name">BEN LABASCHIN</p>
+    <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
+            <p className="editorial-home-kicker">Code library</p>
+            <h1 className="editorial-page-title">{title}</h1>
+            <p className="editorial-page-copy">{subtitle}</p>
+            <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
+              Browse snippets, configs, and lightweight tools in the same editorial shell as the rest of the site.
+            </p>
+
+          <div className="editorial-home-actions">
+            <a href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
+              Browse the index
+            </a>
+            <Link href="/search" className="editorial-home-button editorial-home-button-secondary">
+              Search the archive
             </Link>
-            <p className="editorial-home-brand-note">AI systems, memory, and editorial writing</p>
           </div>
-          <nav className="editorial-home-nav" aria-label="Primary">
-            {editorialNavItems.map((item) => {
-              const active = isActivePath('/code-ai', item.href);
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`editorial-home-nav-link ${active ? 'is-active' : ''}`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-        </header>
+            <div className="editorial-chip-row">
+              <span className="editorial-chip">{allItems.length} snippets</span>
+              <span className="editorial-chip">{activeCategoryCount} active categories</span>
+              <span className="editorial-chip">{featuredItems.length} selected</span>
+              <span className="editorial-chip">
+                {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' }) : 'No latest item'}
+              </span>
+            </div>
+        </div>
 
-        <main className="editorial-home-content">
-          <section className="editorial-page-hero">
-            <div className="editorial-page-hero-copy">
-              <p className="editorial-home-kicker">Code library</p>
-              <h1 className="editorial-page-title">{title}</h1>
-              <p className="editorial-page-copy">{subtitle}</p>
-              <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '58ch' }}>
-                Browse snippets, configs, and lightweight tools in an editorial layout that stays aligned with the rest of the site on desktop and mobile.
-              </p>
-
-              <div className="editorial-home-actions">
-                <Link href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
-                  Browse the index
-                </Link>
-                <Link href="/search" className="editorial-home-button editorial-home-button-secondary">
-                  Search the archive
-                </Link>
+        <aside className="editorial-page-aside">
+            <p className="editorial-home-card-label">At a glance</p>
+            <div className="editorial-page-metric-list">
+              <div>
+                <span className="editorial-page-metric-value">{allItems.length}</span>
+                <span className="editorial-page-metric-label">snippets and tools</span>
               </div>
-
-              <div className="editorial-chip-row">
-                <span className="editorial-chip">
-                  {allItems.length} snippets
+              <div>
+                <span className="editorial-page-metric-value">{activeCategoryCount}</span>
+                <span className="editorial-page-metric-label">active categories</span>
+              </div>
+              <div>
+                <span className="editorial-page-metric-value">{featuredItems.length}</span>
+                <span className="editorial-page-metric-label">selected items</span>
+              </div>
+              <div>
+                <span className="editorial-page-metric-value">
+                  {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric' }) : 'n/a'}
                 </span>
-                <span className="editorial-chip">
-                  {activeCategoryCount} active categories
-                </span>
-                <span className="editorial-chip">
-                  {featuredItems.length} selected
-                </span>
-                <span className="editorial-chip">
-                  {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric', year: 'numeric' }) : 'No latest item'}
-                </span>
+                <span className="editorial-page-metric-label">latest addition</span>
               </div>
             </div>
+            <div className="editorial-chip-row" style={{ marginTop: '18px' }}>
+              <span className="editorial-chip">copy-ready</span>
+              <span className="editorial-chip">searchable</span>
+              <span className="editorial-chip">gists linked</span>
+            </div>
+        </aside>
+      </section>
 
-            <aside className="editorial-page-aside">
-              <p className="editorial-home-card-label">At a glance</p>
-              <div className="editorial-page-metric-list">
-                <div>
-                  <span className="editorial-page-metric-value">{allItems.length}</span>
-                  <span className="editorial-page-metric-label">snippets and tools</span>
-                </div>
-                <div>
-                  <span className="editorial-page-metric-value">{activeCategoryCount}</span>
-                  <span className="editorial-page-metric-label">active categories</span>
-                </div>
-                <div>
-                  <span className="editorial-page-metric-value">{featuredItems.length}</span>
-                  <span className="editorial-page-metric-label">selected items</span>
-                </div>
-                <div>
-                  <span className="editorial-page-metric-value">
-                    {latestItem ? formatCodeToolsDate(latestItem.date, { month: 'short', day: 'numeric' }) : 'n/a'}
-                  </span>
-                  <span className="editorial-page-metric-label">latest addition</span>
-                </div>
-              </div>
-              <div className="editorial-chip-row" style={{ marginTop: '18px' }}>
-                <span className="editorial-chip">copy-ready</span>
-                <span className="editorial-chip">searchable</span>
-                <span className="editorial-chip">gists linked</span>
-              </div>
-            </aside>
-          </section>
+      <section className="editorial-home-proof-strip" aria-label="Code & Tools summary">
+        <span>code notes</span>
+        <span>/</span>
+        <span>snippets + configs</span>
+        <span>/</span>
+        <span>search + filter</span>
+        <span>/</span>
+        <span>code rendering</span>
+        <span>/</span>
+        <span>mobile-friendly shell</span>
+      </section>
 
-          <section className="editorial-home-proof-strip" aria-label="Code & Tools summary">
-            <span>code notes</span>
-            <span>/</span>
-            <span>snippets + configs</span>
-            <span>/</span>
-            <span>search + filter</span>
-            <span>/</span>
-            <span>code rendering</span>
-            <span>/</span>
-            <span>mobile-friendly shell</span>
-          </section>
+      <section className="editorial-list-section" id="code-tools-index">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Browse</p>
+          <h2 className="editorial-page-section-title">Search by title, tag, or category, then open a card to keep the writeup and code in view.</h2>
+        </div>
 
-          <section className="editorial-list-section" id="code-tools-index">
-            <div className="editorial-list-heading">
-              <p className="editorial-home-section-label">Browse</p>
-              <h2 className="editorial-page-section-title">Search by title, tag, or category, then open a card to keep the writeup and code in view.</h2>
+          <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
+            <div className="search-input-container" role="search" aria-label="Code & Tools search">
+              <input
+                type="text"
+                placeholder="Search snippets, tags, filenames, or descriptions..."
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                className="search-input-large"
+              />
             </div>
 
-            <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
-              <div className="search-input-container" role="search" aria-label="Code & Tools search">
-                <input
-                  type="text"
-                  placeholder="Search snippets, tags, filenames, or descriptions..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  className="search-input-large"
-                />
+            <div style={{ display: 'grid', gap: '14px', marginTop: '18px' }}>
+              <div>
+                <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
+                  Categories
+                </p>
+                <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                  {categories.map((category) => {
+                    const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
+                    const active = selectedCategory === category.id;
+
+                    return (
+                      <button
+                        key={category.id}
+                        type="button"
+                        onClick={() => setSelectedCategory(category.id)}
+                        className="editorial-chip"
+                        style={{
+                          ...categoryButtonStyle,
+                          background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.08)',
+                          borderColor: active ? 'rgba(33, 78, 230, 0.2)' : 'rgba(33, 78, 230, 0.08)',
+                          color: 'var(--editorial-blue)',
+                          fontWeight: active ? 700 : 600,
+                        }}
+                        aria-pressed={active}
+                      >
+                        <span>{category.icon}</span>
+                        <span>{category.label}</span>
+                        <span>({count})</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
-              <div style={{ display: 'grid', gap: '14px', marginTop: '18px' }}>
-                <div>
-                  <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
-                    Categories
-                  </p>
-                  <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                    {categories.map((category) => {
-                      const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
-                      const active = selectedCategory === category.id;
-
-                      return (
-                        <button
-                          key={category.id}
-                          type="button"
-                          onClick={() => setSelectedCategory(category.id)}
-                          className="editorial-chip"
-                          style={{
-                            ...categoryButtonStyle,
-                            background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.08)',
-                            borderColor: active ? 'rgba(33, 78, 230, 0.2)' : 'rgba(33, 78, 230, 0.08)',
-                            color: 'var(--editorial-blue)',
-                            fontWeight: active ? 700 : 600,
-                          }}
-                          aria-pressed={active}
-                        >
-                          <span>{category.icon}</span>
-                          <span>{category.label}</span>
-                          <span>({count})</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div>
-                  <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
-                    View mode
-                  </p>
-                  <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                    <button
-                      type="button"
-                      className="editorial-chip"
-                      style={{
-                        ...controlButtonStyle,
-                        background: viewMode === 'compact' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
-                        color: viewMode === 'compact' ? '#fff' : 'var(--editorial-ink)',
-                        borderColor: 'rgba(16, 34, 54, 0.08)',
-                      }}
-                      onClick={() => setViewMode('compact')}
-                      aria-pressed={viewMode === 'compact'}
-                    >
-                      Compact
-                    </button>
-                    <button
-                      type="button"
-                      className="editorial-chip"
-                      style={{
-                        ...controlButtonStyle,
-                        background: viewMode === 'full' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
-                        color: viewMode === 'full' ? '#fff' : 'var(--editorial-ink)',
-                        borderColor: 'rgba(16, 34, 54, 0.08)',
-                      }}
-                      onClick={() => setViewMode('full')}
-                      aria-pressed={viewMode === 'full'}
-                    >
-                      Full
-                    </button>
-                  </div>
+              <div>
+                <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
+                  View mode
+                </p>
+                <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                  <button
+                    type="button"
+                    className="editorial-chip"
+                    style={{
+                      ...controlButtonStyle,
+                      background: viewMode === 'compact' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
+                      color: viewMode === 'compact' ? '#fff' : 'var(--editorial-ink)',
+                      borderColor: 'rgba(16, 34, 54, 0.08)',
+                    }}
+                    onClick={() => setViewMode('compact')}
+                    aria-pressed={viewMode === 'compact'}
+                  >
+                    Compact
+                  </button>
+                  <button
+                    type="button"
+                    className="editorial-chip"
+                    style={{
+                      ...controlButtonStyle,
+                      background: viewMode === 'full' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
+                      color: viewMode === 'full' ? '#fff' : 'var(--editorial-ink)',
+                      borderColor: 'rgba(16, 34, 54, 0.08)',
+                    }}
+                    onClick={() => setViewMode('full')}
+                    aria-pressed={viewMode === 'full'}
+                  >
+                    Full
+                  </button>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '18px' }}>
-              <div className="editorial-post-summary" style={{ margin: 0 }}>
-                Showing <strong>{filteredItems.length}</strong> of <strong>{allItems.length}</strong> items in <strong>{selectedCategoryLabel}</strong>
-                {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
-              </div>
-              <div className="editorial-post-summary" style={{ margin: 0 }}>
-                Compact mode keeps the index scannable. Full mode keeps the writeup and code visible.
-              </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '18px' }}>
+            <div className="editorial-post-summary" style={{ margin: 0 }}>
+              Showing <strong>{filteredItems.length}</strong> of <strong>{allItems.length}</strong> items in <strong>{selectedCategoryLabel}</strong>
+              {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
             </div>
+            <div className="editorial-post-summary" style={{ margin: 0 }}>
+              Compact mode keeps the index scannable. Full mode keeps the writeup and code visible.
+            </div>
+          </div>
 
-            {featuredItems.length > 0 && (
-              <section style={{ marginBottom: '28px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '12px' }}>
-                  <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.5rem', letterSpacing: '-0.04em' }}>
-                    Featured picks
-                  </h3>
-                  <span className="editorial-post-summary" style={{ margin: 0 }}>Curated snippets with the strongest editorial value.</span>
-                </div>
+          {featuredItems.length > 0 && (
+            <section style={{ marginBottom: '28px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '12px' }}>
+                <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.5rem', letterSpacing: '-0.04em' }}>
+                  Featured picks
+                </h3>
+                <span className="editorial-post-summary" style={{ margin: 0 }}>Curated snippets with the strongest editorial value.</span>
+              </div>
 
-                <div className="editorial-post-grid">
-                  {featuredItems.slice(0, 3).map((item) => (
-                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '14px' }}>
-                      <div className="editorial-post-meta">
-                        <span>{getCodeToolsLanguageLabel(item.language)}</span>
-                        {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
-                        <span>{getCodeToolsItemLineCount(item)} lines</span>
-                      </div>
+              <div className="editorial-post-grid">
+                {featuredItems.slice(0, 3).map((item) => (
+                  <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '14px' }}>
+                    <div className="editorial-post-meta">
+                      <span>{getCodeToolsLanguageLabel(item.language)}</span>
+                      {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
+                      <span>{getCodeToolsItemLineCount(item)} lines</span>
+                    </div>
 
-                      <h2 style={{ fontSize: '1.75rem', marginBottom: 0 }}>
-                        <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
-                      </h2>
+                    <h2 style={{ fontSize: '1.75rem', marginBottom: 0 }}>
+                      <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+                    </h2>
 
-                      <p className="editorial-post-summary">{item.description}</p>
+                    <p className="editorial-post-summary">{item.description}</p>
 
-                      <div className="editorial-chip-row">
-                        <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>Featured</span>
-                        <span className="editorial-chip">{item.filename || 'Inline snippet'}</span>
-                        <span className="editorial-chip">{item.tags.length} tags</span>
-                      </div>
+                    <div className="editorial-chip-row">
+                      <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>Featured</span>
+                      <span className="editorial-chip">{item.filename || 'Inline snippet'}</span>
+                      <span className="editorial-chip">{item.tags.length} tags</span>
+                    </div>
 
-                      <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
-                        Open detail page
-                      </Link>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            )}
+                    <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
+                      Open detail page
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
 
-            {viewMode === 'compact' ? (
-              <div style={{ display: 'grid', gap: '18px' }}>
-                {Object.entries(groupedItems)
-                  .sort(([, itemsA], [, itemsB]) => {
-                    const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
-                    const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
-                    return latestB - latestA;
-                  })
-                  .map(([category, categoryItems]) => (
-                    <section key={category} style={groupCardStyle}>
-                      <h3 className="editorial-page-section-title" style={{ fontSize: '1.55rem', marginBottom: '18px', maxWidth: 'none' }}>
-                        {categories.find((categoryConfig) => categoryConfig.id === category)?.label || category}
-                        <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
-                          ({categoryItems.length})
-                        </span>
-                      </h3>
+          {viewMode === 'compact' ? (
+            <div style={{ display: 'grid', gap: '18px' }}>
+              {Object.entries(groupedItems)
+                .sort(([, itemsA], [, itemsB]) => {
+                  const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
+                  const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
+                  return latestB - latestA;
+                })
+                .map(([category, categoryItems]) => (
+                  <section key={category} style={groupCardStyle}>
+                    <h3 className="editorial-page-section-title" style={{ fontSize: '1.55rem', marginBottom: '18px', maxWidth: 'none' }}>
+                      {categories.find((categoryConfig) => categoryConfig.id === category)?.label || category}
+                      <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                        ({categoryItems.length})
+                      </span>
+                    </h3>
 
-                      <div style={{ display: 'grid', gap: '16px' }}>
-                        {categoryItems.map((item) => {
-                          const isExpanded = expandedItems.has(item.id);
+                    <div style={{ display: 'grid', gap: '16px' }}>
+                      {categoryItems.map((item) => {
+                        const isExpanded = expandedItems.has(item.id);
 
-                          return (
-                            <article key={item.id} style={compactCardStyle}>
-                              <div style={{ display: 'grid', gap: '14px' }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', alignItems: 'start' }}>
-                                  <div style={{ maxWidth: '58ch' }}>
-                                    <div className="editorial-post-meta" style={{ marginBottom: '8px' }}>
-                                      {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
-                                      <span>{getCodeToolsLanguageLabel(item.language)}</span>
-                                      <span>{getCodeToolsItemLineCount(item)} lines</span>
-                                    </div>
-
-                                    <h3 style={{ margin: 0, fontSize: '1.55rem' }}>
-                                      <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
-                                    </h3>
-                                    <p className="editorial-post-summary" style={{ marginTop: '10px' }}>{item.description}</p>
+                        return (
+                          <article key={item.id} style={compactCardStyle}>
+                            <div style={{ display: 'grid', gap: '14px' }}>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', alignItems: 'start' }}>
+                                <div style={{ maxWidth: '58ch' }}>
+                                  <div className="editorial-post-meta" style={{ marginBottom: '8px' }}>
+                                    {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
+                                    <span>{getCodeToolsLanguageLabel(item.language)}</span>
+                                    <span>{getCodeToolsItemLineCount(item)} lines</span>
                                   </div>
 
-                                  {item.featured && (
-                                    <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>
-                                      Featured
-                                    </span>
-                                  )}
+                                  <h3 style={{ margin: 0, fontSize: '1.55rem' }}>
+                                    <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+                                  </h3>
+                                  <p className="editorial-post-summary" style={{ marginTop: '10px' }}>{item.description}</p>
                                 </div>
 
-                                <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                                  {item.tags.slice(0, 4).map((tag) => (
-                                    <span key={tag} className="editorial-chip">
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-
-                                <div className="editorial-home-actions" style={{ marginTop: 0 }}>
-                                  <Link href={getCodeToolsUrl(item.id)} className="editorial-home-button editorial-home-button-secondary">
-                                    Open detail page
-                                  </Link>
-                                  <button
-                                    type="button"
-                                    onClick={() => toggleExpanded(item.id)}
-                                    className="editorial-home-button editorial-home-button-primary"
-                                  >
-                                    {isExpanded ? 'Hide preview' : 'Show preview'}
-                                  </button>
-                                </div>
-
-                                {isExpanded && (
-                                  <>
-                                    {item.writeup && (
-                                      <div className="item-writeup" style={{ background: 'rgba(255,255,255,0.45)', borderRadius: '18px', border: '1px solid rgba(16, 34, 54, 0.08)', padding: '1rem 1.05rem' }}>
-                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
-                                      </div>
-                                    )}
-
-                                    <SnippetCodeBlock
-                                      item={item}
-                                      onCopy={() => copyToClipboard(item.content, item.id)}
-                                      copyLabel={copyStates[item.id] || 'Copy'}
-                                    />
-                                  </>
+                                {item.featured && (
+                                  <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>
+                                    Featured
+                                  </span>
                                 )}
                               </div>
-                            </article>
-                          );
-                        })}
-                      </div>
-                    </section>
-                  ))}
-              </div>
-            ) : (
-              <div className="editorial-post-grid">
-                {filteredItems.map((item) => {
-                  const isExpanded = true;
 
-                  return (
-                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '16px' }}>
-                      <div className="editorial-post-meta">
-                        {item.category && (
-                          <span>{categories.find((category) => category.id === item.category)?.label || item.category}</span>
-                        )}
-                        {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
-                        <span>{getCodeToolsLanguageLabel(item.language)}</span>
-                        <span>{getCodeToolsItemLineCount(item)} lines</span>
-                      </div>
+                              <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                                {item.tags.slice(0, 4).map((tag) => (
+                                  <span key={tag} className="editorial-chip">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
 
-                      <h2 style={{ fontSize: '1.75rem', marginBottom: 0 }}>
-                        <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
-                      </h2>
-                      <p className="editorial-post-summary">{item.description}</p>
+                              <div className="editorial-home-actions" style={{ marginTop: 0 }}>
+                                <Link href={getCodeToolsUrl(item.id)} className="editorial-home-button editorial-home-button-secondary">
+                                  Open detail page
+                                </Link>
+                                <button
+                                  type="button"
+                                  onClick={() => toggleExpanded(item.id)}
+                                  className="editorial-home-button editorial-home-button-primary"
+                                >
+                                  {isExpanded ? 'Hide preview' : 'Show preview'}
+                                </button>
+                              </div>
 
-                      <div className="editorial-chip-row">
-                        {item.featured && (
-                          <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>
-                            Featured
-                          </span>
-                        )}
-                        {item.filename && <span className="editorial-chip">{item.filename}</span>}
-                        {item.tags.slice(0, 4).map((tag) => (
-                          <span key={tag} className="editorial-chip">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
+                              {isExpanded && (
+                                <>
+                                  {item.writeup && (
+                                    <div className="item-writeup" style={{ background: 'rgba(255,255,255,0.45)', borderRadius: '18px', border: '1px solid rgba(16, 34, 54, 0.08)', padding: '1rem 1.05rem' }}>
+                                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                                    </div>
+                                  )}
 
-                      {item.writeup && (
-                        <div className="item-writeup" style={{ background: 'rgba(255,255,255,0.45)', borderRadius: '18px', border: '1px solid rgba(16, 34, 54, 0.08)', padding: '1rem 1.05rem' }}>
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
-                        </div>
+                                  <SnippetCodeBlock
+                                    item={item}
+                                    onCopy={() => copyToClipboard(item.content, item.id)}
+                                    copyLabel={copyStates[item.id] || 'Copy'}
+                                  />
+                                </>
+                              )}
+                            </div>
+                          </article>
+                        );
+                      })}
+                    </div>
+                  </section>
+                ))}
+            </div>
+          ) : (
+            <div className="editorial-post-grid">
+              {filteredItems.map((item) => {
+                const isExpanded = true;
+
+                return (
+                  <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '16px' }}>
+                    <div className="editorial-post-meta">
+                      {item.category && (
+                        <span>{categories.find((category) => category.id === item.category)?.label || item.category}</span>
                       )}
+                      {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
+                      <span>{getCodeToolsLanguageLabel(item.language)}</span>
+                      <span>{getCodeToolsItemLineCount(item)} lines</span>
+                    </div>
 
-                      {isExpanded && (
-                        <SnippetCodeBlock
-                          item={item}
-                          onCopy={() => copyToClipboard(item.content, item.id)}
-                          copyLabel={copyStates[item.id] || 'Copy'}
-                        />
+                    <h2 style={{ fontSize: '1.75rem', marginBottom: 0 }}>
+                      <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+                    </h2>
+                    <p className="editorial-post-summary">{item.description}</p>
+
+                    <div className="editorial-chip-row">
+                      {item.featured && (
+                        <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>
+                          Featured
+                        </span>
                       )}
+                      {item.filename && <span className="editorial-chip">{item.filename}</span>}
+                      {item.tags.slice(0, 4).map((tag) => (
+                        <span key={tag} className="editorial-chip">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
 
-                      <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
-                        Read detail
-                      </Link>
-                    </article>
-                  );
-                })}
-              </div>
-            )}
+                    {item.writeup && (
+                      <div className="item-writeup" style={{ background: 'rgba(255,255,255,0.45)', borderRadius: '18px', border: '1px solid rgba(16, 34, 54, 0.08)', padding: '1rem 1.05rem' }}>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                      </div>
+                    )}
 
-            {filteredItems.length === 0 && (
-              <div className="editorial-page-aside" style={{ marginTop: '20px' }}>
-                <p className="editorial-home-card-label">No matches</p>
-                <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-                  No snippets match the current filter. Try a different category, clear the search, or switch to full view to browse the whole collection.
-                </p>
-              </div>
-            )}
-          </section>
-        </main>
-      </div>
-    </div>
+                    {isExpanded && (
+                      <SnippetCodeBlock
+                        item={item}
+                        onCopy={() => copyToClipboard(item.content, item.id)}
+                        copyLabel={copyStates[item.id] || 'Copy'}
+                      />
+                    )}
+
+                    <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
+                      Read detail
+                    </Link>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+
+          {filteredItems.length === 0 && (
+            <div className="editorial-page-aside" style={{ marginTop: '20px' }}>
+              <p className="editorial-home-card-label">No matches</p>
+              <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
+                No snippets match the current filter. Try a different category, clear the search, or switch to full view to browse the whole collection.
+              </p>
+            </div>
+          )}
+      </section>
+    </EditorialPageFrame>
   );
 }

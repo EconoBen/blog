@@ -14,6 +14,7 @@ interface ClientLayoutProps {
 const editorialShellRoutes = [
   '/',
   '/book',
+  '/code-ai',
   '/posts',
   '/publications',
   '/talks',

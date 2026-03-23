@@ -7,6 +7,7 @@ const navItems = [
   { href: '/talks', label: 'Talks' },
   { href: '/publications', label: 'Publications' },
   { href: '/book', label: 'Book' },
+  { href: '/code-ai', label: 'Code & Tools' },
   { href: '/archive', label: 'Archive' },
   { href: '/search', label: 'Search' },
   { href: '/about', label: 'About' },
