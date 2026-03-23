@@ -90,10 +90,19 @@ Post-completion note (March 22, 2026): the first “published server” state wa
 
 ## 12. Parallel Stitch Integration Pass
 
-- [ ] 12.1 Treat `feat/site-practical-review-preview` as the integration base branch, keep `feat/site-stitch-html-preview` as the design-reference branch, and do not merge either branch into `main`
+- [x] 12.1 Treat `feat/site-practical-review-preview` as the integration base branch, keep `feat/site-stitch-html-preview` as the design-reference branch, and do not merge either branch into `main`
 - [ ] 12.2 Launch a shared-shell slice in its own worktree/PR to carry the accepted Stitch shell, global tokens, and homepage direction into the real site implementation
 - [ ] 12.3 Launch a reading-routes slice in its own worktree/PR to integrate the accepted Stitch direction into `/posts` and `/posts/[slug]` using real site content and behaviors
 - [ ] 12.4 Launch a structured-routes slice in its own worktree/PR to integrate the accepted Stitch direction into `/talks`, `/publications`, and `/about` while preserving practical-language and real-data constraints
 - [ ] 12.5 Launch a discovery-and-tools slice in its own worktree/PR to integrate the accepted Stitch direction into `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/code-ai`, `/code-ai/[id]`, and `/book`
-- [ ] 12.6 Use as many background agents as practical, but keep every worker on a disjoint write set so parallel work does not collide
-- [ ] 12.7 Open draft PRs for every slice and hold all merges until a human review approves the combined direction
+- [x] 12.6 Use as many background agents as practical, but keep every worker on a disjoint write set so parallel work does not collide
+- [x] 12.7 Open draft PRs for every slice and hold all merges until a human review approves the combined direction
+- [ ] 12.8 Run a Playwright-driven review pass against the live local Stitch preview and the active integration slices to identify concrete shell, mobile, and route-coherence gaps before the next implementation wave
+- [ ] 12.9 Launch a second integration wave in separate worktrees/PRs for the routes still outside the first draft stack: `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, and `/code-ai/[id]`
+- [ ] 12.10 Reconcile shared-shell drift revealed by review, including editorial-shell route coverage, nav completeness, duplicate shell chrome, and preview-only icon/font regressions that obscure the intended design
+
+Execution note (March 22, 2026): the first four draft PRs are real progress, but they are not the whole site. Playwright review of the current local Stitch preview and source comparison against the active PR stack showed that:
+- the shared shell still needs reconciliation work (`EditorialPageFrame.tsx` overlap between shell and discovery slices)
+- `/code-ai` still shows a double-shell state in the literal preview because it is not treated as an editorial-shell route there
+- the first-wave PR stack still does not cover `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, or `/code-ai/[id]`
+- the next implementation wave must therefore extend the PR stack instead of pretending the first wave is sufficient

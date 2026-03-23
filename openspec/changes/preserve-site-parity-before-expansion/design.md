@@ -2,6 +2,8 @@
 
 > Status note (March 22, 2026): the literal Stitch-to-TSX preview pass now exists on the isolated preview branch `feat/site-stitch-html-preview` and is reviewable locally on `http://localhost:3007`. That branch intentionally uses exported sample copy and placeholder states where needed so the desktop layout family can be judged in-browser without treating the exported content as production truth. A follow-up render fix was required after the first pass: the preview initially served with missing utility styling because `app/globals.css` did not import Tailwind, and the old `body.shell-editorial` rule still forced a dark shell background. The current preview state includes both fixes and has been visually rechecked on the main top-level route set.
 
+> Status note (later on March 22, 2026): the first parallel integration wave is now open as draft PRs, but Playwright review and source comparison show it is still incomplete. The active draft stack covers the shared shell/home direction, posts, talks/publications/about, and the code index, but it does not yet carry the Stitch direction into `/archive`, `/archives/[month]`, `/search`, `/tags`, `/tags/[tag]`, `/book`, or `/code-ai/[id]`. The review also surfaced concrete shell defects in the preview/reference branch that should inform the real integration work: `/code-ai` still presents a double-shell state when it falls outside editorial-shell routing, the shared top bar can degrade into duplicate search text when icon/font wiring is brittle, and the floating dark-mode affordance still leaks into pages that are meant to read as standalone editorial destinations.
+
 The `blog` repo is the implementation target for the public site at `econoben.dev`. It is a Next.js App Router application with content and behavior spread across route components in `app/`, config-driven sections in `app/config/`, markdown posts in `src/posts/`, and service logic in `app/services/`.
 
 The current working tree already contains exploratory editorial redesign work, including a new shell and a `/book` route. That work should continue, but it must not cause silent loss of content or features from the existing site. The canonical baseline is still the current site as currently implemented and shipped: its routes, wording, content corpus, metadata, feeds, and user-visible behaviors.
@@ -43,6 +45,8 @@ The latest execution instruction now goes one step further: begin the real integ
 - each implementation slice gets its own worktree and PR
 - slices must have disjoint write ownership
 - no branch merges without explicit review approval
+
+The newest constraint from live review is that the route family has to be treated in two waves, not one. The first PR wave established direction, but the remaining discovery/book surfaces are too visible to defer indefinitely. If those routes keep their old structure while the homepage/posts/talks family adopts the Stitch shell, the site will continue to feel split between “new editorial surface” and “old utility site.”
 
 ## Goals / Non-Goals
 
@@ -154,6 +158,18 @@ Alternatives considered:
 - Implement sequentially in one long-running branch: rejected because the user explicitly wants parallel execution and reviewable PR slices.
 - Let multiple workers edit the same shared files freely: rejected because it creates preventable merge conflicts and destroys the value of parallel worktrees.
 
+### 12. Use Playwright review to drive the second integration wave
+Now that the literal preview is reviewable in-browser, the next work should be driven by rendered behavior rather than by abstract similarity to the exported HTML. That means the second wave should specifically target the gaps made obvious by review:
+
+- discovery-family routes that still drop back to the old site structure
+- book/code-detail routes that remain outside the visible Stitch direction
+- shell reconciliation issues such as missing editorial-shell route coverage, duplicated chrome, brittle icon handling, and mobile/utility affordances that leak into the editorial surface
+
+Alternatives considered:
+- Keep extending only the already-open first-wave PRs: rejected because that would broaden their ownership, make review harder, and erode the parallel worktree model.
+- Ignore preview-only defects until after production integration: rejected because the preview is the clearest available expression of the intended experience, so broken shell behavior there is useful evidence, not noise.
+- Treat the first four PRs as “good enough” and wait for review: rejected because the uncovered route families are still directly linked from the shell and will make the site feel unfinished immediately.
+
 ## Architecture
 
 ```mermaid
@@ -197,6 +213,8 @@ flowchart TD
 11. After that preview exists, decide route by route what should stay literal, what should be replaced with real site data, and what should be discarded.
 12. Launch a parallel integration wave from `feat/site-practical-review-preview`, using the literal preview branch as reference and separate worktrees for shell, reading, structured, and discovery/tools slices.
 13. Open draft PRs for those slices, review them together, and keep all merges blocked until the human approves the combined direction.
+14. Run a Playwright review pass against the live local preview and active slice outputs, then use that evidence to launch a second-wave set of worktrees for the still-uncovered discovery/book routes plus any shared-shell reconciliation fixes.
+15. Keep those second-wave slices in draft PRs as well, so the human can review the whole direction before any merge toward `main`.
 
 ## Execution Constraints
 
