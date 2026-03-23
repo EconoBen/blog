@@ -97,3 +97,13 @@ Post-completion note (March 22, 2026): the first “published server” state wa
 - [ ] 12.5 Launch a discovery-and-tools slice in its own worktree/PR to integrate the accepted Stitch direction into `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/code-ai`, `/code-ai/[id]`, and `/book`
 - [ ] 12.6 Use as many background agents as practical, but keep every worker on a disjoint write set so parallel work does not collide
 - [ ] 12.7 Open draft PRs for every slice and hold all merges until a human review approves the combined direction
+
+Progress note (March 22, 2026): the discovery half of 12.5 is now active on `feat/site-stitch-polish-discovery`, branched from `feat/site-stitch-review-stack` in its own worktree and reviewed locally on `http://127.0.0.1:3017`.
+- Tracking was split into Beads `blog-d6l`, `blog-6mk`, and `blog-txg`, with GitHub issues `#47`, `#48`, and `#49`.
+- Two background workers were used with disjoint write sets:
+  - archive/month ownership: `app/archive/page.tsx`, `app/archives/[month]/page.tsx`
+  - search/tags ownership: `app/search/page.tsx`, `app/tags/page.tsx`, `app/tags/[tag]/page.tsx`
+- The implemented polish pass flattened the archive family into a more practical ledger, simplified the month page away from “featured” framing, replaced the tag index’s brag cards with quieter discovery sections, simplified the tag detail sidebar, and unified the search page with calmer grouped results and route-side navigation.
+- `npm run build` passed on the branch after the combined pass. A local Playwright sweep on desktop and mobile rechecked `/archive`, `/archives/2026-01`, `/tags`, `/tags/AI`, and `/search?q=memory`.
+- Dev-server note: running `npm run build` in the same worktree can still corrupt the live Next dev state, so the local review server needed a restart on `3017` after the build before browser validation stabilized again.
+- Remaining scope before 12.5 can close: `/code-ai`, `/code-ai/[id]`, `/book`, plus the discovery slice draft PR.
