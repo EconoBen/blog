@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
 import {
   formatCodeToolsDate,
@@ -17,18 +18,6 @@ import {
   getCodeToolsUrl,
   normalizeCodeToolsLanguage,
 } from '../utils/codeTools';
-
-const editorialNavItems = [
-  { href: '/', label: 'Home' },
-  { href: '/posts', label: 'Posts' },
-  { href: '/talks', label: 'Talks' },
-  { href: '/publications', label: 'Publications' },
-  { href: '/book', label: 'Book' },
-  { href: '/archive', label: 'Archive' },
-  { href: '/search', label: 'Search' },
-  { href: '/about', label: 'About' },
-  { href: '/code-ai', label: 'Code & Tools' },
-];
 
 const codeBlockStyle = {
   background: 'rgba(246, 242, 233, 0.94)',
@@ -106,14 +95,6 @@ const compactCardStyle = {
   boxShadow: '0 16px 32px rgba(24, 36, 49, 0.08)',
   padding: '22px 24px 24px',
 } as const;
-
-function isActivePath(currentPath: string, href: string) {
-  if (href === '/') {
-    return currentPath === href;
-  }
-
-  return currentPath === href || currentPath.startsWith(`${href}/`);
-}
 
 function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onCopy: () => void; copyLabel: string }) {
   return (
@@ -225,33 +206,8 @@ export default function CodeAIPage() {
   };
 
   return (
-    <div className="editorial-home-page">
-      <div className="editorial-home-shell">
-        <header className="editorial-home-topbar">
-          <div className="editorial-home-brand">
-            <Link href="/" className="editorial-home-brand-link" aria-label="Go to home">
-              <p className="editorial-home-brand-name">BEN LABASCHIN</p>
-            </Link>
-            <p className="editorial-home-brand-note">AI systems, memory, and editorial writing</p>
-          </div>
-          <nav className="editorial-home-nav" aria-label="Primary">
-            {editorialNavItems.map((item) => {
-              const active = isActivePath('/code-ai', item.href);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`editorial-home-nav-link ${active ? 'is-active' : ''}`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
-        </header>
-
+    <EditorialPageFrame currentPath="/code-ai">
+      <div className="editorial-home-page">
         <main className="editorial-home-content">
           <section className="editorial-page-hero">
             <div className="editorial-page-hero-copy">
@@ -625,6 +581,6 @@ export default function CodeAIPage() {
           </section>
         </main>
       </div>
-    </div>
+    </EditorialPageFrame>
   );
 }
