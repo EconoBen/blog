@@ -1,5 +1,7 @@
 ## Context
 
+> Status note (March 24, 2026, stacked review follow-up of `/code-ai` pass 3): the `/code-ai` refinement was restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-codeai-pass3/`. That pass confirms the route is now structurally better than the earlier morning review: the first real code entry still appears in the opening viewport at `539px` on desktop and `596px` on mobile, horizontal overflow remains `0px`, and the control section now reads as a compressed filter bar rather than a dashboard panel. The remaining debt is still qualitative, but it is narrower now: the route needs more editorial calm and less archive-control weight, not another above-the-fold rescue.
+
 > Status note (March 24, 2026, stacked review follow-up of `/posts` and `/code-ai`): the refreshed route slices were restacked on `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-posts-codeai-pass2/`. The main above-the-fold failure is no longer the same as the morning review. `/posts` now surfaces its first real post module at `475px` on desktop and `645px` on mobile, and `/code-ai` now surfaces its first real entry at `558px` on desktop and `697px` on mobile, with `0px` horizontal overflow on both route captures. That means the current blocker is no longer "content starts too low." The remaining debt is more qualitative: `/posts` still needs stronger browse composition and less card-ledger sameness, and `/code-ai` still needs a calmer archive hierarchy with less residual dashboard feel.
 
 > Status note (March 24, 2026, stacked review of `/posts` and `/code-ai`): the first route-specific implementation slices were stacked on `feat/site-current-review` and reviewed in production mode at `http://127.0.0.1:3018` with fresh Playwright captures under `.playwright-discovery/stacked-review-20260324-posts-codeai/`. That review made the remaining two blockers more concrete. `/posts` still spends too much of the first viewport on the title block, topic chips, archive metrics rail, and a second oversized “start here” billboard before a real post card appears. `/code-ai` still spends too much of the first viewport on route explainer copy, category chips, mode toggles, and browse framing before actual entries appear. The next pass should treat both routes as above-the-fold content-order problems, not just copy or polish problems.
@@ -235,6 +237,13 @@ The next design passes should therefore optimize for these route-level outcomes:
 - `/posts` should feel like a richer browse page, not just a corrected ledger
 - `/code-ai` should feel like an editorial archive, not a softened tool dashboard
 - future review notes should distinguish structural fixes from remaining qualitative route weakness
+
+### 16. `/code-ai` is calmer now, but it still needs final editorial polish
+The latest restacked production review of `/code-ai` on March 24 confirms the route no longer reads like a dashboard first. The first real entry stays in view, the filter block is compressed, and the page order is now closer to the strongest editorial routes.
+
+- The filter bar is now compact enough to read as a tool for the archive rather than the page's main subject.
+- The featured entries remain high in the viewport while the controls sit lower and flatter.
+- The remaining work is final judgment on hierarchy, tone, and scan rhythm, not another structural rescue.
 
 Alternatives considered:
 - Keep layering more copy and section labels into the current openings: rejected because the stacked review shows content already starts too low.
