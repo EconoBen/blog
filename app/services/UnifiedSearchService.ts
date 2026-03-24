@@ -2,7 +2,7 @@ import { postService } from '../../services/PostService';
 import { getCodeToolsItems, getCodeToolsUrl } from '../utils/codeTools';
 
 export interface SearchResult {
-  type: 'post' | 'talk' | 'publication' | 'code-ai';
+  type: 'tag' | 'post' | 'talk' | 'publication' | 'code-ai';
   title: string;
   description?: string;
   url: string;
@@ -10,6 +10,7 @@ export interface SearchResult {
   tags?: string[];
   category?: string;
   authors?: string[];
+  relatedCount?: number;
 }
 
 interface Talk {
