@@ -1,5 +1,7 @@
 ## Context
 
+> Status note (March 24, 2026, stacked review of `/posts` and `/code-ai`): the first route-specific implementation slices were stacked on `feat/site-current-review` and reviewed in production mode at `http://127.0.0.1:3018` with fresh Playwright captures under `.playwright-discovery/stacked-review-20260324-posts-codeai/`. That review made the remaining two blockers more concrete. `/posts` still spends too much of the first viewport on the title block, topic chips, archive metrics rail, and a second oversized “start here” billboard before a real post card appears. `/code-ai` still spends too much of the first viewport on route explainer copy, category chips, mode toggles, and browse framing before actual entries appear. The next pass should treat both routes as above-the-fold content-order problems, not just copy or polish problems.
+
 > Status note (March 23, 2026, direct user review correction): the earlier “close” assessment on several tabs was too optimistic. Direct human review overrode it for four routes: `/posts` still reads as an underpowered yearly ledger, `/about` has dropped too much of the baseline CV detail, `/talks` still spends too much of the top fold on clutter, and `/code-ai` still feels rough and amateurish next to the stronger editorial tabs. Those are now first-class blockers, tracked explicitly as `blog-mkj.2` / `#69`, `blog-qxn.1` / `#67`, `blog-r0j.1` / `#68`, and `blog-vt2.1` / `#66`.
 
 > Status note (March 23, 2026, wave-7 structured-content pass): the next weakest family after the home/code-tools cleanup was `talks` and `publications`, so that pair received another focused production pass. `/talks` now opens with less duplicated helper chrome, a softer browse rail, and list mode as the default archive view so the page reads as an editorial archive before it reads as a control board. `/publications` now uses a quieter archive-map block in the hero instead of a sticky side rail, and the featured publication card no longer dominates the first fold as heavily. Fresh production screenshots under `.playwright-discovery/tab-audit-20260323-wave7-final/` show both routes runtime-clean and much closer to the stronger pages; remaining work is increasingly whole-site judgment rather than obvious per-route breakdowns.
@@ -207,6 +209,22 @@ For the March 23 review pass, this means:
 Alternatives considered:
 - Keep calling these routes “close” because screenshot audits looked better: rejected because it conflicts with direct human review.
 - Roll the complaints back into the older family beads only: rejected because the issues are now specific enough to deserve their own blockers.
+
+### 14. `/posts` and `/code-ai` now fail mainly on content order, not on route existence
+The March 24 stacked review clarifies that the main remaining problem on both tabs is the same structural failure: real content starts too low.
+
+- On `/posts`, the first viewport is still dominated by hero text, topic chips, actions, a right-rail stats card, and then a second large intro statement before the first actual post module appears.
+- On `/code-ai`, the first viewport is still dominated by hero copy, search framing, category chips, and mode controls before any actual entry appears.
+
+The next design pass should therefore optimize for these route-level outcomes:
+
+- the first real post or code entry should appear meaningfully higher on desktop
+- stats/control systems should move down or compress sharply
+- the route should explain itself less and show its content sooner
+
+Alternatives considered:
+- Keep layering more copy and section labels into the current openings: rejected because the stacked review shows content already starts too low.
+- Solve these routes only with typography and spacing tweaks: rejected because the issue is ordering and allocation of the first viewport, not just visual styling.
 
 ## Architecture
 
