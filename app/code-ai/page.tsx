@@ -163,11 +163,15 @@ export default function CodeAIPage() {
   const filteredItems = allItems.filter((item: WorkshopItem) => {
     const query = searchQuery.toLowerCase();
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+    const categoryLabel = categories.find((category) => category.id === item.category)?.label ?? item.category;
     const matchesSearch =
       query === '' ||
       item.title.toLowerCase().includes(query) ||
       item.description.toLowerCase().includes(query) ||
-      item.tags.some((tag: string) => tag.toLowerCase().includes(query));
+      item.tags.some((tag: string) => tag.toLowerCase().includes(query)) ||
+      item.filename?.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query) ||
+      categoryLabel.toLowerCase().includes(query);
 
     return matchesCategory && matchesSearch;
   });
