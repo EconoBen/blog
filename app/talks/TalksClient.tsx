@@ -465,7 +465,9 @@ export default function TalksClient() {
 
       {filteredTalks.length === 0 ? (
         <div className="rounded-2xl bg-surface-container-low p-10 text-center">
-          <p className="font-headline text-2xl font-bold text-on-surface">No talks found for that topic.</p>
+          <p className="font-headline text-2xl font-bold text-on-surface">
+            {activeFilter === 'all' ? 'No talks available yet.' : 'No talks found for that topic.'}
+          </p>
         </div>
       ) : archiveTalks.length === 0 ? (
         <div className="rounded-2xl bg-surface-container-low p-8">
