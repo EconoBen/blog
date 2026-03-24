@@ -91,6 +91,7 @@ const buildYearSummary = (yearPosts: Posts, yearTopics: TagStat[]) => {
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
   const latestPost = posts[0];
+  const recentPosts = posts.slice(1, 4);
   const tagStats = countTags(posts);
   const topTags = tagStats.slice(0, 4);
   const postsByYear = groupPostsByYear(posts);
@@ -145,35 +146,90 @@ export default async function PostsPage() {
 
       <section className="editorial-list-section">
         <p className="editorial-home-section-label">Start here</p>
-        {latestPost ? (
-          <article className="editorial-home-card editorial-home-card-featured">
-            <p className="editorial-home-card-label">Latest post</p>
-            <h3>
-              <Link href={`/posts/${latestPost.slug}`}>{latestPost.title}</Link>
-            </h3>
-            {latestPost.summary ? <p>{latestPost.summary}</p> : null}
-            <div className="editorial-post-meta">
-              <span>{shortDateFormatter.format(latestPost.date)}</span>
-              <span>{latestPost.readingTime ? `${latestPost.readingTime} min read` : 'Long-form post'}</span>
-              <span>{latestPost.tags.length} topic{latestPost.tags.length === 1 ? '' : 's'}</span>
-            </div>
-            <div className="editorial-chip-row">
-              {latestPost.tags.slice(0, 4).map((tag) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                  {tag}
+        <div className="editorial-two-column" style={{ alignItems: 'start', gap: '1rem' }}>
+          {latestPost ? (
+            <article
+              className="editorial-home-card editorial-home-card-featured"
+              style={{ gridColumn: 'auto', display: 'grid', gap: '1rem', alignContent: 'start' }}
+            >
+              <div>
+                <p className="editorial-home-card-label">Latest post</p>
+                <h3>
+                  <Link href={`/posts/${latestPost.slug}`}>{latestPost.title}</Link>
+                </h3>
+              </div>
+              {latestPost.summary ? <p>{latestPost.summary}</p> : null}
+              <div className="editorial-post-meta">
+                <span>{shortDateFormatter.format(latestPost.date)}</span>
+                <span>{latestPost.readingTime ? `${latestPost.readingTime} min read` : 'Long-form post'}</span>
+                <span>{latestPost.tags.length} topic{latestPost.tags.length === 1 ? '' : 's'}</span>
+              </div>
+              <div className="editorial-chip-row">
+                {latestPost.tags.slice(0, 4).map((tag) => (
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+              <div className="editorial-link-row">
+                <Link href={`/posts/${latestPost.slug}`} className="editorial-home-card-link">
+                  Open the latest post
                 </Link>
-              ))}
-            </div>
-            <div className="editorial-link-row">
-              <Link href={`/posts/${latestPost.slug}`} className="editorial-home-card-link">
-                Open the latest post
-              </Link>
-              <Link href={archiveLink} className="editorial-home-card-link">
-                Open the archive
-              </Link>
-            </div>
-          </article>
-        ) : null}
+                <Link href={archiveLink} className="editorial-home-card-link">
+                  Open the archive
+                </Link>
+              </div>
+            </article>
+          ) : null}
+
+          <div style={{ display: 'grid', gap: '1rem' }}>
+            {recentPosts.length > 0 ? (
+              <article className="editorial-home-card" style={{ minHeight: 0, display: 'grid', gap: '0.9rem' }}>
+                <div>
+                  <p className="editorial-home-card-label">Also recent</p>
+                  <h3 style={{ fontSize: '1.45rem', lineHeight: 1.05, maxWidth: '16ch', marginBottom: 0 }}>
+                    Keep moving through the newest writing.
+                  </h3>
+                </div>
+                <ul className="posts-list">
+                  {recentPosts.map((post) => (
+                    <li key={post.slug} className="archive-post">
+                      <Link href={`/posts/${post.slug}`}>
+                        <time className="archive-post-date">
+                          {shortDateFormatter.format(post.date)}
+                        </time>
+                        <span className="archive-post-title">{post.title}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ) : null}
+
+            <article className="editorial-home-card" style={{ minHeight: 0, display: 'grid', gap: '0.9rem' }}>
+              <div>
+                <p className="editorial-home-card-label">Enter by topic</p>
+                <h3 style={{ fontSize: '1.45rem', lineHeight: 1.05, maxWidth: '15ch', marginBottom: 0 }}>
+                  Pick a recurring thread and follow it across the archive.
+                </h3>
+              </div>
+              <div className="editorial-chip-row">
+                {topTags.map(({ tag, count }) => (
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                    {tag} <span>({count})</span>
+                  </Link>
+                ))}
+              </div>
+              <div className="editorial-link-row">
+                {topTags.slice(0, 2).filter(({ samplePosts }) => samplePosts.length > 0).map(({ tag, samplePosts }) => (
+                  <Link key={tag} href={`/posts/${samplePosts[0].slug}`} className="editorial-post-link">
+                    {samplePosts[0].title}
+                  </Link>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
       </section>
 
       <section className="editorial-list-section" id="posts-by-year">
