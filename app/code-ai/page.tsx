@@ -159,20 +159,25 @@ export default function CodeAIPage() {
   const allItems = getCodeToolsItems();
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
   const featuredItems = getCodeToolsFeaturedItems(allItems);
+  const categoryLabelById = Object.fromEntries(categories.map((category) => [category.id, category.label]));
 
   const filteredItems = allItems.filter((item: WorkshopItem) => {
     const query = searchQuery.toLowerCase();
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
+    const categoryLabel = categoryLabelById[item.category] ?? item.category;
     const matchesSearch =
       query === '' ||
       item.title.toLowerCase().includes(query) ||
       item.description.toLowerCase().includes(query) ||
-      item.tags.some((tag: string) => tag.toLowerCase().includes(query));
+      item.tags.some((tag: string) => tag.toLowerCase().includes(query)) ||
+      item.filename?.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query) ||
+      categoryLabel.toLowerCase().includes(query);
 
     return matchesCategory && matchesSearch;
   });
 
-  const selectedCategoryLabel = categories.find((category) => category.id === selectedCategory)?.label ?? 'All';
+  const selectedCategoryLabel = categoryLabelById[selectedCategory] ?? 'All';
 
   const groupedItems = filteredItems.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -208,18 +213,19 @@ export default function CodeAIPage() {
           <section
             className="editorial-page-hero"
             style={{
-              gap: 'clamp(1rem, 2.5vw, 2rem)',
+              gap: 'clamp(1rem, 2.5vw, 1.5rem)',
               gridTemplateColumns: 'minmax(0, 1fr)',
             }}
           >
-            <div className="editorial-page-hero-copy">
+            <div className="editorial-page-hero-copy" style={{ maxWidth: '64rem' }}>
               <p className="editorial-home-kicker">Editorial archive</p>
               <h1 className="editorial-page-title" style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)' }}>
                 {title}
               </h1>
               <p className="editorial-page-copy">{subtitle}</p>
-              <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '48ch' }}>
-                Browse snippets, configs, and tools as an archive of notes, references, and working code rather than a dashboard of metrics.
+              <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '54ch' }}>
+                A quiet index of notes, snippets, and working code. Search and categories live below,
+                and each entry opens into the writeup beside the source.
               </p>
 
               <div className="editorial-home-actions" style={{ marginTop: '1rem' }}>
@@ -230,30 +236,13 @@ export default function CodeAIPage() {
                   Search the archive
                 </Link>
               </div>
-
-              <div
-                className="editorial-page-aside"
-                style={{
-                  marginTop: '1rem',
-                  maxWidth: '34rem',
-                  padding: 'clamp(0.8rem, 2vw, 1.2rem)',
-                  background: 'rgba(255, 255, 255, 0.46)',
-                  boxShadow: 'none',
-                }}
-              >
-                <p className="editorial-home-card-label">Archive note</p>
-                <p className="editorial-post-summary" style={{ marginTop: '10px' }}>
-                  Entries are arranged like reading notes: title first, then context, then source and
-                  code, so the page opens as an archive instead of a control panel.
-                </p>
-              </div>
             </div>
           </section>
 
           <section className="editorial-list-section" id="code-tools-index">
             <div className="editorial-list-heading">
               <p className="editorial-home-section-label">Browse</p>
-              <h2 className="editorial-page-section-title">Search by title, tag, or category, then open an entry to keep the writeup and code together.</h2>
+              <h2 className="editorial-page-section-title">Search the archive by title, tag, filename, or category, then open an entry to read the notes and source together.</h2>
             </div>
 
             <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
@@ -347,9 +336,6 @@ export default function CodeAIPage() {
                 Showing <strong>{filteredItems.length}</strong> of <strong>{allItems.length}</strong> items in <strong>{selectedCategoryLabel}</strong>
                 {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
               </div>
-              <div className="editorial-post-summary" style={{ margin: 0 }}>
-                Archive mode keeps the index scannable. Reader mode keeps the writeup and code visible.
-              </div>
             </div>
 
             {featuredItems.length > 0 && (
@@ -402,7 +388,7 @@ export default function CodeAIPage() {
                   .map(([category, categoryItems]) => (
                     <section key={category} style={groupCardStyle}>
                       <h3 className="editorial-page-section-title" style={{ fontSize: '1.55rem', marginBottom: '18px', maxWidth: 'none' }}>
-                        {categories.find((categoryConfig) => categoryConfig.id === category)?.label || category}
+                        {categoryLabelById[category] || category}
                         <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                           ({categoryItems.length})
                         </span>
@@ -487,7 +473,7 @@ export default function CodeAIPage() {
                     <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '16px' }}>
                       <div className="editorial-post-meta">
                         {item.category && (
-                          <span>{categories.find((category) => category.id === item.category)?.label || item.category}</span>
+                          <span>{categoryLabelById[item.category] || item.category}</span>
                         )}
                         {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
                         <span>{getCodeToolsLanguageLabel(item.language)}</span>
