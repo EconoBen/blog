@@ -138,8 +138,8 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
               {item.description}
             </p>
             <p className="mt-5 max-w-3xl font-body text-sm leading-relaxed text-[#555f70] sm:text-lg">
-              The detail page keeps the writeup and source together, so the route behaves like the
-              rest of the editorial site instead of falling back to a disconnected tools surface.
+              Each entry keeps the writeup and source together, so the page reads like a clipped
+              page from the archive rather than a detached utility screen.
             </p>
           </div>
 
@@ -219,11 +219,10 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
               </div>
             </SidebarBlock>
 
-            <SidebarBlock title="Collection note">
+            <SidebarBlock title="Archive note">
               <p className="font-body text-sm leading-relaxed text-[#434655]">
-                This snippet stays in the same catalog as the rest of the workshop collection, so
-                browsing remains stable even as the presentation gets closer to the accepted Stitch
-                direction.
+                The archive keeps the narrative, notes, and source in one place, which makes each
+                item feel like a preserved page instead of a separate tool.
               </p>
             </SidebarBlock>
           </aside>
