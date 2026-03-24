@@ -160,6 +160,9 @@ export default function CodeAIPage() {
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
   const featuredItems = getCodeToolsFeaturedItems(allItems);
   const categoryLabelById = Object.fromEntries(categories.map((category) => [category.id, category.label]));
+  const visibleCategories = categories.filter((category) => (
+    category.id === 'all' || (categoryCounts[category.id] ?? 0) > 0
+  ));
 
   const filteredItems = allItems.filter((item: WorkshopItem) => {
     const query = searchQuery.toLowerCase();
@@ -223,132 +226,33 @@ export default function CodeAIPage() {
                 {title}
               </h1>
               <p className="editorial-page-copy">{subtitle}</p>
-              <p className="editorial-post-summary" style={{ marginTop: '14px', maxWidth: '54ch' }}>
-                A quiet index of notes, snippets, and working code. Search and categories live below,
-                and each entry opens into the writeup beside the source.
-              </p>
 
               <div className="editorial-home-actions" style={{ marginTop: '1rem' }}>
                 <Link href="#code-tools-index" className="editorial-home-button editorial-home-button-primary">
                   Browse the index
                 </Link>
                 <Link href="/search" className="editorial-home-button editorial-home-button-secondary">
-                  Search the archive
+                  Search site
                 </Link>
-              </div>
-            </div>
-          </section>
-
-          <section className="editorial-list-section" id="code-tools-index">
-            <div className="editorial-list-heading">
-              <p className="editorial-home-section-label">Browse</p>
-              <h2 className="editorial-page-section-title">Search the archive by title, tag, filename, or category, then open an entry to read the notes and source together.</h2>
-            </div>
-
-            <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
-              <div className="search-input-container" role="search" aria-label="Code & Tools search">
-                <input
-                  type="text"
-                  placeholder="Search entries, tags, filenames, or descriptions..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  className="search-input-large"
-                />
-              </div>
-
-              <div style={{ display: 'grid', gap: '14px', marginTop: '18px' }}>
-                <div>
-                  <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
-                    Categories
-                  </p>
-                  <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                    {categories.map((category) => {
-                      const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
-                      const active = selectedCategory === category.id;
-
-                      return (
-                        <button
-                          key={category.id}
-                          type="button"
-                          onClick={() => setSelectedCategory(category.id)}
-                          className="editorial-chip"
-                          style={{
-                            ...categoryButtonStyle,
-                            padding: '0.56rem 0.8rem',
-                            background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.08)',
-                            borderColor: active ? 'rgba(33, 78, 230, 0.2)' : 'rgba(33, 78, 230, 0.08)',
-                            color: 'var(--editorial-blue)',
-                            fontWeight: active ? 700 : 600,
-                          }}
-                          aria-pressed={active}
-                        >
-                          <span>{category.icon}</span>
-                          <span>{category.label}</span>
-                          <span>({count})</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div>
-                  <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
-                    Browse mode
-                  </p>
-                  <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                    <button
-                      type="button"
-                      className="editorial-chip"
-                      style={{
-                        ...controlButtonStyle,
-                        padding: '0.56rem 0.8rem',
-                        background: viewMode === 'compact' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
-                        color: viewMode === 'compact' ? '#fff' : 'var(--editorial-ink)',
-                        borderColor: 'rgba(16, 34, 54, 0.08)',
-                      }}
-                      onClick={() => setViewMode('compact')}
-                      aria-pressed={viewMode === 'compact'}
-                    >
-                      Archive
-                    </button>
-                    <button
-                      type="button"
-                      className="editorial-chip"
-                      style={{
-                        ...controlButtonStyle,
-                        padding: '0.56rem 0.8rem',
-                        background: viewMode === 'full' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
-                        color: viewMode === 'full' ? '#fff' : 'var(--editorial-ink)',
-                        borderColor: 'rgba(16, 34, 54, 0.08)',
-                      }}
-                      onClick={() => setViewMode('full')}
-                      aria-pressed={viewMode === 'full'}
-                    >
-                      Reader
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '18px' }}>
-              <div className="editorial-post-summary" style={{ margin: 0 }}>
-                Showing <strong>{filteredItems.length}</strong> of <strong>{allItems.length}</strong> items in <strong>{selectedCategoryLabel}</strong>
-                {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
               </div>
             </div>
 
             {featuredItems.length > 0 && (
-              <section style={{ marginBottom: '28px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '12px' }}>
-                  <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.35rem', letterSpacing: '-0.04em' }}>
-                    Featured picks
-                  </h3>
-                  <span className="editorial-post-summary" style={{ margin: 0 }}>Curated snippets with the strongest editorial value.</span>
+              <div style={{ display: 'grid', gap: '16px', marginTop: '0.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
+                  <div>
+                    <p className="editorial-home-section-label" style={{ marginBottom: '0.35rem' }}>Start with an entry</p>
+                    <h2 className="editorial-page-section-title" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', maxWidth: '18ch' }}>
+                      Open working code before you browse the whole index.
+                    </h2>
+                  </div>
+                  <span className="editorial-post-summary" style={{ margin: 0, maxWidth: '32ch' }}>
+                    These are the strongest entry points into the archive right now.
+                  </span>
                 </div>
 
                 <div className="editorial-post-grid">
-                  {featuredItems.slice(0, 3).map((item) => (
+                  {featuredItems.slice(0, 2).map((item) => (
                     <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '12px' }}>
                       <div className="editorial-post-meta">
                         <span>{getCodeToolsLanguageLabel(item.language)}</span>
@@ -356,7 +260,7 @@ export default function CodeAIPage() {
                         <span>{getCodeToolsItemLineCount(item)} lines</span>
                       </div>
 
-                      <h2 style={{ fontSize: '1.55rem', marginBottom: 0 }}>
+                      <h2 style={{ fontSize: '1.45rem', marginBottom: 0 }}>
                         <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
                       </h2>
 
@@ -374,8 +278,111 @@ export default function CodeAIPage() {
                     </article>
                   ))}
                 </div>
-              </section>
+              </div>
             )}
+          </section>
+
+          <section className="editorial-list-section" id="code-tools-index">
+            <div style={{ display: 'grid', gap: '12px', marginBottom: '18px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
+                <div>
+                  <p className="editorial-home-section-label" style={{ marginBottom: '0.35rem' }}>Browse</p>
+                  <h2 className="editorial-page-section-title" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', maxWidth: '22ch' }}>
+                    Search, filter, and then read the source.
+                  </h2>
+                </div>
+                <div className="editorial-post-summary" style={{ margin: 0, maxWidth: '30ch' }}>
+                  Keep the controls light and let the entries do the work.
+                </div>
+              </div>
+
+              <div className="search-input-container" role="search" aria-label="Code & Tools search">
+                <input
+                  type="text"
+                  placeholder="Search entries, tags, filenames, or descriptions..."
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  className="search-input-large"
+                />
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px 12px', marginTop: '10px' }}>
+                <span className="editorial-home-card-label" style={{ marginBottom: 0 }}>
+                  Categories
+                </span>
+                <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                  {visibleCategories.map((category) => {
+                    const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
+                    const active = selectedCategory === category.id;
+
+                    return (
+                      <button
+                        key={category.id}
+                        type="button"
+                        onClick={() => setSelectedCategory(category.id)}
+                        className="editorial-chip"
+                        style={{
+                          ...categoryButtonStyle,
+                          padding: '0.48rem 0.72rem',
+                          background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.08)',
+                          borderColor: active ? 'rgba(33, 78, 230, 0.2)' : 'rgba(33, 78, 230, 0.08)',
+                          color: 'var(--editorial-blue)',
+                          fontWeight: active ? 700 : 600,
+                        }}
+                        aria-pressed={active}
+                      >
+                        <span>{category.icon}</span>
+                        <span>{category.label}</span>
+                        <span>({count})</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <span className="editorial-home-card-label" style={{ marginBottom: 0, marginLeft: '0.4rem' }}>
+                  Mode
+                </span>
+                <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                  <button
+                    type="button"
+                    className="editorial-chip"
+                    style={{
+                      ...controlButtonStyle,
+                      padding: '0.48rem 0.72rem',
+                      background: viewMode === 'compact' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
+                      color: viewMode === 'compact' ? '#fff' : 'var(--editorial-ink)',
+                      borderColor: 'rgba(16, 34, 54, 0.08)',
+                    }}
+                    onClick={() => setViewMode('compact')}
+                    aria-pressed={viewMode === 'compact'}
+                  >
+                    Archive
+                  </button>
+                  <button
+                    type="button"
+                    className="editorial-chip"
+                    style={{
+                      ...controlButtonStyle,
+                      padding: '0.48rem 0.72rem',
+                      background: viewMode === 'full' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
+                      color: viewMode === 'full' ? '#fff' : 'var(--editorial-ink)',
+                      borderColor: 'rgba(16, 34, 54, 0.08)',
+                    }}
+                    onClick={() => setViewMode('full')}
+                    aria-pressed={viewMode === 'full'}
+                  >
+                    Reader
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '18px' }}>
+              <div className="editorial-post-summary" style={{ margin: 0 }}>
+                Showing <strong>{filteredItems.length}</strong> of <strong>{allItems.length}</strong> items in <strong>{selectedCategoryLabel}</strong>
+                {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
+              </div>
+            </div>
 
             {viewMode === 'compact' ? (
               <div style={{ display: 'grid', gap: '18px' }}>
