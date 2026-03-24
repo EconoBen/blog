@@ -91,14 +91,12 @@ const formatYearRange = (posts: Posts) => {
   return `Runs from ${longDateFormatter.format(oldestPost.date)} to ${longDateFormatter.format(newestPost.date)}`;
 };
 
-const buildYearSummary = (yearPosts: Posts) => {
+const buildYearSummary = (yearPosts: Posts, yearTopics: TagStat[]) => {
   if (yearPosts.length === 0) {
     return 'No posts were published in this year.';
   }
 
-  const topTopics = countTags(yearPosts)
-    .slice(0, 2)
-    .map((topic) => topic.tag);
+  const topTopics = yearTopics.slice(0, 2).map((topic) => topic.tag);
 
   if (yearPosts.length === 1) {
     const topicLabel = topTopics[0] ? `around ${topTopics[0]}` : 'as a standalone entry';
@@ -137,7 +135,7 @@ export default async function PostsPage() {
       featuredPosts,
       remainingPosts,
       yearTopics,
-      summary: buildYearSummary(yearPosts),
+      summary: buildYearSummary(yearPosts, yearTopics),
       archiveHref: `${archiveLink}#year-${year}`,
     };
   });
@@ -340,9 +338,9 @@ export default async function PostsPage() {
           {topicClusters.map(({ tag, count, samplePosts }) => (
             <article key={tag} className="editorial-post-card">
               <p className="editorial-home-card-label">{count} post{count === 1 ? '' : 's'}</p>
-              <h2>
+              <h3>
                 <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
-              </h2>
+              </h3>
               <p>
                 The tag appears repeatedly across the archive. Start with these representative posts, then expand to the full topic page.
               </p>
