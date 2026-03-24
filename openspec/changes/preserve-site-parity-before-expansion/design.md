@@ -1,5 +1,7 @@
 ## Context
 
+> Status note (March 24, 2026, stacked review follow-up of `/posts` pass 4): the `/posts` opening section was refined again, restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-posts-pass4/`. This pass addresses the remaining visual complaint from the earlier human screenshot: the route no longer spends a giant featured slab on a single narrow text column. The first real post module still appears at `475px` on desktop and `645px` on mobile with `0px` horizontal overflow, but the opening section now uses that space for multiple meaningful browse paths instead of dead white area.
+
 > Status note (March 24, 2026, stacked review follow-up of `/posts` pass 3): the refreshed `/posts` slice was restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-posts-codeai-pass3/`. The route is structurally stronger than the earlier same-weight ledger pass. The first real post module still appears in the opening viewport at `475px` on desktop and `645px` on mobile with `0px` horizontal overflow, and the latest year now has real editorial priority while the remaining years recede into secondary browse cards. The remaining debt is qualitative: browse rhythm, topic-section strength, and overall editorial finish.
 
 > Status note (March 24, 2026, stacked review follow-up of `/code-ai` pass 3): the `/code-ai` refinement was restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-codeai-pass3/`. That pass confirms the route is now structurally better than the earlier morning review: the first real code entry still appears in the opening viewport at `539px` on desktop and `596px` on mobile, horizontal overflow remains `0px`, and the control section now reads as a compressed filter bar rather than a dashboard panel. The remaining debt is still qualitative, but it is narrower now: the route needs more editorial calm and less archive-control weight, not another above-the-fold rescue.
@@ -253,6 +255,13 @@ The latest restacked production review of `/posts` on March 24 confirms the rout
 - The route keeps the first real post module in the opening viewport while reducing the earlier feeling of evenly weighted archive bins.
 - The year section is now closer to an editorial browse system than a simple chronological grid.
 - The remaining work is final polish on browse rhythm and topic depth, not another structural re-ordering pass.
+
+### 18. `/posts` opening composition is now useful, not just large
+The latest pass on March 24 changes the quality of the first block. The page no longer gives the full opening width to one under-filled featured card.
+
+- The lead post still anchors the route, but it now sits beside supporting recent and topic entry paths.
+- The first screen uses width for navigation depth instead of empty space.
+- Remaining work should focus on the lower browse rhythm, not on rescuing the opening section again.
 
 Alternatives considered:
 - Keep layering more copy and section labels into the current openings: rejected because the stacked review shows content already starts too low.
