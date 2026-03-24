@@ -192,7 +192,7 @@ Wave-6 focused composition pass note (March 23, 2026, final): one more productio
 - Both routes are now much closer than they were in wave 4 or wave 5, but the associated beads stay open until one more whole-site review confirms they sit naturally beside the strongest editorial routes.
 
 Wave-7 structured-content pass note (March 23, 2026, final): another clean production rebuild plus Playwright recheck under `.playwright-discovery/tab-audit-20260323-wave7-final/` focused on `/talks` and `/publications`.
-- `/talks` now opens with less duplicated helper chrome, a softer browse rail, and list mode as the default archive treatment, which removes much of the old card-board feel on both desktop and mobile.
+- `/talks` now opens with less duplicated helper chrome, a softer browse rail, and grid mode as the default archive treatment, which removes much of the old card-board feel on both desktop and mobile.
 - `/publications` now uses a quieter archive-map block in the hero instead of a sticky side rail, and the featured publication still leads without dominating the first fold as heavily.
 - Both routes are now close; keep the structured-content beads open only for the final whole-site editorial pass.
 
