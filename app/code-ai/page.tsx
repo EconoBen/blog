@@ -83,17 +83,17 @@ const codeActionStyle = {
 const groupCardStyle = {
   background: 'rgba(255, 255, 255, 0.58)',
   border: '1px solid rgba(16, 34, 54, 0.08)',
-  borderRadius: '22px',
-  boxShadow: '0 16px 32px rgba(24, 36, 49, 0.08)',
-  padding: '22px 24px 24px',
+  borderRadius: '18px',
+  boxShadow: '0 10px 24px rgba(24, 36, 49, 0.07)',
+  padding: '18px 18px 20px',
 } as const;
 
 const compactCardStyle = {
   background: 'rgba(255, 255, 255, 0.74)',
   border: '1px solid rgba(16, 34, 54, 0.08)',
-  borderRadius: '22px',
-  boxShadow: '0 16px 32px rgba(24, 36, 49, 0.08)',
-  padding: '22px 24px 24px',
+  borderRadius: '18px',
+  boxShadow: '0 10px 24px rgba(24, 36, 49, 0.07)',
+  padding: '18px',
 } as const;
 
 function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onCopy: () => void; copyLabel: string }) {
@@ -190,6 +190,37 @@ export default function CodeAIPage() {
     acc[item.category].push(item);
     return acc;
   }, {} as Record<string, WorkshopItem[]>);
+  const orderedGroupEntries = Object.entries(groupedItems).sort(([, itemsA], [, itemsB]) => {
+    const countA = itemsA.length;
+    const countB = itemsB.length;
+
+    if (countA !== countB) {
+      return countB - countA;
+    }
+
+    const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
+    const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
+
+    if (latestA !== latestB) {
+      return latestB - latestA;
+    }
+
+    const labelA = categoryLabelById[itemsA[0]?.category ?? ''] || itemsA[0]?.category || '';
+    const labelB = categoryLabelById[itemsB[0]?.category ?? ''] || itemsB[0]?.category || '';
+    return labelA.localeCompare(labelB);
+  });
+  const orderedVisibleCategories = visibleCategories
+    .filter((category) => category.id !== 'all')
+    .sort((a, b) => {
+      const countA = categoryCounts[a.id] ?? 0;
+      const countB = categoryCounts[b.id] ?? 0;
+
+      if (countA !== countB) {
+        return countB - countA;
+      }
+
+      return a.label.localeCompare(b.label);
+    });
 
   const toggleExpanded = (itemId: string) => {
     const nextExpanded = new Set(expandedItems);
@@ -241,33 +272,29 @@ export default function CodeAIPage() {
               <div style={{ display: 'grid', gap: '16px', marginTop: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
                   <div>
-                    <p className="editorial-home-section-label" style={{ marginBottom: '0.35rem' }}>Start with an entry</p>
-                    <h2 className="editorial-page-section-title" style={{ fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', maxWidth: '18ch' }}>
-                      Open working code before you browse the whole index.
+                    <p className="editorial-home-section-label" style={{ marginBottom: '0.35rem' }}>Lead entries</p>
+                    <h2 className="editorial-page-section-title" style={{ fontSize: 'clamp(1.55rem, 2.8vw, 2.2rem)', maxWidth: '18ch' }}>
+                      Open working code before you browse the full archive.
                     </h2>
                   </div>
-                  <span className="editorial-post-summary" style={{ margin: 0, maxWidth: '32ch' }}>
-                    These are the strongest entry points into the archive right now.
-                  </span>
                 </div>
 
                 <div className="editorial-post-grid">
                   {featuredItems.slice(0, 2).map((item) => (
-                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '12px' }}>
+                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '10px' }}>
                       <div className="editorial-post-meta">
                         <span>{getCodeToolsLanguageLabel(item.language)}</span>
                         {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
                         <span>{getCodeToolsItemLineCount(item)} lines</span>
                       </div>
 
-                      <h2 style={{ fontSize: '1.45rem', marginBottom: 0 }}>
+                      <h2 style={{ fontSize: '1.35rem', marginBottom: 0 }}>
                         <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
                       </h2>
 
                       <p className="editorial-post-summary">{item.description}</p>
 
                       <div className="editorial-chip-row">
-                        <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>Featured</span>
                         <span className="editorial-chip">{item.filename || 'Inline snippet'}</span>
                         <span className="editorial-chip">{item.tags.length} tags</span>
                       </div>
@@ -283,16 +310,16 @@ export default function CodeAIPage() {
           </section>
 
           <section className="editorial-list-section" id="code-tools-index">
-            <div style={{ display: 'grid', gap: '12px', marginBottom: '18px' }}>
+            <div style={{ display: 'grid', gap: '14px', marginBottom: '18px', padding: '16px', border: '1px solid rgba(16, 34, 54, 0.08)', borderRadius: '20px', background: 'rgba(255, 255, 255, 0.45)', boxShadow: '0 10px 24px rgba(24, 36, 49, 0.05)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', flexWrap: 'wrap' }}>
                 <div>
-                  <p className="editorial-home-section-label" style={{ marginBottom: '0.35rem' }}>Browse</p>
-                  <h2 className="editorial-page-section-title" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.1rem)', maxWidth: '22ch' }}>
-                    Search, filter, and then read the source.
+                  <p className="editorial-home-section-label" style={{ marginBottom: '0.35rem' }}>Browse and filter</p>
+                  <h2 className="editorial-page-section-title" style={{ fontSize: 'clamp(1.45rem, 2.8vw, 1.95rem)', maxWidth: '22ch' }}>
+                    Search by title, tag, filename, or category.
                   </h2>
                 </div>
                 <div className="editorial-post-summary" style={{ margin: 0, maxWidth: '30ch' }}>
-                  Keep the controls light and let the entries do the work.
+                  Scan the archive first, then open the detail view when you need the writeup or source.
                 </div>
               </div>
 
@@ -306,12 +333,9 @@ export default function CodeAIPage() {
                 />
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px 12px', marginTop: '10px' }}>
-                <span className="editorial-home-card-label" style={{ marginBottom: 0 }}>
-                  Categories
-                </span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '10px 12px' }}>
                 <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                  {visibleCategories.map((category) => {
+                  {orderedVisibleCategories.map((category) => {
                     const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
                     const active = selectedCategory === category.id;
 
@@ -339,9 +363,6 @@ export default function CodeAIPage() {
                   })}
                 </div>
 
-                <span className="editorial-home-card-label" style={{ marginBottom: 0, marginLeft: '0.4rem' }}>
-                  Mode
-                </span>
                 <div className="editorial-chip-row" style={{ marginTop: 0 }}>
                   <button
                     type="button"
@@ -386,13 +407,7 @@ export default function CodeAIPage() {
 
             {viewMode === 'compact' ? (
               <div style={{ display: 'grid', gap: '18px' }}>
-                {Object.entries(groupedItems)
-                  .sort(([, itemsA], [, itemsB]) => {
-                    const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
-                    const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
-                    return latestB - latestA;
-                  })
-                  .map(([category, categoryItems]) => (
+                {orderedGroupEntries.map(([category, categoryItems]) => (
                     <section key={category} style={groupCardStyle}>
                       <h3 className="editorial-page-section-title" style={{ fontSize: '1.55rem', marginBottom: '18px', maxWidth: 'none' }}>
                         {categoryLabelById[category] || category}
@@ -471,7 +486,7 @@ export default function CodeAIPage() {
                         })}
                       </div>
                     </section>
-                  ))}
+                ))}
               </div>
             ) : (
               <div className="editorial-post-grid">
