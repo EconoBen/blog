@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
+import { publicationsConfig } from '../config/publicationsConfig';
+import { talksConfig } from '../config/talksConfig';
 
 export const metadata: Metadata = {
   title: 'About | ECONOBEN.DEV',
@@ -160,15 +162,29 @@ const skills = [
   },
 ];
 
-const publications = [
-  { year: '2025', title: 'Building Stateful AI Agents', venue: 'ODSC West (Talk)' },
-  { year: '2025', title: 'Managing Memory for AI Agents', venue: "O'Reilly Media (Book)" },
-  { year: '2025', title: 'Extending "GPTs Are GPTs" to Firms', venue: 'AEA Papers and Proceedings' },
-  { year: '2024', title: 'Building With AI: How I Build Quick POCs with LLMs', venue: 'Wharton Guest Lecture' },
-  { year: '2024', title: 'A Normie Approach to Validating LLM Outputs', venue: 'AI.Science Talk' },
-  { year: '2023', title: 'What Are AI Agents?', venue: "O'Reilly Media (Book)" },
-  { year: '2023', title: 'Building an HTTPS Model API for Cheap: AWS, Docker, and the Normconf API', venue: 'Talk' },
-];
+type PublicWorkItem = {
+  date: string;
+  title: string;
+  venue: string;
+  year: string;
+};
+
+const publicWorkItems: PublicWorkItem[] = [
+  ...publicationsConfig.publications.map((publication) => ({
+    date: publication.date,
+    title: publication.title,
+    venue: publication.venue ?? publication.type,
+    year: String(publication.year),
+  })),
+  ...talksConfig.talks.map((talk) => ({
+    date: talk.date,
+    title: talk.title,
+    venue: talk.event,
+    year: String(new Date(talk.date).getFullYear()),
+  })),
+]
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  .slice(0, 7);
 
 const patents = [
   'Shared Mobility Simulation and Prediction System, USPTO 20190347941',
@@ -438,7 +454,7 @@ export default function AboutPage() {
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Publications & talks</p>
             <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-on-surface">The public work.</h2>
             <div className="mt-7 space-y-4">
-              {publications.map((publication) => (
+              {publicWorkItems.map((publication) => (
                 <div
                   key={`${publication.year}-${publication.title}`}
                   className="flex flex-col gap-3 rounded-xl bg-surface-container-highest p-5 md:flex-row md:items-baseline md:justify-between"
