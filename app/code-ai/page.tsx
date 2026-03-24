@@ -159,11 +159,12 @@ export default function CodeAIPage() {
   const allItems = getCodeToolsItems();
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
   const featuredItems = getCodeToolsFeaturedItems(allItems);
+  const categoryLabelById = Object.fromEntries(categories.map((category) => [category.id, category.label]));
 
   const filteredItems = allItems.filter((item: WorkshopItem) => {
     const query = searchQuery.toLowerCase();
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-    const categoryLabel = categories.find((category) => category.id === item.category)?.label ?? item.category;
+    const categoryLabel = categoryLabelById[item.category] ?? item.category;
     const matchesSearch =
       query === '' ||
       item.title.toLowerCase().includes(query) ||
@@ -176,7 +177,7 @@ export default function CodeAIPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const selectedCategoryLabel = categories.find((category) => category.id === selectedCategory)?.label ?? 'All';
+  const selectedCategoryLabel = categoryLabelById[selectedCategory] ?? 'All';
 
   const groupedItems = filteredItems.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -387,7 +388,7 @@ export default function CodeAIPage() {
                   .map(([category, categoryItems]) => (
                     <section key={category} style={groupCardStyle}>
                       <h3 className="editorial-page-section-title" style={{ fontSize: '1.55rem', marginBottom: '18px', maxWidth: 'none' }}>
-                        {categories.find((categoryConfig) => categoryConfig.id === category)?.label || category}
+                        {categoryLabelById[category] || category}
                         <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                           ({categoryItems.length})
                         </span>
@@ -472,7 +473,7 @@ export default function CodeAIPage() {
                     <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '16px' }}>
                       <div className="editorial-post-meta">
                         {item.category && (
-                          <span>{categories.find((category) => category.id === item.category)?.label || item.category}</span>
+                          <span>{categoryLabelById[item.category] || item.category}</span>
                         )}
                         {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
                         <span>{getCodeToolsLanguageLabel(item.language)}</span>
