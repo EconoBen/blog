@@ -6,7 +6,6 @@ const navItems = [
   { href: '/posts', label: 'Posts' },
   { href: '/talks', label: 'Talks' },
   { href: '/publications', label: 'Publications' },
-  { href: '/code-ai', label: 'Code & Tools' },
   { href: '/book', label: 'Book' },
   { href: '/about', label: 'About' },
 ];
@@ -32,7 +31,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         <Link href="/" className="editorial-home-brand-link" aria-label="Go to home">
           <p className="editorial-home-brand-name">BEN LABASCHIN</p>
         </Link>
-        <p className="editorial-home-brand-note">Technical editorial platform</p>
+        <p className="editorial-home-brand-note">Economics, AI &amp; tech</p>
       </div>
       <nav className="editorial-home-nav" aria-label="Primary">
         {navItems.map((item) => (
@@ -45,6 +44,13 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             {item.label}
           </Link>
         ))}
+        <Link
+          href="/search"
+          className={`editorial-home-nav-link ${isActivePath(currentPath, '/search') ? 'is-active' : ''}`}
+          aria-current={isActivePath(currentPath, '/search') ? 'page' : undefined}
+        >
+          Search
+        </Link>
       </nav>
     </header>
   );

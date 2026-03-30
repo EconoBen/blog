@@ -26,12 +26,12 @@ const editorialShellRoutes = [
 
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   const pathname = usePathname();
-  // Default to open on desktop (production parity)
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.innerWidth >= 768;
     }
-    return true; // Default to open for SSR
+
+    return true;
   });
   const [sidebarWidth, setSidebarWidth] = useState(240);
   const [isResizing, setIsResizing] = useState(false);
@@ -45,19 +45,16 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // Load saved sidebar width from localStorage
     const savedWidth = localStorage.getItem('sidebarWidth');
     if (savedWidth) {
       setSidebarWidth(parseInt(savedWidth, 10));
     }
 
-    // Load saved sidebar state, but default to open on desktop if no saved state
     const savedState = localStorage.getItem('sidebarOpen');
     const isDesktop = window.innerWidth >= 768;
     if (savedState !== null) {
       setSidebarOpen(savedState === 'true');
     } else if (isDesktop) {
-      // Default to open on desktop if no saved preference
       setSidebarOpen(true);
     }
 
@@ -121,25 +118,24 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     };
   }, [useEditorialShell]);
 
-  // Don't render sidebar on mobile
   if (isMobile || useEditorialShell) {
     return (
       <>
         {children}
-        <DarkModeToggle />
+        {!useEditorialShell ? <DarkModeToggle /> : null}
       </>
     );
   }
 
   return (
     <>
-      <Sidebar 
+      <Sidebar
         width={sidebarWidth}
         isOpen={sidebarOpen}
         onToggle={toggleSidebar}
         isResizing={isResizing}
       />
-      <div 
+      <div
         className={`main-content ${sidebarOpen ? 'sidebar-open' : ''}`}
         style={{ marginLeft: sidebarOpen ? `${sidebarWidth}px` : '0' }}
       >
@@ -150,7 +146,6 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
       </div>
       <SocialLinks />
       <DarkModeToggle />
-      {/* Add resize handle event listener */}
       {sidebarOpen && (
         <div
           className="sidebar-resize-handle-overlay"
