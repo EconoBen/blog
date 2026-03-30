@@ -1,10 +1,16 @@
 {
   "buildCSS": [
     {
-      "name": "c65842d9d4a38ec8.css",
-      "path": "static/css/c65842d9d4a38ec8.css",
-      "size": 95276,
-      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/build-c65842d9d4a38ec8.css"
+      "name": "931b179cff3131dc.css",
+      "path": "static/css/931b179cff3131dc.css",
+      "size": 2063,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/build-931b179cff3131dc.css"
+    },
+    {
+      "name": "d275846b59a8bbda.css",
+      "path": "static/css/d275846b59a8bbda.css",
+      "size": 97242,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/build-d275846b59a8bbda.css"
     }
   ],
   "inlineCSS": [],
@@ -17,14 +23,62 @@
     {
       "name": "globals.css",
       "path": "/Users/blabaschin/Documents/GitHub/blog/app/globals.css",
-      "size": 130107,
+      "size": 139393,
       "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/globals.css"
+    },
+    {
+      "name": "components.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/components.css",
+      "size": 950,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-components.css"
+    },
+    {
+      "name": "dark-mode.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/dark-mode.css",
+      "size": 657,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-dark-mode.css"
+    },
+    {
+      "name": "layout.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/layout.css",
+      "size": 1181,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-layout.css"
     },
     {
       "name": "mobile-search-fixes.css",
       "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/mobile-search-fixes.css",
       "size": 8648,
       "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-mobile-search-fixes.css"
+    },
+    {
+      "name": "mobile.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/mobile.css",
+      "size": 171,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-mobile.css"
+    },
+    {
+      "name": "navigation.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/navigation.css",
+      "size": 868,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-navigation.css"
+    },
+    {
+      "name": "production-main.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/production-main.css",
+      "size": 95273,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-production-main.css"
+    },
+    {
+      "name": "responsive.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/responsive.css",
+      "size": 739,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-responsive.css"
+    },
+    {
+      "name": "typography.css",
+      "path": "/Users/blabaschin/Documents/GitHub/blog/app/styles/typography.css",
+      "size": 907,
+      "outputPath": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data/css/app-typography.css"
     }
   ],
   "references": [

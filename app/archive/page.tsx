@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Sidebar from '../components/Sidebar';
+import NavBar from '../components/NavBar';
+import { SidebarToggle } from '../components/SidebarToggle';
 import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
@@ -9,108 +12,75 @@ export const metadata: Metadata = {
 
 export default async function ArchivePage() {
   const posts = await postService.getAllPosts();
-  
-  // Group posts by year and month
-  const postsByYearMonth = posts.reduce((acc, post) => {
-    const year = post.date.getFullYear();
-    const month = post.date.getMonth();
-    const key = `${year}-${month}`;
-    
-    if (!acc[key]) {
-      acc[key] = {
+
+  // Build months: key = YYYY-MM
+  const months = new Map<string, { year: number; month: number; name: string; count: number }>();
+  posts.forEach((post) => {
+    const d = new Date(post.date);
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const key = `${year}-${String(month).padStart(2, '0')}`;
+    if (!months.has(key)) {
+      months.set(key, {
         year,
         month,
-        monthName: post.date.toLocaleDateString('en-US', { month: 'long' }),
-        posts: []
-      };
+        name: d.toLocaleDateString('en-US', { month: 'long' }),
+        count: 0,
+      });
     }
-    
-    acc[key].posts.push(post);
-    return acc;
-  }, {} as Record<string, { year: number; month: number; monthName: string; posts: typeof posts }>);
-
-  // Sort by year and month
-  const sortedEntries = Object.values(postsByYearMonth).sort((a, b) => {
-    if (a.year !== b.year) return b.year - a.year;
-    return b.month - a.month;
+    months.get(key)!.count += 1;
   });
 
-  // Group by year for display
-  const postsByYear = sortedEntries.reduce((acc, entry) => {
-    if (!acc[entry.year]) {
-      acc[entry.year] = [];
-    }
-    acc[entry.year].push(entry);
-    return acc;
-  }, {} as Record<number, typeof sortedEntries>);
+  // Group by year, sorted desc
+  const grouped = new Map<number, Array<{ key: string; name: string; count: number }>>();
+  Array.from(months.entries())
+    .sort((a, b) => (a[0] < b[0] ? 1 : -1))
+    .forEach(([key, m]) => {
+      if (!grouped.has(m.year)) grouped.set(m.year, []);
+      grouped.get(m.year)!.push({ key, name: m.name, count: m.count });
+    });
 
-  const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+  const years = Array.from(grouped.keys()).sort((a, b) => b - a);
+  const recentPosts = posts.slice(0, 10);
 
   return (
-    <div className="archive-page">
-      <div className="page-header">
-        <h1 className="page-title">Archive</h1>
-        <p className="page-subtitle">
-          {posts.length} posts across {years.length} years
-        </p>
-      </div>
+    <div className="blog-container">
+      <Sidebar posts={recentPosts} />
 
-      <div className="archive-content">
-        {years.map(year => (
-          <section key={year} className="archive-year">
-            <h2 className="year-heading">{year}</h2>
-            
-            <div className="months-grid">
-              {postsByYear[year].map(({ monthName, posts: monthPosts }) => (
-                <div key={`${year}-${monthName}`} className="month-section">
-                  <h3 className="month-heading">
-                    {monthName} 
-                    <span className="post-count">({monthPosts.length})</span>
-                  </h3>
-                  
-                  <ul className="posts-list">
-                    {monthPosts.map(post => (
-                      <li key={post.slug} className="archive-post">
-                        <Link href={`/posts/${post.slug}`}>
-                          <time className="archive-post-date">
-                            {post.date.getDate().toString().padStart(2, '0')}
-                          </time>
-                          <span className="archive-post-title">{post.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+      <div className="main-content">
+        <NavBar />
 
-      <div className="archive-stats">
-        <h2 className="stats-heading">Post Statistics</h2>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-value">{posts.length}</div>
-            <div className="stat-label">Total Posts</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">{years.length}</div>
-            <div className="stat-label">Years Active</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">
-              {Math.round(posts.length / years.length)}
-            </div>
-            <div className="stat-label">Posts per Year</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">
-              {new Set(posts.flatMap(p => p.tags)).size}
-            </div>
-            <div className="stat-label">Unique Tags</div>
-          </div>
+        <div className="content-wrapper archives-content">
+          {years.map((year) => (
+            <section key={year} className="archive-year-card">
+              <div className="year-header">
+                <h3>{year}</h3>
+                <div className="year-divider" />
+              </div>
+
+              <div className="archive-months-grid">
+                {grouped.get(year)!.map(({ key, name, count }) => (
+                  <Link
+                    key={key}
+                    href={`/archives/${key}`}
+                    className="archive-month-card"
+                  >
+                    <div className="month-content">
+                      <div className="month-name">{name}</div>
+                      <div className="post-count">
+                        <span className="count-number">{count}</span>
+                        <span className="count-label">posts</span>
+                      </div>
+                    </div>
+                    <span className="month-arrow">→</span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
+
+        <SidebarToggle />
       </div>
     </div>
   );

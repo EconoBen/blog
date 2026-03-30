@@ -144,21 +144,32 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // Redirects for old routes
-  async redirects() {
-    return [
-      {
-        source: '/workshop',
-        destination: '/code-ai',
-        permanent: true,
-      },
-      {
-        source: '/workshop/:slug',
-        destination: '/code-ai/:slug',
-        permanent: true,
-      },
-    ];
-  },
+    // Redirects for old routes
+    async redirects() {
+      return [
+        // Legacy archive routes to new pluralized path
+        {
+          source: '/archive',
+          destination: '/archives',
+          permanent: true,
+        },
+        {
+          source: '/archive/:path*',
+          destination: '/archives/:path*',
+          permanent: true,
+        },
+        {
+          source: '/workshop',
+          destination: '/code-ai',
+          permanent: true,
+        },
+        {
+          source: '/workshop/:slug',
+          destination: '/code-ai/:slug',
+          permanent: true,
+        },
+      ];
+    },
 };
 
 export default nextConfig;

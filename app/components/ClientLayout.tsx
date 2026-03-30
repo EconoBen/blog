@@ -1,19 +1,14 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
-import Sidebar from './Sidebar';
+import React, { useState, useEffect } from 'react';
 import SocialLinks from './SocialLinks';
 import DarkModeToggle from './DarkModeToggle';
-import NavBar from './NavBar';
 
 interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(240);
-  const [isResizing, setIsResizing] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -24,107 +19,16 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     checkMobile();
     window.addEventListener('resize', checkMobile);
 
-    // Load saved sidebar width from localStorage
-    const savedWidth = localStorage.getItem('sidebarWidth');
-    if (savedWidth) {
-      setSidebarWidth(parseInt(savedWidth, 10));
-    }
-
-    // Load saved sidebar state
-    const savedState = localStorage.getItem('sidebarOpen');
-    if (savedState !== null) {
-      setSidebarOpen(savedState === 'true');
-    }
-
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
   }, []);
 
-  const toggleSidebar = useCallback(() => {
-    const newState = !sidebarOpen;
-    setSidebarOpen(newState);
-    localStorage.setItem('sidebarOpen', String(newState));
-  }, [sidebarOpen]);
-
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsResizing(true);
-  }, []);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isResizing) return;
-
-      const newWidth = e.clientX;
-      if (newWidth >= 200 && newWidth <= 400) {
-        setSidebarWidth(newWidth);
-      }
-    };
-
-    const handleMouseUp = () => {
-      if (isResizing) {
-        setIsResizing(false);
-        localStorage.setItem('sidebarWidth', String(sidebarWidth));
-      }
-    };
-
-    if (isResizing) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    }
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isResizing, sidebarWidth]);
-
-  // Don't render sidebar on mobile
-  if (isMobile) {
-    return (
-      <>
-        {children}
-        <DarkModeToggle />
-      </>
-    );
-  }
-
   return (
     <>
-      <Sidebar 
-        width={sidebarWidth}
-        isOpen={sidebarOpen}
-        onToggle={toggleSidebar}
-        isResizing={isResizing}
-      />
-      <div 
-        className={`main-content ${sidebarOpen ? 'sidebar-open' : ''}`}
-        style={{ marginLeft: sidebarOpen ? `${sidebarWidth}px` : '0' }}
-      >
-        <NavBar />
-        <div className="content-wrapper">
-          {children}
-        </div>
-      </div>
+      {children}
       <SocialLinks />
       <DarkModeToggle />
-      {/* Add resize handle event listener */}
-      {sidebarOpen && (
-        <div
-          className="sidebar-resize-handle-overlay"
-          onMouseDown={handleMouseDown}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: sidebarWidth - 5,
-            width: '10px',
-            height: '100%',
-            cursor: 'ew-resize',
-            zIndex: 1001,
-          }}
-        />
-      )}
     </>
   );
 };

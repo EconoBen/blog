@@ -1,12 +1,12 @@
 {
-  "timestamp": "2025-08-06T20:11:27.042Z",
+  "timestamp": "2025-08-08T00:24:51.825Z",
   "localUrl": "http://localhost:3000",
   "pagesAnalyzed": 7,
   "outputDirectory": "/Users/blabaschin/Documents/GitHub/blog/analysis/local-data",
   "buildDirectory": "/Users/blabaschin/Documents/GitHub/blog/.next",
   "publicDirectory": "/Users/blabaschin/Documents/GitHub/blog/public",
   "htmlFiles": 7,
-  "cssFiles": 5,
-  "buildTimestamp": "2025-08-06T20:11:26.793Z",
+  "cssFiles": 13,
+  "buildTimestamp": "2025-08-08T00:23:36.764Z",
   "buildExists": true
 }

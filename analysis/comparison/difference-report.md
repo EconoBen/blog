@@ -1,6 +1,6 @@
 # Production Parity Difference Report
 
-Generated: 8/6/2025, 1:11:27 PM
+Generated: 8/7/2025, 5:41:40 PM
 
 ## Executive Summary
 

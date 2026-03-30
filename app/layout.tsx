@@ -1,30 +1,40 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
+import type { Metadata, Viewport } from 'next';
 import ClientLayout from './components/ClientLayout';
 
-const inter = Inter({ subsets: ['latin'] });
-
+// Match production head tags for parity
 export const metadata: Metadata = {
-  title: 'Economic Notes - Exploring Economics, Technology, and Life',
-  description: 'A blog about economics, technology, and personal experiences.',
-  authors: [{ name: 'Benjamin Labaschin' }],
+  title: 'Ben Labaschin - Economics, AI & Tech Blog',
+  description:
+    "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
+  authors: [{ name: 'Ben Labaschin' }],
   keywords: ['economics', 'technology', 'AI', 'machine learning', 'blog'],
   manifest: '/manifest.json',
+  metadataBase: new URL('https://econoben.dev'),
   openGraph: {
-    title: 'Economic Notes',
-    description: 'A blog about economics, technology, and personal experiences.',
+    title: 'Ben Labaschin - Economics, AI & Tech Blog',
+    description:
+      "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
     url: 'https://econoben.dev',
-    siteName: 'Economic Notes',
+    siteName: 'econoben.dev',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Economic Notes',
-    description: 'A blog about economics, technology, and personal experiences.',
+    title: 'Ben Labaschin - Economics, AI & Tech Blog',
+    description:
+      "Ben Labaschin's blog on economics, AI, machine learning, and technology. Featuring insights on LLMs, personal finance, and software engineering.",
   },
-  metadataBase: new URL('https://econoben.dev'),
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/icon-192.png',
+  },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#000000',
 };
 
 export default function RootLayout({
@@ -34,7 +44,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head>
+        <link rel="stylesheet" href="/static/css/main.da68fc15.css" />
+      </head>
+      <body>
         <ClientLayout>
           {children}
         </ClientLayout>

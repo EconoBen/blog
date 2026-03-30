@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500&display=swap');
 @import './styles/mobile-search-fixes.css';
+/* Import styles ported from production (CRA) */
+@import './styles/layout.css';
+@import './styles/navigation.css';
+@import './styles/components.css';
+@import './styles/typography.css';
+@import './styles/responsive.css';
+@import './styles/dark-mode.css';
+@import './styles/mobile.css';
+/* Inject production CSS last so it wins cascade */
+@import './styles/production-main.css';
 
 /* CSS Variables */
 :root {

@@ -3,7 +3,7 @@ import { postService } from './services/PostService';
 import Sidebar from './components/Sidebar';
 import { MainContent } from './components/MainContent';
 import { SidebarToggle } from './components/SidebarToggle';
-import MobileLayout from './components/MobileLayout';
+import NavBar from './components/NavBar';
 
 export default async function HomePage() {
   const posts = await postService.getAllPosts();
@@ -12,12 +12,18 @@ export default async function HomePage() {
   const recentPosts = posts.slice(0, 10);
 
   return (
-    <MobileLayout>
-      <div className="blog-container">
-        <Sidebar posts={recentPosts} />
+    <div className="blog-container">
+      {/* Production-matching layout: Sidebar + Main Content */}
+      <Sidebar posts={recentPosts} />
+
+      {/* Main content area with navbar */}
+      <div className="main-content">
+        <NavBar />
         <MainContent posts={posts} />
-        <SidebarToggle />
       </div>
-    </MobileLayout>
+
+      {/* Sidebar toggle for mobile */}
+      <SidebarToggle />
+    </div>
   );
 }

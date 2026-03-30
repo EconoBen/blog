@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useSidebar } from '../hooks/useSidebar';
 
 interface Post {
   slug: string;
@@ -13,10 +14,6 @@ interface Post {
 
 interface SidebarProps {
   posts?: Post[];
-  isOpen?: boolean;
-  width?: number;
-  onToggle?: () => void;
-  isResizing?: boolean;
 }
 
 interface SidebarPostItemProps {
@@ -49,7 +46,9 @@ const SidebarPostItem: React.FC<SidebarPostItemProps> = ({ post }) => {
   );
 };
 
-export const Sidebar: React.FC<SidebarProps> = ({ posts, isOpen = false, width, onToggle, isResizing }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ posts }) => {
+  const { isOpen } = useSidebar();
+
   // Handle case where posts might be undefined or empty
   if (!posts || posts.length === 0) {
     return (

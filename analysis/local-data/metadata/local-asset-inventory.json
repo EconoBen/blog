@@ -3324,7 +3324,7 @@
       "name": "manifest.json",
       "path": "manifest.json",
       "fullPath": "/Users/blabaschin/Documents/GitHub/blog/public/manifest.json",
-      "size": 660,
+      "size": 694,
       "extension": ".json",
       "type": "other"
     },
@@ -3442,6 +3442,22 @@
     }
   ],
   "buildAssets": [
+    {
+      "name": "_buildManifest.js",
+      "path": "LtyxaJM0M__POQLQZiXid/_buildManifest.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/LtyxaJM0M__POQLQZiXid/_buildManifest.js",
+      "size": 1279,
+      "extension": ".js",
+      "type": "script"
+    },
+    {
+      "name": "_ssgManifest.js",
+      "path": "LtyxaJM0M__POQLQZiXid/_ssgManifest.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/LtyxaJM0M__POQLQZiXid/_ssgManifest.js",
+      "size": 185,
+      "extension": ".js",
+      "type": "script"
+    },
     {
       "name": "4bd1b696-4e0ef8e861551a30.js",
       "path": "chunks/4bd1b696-4e0ef8e861551a30.js",
@@ -3563,18 +3579,18 @@
       "type": "script"
     },
     {
-      "name": "layout-04a0c423dc4c7100.js",
-      "path": "chunks/app/layout-04a0c423dc4c7100.js",
-      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/layout-04a0c423dc4c7100.js",
-      "size": 10935,
+      "name": "layout-5183a4b15f3062fd.js",
+      "path": "chunks/app/layout-5183a4b15f3062fd.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/layout-5183a4b15f3062fd.js",
+      "size": 3734,
       "extension": ".js",
       "type": "script"
     },
     {
-      "name": "page-820feba9c25c191a.js",
-      "path": "chunks/app/page-820feba9c25c191a.js",
-      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/page-820feba9c25c191a.js",
-      "size": 5861,
+      "name": "page-3c15a16baacac3d8.js",
+      "path": "chunks/app/page-3c15a16baacac3d8.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/app/page-3c15a16baacac3d8.js",
+      "size": 10258,
       "extension": ".js",
       "type": "script"
     },
@@ -3707,36 +3723,28 @@
       "type": "script"
     },
     {
-      "name": "webpack-7dbb97f49842b046.js",
-      "path": "chunks/webpack-7dbb97f49842b046.js",
-      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/webpack-7dbb97f49842b046.js",
-      "size": 3417,
+      "name": "webpack-84ea83ec8e65742b.js",
+      "path": "chunks/webpack-84ea83ec8e65742b.js",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/chunks/webpack-84ea83ec8e65742b.js",
+      "size": 3429,
       "extension": ".js",
       "type": "script"
     },
     {
-      "name": "c65842d9d4a38ec8.css",
-      "path": "css/c65842d9d4a38ec8.css",
-      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/css/c65842d9d4a38ec8.css",
-      "size": 95276,
+      "name": "931b179cff3131dc.css",
+      "path": "css/931b179cff3131dc.css",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/css/931b179cff3131dc.css",
+      "size": 2063,
       "extension": ".css",
       "type": "stylesheet"
     },
     {
-      "name": "_buildManifest.js",
-      "path": "kHGsQb2G_t4fc8aw0ltCL/_buildManifest.js",
-      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/kHGsQb2G_t4fc8aw0ltCL/_buildManifest.js",
-      "size": 1279,
-      "extension": ".js",
-      "type": "script"
-    },
-    {
-      "name": "_ssgManifest.js",
-      "path": "kHGsQb2G_t4fc8aw0ltCL/_ssgManifest.js",
-      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/kHGsQb2G_t4fc8aw0ltCL/_ssgManifest.js",
-      "size": 185,
-      "extension": ".js",
-      "type": "script"
+      "name": "d275846b59a8bbda.css",
+      "path": "css/d275846b59a8bbda.css",
+      "fullPath": "/Users/blabaschin/Documents/GitHub/blog/.next/static/css/d275846b59a8bbda.css",
+      "size": 97242,
+      "extension": ".css",
+      "type": "stylesheet"
     },
     {
       "name": "26a46d62cd723877-s.woff2",
@@ -3801,6 +3809,6 @@
     "totalScripts": 11,
     "totalOther": 0,
     "totalPublicAssets": 426,
-    "totalBuildAssets": 44
+    "totalBuildAssets": 45
   }
 }

@@ -2,7 +2,17 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10",
+  "engines": {
+    "node": ">=20 <21",
+    "npm": ">=10 <11"
+  },
   "scripts": {
+    "preinstall": "node scripts/check-node.js",
+    "predev": "node scripts/check-node.js",
+    "prebuild": "node scripts/check-node.js",
+    "prestart": "node scripts/check-node.js",
+
     "dev": "next dev",
     "build": "next build && npm run post-build",
     "start": "next start",
@@ -29,7 +39,8 @@
     "analyze-local-assets": "node scripts/production-analysis/local-build-analyzer.js assets",
     "analyze-comprehensive": "node scripts/production-analysis/comprehensive-analyzer.js",
     "analyze-differences": "node scripts/production-analysis/difference-engine.js",
-    "test-difference-engine": "node scripts/production-analysis/test-difference-engine.js"
+    "test-difference-engine": "node scripts/production-analysis/test-difference-engine.js",
+    "parity:run": "node scripts/parity-runner.js --timeout=240"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.840.0",

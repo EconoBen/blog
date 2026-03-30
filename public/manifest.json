@@ -1,8 +1,8 @@
 {
-  "name": "Economic Notes",
-  "short_name": "EconNotes",
-  "description": "Exploring Economics, Technology, and Life",
-  "theme_color": "#0066cc",
+  "name": "Tech Notes Blog",
+  "short_name": "Tech Notes",
+  "description": "Ben Labaschin's blog on economics, AI, machine learning, and technology.",
+  "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "standalone",
   "orientation": "portrait",
