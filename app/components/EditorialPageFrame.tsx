@@ -75,11 +75,15 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const desktopNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-transparent bg-transparent px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/20 hover:bg-[#004ac6]/10 hover:text-[#004ac6]';
+      : 'inline-flex min-h-[34px] items-center justify-center px-1 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
+  const mobileDiscoveryNavItemClassName = (active: boolean) =>
+    active
+      ? 'inline-flex items-center justify-center text-[10px] font-bold uppercase tracking-[0.24em] text-[#004ac6]'
+      : 'inline-flex items-center justify-center text-[10px] font-bold uppercase tracking-[0.24em] text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
   const mobileNavItemClassName = (active: boolean) =>
     active
-      ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:bg-[#004ac6]/10 hover:text-[#004ac6]';
+      ? 'inline-flex min-h-[30px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-2.5 py-1 text-[10px] font-bold uppercase leading-none tracking-[0.2em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'inline-flex min-h-[30px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-2.5 py-1 text-[10px] font-bold uppercase leading-none tracking-[0.2em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/30 hover:bg-[#004ac6]/10 hover:text-[#004ac6]';
 
   return (
     <header className={headerClassName}>
@@ -88,7 +92,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
           <Link href="/" className={brandClassName} aria-label="Go to home">
             {brandLabel}
           </Link>
-          <nav className="flex items-center gap-2 md:hidden" aria-label="Discovery">
+          <nav className="flex items-center gap-3 md:hidden" aria-label="Discovery">
             {mobileDiscoveryNavItems.map((item) => {
               const active = isActivePath(currentPath, item.href);
 
@@ -96,8 +100,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={mobileNavItemClassName(active)}
-                  style={active ? activeNavStyle : undefined}
+                  className={mobileDiscoveryNavItemClassName(active)}
                   aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
@@ -142,10 +145,11 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         </nav>
       </div>
       <nav
-        className="mx-auto max-w-7xl px-4 pb-2.5 md:hidden sm:px-6"
+        className="mx-auto max-w-7xl px-4 pb-2 md:hidden sm:px-6"
         aria-label="Primary"
       >
-        <div className="flex flex-wrap gap-2 pb-1">
+        <div className="overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-max gap-2 pr-4">
           {mobilePrimaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
@@ -161,6 +165,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
               </Link>
             );
           })}
+          </div>
         </div>
       </nav>
     </header>
@@ -175,7 +180,7 @@ export function EditorialPageFrame({
   const copyrightYear = new Date().getFullYear();
 
   return (
-    <div className={`min-h-screen bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
+    <div className={`min-h-screen overflow-x-hidden bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
         <EditorialTopbar currentPath={currentPath} />
         <main>{children}</main>

@@ -11,7 +11,6 @@ import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
 import {
   formatCodeToolsDate,
   getCodeToolsCategoryCounts,
-  getCodeToolsFeaturedItems,
   getCodeToolsItemLineCount,
   getCodeToolsItems,
   getCodeToolsLanguageLabel,
@@ -158,7 +157,9 @@ export default function CodeAIPage() {
   const { title, subtitle, categories } = workshopConfig;
   const allItems = getCodeToolsItems();
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
-  const featuredItems = getCodeToolsFeaturedItems(allItems);
+  const visibleCategories = categories.filter((category) => (
+    category.id === 'all' || (categoryCounts[category.id] ?? 0) > 0
+  ));
 
   const filteredItems = allItems.filter((item: WorkshopItem) => {
     const query = searchQuery.toLowerCase();
@@ -206,10 +207,9 @@ export default function CodeAIPage() {
       <div className="editorial-home-page">
         <main className="editorial-home-content">
           <section
-            className="editorial-page-hero"
+            className="editorial-page-hero mx-auto max-w-5xl"
             style={{
               gap: 'clamp(1rem, 2.5vw, 2rem)',
-              gridTemplateColumns: 'minmax(0, 1fr)',
             }}
           >
             <div className="editorial-page-hero-copy">
@@ -234,8 +234,8 @@ export default function CodeAIPage() {
               <div
                 className="editorial-page-aside"
                 style={{
-                  marginTop: '1rem',
-                  maxWidth: '34rem',
+                  marginTop: '1.1rem',
+                  maxWidth: '32rem',
                   padding: 'clamp(0.8rem, 2vw, 1.2rem)',
                   background: 'rgba(255, 255, 255, 0.46)',
                   boxShadow: 'none',
@@ -250,13 +250,28 @@ export default function CodeAIPage() {
             </div>
           </section>
 
-          <section className="editorial-list-section" id="code-tools-index">
+          <section className="editorial-list-section mx-auto max-w-6xl" id="code-tools-index">
             <div className="editorial-list-heading">
               <p className="editorial-home-section-label">Browse</p>
-              <h2 className="editorial-page-section-title">Search by title, tag, or category, then open an entry to keep the writeup and code together.</h2>
+              <div style={{ display: 'grid', gap: '0.8rem' }}>
+                <h2 className="editorial-page-section-title" style={{ maxWidth: '15ch' }}>
+                  Browse the archive.
+                </h2>
+                <p className="editorial-post-summary" style={{ maxWidth: '52ch' }}>
+                  Search by title, tag, or category, then open an entry to keep the writeup and code together.
+                </p>
+              </div>
             </div>
 
-            <div className="editorial-page-aside" style={{ marginBottom: '20px' }}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '18px',
+                marginBottom: '20px',
+                padding: '1rem 0 0',
+                borderTop: '1px solid rgba(16, 34, 54, 0.08)',
+              }}
+            >
               <div className="search-input-container" role="search" aria-label="Code & Tools search">
                 <input
                   type="text"
@@ -267,13 +282,26 @@ export default function CodeAIPage() {
                 />
               </div>
 
-              <div style={{ display: 'grid', gap: '14px', marginTop: '18px' }}>
-                <div>
-                  <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
+              <div
+                style={{
+                  display: 'grid',
+                  gap: '14px',
+                  paddingTop: '0.4rem',
+                }}
+              >
+                <div style={{ display: 'grid', gap: '0.6rem' }}>
+                  <p
+                    className="editorial-home-card-label"
+                    style={{
+                      marginBottom: 0,
+                      letterSpacing: '0.14em',
+                      opacity: 0.75,
+                    }}
+                  >
                     Categories
                   </p>
                   <div className="editorial-chip-row" style={{ marginTop: 0 }}>
-                    {categories.map((category) => {
+                    {visibleCategories.map((category) => {
                       const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
                       const active = selectedCategory === category.id;
 
@@ -285,9 +313,9 @@ export default function CodeAIPage() {
                           className="editorial-chip"
                           style={{
                             ...categoryButtonStyle,
-                            padding: '0.56rem 0.8rem',
-                            background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.08)',
-                            borderColor: active ? 'rgba(33, 78, 230, 0.2)' : 'rgba(33, 78, 230, 0.08)',
+                            padding: '0.52rem 0.76rem',
+                            background: active ? 'rgba(33, 78, 230, 0.14)' : 'rgba(33, 78, 230, 0.06)',
+                            borderColor: active ? 'rgba(33, 78, 230, 0.18)' : 'rgba(33, 78, 230, 0.08)',
                             color: 'var(--editorial-blue)',
                             fontWeight: active ? 700 : 600,
                           }}
@@ -302,17 +330,37 @@ export default function CodeAIPage() {
                   </div>
                 </div>
 
-                <div>
-                  <p className="editorial-home-card-label" style={{ marginBottom: '10px' }}>
-                    Browse mode
-                  </p>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    gap: '0.75rem',
+                  }}
+                >
+                  <div style={{ display: 'grid', gap: '0.45rem' }}>
+                    <p
+                      className="editorial-home-card-label"
+                      style={{
+                        marginBottom: 0,
+                        letterSpacing: '0.14em',
+                        opacity: 0.75,
+                      }}
+                    >
+                      Browse mode
+                    </p>
+                    <p className="editorial-post-summary" style={{ margin: 0, maxWidth: '42ch' }}>
+                      Archive mode keeps the index scannable. Reader mode keeps the writeup and code visible.
+                    </p>
+                  </div>
                   <div className="editorial-chip-row" style={{ marginTop: 0 }}>
                     <button
                       type="button"
                       className="editorial-chip"
                       style={{
                         ...controlButtonStyle,
-                        padding: '0.56rem 0.8rem',
+                        padding: '0.52rem 0.76rem',
                         background: viewMode === 'compact' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
                         color: viewMode === 'compact' ? '#fff' : 'var(--editorial-ink)',
                         borderColor: 'rgba(16, 34, 54, 0.08)',
@@ -327,7 +375,7 @@ export default function CodeAIPage() {
                       className="editorial-chip"
                       style={{
                         ...controlButtonStyle,
-                        padding: '0.56rem 0.8rem',
+                        padding: '0.52rem 0.76rem',
                         background: viewMode === 'full' ? 'rgba(16, 34, 54, 0.92)' : 'rgba(255,255,255,0.55)',
                         color: viewMode === 'full' ? '#fff' : 'var(--editorial-ink)',
                         borderColor: 'rgba(16, 34, 54, 0.08)',
@@ -340,6 +388,7 @@ export default function CodeAIPage() {
                   </div>
                 </div>
               </div>
+
             </div>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem', marginBottom: '18px' }}>
@@ -347,49 +396,7 @@ export default function CodeAIPage() {
                 Showing <strong>{filteredItems.length}</strong> of <strong>{allItems.length}</strong> items in <strong>{selectedCategoryLabel}</strong>
                 {searchQuery ? <> for <strong>“{searchQuery}”</strong></> : null}
               </div>
-              <div className="editorial-post-summary" style={{ margin: 0 }}>
-                Archive mode keeps the index scannable. Reader mode keeps the writeup and code visible.
-              </div>
             </div>
-
-            {featuredItems.length > 0 && (
-              <section style={{ marginBottom: '28px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: '1rem', marginBottom: '12px' }}>
-                  <h3 style={{ margin: 0, color: 'var(--editorial-ink)', fontFamily: 'Space Grotesk, Inter, sans-serif', fontSize: '1.35rem', letterSpacing: '-0.04em' }}>
-                    Featured picks
-                  </h3>
-                  <span className="editorial-post-summary" style={{ margin: 0 }}>Curated snippets with the strongest editorial value.</span>
-                </div>
-
-                <div className="editorial-post-grid">
-                  {featuredItems.slice(0, 3).map((item) => (
-                    <article key={item.id} className="editorial-post-card" style={{ display: 'grid', gap: '12px' }}>
-                      <div className="editorial-post-meta">
-                        <span>{getCodeToolsLanguageLabel(item.language)}</span>
-                        {item.date && <span>{formatCodeToolsDate(item.date)}</span>}
-                        <span>{getCodeToolsItemLineCount(item)} lines</span>
-                      </div>
-
-                      <h2 style={{ fontSize: '1.55rem', marginBottom: 0 }}>
-                        <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
-                      </h2>
-
-                      <p className="editorial-post-summary">{item.description}</p>
-
-                      <div className="editorial-chip-row">
-                        <span className="editorial-chip" style={{ background: 'rgba(33, 78, 230, 0.14)' }}>Featured</span>
-                        <span className="editorial-chip">{item.filename || 'Inline snippet'}</span>
-                        <span className="editorial-chip">{item.tags.length} tags</span>
-                      </div>
-
-                      <Link href={getCodeToolsUrl(item.id)} className="editorial-post-link">
-                        Open detail page
-                      </Link>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            )}
 
             {viewMode === 'compact' ? (
               <div style={{ display: 'grid', gap: '18px' }}>

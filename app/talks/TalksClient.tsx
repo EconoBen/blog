@@ -148,12 +148,12 @@ function FeaturedTalk({
   const primarySourceUrl = getPrimarySourceUrl(talk);
 
   return (
-    <article className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)]">
+    <article className="overflow-hidden rounded-[1.75rem] bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)]">
       <div className="grid h-full gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
         <div className="min-h-[300px] bg-surface-container-low">
           <TalkMediaPreview talk={talk} isOpen={isOpen} onOpen={onOpen} />
         </div>
-        <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
+        <div className="flex flex-col justify-between p-5 sm:p-6 md:p-8 lg:p-10">
           <div className="space-y-6">
             <div className="flex flex-wrap items-center gap-3">
               <span className="rounded-sm bg-secondary-fixed-dim px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-secondary-fixed-variant">
@@ -168,19 +168,19 @@ function FeaturedTalk({
             </div>
             <div className="flex flex-wrap gap-2">
               {talk.topics.slice(0, 6).map((topic) => (
-                <span key={topic} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
+                <span key={topic} className="rounded-full bg-surface-container-low/80 px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
                   {topic}
                 </span>
               ))}
             </div>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2">
             {primarySourceUrl && (
               <a
                 href={primarySourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-primary-container px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-primary"
+                className="font-label text-xs font-bold uppercase tracking-[0.22em] text-primary underline decoration-primary/30 underline-offset-4"
               >
                 {getPrimarySourceLabel(talk)}
               </a>
@@ -190,7 +190,7 @@ function FeaturedTalk({
                 href={talk.transcriptUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-surface"
+                className="font-label text-xs font-bold uppercase tracking-[0.22em] text-secondary underline decoration-outline-variant/40 underline-offset-4 hover:text-on-surface"
               >
                 Read transcript
               </a>
@@ -198,7 +198,7 @@ function FeaturedTalk({
             <button
               type="button"
               onClick={onOpen}
-              className="inline-flex items-center justify-center rounded-lg bg-on-surface px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-surface"
+              className="inline-flex items-center justify-center rounded-full bg-on-surface px-5 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-surface"
             >
               {getPrimaryActionLabel(talk)}
             </button>
@@ -227,7 +227,7 @@ function TalkCard({
 
   return (
     <article
-      className={`group overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1 ${
+      className={`group overflow-hidden rounded-[1.75rem] border border-outline-variant/10 bg-surface-container-highest/90 shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(29,28,22,0.08)] ${
         viewMode === 'grid' ? 'h-full' : 'lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]'
       }`}
     >
@@ -290,7 +290,7 @@ function TalkCard({
         )}
       </div>
 
-      <div className="space-y-5 p-8">
+      <div className="space-y-5 p-6 sm:p-7 lg:p-8">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="space-y-2">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{talk.event}</p>
@@ -307,19 +307,19 @@ function TalkCard({
 
         <div className="flex flex-wrap gap-2">
           {talk.topics.slice(0, viewMode === 'grid' ? 4 : 6).map((topic) => (
-            <span key={topic} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
+            <span key={topic} className="rounded-full bg-surface-container-low/80 px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
               {topic}
             </span>
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3 pt-1">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-1">
           {primarySourceUrl && (
             <a
               href={primarySourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+              className="font-label text-[11px] font-bold uppercase tracking-[0.22em] text-secondary underline decoration-outline-variant/40 underline-offset-4 transition-colors hover:text-on-surface hover:decoration-primary"
             >
               {getPrimarySourceLabel(talk)}
             </a>
@@ -329,14 +329,14 @@ function TalkCard({
               href={talk.transcriptUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+              className="font-label text-[11px] font-bold uppercase tracking-[0.22em] text-secondary underline decoration-outline-variant/40 underline-offset-4 transition-colors hover:text-on-surface hover:decoration-primary"
             >
               Transcript
             </a>
           )}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
+            className="inline-flex items-center justify-center rounded-full bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-[0.22em] text-surface"
             onClick={onOpen}
           >
             {isOpen ? 'Playing in page' : getPrimaryActionLabel(talk)}
@@ -349,7 +349,7 @@ function TalkCard({
 
 export default function TalksClient() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const { talks } = talksConfig;
 
   const sortedTalks = [...talks].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -388,40 +388,56 @@ export default function TalksClient() {
   const archiveTalks = featuredTalk ? filteredTalks.filter((talk) => talk.id !== featuredTalk.id) : filteredTalks;
 
   return (
-    <section className="mx-auto max-w-7xl px-8 pb-16">
+    <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <header className="mb-8 grid gap-6 border-b border-outline-variant/20 pb-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+        <div className="max-w-3xl space-y-4">
+          <p className="font-label text-xs font-bold uppercase tracking-[0.3em] text-secondary">
+            Recorded talks
+          </p>
+          <h1 className="font-headline text-5xl font-black tracking-tighter text-on-surface sm:text-6xl">
+            Talks.
+          </h1>
+          <p className="max-w-2xl font-body text-lg leading-relaxed text-secondary">
+            A small archive of recorded sessions with inline playback, transcripts, and source links attached to each talk.
+          </p>
+        </div>
+        <p className="max-w-sm font-body text-sm leading-relaxed text-secondary lg:text-right">
+          Open a recording, keep the player in view, and move through the archive without the page turning into a control surface.
+        </p>
+      </header>
+
       {featuredTalk && (
-        <div className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
+        <div className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(300px,0.85fr)]">
           <FeaturedTalk talk={featuredTalk} isOpen={featuredTalk.id === activeTalkId} onOpen={() => setActiveTalkId(featuredTalk.id)} />
-          <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 md:p-6 lg:p-7">
+          <aside className="rounded-[1.75rem] border border-outline-variant/10 bg-surface-container-highest/75 p-5 shadow-none md:p-6 lg:sticky lg:top-6 lg:p-7">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse recordings</p>
             <h2 className="mt-4 font-headline text-xl font-bold leading-tight text-on-surface md:text-2xl">
-              {activeFilter === 'all' ? 'All talks, newest first.' : `Talks about ${activeFilter}.`}
+              {activeFilter === 'all' ? 'An editorial browse of the archive.' : `A focused browse of ${activeFilter}.`}
             </h2>
             <p className="mt-3 font-body text-sm leading-relaxed text-secondary md:mt-4 md:text-base">
-              Open a card, play it in place, and keep transcripts and source links close to the recording.
+              Select a recording to bring it forward. Playback stays inline, while transcripts and source links live with the individual talk.
             </p>
-            <div className="mt-6 flex flex-wrap gap-2">
-              <span className="rounded-full bg-surface-container-high px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
-                Inline playback
-              </span>
-              <span className="rounded-full bg-surface-container-high px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
-                Transcripts
-              </span>
-              <span className="rounded-full bg-surface-container-high px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
-                Source links
-              </span>
+            <div className="mt-6 rounded-2xl bg-surface-container-low/80 p-4">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Now featured</p>
+              <h3 className="mt-2 font-headline text-lg font-bold leading-snug text-on-surface">{featuredTalk.title}</h3>
+              <p className="mt-2 font-body text-sm leading-relaxed text-secondary">
+                {featuredTalk.event} · {formatDate(featuredTalk.date)}
+              </p>
+              <p className="mt-3 font-body text-sm leading-relaxed text-secondary">
+                {featuredTalk.description}
+              </p>
             </div>
-            <div className="mt-5 hidden space-y-2 md:block">
+            <div className="mt-5 hidden space-y-1 md:block">
               {archiveTalks.slice(0, 3).map((talk) => (
                 <button
                   key={talk.id}
                   type="button"
                   onClick={() => setActiveTalkId(talk.id)}
-                  className="flex w-full items-start justify-between gap-3 rounded-xl bg-surface-container-high/60 px-4 py-3 text-left transition-colors hover:bg-surface-container-high"
+                  className="flex w-full items-start justify-between gap-4 rounded-2xl border-b border-outline-variant/10 px-1 py-3 text-left transition-colors hover:border-outline-variant/20 hover:bg-surface-container-low/50"
                 >
-                  <span className="min-w-0">
+                  <span className="min-w-0 space-y-1">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-primary">{talk.event}</span>
-                    <span className="mt-1 block line-clamp-2 font-headline text-sm font-bold leading-snug text-on-surface">{talk.title}</span>
+                    <span className="block line-clamp-2 font-headline text-sm font-bold leading-snug text-on-surface">{talk.title}</span>
                   </span>
                   <span className="shrink-0 font-label text-[10px] uppercase tracking-widest text-secondary">{formatDate(talk.date)}</span>
                 </button>
@@ -465,11 +481,11 @@ export default function TalksClient() {
           ))}
         </div>
 
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 rounded-lg bg-surface-container-low p-1">
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 rounded-full bg-surface-container-low p-1">
             <button
               type="button"
-              className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+              className={`rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                 viewMode === 'grid' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
               }`}
               onClick={() => setViewMode('grid')}
@@ -479,7 +495,7 @@ export default function TalksClient() {
             </button>
             <button
               type="button"
-              className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+              className={`rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                 viewMode === 'list' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
               }`}
               onClick={() => setViewMode('list')}

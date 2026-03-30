@@ -13,6 +13,7 @@ export default function PublicationsPage() {
   const sortedPublications = [...publications].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+  const totalPublications = sortedPublications.length;
   const featuredPublication =
     sortedPublications.find((publication) => publication.featured) ?? sortedPublications[0];
   const archivePublications = featuredPublication
@@ -32,19 +33,68 @@ export default function PublicationsPage() {
 
   return (
     <EditorialPageFrame currentPath="/publications">
+      <section className="mx-auto max-w-7xl px-8 pb-6 pt-8 md:pt-10">
+        <header className="grid gap-8 border-b border-outline-variant/20 pb-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)] lg:items-end">
+          <div className="max-w-3xl space-y-4">
+            <p className="font-label text-xs font-bold uppercase tracking-[0.3em] text-secondary">
+              Published work
+            </p>
+            <h1 className="font-headline text-5xl font-black tracking-tighter text-on-surface sm:text-6xl">
+              Publications.
+            </h1>
+            <p className="max-w-2xl font-body text-lg leading-relaxed text-secondary">
+              Books, reports, and papers arranged newest first, with the featured record leading the archive.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full border border-outline-variant/20 bg-surface-container-low/70 px-3 py-2 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+                {totalPublications} works
+              </span>
+              <span className="rounded-full border border-outline-variant/20 bg-surface-container-low/70 px-3 py-2 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+                {publicationYears.length} years indexed
+              </span>
+              <span className="rounded-full border border-outline-variant/20 bg-surface-container-low/70 px-3 py-2 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+                Featured piece first
+              </span>
+            </div>
+          </div>
+          <div className="rounded-2xl border border-outline-variant/15 bg-surface-container-low/80 p-5 shadow-[0_12px_30px_rgba(29,28,22,0.03)]">
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">
+              Archive map
+            </p>
+            <p className="mt-2 max-w-md font-body text-sm leading-relaxed text-secondary">
+              Jump by year without crowding the first fold. The archive stays navigable while the feature keeps room to breathe.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {publicationYears.map((year) => (
+                <Link
+                  key={year}
+                  href={`#publication-year-${year}`}
+                  className="rounded-full border border-outline-variant/15 bg-surface-container-highest px-4 py-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:border-secondary-container hover:bg-secondary-container hover:text-primary"
+                >
+                  {year}
+                </Link>
+              ))}
+            </div>
+            <p className="mt-4 font-body text-xs italic text-secondary">
+              {totalPublications} publications across {publicationYears.length} years.
+            </p>
+          </div>
+        </header>
+      </section>
+
       {featuredPublication && (
-        <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-8 lg:grid-cols-12 lg:items-start">
+        <section className="mx-auto max-w-7xl px-8 pb-10">
           <article
             id="featured-publication"
-            className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)] lg:col-span-8"
+            className="overflow-hidden rounded-[1.5rem] border border-outline-variant/15 bg-surface-container-highest shadow-[0_16px_40px_rgba(29,28,22,0.05)]"
           >
-            <div className="grid gap-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(280px,1.1fr)]">
-              <div className="bg-surface-container-low p-6 md:p-8">
+            <div className="grid gap-0 lg:grid-cols-[minmax(280px,0.92fr)_minmax(0,1.08fr)] lg:items-stretch">
+              <div className="bg-surface-container-low/80 p-5 md:p-7">
                 {featuredPublication.coverImage ? (
                   <img
                     src={featuredPublication.coverImage}
                     alt={featuredPublication.title}
-                    className="aspect-[4/5] w-full rounded-xl object-cover shadow-xl"
+                    className="aspect-[4/5] w-full rounded-xl object-cover shadow-lg"
                   />
                 ) : (
                   <div className="flex aspect-[4/5] w-full items-center justify-center rounded-xl bg-[linear-gradient(135deg,_#1d1c16,_#32302a)] p-8 text-[#fef9ef]">
@@ -120,35 +170,6 @@ export default function PublicationsPage() {
               </div>
             </div>
           </article>
-          <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-low p-4 lg:col-span-4 lg:sticky lg:top-24">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse the archive</p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {publicationYears.map((year) => (
-                <Link
-                  key={year}
-                  href={`#publication-year-${year}`}
-                  className="rounded-full bg-surface-container-highest px-4 py-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-primary"
-                >
-                  {year}
-                </Link>
-              ))}
-            </div>
-            <div className="mt-5 space-y-3 border-t border-outline-variant/30 pt-5">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Featured publication</p>
-              {featuredPublication && (
-                <>
-                  <p className="font-headline text-lg font-bold leading-snug text-on-surface">{featuredPublication.title}</p>
-                  <p className="font-body text-sm leading-relaxed text-secondary">{featuredPublication.venue ?? featuredPublication.authors}</p>
-                  <Link
-                    href="#featured-publication"
-                    className="inline-flex items-center text-xs font-bold uppercase tracking-widest text-primary"
-                  >
-                    Jump to feature
-                  </Link>
-                </>
-              )}
-            </div>
-          </aside>
         </section>
       )}
 
@@ -162,16 +183,18 @@ export default function PublicationsPage() {
             className={`mx-auto px-8 pb-16 ${isSparseYear ? 'max-w-5xl' : 'max-w-7xl'}`}
             id={`publication-year-${year}`}
           >
-            <div className="mb-8 grid gap-4 lg:grid-cols-12 lg:items-end">
-              <div className="lg:col-span-8">
-                <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">{year}</p>
-                <h2 className="mt-3 font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
+            <div className="mb-8 flex flex-col gap-3 border-t border-outline-variant/20 pt-6 sm:flex-row sm:items-end sm:justify-between">
+              <div className="max-w-2xl space-y-2">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.28em] text-secondary">
+                  Archive chapter
+                </p>
+                <h2 className="font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
                   Publications from {year}
                 </h2>
               </div>
-              <div className="lg:col-span-4 lg:text-right">
-                <p className="font-body text-base italic text-secondary">{yearPublications.length} item{yearPublications.length === 1 ? '' : 's'} in this section</p>
-              </div>
+              <p className="font-body text-sm italic text-secondary sm:max-w-xs sm:text-right">
+                {yearPublications.length} item{yearPublications.length === 1 ? '' : 's'} in this section
+              </p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))]">

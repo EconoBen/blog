@@ -46,8 +46,8 @@ function MaterialIcon({ name, className = '' }: { name: string; className?: stri
 function DetailStat({ label, value }: { label: string; value: string | number }) {
   return (
     <div>
-      <span className="block font-headline text-lg font-bold text-[#1d1c16] sm:text-xl">{value}</span>
-      <span className="mt-1 block font-label text-[9px] font-bold uppercase tracking-widest text-[#555f70] sm:text-[10px]">
+      <span className="block font-headline text-base font-bold text-[#1d1c16] sm:text-lg">{value}</span>
+      <span className="mt-1 block font-label text-[9px] font-bold uppercase tracking-[0.22em] text-[#555f70] sm:text-[10px]">
         {label}
       </span>
     </div>
@@ -124,7 +124,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
       <main className="mx-auto max-w-7xl px-8 py-14 sm:py-16">
         <section className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          <div className="order-1 lg:col-span-8 lg:order-2">
+          <div className="order-1 lg:col-span-9 lg:order-2">
             <div className="mb-5 flex flex-wrap items-center gap-3">
               <span className="rounded-sm bg-[#bdc7db] px-3 py-1 font-label text-xs font-bold uppercase tracking-widest text-[#121c2b]">
                 {categoryConfig?.label || item.category}
@@ -138,46 +138,56 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
               {item.description}
             </p>
             <p className="mt-5 max-w-3xl font-body text-sm leading-relaxed text-[#555f70] sm:text-lg">
-              The detail page keeps the writeup and source together, so the route behaves like the
-              rest of the editorial site instead of falling back to a disconnected tools surface.
+              Each entry keeps the note, source, and implementation together so the archive reads
+              like a page rather than a product surface.
             </p>
+
+            <div className="mt-6 flex flex-wrap gap-2 font-label text-[10px] uppercase tracking-[0.22em] text-[#555f70] sm:text-[11px]">
+              <span className="rounded-full bg-[#f8f3e9] px-3 py-1">{languageLabel}</span>
+              <span className="rounded-full bg-[#f8f3e9] px-3 py-1">{dateLabel}</span>
+              <span className="rounded-full bg-[#f8f3e9] px-3 py-1">{lineCount} lines</span>
+              <span className="rounded-full bg-[#f8f3e9] px-3 py-1">{relatedItems.length} related</span>
+            </div>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                href="/code-ai"
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#c3c6d7] px-4 py-3 font-headline text-sm font-bold text-[#1d1c16] transition-colors hover:bg-white"
+              >
+                <MaterialIcon name="arrow_back" className="text-sm" />
+                Back to archive
+              </Link>
+              {item.gistUrl && (
+                <a
+                  href={item.gistUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-4 py-3 font-headline text-sm font-bold text-white transition-opacity hover:opacity-90"
+                >
+                  <MaterialIcon name="terminal" className="text-sm" />
+                  View on GitHub
+                </a>
+              )}
+            </div>
           </div>
 
-          <div className="order-2 flex flex-col justify-end lg:col-span-4 lg:order-1">
-            <div className="space-y-4 rounded-xl bg-[#f8f3e9] p-4 sm:p-7">
-              <div className="grid grid-cols-2 gap-3 sm:gap-6">
+          <div className="order-2 hidden lg:order-1 lg:col-span-3 lg:flex lg:flex-col lg:justify-end">
+            <div className="space-y-3 rounded-xl bg-[#f8f3e9] p-3 sm:p-5">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <DetailStat label="Language" value={languageLabel} />
-                <DetailStat label="Lines" value={lineCount} />
+                <DetailStat label="Updated" value={dateLabel} />
                 <DetailStat label="Tags" value={item.tags.length} />
-                <DetailStat label="Related" value={relatedItems.length} />
               </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                <Link
-                  href="/code-ai"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#c3c6d7] px-4 py-3 font-headline text-sm font-bold text-[#1d1c16] transition-colors hover:bg-white sm:flex-1"
-                >
-                  <MaterialIcon name="arrow_back" className="text-sm" />
-                  Back to Code &amp; Tools
-                </Link>
-                {item.gistUrl && (
-                  <a
-                    href={item.gistUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#2563eb] px-4 py-3 font-headline text-sm font-bold text-white transition-opacity hover:opacity-90 sm:flex-1"
-                  >
-                    <MaterialIcon name="terminal" className="text-sm" />
-                    View on GitHub
-                  </a>
-                )}
-              </div>
+              <p className="font-body text-[0.78rem] leading-relaxed text-[#555f70]">
+                A quiet metadata rail for orientation. The related entries sit lower on the page,
+                where they can do the work without competing with the writeup.
+              </p>
             </div>
           </div>
         </section>
 
         <section className="grid grid-cols-1 gap-10 lg:grid-cols-12">
-          <aside className="order-2 space-y-5 lg:col-span-3 lg:order-1">
+          <aside className="order-2 hidden space-y-5 lg:col-span-3 lg:order-1 lg:block">
             <SidebarBlock title="Overview">
               <ul className="space-y-2.5 font-label text-sm text-[#1d1c16]">
                 <li className="flex items-center gap-2">

@@ -34,17 +34,17 @@ export default async function TagsPage() {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16 md:py-20">
+      <main className="mx-auto min-h-screen max-w-7xl px-5 py-12 sm:px-6 md:px-8 md:py-20">
         <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="space-y-8 lg:col-span-8">
             <div className="max-w-3xl">
               <span className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
                 Archive &amp; Taxonomy
               </span>
-              <h1 className="font-headline text-5xl font-black tracking-tight text-on-surface md:text-6xl">
+              <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface sm:text-5xl md:text-6xl">
                 Topic index.
               </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">
                 Browse the archive by subject. The tags stay ranked by use, but the page keeps the hierarchy quiet and practical.
               </p>
             </div>
@@ -101,7 +101,49 @@ export default async function TagsPage() {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="md:hidden">
+                <details className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+                    <span className="font-headline text-base font-bold text-on-surface">
+                      Open the full alphabetical index
+                    </span>
+                    <span className="rounded-full bg-surface px-2.5 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                      {sortedTags.length} tags
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-on-surface-variant">
+                    The top tags above cover the quickest paths. Open this directory view when you want the complete list.
+                  </p>
+                  <div className="mt-5 space-y-4">
+                    {sortedLetters.map((letter) => (
+                      <section key={letter} id={`tag-letter-${letter}`} className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-4">
+                        <div className="flex flex-wrap items-baseline justify-between gap-4">
+                          <h3 className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">
+                            {letter}
+                          </h3>
+                          <span className="font-body text-sm italic text-secondary">
+                            {tagsByLetter[letter].length} tag{tagsByLetter[letter].length === 1 ? '' : 's'}
+                          </span>
+                        </div>
+                        <div className="mt-4 grid grid-cols-1 gap-2">
+                          {tagsByLetter[letter].map((tagEntry) => (
+                            <Link
+                              key={tagEntry.tag}
+                              href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
+                              className="flex items-center justify-between gap-2 rounded-xl bg-surface px-3 py-2.5 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                            >
+                              <span className="min-w-0 truncate">{tagEntry.tag}</span>
+                              <span className="shrink-0 text-secondary">{tagEntry.count}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </section>
+                    ))}
+                  </div>
+                </details>
+              </div>
+
+              <div className="hidden space-y-4 md:block">
                 {sortedLetters.map((letter) => (
                   <section key={letter} id={`tag-letter-${letter}`} className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-5 md:p-6">
                     <div className="flex flex-wrap items-baseline justify-between gap-4">

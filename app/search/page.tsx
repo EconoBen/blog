@@ -122,7 +122,7 @@ function SearchContent() {
           </p>
 
           <form action="/search" className="group relative mt-7" onSubmit={handleSearch} role="search" aria-label="Site search">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-6">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5 sm:pl-6">
               <svg
                 aria-hidden="true"
                 className="h-5 w-5 text-secondary"
@@ -137,7 +137,7 @@ function SearchContent() {
             </div>
             <input
               autoFocus
-              className="block w-full rounded-2xl bg-surface-container-lowest py-5 pl-16 pr-6 font-body text-lg text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none md:py-6 md:text-xl"
+              className="block w-full rounded-2xl bg-surface-container-lowest py-5 pl-20 pr-6 font-body text-lg text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none sm:pl-16 md:py-6 md:text-xl"
               name="q"
               onChange={(event) => setSearchQuery(event.target.value)}
               aria-label="Search site"

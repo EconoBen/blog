@@ -101,30 +101,6 @@ export default function BookPage() {
           </div>
         </header>
 
-        <section className="md:hidden">
-          <div className="mx-auto mt-2 flex max-w-[15rem] items-center justify-center overflow-hidden rounded-xl bg-[#e7e2d8] p-3 shadow-[0_24px_40px_rgba(29,28,22,0.05)]">
-            <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-sm bg-[#1d1c16] p-4 text-[#fef9ef]">
-              <div className="space-y-2">
-                <p className="font-headline text-[10px] uppercase tracking-[0.34em] opacity-60">
-                  Working manuscript
-                </p>
-                <h2 className="font-headline text-lg font-black leading-[0.9] tracking-tight">
-                  AGENT MEMORY
-                </h2>
-              </div>
-              <div className="space-y-3">
-                <p className="max-w-[15ch] font-body text-[0.8rem] italic leading-relaxed opacity-80">
-                  Practical memory systems for production agents.
-                </p>
-                <div className="h-px w-12 bg-[#fef9ef]/20" />
-                <p className="font-headline text-[11px] font-bold uppercase tracking-[0.22em]">
-                  ECONOBEN.DEV
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="py-12 md:py-20">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
             <div className="flex min-h-[300px] flex-col justify-between rounded-xl bg-[#f8f3e9] p-6 sm:p-10 md:col-span-2 md:min-h-[400px] md:p-12">

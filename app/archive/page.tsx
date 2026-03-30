@@ -102,46 +102,34 @@ export default async function ArchivePage() {
                 <h2 className="mb-6 font-label text-[10px] uppercase tracking-[0.3em] text-secondary">
                   Years
                 </h2>
-                <ul className="space-y-3">
+                <ul className="space-y-2 border-l border-outline-variant/20 pl-4">
                   {yearEntries.map((entry, index) => (
                     <li key={entry.year}>
                       <a
                         href={`#year-${entry.year}`}
                         className={index === 0
-                          ? 'block rounded-2xl border border-primary/40 bg-primary/5 px-4 py-4 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08]'
-                          : 'block rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high'}
+                          ? 'block py-2 text-primary transition-colors hover:text-primary-container'
+                          : 'block py-2 text-on-surface-variant transition-colors hover:text-on-surface'}
                       >
                         <div className="flex items-baseline justify-between gap-4">
-                          <span className="font-headline text-2xl font-bold tracking-tighter">{entry.year}</span>
-                          <span className="font-label text-[10px] uppercase tracking-[0.2em]">{entry.months.length} month{entry.months.length === 1 ? '' : 's'}</span>
+                          <span className="font-headline text-xl font-bold tracking-tighter">{entry.year}</span>
+                          <span className="font-label text-[10px] uppercase tracking-[0.2em]">{entry.months.length} mo</span>
                         </div>
-                        <p className="mt-2 font-body text-sm leading-relaxed">
-                          {entry.postCount} post{entry.postCount === 1 ? '' : 's'} in this year.
-                        </p>
                       </a>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5">
-                <h3 className="mb-4 font-headline text-sm font-bold text-on-surface">Archive at a glance</h3>
-                <div className="grid gap-3">
-                  {[
-                    ['Total posts', `${posts.length}`],
-                    ['Years covered', `${years.length}`],
-                    ['Unique tags', `${uniqueTags}`],
-                  ].map(([labelText, value]) => (
-                    <div key={labelText} className="flex items-center justify-between rounded-xl border border-outline-variant/20 bg-surface px-4 py-3">
-                      <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">{labelText}</span>
-                      <span className="font-headline text-lg font-bold text-on-surface">{value}</span>
-                    </div>
-                  ))}
-                </div>
+              <div className="border-t border-outline-variant/20 pt-5">
+                <h3 className="mb-3 font-headline text-sm font-bold text-on-surface">Archive note</h3>
+                <p className="font-body text-sm leading-relaxed text-on-surface-variant">
+                  {posts.length} posts across {years.length} years and {uniqueTags} tagged topics. Use the year rail when date matters, then drop into month pages for the denser read.
+                </p>
                 {latestMonth ? (
                   <Link
                     href={latestMonth.monthHref}
-                    className="mt-6 inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-primary transition-colors hover:text-primary-container"
+                    className="mt-5 inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-primary transition-colors hover:text-primary-container"
                   >
                     Latest month {latestMonth.monthLabel} {latestMonth.year}
                   </Link>
@@ -153,7 +141,7 @@ export default async function ArchivePage() {
           <div className="space-y-20 lg:col-span-9">
             {yearEntries.map((entry) => (
               <section key={entry.year} id={`year-${entry.year}`} className="scroll-mt-32">
-                <div className="mb-10 flex flex-col gap-3 border-b border-outline-variant/20 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                <div className="mb-8 flex flex-col gap-3 border-b border-outline-variant/20 pb-4 sm:flex-row sm:items-end sm:justify-between">
                   <div>
                     <h2 className="font-headline text-4xl font-black tracking-tighter text-on-surface">{entry.year}</h2>
                     <p className="mt-2 font-body text-base leading-relaxed text-on-surface-variant">
@@ -165,10 +153,10 @@ export default async function ArchivePage() {
                   </span>
                 </div>
 
-                <div className="space-y-12">
+                <div className="space-y-10">
                   {entry.months.map((month) => (
-                    <section key={month.key} className="border-l border-outline-variant/20 pl-6">
-                      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+                    <section key={month.key} className="border-t border-outline-variant/20 pt-5">
+                      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
                         <div>
                           <h3 className="font-headline text-2xl font-bold text-on-surface">{month.monthLabel}</h3>
                           <p className="mt-1 font-body text-base text-on-surface-variant">
