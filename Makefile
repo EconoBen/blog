@@ -129,6 +129,26 @@ commit: ## Create a commit with AI-generated message
 	@echo "$(YELLOW)This will analyze changes and create a commit$(NC)"
 	git add -A && git commit
 
+# Content Creation Commands
+.PHONY: post
+post: ## Create a new blog post with Claude (interactive dialogue)
+	@echo "$(BLUE)Starting Claude post creation...$(NC)"
+	@claude "/post"
+
+.PHONY: publish
+publish: ## Full publish pipeline: images → audio → git push → auto-deploy
+	@echo "$(BLUE)Running full publish pipeline...$(NC)"
+	@echo "$(BLUE)Step 1/4: Optimizing images...$(NC)"
+	@npm run optimize-images || true
+	@echo "$(BLUE)Step 2/4: Generating audio...$(NC)"
+	@npm run audio-pipeline || echo "$(YELLOW)Audio generation skipped (check API key or no new posts)$(NC)"
+	@echo "$(BLUE)Step 3/4: Committing changes...$(NC)"
+	@git add -A
+	@git commit -m "feat: publish new post" || echo "$(YELLOW)No changes to commit$(NC)"
+	@echo "$(BLUE)Step 4/4: Pushing to deploy...$(NC)"
+	@git push
+	@echo "$(GREEN)✓ Published! Vercel will auto-deploy.$(NC)"
+
 # Utility Commands
 .PHONY: clean
 clean: ## Clean build artifacts and caches
