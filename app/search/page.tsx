@@ -19,9 +19,10 @@ function formatResultDate(date?: Date | string) {
   }).format(new Date(date));
 }
 
-const resultTypeOrder: SearchResult['type'][] = ['post', 'publication', 'talk', 'code-ai'];
+const resultTypeOrder: SearchResult['type'][] = ['tag', 'post', 'publication', 'talk', 'code-ai'];
 
 const typeLabels: Record<SearchResult['type'], string> = {
+  tag: 'Tags',
   post: 'Posts',
   publication: 'Publications',
   talk: 'Talks',
@@ -29,6 +30,11 @@ const typeLabels: Record<SearchResult['type'], string> = {
 };
 
 const quickQueries = ['memory', 'retrieval', 'economics', 'tooling'];
+const starterTips = [
+  ['Specific titles', 'Use part of a post or talk title when you know the wording already.'],
+  ['Subjects', 'Try themes like memory, retrieval, or economics to widen the result set.'],
+  ['Route jumps', 'Search for tools, publications, or topic terms to land on the most direct route.'],
+];
 
 function groupResultsByType(results: SearchResult[]) {
   const groups = new Map<SearchResult['type'], SearchResult[]>();
@@ -103,34 +109,48 @@ function SearchContent() {
 
   return (
     <EditorialPageFrame currentPath="/search">
-      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16">
-        <header className="mb-16 max-w-3xl">
+      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16 md:py-20">
+        <header className="mb-12 max-w-3xl">
           <div className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
             Search &amp; Discovery
           </div>
-          <h1 className="mb-8 font-headline text-5xl font-black tracking-tighter text-on-surface">
-            Search the archives.
+          <h1 className="mb-5 font-headline text-5xl font-black tracking-tighter text-on-surface md:text-6xl">
+            Search the archive.
           </h1>
+          <p className="max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
+            Search across posts, tags, talks, publications, and tools with a plain query. Post matches now check title, summary, content, slug, and tags, so the page can route you more directly instead of pretending everything is the same.
+          </p>
 
-          <form action="/search" className="group relative" onSubmit={handleSearch} role="search" aria-label="Site search">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-6">
-              <span className="material-symbols-outlined text-secondary" aria-hidden="true">search</span>
+          <form action="/search" className="group relative mt-7" onSubmit={handleSearch} role="search" aria-label="Site search">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5 sm:pl-6">
+              <svg
+                aria-hidden="true"
+                className="h-5 w-5 text-secondary"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                viewBox="0 0 24 24"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" strokeLinecap="round" />
+              </svg>
             </div>
             <input
               autoFocus
-              className="block w-full rounded-xl bg-surface-container-lowest py-6 pl-16 pr-6 font-body text-xl text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none"
+              className="block w-full rounded-2xl bg-surface-container-lowest py-5 pl-20 pr-6 font-body text-lg text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none sm:pl-16 md:py-6 md:text-xl"
               name="q"
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search for posts, talks, publications, or tools..."
+              aria-label="Search site"
+              placeholder="Search for a title, topic, or phrase"
               type="text"
               value={searchQuery}
             />
             <div className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-500 group-focus-within:scale-x-100" />
           </form>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <span className="mr-2 self-center font-label text-[10px] uppercase tracking-widest text-secondary">
-              Quick Queries:
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <span className="mr-1 self-center font-label text-[10px] uppercase tracking-widest text-secondary">
+              Quick queries
             </span>
             {quickQueries.map((term) => (
               <Link
@@ -142,68 +162,74 @@ function SearchContent() {
               </Link>
             ))}
           </div>
+
+          <p className="mt-6 max-w-2xl font-body text-sm leading-relaxed text-on-surface-variant">
+            Indexed surfaces: posts, tags, talks, publications, and Code &amp; Tools. Compact search uses the same endpoint, but trims that list in the dropdown so the route stays predictable on mobile.
+          </p>
         </header>
 
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-12">
-          <div className="space-y-12 md:col-span-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <div className="space-y-10 lg:col-span-8">
             {!normalizedQuery ? (
-              <section className="rounded-xl bg-surface-container-highest p-10">
-                <h2 className="mb-4 font-headline text-2xl font-bold text-on-surface">Start with a topic or title.</h2>
-                <p className="mb-6 max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant">
-                  Search across posts, talks, publications, and code notes without leaving the editorial surface.
+              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-6 md:p-8">
+                <h2 className="font-headline text-2xl font-bold text-on-surface">Start with a topic, title fragment, or name.</h2>
+                <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
+                  Search is broad by design. Exact titles, tag terms, and short phrases all work, and the results stay grouped by content type.
                 </p>
-                <div className="flex flex-wrap gap-3">
-                  {quickQueries.concat(['forecasting', 'llm']).map((term) => (
-                    <Link
-                      key={term}
-                      href={`/search?q=${encodeURIComponent(term)}`}
-                      className="rounded-full bg-surface px-4 py-2 font-label text-xs font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-surface-container-low hover:text-on-surface"
-                    >
-                      {term}
-                    </Link>
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  {starterTips.map(([label, description]) => (
+                    <div key={label} className="rounded-xl bg-surface p-4">
+                      <h3 className="font-headline text-sm font-bold uppercase tracking-widest text-secondary">{label}</h3>
+                      <p className="mt-3 font-body text-sm leading-relaxed text-on-surface-variant">{description}</p>
+                    </div>
                   ))}
                 </div>
               </section>
             ) : loading ? (
-              <section className="rounded-xl bg-surface-container-highest p-10">
+              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-highest p-6 md:p-8">
                 <p className="font-headline text-xl font-bold text-on-surface">Searching…</p>
                 <p className="mt-3 font-body text-base text-on-surface-variant">
                   Gathering results for “{normalizedQuery}”.
                 </p>
               </section>
             ) : results.length === 0 ? (
-              <section className="rounded-xl bg-surface-container-highest p-10">
+              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-highest p-6 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">No results for “{normalizedQuery}”.</h2>
-                <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant">
-                  Try a broader phrase, a specific title fragment, or one of the suggested topics in the sidebar.
+                <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
+                  Try a broader phrase, a title fragment, or one of the suggested terms in the side rail.
                 </p>
               </section>
             ) : (
               groupedResults.map(({ type, results: typeResults }) => (
                 <section key={type}>
-                  <div className="mb-8 flex items-center justify-between">
-                    <h2 className="flex items-center gap-2 font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
-                      <span className="h-px w-8 bg-outline-variant" />
-                      {typeLabels[type]}
-                    </h2>
-                    <span className="text-xs italic text-secondary">
-                      Showing {typeResults.length} result{typeResults.length === 1 ? '' : 's'}
-                    </span>
+                  <div className="mb-6 flex items-end justify-between gap-4 border-b border-outline-variant/10 pb-4">
+                    <div>
+                      <h2 className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
+                        {typeLabels[type]}
+                      </h2>
+                      <p className="mt-2 text-sm italic text-secondary">
+                        {typeResults.length} result{typeResults.length === 1 ? '' : 's'}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="space-y-1">
+                  <div className="space-y-4">
                     {typeResults.map((result) => (
                       <article
                         key={`${result.type}-${result.url}`}
-                        className="-mx-8 rounded-xl p-8 transition-all duration-300 hover:bg-surface-container-low"
+                        className="rounded-2xl border border-outline-variant/10 bg-surface-container-low px-5 py-5 transition-colors hover:bg-surface-container-high md:px-6 md:py-6"
                       >
                         <Link href={result.url} className="block">
                           <div className="flex flex-col gap-3">
                             <div className="flex flex-wrap items-center gap-3">
                               <span className="rounded bg-primary-fixed px-2 py-0.5 font-label text-[10px] font-bold uppercase tracking-widest text-primary">
-                                {result.type}
+                                {typeLabels[result.type]}
                               </span>
-                              {result.date ? (
+                              {result.type === 'tag' && typeof result.relatedCount === 'number' ? (
+                                <span className="font-label text-xs text-secondary">
+                                  {result.relatedCount} site item{result.relatedCount === 1 ? '' : 's'}
+                                </span>
+                              ) : result.date ? (
                                 <time className="font-label text-xs text-secondary">
                                   {formatResultDate(result.date)}
                                 </time>
@@ -213,7 +239,7 @@ function SearchContent() {
                               {result.title}
                             </h3>
                             {result.description ? (
-                              <p className="max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+                              <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant">
                                 {result.description}
                               </p>
                             ) : null}
@@ -222,7 +248,7 @@ function SearchContent() {
                                 {result.tags.slice(0, 4).map((tag) => (
                                   <span
                                     key={`${result.url}-${tag}`}
-                                    className="rounded-sm bg-surface-container-highest px-2 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary"
+                                    className="rounded-sm bg-surface px-2 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary"
                                   >
                                     {tag}
                                   </span>
@@ -239,50 +265,57 @@ function SearchContent() {
             )}
           </div>
 
-          <aside className="space-y-12 md:col-span-4">
-            <div className="rounded-xl bg-surface-container-low p-8">
-              <h2 className="mb-6 font-headline text-lg font-bold">Search Status</h2>
-              <div className="space-y-4">
+          <aside className="space-y-6 lg:col-span-4 lg:sticky lg:top-32">
+            <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
+              <h2 className="mb-6 font-headline text-lg font-bold text-on-surface">Search summary</h2>
+              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {[
                   ['Query', normalizedQuery || 'None'],
-                  ['Results', loading ? '…' : `${results.length}`],
+                  ['Results', loading ? 'Searching' : `${results.length}`],
                   ['Sections', `${groupedResults.length}`],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex items-center justify-between border-b border-outline-variant/20 pb-3">
-                    <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
-                    <span className="font-headline text-base font-bold text-on-surface">{value}</span>
+                  <div key={label} className="rounded-xl bg-surface-container-highest px-4 py-3">
+                    <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
+                    <span className="mt-2 block font-body text-sm text-on-surface-variant">{value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-xl bg-surface p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold">Try searching for</h2>
+            <div className="rounded-2xl bg-surface p-6 md:p-8">
+              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Navigate elsewhere</h2>
+              <p className="mb-5 font-body text-sm leading-relaxed text-on-surface-variant">
+                If search is not the fastest route, jump directly to the archive, tags, or tools surface.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  ['Open archive', '/archive'],
+                  ['Browse tags', '/tags'],
+                  ['Code & tools', '/code-ai'],
+                ].map(([label, href]) => (
+                  <Link
+                    key={label}
+                    href={href}
+                    className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+
+              <h3 className="mb-3 mt-6 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+                Suggested queries
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {quickQueries.concat(['openai', 'python']).map((term) => (
                   <Link
                     key={term}
                     href={`/search?q=${encodeURIComponent(term)}`}
-                    className="rounded-md bg-surface-container-low px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                    className="rounded-full bg-surface-container-low px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high"
                   >
                     {term}
                   </Link>
                 ))}
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-outline-variant/20 bg-surface p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold">Browse instead</h2>
-              <div className="flex flex-col gap-3">
-                <Link href="/archive" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
-                  Open archive
-                </Link>
-                <Link href="/tags" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
-                  Browse tags
-                </Link>
-                <Link href="/code-ai" className="font-label text-xs font-bold uppercase tracking-widest text-primary">
-                  Code &amp; tools
-                </Link>
               </div>
             </div>
           </aside>

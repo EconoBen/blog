@@ -1,5 +1,41 @@
 ## Context
 
+> Status note (March 24, 2026, stacked review follow-up of `/posts` pass 4): the `/posts` opening section was refined again, restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-posts-pass4/`. This pass addresses the remaining visual complaint from the earlier human screenshot: the route no longer spends a giant featured slab on a single narrow text column. The first real post module still appears at `475px` on desktop and `645px` on mobile with `0px` horizontal overflow, but the opening section now uses that space for multiple meaningful browse paths instead of dead white area.
+
+> Status note (March 24, 2026, stacked review follow-up of `/posts` pass 3): the refreshed `/posts` slice was restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-posts-codeai-pass3/`. The route is structurally stronger than the earlier same-weight ledger pass. The first real post module still appears in the opening viewport at `475px` on desktop and `645px` on mobile with `0px` horizontal overflow, and the latest year now has real editorial priority while the remaining years recede into secondary browse cards. The remaining debt is qualitative: browse rhythm, topic-section strength, and overall editorial finish.
+
+> Status note (March 24, 2026, stacked review follow-up of `/code-ai` pass 3): the `/code-ai` refinement was restacked onto `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-codeai-pass3/`. That pass confirms the route is now structurally better than the earlier morning review: the first real code entry still appears in the opening viewport at `539px` on desktop and `596px` on mobile, horizontal overflow remains `0px`, and the control section now reads as a compressed filter bar rather than a dashboard panel. The remaining debt is still qualitative, but it is narrower now: the route needs more editorial calm and less archive-control weight, not another above-the-fold rescue.
+
+> Status note (March 24, 2026, stacked review follow-up of `/posts` and `/code-ai`): the refreshed route slices were restacked on `feat/site-current-review`, rebuilt in production mode, and rechecked at `http://127.0.0.1:3018` with screenshots under `.playwright-discovery/stacked-review-20260324-posts-codeai-pass2/`. The main above-the-fold failure is no longer the same as the morning review. `/posts` now surfaces its first real post module at `475px` on desktop and `645px` on mobile, and `/code-ai` now surfaces its first real entry at `558px` on desktop and `697px` on mobile, with `0px` horizontal overflow on both route captures. That means the current blocker is no longer "content starts too low." The remaining debt is more qualitative: `/posts` still needs stronger browse composition and less card-ledger sameness, and `/code-ai` still needs a calmer archive hierarchy with less residual dashboard feel.
+
+> Status note (March 24, 2026, stacked review of `/posts` and `/code-ai`): the first route-specific implementation slices were stacked on `feat/site-current-review` and reviewed in production mode at `http://127.0.0.1:3018` with fresh Playwright captures under `.playwright-discovery/stacked-review-20260324-posts-codeai/`. That review made the remaining two blockers more concrete. `/posts` still spends too much of the first viewport on the title block, topic chips, archive metrics rail, and a second oversized “start here” billboard before a real post card appears. `/code-ai` still spends too much of the first viewport on route explainer copy, category chips, mode toggles, and browse framing before actual entries appear. The next pass should treat both routes as above-the-fold content-order problems, not just copy or polish problems.
+
+> Status note (March 23, 2026, direct user review correction): the earlier “close” assessment on several tabs was too optimistic. Direct human review overrode it for four routes: `/posts` still reads as an underpowered yearly ledger, `/about` has dropped too much of the baseline CV detail, `/talks` still spends too much of the top fold on clutter, and `/code-ai` still feels rough and amateurish next to the stronger editorial tabs. Those are now first-class blockers, tracked explicitly as `blog-mkj.2` / `#69`, `blog-qxn.1` / `#67`, `blog-r0j.1` / `#68`, and `blog-vt2.1` / `#66`.
+
+> Status note (March 23, 2026, wave-7 structured-content pass): the next weakest family after the home/code-tools cleanup was `talks` and `publications`, so that pair received another focused production pass. `/talks` now opens with less duplicated helper chrome, a softer browse rail, and list mode as the default archive view so the page reads as an editorial archive before it reads as a control board. `/publications` now uses a quieter archive-map block in the hero instead of a sticky side rail, and the featured publication card no longer dominates the first fold as heavily. Fresh production screenshots under `.playwright-discovery/tab-audit-20260323-wave7-final/` show both routes runtime-clean and much closer to the stronger pages; remaining work is increasingly whole-site judgment rather than obvious per-route breakdowns.
+
+> Status note (March 23, 2026, wave-6 focused composition pass): one more production rebuild and focused Playwright recheck on `http://127.0.0.1:3017` tightened the last two active composition problems from wave 5. On the homepage, the archive support rail no longer forces the lead archive card to stretch to an awkward shared height, and the right rail now starts more cleanly with a compact label row instead of explanatory filler. On `/code-ai`, empty categories are no longer rendered in the browse controls, which reduces the remaining dashboard feel without changing route behavior. The remaining gap is now mostly final judgment rather than a concrete broken composition: home and code-tools are much closer, but both should stay open until one more whole-site pass confirms they sit naturally beside the strongest editorial routes.
+
+> Status note (March 23, 2026, wave-5 focused calmness pass): a targeted production rebuild and Playwright recheck on `http://127.0.0.1:3017` pushed the remaining review blockers further inward rather than wider. The desktop shell is quieter because inactive topbar items now render as text links instead of a full row of inactive pills, the `/posts` archive moved to a calmer single-column year stack with the repeated latest-post CTA removed, `/archive` retained its ledger direction without new regressions, and `/code-ai` now opens more clearly as an archive with search and category controls subordinate to the content cards. The remaining honest frontend debt is now mostly compositional rather than structural: the homepage second screen is improved but still not fully settled, and the code-tools index is better but still denser than the strongest editorial routes.
+
+> Status note (March 23, 2026, wave-4 production audit and recheck): the production review baseline is stable again after removing a stale duplicate `src/app` scaffold that was causing the recurring `/_document` build failure in this worktree. A clean `npm run build` now completes again, `next start` is back on `http://127.0.0.1:3017`, and fresh desktop/mobile Playwright sweeps were captured under `.playwright-discovery/tab-audit-20260323-wave4/` and `.playwright-discovery/tab-audit-20260323-wave4-recheck/`. The site is runtime-clean, the measurable post-detail mobile overflow bug is fixed, talks/publications now expose stronger first-viewport hierarchy and page-level headings, and the remaining honest frontend debt is narrower: homepage second-screen composition, reading-family calmness on `/posts` and `/archive`, and another desktop hierarchy pass for the code-tools index.
+
+> Status note (March 23, 2026, wave-3 implementation recheck): the follow-up remediation pass from the wave-3 route audit is now applied locally and revalidated in production mode with a fresh `npm run build`, a restarted `next start` preview on `http://127.0.0.1:3017`, and updated screenshots under `.playwright-discovery/tab-audit-20260323-wave3-final/`. The shared mobile shell blocker is resolved: active-route pills render correctly, the active mobile route is promoted forward, and the primary nav no longer clips at 390px. Home, talks/publications, discovery, and code-tools all improved, but the remaining debt is now narrower and more honest: the homepage still needs a final second-screen composition pass, talks/publications are close rather than finished, and the code-tools family still needs another desktop hierarchy pass before it can be considered review-ready.
+
+> Status note (March 23, 2026, wave-3 route review): a third production-mode Playwright pass focused on the still-unsettled tabs using both full-page and first-viewport captures under `.playwright-discovery/tab-audit-20260323-wave3/`. That pass made the remaining frontend debt more specific: the mobile shell/header consumes too much space across top-level tabs, the homepage still duplicates its lead story, talks/publications still bury the primary artifact too far down the page, code-tools still reads like a product dashboard, and tags/search still have route-readiness gaps. Those findings are now split into narrower Beads/issues (`#61`, `#63`, `#65`, `#62`, `#64`) and separate worktree slices branched from `feat/site-stitch-polish-discovery`.
+
+> Status note (March 23, 2026, second frontend wave): the first tab-audit remediation wave is now applied locally across the reading/archive routes, tags/search, talks/publications/about, and code-tools/book surfaces. The branch remains runtime-clean in production mode, and the follow-up screenshots show materially better mobile hierarchy on posts, post detail, month archives, tags/search, about, book, and code-tools. Remaining frontend debt is now narrower: the homepage’s lower-half composition still needs direct work in `ShellHomePage`, and a few route families still have aesthetic polish left even after the hierarchy improvements.
+
+> Status note (March 23, 2026, tab-by-tab frontend audit): a second production-mode QA pass reviewed each major tab with a persistent Playwright browser session and fresh desktop/mobile screenshots under `.playwright-discovery/tab-audit-20260323/`. That pass confirmed the site is runtime-clean but not yet frontend-complete. The remaining issues are now grouped as route-family polish work rather than generic “more refinement”: home/posts/archive reading hierarchy, tags/search navigation strength, talks/publications/about hierarchy and dead-space cleanup, code-tools editorial flattening, and a smaller book-only mobile follow-up.
+
+> Status note (March 23, 2026, planning method): frontend work is now organized by a per-tab review matrix inside OpenSpec rather than by vague route-family intuition. Every major route is expected to have desktop and mobile Playwright evidence, an explicit status, and a linked implementation bead/issue before it is considered ready.
+
+> Status note (March 23, 2026, route-family polish): the `feat/site-stitch-polish-discovery` branch now includes the first production-verified polish pass for the remaining page families identified in the March 23 sweep. `/talks` and `/publications` were flattened to reduce metric-heavy side rails, `/about` metadata and copy were aligned with the ECONOBEN.DEV shell, `/code-ai` and `/code-ai/[id]` were tightened for mobile density, and `/book` moved to a calmer editorial hero treatment. A second clean production rebuild and Playwright sweep on `http://127.0.0.1:3017` confirmed the route set stayed runtime-clean after those edits.
+
+> Status note (March 23, 2026, production review baseline): the local review surface for `feat/site-stitch-polish-discovery` must now be treated as a production preview (`npm run build` + `npm run start`) rather than `next dev`. In this worktree, `next dev` repeatedly surfaced unstable chunk/runtime failures around `ClientLayout`, page CSS delivery, and Fast Refresh state, which made it unsuitable for reliable design review even when individual spot checks passed. The stable review URL remains `http://127.0.0.1:3017`, but only when served from `next start`. A production-mode Playwright sweep across the main route family completed cleanly and was used to generate the next Beads/issues backlog for route-level polish.
+
+> Status note (March 22, 2026, discovery polish): a new worktree branch, `feat/site-stitch-polish-discovery`, is now extending the integrated review stack for the discovery family. That branch currently carries a practical polish pass for `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, and `/search`, validated locally on `http://127.0.0.1:3017` with desktop and mobile Playwright screenshots. The route work deliberately removed more of the transitional “snapshot,” “featured,” and brag-style framing in favor of flatter archive ledgers, quieter side rails, and simpler grouped search results. One local tooling constraint remains important: running `npm run build` in the same worktree can still destabilize the live Next dev server, so preview verification may require restarting the local review server after a build even when the production build itself passes.
+
 > Status note (March 22, 2026): the literal Stitch-to-TSX preview pass now exists on the isolated preview branch `feat/site-stitch-html-preview` and is reviewable locally on `http://localhost:3007`. That branch intentionally uses exported sample copy and placeholder states where needed so the desktop layout family can be judged in-browser without treating the exported content as production truth. A follow-up render fix was required after the first pass: the preview initially served with missing utility styling because `app/globals.css` did not import Tailwind, and the old `body.shell-editorial` rule still forced a dark shell background. The current preview state includes both fixes and has been visually rechecked on the main top-level route set.
 
 The `blog` repo is the implementation target for the public site at `econoben.dev`. It is a Next.js App Router application with content and behavior spread across route components in `app/`, config-driven sections in `app/config/`, markdown posts in `src/posts/`, and service logic in `app/services/`.
@@ -153,6 +189,83 @@ Alternatives considered:
 - Merge the literal preview branch and clean it up later: rejected because it would bring exported sample content and placeholder assumptions too close to production.
 - Implement sequentially in one long-running branch: rejected because the user explicitly wants parallel execution and reviewable PR slices.
 - Let multiple workers edit the same shared files freely: rejected because it creates preventable merge conflicts and destroys the value of parallel worktrees.
+
+### 12. Frontend review is tab-by-tab, not page-family-by-vibe
+The unit of frontend QA is now the individual tab/route. Each major tab must have:
+
+- a desktop screenshot
+- a mobile screenshot
+- a route status in OpenSpec
+- a linked bead/issue if it is not ready
+
+Route families are still useful for implementation ownership, but they are no longer sufficient as the planning unit. The review process should be able to answer, explicitly, whether `/`, `/posts`, `/posts/[slug]`, `/archive`, `/archives/[month]`, `/tags`, `/tags/[tag]`, `/search`, `/talks`, `/publications`, `/about`, `/book`, `/code-ai`, and `/code-ai/[id]` are each review-ready.
+
+Alternatives considered:
+- Continue with route-family-only notes: rejected because it hides which specific tabs still fail review.
+- Use only broad “site feels better/worse” commentary: rejected because it is not actionable enough for parallel implementation.
+
+### 13. Direct user review overrides optimistic route-close calls
+Playwright evidence is necessary, but it is not sufficient. When direct human review says a route is still weak, OpenSpec must downgrade the route and split new route-specific blockers instead of treating the gap as residual polish.
+
+For the March 23 review pass, this means:
+
+- `/posts` needs a substantive rebuild, not another incremental calm-down pass
+- `/about` must regain the lost CV/resume depth from the current-site baseline
+- `/talks` still needs a more decisive first-viewport simplification
+- `/code-ai` still needs a composition pass strong enough to remove the “softened dashboard” feel
+
+Alternatives considered:
+- Keep calling these routes “close” because screenshot audits looked better: rejected because it conflicts with direct human review.
+- Roll the complaints back into the older family beads only: rejected because the issues are now specific enough to deserve their own blockers.
+
+### 14. `/posts` and `/code-ai` now fail mainly on content order, not on route existence
+The March 24 stacked review clarifies that the main remaining problem on both tabs is the same structural failure: real content starts too low.
+
+- On `/posts`, the first viewport is still dominated by hero text, topic chips, actions, a right-rail stats card, and then a second large intro statement before the first actual post module appears.
+- On `/code-ai`, the first viewport is still dominated by hero copy, search framing, category chips, and mode controls before any actual entry appears.
+
+The next design pass should therefore optimize for these route-level outcomes:
+
+- the first real post or code entry should appear meaningfully higher on desktop
+- stats/control systems should move down or compress sharply
+- the route should explain itself less and show its content sooner
+
+### 15. The content-order failure is reduced; the remaining problem is editorial quality
+The stacked follow-up pass later on March 24 changes the diagnosis. Both routes now surface real content inside the opening viewport, so the remaining work should stop treating them as simple above-the-fold bugs.
+
+- On `/posts`, the first real post module now appears in the opening viewport, but the page still reads as a set of evenly weighted year cards rather than a stronger editorial browse route with clearer depth and entry paths.
+- On `/code-ai`, the first real code entry now appears in the opening viewport, but the page still carries too much archive-control weight and not enough compositional calm compared with the strongest tabs.
+
+The next design passes should therefore optimize for these route-level outcomes:
+
+- `/posts` should feel like a richer browse page, not just a corrected ledger
+- `/code-ai` should feel like an editorial archive, not a softened tool dashboard
+- future review notes should distinguish structural fixes from remaining qualitative route weakness
+
+### 16. `/code-ai` is calmer now, but it still needs final editorial polish
+The latest restacked production review of `/code-ai` on March 24 confirms the route no longer reads like a dashboard first. The first real entry stays in view, the filter block is compressed, and the page order is now closer to the strongest editorial routes.
+
+- The filter bar is now compact enough to read as a tool for the archive rather than the page's main subject.
+- The featured entries remain high in the viewport while the controls sit lower and flatter.
+- The remaining work is final judgment on hierarchy, tone, and scan rhythm, not another structural rescue.
+
+### 17. `/posts` now has hierarchy, but it still needs final browse polish
+The latest restacked production review of `/posts` on March 24 confirms the route no longer reads like a flat field of same-weight year cards. The newest year now anchors the page as the primary browse entry while the other years recede into a secondary layer.
+
+- The route keeps the first real post module in the opening viewport while reducing the earlier feeling of evenly weighted archive bins.
+- The year section is now closer to an editorial browse system than a simple chronological grid.
+- The remaining work is final polish on browse rhythm and topic depth, not another structural re-ordering pass.
+
+### 18. `/posts` opening composition is now useful, not just large
+The latest pass on March 24 changes the quality of the first block. The page no longer gives the full opening width to one under-filled featured card.
+
+- The lead post still anchors the route, but it now sits beside supporting recent and topic entry paths.
+- The first screen uses width for navigation depth instead of empty space.
+- Remaining work should focus on the lower browse rhythm, not on rescuing the opening section again.
+
+Alternatives considered:
+- Keep layering more copy and section labels into the current openings: rejected because the stacked review shows content already starts too low.
+- Solve these routes only with typography and spacing tweaks: rejected because the issue is ordering and allocation of the first viewport, not just visual styling.
 
 ## Architecture
 

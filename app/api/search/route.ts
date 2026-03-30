@@ -5,6 +5,9 @@ import { unifiedSearchService } from '@/app/services/UnifiedSearchService';
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const query = url.searchParams.get('q')?.trim() || '';
+  const limitParam = url.searchParams.get('limit');
+  const limit = limitParam ? Number(limitParam) : undefined;
+  const compactResponse = typeof limit === 'number' && Number.isFinite(limit) && limit > 0;
 
   if (!query) {
     return NextResponse.json(
@@ -14,7 +17,11 @@ export async function GET(request: Request) {
   }
 
   try {
-    const results = await unifiedSearchService.search(query);
+    const results = await unifiedSearchService.search(query, {
+      includeCodeTools: !compactResponse,
+      includeTagResults: !compactResponse,
+      limit: compactResponse ? limit : undefined,
+    });
     return NextResponse.json(
       {
         results,

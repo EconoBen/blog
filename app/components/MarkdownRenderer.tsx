@@ -41,16 +41,21 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
         (el) => React.isValidElement(el) && (el as any).type === 'span' && Boolean(((el as any).props || {})['data-tts-diagram'])
       );
       if (hasTtsMarker) {
-        return <pre {...props}><TTSPipelineDiagram /></pre>;
+        return <TTSPipelineDiagram />;
+      }
+
+      // If the fenced block already rendered a CodeBlock component, do not wrap it again.
+      if (kids.length === 1 && React.isValidElement(kids[0]) && Boolean((kids[0] as any).props?.filename)) {
+        return <>{kids[0]}</>;
       }
 
       // If react-markdown nested a <pre> inside this <pre>, unwrap it
       if (kids.length === 1 && React.isValidElement(kids[0]) && (kids[0] as any).type === 'pre') {
         const innerChildren = ((kids[0] as any).props || {}).children;
-        return <pre {...props}>{innerChildren}</pre>;
+        return <>{innerChildren}</>;
       }
 
-      return <pre {...props}>{children}</pre>;
+      return <>{children}</>;
     },
     // Wrap fenced code blocks; ensure single <pre> around TTS diagram to match production// Override code block rendering
     code({ node, inline, className, children, ...props }: any) {

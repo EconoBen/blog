@@ -114,48 +114,6 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </Link>
           </div>
         </div>
-        <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Reading frame</p>
-          <div className="editorial-page-metric-list">
-            <div>
-              <span className="editorial-page-metric-value">{longDateFormatter.format(post.date)}</span>
-              <span className="editorial-page-metric-label">publication date</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{post.readingTime ? `${post.readingTime} min` : 'Essay'}</span>
-              <span className="editorial-page-metric-label">reading length</span>
-            </div>
-            <div>
-              <span className="editorial-page-metric-value">{post.tags.length}</span>
-              <span className="editorial-page-metric-label">topics</span>
-            </div>
-          </div>
-          {audioUrl ? (
-            <AudioPlayer
-              audioUrl={audioUrl}
-              title="Listen to this post"
-              className="post-audio-player"
-            />
-          ) : (
-            <p className="editorial-post-summary">No audio version is available for this post yet.</p>
-          )}
-          <div className="editorial-chip-row">
-            {post.tags.length > 0
-              ? post.tags.map((tag) => (
-                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                    {tag}
-                  </Link>
-                ))
-              : <span className="editorial-chip">Essay</span>}
-          </div>
-          {post.coverImage ? (
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="blog-image"
-            />
-          ) : null}
-        </aside>
       </section>
 
       <section className="editorial-list-section">
@@ -166,6 +124,51 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         <div className="blog-content">
           <MarkdownRenderer content={post.content} />
+        </div>
+      </section>
+
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Reading frame</p>
+          <h2 className="editorial-page-section-title">Audio, tags, and the cover image stay available after the article begins.</h2>
+        </div>
+
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="rounded-3xl border border-outline-variant/20 bg-surface-container-low p-6 md:p-8">
+            <div className="flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+              <span>Published {longDateFormatter.format(post.date)}</span>
+              <span>{post.readingTime ? `${post.readingTime} min read` : 'Essay'}</span>
+              <span>{post.tags.length} topic{post.tags.length === 1 ? '' : 's'}</span>
+            </div>
+            <div className="mt-6">
+              {audioUrl ? (
+                <AudioPlayer
+                  audioUrl={audioUrl}
+                  title="Listen to this post"
+                  className="post-audio-player"
+                />
+              ) : (
+                <p className="editorial-post-summary">No audio version is available for this post yet.</p>
+              )}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {post.tags.length > 0
+                ? post.tags.map((tag) => (
+                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                      {tag}
+                    </Link>
+                  ))
+                : <span className="editorial-chip">Essay</span>}
+            </div>
+          </div>
+
+          {post.coverImage ? (
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              className="blog-image"
+            />
+          ) : null}
         </div>
       </section>
 

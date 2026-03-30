@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
-import { postService } from '../services/PostService';
+import { postService, type Post, type TagCount } from '../services/PostService';
 
 export const metadata: Metadata = {
   title: 'Tags | ECONOBEN.DEV',
@@ -10,12 +10,20 @@ export const metadata: Metadata = {
 
 export default async function TagsPage() {
   const posts = await postService.getAllPosts();
-  const allTags = await postService.getAllTags();
-  const sortedTags = [...allTags].sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
-  const [primaryTag, secondaryTag, ...remainingTags] = sortedTags;
+  const tagCountMap = new Map<string, number>();
+
+  posts.forEach((post: Post) => {
+    post.tags.forEach((tag) => {
+      tagCountMap.set(tag, (tagCountMap.get(tag) ?? 0) + 1);
+    });
+  });
+
+  const sortedTags = Array.from(tagCountMap.entries())
+    .map(([tag, count]): TagCount => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
   const topTags = sortedTags.slice(0, 8);
 
-  const tagsByLetter = remainingTags.reduce<Record<string, typeof remainingTags>>((acc, tagEntry) => {
+  const tagsByLetter = sortedTags.reduce<Record<string, typeof sortedTags>>((acc, tagEntry) => {
     const letter = tagEntry.tag.charAt(0).toUpperCase();
     acc[letter] ??= [];
     acc[letter].push(tagEntry);
@@ -26,137 +34,180 @@ export default async function TagsPage() {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto min-h-screen max-w-7xl px-8 py-20">
-        <section className="mb-20 max-w-3xl">
-          <span className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
-            Archive &amp; Taxonomy
-          </span>
-          <h1 className="mb-6 font-headline text-6xl font-black tracking-tight text-on-surface">
-            Topic Index
-          </h1>
-          <p className="text-xl leading-relaxed text-on-surface-variant">
-            Browse the archive by subject, with the most-used topics surfaced first and every tag still linking through to its own post trail.
-          </p>
-        </section>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-          {primaryTag ? (
-            <Link
-              href={`/tags/${encodeURIComponent(primaryTag.tag)}`}
-              className="cursor-pointer rounded-xl bg-surface-container-highest p-10 transition-colors hover:bg-surface-container-high md:col-span-8"
-            >
-              <div className="mb-8 flex items-start justify-between gap-6">
-                <span className="rounded-full bg-primary px-3 py-1 font-label text-xs font-bold text-on-primary">
-                  MOST USED
-                </span>
-                <span className="font-headline text-4xl font-bold text-on-surface">{primaryTag.count}</span>
-              </div>
-              <h2 className="mb-4 font-headline text-4xl font-extrabold transition-colors hover:text-primary">
-                {primaryTag.tag}
-              </h2>
-              <p className="max-w-xl text-lg text-on-surface-variant">
-                The densest topic cluster in the archive, currently spanning {primaryTag.count} post{primaryTag.count === 1 ? '' : 's'}.
-              </p>
-              <div className="mt-12 flex flex-wrap gap-3">
-                {posts
-                  .filter((post) => post.tags.includes(primaryTag.tag))
-                  .slice(0, 4)
-                  .map((post) => (
-                    <span
-                      key={post.slug}
-                      className="rounded bg-secondary-container px-2 py-1 font-label text-[10px] uppercase tracking-tighter text-on-secondary-container"
-                    >
-                      {post.title}
-                    </span>
-                  ))}
-              </div>
-            </Link>
-          ) : null}
-
-          {secondaryTag ? (
-            <Link
-              href={`/tags/${encodeURIComponent(secondaryTag.tag)}`}
-              className="rounded-xl border border-outline-variant/10 bg-surface-container-low p-10 transition-colors hover:bg-surface-container-high md:col-span-4"
-            >
-              <div className="mb-8 flex justify-between">
-                <span className="font-headline text-3xl font-bold text-secondary">{secondaryTag.count}</span>
-              </div>
-              <h2 className="mb-4 font-headline text-3xl font-extrabold text-on-surface">
-                {secondaryTag.tag}
-              </h2>
-              <p className="text-on-surface-variant">
-                Another high-signal topic area that stays one click away from the underlying posts.
-              </p>
-              <span className="mt-8 inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-primary">
-                Explore topic
+      <main className="mx-auto min-h-screen max-w-7xl px-5 py-12 sm:px-6 md:px-8 md:py-20">
+        <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
+          <div className="space-y-8 lg:col-span-8">
+            <div className="max-w-3xl">
+              <span className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
+                Archive &amp; Taxonomy
               </span>
-            </Link>
-          ) : null}
+              <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface sm:text-5xl md:text-6xl">
+                Topic index.
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">
+                Browse the archive by subject. The tags stay ranked by use, but the page keeps the hierarchy quiet and practical.
+              </p>
+            </div>
 
-          <div className="mt-12 md:col-span-12">
-            <div className="mb-8 flex flex-col gap-4 border-b border-outline-variant/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h3 className="font-headline text-xl font-bold text-on-surface">Alphabetical Index</h3>
-                <p className="mt-2 font-body text-sm text-on-surface-variant">
-                  {sortedTags.length} tags across {posts.length} post{posts.length === 1 ? '' : 's'}.
+            <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-6 md:p-8">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <h2 className="font-headline text-xl font-bold text-on-surface">Top tags</h2>
+                  <p className="mt-2 font-body text-sm text-on-surface-variant">
+                    {sortedTags.length} tags across {posts.length} post{posts.length === 1 ? '' : 's'}.
+                  </p>
+                </div>
+                <p className="font-body text-sm italic text-secondary">
+                  Each tag still links to its own topic trail.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2">
+
+              <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
                 {topTags.map((tagEntry) => (
                   <Link
                     key={tagEntry.tag}
                     href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
-                    className="rounded-full bg-surface-container-low px-3 py-1.5 font-label text-xs font-semibold text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                    className="flex items-center justify-between gap-3 rounded-2xl border border-outline-variant/10 bg-surface px-4 py-3 transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
                   >
-                    {tagEntry.tag}
+                    <span className="min-w-0 font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+                      {tagEntry.tag}
+                    </span>
+                    <span className="rounded-full bg-surface-container-lowest px-2.5 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                      {tagEntry.count}
+                    </span>
                   </Link>
+                ))}
+              </div>
+            </section>
+
+            <section className="space-y-6">
+              <div className="flex flex-col gap-4 border-b border-outline-variant/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <h2 className="font-headline text-xl font-bold text-on-surface">Alphabetical index</h2>
+                  <p className="mt-2 font-body text-sm text-on-surface-variant">
+                    All tags, grouped by first letter, with counts kept visible but understated.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {sortedLetters.map((letter) => (
+                    <a
+                      key={letter}
+                      href={`#tag-letter-${letter}`}
+                      className="rounded-full border border-outline-variant/10 bg-surface-container-low px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                    >
+                      {letter}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              <div className="md:hidden">
+                <details className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4">
+                    <span className="font-headline text-base font-bold text-on-surface">
+                      Open the full alphabetical index
+                    </span>
+                    <span className="rounded-full bg-surface px-2.5 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                      {sortedTags.length} tags
+                    </span>
+                  </summary>
+                  <p className="mt-3 max-w-2xl font-body text-sm leading-relaxed text-on-surface-variant">
+                    The top tags above cover the quickest paths. Open this directory view when you want the complete list.
+                  </p>
+                  <div className="mt-5 space-y-4">
+                    {sortedLetters.map((letter) => (
+                      <section key={letter} id={`tag-letter-${letter}`} className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-4">
+                        <div className="flex flex-wrap items-baseline justify-between gap-4">
+                          <h3 className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">
+                            {letter}
+                          </h3>
+                          <span className="font-body text-sm italic text-secondary">
+                            {tagsByLetter[letter].length} tag{tagsByLetter[letter].length === 1 ? '' : 's'}
+                          </span>
+                        </div>
+                        <div className="mt-4 grid grid-cols-1 gap-2">
+                          {tagsByLetter[letter].map((tagEntry) => (
+                            <Link
+                              key={tagEntry.tag}
+                              href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
+                              className="flex items-center justify-between gap-2 rounded-xl bg-surface px-3 py-2.5 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                            >
+                              <span className="min-w-0 truncate">{tagEntry.tag}</span>
+                              <span className="shrink-0 text-secondary">{tagEntry.count}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      </section>
+                    ))}
+                  </div>
+                </details>
+              </div>
+
+              <div className="hidden space-y-4 md:block">
+                {sortedLetters.map((letter) => (
+                  <section key={letter} id={`tag-letter-${letter}`} className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-5 md:p-6">
+                    <div className="flex flex-wrap items-baseline justify-between gap-4">
+                      <h3 className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">
+                        {letter}
+                      </h3>
+                      <span className="font-body text-sm italic text-secondary">
+                        {tagsByLetter[letter].length} tag{tagsByLetter[letter].length === 1 ? '' : 's'}
+                      </span>
+                    </div>
+                    <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {tagsByLetter[letter].map((tagEntry) => (
+                        <Link
+                          key={tagEntry.tag}
+                          href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
+                          className="flex items-center justify-between gap-2 rounded-xl bg-surface px-3 py-2.5 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                        >
+                          <span className="min-w-0 truncate">{tagEntry.tag}</span>
+                          <span className="shrink-0 text-secondary">{tagEntry.count}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          <aside className="space-y-6 lg:sticky lg:top-32 lg:col-span-4">
+            <div className="rounded-2xl bg-surface-container-highest p-6 md:p-8">
+              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Tag archive</h2>
+              <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                {[
+                  ['Total tags', `${sortedTags.length}`],
+                  ['Posts covered', `${posts.length}`],
+                  ['Top tag count', `${topTags[0]?.count ?? 0}`],
+                ].map(([label, value]) => (
+                  <div key={label} className="rounded-xl bg-surface-container-low p-4">
+                    <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
+                    <span className="mt-2 block font-body text-lg text-on-surface-variant">{value}</span>
+                  </div>
                 ))}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {sortedLetters.map((letter) => (
-                <section key={letter} className="rounded-xl bg-surface p-6">
-                  <h4 className="mb-4 font-headline text-lg font-bold text-on-surface">{letter}</h4>
-                  <div className="space-y-3">
-                    {tagsByLetter[letter].map((tagEntry) => (
-                      <Link
-                        key={tagEntry.tag}
-                        href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
-                        className="flex items-center justify-between border-b border-outline-variant/10 pb-3 transition-colors hover:text-primary"
-                      >
-                        <span className="font-headline font-semibold text-on-surface">{tagEntry.tag}</span>
-                        <span className="rounded bg-surface-container-highest px-2 py-1 font-label text-xs text-secondary">
-                          {tagEntry.count}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </section>
-              ))}
+            <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
+              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse routes</h2>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+                  Browse archive
+                </Link>
+                <Link href="/search" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+                  Search site
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <section className="mx-auto mt-32 max-w-4xl rounded-xl border border-outline-variant/20 bg-surface-container-low p-12 text-center">
-          <h3 className="mb-4 font-headline text-2xl font-bold text-on-surface">Need a broader route in?</h3>
-          <p className="mb-8 font-body text-lg italic text-on-surface-variant">
-            Move from tags into the full archive or search the site directly if you know the subject already.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href="/archive"
-              className="rounded-md bg-primary-container px-6 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-primary"
-            >
-              Browse archive
-            </Link>
-            <Link
-              href="/search"
-              className="rounded-md border border-outline-variant bg-surface px-6 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high"
-            >
-              Search site
-            </Link>
-          </div>
+            <div className="rounded-2xl border border-outline-variant/20 bg-surface p-6 md:p-8">
+              <h2 className="mb-3 font-headline text-lg font-bold text-on-surface">A useful starting point</h2>
+              <p className="font-body text-sm leading-relaxed text-on-surface-variant">
+                Pick a high-frequency tag first if you want breadth, or use the alphabetical index when you already know the subject you are chasing.
+              </p>
+            </div>
+          </aside>
         </section>
       </main>
     </EditorialPageFrame>
