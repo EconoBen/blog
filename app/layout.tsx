@@ -1,28 +1,29 @@
 import type { Metadata } from 'next';
-import { Manrope } from 'next/font/google';
+import { Inter, Newsreader } from 'next/font/google';
 import './globals.css';
 import ClientLayout from './components/ClientLayout';
 
-const manrope = Manrope({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const newsreader = Newsreader({ subsets: ['latin'], variable: '--font-newsreader' });
 
 export const metadata: Metadata = {
-  title: 'Ben Labaschin | Technical Editorial Platform',
-  description: 'Posts, talks, publications, code, and a forthcoming book on agent memory.',
+  title: 'ECONOBEN.DEV',
+  description: 'Posts, talks, publications, technical tools, and the forthcoming book preview in a literal Stitch TSX pass.',
   authors: [{ name: 'Benjamin Labaschin' }],
-  keywords: ['agent memory', 'AI systems', 'machine learning', 'technical writing', 'talks', 'publications'],
+  keywords: ['econoben', 'technical editorial', 'posts', 'talks', 'publications', 'code and tools', 'agent memory'],
   manifest: '/manifest.json',
   openGraph: {
-    title: 'Ben Labaschin | Technical Editorial Platform',
-    description: 'Posts, talks, publications, code, and a forthcoming book on agent memory.',
+    title: 'ECONOBEN.DEV',
+    description: 'Posts, talks, publications, technical tools, and the forthcoming book preview in a literal Stitch TSX pass.',
     url: 'https://econoben.dev',
-    siteName: 'Ben Labaschin | Technical Editorial Platform',
+    siteName: 'ECONOBEN.DEV',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ben Labaschin | Technical Editorial Platform',
-    description: 'Posts, talks, publications, code, and a forthcoming book on agent memory.',
+    title: 'ECONOBEN.DEV',
+    description: 'Posts, talks, publications, technical tools, and the forthcoming book preview in a literal Stitch TSX pass.',
   },
   metadataBase: new URL('https://econoben.dev'),
 };
@@ -34,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={manrope.className}>
+      <body className={`${inter.variable} ${newsreader.variable}`}>
         <ClientLayout>
           {children}
         </ClientLayout>

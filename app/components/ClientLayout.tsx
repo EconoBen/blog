@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
 import Sidebar from './Sidebar';
 import SocialLinks from './SocialLinks';
-import DarkModeToggle from './DarkModeToggle';
 import NavBar from './NavBar';
 
 interface ClientLayoutProps {
@@ -123,12 +122,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
 
   // Don't render sidebar on mobile
   if (isMobile || useEditorialShell) {
-    return (
-      <>
-        {children}
-        <DarkModeToggle />
-      </>
-    );
+    return <>{children}</>;
   }
 
   return (
@@ -144,12 +138,11 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
         style={{ marginLeft: sidebarOpen ? `${sidebarWidth}px` : '0' }}
       >
         <NavBar />
-        <div className="content-wrapper">
+      <div className="content-wrapper">
           {children}
         </div>
       </div>
       <SocialLinks />
-      <DarkModeToggle />
       {/* Add resize handle event listener */}
       {sidebarOpen && (
         <div
