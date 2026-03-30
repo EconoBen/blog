@@ -150,7 +150,7 @@ function FeaturedTalk({
   return (
     <article className="overflow-hidden rounded-2xl bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)]">
       <div className="grid h-full gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
-        <div className="min-h-[340px] bg-surface-container-low">
+        <div className="min-h-[300px] bg-surface-container-low">
           <TalkMediaPreview talk={talk} isOpen={isOpen} onOpen={onOpen} />
         </div>
         <div className="flex flex-col justify-between p-6 md:p-8 lg:p-10">
@@ -385,11 +385,12 @@ export default function TalksClient() {
   }, [activeTalkId, filteredTalks]);
 
   const featuredTalk = filteredTalks.find((talk) => talk.id === activeTalkId) ?? filteredTalks[0] ?? null;
+  const archiveTalks = featuredTalk ? filteredTalks.filter((talk) => talk.id !== featuredTalk.id) : filteredTalks;
 
   return (
-    <section className="mx-auto max-w-7xl px-8 pb-32">
+    <section className="mx-auto max-w-7xl px-8 pb-16">
       {featuredTalk && (
-        <div className="mb-12 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
+        <div className="mb-8 grid gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.85fr)]">
           <FeaturedTalk talk={featuredTalk} isOpen={featuredTalk.id === activeTalkId} onOpen={() => setActiveTalkId(featuredTalk.id)} />
           <aside className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 md:p-6 lg:p-7">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse recordings</p>
@@ -411,7 +412,7 @@ export default function TalksClient() {
               </span>
             </div>
             <div className="mt-5 hidden space-y-2 md:block">
-              {filteredTalks.slice(0, 3).map((talk) => (
+              {archiveTalks.slice(0, 3).map((talk) => (
                 <button
                   key={talk.id}
                   type="button"
@@ -497,9 +498,15 @@ export default function TalksClient() {
         <div className="rounded-2xl bg-surface-container-low p-10 text-center">
           <p className="font-headline text-2xl font-bold text-on-surface">No talks found for that topic.</p>
         </div>
+      ) : archiveTalks.length === 0 ? (
+        <div className="rounded-2xl bg-surface-container-low p-8">
+          <p className="font-body text-base leading-relaxed text-secondary">
+            This filter only leaves the featured recording. Open it above or clear the filter to browse the rest of the archive.
+          </p>
+        </div>
       ) : (
         <div className={viewMode === 'grid' ? 'grid gap-8 md:grid-cols-2 xl:grid-cols-3' : 'space-y-8'}>
-          {filteredTalks.map((talk) => (
+          {archiveTalks.map((talk) => (
             <TalkCard
               key={talk.id}
               talk={talk}
