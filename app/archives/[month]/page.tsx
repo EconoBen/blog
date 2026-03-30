@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { EditorialPageFrame } from '../../components/EditorialPageFrame';
-import { postService } from '../../services/PostService';
+import { postService } from '../../../services/PostService';
 
 interface ArchivePageProps {
   params: Promise<{
@@ -52,6 +52,32 @@ async function getPostsForMonth(month: string) {
   return { year, monthNum, monthPosts };
 }
 
+function MonthPostRow({ post }: { post: Awaited<ReturnType<typeof postService.getAllPosts>>[number] }) {
+  return (
+    <article style={rowStyle}>
+      <div className="editorial-post-row-header">
+        <div className="editorial-post-row-title">
+          <p className="editorial-home-card-label">{longDateFormatter.format(post.date)}</p>
+          <h3 style={{ margin: 0 }}>
+            <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+          </h3>
+        </div>
+        <span className="editorial-post-summary">
+          {post.readingTime ? `${post.readingTime} min read` : 'Post'}
+        </span>
+      </div>
+      {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
+      <div className="editorial-chip-row">
+        {post.tags.slice(0, 4).map((tag) => (
+          <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+            {tag}
+          </Link>
+        ))}
+      </div>
+    </article>
+  );
+}
+
 export default async function ArchivePage({ params }: ArchivePageProps) {
   const { month } = await params;
   const monthData = await getPostsForMonth(month);
@@ -71,6 +97,15 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
     month: 'long',
   });
 
+  const monthTagCounts = new Map<string, number>();
+  monthPosts.forEach((post) => {
+    post.tags.forEach((tag) => {
+      monthTagCounts.set(tag, (monthTagCounts.get(tag) ?? 0) + 1);
+    });
+  });
+  const topMonthTags = Array.from(monthTagCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 4);
+  const leadPost = monthPosts[0];
+
   return (
     <EditorialPageFrame currentPath="/archive" pageClassName="editorial-book-page">
       <section className="editorial-page-hero">
@@ -78,48 +113,113 @@ export default async function ArchivePage({ params }: ArchivePageProps) {
           <p className="editorial-home-kicker">Archive month</p>
           <h1 className="editorial-page-title">{monthName}</h1>
           <p className="editorial-page-copy">
-            Posts published in {monthName}, ordered newest first and kept in the same reading vocabulary as the broader archive.
+            Posts published in {monthName}, ordered newest first and framed as a content-led monthly archive.
           </p>
+          <div className="editorial-breadcrumb" aria-label="Archive month breadcrumb">
+            <Link href="/archive">Archive</Link>
+            <span>/</span>
+            <span>{monthName}</span>
+          </div>
           <div className="editorial-chip-row">
             <span className="editorial-chip">{monthPosts.length} posts</span>
             <span className="editorial-chip">Newest first</span>
-            <span className="editorial-chip">Archive link preserved</span>
             <Link href="/archive" className="editorial-chip">
               Back to archive
             </Link>
+          </div>
+        </div>
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">Month notes</p>
+          <div className="editorial-page-metric-list" style={{ marginTop: '12px' }}>
+            <div>
+              <span className="editorial-page-metric-value">{monthPosts.length}</span>
+              <span className="editorial-page-metric-label">Posts published this month</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">{topMonthTags.length}</span>
+              <span className="editorial-page-metric-label">Top tags carrying the monthly signal</span>
+            </div>
+          </div>
+          <div className="editorial-chip-row" style={{ marginTop: '16px' }}>
+            {topMonthTags.length > 0 ? (
+              topMonthTags.map(([tag, count]) => (
+                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                  {tag} <span>({count})</span>
+                </Link>
+              ))
+            ) : (
+              <span className="editorial-chip">No tags</span>
+            )}
+          </div>
+        </aside>
+      </section>
+
+      <section className="editorial-list-section">
+        <div className="editorial-list-heading">
+          <p className="editorial-home-section-label">Content-led layout</p>
+          <h2 className="editorial-page-section-title">The month opens with the strongest post and then falls back to the full list.</h2>
+        </div>
+        <div className="editorial-month-feature">
+          <article className="editorial-discovery-card is-featured">
+            <div>
+              <p className="editorial-home-card-label">Featured post in this month</p>
+              <h2 style={{ marginTop: '10px' }}>
+                <Link href={`/posts/${leadPost.slug}`}>{leadPost.title}</Link>
+              </h2>
+              {leadPost.summary && <p className="editorial-post-summary">{leadPost.summary}</p>}
+              <div className="editorial-post-meta-panel" style={{ marginTop: '16px' }}>
+                <span>{longDateFormatter.format(leadPost.date)}</span>
+                <span>{leadPost.readingTime ? `${leadPost.readingTime} min read` : 'Post'}</span>
+                <Link href={`/posts/${leadPost.slug}`}>Open post</Link>
+              </div>
+              <div className="editorial-chip-row">
+                {leadPost.tags.slice(0, 5).map((tag) => (
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <aside className="editorial-discovery-card-aside">
+              <div className="editorial-page-aside">
+                <p className="editorial-home-card-label">Why it is featured</p>
+                <p className="editorial-page-copy" style={{ marginTop: '10px' }}>
+                  The lead post anchors the month and gives the reader an immediate entry point before the smaller items in the list.
+                </p>
+              </div>
+            </aside>
+          </article>
+
+          <div className="editorial-search-sidebar-card">
+            <p className="editorial-home-card-label">Month context</p>
+            <h3 style={{ marginTop: '8px' }}>{monthName}</h3>
+            <p style={{ marginTop: '10px' }}>
+              The month bucket preserves the underlying post URLs, tag links, and markdown rendering while making the chronology easier to scan.
+            </p>
+            <div className="editorial-link-row">
+              <Link href="/posts" className="editorial-post-link">
+                Posts
+              </Link>
+              <Link href="/tags" className="editorial-post-link">
+                Tags
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Posts</p>
+          <p className="editorial-home-section-label">Monthly posts</p>
           <h2 className="editorial-page-section-title">Everything published during this month.</h2>
         </div>
-        <div style={{ display: 'grid', gap: '1rem' }}>
-          {monthPosts.map((post) => (
-            <article key={post.slug} style={rowStyle}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline' }}>
-                <div>
-                  <p className="editorial-home-card-label">{longDateFormatter.format(post.date)}</p>
-                  <h3 style={{ margin: 0 }}>
-                    <Link href={`/posts/${post.slug}`}>{post.title}</Link>
-                  </h3>
-                </div>
-                <span className="editorial-post-summary">
-                  {post.readingTime ? `${post.readingTime} min read` : 'Post'}
-                </span>
-              </div>
-              {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
-              <div className="editorial-chip-row">
-                {post.tags.slice(0, 4).map((tag) => (
-                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-            </article>
+        <div style={{ display: 'grid', gap: '14px' }}>
+          {monthPosts.slice(1).map((post) => (
+            <MonthPostRow key={post.slug} post={post} />
           ))}
+          {monthPosts.length === 1 ? (
+            <p className="editorial-post-summary">This month only contains the featured post above.</p>
+          ) : null}
         </div>
       </section>
     </EditorialPageFrame>
