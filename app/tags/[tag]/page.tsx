@@ -83,20 +83,57 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto max-w-7xl px-8 py-16 md:py-20">
+      <main className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:px-8 md:py-20">
         <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="space-y-10 lg:col-span-8 lg:order-first">
             <div className="max-w-3xl">
               <span className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
                 Topic archive
               </span>
-              <h1 className="mt-4 font-headline text-5xl font-black tracking-tighter text-on-surface md:text-6xl">
+              <h1 className="mt-4 font-headline text-4xl font-black tracking-tighter text-on-surface sm:text-5xl md:text-6xl">
                 {tag}
               </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">
                 {posts.length} post{posts.length === 1 ? '' : 's'} collected under this topic, grouped by year and left fully linked for browsing.
               </p>
             </div>
+
+            <div className="flex flex-wrap gap-2 lg:hidden">
+              <Link
+                href="/tags"
+                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+              >
+                Back to tags
+              </Link>
+              <Link
+                href="/archive"
+                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+              >
+                Open archive
+              </Link>
+              <Link
+                href={`/search?q=${encodeURIComponent(tag)}`}
+                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+              >
+                Search this topic
+              </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-2 text-[11px] font-bold uppercase tracking-widest text-secondary lg:hidden">
+              <span className="rounded-full bg-surface-container-low px-3 py-1.5">
+                {posts.length} post{posts.length === 1 ? '' : 's'}
+              </span>
+              <span className="rounded-full bg-surface-container-low px-3 py-1.5">
+                {postsByYear.length} year{postsByYear.length === 1 ? '' : 's'}
+              </span>
+              <span className="rounded-full bg-surface-container-low px-3 py-1.5">
+                {relatedTags.length} related tag{relatedTags.length === 1 ? '' : 's'}
+              </span>
+            </div>
+
+            <p className="max-w-2xl text-sm leading-relaxed text-on-surface-variant lg:hidden">
+              Use the route chips above to switch surfaces, then scroll the year groups below for the full topic trail.
+            </p>
 
             {postsByYear.map((yearGroup) => (
               <section key={yearGroup.year} className="space-y-5">
@@ -153,7 +190,7 @@ export default async function TagPage({ params }: TagPageProps) {
           </div>
 
           <aside className="space-y-6 lg:col-span-4 lg:order-last lg:sticky lg:top-32">
-            <div className="rounded-2xl bg-surface-container-highest p-6 md:p-8">
+            <div className="hidden rounded-2xl bg-surface-container-highest p-6 md:block md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Topic notes</h2>
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
@@ -170,7 +207,7 @@ export default async function TagPage({ params }: TagPageProps) {
             </div>
 
             {relatedTags.length > 0 ? (
-              <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
+              <div className="hidden rounded-2xl bg-surface-container-low p-6 md:block md:p-8">
                 <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Related tags</h2>
                 <div className="flex flex-wrap gap-2">
                   {relatedTags.map(([relatedTag, count]) => (
@@ -187,12 +224,12 @@ export default async function TagPage({ params }: TagPageProps) {
               </div>
             ) : null}
 
-            <div className="rounded-2xl border border-outline-variant/20 bg-surface p-6 md:p-8">
+            <div className="hidden rounded-2xl border border-outline-variant/20 bg-surface p-6 md:block md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse beyond this topic</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
                 Switch from this topic trail to the full archive or run a direct search if you want a broader slice of the same material.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-3 md:mt-6">
                 <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
                   Open archive
                 </Link>
