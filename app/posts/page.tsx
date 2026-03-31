@@ -88,6 +88,18 @@ const buildYearSummary = (yearPosts: Posts, yearTopics: TagStat[]) => {
   return `${yearPosts.length} posts threaded through ${topTopics[0]} and ${topTopics[1]}, with the full archive available by month in /archive.`;
 };
 
+const buildYearSpan = (yearPosts: Posts) => {
+  if (yearPosts.length === 0) {
+    return 'No posts';
+  }
+
+  if (yearPosts.length === 1) {
+    return shortDateFormatter.format(yearPosts[0].date);
+  }
+
+  return `${shortDateFormatter.format(yearPosts[yearPosts.length - 1].date)} to ${shortDateFormatter.format(yearPosts[0].date)}`;
+};
+
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
   const latestPost = posts[0];
@@ -117,12 +129,18 @@ export default async function PostsPage() {
 
   return (
     <EditorialPageFrame currentPath="/posts">
-      <section className="editorial-page-hero">
+      <section
+        className="editorial-page-hero"
+        style={{
+          alignItems: 'start',
+          gridTemplateColumns: 'minmax(0, 1.08fr) minmax(340px, 0.92fr)',
+        }}
+      >
         <div className="editorial-page-hero-copy">
           <p className="editorial-home-kicker">Reading archive</p>
           <h1 className="editorial-page-title">Posts</h1>
           <p className="editorial-page-copy">
-            A browsable index of essays, reports, and field notes. Start with the newest post, then use the year and topic routes when you want to branch out. /archive keeps the month-by-month ledger separate.
+            A browsable index of essays, reports, and field notes. Start with the latest writing, then move through years and recurring topics when you want a narrower route in.
           </p>
           <div className="editorial-chip-row">
             {topTags.map(({ tag, count }) => (
@@ -142,94 +160,98 @@ export default async function PostsPage() {
             </Link>
           </div>
         </div>
-      </section>
 
-      <section className="editorial-list-section">
-        <p className="editorial-home-section-label">Start here</p>
-        <div className="editorial-two-column" style={{ alignItems: 'start', gap: '1rem' }}>
-          {latestPost ? (
-            <article
-              className="editorial-home-card editorial-home-card-featured"
-              style={{ gridColumn: 'auto', display: 'grid', gap: '1rem', alignContent: 'start' }}
-            >
-              <div>
-                <p className="editorial-home-card-label">Latest post</p>
-                <h3>
-                  <Link href={`/posts/${latestPost.slug}`}>{latestPost.title}</Link>
-                </h3>
-              </div>
-              {latestPost.summary ? <p>{latestPost.summary}</p> : null}
-              <div className="editorial-post-meta">
-                <span>{shortDateFormatter.format(latestPost.date)}</span>
-                <span>{latestPost.readingTime ? `${latestPost.readingTime} min read` : 'Long-form post'}</span>
-                <span>{latestPost.tags.length} topic{latestPost.tags.length === 1 ? '' : 's'}</span>
-              </div>
-              <div className="editorial-chip-row">
-                {latestPost.tags.slice(0, 4).map((tag) => (
-                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-              <div className="editorial-link-row">
-                <Link href={`/posts/${latestPost.slug}`} className="editorial-home-card-link">
-                  Open the latest post
-                </Link>
-                <Link href={archiveLink} className="editorial-home-card-link">
-                  Open the archive
-                </Link>
-              </div>
-            </article>
-          ) : null}
-
-          <div style={{ display: 'grid', gap: '1rem' }}>
-            {recentPosts.length > 0 ? (
-              <article className="editorial-home-card" style={{ minHeight: 0, display: 'grid', gap: '0.9rem' }}>
-                <div>
-                  <p className="editorial-home-card-label">Also recent</p>
-                  <h3 style={{ fontSize: '1.45rem', lineHeight: 1.05, maxWidth: '16ch', marginBottom: 0 }}>
-                    Keep moving through the newest writing.
-                  </h3>
+        {latestPost ? (
+          <article className="editorial-home-card editorial-home-card-featured" style={{ display: 'grid', gap: '1rem', alignContent: 'start' }}>
+            <div className="editorial-two-column" style={{ alignItems: 'start', gap: '1rem', gridTemplateColumns: 'minmax(0, 1.15fr) minmax(260px, 0.85fr)' }}>
+              <div style={{ display: 'grid', gap: '0.95rem' }}>
+                <div className="editorial-list-heading" style={{ marginBottom: 0 }}>
+                  <div>
+                    <p className="editorial-home-card-label">Latest post</p>
+                    <h3
+                      style={{
+                        marginBottom: '0.35rem',
+                        maxWidth: '14ch',
+                        fontSize: 'clamp(1.9rem, 2.7vw, 2.35rem)',
+                        lineHeight: 0.98,
+                      }}
+                    >
+                      <Link href={`/posts/${latestPost.slug}`}>{latestPost.title}</Link>
+                    </h3>
+                  </div>
+                  <span className="editorial-post-summary" style={{ margin: 0, maxWidth: '24ch' }}>
+                    Start with the newest writing, then branch into years or topics from the same opening block.
+                  </span>
                 </div>
-                <ul className="posts-list">
-                  {recentPosts.map((post) => (
-                    <li key={post.slug} className="archive-post">
-                      <Link href={`/posts/${post.slug}`}>
-                        <time className="archive-post-date">
-                          {shortDateFormatter.format(post.date)}
-                        </time>
-                        <span className="archive-post-title">{post.title}</span>
-                      </Link>
-                    </li>
+                {latestPost.summary ? <p>{latestPost.summary}</p> : null}
+                <div className="editorial-post-meta">
+                  <span>{shortDateFormatter.format(latestPost.date)}</span>
+                  <span>{latestPost.readingTime ? `${latestPost.readingTime} min read` : 'Long-form post'}</span>
+                  <span>{latestPost.tags.length} topic{latestPost.tags.length === 1 ? '' : 's'}</span>
+                </div>
+                <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                  {latestPost.tags.slice(0, 3).map((tag) => (
+                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                      {tag}
+                    </Link>
                   ))}
-                </ul>
-              </article>
-            ) : null}
+                </div>
+                <div className="editorial-link-row" style={{ marginTop: '0.25rem' }}>
+                  <Link href={`/posts/${latestPost.slug}`} className="editorial-home-card-link">
+                    Open the latest post
+                  </Link>
+                  <Link href={archiveLink} className="editorial-home-card-link">
+                    Open the archive
+                  </Link>
+                </div>
+              </div>
 
-            <article className="editorial-home-card" style={{ minHeight: 0, display: 'grid', gap: '0.9rem' }}>
-              <div>
-                <p className="editorial-home-card-label">Enter by topic</p>
-                <h3 style={{ fontSize: '1.45rem', lineHeight: 1.05, maxWidth: '15ch', marginBottom: 0 }}>
-                  Pick a recurring thread and follow it across the archive.
-                </h3>
+              <div style={{ display: 'grid', gap: '0.9rem' }}>
+                <article className="editorial-post-card" style={{ display: 'grid', gap: '0.7rem', padding: '1rem', margin: 0 }}>
+                  <div className="editorial-list-heading" style={{ marginBottom: 0 }}>
+                    <div>
+                      <p className="editorial-home-card-label">Recent writing</p>
+                      <h4 style={{ margin: 0, fontSize: '1.08rem', lineHeight: 1.08, maxWidth: '15ch' }}>
+                        Move through the newest essays and notes.
+                      </h4>
+                    </div>
+                  </div>
+                  <ul className="posts-list" style={{ gap: '0.6rem' }}>
+                    {recentPosts.map((post) => (
+                      <li key={post.slug} className="archive-post">
+                        <Link href={`/posts/${post.slug}`}>
+                          <time className="archive-post-date">{shortDateFormatter.format(post.date)}</time>
+                          <span className="archive-post-title">{post.title}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+
+                <article className="editorial-post-card" style={{ display: 'grid', gap: '0.7rem', padding: '1rem', margin: 0 }}>
+                  <p className="editorial-home-card-label">Topic routes</p>
+                  <h4 style={{ margin: 0, fontSize: '1.08rem', lineHeight: 1.08, maxWidth: '15ch' }}>
+                    Follow the threads that repeat across years.
+                  </h4>
+                  <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                    {topTags.slice(0, 3).map(({ tag, count }) => (
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                        {tag} <span>({count})</span>
+                      </Link>
+                    ))}
+                  </div>
+                  <div style={{ display: 'grid', gap: '0.45rem' }}>
+                    {topTags.slice(0, 2).filter(({ samplePosts }) => samplePosts.length > 0).map(({ tag, samplePosts }) => (
+                      <Link key={tag} href={`/posts/${samplePosts[0].slug}`} className="editorial-post-link" style={{ marginTop: 0 }}>
+                        {samplePosts[0].title}
+                      </Link>
+                    ))}
+                  </div>
+                </article>
               </div>
-              <div className="editorial-chip-row">
-                {topTags.map(({ tag, count }) => (
-                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                    {tag} <span>({count})</span>
-                  </Link>
-                ))}
-              </div>
-              <div className="editorial-link-row">
-                {topTags.slice(0, 2).filter(({ samplePosts }) => samplePosts.length > 0).map(({ tag, samplePosts }) => (
-                  <Link key={tag} href={`/posts/${samplePosts[0].slug}`} className="editorial-post-link">
-                    {samplePosts[0].title}
-                  </Link>
-                ))}
-              </div>
-            </article>
-          </div>
-        </div>
+            </div>
+          </article>
+        ) : null}
       </section>
 
       <section className="editorial-list-section" id="posts-by-year">
@@ -253,12 +275,12 @@ export default async function PostsPage() {
                 </span>
               </div>
 
-              <div className="editorial-two-column" style={{ gap: '1rem' }}>
-                <div style={{ display: 'grid', gap: '0.9rem' }}>
+              <div className="editorial-two-column" style={{ gap: '1rem', gridTemplateColumns: 'minmax(220px, 0.78fr) minmax(0, 1.22fr)' }}>
+                <div style={{ display: 'grid', gap: '0.9rem', alignContent: 'start' }}>
                   <p>{leadYearEntry.summary}</p>
                   <div className="editorial-post-meta">
-                    <span>{leadYearEntry.posts.length > 0 ? `Latest ${shortDateFormatter.format(leadYearEntry.posts[0].date)}` : 'No posts'}</span>
-                    <span>{leadYearEntry.posts.length > 0 ? `Earliest ${shortDateFormatter.format(leadYearEntry.posts[leadYearEntry.posts.length - 1].date)}` : ''}</span>
+                    <span>{buildYearSpan(leadYearEntry.posts)}</span>
+                    <span>{leadYearEntry.posts.length} post{leadYearEntry.posts.length === 1 ? '' : 's'} in the year ledger</span>
                   </div>
                   <div className="editorial-chip-row">
                     {leadYearEntry.yearTopics.map(({ tag, count }) => (
@@ -282,13 +304,6 @@ export default async function PostsPage() {
                         <span className="archive-post-title">{post.title}</span>
                       </Link>
                       {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
-                      <div className="editorial-chip-row">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                            {tag}
-                          </Link>
-                        ))}
-                      </div>
                     </li>
                   ))}
                 </ul>
@@ -297,43 +312,68 @@ export default async function PostsPage() {
           ) : null}
 
           {remainingYearEntries.length > 0 ? (
-            <div className="editorial-post-grid">
-              {remainingYearEntries.map(({ year, posts: yearPosts, yearTopics, summary, archiveHref, remainingPosts }) => (
-                <article key={year} className="editorial-post-card" style={{ display: 'grid', gap: '0.85rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', alignItems: 'baseline', flexWrap: 'wrap' }}>
-                    <div>
-                      <p className="editorial-home-card-label">Year {year}</p>
-                      <h3 style={{ marginBottom: 0 }}>
-                        {yearPosts.length} post{yearPosts.length !== 1 ? 's' : ''}
-                      </h3>
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              {remainingYearEntries.map(({ year, posts: yearPosts, yearTopics, summary, archiveHref, remainingPosts }) => {
+                return (
+                  <article
+                    key={year}
+                    className="editorial-home-card"
+                    style={{ display: 'grid', gap: '1rem', padding: '1.05rem 1.15rem' }}
+                  >
+                    <div
+                      className="editorial-two-column"
+                      style={{
+                        alignItems: 'start',
+                        gap: '1rem',
+                        gridTemplateColumns: 'minmax(180px, 220px) minmax(0, 1fr)',
+                      }}
+                    >
+                      <div style={{ display: 'grid', gap: '0.85rem', alignContent: 'start' }}>
+                        <div>
+                          <p className="editorial-home-card-label">Year {year}</p>
+                          <h3 style={{ marginBottom: '0.35rem', fontSize: '1.7rem', maxWidth: 'none' }}>
+                            {yearPosts.length} post{yearPosts.length !== 1 ? 's' : ''}
+                          </h3>
+                          <p className="editorial-post-summary" style={{ margin: 0 }}>
+                            {buildYearSpan(yearPosts)}
+                          </p>
+                        </div>
+
+                        <p>{summary}</p>
+                        <div className="editorial-chip-row" style={{ marginTop: 0 }}>
+                          {yearTopics.map(({ tag, count }) => (
+                            <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                              {tag} <span>({count})</span>
+                            </Link>
+                          ))}
+                        </div>
+                        <div className="editorial-link-row" style={{ marginTop: 0 }}>
+                          <Link href={archiveHref} className="editorial-home-card-link">
+                            Open the full archive for {year}
+                          </Link>
+                          {remainingPosts > 0 ? (
+                            <span className="editorial-post-summary" style={{ margin: 0 }}>
+                              {remainingPosts} more post{remainingPosts === 1 ? '' : 's'} in the archive
+                            </span>
+                          ) : null}
+                        </div>
+                      </div>
+
+                      <ul className="posts-list">
+                        {yearPosts.slice(0, 3).map((post) => (
+                          <li key={post.slug} className="archive-post">
+                            <Link href={`/posts/${post.slug}`}>
+                              <time className="archive-post-date">{shortDateFormatter.format(post.date)}</time>
+                              <span className="archive-post-title">{post.title}</span>
+                            </Link>
+                            {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <span className="editorial-post-summary" style={{ margin: 0 }}>
-                      {yearPosts.length > 0 ? `Latest ${shortDateFormatter.format(yearPosts[0].date)}` : 'No posts'}
-                    </span>
-                  </div>
-
-                  <p>{summary}</p>
-
-                  <div className="editorial-chip-row">
-                    {yearTopics.map(({ tag, count }) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                        {tag} <span>({count})</span>
-                      </Link>
-                    ))}
-                  </div>
-
-                  <div className="editorial-link-row">
-                    <Link href={archiveHref} className="editorial-home-card-link">
-                      Open the full archive for {year}
-                    </Link>
-                    {remainingPosts > 0 ? (
-                      <span className="editorial-post-summary" style={{ margin: 0 }}>
-                        {remainingPosts} more post{remainingPosts === 1 ? '' : 's'} in the archive
-                      </span>
-                    ) : null}
-                  </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           ) : null}
         </div>
@@ -347,21 +387,22 @@ export default async function PostsPage() {
 
         <div className="editorial-post-grid">
           {topicClusters.map(({ tag, count, samplePosts }) => (
-            <article key={tag} className="editorial-post-card">
+            <article key={tag} className="editorial-post-card" style={{ display: 'grid', gap: '0.9rem' }}>
               <p className="editorial-home-card-label">{count} post{count === 1 ? '' : 's'}</p>
               <h3>
                 <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
               </h3>
-              <p>
-                The tag appears repeatedly across the archive. Start with these representative posts, then expand to the full topic page.
-              </p>
-              <div className="editorial-link-row">
+              <p>The tag appears repeatedly across the archive. Start with representative posts and then open the full topic page.</p>
+              <ul className="posts-list">
                 {samplePosts.map((post) => (
-                  <Link key={post.slug} href={`/posts/${post.slug}`} className="editorial-post-link">
-                    {post.title}
-                  </Link>
+                  <li key={post.slug} className="archive-post">
+                    <Link href={`/posts/${post.slug}`}>
+                      <time className="archive-post-date">{shortDateFormatter.format(post.date)}</time>
+                      <span className="archive-post-title">{post.title}</span>
+                    </Link>
+                  </li>
                 ))}
-              </div>
+              </ul>
               <Link href={`/tags/${encodeURIComponent(tag)}`} className="editorial-post-link">
                 View all {tag} posts
               </Link>

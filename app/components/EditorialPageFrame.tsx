@@ -67,15 +67,15 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const mobileDiscoveryNavItems = prioritizeActiveItem(discoveryNavItems, currentPath);
   const brandLabel = compactShell ? 'econoben.dev' : 'ECONOBEN.DEV';
   const headerClassName = compactShell
-    ? 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/5 bg-[#fef9ef]/95 backdrop-blur'
-    : 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/5 bg-[#f8f3e9]/95 shadow-[0_24px_40px_rgba(29,28,22,0.04)] backdrop-blur';
+    ? 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
+    : 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
   const brandClassName = compactShell
-    ? 'font-headline text-xl font-bold tracking-tighter text-[#1d1c16] md:text-2xl'
-    : 'font-headline text-xl font-black tracking-tighter text-[#1d1c16] md:text-2xl';
+    ? 'font-headline text-[1.65rem] font-extrabold tracking-tight text-[#1d1c16] md:text-[1.85rem]'
+    : 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] md:text-[1.95rem]';
   const desktopNavItemClassName = (active: boolean) =>
     active
-      ? 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[34px] items-center justify-center rounded-full border border-transparent bg-transparent px-3 py-2 text-[11px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#004ac6]/20 hover:bg-[#004ac6]/10 hover:text-[#004ac6]';
+      ? 'inline-flex min-h-[34px] items-center justify-center border-b-2 border-[#004ac6] px-1 py-2 text-[11.5px] font-bold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#004ac6]'
+      : 'inline-flex min-h-[34px] items-center justify-center border-b-2 border-transparent px-1 py-2 text-[11.5px] font-bold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
   const mobileNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'

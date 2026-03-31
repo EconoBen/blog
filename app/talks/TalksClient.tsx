@@ -349,7 +349,7 @@ function TalkCard({
 
 export default function TalksClient() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const { talks } = talksConfig;
 
   const sortedTalks = [...talks].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -363,7 +363,7 @@ export default function TalksClient() {
 
   const topicFilters = Array.from(topicCounts.entries())
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 12)
+    .slice(0, 6)
     .map(([topic]) => topic);
 
   const filteredTalks =
@@ -386,78 +386,79 @@ export default function TalksClient() {
 
   const featuredTalk = filteredTalks.find((talk) => talk.id === activeTalkId) ?? filteredTalks[0] ?? null;
   const archiveTalks = featuredTalk ? filteredTalks.filter((talk) => talk.id !== featuredTalk.id) : filteredTalks;
+  const archiveSummary =
+    activeFilter === 'all'
+      ? `${archiveTalks.length} more session${archiveTalks.length === 1 ? '' : 's'} below the featured recording.`
+      : `${filteredTalks.length} session${filteredTalks.length === 1 ? '' : 's'} tagged ${activeFilter}.`;
 
   return (
     <section className="mx-auto max-w-7xl px-4 pb-14 pt-2 sm:px-6 lg:px-8">
       {featuredTalk && (
         <div className="space-y-5">
           <FeaturedTalk talk={featuredTalk} isOpen={featuredTalk.id === activeTalkId} onOpen={() => setActiveTalkId(featuredTalk.id)} />
-          <div className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest px-4 py-4 md:px-5">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between gap-3">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Browse archive</p>
-                <div className="hidden font-label text-[11px] uppercase tracking-widest text-secondary md:block">
-                  {filteredTalks.length} recordings
-                </div>
+          <div className="space-y-3 pt-1">
+            <div className="flex flex-col gap-3 rounded-2xl border border-outline-variant/12 bg-surface-container-low px-4 py-4 lg:flex-row lg:items-center lg:justify-between lg:px-5">
+              <div className="space-y-1">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Archive</p>
+                <h2 className="max-w-2xl font-headline text-xl font-bold tracking-tight text-on-surface md:text-[1.6rem]">
+                  More talks and recordings.
+                </h2>
+                <p className="font-body text-sm leading-relaxed text-secondary">{archiveSummary}</p>
               </div>
-              <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                <div
-                  className="flex gap-3 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:overflow-visible lg:pb-0"
-                  aria-label="Talk topics"
+              <div className="flex items-center gap-2 rounded-full border border-outline-variant/15 bg-surface-container-lowest/80 p-1 self-start lg:self-auto">
+                <button
+                  type="button"
+                  className={`rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'list' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
+                  }`}
+                  onClick={() => setViewMode('list')}
+                  aria-pressed={viewMode === 'list'}
                 >
-                  <button
-                    type="button"
-                    className={`shrink-0 rounded-full px-4 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                      activeFilter === 'all'
-                        ? 'bg-surface-container-highest text-on-surface'
-                        : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
-                    }`}
-                    onClick={() => setActiveFilter('all')}
-                    aria-pressed={activeFilter === 'all'}
-                  >
-                    All talks
-                  </button>
-                  {topicFilters.map((topic) => (
-                    <button
-                      type="button"
-                      key={topic}
-                      className={`shrink-0 rounded-full px-4 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                        activeFilter === topic
-                          ? 'bg-surface-container-highest text-on-surface'
-                          : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
-                      }`}
-                      onClick={() => setActiveFilter(topic)}
-                      aria-pressed={activeFilter === topic}
-                    >
-                      {topic}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 rounded-lg bg-surface-container-low p-1">
-                    <button
-                      type="button"
-                      className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                        viewMode === 'grid' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
-                      }`}
-                      onClick={() => setViewMode('grid')}
-                      aria-pressed={viewMode === 'grid'}
-                    >
-                      Grid
-                    </button>
-                    <button
-                      type="button"
-                      className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                        viewMode === 'list' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
-                      }`}
-                      onClick={() => setViewMode('list')}
-                      aria-pressed={viewMode === 'list'}
-                    >
-                      List
-                    </button>
-                  </div>
-                </div>
+                  List
+                </button>
+                <button
+                  type="button"
+                  className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'grid' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
+                  }`}
+                  onClick={() => setViewMode('grid')}
+                  aria-pressed={viewMode === 'grid'}
+                >
+                  Grid
+                </button>
               </div>
+            </div>
+            <div
+              className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:overflow-visible lg:pb-0"
+              aria-label="Talk topics"
+            >
+              <button
+                type="button"
+                className={`shrink-0 rounded-full px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  activeFilter === 'all'
+                    ? 'bg-surface-container-highest text-on-surface'
+                    : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
+                }`}
+                onClick={() => setActiveFilter('all')}
+                aria-pressed={activeFilter === 'all'}
+              >
+                All talks
+              </button>
+              {topicFilters.map((topic) => (
+                <button
+                  type="button"
+                  key={topic}
+                  className={`shrink-0 rounded-full px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    activeFilter === topic
+                      ? 'bg-surface-container-highest text-on-surface'
+                      : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
+                  }`}
+                  onClick={() => setActiveFilter(topic)}
+                  aria-pressed={activeFilter === topic}
+                >
+                  {topic}
+                </button>
+              ))}
             </div>
           </div>
         </div>

@@ -9,7 +9,23 @@ export const metadata: Metadata = {
   description: "Ben Labaschin's CV, contact details, publications, and work history on ECONOBEN.DEV.",
 };
 
-const experience = [
+type ExperienceItem = {
+  role: string;
+  company: string;
+  period: string;
+  summary: string;
+  bullets: string[];
+  tags: string[];
+};
+
+type PublicWorkItem = {
+  date: string;
+  title: string;
+  venue: string;
+  year: string;
+};
+
+const experience: ExperienceItem[] = [
   {
     role: 'Principal Machine Learning Engineer',
     company: 'Workhelix',
@@ -19,7 +35,8 @@ const experience = [
     bullets: [
       'Built core platform work for scalable async LLM APIs and custom embedding systems used by Fortune 50 customers.',
       'Shipped agent memory, retrieval, and workflow tooling for production use, with a focus on reliability and maintainability.',
-      'Developed analysis and evaluation systems that helped quantify how GenAI changes engineering workflows.',
+      'Developed analysis and evaluation systems that helped quantify how GenAI changes engineering workflows and organizational productivity.',
+      'Engineered high-throughput GitHub and GitLab extraction flows with asyncio rate limiting and GraphQL cursor pagination, reducing repository processing time from 30 minutes to 2 minutes.',
       'Contributed technical writing on AI agents, memory, and practical deployment patterns alongside product work.',
     ],
     tags: ['LLMs', 'Embeddings', 'Retrieval', 'Agent memory', 'FastAPI', 'Docker', 'AWS'],
@@ -34,6 +51,7 @@ const experience = [
       'Owned ML engineering for the Capital One Travel partnership and supported the systems that made Hopper Cloud usable for enterprise partners.',
       'Designed multi-tenant ML flows, including bandit-style decisioning and price-freeze logic for travel booking experiences.',
       'Helped implement CI/CD and orchestration workflows with GitHub Actions and Kubeflow to keep partner releases moving quickly.',
+      'Worked across product, engineering, and data teams to keep the partnership architecture understandable enough for repeated release cycles.',
     ],
     tags: ['GCP', 'MLOps', 'GitHub Actions', 'Kubeflow', 'Bandits', 'Travel platforms'],
   },
@@ -46,6 +64,7 @@ const experience = [
     bullets: [
       'Delivered $8M in savings through optimized shipment prioritization and pricing systems.',
       'Used A/B testing and XGBoost-based models to turn operational rules into measurable decision systems.',
+      'Helped translate ML results into changes that operations teams could actually use without a separate data-science handoff.',
     ],
     tags: ['A/B testing', 'XGBoost', 'Pricing', 'Forecasting', 'Operations'],
   },
@@ -58,6 +77,7 @@ const experience = [
     bullets: [
       'Led A/B testing, power analysis, and regression modeling to improve investment decisions and renovation economics.',
       'Built Python analytics pipelines with SciPy and scikit-learn for apartment ROI and warehouse investment analysis.',
+      'Worked on tools that made large, slow-moving real-estate decisions easier to defend with numbers.',
     ],
     tags: ['SciPy', 'scikit-learn', 'Regression', 'Geo data', 'Investment analytics'],
   },
@@ -83,6 +103,7 @@ const experience = [
     bullets: [
       'Built lessons that connected basic ML theory to production work and current AI practice.',
       'Taught Python, AI, and ML concepts to more than 30 students in a classroom setting.',
+      'Kept the curriculum practical and project-oriented instead of drifting into abstract lecture-only material.',
     ],
     tags: ['Teaching', 'Python', 'AI/ML', 'Curriculum'],
   },
@@ -117,26 +138,11 @@ const quickLinks = [
 ];
 
 const contactLinks = [
-  {
-    label: 'GitHub',
-    href: 'https://github.com/econoben',
-  },
-  {
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/in/benjamin-labaschin',
-  },
-  {
-    label: 'Email',
-    href: 'mailto:benjaminlabaschin@gmail.com',
-  },
-  {
-    label: 'Publications',
-    href: '/publications',
-  },
-  {
-    label: 'Talks',
-    href: '/talks',
-  },
+  { label: 'GitHub', href: 'https://github.com/econoben' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/benjamin-labaschin' },
+  { label: 'Email', href: 'mailto:benjaminlabaschin@gmail.com' },
+  { label: 'Publications', href: '/publications' },
+  { label: 'Talks', href: '/talks' },
 ];
 
 const skills = [
@@ -162,14 +168,7 @@ const skills = [
   },
 ];
 
-type PublicWorkItem = {
-  date: string;
-  title: string;
-  venue: string;
-  year: string;
-};
-
-const publicWorkItems: PublicWorkItem[] = [
+const selectedWriting = [
   ...publicationsConfig.publications.map((publication) => ({
     date: publication.date,
     title: publication.title,
@@ -184,12 +183,7 @@ const publicWorkItems: PublicWorkItem[] = [
   })),
 ]
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  .slice(0, 7);
-
-const patents = [
-  'Shared Mobility Simulation and Prediction System, USPTO 20190347941',
-  'Matching Drivers With Shared Vehicles To Optimize Shared Vehicle Services, USPTO 20190347582',
-];
+  .slice(0, 8);
 
 const highlights = [
   { label: 'Impact', value: '$8M+ savings in logistics and operations work' },
@@ -198,19 +192,45 @@ const highlights = [
   { label: 'Teaching', value: 'AI/ML curriculum for 30+ Chapman students' },
 ];
 
+const currentFocus = [
+  'Enterprise GenAI systems that stay usable after the prototype phase.',
+  'Retrieval, memory, evaluation, and orchestration for agentic workflows.',
+  'Production ML plumbing that makes analysis, search, and deployment repeatable.',
+  'Writing about the practical constraints that appear once these systems ship.',
+];
+
+const patents = [
+  'Shared Mobility Simulation and Prediction System, USPTO 20190347941',
+  'Matching Drivers With Shared Vehicles To Optimize Shared Vehicle Services, USPTO 20190347582',
+];
+
+function StatCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl bg-surface-container-highest p-4">
+      <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</p>
+      <p className="mt-2 font-headline text-lg font-bold leading-tight text-on-surface">{value}</p>
+    </div>
+  );
+}
+
 export default function AboutPage() {
   return (
     <EditorialPageFrame currentPath="/about">
-      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-12 pt-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)] lg:items-start">
-        <div className="space-y-4 lg:pt-6">
-          <span className="mb-6 block font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">About / CV</span>
+      <section className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 pb-12 pt-14 lg:grid-cols-[minmax(0,1.12fr)_minmax(320px,0.88fr)] lg:items-start">
+        <div className="space-y-5 lg:pt-6">
+          <span className="mb-4 block font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">About / CV</span>
           <h1 className="max-w-4xl font-headline text-5xl font-black tracking-tighter text-on-surface md:text-7xl">
             Ben Labaschin
           </h1>
           <p className="max-w-2xl font-body text-lg leading-relaxed text-secondary md:text-xl">
-            I build practical AI systems and write about the trade-offs that show up once they have to work in production.
-            This page keeps the CV readable, the links obvious, and the story anchored in the ECONOBEN.DEV editorial system.
+            Principal machine learning engineer building production AI systems, writing about how they work in the real
+            world, and keeping the CV readable enough that people can get to the useful part quickly.
           </p>
+          <p className="max-w-2xl font-body text-base leading-relaxed text-secondary md:text-lg">
+            The through-line is practical: enterprise GenAI platforms, retrieval and memory systems, evaluation, APIs,
+            and the surrounding deployment work that turns experiments into systems teams can actually use.
+          </p>
+
           <div className="flex flex-wrap gap-3 pt-1">
             <a
               href="/benjamin_labaschin_resume.pdf"
@@ -238,16 +258,11 @@ export default function AboutPage() {
               Email
             </a>
           </div>
-          <div className="hidden flex-wrap gap-3 pt-2 lg:flex">
-            <span className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-secondary">
-              Principal ML Engineer
-            </span>
-            <span className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-secondary">
-              AI systems, memory, applied ML
-            </span>
-            <span className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-secondary">
-              Resume · Talks · Publications
-            </span>
+
+          <div className="grid gap-3 pt-2 sm:grid-cols-3">
+            <StatCard label="Current role" value="Principal ML Engineer at Workhelix" />
+            <StatCard label="Public work" value="Books, papers, talks, and site essays" />
+            <StatCard label="Focus" value="AI systems, memory, retrieval, evaluation" />
           </div>
         </div>
 
@@ -284,13 +299,14 @@ export default function AboutPage() {
       <section className="mx-auto max-w-7xl px-8 pb-16">
         <div className="grid gap-6 lg:grid-cols-12">
           <article className="rounded-2xl bg-surface-container-low p-6 md:p-8 lg:col-span-7">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">What I do</p>
-            <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-on-surface">Practical summary.</h2>
-            <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-secondary">
-              The work is usually some mix of agent memory, retrieval, evaluation, and the plumbing needed to make AI systems
-              usable for actual teams. I write because the implementation details matter.
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Professional summary</p>
+            <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-on-surface">The short version.</h2>
+            <p className="mt-4 max-w-3xl font-body text-lg leading-relaxed text-secondary">
+              I build production AI systems that have to survive real users, real latency, and real operational limits.
+              That has meant enterprise GenAI platforms, async APIs, retrieval and memory systems, evaluation pipelines,
+              and the boring but necessary deployment work that makes an ambitious ML stack reliable.
             </p>
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {quickLinks.map((item) => (
                 <div key={item.label} className="rounded-xl bg-surface-container-highest p-4">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{item.label}</p>
@@ -319,11 +335,16 @@ export default function AboutPage() {
           </article>
 
           <aside className="rounded-2xl bg-surface-container-low p-6 md:p-8 lg:col-span-5">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Contact</p>
-            <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-on-surface">Reach out directly.</h2>
-            <p className="mt-4 font-body text-lg leading-relaxed text-secondary">
-              Email is usually the fastest path. GitHub and LinkedIn are here if that is easier.
-            </p>
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Current focus</p>
+            <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-on-surface">What I keep building.</h2>
+            <ul className="mt-5 space-y-4">
+              {currentFocus.map((item) => (
+                <li key={item} className="flex gap-3 font-body text-base leading-relaxed text-secondary md:text-lg">
+                  <span className="mt-2 h-2 w-2 flex-none rounded-full bg-primary" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
             <div className="mt-7 grid gap-3 sm:grid-cols-2">
               {contactLinks.map((link) => {
                 const isExternal = link.href.startsWith('http') || link.href.startsWith('mailto:');
@@ -362,7 +383,7 @@ export default function AboutPage() {
             </h2>
           </div>
           <div className="lg:col-span-4 lg:text-right">
-            <p className="font-body text-base italic text-secondary">Kept short enough to scan, but specific enough to be useful.</p>
+            <p className="font-body text-base italic text-secondary">Kept specific enough to be useful, but still easy to scan.</p>
           </div>
         </div>
 
@@ -425,12 +446,6 @@ export default function AboutPage() {
 
         <aside className="space-y-6 lg:col-span-5">
           <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Why this page exists</p>
-            <p className="mt-4 font-body text-lg leading-relaxed text-secondary">
-              The goal here is utility: quick contact paths, a readable CV, and enough context to understand what I work on.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Education</p>
             <p className="mt-4 font-headline text-2xl font-bold tracking-tight text-on-surface">B.A. Economics, cum laude</p>
             <p className="mt-2 font-body text-lg text-secondary">Lake Forest College · Lake Forest, Illinois · 2016</p>
@@ -445,6 +460,13 @@ export default function AboutPage() {
               ))}
             </ul>
           </div>
+          <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Why this page exists</p>
+            <p className="mt-4 font-body text-lg leading-relaxed text-secondary">
+              The goal is utility: a readable CV, quick contact paths, and enough context to understand the work without
+              hiding the details that make the experience credible.
+            </p>
+          </div>
         </aside>
       </section>
 
@@ -453,8 +475,12 @@ export default function AboutPage() {
           <article className="rounded-2xl bg-surface-container-low p-6 md:p-8 lg:col-span-8">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Publications & talks</p>
             <h2 className="mt-4 font-headline text-3xl font-bold tracking-tight text-on-surface">The public work.</h2>
+            <p className="mt-4 max-w-3xl font-body text-lg leading-relaxed text-secondary">
+              Books, reports, papers, and recorded talks are part of the record too. They are the clearest route to the
+              ideas behind the engineering work.
+            </p>
             <div className="mt-7 space-y-4">
-              {publicWorkItems.map((publication) => (
+              {selectedWriting.map((publication) => (
                 <div
                   key={`${publication.year}-${publication.title}`}
                   className="flex flex-col gap-3 rounded-xl bg-surface-container-highest p-5 md:flex-row md:items-baseline md:justify-between"
@@ -494,14 +520,5 @@ export default function AboutPage() {
         </div>
       </section>
     </EditorialPageFrame>
-  );
-}
-
-function StatCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl bg-surface-container-highest p-4">
-      <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</p>
-      <p className="mt-2 font-headline text-lg font-bold leading-tight text-on-surface">{value}</p>
-    </div>
   );
 }
