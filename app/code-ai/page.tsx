@@ -101,7 +101,7 @@ function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onC
     <div style={codeBlockStyle}>
       <div style={codeHeaderStyle}>
         <div style={{ display: 'grid', gap: '0.18rem' }}>
-          <div style={{ color: 'var(--editorial-ink)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+          <div style={{ color: 'var(--editorial-ink)', fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
             {getCodeToolsLanguageLabel(item.language)}
           </div>
           <div style={{ color: 'var(--editorial-slate)', fontFamily: 'Inter, var(--font-body)', fontSize: '0.88rem' }}>
@@ -137,7 +137,7 @@ function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onC
           customStyle={syntaxStyle}
           codeTagProps={{
             style: {
-              fontFamily: "'IBM Plex Mono', 'Roboto Mono', 'Consolas', 'Monaco', monospace",
+              fontFamily: "'IBM Plex Mono', 'Consolas', 'Monaco', monospace",
             },
           }}
         >
@@ -422,7 +422,7 @@ export default function CodeAIPage() {
                     <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap', marginBottom: '16px' }}>
                       <h3 className="editorial-page-section-title" style={{ fontSize: '1.45rem', marginBottom: 0, maxWidth: 'none' }}>
                         {categoryLabelById[category] || category}
-                        <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, Roboto Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                        <span style={{ marginLeft: '0.5rem', color: 'var(--editorial-slate)', fontFamily: 'IBM Plex Mono, monospace', fontSize: '0.72rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
                           ({categoryItems.length})
                         </span>
                       </h3>

@@ -256,12 +256,12 @@ select:focus-visible {
 
 /* Typography defaults */
 code, pre, kbd {
-	font-family: 'IBM Plex Mono', 'Roboto Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
+	font-family: 'IBM Plex Mono', 'SF Mono', 'Menlo', 'Consolas', monospace;
 }
 
 /* Apply fallback fonts */
 .monospace-text {
-	font-family: 'IBM Plex Mono', 'Roboto Mono', 'SF Mono', 'Consolas', monospace;
+	font-family: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
 }
 
 /* Images default */
@@ -579,7 +579,7 @@ img {
 .bibtex-code {
   background-color: var(--color-background);
   border-radius: var(--border-radius-sm);
-  font-family: 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.85rem;
   line-height: 1.5;
   margin-bottom: 1rem;
@@ -4025,7 +4025,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 
 .logo-symbol {
     color: var(--color-primary);
-    font-family: 'IBM Plex Mono', 'Roboto Mono', monospace;
+    font-family: 'IBM Plex Mono', monospace;
     margin-right: 8px;
 }
 
@@ -4928,7 +4928,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 .code-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+    font-family: 'IBM Plex Mono', 'Menlo', 'Consolas', monospace;
     font-size: var(--font-size-smaller);
     table-layout: fixed;
 }
@@ -7297,7 +7297,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 .blog-content li code,
 .blog-content td code,
 .blog-content th code {
-    font-family: 'Roboto Mono', 'Menlo', 'Consolas', monospace;
+    font-family: 'IBM Plex Mono', 'Menlo', 'Consolas', monospace;
     background: var(--color-code-bg);
     padding: 2px 6px;
     border-radius: var(--radius-small);
@@ -7417,7 +7417,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 
 /* Font fallback and better typography classes */
 .monospace-text {
-    font-family: 'Roboto Mono', 'SF Mono', 'Consolas', monospace;
+    font-family: 'IBM Plex Mono', 'SF Mono', 'Consolas', monospace;
 }
 
 /* Blog Images */
@@ -8056,7 +8056,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 .editorial-home-card-label,
 .editorial-home-section-label,
 .editorial-home-brand-note {
-  font-family: 'IBM Plex Mono', 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
 }
 
 .editorial-home-brand-link {
@@ -8289,7 +8289,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 
 .editorial-home-book-meta span {
   color: var(--editorial-slate);
-  font-family: 'IBM Plex Mono', 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.72rem;
 }
 
@@ -8590,7 +8590,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  font-family: 'IBM Plex Mono', 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.72rem;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -8626,7 +8626,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   border: 1px solid rgba(33, 78, 230, 0.08);
   border-radius: 999px;
   color: var(--editorial-blue);
-  font-family: 'IBM Plex Mono', 'Roboto Mono', monospace;
+  font-family: 'IBM Plex Mono', monospace;
   font-size: 0.68rem;
   padding: 7px 10px;
   text-transform: uppercase;

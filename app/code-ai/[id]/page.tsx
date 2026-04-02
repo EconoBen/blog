@@ -273,7 +273,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                   codeTagProps={{
                     style: {
                       fontFamily:
-                        "'IBM Plex Mono', 'Roboto Mono', 'Consolas', 'Monaco', monospace",
+                        "'IBM Plex Mono', 'Consolas', 'Monaco', monospace",
                     },
                   }}
                 >

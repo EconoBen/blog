@@ -203,7 +203,7 @@ export default async function PostsPage() {
                   <time
                     style={{
                       color: 'var(--editorial-slate)',
-                      fontFamily: "'IBM Plex Mono', 'Roboto Mono', monospace",
+                      fontFamily: "'IBM Plex Mono', monospace",
                       fontSize: '0.72rem',
                       letterSpacing: '0.04em',
                       textTransform: 'uppercase',
@@ -341,7 +341,7 @@ export default async function PostsPage() {
                         <time
                           style={{
                             color: 'var(--editorial-slate)',
-                            fontFamily: "'IBM Plex Mono', 'Roboto Mono', monospace",
+                            fontFamily: "'IBM Plex Mono', monospace",
                             fontSize: '0.72rem',
                             letterSpacing: '0.04em',
                             textTransform: 'uppercase',
@@ -412,7 +412,7 @@ export default async function PostsPage() {
                     <time
                       style={{
                         color: 'var(--editorial-slate)',
-                        fontFamily: "'IBM Plex Mono', 'Roboto Mono', monospace",
+                        fontFamily: "'IBM Plex Mono', monospace",
                         fontSize: '0.68rem',
                         letterSpacing: '0.04em',
                         textTransform: 'uppercase',

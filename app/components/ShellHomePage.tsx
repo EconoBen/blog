@@ -54,7 +54,11 @@ const ShellHomeEmptyState = () => (
           The archive is loading, but the rest of the site is already live: posts, talks, publications, and the forthcoming book on Agent Memory.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
-          <Link href="/book" className="rounded-lg bg-[#1d1c16] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#fef9ef] transition-transform hover:-translate-y-1">
+          <Link
+            href="/book"
+            className="rounded-lg bg-[#004ac6] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white shadow-[0_14px_28px_rgba(0,74,198,0.18)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
+            style={{ color: '#fef9ef', WebkitTextFillColor: '#fef9ef' }}
+          >
             Follow the book
           </Link>
           <Link href="/about" className="rounded-lg bg-[#ede8de] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
@@ -96,7 +100,11 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               A public platform for posts, talks, publications, and the forthcoming book on Agent Memory.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="/book" className="rounded-lg bg-[#1d1c16] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#fef9ef] transition-transform hover:-translate-y-1">
+              <Link
+                href="/book"
+                className="rounded-lg bg-[#004ac6] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white shadow-[0_14px_28px_rgba(0,74,198,0.18)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
+                style={{ color: '#fef9ef', WebkitTextFillColor: '#fef9ef' }}
+              >
                 Follow the book
               </Link>
               <Link href="/posts" className="rounded-lg bg-[#ede8de] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
@@ -113,53 +121,53 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           </div>
 
           <aside className="lg:col-span-5">
-            <article className="overflow-hidden rounded-3xl bg-[#1d1c16] text-[#fef9ef] shadow-[0_24px_70px_rgba(16,34,54,0.14)]">
+            <article className="overflow-hidden rounded-3xl border border-[#1d1c16]/8 bg-[#f8f3e9] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.12)]">
               <div className="relative h-72 overflow-hidden">
                 {imageSourceFor(featuredPost) ? (
                   <img
                     src={imageSourceFor(featuredPost) as string}
                     alt={featuredPost.title}
-                    className="h-full w-full object-cover opacity-85"
+                    className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full items-end bg-[linear-gradient(135deg,#1d1c16_0%,#32302a_100%)] p-8">
+                  <div className="flex h-full items-end bg-[linear-gradient(135deg,#dfe6fb_0%,#f5efe2_100%)] p-8">
                     <div>
-                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#bdc7db]">
+                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                         Latest writing
                       </p>
-                      <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-none">
+                      <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-none text-[#1d1c16]">
                         {featuredPost.title}
                       </p>
                     </div>
                   </div>
                 )}
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(29,28,22,0)_35%,rgba(29,28,22,0.84)_100%)]" />
-                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#f5f0e6]">
-                  <span className="rounded-sm bg-[#bdc7db]/20 px-3 py-1 font-label font-bold">
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,243,233,0)_34%,rgba(248,243,233,0.3)_64%,rgba(248,243,233,0.92)_100%)]" />
+                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                  <span className="rounded-sm bg-[#fef9ef]/92 px-3 py-1 font-label font-bold text-[#1d1c16] shadow-[0_8px_20px_rgba(16,34,54,0.1)]">
                     Latest post
                   </span>
                   <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
                 </div>
               </div>
               <div className="p-8">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#bdc7db]">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                   {primaryTag(featuredPost)}
                 </p>
-                <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#fef9ef] md:text-4xl">
-                  <Link href={`/posts/${featuredPost.slug}`} className="transition-colors hover:text-[#b4c5ff]">
+                <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
+                  <Link href={`/posts/${featuredPost.slug}`} className="transition-colors hover:text-[#004ac6]">
                     {featuredPost.title}
                   </Link>
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-[#e7e2d8]">
+                <p className="mt-4 text-lg leading-relaxed text-[#555f70]">
                   {excerptFor(featuredPost)}
                 </p>
-                <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#bdc7db]">
+                <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
                   <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Read now'}</span>
                   <span>{dateFormatter.format(featuredPost.date)}</span>
                   <span>{featuredPost.tags.length ? `${featuredPost.tags.length} tags` : 'Editorial post'}</span>
                 </div>
                 <div className="mt-8">
-                  <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#b4c5ff] transition-transform hover:translate-x-1">
+                  <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#004ac6] transition-transform hover:translate-x-1">
                     Read the post
                   </Link>
                 </div>
@@ -197,8 +205,8 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             </Link>
           </div>
 
-          <div className="grid gap-6 sm:gap-8 md:grid-cols-12">
-            <article className="group overflow-hidden rounded-3xl bg-[#ede8de] shadow-[0_24px_70px_rgba(16,34,54,0.08)] md:col-span-8">
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
+            <article className="group overflow-hidden rounded-3xl border border-[#e4e7ef]/50 bg-[linear-gradient(135deg,#ffffff_0%,#f7f8ff_35%,#ffffff_55%,#f8f9fe_80%,#ffffff_100%)] shadow-[0_24px_70px_rgba(16,34,54,0.08)]">
               {imageSourceFor(leadDiscoveryPost) ? (
                 <div className="relative h-64 overflow-hidden sm:h-72 md:h-80">
                   <img
@@ -238,9 +246,9 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               </div>
             </article>
 
-            <div className="flex flex-col gap-6 sm:gap-8 md:col-span-4">
+            <div className="flex flex-col gap-6 sm:gap-8">
               {supportingPosts.map((post) => (
-                <article key={post.slug} className="group flex-1 rounded-3xl bg-[#ede8de] p-6 shadow-[0_24px_70px_rgba(16,34,54,0.06)] sm:p-7">
+                <article key={post.slug} className="group flex-1 rounded-3xl border border-[#e4e7ef]/50 bg-[linear-gradient(135deg,#ffffff_0%,#f7f8ff_35%,#ffffff_55%,#f8f9fe_80%,#ffffff_100%)] p-6 shadow-[0_24px_70px_rgba(16,34,54,0.06)] sm:p-7">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                     {primaryTag(post)}
                   </p>
@@ -249,62 +257,80 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                       {post.title}
                     </Link>
                   </h3>
-                  <p className="mt-4 text-base leading-relaxed text-[#555f70] sm:text-lg">
-                    {excerptFor(post, 140)}
+                  <p className="mt-4 text-base leading-relaxed text-[#555f70]">
+                    {excerptFor(post, 120)}
                   </p>
-                  <div className="mt-8 flex flex-wrap gap-2">
+                  <div className="mt-5 flex flex-wrap gap-2">
                     {post.tags.slice(0, 2).map((tag) => (
                       <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#f8f3e9] px-2 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
                         {tag}
                       </Link>
                     ))}
                   </div>
+                  <div className="mt-5 flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                    <span>{dateFormatter.format(post.date)}</span>
+                    <span>{post.readingTime ? `${post.readingTime} min read` : 'Long-form'}</span>
+                    <Link href={`/posts/${post.slug}`} className="font-bold text-[#004ac6] transition-transform hover:translate-x-1">
+                      Read the post
+                    </Link>
+                  </div>
                 </article>
               ))}
             </div>
 
             {secondaryPost && (
-              <article className="overflow-hidden rounded-3xl bg-[#1d1c16] text-[#fef9ef] shadow-[0_24px_70px_rgba(16,34,54,0.12)] md:col-span-5">
+              <article className="group overflow-hidden rounded-3xl border border-[#e4e7ef]/50 bg-[linear-gradient(135deg,#ffffff_0%,#f7f8ff_35%,#ffffff_55%,#f8f9fe_80%,#ffffff_100%)] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.08)]">
                 <div className="p-7 sm:p-8 md:p-10">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#b4c5ff]">
-                    {secondaryPost.tags[0] ? secondaryPost.tags[0] : 'Later in the archive'}
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
+                    {primaryTag(secondaryPost)}
                   </p>
-                  <h3 className="mt-4 max-w-xl font-headline text-2xl font-bold leading-tight sm:text-3xl">
-                    <Link href={`/posts/${secondaryPost.slug}`} className="transition-colors hover:text-[#b4c5ff]">
+                  <h3 className="mt-4 max-w-xl font-headline text-2xl font-bold leading-tight text-[#1d1c16] transition-colors group-hover:text-[#004ac6] sm:text-3xl">
+                    <Link href={`/posts/${secondaryPost.slug}`}>
                       {secondaryPost.title}
                     </Link>
                   </h3>
-                  <p className="mt-4 text-base leading-relaxed text-[#e7e2d8] sm:text-lg">
+                  <p className="mt-4 text-base leading-relaxed text-[#555f70] sm:text-lg">
                     {excerptFor(secondaryPost, 140)}
                   </p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <Link href="/book" className="rounded-lg bg-[#2563eb] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-white transition-colors hover:bg-[#004ac6]">
-                      Follow the book
-                    </Link>
-                    <Link href="/publications" className="rounded-lg bg-[#ede8de] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-colors hover:bg-[#f8f3e9]">
-                      Publications
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {secondaryPost.tags.slice(0, 3).map((tag) => (
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#f8f3e9] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70] transition-colors hover:bg-[#e7e2d8]">
+                        {tag}
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="mt-6 flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                    <span>{dateFormatter.format(secondaryPost.date)}</span>
+                    <span>{secondaryPost.readingTime ? `${secondaryPost.readingTime} min read` : 'Long-form'}</span>
+                    <Link href={`/posts/${secondaryPost.slug}`} className="font-bold text-[#004ac6] transition-transform hover:translate-x-1">
+                      Read the post
                     </Link>
                   </div>
                 </div>
               </article>
             )}
 
-            <article className="overflow-hidden rounded-3xl bg-[#ede8de] p-7 shadow-[0_24px_70px_rgba(16,34,54,0.06)] sm:p-8 md:col-span-7 md:p-10">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#004ac6]">
+            <article className="group overflow-hidden rounded-3xl border border-[#e4e7ef]/50 bg-[linear-gradient(135deg,#ffffff_0%,#f7f8ff_35%,#ffffff_55%,#f8f9fe_80%,#ffffff_100%)] p-7 shadow-[0_24px_70px_rgba(16,34,54,0.06)] sm:p-8 md:p-10">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                 Upcoming publication
               </p>
-              <h3 className="mt-4 max-w-2xl font-headline text-3xl font-black leading-tight text-[#1d1c16] sm:text-4xl md:text-5xl">
-                Agent Memory.
+              <h3 className="mt-4 max-w-2xl font-headline text-2xl font-bold leading-tight text-[#1d1c16] transition-colors group-hover:text-[#004ac6] sm:text-3xl md:text-4xl">
+                <Link href="/book">
+                  Agent Memory
+                </Link>
               </h3>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#555f70] sm:mt-6 sm:text-xl">
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#555f70] sm:text-lg">
                 A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4 sm:mt-10">
-                <Link href="/book" className="rounded-lg bg-[#1d1c16] px-8 py-4 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#fef9ef] transition-transform hover:-translate-y-1">
-                  Notify me when it&apos;s ready
-                </Link>
-                <Link href="/about" className="rounded-lg bg-[#f8f3e9] px-8 py-4 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1">
-                  About the author
+              <div className="mt-6 flex flex-wrap gap-3">
+                <span className="rounded-sm bg-[#f8f3e9] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">AI Memory</span>
+                <span className="rounded-sm bg-[#f8f3e9] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">Production Systems</span>
+                <span className="rounded-sm bg-[#f8f3e9] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">Book</span>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                <span>Early release</span>
+                <Link href="/book" className="font-bold text-[#004ac6] transition-transform hover:translate-x-1">
+                  Follow the book
                 </Link>
               </div>
             </article>
@@ -312,40 +338,35 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-8 py-24">
+      <section className="mx-auto max-w-7xl px-8 pt-16 pb-8">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
-              Stay in touch
+              Direct updates
             </p>
             <h2 className="mt-4 max-w-2xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-6xl">
-              The Labaschin Letter.
+              Email updates.
             </h2>
             <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70]">
-              Occasional deep-dives into economics, engineering, and the future of human-agent collaboration. If you want the work, the fastest path is still direct email.
+              No fake signup funnel here. If you want updates on the book, new posts, talks, or publications, the simplest path is still direct email.
             </p>
           </div>
 
-          <div className="rounded-3xl border border-[#c3c6d7]/40 bg-white/70 p-8 shadow-[0_24px_70px_rgba(16,34,54,0.06)] lg:col-span-5">
+          <div className="rounded-3xl border border-[#e4e7ef]/50 bg-[linear-gradient(135deg,#ffffff_0%,#f7f8ff_35%,#ffffff_55%,#f8f9fe_80%,#ffffff_100%)] p-8 shadow-[0_24px_70px_rgba(16,34,54,0.06)] lg:col-span-5">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
-              Actual next step
+              Direct contact
             </p>
             <p className="mt-4 text-lg leading-relaxed text-[#1d1c16]">
-              There is no fake signup form here. Email if you want updates on Agent Memory or want to talk about the posts, talks, or publications.
+              Email if you want updates on Agent Memory or want to talk about the posts, talks, or publications. This section should stay practical, not newsletter-branded.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="rounded-lg bg-[#1d1c16] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#fef9ef] transition-transform hover:-translate-y-1"
+                className="rounded-lg bg-[#004ac6] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-white shadow-[0_12px_24px_rgba(0,74,198,0.14)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
+                style={{ color: '#fef9ef', WebkitTextFillColor: '#fef9ef' }}
               >
                 Email updates
               </a>
-              <Link href="/about" className="rounded-lg bg-[#ede8de] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1">
-                About / CV
-              </Link>
-              <Link href="/publications" className="rounded-lg bg-[#ede8de] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1">
-                Publications
-              </Link>
             </div>
           </div>
         </div>
