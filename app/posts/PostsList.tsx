@@ -23,7 +23,7 @@ const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
 const primaryTag = (post: Post) => post.tags[0] ?? 'Editorial';
 
 export function PostsList({ posts }: { posts: Post[] }) {
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
 
   return (
     <div>

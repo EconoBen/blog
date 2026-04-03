@@ -8694,6 +8694,37 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
 }
 
 
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.featured-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.featured-shimmer:hover::after {
+  animation: shimmer-sweep 0.8s ease-in-out;
+}
+
 .posts-year-row {
   display: grid;
   grid-template-columns: 7.5rem 1fr;

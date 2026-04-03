@@ -148,7 +148,7 @@ function FeaturedTalk({
   const primarySourceUrl = getPrimarySourceUrl(talk);
 
   return (
-    <article className="overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
+    <article className="featured-shimmer overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(29,28,22,0.1)]">
       <div className="flex flex-col gap-0 lg:flex-row lg:items-stretch">
         <div className="h-[160px] shrink-0 bg-surface-container-low lg:h-auto lg:w-[280px]">
           <TalkMediaPreview talk={talk} isOpen={isOpen} onOpen={onOpen} />
@@ -337,7 +337,7 @@ function TalkCard({
 
 export default function TalksClient() {
   const [activeFilter, setActiveFilter] = useState<string>('all');
-  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
   const { talks } = talksConfig;
 
   const sortedTalks = [...talks].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
