@@ -8699,6 +8699,42 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   100% { transform: translateX(100%); }
 }
 
+.sticky-note {
+  position: relative;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(192, 196, 204, 0.6);
+  border-radius: 4px 4px 4px 4px;
+  box-shadow:
+    2px 3px 8px rgba(29, 28, 22, 0.06),
+    inset 0 0 40px rgba(0, 53, 160, 0.01);
+  backdrop-filter: blur(4px);
+}
+
+.sticky-note::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(225deg, #fef9ef 50%, #d8dce6 50%, #c8cdd8 56%, transparent 56%);
+  border-bottom-left-radius: 6px;
+  z-index: 2;
+}
+
+.sticky-note::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  box-shadow: -2px 2px 4px rgba(29, 28, 22, 0.06);
+  border-bottom-left-radius: 6px;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .graph-paper-bg {
   background-color: #fef9ef;
   background-image:

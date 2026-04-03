@@ -150,7 +150,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[leadDiscoveryPost, ...supportingPosts, secondaryPost].filter(Boolean).map((post) => (
-              <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
+              <article key={(post as Post).slug} className="group sticky-note overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
                 <div className="space-y-5">
                   <div className="space-y-2">
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
@@ -182,7 +182,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               </article>
             ))}
 
-            <article className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
+            <article className="group sticky-note overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-5">
                 <div className="space-y-2">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
