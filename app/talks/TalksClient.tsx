@@ -148,39 +148,27 @@ function FeaturedTalk({
   const primarySourceUrl = getPrimarySourceUrl(talk);
 
   return (
-    <article className="overflow-hidden rounded-[28px] bg-surface-container-highest shadow-[0_24px_60px_rgba(29,28,22,0.06)]">
-      <div className="grid h-full gap-0 lg:grid-cols-[minmax(0,1.2fr)_minmax(260px,0.8fr)]">
-        <div className="min-h-[260px] bg-surface-container-low">
+    <article className="overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
+      <div className="flex flex-col gap-0 lg:flex-row lg:items-stretch">
+        <div className="h-[160px] shrink-0 bg-surface-container-low lg:h-auto lg:w-[280px]">
           <TalkMediaPreview talk={talk} isOpen={isOpen} onOpen={onOpen} />
         </div>
-        <div className="flex flex-col justify-between p-5 md:p-6 lg:p-8">
-          <div className="space-y-4">
+        <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-3 p-5 md:p-6">
+          <div className="flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-sm bg-secondary-fixed-dim px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-secondary-fixed-variant">
-                Featured recording
-              </span>
-              <span className="font-label text-xs uppercase tracking-widest text-secondary">{formatDate(talk.date)}</span>
-            </div>
-            <div className="space-y-3">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{talk.event}</p>
-              <h2 className="max-w-xl font-headline text-3xl font-bold tracking-tight text-on-surface lg:text-[2.6rem]">{talk.title}</h2>
-              <p className="max-w-xl line-clamp-4 font-body text-base leading-relaxed text-secondary">{talk.description}</p>
+              <span className="font-label text-[10px] uppercase tracking-widest text-secondary">{formatDate(talk.date)}</span>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {talk.topics.slice(0, 4).map((topic) => (
-                <span key={topic} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
-                  {topic}
-                </span>
-              ))}
-            </div>
+            <h2 className="font-headline text-xl font-bold tracking-tight text-on-surface md:text-2xl">{talk.title}</h2>
+            <p className="line-clamp-2 max-w-2xl font-body text-sm leading-relaxed text-secondary">{talk.description}</p>
           </div>
-          <div className="mt-7 flex flex-wrap gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             {primarySourceUrl && (
               <a
                 href={primarySourceUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-primary-container px-4 py-2.5 font-label text-[11px] font-bold uppercase tracking-widest text-on-primary"
+                className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
               >
                 {getPrimarySourceLabel(talk)}
               </a>
@@ -188,21 +176,21 @@ function FeaturedTalk({
             <button
               type="button"
               onClick={onOpen}
-              className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2.5 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
+              className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
             >
               {getPrimaryActionLabel(talk)}
             </button>
+            {talk.transcriptUrl && (
+              <a
+                href={talk.transcriptUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center font-label text-[11px] font-bold uppercase tracking-widest text-secondary transition-colors hover:text-primary"
+              >
+                Transcript
+              </a>
+            )}
           </div>
-          {talk.transcriptUrl && (
-            <a
-              href={talk.transcriptUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex self-start font-label text-[11px] font-bold uppercase tracking-widest text-secondary transition-colors hover:text-primary"
-            >
-              Read transcript
-            </a>
-          )}
         </div>
       </div>
     </article>

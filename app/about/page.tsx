@@ -366,32 +366,55 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Contact ── */}
-      <section className="border-t border-outline-variant/20">
-        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-4 px-8 py-10">
-          <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Get in touch</span>
-          <a
-            href="mailto:benjaminlabaschin@gmail.com"
-            className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
-          >
-            Email
-          </a>
-          <a
-            href="https://github.com/econoben"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com/in/benjamin-labaschin"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
-          >
-            LinkedIn
-          </a>
+      {/* ── Sticky contact sidebar (appears on right side of page) ── */}
+      <div className="fixed bottom-6 right-6 z-40 hidden lg:block">
+        <div className="w-[200px] space-y-3 rounded-2xl border border-outline-variant/15 bg-surface-container-highest/95 p-5 shadow-[0_18px_50px_rgba(29,28,22,0.1)] backdrop-blur-sm">
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Contact</p>
+          <div className="space-y-2">
+            <a
+              href="mailto:benjaminlabaschin@gmail.com"
+              className="block rounded-lg bg-surface-container-low px-3 py-2 text-center font-label text-[10px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-0.5"
+            >
+              Email
+            </a>
+            <a
+              href="https://github.com/econoben"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="block rounded-lg bg-surface-container-low px-3 py-2 text-center font-label text-[10px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-0.5"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://linkedin.com/in/benjamin-labaschin"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="block rounded-lg bg-surface-container-low px-3 py-2 text-center font-label text-[10px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-0.5"
+            >
+              LinkedIn
+            </a>
+          </div>
+          <div className="border-t border-outline-variant/20 pt-3">
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Resume</p>
+            <a
+              href="/benjamin_labaschin_resume.pdf"
+              download
+              className="mt-2 block rounded-lg bg-on-surface px-3 py-2 text-center font-label text-[10px] font-bold uppercase tracking-widest text-surface transition-transform hover:-translate-y-0.5"
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile contact bar ── */}
+      <section className="border-t border-outline-variant/20 lg:hidden">
+        <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-3 px-8 py-8">
+          <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Contact</span>
+          <a href="mailto:benjaminlabaschin@gmail.com" className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">Email</a>
+          <a href="https://github.com/econoben" target="_blank" rel="noreferrer noopener" className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">GitHub</a>
+          <a href="https://linkedin.com/in/benjamin-labaschin" target="_blank" rel="noreferrer noopener" className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">LinkedIn</a>
+          <a href="/benjamin_labaschin_resume.pdf" download className="rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface transition-transform hover:-translate-y-1">Download CV</a>
         </div>
       </section>
     </EditorialPageFrame>
