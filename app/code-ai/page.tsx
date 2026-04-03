@@ -90,7 +90,7 @@ export default function CodeAIPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
-  const [viewMode, setViewMode] = useState<'compact' | 'full'>('full');
+  const [viewMode, setViewMode] = useState<'compact' | 'full'>('compact');
   const [copyStates, setCopyStates] = useState<Record<string, string>>({});
 
   const { title, subtitle, categories } = workshopConfig;
