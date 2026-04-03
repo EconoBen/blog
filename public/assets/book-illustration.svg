@@ -1,72 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 460" fill="none">
-  <!-- Thick standing hardcover book — straight on, no bend, thick spine -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" fill="none">
+  <!-- Standing hardcover book — matching reference silhouette exactly -->
+  <!-- Slightly angled: spine visible on left, front cover facing right -->
 
-  <!-- Shadow -->
-  <ellipse cx="165" cy="448" rx="120" ry="8" fill="#1d1c16" opacity="0.06"/>
+  <!-- Page edges at top (thin white strips between covers) -->
+  <path d="M 78 32 L 78 28 L 252 38 L 252 42 Z" fill="#f0ede6"/>
+  <path d="M 78 28 L 78 24 L 252 34 L 252 38 Z" fill="#f5f2ec"/>
+  <path d="M 78 24 L 78 20 L 252 30 L 252 34 Z" fill="#faf8f4"/>
+  <path d="M 78 20 L 78 17 L 252 27 L 252 30 Z" fill="#fff"/>
 
-  <!-- Page block (top edge — many visible pages) -->
-  <rect x="72" y="18" width="220" height="4" rx="0.5" fill="#f5f0e8" stroke="#d0cdc6" stroke-width="0.4"/>
-  <rect x="72" y="14" width="220" height="4" rx="0.5" fill="#faf8f5" stroke="#d0cdc6" stroke-width="0.3"/>
-  <rect x="72" y="10" width="220" height="4" rx="0.5" fill="#fef9ef" stroke="#d8d4cc" stroke-width="0.3"/>
-  <rect x="72" y="6" width="220" height="4" rx="0.5" fill="#fff" stroke="#ddd" stroke-width="0.2"/>
-  <!-- Page edge lines -->
-  <line x1="76" y1="8" x2="288" y2="8" stroke="#e0ddd6" stroke-width="0.3"/>
-  <line x1="76" y1="12" x2="288" y2="12" stroke="#e0ddd6" stroke-width="0.3"/>
-  <line x1="76" y1="16" x2="288" y2="16" stroke="#e0ddd6" stroke-width="0.2"/>
-  <line x1="76" y1="20" x2="288" y2="20" stroke="#e0ddd6" stroke-width="0.2"/>
+  <!-- Spine (left side, slightly angled inward) -->
+  <path d="M 38 8 L 78 17 L 78 378 L 38 366 Z" fill="#0035a0"/>
 
-  <!-- Spine (thick, left side, straight) -->
-  <rect x="20" y="2" width="52" height="440" rx="3" fill="#0035a0"/>
-  <!-- Spine inner highlight -->
-  <rect x="24" y="8" width="6" height="428" rx="1" fill="white" opacity="0.08"/>
-  <!-- Spine horizontal bands (top) -->
-  <rect x="24" y="40" width="44" height="8" rx="1" fill="white" opacity="0.2"/>
-  <rect x="24" y="56" width="44" height="3" rx="0.5" fill="white" opacity="0.15"/>
-  <!-- Spine horizontal bands (bottom) -->
-  <rect x="24" y="390" width="44" height="8" rx="1" fill="white" opacity="0.2"/>
-  <rect x="24" y="406" width="44" height="3" rx="0.5" fill="white" opacity="0.15"/>
-  <!-- Spine text -->
-  <text x="48" y="258" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="700" fill="white" letter-spacing="0.2em" opacity="0.55" transform="rotate(-90, 48, 258)">AGENT MEMORY</text>
+  <!-- Spine white bands — top -->
+  <path d="M 42 38 L 74 45 L 74 52 L 42 45 Z" fill="white" opacity="0.35"/>
+  <path d="M 42 58 L 74 65 L 74 68 L 42 61 Z" fill="white" opacity="0.25"/>
 
-  <!-- Front cover (straight rectangle, no angle) -->
-  <rect x="72" y="2" width="220" height="440" rx="2" fill="#0035a0" stroke="#002a80" stroke-width="1"/>
+  <!-- Spine white bands — bottom -->
+  <path d="M 42 318 L 74 325 L 74 332 L 42 325 Z" fill="white" opacity="0.35"/>
+  <path d="M 42 338 L 74 345 L 74 348 L 42 341 Z" fill="white" opacity="0.25"/>
 
-  <!-- Cover inner border -->
-  <rect x="84" y="16" width="196" height="414" rx="1" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <!-- Front cover (main face, solid fill) -->
+  <path d="M 78 17 L 252 27 L 252 392 L 78 378 Z" fill="#0035a0"/>
 
-  <!-- Cover horizontal bands matching spine -->
-  <rect x="84" y="38" width="196" height="8" fill="white" opacity="0.12"/>
-  <rect x="84" y="54" width="196" height="3" fill="white" opacity="0.08"/>
-  <rect x="84" y="388" width="196" height="8" fill="white" opacity="0.12"/>
-  <rect x="84" y="404" width="196" height="3" fill="white" opacity="0.08"/>
+  <!-- Title on cover -->
+  <text x="100" y="160" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="800" fill="white" opacity="0.9" letter-spacing="0.02em">AGENT</text>
+  <text x="100" y="198" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="800" fill="white" opacity="0.9" letter-spacing="0.02em">MEMORY</text>
 
-  <!-- Title -->
-  <text x="104" y="160" font-family="'Space Grotesk', sans-serif" font-size="40" font-weight="800" fill="white" letter-spacing="0.02em">AGENT</text>
-  <text x="104" y="206" font-family="'Space Grotesk', sans-serif" font-size="40" font-weight="800" fill="white" letter-spacing="0.02em">MEMORY</text>
-
-  <!-- Divider under title -->
-  <rect x="104" y="220" width="56" height="2" rx="1" fill="white" opacity="0.3"/>
-
-  <!-- Subtitle -->
-  <text x="104" y="248" font-family="'Inter', sans-serif" font-size="9" font-weight="400" fill="white" opacity="0.45" letter-spacing="0.08em">HOW AI SYSTEMS REMEMBER</text>
-
-  <!-- AI node pattern -->
-  <circle cx="116" cy="290" r="3" fill="white" opacity="0.18"/>
-  <circle cx="146" cy="286" r="2" fill="white" opacity="0.12"/>
-  <circle cx="176" cy="292" r="3" fill="white" opacity="0.18"/>
-  <circle cx="206" cy="288" r="2" fill="white" opacity="0.12"/>
-  <circle cx="236" cy="294" r="3" fill="white" opacity="0.18"/>
-  <line x1="119" y1="290" x2="144" y2="286" stroke="white" stroke-width="0.5" opacity="0.1"/>
-  <line x1="148" y1="286" x2="173" y2="292" stroke="white" stroke-width="0.5" opacity="0.1"/>
-  <line x1="179" y1="292" x2="204" y2="288" stroke="white" stroke-width="0.5" opacity="0.1"/>
-  <line x1="208" y1="288" x2="233" y2="294" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <!-- Thin divider -->
+  <path d="M 100 210 L 156 212 L 156 213 L 100 211 Z" fill="white" opacity="0.3"/>
 
   <!-- Author -->
-  <text x="104" y="350" font-family="'Inter', sans-serif" font-size="10" font-weight="500" fill="white" opacity="0.4" letter-spacing="0.12em">BEN LABASCHIN</text>
+  <text x="100" y="310" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="white" opacity="0.4" letter-spacing="0.1em">BEN LABASCHIN</text>
 
-  <!-- Bottom edge (book thickness visible) -->
-  <rect x="20" y="442" width="272" height="6" rx="1" fill="#002a80"/>
-  <!-- Page edge visible at bottom -->
-  <rect x="72" y="442" width="220" height="4" fill="#ede8de"/>
-  <rect x="72" y="444" width="220" height="2" fill="#d8d4cc"/>
+  <!-- Bottom edge (thickness) -->
+  <path d="M 38 366 L 78 378 L 252 392 L 252 398 L 78 384 L 38 372 Z" fill="#002a80"/>
 </svg>
