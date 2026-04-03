@@ -236,17 +236,31 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-[#d0d3db] px-8 pt-12 pb-8">
-        <div className="flex flex-wrap items-center justify-between gap-6">
-          <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
-            Updates
-          </p>
-          <a
-            href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-            className="rounded-lg border border-[#c0c4cc] bg-transparent px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white"
-          >
-            Email for updates
-          </a>
+      <section className="border-t border-[#d0d3db] py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-8">
+          <div className="mx-auto max-w-xl">
+            <article className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
+              <div className="space-y-4">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
+                  Stay in the loop
+                </p>
+                <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16]">
+                  Email for updates
+                </h3>
+                <p className="text-base leading-relaxed text-[#555f70]">
+                  New posts, talks, and book progress — direct to your inbox
+                </p>
+                <div className="pt-1">
+                  <a
+                    href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white"
+                  >
+                    Send email
+                  </a>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
     </EditorialPageFrame>
