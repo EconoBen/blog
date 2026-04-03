@@ -68,8 +68,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const mobileDiscoveryNavItems = prioritizeActiveItem(discoveryNavItems, currentPath);
   const brandLabel = compactShell ? 'econoben.dev' : 'ECONOBEN.DEV';
   const headerClassName = compactShell
-    ? 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
-    : 'sticky top-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
+    ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
+    : 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
   const brandClassName = compactShell
     ? 'font-headline text-[1.65rem] font-extrabold tracking-tight text-[#1d1c16] md:text-[1.85rem]'
     : 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] md:text-[1.95rem]';
@@ -180,6 +180,7 @@ export function EditorialPageFrame({
     <div className={`min-h-screen bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
         <EditorialTopbar currentPath={currentPath} />
+        <div className="h-[70px] md:h-[80px]" aria-hidden="true" />
         <main>{children}</main>
         <ScrollToTop />
         <footer className="mt-20 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
