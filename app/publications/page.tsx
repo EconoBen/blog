@@ -52,15 +52,15 @@ export default function PublicationsPage() {
                 <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{getType(featured)}</p>
                 <h2 className="font-headline text-3xl font-bold leading-snug text-on-surface md:text-4xl">{featured.title}</h2>
               </div>
-              <p className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">{featured.authors}</p>
-              {featured.venue && <p className="font-label text-[10px] uppercase tracking-widest text-secondary">{featured.venue}</p>}
-              <time className="block font-label text-[10px] uppercase tracking-widest text-secondary">{fmtDate(featured.date)}</time>
+              <p className="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface">{featured.authors}</p>
+              {featured.venue && <p className="font-label text-[10px] uppercase tracking-widest text-on-surface">{featured.venue}</p>}
+              <time className="block font-label text-[10px] uppercase tracking-widest text-on-surface">{fmtDate(featured.date)}</time>
               {featured.abstract && (
-                <p className="max-w-xl font-body text-lg leading-relaxed text-secondary">{featured.abstract}</p>
+                <p className="max-w-xl font-body text-lg leading-relaxed text-on-surface">{featured.abstract}</p>
               )}
               <div className="flex flex-wrap gap-2">
                 {featured.topics.slice(0, 6).map((t) => (
-                  <span key={t} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">{t}</span>
+                  <span key={t} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">{t}</span>
                 ))}
               </div>
               <div className="flex flex-wrap gap-3 pt-2">
@@ -88,7 +88,7 @@ export default function PublicationsPage() {
             <div className="mx-auto max-w-[1440px] px-8">
               <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
                 <h2 className="font-headline text-xl font-bold text-on-surface">{year}</h2>
-                <p className="font-label text-[10px] uppercase tracking-widest text-secondary">{pubs.length} publication{pubs.length !== 1 ? 's' : ''}</p>
+                <p className="font-label text-[10px] uppercase tracking-widest text-on-surface">{pubs.length} publication{pubs.length !== 1 ? 's' : ''}</p>
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -142,17 +142,17 @@ function BookCard({ publication }: { publication: Publication }) {
             {publication.title}
           </h3>
         </div>
-        <p className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">{publication.authors}</p>
-        {publication.venue && <p className="font-label text-[10px] uppercase tracking-widest text-secondary">{publication.venue}</p>}
-        <time className="font-label text-[10px] uppercase tracking-widest text-secondary">{fmtDate(publication.date)}</time>
+        <p className="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface">{publication.authors}</p>
+        {publication.venue && <p className="font-label text-[10px] uppercase tracking-widest text-on-surface">{publication.venue}</p>}
+        <time className="font-label text-[10px] uppercase tracking-widest text-on-surface">{fmtDate(publication.date)}</time>
 
         {publication.abstract && (
-          <p className="line-clamp-3 font-body text-sm leading-relaxed text-secondary">{publication.abstract}</p>
+          <p className="line-clamp-3 font-body text-sm leading-relaxed text-on-surface">{publication.abstract}</p>
         )}
 
         <div className="mt-auto flex flex-wrap gap-2 pt-2">
           {publication.topics.slice(0, 3).map((t) => (
-            <span key={t} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">{t}</span>
+            <span key={t} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">{t}</span>
           ))}
         </div>
 

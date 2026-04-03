@@ -182,7 +182,7 @@ export function EditorialPageFrame({
         <main>{children}</main>
         <footer className="mt-20 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-8 py-12 md:flex-row">
-            <div className="font-headline text-sm uppercase tracking-wide text-[#555f70]">
+            <div className="font-headline text-sm uppercase tracking-wide text-[#1d1c16]">
               {copyrightYear > 2024 ? `© 2024-${copyrightYear} Ben` : '© 2024 Ben'} - Technical Curator &amp; Economist
             </div>
             <nav className="flex flex-wrap justify-center gap-8">
@@ -190,7 +190,7 @@ export function EditorialPageFrame({
                 const isInternal = item.href.startsWith('/');
                 const isHttpLink = item.href.startsWith('http://') || item.href.startsWith('https://');
                 const linkClassName =
-                  'font-headline text-sm uppercase tracking-wide text-[#555f70] opacity-80 transition-opacity hover:opacity-100 hover:underline';
+                  'font-headline text-sm uppercase tracking-wide text-[#1d1c16] opacity-80 transition-opacity hover:opacity-100 hover:underline';
 
                 if (!isInternal) {
                   return (

@@ -50,7 +50,7 @@ const ShellHomeEmptyState = () => (
         <h1 className="mt-6 font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl">
           Writing about how AI systems remember, fail, and scale.
         </h1>
-        <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70] md:text-3xl">
+        <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#1d1c16] md:text-3xl">
           The archive is loading, but the rest of the site is already live: posts, talks, publications, and the forthcoming book on Agent Memory.
         </p>
         <div className="mt-10 flex flex-wrap gap-4">
@@ -115,7 +115,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                 ) : (
                   <div className="flex h-full items-end bg-[linear-gradient(135deg,#dfe6fb_0%,#f5efe2_100%)] p-8">
                     <div>
-                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
+                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                         Latest writing
                       </p>
                       <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-none text-[#1d1c16]">
@@ -125,7 +125,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   </div>
                 )}
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,243,233,0)_34%,rgba(248,243,233,0.3)_64%,rgba(248,243,233,0.92)_100%)]" />
-                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
                   <span className="rounded-sm bg-[#fef9ef]/92 px-3 py-1 font-label font-bold text-[#1d1c16] shadow-[0_8px_20px_rgba(16,34,54,0.1)]">
                     Latest post
                   </span>
@@ -133,7 +133,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                 </div>
               </div>
               <div className="p-8">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                   {primaryTag(featuredPost)}
                 </p>
                 <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
@@ -141,10 +141,10 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                     {featuredPost.title}
                   </Link>
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-[#555f70]">
+                <p className="mt-4 text-lg leading-relaxed text-[#1d1c16]">
                   {excerptFor(featuredPost)}
                 </p>
-                <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
                   <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Read now'}</span>
                   <span>{dateFormatter.format(featuredPost.date)}</span>
                   <span>{featuredPost.tags.length ? `${featuredPost.tags.length} tags` : 'Editorial post'}</span>
@@ -176,28 +176,28 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
                 <div className="space-y-5">
                   <div className="space-y-2">
-                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
+                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                       {primaryTag(post as Post)}
                     </p>
-                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#555f70] transition-colors group-hover:text-[#004ac6]">
+                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
                       <Link href={`/posts/${(post as Post).slug}`}>
                         {(post as Post).title}
                       </Link>
                     </h3>
                   </div>
-                  <time className="block font-label text-[10px] uppercase tracking-widest text-[#555f70]">{dateFormatter.format((post as Post).date)}</time>
-                  <p className="text-base leading-relaxed text-[#555f70]">
+                  <time className="block font-label text-[10px] uppercase tracking-widest text-[#1d1c16]">{dateFormatter.format((post as Post).date)}</time>
+                  <p className="text-base leading-relaxed text-[#1d1c16]">
                     {excerptFor(post as Post, 140)}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {(post as Post).tags.slice(0, 3).map((tag) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">
                         {tag}
                       </Link>
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-transform hover:-translate-y-1">
+                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
                       Read the post
                     </Link>
                   </div>
@@ -208,25 +208,25 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <article className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-5">
                 <div className="space-y-2">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                     Upcoming publication
                   </p>
-                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#555f70] transition-colors group-hover:text-[#004ac6]">
+                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
                     <Link href="/book">
                       Agent Memory
                     </Link>
                   </h3>
                 </div>
-                <p className="text-base leading-relaxed text-[#555f70]">
+                <p className="text-base leading-relaxed text-[#1d1c16]">
                   A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">AI Memory</span>
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">Production Systems</span>
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">Book</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">AI Memory</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Production Systems</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
-                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-transform hover:-translate-y-1">
+                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
                     Follow the book
                   </Link>
                 </div>
@@ -241,19 +241,19 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           <div className="mx-auto max-w-xl">
             <article className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-4">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                   Stay in the loop
                 </p>
-                <h3 className="font-headline text-2xl font-bold leading-snug text-[#555f70]">
+                <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16]">
                   Email for updates
                 </h3>
-                <p className="text-base leading-relaxed text-[#555f70]">
+                <p className="text-base leading-relaxed text-[#1d1c16]">
                   New posts, talks, and book progress — direct to your inbox
                 </p>
                 <div className="pt-1">
                   <a
                     href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-transform hover:-translate-y-1"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1"
                   >
                     Send email
                   </a>

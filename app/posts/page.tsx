@@ -63,7 +63,7 @@ export default async function PostsPage() {
         <h1 className="mt-4 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-6xl">
           Posts
         </h1>
-        <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-secondary">
+        <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface">
           Essays, reports, and field notes on AI systems, developer tooling, and applied economics
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -81,7 +81,7 @@ export default async function PostsPage() {
         <div className="mx-auto max-w-[1440px] px-8">
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">All posts</p>
-            <p className="font-label text-[10px] uppercase tracking-widest text-secondary">{posts.length} posts across {postsByYear.length} years</p>
+            <p className="font-label text-[10px] uppercase tracking-widest text-on-surface">{posts.length} posts across {postsByYear.length} years</p>
           </div>
 
           <div className="space-y-8">
@@ -94,7 +94,7 @@ export default async function PostsPage() {
                     <h2 className="font-headline text-xl font-bold text-on-surface">{year}</h2>
                     <div className="flex flex-wrap gap-2">
                       {yearTopics.map(({ tag }) => (
-                        <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
+                        <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
                           {tag}
                         </Link>
                       ))}
@@ -118,7 +118,7 @@ export default async function PostsPage() {
                           ) : (
                             <div className="flex h-full min-h-[180px] items-center justify-center bg-[radial-gradient(circle_at_top_left,_rgba(220,229,255,0.5),_transparent_36%),linear-gradient(135deg,_#fef9ef,_#ede8de)] p-8">
                               <div className="max-w-xs space-y-2 text-center">
-                                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">{primaryTag(post)}</p>
+                                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface">{primaryTag(post)}</p>
                                 <p className="font-headline text-xl font-bold text-on-surface">{post.title}</p>
                               </div>
                             </div>
@@ -134,16 +134,16 @@ export default async function PostsPage() {
                                 <Link href={`/posts/${post.slug}`}>{post.title}</Link>
                               </h3>
                             </div>
-                            <time className="font-label text-[10px] uppercase tracking-widest text-secondary">{shortDateFormatter.format(post.date)}</time>
+                            <time className="font-label text-[10px] uppercase tracking-widest text-on-surface">{shortDateFormatter.format(post.date)}</time>
                           </div>
 
                           {post.summary && (
-                            <p className="font-body text-lg leading-relaxed text-secondary">{post.summary}</p>
+                            <p className="font-body text-lg leading-relaxed text-on-surface">{post.summary}</p>
                           )}
 
                           <div className="flex flex-wrap gap-2">
                             {post.tags.slice(0, 5).map((tag) => (
-                              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary">
+                              <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
                                 {tag}
                               </Link>
                             ))}
@@ -154,7 +154,7 @@ export default async function PostsPage() {
                               Read the post
                             </Link>
                             {post.readingTime && (
-                              <span className="inline-flex items-center font-label text-[10px] uppercase tracking-widest text-secondary">
+                              <span className="inline-flex items-center font-label text-[10px] uppercase tracking-widest text-on-surface">
                                 {post.readingTime} min read
                               </span>
                             )}
@@ -184,7 +184,7 @@ export default async function PostsPage() {
                     <Link href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>
                   </h3>
                   {samplePosts[0]?.summary && (
-                    <p className="line-clamp-3 font-body text-sm leading-relaxed text-secondary">{samplePosts[0].summary}</p>
+                    <p className="line-clamp-3 font-body text-sm leading-relaxed text-on-surface">{samplePosts[0].summary}</p>
                   )}
                   <Link href={`/tags/${encodeURIComponent(tag)}`} className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
                     View all
