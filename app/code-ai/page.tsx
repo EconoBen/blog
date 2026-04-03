@@ -193,26 +193,11 @@ export default function CodeAIPage() {
             <p className="max-w-[46rem] font-body text-lg leading-relaxed text-secondary">
               {subtitle}
             </p>
-
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Link
-                href="#code-tools-index"
-                className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2.5 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
-              >
-                Browse the index
-              </Link>
-              <Link
-                href="/search"
-                className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2.5 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
-              >
-                Search site
-              </Link>
-            </div>
           </div>
         </div>
 
         {/* Browse and filter — full index */}
-        <section className="border-t border-outline-variant/20 py-12 md:py-16" id="code-tools-index">
+        <section className="border-t border-outline-variant/20 pt-6 pb-12 md:pt-8 md:pb-16" id="code-tools-index">
           <div className="space-y-5">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
               <div className="space-y-1">
