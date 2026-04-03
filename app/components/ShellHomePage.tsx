@@ -102,12 +102,11 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
                 href="/book"
-                className="rounded-lg bg-[#004ac6] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white shadow-[0_14px_28px_rgba(0,74,198,0.18)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
-                style={{ color: '#fef9ef', WebkitTextFillColor: '#fef9ef' }}
+                className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white"
               >
                 Follow the book
               </Link>
-              <Link href="/posts" className="rounded-lg bg-[#ede8de] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
+              <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white">
                 Browse selected writing
               </Link>
             </div>
@@ -167,7 +166,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   <span>{featuredPost.tags.length ? `${featuredPost.tags.length} tags` : 'Editorial post'}</span>
                 </div>
                 <div className="mt-8">
-                  <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#004ac6] transition-transform hover:translate-x-1">
+                  <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:translate-x-1">
                     Read the post
                   </Link>
                 </div>
@@ -198,7 +197,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <h2 className="font-headline text-2xl font-bold tracking-tight text-[#1d1c16] md:text-3xl">
               Recent writing and where to go next
             </h2>
-            <Link href="/archive" className="ml-auto border-b-2 border-[#004ac6] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#004ac6]">
+            <Link href="/archive" className="ml-auto border-b-2 border-[#1d1c16] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               View archive
             </Link>
           </div>
@@ -208,7 +207,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
                 <div className="space-y-5">
                   <div className="space-y-2">
-                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#004ac6]">
+                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                       {primaryTag(post as Post)}
                     </p>
                     <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
@@ -240,7 +239,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <article className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-5">
                 <div className="space-y-2">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#004ac6]">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                     Upcoming publication
                   </p>
                   <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
@@ -292,8 +291,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="rounded-lg bg-[#004ac6] px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-white shadow-[0_12px_24px_rgba(0,74,198,0.14)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
-                style={{ color: '#fef9ef', WebkitTextFillColor: '#fef9ef' }}
+                className="rounded-lg border border-[#c0c4cc] bg-transparent px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white"
               >
                 Email updates
               </a>
