@@ -56,7 +56,7 @@ interface EditorialPageFrameProps {
   pageClassName?: string;
 }
 
-const activeNavStyle: CSSProperties = {
+const activeMobileNavStyle: CSSProperties = {
   color: '#fef9ef',
   WebkitTextFillColor: '#fef9ef',
 };
@@ -74,8 +74,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
     : 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] md:text-[1.95rem]';
   const desktopNavItemClassName = (active: boolean) =>
     active
-      ? 'inline-flex min-h-[34px] items-center justify-center border-b-2 border-[#004ac6] px-1 py-2 text-[11.5px] font-bold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#004ac6]'
-      : 'inline-flex min-h-[34px] items-center justify-center border-b-2 border-transparent px-1 py-2 text-[11.5px] font-bold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
+      ? 'nav-link-animated is-active inline-flex min-h-[40px] items-center justify-center px-2 py-2 font-body text-sm font-semibold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#004ac6]'
+      : 'nav-link-animated inline-flex min-h-[40px] items-center justify-center px-2 py-2 font-body text-sm font-semibold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
   const mobileNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
@@ -83,7 +83,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
 
   return (
     <header className={headerClassName}>
-      <div className="mx-auto flex max-w-7xl flex-col gap-2.5 px-4 py-2.5 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-6">
+      <div className="mx-auto flex max-w-7xl flex-col gap-2.5 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8 md:px-8 md:py-5">
         <div className="flex items-center justify-between gap-3">
           <Link href="/" className={brandClassName} aria-label="Go to home">
             {brandLabel}
@@ -97,7 +97,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                   key={item.href}
                   href={item.href}
                   className={mobileNavItemClassName(active)}
-                  style={active ? activeNavStyle : undefined}
+                  style={active ? activeMobileNavStyle : undefined}
                   aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
@@ -111,14 +111,13 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             const active = isActivePath(currentPath, item.href);
 
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={desktopNavItemClassName(active)}
-                style={active ? activeNavStyle : undefined}
-                aria-current={active ? 'page' : undefined}
-              >
-                {item.label}
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={desktopNavItemClassName(active)}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
               </Link>
             );
           })}
@@ -128,14 +127,13 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             const active = isActivePath(currentPath, item.href);
 
             return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={desktopNavItemClassName(active)}
-                style={active ? activeNavStyle : undefined}
-                aria-current={active ? 'page' : undefined}
-              >
-                {item.label}
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={desktopNavItemClassName(active)}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {item.label}
               </Link>
             );
           })}
@@ -154,7 +152,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                 key={item.href}
                 href={item.href}
                 className={mobileNavItemClassName(active)}
-                style={active ? activeNavStyle : undefined}
+                style={active ? activeMobileNavStyle : undefined}
                 aria-current={active ? 'page' : undefined}
               >
                 {item.label}

@@ -8693,6 +8693,31 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   padding: 20px 22px;
 }
 
+.nav-link-animated {
+  position: relative;
+}
+
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #004ac6;
+  transition: width 0.25s ease, left 0.25s ease;
+}
+
+.nav-link-animated:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+.nav-link-animated.is-active::after {
+  left: 0;
+  width: 100%;
+}
+
 .posts-year-row {
   display: grid;
   grid-template-columns: 7.5rem 1fr;
