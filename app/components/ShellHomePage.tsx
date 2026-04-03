@@ -87,76 +87,53 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
   return (
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
-      <section className="mx-auto max-w-[1440px] px-8 pb-20 pt-14 md:pb-24 md:pt-28">
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-7">
-            <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
-              Technical editorial
-            </p>
-            <h1 className="mt-6 max-w-4xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
-              Writing about how AI systems <span className="font-body italic font-normal text-[#0035a0]">remember</span>, fail, and scale
-            </h1>
-            <div className="mt-10">
-              <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
+      {/* ── Featured banner — distinct from rest of page ── */}
+      <section className="border-b border-[#1d1c16]/8 bg-[#0035a0]">
+        <div className="mx-auto max-w-[1440px] px-8 py-14 md:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            {/* Left: headline centered vertically */}
+            <div className="space-y-6 text-white">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-white/60">
+                Technical editorial
+              </p>
+              <h1 className="max-w-xl font-headline text-4xl font-black tracking-tight text-white md:text-5xl">
+                Writing about how AI systems <span className="font-body italic font-normal text-white/70">remember</span>, fail, and scale
+              </h1>
+              <Link href="/posts" className="inline-flex rounded-lg border border-white/30 bg-white/10 px-6 py-3 font-headline text-sm font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1">
                 Browse writing
               </Link>
             </div>
-          </div>
 
-          <aside className="lg:col-span-5">
-            <article className="overflow-hidden rounded-3xl border border-[#1d1c16]/8 bg-[#f8f3e9] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.12)]">
-              <div className="relative h-72 overflow-hidden">
-                {imageSourceFor(featuredPost) ? (
-                  <img
-                    src={imageSourceFor(featuredPost) as string}
-                    alt={featuredPost.title}
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <div className="flex h-full items-end bg-[linear-gradient(135deg,#dfe6fb_0%,#f5efe2_100%)] p-8">
-                    <div>
-                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
-                        Latest writing
-                      </p>
-                      <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-none text-[#1d1c16]">
-                        {featuredPost.title}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,243,233,0)_34%,rgba(248,243,233,0.3)_64%,rgba(248,243,233,0.92)_100%)]" />
-                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
-                  <span className="rounded-sm bg-[#fef9ef]/92 px-3 py-1 font-label font-bold text-[#1d1c16] shadow-[0_8px_20px_rgba(16,34,54,0.1)]">
+            {/* Right: featured post card */}
+            <article className="featured-shimmer overflow-hidden rounded-2xl border border-white/15 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
+              <div className="space-y-4 p-8">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="rounded-t-lg rounded-b-none bg-[#1d1c16] px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                     Latest post
                   </span>
-                  <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
+                  <span className="font-label text-[10px] uppercase tracking-widest text-[#555f70]">{dateFormatter.format(featuredPost.date)}</span>
                 </div>
-              </div>
-              <div className="p-8">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
                   {primaryTag(featuredPost)}
                 </p>
-                <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
+                <h2 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] md:text-3xl">
                   <Link href={`/posts/${featuredPost.slug}`} className="transition-colors hover:text-[#0035a0]">
                     {featuredPost.title}
                   </Link>
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-[#1d1c16]">
+                <p className="line-clamp-3 text-base leading-relaxed text-[#555f70]">
                   {excerptFor(featuredPost)}
                 </p>
-                <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
+                <div className="flex flex-wrap items-center gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
                   <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Read now'}</span>
-                  <span>{dateFormatter.format(featuredPost.date)}</span>
-                  <span>{featuredPost.tags.length ? `${featuredPost.tags.length} tags` : 'Editorial post'}</span>
+                  <span>{featuredPost.tags.length} tags</span>
                 </div>
-                <div className="mt-8">
-                  <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:translate-x-1">
-                    Read the post
-                  </Link>
-                </div>
+                <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center justify-center rounded-lg bg-[#1d1c16] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-transform hover:-translate-y-1">
+                  Read the post
+                </Link>
               </div>
             </article>
-          </aside>
+          </div>
         </div>
       </section>
 
