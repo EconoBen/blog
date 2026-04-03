@@ -76,137 +76,15 @@ export default function BookPage() {
             </div>
           </div>
 
-          {/* Desktop cover — 3D book */}
-          <div className="relative order-2 hidden md:col-span-5 md:order-none md:flex md:items-center md:justify-center">
-            <div style={{ perspective: '1200px' }}>
-              <div style={{
-                transform: 'rotateY(-15deg)',
-                transformStyle: 'preserve-3d',
-                position: 'relative',
-              }}>
-                {/* Front cover */}
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <div className="relative mx-auto flex aspect-[4/5] max-w-none items-center justify-center overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-low p-12 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-                    <div className="pointer-events-none absolute inset-0 opacity-50">
-                      <div className="absolute right-6 top-6 h-24 w-24 rounded-full bg-primary-container" />
-                      <div className="absolute bottom-8 left-8 h-32 w-32 rounded-full bg-surface-container-highest" />
-                    </div>
-                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-2xl border border-outline-variant/15 bg-surface-container-lowest p-8 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-                      <div className="space-y-3">
-                        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface/50">
-                          O&apos;Reilly early release
-                        </p>
-                        <h2 className="max-w-[7ch] font-headline text-4xl font-black leading-[0.9] tracking-tight text-on-surface">
-                          Agent
-                          <br />
-                          Memory
-                        </h2>
-                        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                          Working subtitle
-                        </p>
-                      </div>
-                      <div className="space-y-4">
-                        <p className="max-w-[16ch] font-body text-lg italic leading-relaxed text-on-surface/60">
-                          {bookSubtitle}
-                        </p>
-                        <div className="h-px w-12 bg-outline-variant/20" />
-                        <span className="inline-flex rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                          Draft cover
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Spine */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '30px',
-                  height: '100%',
-                  background: '#0035a0',
-                  transform: 'rotateY(90deg) translateZ(15px)',
-                  transformOrigin: 'left center',
-                  borderRadius: '4px 0 0 4px',
-                }} />
-                {/* Pages edge */}
-                <div style={{
-                  position: 'absolute',
-                  top: '4px',
-                  right: '-18px',
-                  width: '18px',
-                  height: 'calc(100% - 8px)',
-                  background: 'linear-gradient(90deg, #f5f0e8, #ede8de, #f5f0e8)',
-                  transform: 'rotateY(90deg)',
-                  transformOrigin: 'left center',
-                  borderRadius: '0 2px 2px 0',
-                }} />
-              </div>
-            </div>
+          {/* Book illustration */}
+          <div className="order-2 flex items-center justify-center md:col-span-5 md:order-none">
+            <img
+              src="/assets/book-illustration.svg"
+              alt="Agent Memory book"
+              className="h-auto w-full max-w-[320px] md:max-w-[380px]"
+            />
           </div>
         </header>
-
-        {/* Mobile cover — 3D book */}
-        <section className="md:hidden">
-          <div className="mx-auto mt-2 flex max-w-[16rem] items-center justify-center">
-            <div style={{ perspective: '900px' }}>
-              <div style={{
-                transform: 'rotateY(-12deg)',
-                transformStyle: 'preserve-3d',
-                position: 'relative',
-              }}>
-                {/* Front cover */}
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <div className="overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-low p-3 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-                    <div className="relative z-10 flex h-full w-full flex-col justify-between rounded-2xl border border-outline-variant/15 bg-surface-container-lowest p-4 text-on-surface">
-                      <div className="space-y-2">
-                        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface/50">
-                          O&apos;Reilly early release
-                        </p>
-                        <h2 className="font-headline text-lg font-black leading-[0.9] tracking-tight text-on-surface">
-                          Agent Memory
-                        </h2>
-                      </div>
-                      <div className="space-y-3">
-                        <p className="max-w-[16ch] font-body text-sm italic leading-relaxed text-on-surface/60">
-                          {bookSubtitle}
-                        </p>
-                        <div className="h-px w-12 bg-outline-variant/20" />
-                        <span className="inline-flex w-fit rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                          Draft cover
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Spine */}
-                <div style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '22px',
-                  height: '100%',
-                  background: '#0035a0',
-                  transform: 'rotateY(90deg) translateZ(11px)',
-                  transformOrigin: 'left center',
-                  borderRadius: '4px 0 0 4px',
-                }} />
-                {/* Pages edge */}
-                <div style={{
-                  position: 'absolute',
-                  top: '3px',
-                  right: '-14px',
-                  width: '14px',
-                  height: 'calc(100% - 6px)',
-                  background: 'linear-gradient(90deg, #f5f0e8, #ede8de, #f5f0e8)',
-                  transform: 'rotateY(90deg)',
-                  transformOrigin: 'left center',
-                  borderRadius: '0 2px 2px 0',
-                }} />
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Central thesis */}
         <section className="py-12 md:py-16">
