@@ -173,13 +173,13 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[leadDiscoveryPost, ...supportingPosts, secondaryPost].filter(Boolean).map((post) => (
-              <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
+              <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
                 <div className="space-y-5">
                   <div className="space-y-2">
-                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
+                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                       {primaryTag(post as Post)}
                     </p>
-                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
+                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#555f70] transition-colors group-hover:text-[#004ac6]">
                       <Link href={`/posts/${(post as Post).slug}`}>
                         {(post as Post).title}
                       </Link>
@@ -191,13 +191,13 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {(post as Post).tags.slice(0, 3).map((tag) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">
                         {tag}
                       </Link>
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
+                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors hover:bg-[#555f70] hover:text-white">
                       Read the post
                     </Link>
                   </div>
@@ -205,13 +205,13 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               </article>
             ))}
 
-            <article className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
+            <article className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-5">
                 <div className="space-y-2">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                     Upcoming publication
                   </p>
-                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
+                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#555f70] transition-colors group-hover:text-[#004ac6]">
                     <Link href="/book">
                       Agent Memory
                     </Link>
@@ -221,12 +221,12 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">AI Memory</span>
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Production Systems</span>
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">AI Memory</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">Production Systems</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">Book</span>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
-                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
+                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors hover:bg-[#555f70] hover:text-white">
                     Follow the book
                   </Link>
                 </div>
@@ -239,12 +239,12 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       <section className="border-t border-[#d0d3db] py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-8">
           <div className="mx-auto max-w-xl">
-            <article className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
+            <article className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-4">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
+                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
                   Stay in the loop
                 </p>
-                <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16]">
+                <h3 className="font-headline text-2xl font-bold leading-snug text-[#555f70]">
                   Email for updates
                 </h3>
                 <p className="text-base leading-relaxed text-[#555f70]">
@@ -253,7 +253,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                 <div className="pt-1">
                   <a
                     href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors hover:bg-[#555f70] hover:text-white"
                   >
                     Send email
                   </a>
