@@ -96,26 +96,10 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
               Writing about how AI systems <span className="font-body italic font-normal text-[#004ac6]">remember</span>, fail, and scale
             </h1>
-            <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70] md:text-3xl">
-              A public platform for posts, talks, publications, and the forthcoming book on Agent Memory
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                href="/book"
-                className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white"
-              >
-                Follow the book
-              </Link>
+            <div className="mt-10">
               <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white">
-                Browse selected writing
+                Browse writing
               </Link>
-            </div>
-            <div className="mt-10 flex flex-wrap gap-3">
-              {topTags.map(([tag, count]) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#1d1c16] transition-colors hover:text-[#004ac6]">
-                  {tag} ({count})
-                </Link>
-              ))}
             </div>
           </div>
 
@@ -176,28 +160,13 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-8">
-        <div className="flex flex-wrap items-center gap-4 border-y border-[#c3c6d7]/40 py-5 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#555f70]">
-          <span>{posts.length} published posts</span>
-          <span className="hidden sm:inline">/</span>
-          <span>{uniqueTags} unique topics</span>
-          <span className="hidden sm:inline">/</span>
-          <span>{yearsRepresented} years represented</span>
-          <span className="hidden sm:inline">/</span>
-          <span>{postsWithImages} posts with images</span>
-        </div>
-      </section>
-
-      <section className="border-t border-[#d0d3db] py-16 sm:py-20 md:py-28">
+      <section className="border-t border-[#d0d3db] py-16 sm:py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-8">
-          <div className="mb-10 flex flex-wrap items-baseline gap-4 sm:mb-12">
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 sm:mb-12">
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Selected work
             </p>
-            <h2 className="font-headline text-2xl font-bold tracking-tight text-[#1d1c16] md:text-3xl">
-              Recent writing and where to go next
-            </h2>
-            <Link href="/archive" className="ml-auto border-b-2 border-[#1d1c16] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
+            <Link href="/archive" className="border-b border-[#1d1c16] pb-0.5 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               View archive
             </Link>
           </div>
@@ -267,36 +236,17 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl border-t border-[#d0d3db] px-8 pt-16 pb-8">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
-              Direct updates
-            </p>
-            <h2 className="mt-4 max-w-2xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-6xl">
-              Email updates
-            </h2>
-            <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70]">
-              No fake signup funnel here. If you want updates on the book, new posts, talks, or publications, the simplest path is still direct email.
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-[#e4e7ef]/50 bg-[linear-gradient(135deg,#ffffff_0%,#f7f8ff_35%,#ffffff_55%,#f8f9fe_80%,#ffffff_100%)] p-8 shadow-[0_24px_70px_rgba(16,34,54,0.06)] lg:col-span-5">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#555f70]">
-              Direct contact
-            </p>
-            <p className="mt-4 text-lg leading-relaxed text-[#1d1c16]">
-              Email if you want updates on Agent Memory or want to talk about the posts, talks, or publications. This section should stay practical, not newsletter-branded.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="rounded-lg border border-[#c0c4cc] bg-transparent px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white"
-              >
-                Email updates
-              </a>
-            </div>
-          </div>
+      <section className="mx-auto max-w-7xl border-t border-[#d0d3db] px-8 pt-12 pb-8">
+        <div className="flex flex-wrap items-center justify-between gap-6">
+          <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
+            Updates
+          </p>
+          <a
+            href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
+            className="rounded-lg border border-[#c0c4cc] bg-transparent px-6 py-3 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white"
+          >
+            Email for updates
+          </a>
         </div>
       </section>
     </EditorialPageFrame>

@@ -74,8 +74,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
     : 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] md:text-[1.95rem]';
   const desktopNavItemClassName = (active: boolean) =>
     active
-      ? 'nav-link-animated is-active inline-flex min-h-[40px] items-center justify-center px-2 py-2 font-body text-sm font-semibold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#004ac6]'
-      : 'nav-link-animated inline-flex min-h-[40px] items-center justify-center px-2 py-2 font-body text-sm font-semibold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
+      ? 'nav-link-animated is-active inline-flex min-h-[40px] items-center justify-center px-2 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#004ac6]'
+      : 'nav-link-animated inline-flex min-h-[40px] items-center justify-center px-2 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#004ac6]';
   const mobileNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#004ac6]/15 bg-[#004ac6] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
