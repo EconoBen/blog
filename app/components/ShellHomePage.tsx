@@ -42,7 +42,7 @@ const topTagsFor = (posts: Post[], limit = 4) => {
 
 const ShellHomeEmptyState = () => (
   <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
-    <section className="mx-auto max-w-7xl px-8 py-24 md:py-32">
+    <section className="mx-auto max-w-[1440px] px-8 py-24 md:py-32">
       <div className="max-w-3xl">
         <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
           Technical editorial
@@ -87,7 +87,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
   return (
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
-      <section className="mx-auto max-w-7xl px-8 pb-20 pt-14 md:pb-24 md:pt-28">
+      <section className="mx-auto max-w-[1440px] px-8 pb-20 pt-14 md:pb-24 md:pt-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
@@ -97,7 +97,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               Writing about how AI systems <span className="font-body italic font-normal text-[#004ac6]">remember</span>, fail, and scale
             </h1>
             <div className="mt-10">
-              <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1 hover:bg-[#1d1c16] hover:text-white">
+              <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
                 Browse writing
               </Link>
             </div>
@@ -161,7 +161,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       </section>
 
       <section className="border-t border-[#d0d3db] py-16 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-7xl px-8">
+        <div className="mx-auto max-w-[1440px] px-8">
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4 sm:mb-12">
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Selected work
@@ -197,7 +197,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors hover:bg-[#555f70] hover:text-white">
+                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-transform hover:-translate-y-1">
                       Read the post
                     </Link>
                   </div>
@@ -226,7 +226,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#555f70]">Book</span>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
-                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors hover:bg-[#555f70] hover:text-white">
+                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-transform hover:-translate-y-1">
                     Follow the book
                   </Link>
                 </div>
@@ -237,7 +237,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       </section>
 
       <section className="border-t border-[#d0d3db] py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-8">
+        <div className="mx-auto max-w-[1440px] px-8">
           <div className="mx-auto max-w-xl">
             <article className="group overflow-hidden rounded-2xl border border-[#c0c4cc] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-4">
@@ -253,7 +253,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                 <div className="pt-1">
                   <a
                     href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-colors hover:bg-[#555f70] hover:text-white"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#555f70] transition-transform hover:-translate-y-1"
                   >
                     Send email
                   </a>

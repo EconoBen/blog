@@ -83,7 +83,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
 
   return (
     <header className={headerClassName}>
-      <div className="mx-auto flex max-w-7xl flex-col gap-2.5 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8 md:px-8 md:py-5">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-2.5 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8 md:px-8 md:py-5">
         <div className="flex items-center justify-between gap-3">
           <Link href="/" className={brandClassName} aria-label="Go to home">
             {brandLabel}
@@ -140,7 +140,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         </nav>
       </div>
       <nav
-        className="mx-auto max-w-7xl px-4 pb-2.5 md:hidden sm:px-6"
+        className="mx-auto max-w-[1440px] px-4 pb-2.5 md:hidden sm:px-6"
         aria-label="Primary"
       >
         <div className="flex flex-wrap gap-2 pb-1">
@@ -178,7 +178,7 @@ export function EditorialPageFrame({
         <EditorialTopbar currentPath={currentPath} />
         <main>{children}</main>
         <footer className="mt-20 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-8 py-12 md:flex-row">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-8 py-12 md:flex-row">
             <div className="font-headline text-sm uppercase tracking-wide text-[#555f70]">
               {copyrightYear > 2024 ? `© 2024-${copyrightYear} Ben` : '© 2024 Ben'} - Technical Curator &amp; Economist
             </div>
