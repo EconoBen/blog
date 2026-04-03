@@ -90,7 +90,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       <section className="mx-auto max-w-7xl px-8 pb-20 pt-14 md:pb-24 md:pt-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
+            <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Technical editorial
             </p>
             <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
@@ -191,16 +191,14 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
       <section className="bg-[#f8f3e9] py-16 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-8">
-          <div className="mb-10 flex flex-col gap-4 sm:mb-12 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
-                Selected work
-              </p>
-              <h2 className="mt-4 max-w-2xl font-headline text-4xl font-bold tracking-tight text-[#1d1c16] md:text-5xl">
-                Recent writing and where to go next.
-              </h2>
-            </div>
-            <Link href="/archive" className="border-b-2 border-[#004ac6] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#004ac6]">
+          <div className="mb-10 flex flex-wrap items-baseline gap-4 sm:mb-12">
+            <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
+              Selected work
+            </p>
+            <h2 className="font-headline text-2xl font-bold tracking-tight text-[#1d1c16] md:text-3xl">
+              Recent writing and where to go next.
+            </h2>
+            <Link href="/archive" className="ml-auto border-b-2 border-[#004ac6] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#004ac6]">
               View archive
             </Link>
           </div>
@@ -273,7 +271,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       <section className="mx-auto max-w-7xl px-8 pt-16 pb-8">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
+            <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Direct updates
             </p>
             <h2 className="mt-4 max-w-2xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-6xl">
