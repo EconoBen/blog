@@ -207,7 +207,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[leadDiscoveryPost, ...supportingPosts, secondaryPost].filter(Boolean).map((post) => (
-              <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white p-8 transition-transform duration-300 hover:-translate-y-1">
+              <article key={(post as Post).slug} className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
                 <div className="space-y-5">
                   <div className="space-y-2">
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#004ac6]">
@@ -231,7 +231,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#1d1c16] bg-[#1d1c16] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white">
+                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#1d1c16] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
                       Read the post
                     </Link>
                   </div>
@@ -239,7 +239,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               </article>
             ))}
 
-            <article className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white p-8 transition-transform duration-300 hover:-translate-y-1">
+            <article className="group overflow-hidden rounded-2xl border border-[#1d1c16] bg-white/60 backdrop-blur-sm p-8 transition-transform duration-300 hover:-translate-y-1">
               <div className="space-y-5">
                 <div className="space-y-2">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#004ac6]">
@@ -260,7 +260,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   <span className="rounded-full border border-[#1d1c16]/20 bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
-                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#1d1c16] bg-[#1d1c16] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white">
+                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#1d1c16] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
                     Follow the book
                   </Link>
                 </div>
