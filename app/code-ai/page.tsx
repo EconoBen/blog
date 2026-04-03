@@ -366,7 +366,7 @@ export default function CodeAIPage() {
                               <button
                                 type="button"
                                 onClick={() => toggleExpanded(item.id)}
-                                className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
+                                className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface"
                               >
                                 {isExpanded ? 'Hide preview' : 'Show preview'}
                               </button>

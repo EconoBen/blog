@@ -8699,6 +8699,29 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   100% { transform: translateX(100%); }
 }
 
+@keyframes gradient-line {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.banner-glow {
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 53, 160, 0.08);
+}
+
+.banner-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0035a0, #5b8def, #0035a0, #5b8def);
+  background-size: 300% 100%;
+  animation: gradient-line 4s ease infinite;
+}
+
 .featured-shimmer {
   position: relative;
   overflow: hidden;

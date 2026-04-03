@@ -88,7 +88,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
   return (
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
       {/* ── Featured banner — distinct from rest of page ── */}
-      <section className="border-b border-outline-variant/20 bg-[#e8eef8]">
+      <section className="banner-glow bg-[#e8eef8]">
         <div className="mx-auto max-w-[1440px] px-8 py-14 md:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             {/* Left: headline centered vertically */}
@@ -108,7 +108,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <article className="featured-shimmer overflow-hidden rounded-2xl border border-white/15 bg-white shadow-[0_24px_70px_rgba(0,0,0,0.2)]">
               <div className="space-y-4 p-8">
                 <div className="flex flex-wrap items-center gap-3">
-                  <span className="rounded-t-lg rounded-b-none bg-[#1d1c16] px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                  <span className="rounded-t-lg rounded-b-none bg-[#0035a0] px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                     Latest post
                   </span>
                   <span className="font-label text-[10px] uppercase tracking-widest text-[#555f70]">{dateFormatter.format(featuredPost.date)}</span>
@@ -128,7 +128,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Read now'}</span>
                   <span>{featuredPost.tags.length} tags</span>
                 </div>
-                <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center justify-center rounded-lg bg-[#1d1c16] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-transform hover:-translate-y-1">
+                <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
                   Read the post
                 </Link>
               </div>

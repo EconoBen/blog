@@ -176,7 +176,7 @@ function FeaturedTalk({
             <button
               type="button"
               onClick={onOpen}
-              className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
+              className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface"
             >
               {getPrimaryActionLabel(talk)}
             </button>
@@ -324,7 +324,7 @@ function TalkCard({
           )}
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface"
+            className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface"
             onClick={onOpen}
           >
             {isOpen ? 'Playing in page' : getPrimaryActionLabel(talk)}
@@ -397,7 +397,7 @@ export default function TalksClient() {
                 <button
                   type="button"
                   className={`px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                    viewMode === 'list' ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white' : 'text-on-surface/50 hover:text-on-surface'
+                    viewMode === 'list' ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white' : 'text-on-surface/50 hover:text-on-surface'
                   }`}
                   onClick={() => setViewMode('list')}
                   aria-pressed={viewMode === 'list'}
@@ -407,7 +407,7 @@ export default function TalksClient() {
                 <button
                   type="button"
                   className={`px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                    viewMode === 'grid' ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white' : 'text-on-surface/50 hover:text-on-surface'
+                    viewMode === 'grid' ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white' : 'text-on-surface/50 hover:text-on-surface'
                   }`}
                   onClick={() => setViewMode('grid')}
                   aria-pressed={viewMode === 'grid'}
@@ -424,7 +424,7 @@ export default function TalksClient() {
                 type="button"
                 className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                   activeFilter === 'all'
-                    ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white'
+                    ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white'
                     : 'text-on-surface/50 hover:text-on-surface'
                 }`}
                 onClick={() => setActiveFilter('all')}
@@ -438,7 +438,7 @@ export default function TalksClient() {
                   key={topic}
                   className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                     activeFilter === topic
-                      ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white'
+                      ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white'
                       : 'text-on-surface/50 hover:text-on-surface'
                   }`}
                   onClick={() => setActiveFilter(topic)}

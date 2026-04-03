@@ -186,7 +186,7 @@ export default function AboutPage() {
               <a
                 href="/benjamin_labaschin_resume.pdf"
                 download
-                className="rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface transition-transform hover:-translate-y-1"
+                className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
               >
                 Download resume
               </a>
@@ -392,7 +392,7 @@ export default function AboutPage() {
             href="/benjamin_labaschin_resume.pdf"
             download
             title="Download CV"
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-on-surface text-surface transition-transform hover:-translate-y-0.5"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent text-on-surface transition-transform hover:-translate-y-0.5"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/></svg>
           </a>
@@ -406,7 +406,7 @@ export default function AboutPage() {
           <a href="mailto:benjaminlabaschin@gmail.com" className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">Email</a>
           <a href="https://github.com/econoben" target="_blank" rel="noreferrer noopener" className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">GitHub</a>
           <a href="https://linkedin.com/in/benjamin-labaschin" target="_blank" rel="noreferrer noopener" className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">LinkedIn</a>
-          <a href="/benjamin_labaschin_resume.pdf" download className="rounded-lg bg-on-surface px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-surface transition-transform hover:-translate-y-1">Download CV</a>
+          <a href="/benjamin_labaschin_resume.pdf" download className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">Download CV</a>
         </div>
       </section>
     </EditorialPageFrame>
