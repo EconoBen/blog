@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
+import { ScrollToTop } from './ScrollToTop';
 
 const primaryNavItems = [
   { href: '/', label: 'Home' },
@@ -180,6 +181,7 @@ export function EditorialPageFrame({
       <div>
         <EditorialTopbar currentPath={currentPath} />
         <main>{children}</main>
+        <ScrollToTop />
         <footer className="mt-20 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-6 px-8 py-12 md:flex-row">
             <div className="font-headline text-sm uppercase tracking-wide text-[#1d1c16]">
