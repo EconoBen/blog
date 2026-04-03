@@ -223,13 +223,13 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {(post as Post).tags.slice(0, 3).map((tag) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#1d1c16]/20 bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">
                         {tag}
                       </Link>
                     ))}
                   </div>
                   <div className="flex flex-wrap gap-3 pt-1">
-                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#1d1c16] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
+                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
                       Read the post
                     </Link>
                   </div>
@@ -253,12 +253,12 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-[#1d1c16]/20 bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">AI Memory</span>
-                  <span className="rounded-full border border-[#1d1c16]/20 bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Production Systems</span>
-                  <span className="rounded-full border border-[#1d1c16]/20 bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">AI Memory</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Production Systems</span>
+                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
                 </div>
                 <div className="flex flex-wrap gap-3 pt-1">
-                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#1d1c16] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
+                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-colors hover:bg-[#1d1c16] hover:text-white">
                     Follow the book
                   </Link>
                 </div>
