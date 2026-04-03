@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg24" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1d1c16"/>
-      <stop offset="100%" stop-color="#24231b"/>
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
     </linearGradient>
     <radialGradient id="targetGlow" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#004ac6" stop-opacity="0.12"/>
@@ -56,10 +56,10 @@
     <circle cx="0" cy="0" r="8" fill="#fef9ef" opacity="0.6"/>
 
     <!-- Cross hairs -->
-    <line x1="0" y1="-210" x2="0" y2="-22" stroke="#555f70" stroke-width="0.75" stroke-opacity="0.2"/>
-    <line x1="0" y1="22" x2="0" y2="210" stroke="#555f70" stroke-width="0.75" stroke-opacity="0.2"/>
-    <line x1="-210" y1="0" x2="-22" y2="0" stroke="#555f70" stroke-width="0.75" stroke-opacity="0.2"/>
-    <line x1="22" y1="0" x2="210" y2="0" stroke="#555f70" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="0" y1="-210" x2="0" y2="-22" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="0" y1="22" x2="0" y2="210" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="-210" y1="0" x2="-22" y2="0" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="22" y1="0" x2="210" y2="0" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
   </g>
 
   <!-- Arrow 1 (embedded in target, near center) -->
@@ -75,10 +75,10 @@
 
   <!-- Arrow 2 (slight miss, in ring 3) -->
   <g transform="translate(520, 315)">
-    <line x1="-150" y1="-100" x2="30" y2="-45" stroke="#555f70" stroke-width="1.5" stroke-opacity="0.3"/>
-    <polygon points="33,-46 24,-40 26,-52" fill="#555f70" opacity="0.35"/>
-    <line x1="-146" y1="-98" x2="-155" y2="-110" stroke="#555f70" stroke-width="0.75" stroke-opacity="0.2"/>
-    <line x1="-150" y1="-102" x2="-162" y2="-106" stroke="#555f70" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="-150" y1="-100" x2="30" y2="-45" stroke="#95a0b4" stroke-width="1.5" stroke-opacity="0.3"/>
+    <polygon points="33,-46 24,-40 26,-52" fill="#95a0b4" opacity="0.35"/>
+    <line x1="-146" y1="-98" x2="-155" y2="-110" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="-150" y1="-102" x2="-162" y2="-106" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
   </g>
 
   <!-- Radiating segments outside target (achievement arcs) -->
@@ -98,8 +98,8 @@
   </g>
 
   <!-- Corner accents -->
-  <line x1="30" y1="30" x2="70" y2="30" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
-  <line x1="30" y1="30" x2="30" y2="70" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
-  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
-  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="30" y2="70" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
 </svg>

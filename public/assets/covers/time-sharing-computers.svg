@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1d1c16"/>
-      <stop offset="100%" stop-color="#211f18"/>
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
     </linearGradient>
     <radialGradient id="clockGlow" cx="0.5" cy="0.5" r="0.5">
       <stop offset="0%" stop-color="#004ac6" stop-opacity="0.1"/>
@@ -17,7 +17,7 @@
   <ellipse cx="600" cy="315" rx="240" ry="240" fill="url(#clockGlow)"/>
 
   <!-- Outer clock ring -->
-  <circle cx="600" cy="315" r="200" fill="none" stroke="#555f70" stroke-opacity="0.15" stroke-width="2"/>
+  <circle cx="600" cy="315" r="200" fill="none" stroke="#95a0b4" stroke-opacity="0.15" stroke-width="2"/>
 
   <!-- Tick marks around the clock (12 positions) -->
   <g stroke="#fef9ef" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round">
@@ -47,7 +47,7 @@
     <path d="M 780 405 A 180 180 0 0 1 600 495" stroke="#004ac6" stroke-opacity="0.3"/>
 
     <!-- Segment 4 (grey) — 6 to 8 o'clock -->
-    <path d="M 600 495 A 180 180 0 0 1 420 405" stroke="#555f70" stroke-opacity="0.25"/>
+    <path d="M 600 495 A 180 180 0 0 1 420 405" stroke="#95a0b4" stroke-opacity="0.25"/>
 
     <!-- Segment 5 (blue dark) — 8 to 10 o'clock -->
     <path d="M 420 405 A 180 180 0 0 1 434 225" stroke="#004ac6" stroke-opacity="0.2"/>
@@ -57,14 +57,14 @@
   </g>
 
   <!-- Inner ring -->
-  <circle cx="600" cy="315" r="130" fill="none" stroke="#555f70" stroke-opacity="0.08" stroke-width="1"/>
+  <circle cx="600" cy="315" r="130" fill="none" stroke="#95a0b4" stroke-opacity="0.08" stroke-width="1"/>
 
   <!-- Clock hand — suggesting current time slice -->
   <line x1="600" y1="315" x2="720" y2="220" stroke="#fef9ef" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"/>
   <line x1="600" y1="315" x2="540" y2="200" stroke="#fef9ef" stroke-opacity="0.12" stroke-width="1.5" stroke-linecap="round"/>
 
   <!-- Center hub -->
-  <circle cx="600" cy="315" r="8" fill="#1d1c16" stroke="#004ac6" stroke-opacity="0.5" stroke-width="2"/>
+  <circle cx="600" cy="315" r="8" fill="#e8eef8" stroke="#004ac6" stroke-opacity="0.5" stroke-width="2"/>
   <circle cx="600" cy="315" r="3" fill="#004ac6" fill-opacity="0.6"/>
 
   <!-- Terminal/user nodes around perimeter -->
@@ -87,11 +87,11 @@
 
     <!-- Terminal 3 (bottom right) -->
     <g transform="translate(830, 490)">
-      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#555f70" stroke-opacity="0.25" stroke-width="1.5"/>
-      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#555f70" fill-opacity="0.06"/>
-      <line x1="-8" y1="12" x2="8" y2="12" stroke="#555f70" stroke-opacity="0.15" stroke-width="1"/>
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#95a0b4" stroke-opacity="0.25" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#95a0b4" fill-opacity="0.06"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#95a0b4" stroke-opacity="0.15" stroke-width="1"/>
     </g>
-    <line x1="750" y1="440" x2="812" y2="482" stroke="#555f70" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="750" y1="440" x2="812" y2="482" stroke="#95a0b4" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 4"/>
 
     <!-- Terminal 4 (bottom left) -->
     <g transform="translate(370, 490)">
@@ -111,11 +111,11 @@
 
     <!-- Terminal 6 (top left) -->
     <g transform="translate(340, 160)">
-      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#555f70" stroke-opacity="0.2" stroke-width="1.5"/>
-      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#555f70" fill-opacity="0.05"/>
-      <line x1="-8" y1="12" x2="8" y2="12" stroke="#555f70" stroke-opacity="0.12" stroke-width="1"/>
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#95a0b4" stroke-opacity="0.2" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#95a0b4" fill-opacity="0.05"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#95a0b4" stroke-opacity="0.12" stroke-width="1"/>
     </g>
-    <line x1="430" y1="210" x2="360" y2="168" stroke="#555f70" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="430" y1="210" x2="360" y2="168" stroke="#95a0b4" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="4 4"/>
   </g>
 
   <!-- Vintage scan line overlay -->

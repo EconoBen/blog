@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1d1c16"/>
-      <stop offset="100%" stop-color="#2a2920"/>
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
     </linearGradient>
     <linearGradient id="blueGlow" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#004ac6" stop-opacity="0.8"/>
@@ -18,7 +18,7 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
 
   <!-- Subtle grid lines -->
-  <g stroke="#555f70" stroke-opacity="0.08" stroke-width="1">
+  <g stroke="#95a0b4" stroke-opacity="0.08" stroke-width="1">
     <line x1="200" y1="0" x2="200" y2="630"/>
     <line x1="400" y1="0" x2="400" y2="630"/>
     <line x1="600" y1="0" x2="600" y2="630"/>
@@ -33,16 +33,16 @@
   <!-- Server stack — layered rectangles -->
   <g transform="translate(600, 315)">
     <!-- Bottom layer (infrastructure) -->
-    <rect x="-220" y="60" width="440" height="70" rx="6" fill="#1d1c16" stroke="#555f70" stroke-opacity="0.4" stroke-width="1.5"/>
+    <rect x="-220" y="60" width="440" height="70" rx="6" fill="#e8eef8" stroke="#95a0b4" stroke-opacity="0.4" stroke-width="1.5"/>
     <rect x="-210" y="65" width="420" height="60" rx="4" fill="url(#creamFade)"/>
     <g transform="translate(-180, 80)">
-      <circle r="4" fill="#555f70" opacity="0.5"/>
-      <circle r="4" cx="20" fill="#555f70" opacity="0.5"/>
-      <circle r="4" cx="40" fill="#555f70" opacity="0.5"/>
+      <circle r="4" fill="#95a0b4" opacity="0.5"/>
+      <circle r="4" cx="20" fill="#95a0b4" opacity="0.5"/>
+      <circle r="4" cx="40" fill="#95a0b4" opacity="0.5"/>
     </g>
 
     <!-- Middle layer (server) -->
-    <rect x="-200" y="-15" width="400" height="70" rx="6" fill="#1d1c16" stroke="#004ac6" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="-200" y="-15" width="400" height="70" rx="6" fill="#dce5f4" stroke="#004ac6" stroke-opacity="0.5" stroke-width="1.5"/>
     <rect x="-190" y="-10" width="380" height="60" rx="4" fill="#004ac6" fill-opacity="0.08"/>
     <g transform="translate(-160, 5)">
       <circle r="4" fill="#004ac6" opacity="0.6"/>
@@ -54,7 +54,7 @@
     <rect x="80" y="30" width="90" height="8" rx="2" fill="#004ac6" fill-opacity="0.1"/>
 
     <!-- Top layer (API/cloud) -->
-    <rect x="-180" y="-90" width="360" height="70" rx="6" fill="#1d1c16" stroke="#004ac6" stroke-opacity="0.8" stroke-width="2"/>
+    <rect x="-180" y="-90" width="360" height="70" rx="6" fill="#dce5f4" stroke="#004ac6" stroke-opacity="0.8" stroke-width="2"/>
     <rect x="-170" y="-85" width="340" height="60" rx="4" fill="#004ac6" fill-opacity="0.15"/>
     <g transform="translate(-140, -70)">
       <circle r="5" fill="#004ac6" opacity="0.8"/>

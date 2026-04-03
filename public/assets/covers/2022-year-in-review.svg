@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg3" x1="0" y1="1" x2="0.8" y2="0">
-      <stop offset="0%" stop-color="#1d1c16"/>
-      <stop offset="100%" stop-color="#22211a"/>
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
     </linearGradient>
     <linearGradient id="rocketTrail" x1="0" y1="1" x2="0.5" y2="0">
       <stop offset="0%" stop-color="#004ac6" stop-opacity="0"/>
@@ -48,19 +48,19 @@
   <!-- Milestone dots along the path -->
   <g>
     <!-- Q1 milestone -->
-    <circle cx="250" cy="510" r="7" fill="#1d1c16" stroke="#004ac6" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="250" cy="510" r="7" fill="#e8eef8" stroke="#004ac6" stroke-width="2" stroke-opacity="0.5"/>
     <circle cx="250" cy="510" r="3" fill="#004ac6" fill-opacity="0.5"/>
 
     <!-- Q2 milestone -->
-    <circle cx="480" cy="415" r="8" fill="#1d1c16" stroke="#004ac6" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="480" cy="415" r="8" fill="#e8eef8" stroke="#004ac6" stroke-width="2" stroke-opacity="0.6"/>
     <circle cx="480" cy="415" r="3.5" fill="#004ac6" fill-opacity="0.6"/>
 
     <!-- Q3 milestone -->
-    <circle cx="720" cy="268" r="9" fill="#1d1c16" stroke="#004ac6" stroke-width="2" stroke-opacity="0.7"/>
+    <circle cx="720" cy="268" r="9" fill="#e8eef8" stroke="#004ac6" stroke-width="2" stroke-opacity="0.7"/>
     <circle cx="720" cy="268" r="4" fill="#004ac6" fill-opacity="0.7"/>
 
     <!-- Q4 milestone -->
-    <circle cx="950" cy="118" r="10" fill="#1d1c16" stroke="#004ac6" stroke-width="2.5" stroke-opacity="0.8"/>
+    <circle cx="950" cy="118" r="10" fill="#e8eef8" stroke="#004ac6" stroke-width="2.5" stroke-opacity="0.8"/>
     <circle cx="950" cy="118" r="4.5" fill="#004ac6" fill-opacity="0.8"/>
   </g>
 
@@ -84,7 +84,7 @@
   </g>
 
   <!-- Dashed horizontal lines at milestones suggesting targets/goals -->
-  <g stroke="#555f70" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="8 6">
+  <g stroke="#95a0b4" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="8 6">
     <line x1="0" y1="510" x2="250" y2="510"/>
     <line x1="0" y1="415" x2="480" y2="415"/>
     <line x1="0" y1="268" x2="720" y2="268"/>

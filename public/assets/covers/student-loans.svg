@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bgLoan" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1d1c16"/>
-      <stop offset="100%" stop-color="#23221b"/>
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
     </linearGradient>
     <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#004ac6" stop-opacity="0.8"/>
@@ -22,7 +22,7 @@
   <rect width="1200" height="630" fill="url(#bgLoan)"/>
 
   <!-- Baseline -->
-  <line x1="120" y1="530" x2="1080" y2="530" stroke="#555f70" stroke-width="1" stroke-opacity="0.2"/>
+  <line x1="120" y1="530" x2="1080" y2="530" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.2"/>
 
   <!-- Descending bars (6 years of reducing debt) -->
   <!-- Year 1: tallest (194k) -->
@@ -73,14 +73,14 @@
   </g>
 
   <!-- Weight/pressure indicator lines above tallest bar -->
-  <g stroke="#555f70" stroke-width="0.5" stroke-opacity="0.1">
+  <g stroke="#95a0b4" stroke-width="0.5" stroke-opacity="0.1">
     <line x1="175" y1="95" x2="275" y2="95"/>
     <line x1="180" y1="85" x2="270" y2="85"/>
     <line x1="185" y1="75" x2="265" y2="75"/>
   </g>
 
   <!-- Subtle grid ticks on y-axis -->
-  <g stroke="#555f70" stroke-width="0.75" stroke-opacity="0.1">
+  <g stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.1">
     <line x1="115" y1="170" x2="125" y2="170"/>
     <line x1="115" y1="260" x2="125" y2="260"/>
     <line x1="115" y1="350" x2="125" y2="350"/>
@@ -92,8 +92,8 @@
         fill="url(#successGrad)" opacity="0.15"/>
 
   <!-- Corner accents -->
-  <line x1="30" y1="30" x2="70" y2="30" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
-  <line x1="30" y1="30" x2="30" y2="70" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
-  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
-  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="30" y2="70" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
 </svg>

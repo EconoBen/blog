@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1d1c16"/>
-      <stop offset="100%" stop-color="#22211a"/>
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
     </linearGradient>
     <linearGradient id="shieldGrad" x1="0.5" y1="0" x2="0.5" y2="1">
       <stop offset="0%" stop-color="#004ac6" stop-opacity="0.2"/>
@@ -43,7 +43,7 @@
     </g>
 
     <!-- Central lock/secure icon -->
-    <rect x="-20" y="-15" width="40" height="32" rx="5" fill="#1d1c16" stroke="#004ac6" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="-20" y="-15" width="40" height="32" rx="5" fill="#e8eef8" stroke="#004ac6" stroke-opacity="0.5" stroke-width="1.5"/>
     <path d="M -10 -15 L -10 -28 C -10 -42, 10 -42, 10 -28 L 10 -15" fill="none" stroke="#004ac6" stroke-opacity="0.4" stroke-width="1.5"/>
     <circle cy="2" r="4" fill="#004ac6" fill-opacity="0.4"/>
     <line x1="0" y1="4" x2="0" y2="12" stroke="#004ac6" stroke-opacity="0.35" stroke-width="1.5"/>
@@ -125,7 +125,7 @@
   </g>
 
   <!-- Network mesh background — very subtle -->
-  <g stroke="#555f70" stroke-opacity="0.03" stroke-width="0.5">
+  <g stroke="#95a0b4" stroke-opacity="0.03" stroke-width="0.5">
     <line x1="100" y1="100" x2="300" y2="180"/>
     <line x1="300" y1="180" x2="200" y2="350"/>
     <line x1="900" y1="180" x2="1000" y2="350"/>
