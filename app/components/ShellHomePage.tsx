@@ -90,7 +90,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       <section className="mx-auto max-w-7xl px-8 pb-20 pt-14 md:pb-24 md:pt-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
+            <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Technical editorial
             </p>
             <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
@@ -113,7 +113,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
               {topTags.map(([tag, count]) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#ede8de] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70] transition-colors hover:bg-[#e7e2d8]">
+                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#1d1c16] transition-colors hover:text-[#004ac6]">
                   {tag} ({count})
                 </Link>
               ))}
