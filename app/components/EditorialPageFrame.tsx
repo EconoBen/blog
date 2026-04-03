@@ -66,13 +66,11 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const compactShell = isCompactShell(currentPath);
   const mobilePrimaryNavItems = prioritizeActiveItem(primaryNavItems, currentPath);
   const mobileDiscoveryNavItems = prioritizeActiveItem(discoveryNavItems, currentPath);
-  const brandLabel = compactShell ? 'econoben.dev' : 'ECONOBEN.DEV';
+  const brandLabel = 'ECONOBEN.DEV';
   const headerClassName = compactShell
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
     : 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
-  const brandClassName = compactShell
-    ? 'font-headline text-[1.65rem] font-extrabold tracking-tight text-[#1d1c16] md:text-[1.85rem]'
-    : 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] md:text-[1.95rem]';
+  const brandClassName = 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16]';
   const desktopNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 rounded-t-lg rounded-b-none bg-[#0035a0] font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap !text-white [&]:text-white'
