@@ -6,7 +6,7 @@ const primaryNavItems = [
   { href: '/posts', label: 'Posts' },
   { href: '/talks', label: 'Talks' },
   { href: '/publications', label: 'Publications' },
-  { href: '/book', label: 'Book' },
+  { href: '/book', label: 'New Book' },
   { href: '/code-ai', label: 'Code & Tools' },
   { href: '/about', label: 'About' },
 ];
@@ -122,7 +122,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             );
           })}
         </nav>
-        <nav className="hidden items-center gap-2 md:flex" aria-label="Discovery">
+        <nav className="hidden items-center gap-3 md:flex" aria-label="Discovery">
           {discoveryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
@@ -130,7 +130,10 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={desktopNavItemClassName(active)}
+                  className={active
+                    ? 'inline-flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#555f70]'
+                    : 'inline-flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#999] transition-colors duration-200 hover:text-[#555f70]'
+                  }
                   aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
