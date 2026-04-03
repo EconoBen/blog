@@ -119,7 +119,7 @@ export default function CodeAIPage() {
   });
 
   const selectedCategoryLabel = categoryLabelById[selectedCategory] ?? 'All';
-  const highlightedItems = featuredItems.slice(0, 3);
+  // Featured items are now integrated into the main index
   const selectedCount = filteredItems.length;
 
   const groupedItems = filteredItems.reduce((acc, item) => {
@@ -211,76 +211,7 @@ export default function CodeAIPage() {
           </div>
         </div>
 
-        {/* Lead entries */}
-        <div className="space-y-5 border-t border-outline-variant/20 py-12 md:py-16">
-          <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <div className="space-y-1">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Lead entries</p>
-              <h2 className="max-w-[20ch] font-headline text-[clamp(1.55rem,2.8vw,2.1rem)] font-bold tracking-tight text-on-surface">
-                Open working code first, then browse the archive beneath it.
-              </h2>
-            </div>
-            <p className="max-w-[24ch] font-body text-sm leading-relaxed text-secondary">
-              {selectedCount} item{selectedCount === 1 ? '' : 's'} in view. {selectedCategory === 'all' ? 'All categories are available.' : `${selectedCategoryLabel} is active.`}
-            </p>
-          </div>
-
-          {highlightedItems.length > 0 && (
-            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-              {highlightedItems.map((item) => (
-                <article
-                  key={item.id}
-                  className="group rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-6 shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1"
-                >
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-                        {getCodeToolsLanguageLabel(item.language)}
-                      </span>
-                      {item.date && (
-                        <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
-                          {formatCodeToolsDate(item.date)}
-                        </span>
-                      )}
-                      <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
-                        {getCodeToolsItemLineCount(item)} lines
-                      </span>
-                    </div>
-
-                    <h2 className="max-w-[20ch] font-headline text-xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
-                      <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
-                    </h2>
-
-                    <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
-
-                    <div className="flex flex-wrap gap-2">
-                      <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                        {item.filename || 'Inline snippet'}
-                      </span>
-                      <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                        {item.tags.length} tags
-                      </span>
-                      {item.featured && (
-                        <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                          Featured
-                        </span>
-                      )}
-                    </div>
-
-                    <Link
-                      href={getCodeToolsUrl(item.id)}
-                      className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
-                    >
-                      Open detail page
-                    </Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Browse and filter */}
+        {/* Browse and filter — full index */}
         <section className="border-t border-outline-variant/20 py-12 md:py-16" id="code-tools-index">
           <div className="space-y-5">
             <div className="flex flex-wrap items-baseline justify-between gap-4">
