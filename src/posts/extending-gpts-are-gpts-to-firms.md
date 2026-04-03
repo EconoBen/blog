@@ -3,6 +3,7 @@ title: "Extending 'GPTs Are GPTs' to Firms"
 date: "2025-06-02"
 tags: ["AI", "Economics", "Labor", "Productivity", "GPTs"]
 summary: "A new paper on the impact of AI on labor demand at the firm level."
+image: "/assets/covers/extending-gpts-are-gpts-to-firms.svg"
 ---
 
 

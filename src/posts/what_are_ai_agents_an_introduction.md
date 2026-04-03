@@ -3,6 +3,7 @@ title: "What Are AI Agents? An Introduction to AI Agents and LLMs"
 date: "2023-11-27"
 tags: ["AI", "LLM", "Agents", "Machine Learning", "Technology"]
 summary: "I wrote a book for O'Reilly Media about AI agents and LLMs, exploring what they are, how they're different from traditional AI, and when to use them. The report breaks down these concepts in an approachable way for newcomers to the field."
+image: "/assets/covers/what-are-ai-agents.svg"
 ---
 
 ![What Are AI Agents?](/posts/oreilly_what_are_ai_agents.png)

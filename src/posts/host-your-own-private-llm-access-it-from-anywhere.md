@@ -3,6 +3,7 @@ title: "Host Your Own Local LLM / RAG Behind a Private VPN, Access It From Anywh
 date: "2025-01-06"
 summary: "A step-by-step guide on hosting your own private Large Language Model and RAG system using Synology, Tailscale, Caddy, and Ollama—all protected behind a lightweight VPN and accessible anywhere."
 tags: ["LLM", "RAG", "Synology", "Ollama", "Caddy", "Tailscale", "self-hosting", "reverse proxy", "VPN"]
+image: "/assets/covers/host-local-llm-vpn.svg"
 ---
 
 

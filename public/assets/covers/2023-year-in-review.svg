@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg23" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1d1c16"/>
+      <stop offset="100%" stop-color="#24231b"/>
+    </linearGradient>
+    <linearGradient id="ringGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#004ac6"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="ringGrad2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef9ef" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fef9ef" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg23)"/>
+
+  <!-- Central progress rings composition -->
+  <g transform="translate(600, 315)">
+
+    <!-- Outer ring (largest achievement) — ~85% filled -->
+    <circle cx="0" cy="0" r="200" fill="none" stroke="#555f70" stroke-width="8" stroke-opacity="0.08"/>
+    <circle cx="0" cy="0" r="200" fill="none" stroke="url(#ringGrad1)" stroke-width="8" stroke-opacity="0.5"
+            stroke-dasharray="1068 257" stroke-dashoffset="315" stroke-linecap="round"/>
+
+    <!-- Ring 2 — ~70% filled -->
+    <circle cx="0" cy="0" r="165" fill="none" stroke="#555f70" stroke-width="8" stroke-opacity="0.08"/>
+    <circle cx="0" cy="0" r="165" fill="none" stroke="url(#ringGrad1)" stroke-width="8" stroke-opacity="0.45"
+            stroke-dasharray="726 311" stroke-dashoffset="259" stroke-linecap="round"/>
+
+    <!-- Ring 3 — ~90% filled -->
+    <circle cx="0" cy="0" r="130" fill="none" stroke="#555f70" stroke-width="8" stroke-opacity="0.08"/>
+    <circle cx="0" cy="0" r="130" fill="none" stroke="url(#ringGrad2)" stroke-width="8" stroke-opacity="0.4"
+            stroke-dasharray="735 82" stroke-dashoffset="204" stroke-linecap="round"/>
+
+    <!-- Ring 4 — ~60% filled -->
+    <circle cx="0" cy="0" r="95" fill="none" stroke="#555f70" stroke-width="8" stroke-opacity="0.08"/>
+    <circle cx="0" cy="0" r="95" fill="none" stroke="url(#ringGrad1)" stroke-width="8" stroke-opacity="0.35"
+            stroke-dasharray="358 239" stroke-dashoffset="149" stroke-linecap="round"/>
+
+    <!-- Inner ring — ~95% filled -->
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#555f70" stroke-width="8" stroke-opacity="0.08"/>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="url(#ringGrad2)" stroke-width="8" stroke-opacity="0.35"
+            stroke-dasharray="358 19" stroke-dashoffset="94" stroke-linecap="round"/>
+
+    <!-- Center achievement dot -->
+    <circle cx="0" cy="0" r="22" fill="#004ac6" opacity="0.15"/>
+    <circle cx="0" cy="0" r="12" fill="#004ac6" opacity="0.35"/>
+    <circle cx="0" cy="0" r="5" fill="#fef9ef" opacity="0.5"/>
+
+  </g>
+
+  <!-- Pie segment accents (offset from main rings) -->
+  <!-- Top-left segment -->
+  <g transform="translate(250, 180)">
+    <path d="M0,0 L0,-50 A50,50 0 0,1 43,-25 Z" fill="#004ac6" opacity="0.08"/>
+    <path d="M0,0 L43,-25 A50,50 0 0,1 43,25 Z" fill="#004ac6" opacity="0.05"/>
+    <circle cx="0" cy="0" r="50" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+    <circle cx="0" cy="0" r="3" fill="#004ac6" opacity="0.3"/>
+  </g>
+
+  <!-- Top-right segment -->
+  <g transform="translate(950, 200)">
+    <path d="M0,0 L0,-35 A35,35 0 0,1 30,-17 Z" fill="#004ac6" opacity="0.06"/>
+    <path d="M0,0 L30,-17 A35,35 0 0,1 30,17 Z" fill="#004ac6" opacity="0.04"/>
+    <path d="M0,0 L30,17 A35,35 0 0,1 0,35 Z" fill="#004ac6" opacity="0.08"/>
+    <circle cx="0" cy="0" r="35" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.12"/>
+    <circle cx="0" cy="0" r="2" fill="#004ac6" opacity="0.25"/>
+  </g>
+
+  <!-- Bottom-left segment -->
+  <g transform="translate(220, 460)">
+    <path d="M0,0 L-30,0 A30,30 0 0,1 -15,-26 Z" fill="#fef9ef" opacity="0.03"/>
+    <path d="M0,0 L-15,-26 A30,30 0 0,1 15,-26 Z" fill="#fef9ef" opacity="0.05"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#fef9ef" stroke-width="1" stroke-opacity="0.08"/>
+    <circle cx="0" cy="0" r="2" fill="#fef9ef" opacity="0.15"/>
+  </g>
+
+  <!-- Bottom-right mini ring -->
+  <g transform="translate(980, 430)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#555f70" stroke-width="4" stroke-opacity="0.06"/>
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#004ac6" stroke-width="4" stroke-opacity="0.15"
+            stroke-dasharray="118 39" stroke-dashoffset="39" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="2" fill="#004ac6" opacity="0.25"/>
+  </g>
+
+  <!-- Small floating achievement dots -->
+  <g fill="#004ac6" opacity="0.12">
+    <circle cx="160" cy="315" r="3"/>
+    <circle cx="1040" cy="315" r="3"/>
+    <circle cx="600" cy="80" r="2.5"/>
+    <circle cx="600" cy="555" r="2.5"/>
+  </g>
+
+  <!-- Corner accents -->
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="30" y2="70" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#555f70" stroke-width="1" stroke-opacity="0.25"/>
+</svg>

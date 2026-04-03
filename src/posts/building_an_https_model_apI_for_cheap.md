@@ -3,6 +3,7 @@ title: "Building an HTTPS Model API for Cheap: A Step-by-Step Guide to Deploying
 date: "2022-12-15"
 tags: ["AWS", "Docker", "ECS", "ECR", "FastAPI", "DevOps", "Cloud Infrastructure"]
 summary: "A straight-to-the-point guide for deploying a Dockerized FastAPI app on AWS using ECS, ECR, Route 53, and an Application Load Balancer—ideal for developers looking to get an HTTPS API live without overspending or overengineering."
+image: "/assets/covers/building-https-model-api.svg"
 ---
 
 # Intro

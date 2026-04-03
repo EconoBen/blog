@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1d1c16"/>
+      <stop offset="100%" stop-color="#211f18"/>
+    </linearGradient>
+    <radialGradient id="clockGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg7)"/>
+
+  <!-- Central clock glow -->
+  <ellipse cx="600" cy="315" rx="240" ry="240" fill="url(#clockGlow)"/>
+
+  <!-- Outer clock ring -->
+  <circle cx="600" cy="315" r="200" fill="none" stroke="#555f70" stroke-opacity="0.15" stroke-width="2"/>
+
+  <!-- Tick marks around the clock (12 positions) -->
+  <g stroke="#fef9ef" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round">
+    <line x1="600" y1="125" x2="600" y2="140"/>  <!-- 12 -->
+    <line x1="700" y1="142" x2="692" y2="155"/>  <!-- 1 -->
+    <line x1="775" y1="215" x2="764" y2="224"/>  <!-- 2 -->
+    <line x1="800" y1="315" x2="785" y2="315"/>  <!-- 3 -->
+    <line x1="775" y1="415" x2="764" y2="406"/>  <!-- 4 -->
+    <line x1="700" y1="488" x2="692" y2="475"/>  <!-- 5 -->
+    <line x1="600" y1="505" x2="600" y2="490"/>  <!-- 6 -->
+    <line x1="500" y1="488" x2="508" y2="475"/>  <!-- 7 -->
+    <line x1="425" y1="415" x2="436" y2="406"/>  <!-- 8 -->
+    <line x1="400" y1="315" x2="415" y2="315"/>  <!-- 9 -->
+    <line x1="425" y1="215" x2="436" y2="224"/>  <!-- 10 -->
+    <line x1="500" y1="142" x2="508" y2="155"/>  <!-- 11 -->
+  </g>
+
+  <!-- Segmented arcs — time slices (round-robin) -->
+  <g fill="none" stroke-width="18" stroke-linecap="butt">
+    <!-- Segment 1 (blue) — 12 to 2 o'clock -->
+    <path d="M 600 135 A 180 180 0 0 1 766 225" stroke="#004ac6" stroke-opacity="0.45"/>
+
+    <!-- Segment 2 (cream) — 2 to 4 o'clock -->
+    <path d="M 766 225 A 180 180 0 0 1 780 405" stroke="#fef9ef" stroke-opacity="0.12"/>
+
+    <!-- Segment 3 (blue lighter) — 4 to 6 o'clock -->
+    <path d="M 780 405 A 180 180 0 0 1 600 495" stroke="#004ac6" stroke-opacity="0.3"/>
+
+    <!-- Segment 4 (grey) — 6 to 8 o'clock -->
+    <path d="M 600 495 A 180 180 0 0 1 420 405" stroke="#555f70" stroke-opacity="0.25"/>
+
+    <!-- Segment 5 (blue dark) — 8 to 10 o'clock -->
+    <path d="M 420 405 A 180 180 0 0 1 434 225" stroke="#004ac6" stroke-opacity="0.2"/>
+
+    <!-- Segment 6 (cream) — 10 to 12 o'clock -->
+    <path d="M 434 225 A 180 180 0 0 1 600 135" stroke="#fef9ef" stroke-opacity="0.08"/>
+  </g>
+
+  <!-- Inner ring -->
+  <circle cx="600" cy="315" r="130" fill="none" stroke="#555f70" stroke-opacity="0.08" stroke-width="1"/>
+
+  <!-- Clock hand — suggesting current time slice -->
+  <line x1="600" y1="315" x2="720" y2="220" stroke="#fef9ef" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"/>
+  <line x1="600" y1="315" x2="540" y2="200" stroke="#fef9ef" stroke-opacity="0.12" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Center hub -->
+  <circle cx="600" cy="315" r="8" fill="#1d1c16" stroke="#004ac6" stroke-opacity="0.5" stroke-width="2"/>
+  <circle cx="600" cy="315" r="3" fill="#004ac6" fill-opacity="0.6"/>
+
+  <!-- Terminal/user nodes around perimeter -->
+  <g>
+    <!-- Terminal 1 (top right) -->
+    <g transform="translate(860, 160)">
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#004ac6" stroke-opacity="0.35" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#004ac6" fill-opacity="0.1"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#004ac6" stroke-opacity="0.2" stroke-width="1"/>
+    </g>
+    <line x1="770" y1="210" x2="840" y2="168" stroke="#004ac6" stroke-opacity="0.15" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- Terminal 2 (right) -->
+    <g transform="translate(900, 340)">
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#fef9ef" stroke-opacity="0.15" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#fef9ef" fill-opacity="0.04"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#fef9ef" stroke-opacity="0.1" stroke-width="1"/>
+    </g>
+    <line x1="800" y1="330" x2="880" y2="338" stroke="#fef9ef" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- Terminal 3 (bottom right) -->
+    <g transform="translate(830, 490)">
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#555f70" stroke-opacity="0.25" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#555f70" fill-opacity="0.06"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#555f70" stroke-opacity="0.15" stroke-width="1"/>
+    </g>
+    <line x1="750" y1="440" x2="812" y2="482" stroke="#555f70" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- Terminal 4 (bottom left) -->
+    <g transform="translate(370, 490)">
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#004ac6" stroke-opacity="0.25" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#004ac6" fill-opacity="0.06"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#004ac6" stroke-opacity="0.12" stroke-width="1"/>
+    </g>
+    <line x1="450" y1="440" x2="388" y2="482" stroke="#004ac6" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- Terminal 5 (left) -->
+    <g transform="translate(300, 340)">
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#fef9ef" stroke-opacity="0.12" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#fef9ef" fill-opacity="0.03"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#fef9ef" stroke-opacity="0.08" stroke-width="1"/>
+    </g>
+    <line x1="400" y1="330" x2="320" y2="338" stroke="#fef9ef" stroke-opacity="0.06" stroke-width="1" stroke-dasharray="4 4"/>
+
+    <!-- Terminal 6 (top left) -->
+    <g transform="translate(340, 160)">
+      <rect x="-16" y="-12" width="32" height="24" rx="3" fill="none" stroke="#555f70" stroke-opacity="0.2" stroke-width="1.5"/>
+      <rect x="-12" y="-8" width="24" height="14" rx="1" fill="#555f70" fill-opacity="0.05"/>
+      <line x1="-8" y1="12" x2="8" y2="12" stroke="#555f70" stroke-opacity="0.12" stroke-width="1"/>
+    </g>
+    <line x1="430" y1="210" x2="360" y2="168" stroke="#555f70" stroke-opacity="0.08" stroke-width="1" stroke-dasharray="4 4"/>
+  </g>
+
+  <!-- Vintage scan line overlay -->
+  <g stroke="#fef9ef" stroke-opacity="0.01" stroke-width="1">
+    <line x1="0" y1="50" x2="1200" y2="50"/>
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="250" x2="1200" y2="250"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="350" x2="1200" y2="350"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="0" y1="550" x2="1200" y2="550"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+  </g>
+</svg>

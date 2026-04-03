@@ -3,6 +3,7 @@ title: "Publishing for O'Reilly"
 date: "2023-11-13"
 tags: ["O'Reilly", "AI Agents", "Machine Learning", "Career Journeys", "Publishing"]
 summary: "A reflection on the upcoming release of 'What Are AI Agents?' and the significance of joining the ranks of O'Reilly authors—a milestone shaped by library visits, borrowed books, and years of persistence."
+image: "/assets/covers/publishing-for-oreilly.svg"
 ---
 
 In a bit of surreal news, I'm happy to announce that with the imminent publishing of "What Are AI Agents? When and How to Use LLM Agents" I will officially be an O'Reilly author. To say it is meaningful to me to write for O'Reilly doesn't quite capture it. Without O'Reilly authors or the editors who gave those authors a chance, I wouldn't have the career I do today.
