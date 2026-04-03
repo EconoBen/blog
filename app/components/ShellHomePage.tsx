@@ -88,18 +88,18 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
   return (
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
       {/* ── Featured banner — distinct from rest of page ── */}
-      <section className="border-b border-[#1d1c16]/8 bg-[#0035a0]">
+      <section className="border-b border-outline-variant/20 bg-[#e8eef8]">
         <div className="mx-auto max-w-[1440px] px-8 py-14 md:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             {/* Left: headline centered vertically */}
-            <div className="space-y-6 text-white">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-white/60">
+            <div className="space-y-6">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
                 Technical editorial
               </p>
-              <h1 className="max-w-xl font-headline text-4xl font-black tracking-tight text-white md:text-5xl">
-                Writing about how AI systems <span className="font-body italic font-normal text-white/70">remember</span>, fail, and scale
+              <h1 className="max-w-xl font-headline text-4xl font-black tracking-tight text-[#1d1c16] md:text-5xl">
+                Writing about how AI systems <span className="font-body italic font-normal text-[#0035a0]">remember</span>, fail, and scale
               </h1>
-              <Link href="/posts" className="inline-flex rounded-lg border border-white/30 bg-white/10 px-6 py-3 font-headline text-sm font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1">
+              <Link href="/posts" className="inline-flex rounded-lg border border-[#c0c4cc] bg-white/60 px-6 py-3 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
                 Browse writing
               </Link>
             </div>
