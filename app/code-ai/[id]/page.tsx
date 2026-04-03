@@ -181,19 +181,19 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
             <SidebarBlock title="Overview">
               <ul className="space-y-2.5 font-label text-sm text-[#1d1c16]">
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0035a0]" />
                   {categoryConfig?.label || item.category}
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0035a0]" />
                   {languageLabel}
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0035a0]" />
                   {dateLabel}
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#004ac6]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#0035a0]" />
                   {lineCount} lines
                 </li>
               </ul>
@@ -295,7 +295,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                   </div>
                   <Link
                     href="/code-ai"
-                    className="inline-flex items-center gap-1 font-headline font-bold text-[#004ac6] hover:underline"
+                    className="inline-flex items-center gap-1 font-headline font-bold text-[#0035a0] hover:underline"
                   >
                     View full catalog
                     <MaterialIcon name="arrow_forward" className="text-sm" />
@@ -308,7 +308,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
                       href={getCodeToolsUrl(relatedItem.id)}
                       className="rounded-xl bg-[#e7e2d8] p-6 transition-all hover:-translate-y-1 sm:p-8"
                     >
-                      <div className="mb-4 text-xs font-label font-bold uppercase tracking-widest text-[#004ac6]">
+                      <div className="mb-4 text-xs font-label font-bold uppercase tracking-widest text-[#0035a0]">
                         {getCodeToolsCategoryMeta(relatedItem.category)?.label || relatedItem.category}
                       </div>
                       <h4 className="mb-2 font-headline text-xl font-bold text-[#1d1c16]">

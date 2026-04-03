@@ -44,7 +44,7 @@ const ShellHomeEmptyState = () => (
   <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
     <section className="mx-auto max-w-[1440px] px-8 py-24 md:py-32">
       <div className="max-w-3xl">
-        <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#004ac6]">
+        <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#0035a0]">
           Technical editorial
         </p>
         <h1 className="mt-6 font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl">
@@ -56,7 +56,7 @@ const ShellHomeEmptyState = () => (
         <div className="mt-10 flex flex-wrap gap-4">
           <Link
             href="/book"
-            className="rounded-lg bg-[#004ac6] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white shadow-[0_14px_28px_rgba(0,74,198,0.18)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
+            className="rounded-lg bg-[#0035a0] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white shadow-[0_14px_28px_rgba(0,74,198,0.18)] transition-transform hover:-translate-y-1 hover:bg-[#003ea8]"
             style={{ color: '#fef9ef', WebkitTextFillColor: '#fef9ef' }}
           >
             Follow the book
@@ -94,7 +94,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               Technical editorial
             </p>
             <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
-              Writing about how AI systems <span className="font-body italic font-normal text-[#004ac6]">remember</span>, fail, and scale
+              Writing about how AI systems <span className="font-body italic font-normal text-[#0035a0]">remember</span>, fail, and scale
             </h1>
             <div className="mt-10">
               <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
@@ -137,7 +137,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   {primaryTag(featuredPost)}
                 </p>
                 <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
-                  <Link href={`/posts/${featuredPost.slug}`} className="transition-colors hover:text-[#004ac6]">
+                  <Link href={`/posts/${featuredPost.slug}`} className="transition-colors hover:text-[#0035a0]">
                     {featuredPost.title}
                   </Link>
                 </h2>
@@ -179,7 +179,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                       {primaryTag(post as Post)}
                     </p>
-                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
+                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#0035a0]">
                       <Link href={`/posts/${(post as Post).slug}`}>
                         {(post as Post).title}
                       </Link>
@@ -211,7 +211,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                     Upcoming publication
                   </p>
-                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#004ac6]">
+                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#0035a0]">
                     <Link href="/book">
                       Agent Memory
                     </Link>
