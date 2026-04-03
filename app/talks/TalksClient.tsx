@@ -393,11 +393,11 @@ export default function TalksClient() {
                 </h2>
                 <p className="font-body text-sm leading-relaxed text-secondary">{archiveSummary}</p>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-outline-variant/15 bg-surface-container-lowest/80 p-1 self-start lg:self-auto">
+              <div className="flex items-center gap-1 self-start lg:self-auto">
                 <button
                   type="button"
-                  className={`rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                    viewMode === 'list' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
+                  className={`px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'list' ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white' : 'text-on-surface/50 hover:text-on-surface'
                   }`}
                   onClick={() => setViewMode('list')}
                   aria-pressed={viewMode === 'list'}
@@ -406,8 +406,8 @@ export default function TalksClient() {
                 </button>
                 <button
                   type="button"
-                  className={`rounded-md px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                    viewMode === 'grid' ? 'bg-surface-container-lowest text-on-surface shadow-sm' : 'text-secondary hover:text-on-surface'
+                  className={`px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'grid' ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white' : 'text-on-surface/50 hover:text-on-surface'
                   }`}
                   onClick={() => setViewMode('grid')}
                   aria-pressed={viewMode === 'grid'}
@@ -422,10 +422,10 @@ export default function TalksClient() {
             >
               <button
                 type="button"
-                className={`shrink-0 rounded-full px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                   activeFilter === 'all'
-                    ? 'bg-surface-container-highest text-on-surface'
-                    : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
+                    ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white'
+                    : 'text-on-surface/50 hover:text-on-surface'
                 }`}
                 onClick={() => setActiveFilter('all')}
                 aria-pressed={activeFilter === 'all'}
@@ -436,10 +436,10 @@ export default function TalksClient() {
                 <button
                   type="button"
                   key={topic}
-                  className={`shrink-0 rounded-full px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                     activeFilter === topic
-                      ? 'bg-surface-container-highest text-on-surface'
-                      : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
+                      ? 'rounded-t-lg rounded-b-none bg-[#1d1c16] text-white'
+                      : 'text-on-surface/50 hover:text-on-surface'
                   }`}
                   onClick={() => setActiveFilter(topic)}
                   aria-pressed={activeFilter === topic}
