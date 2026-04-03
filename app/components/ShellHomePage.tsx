@@ -94,10 +94,10 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               Technical editorial
             </p>
             <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
-              Writing about how AI systems <span className="font-body italic font-normal text-[#004ac6]">remember</span>, fail, and scale.
+              Writing about how AI systems <span className="font-body italic font-normal text-[#004ac6]">remember</span>, fail, and scale
             </h1>
             <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70] md:text-3xl">
-              A public platform for posts, talks, publications, and the forthcoming book on Agent Memory.
+              A public platform for posts, talks, publications, and the forthcoming book on Agent Memory
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link
@@ -189,14 +189,14 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="bg-[#f8f3e9] py-16 sm:py-20 md:py-28">
+      <section className="border-t border-[#d0d3db] py-16 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-8">
           <div className="mb-10 flex flex-wrap items-baseline gap-4 sm:mb-12">
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Selected work
             </p>
             <h2 className="font-headline text-2xl font-bold tracking-tight text-[#1d1c16] md:text-3xl">
-              Recent writing and where to go next.
+              Recent writing and where to go next
             </h2>
             <Link href="/archive" className="ml-auto border-b-2 border-[#004ac6] pb-1 font-label text-sm font-bold uppercase tracking-[0.2em] text-[#004ac6]">
               View archive
@@ -268,14 +268,14 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-8 pt-16 pb-8">
+      <section className="mx-auto max-w-7xl border-t border-[#d0d3db] px-8 pt-16 pb-8">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Direct updates
             </p>
             <h2 className="mt-4 max-w-2xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-6xl">
-              Email updates.
+              Email updates
             </h2>
             <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70]">
               No fake signup funnel here. If you want updates on the book, new posts, talks, or publications, the simplest path is still direct email.
