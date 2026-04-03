@@ -280,14 +280,14 @@ export default function AboutPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               {skills.map((group) => (
                 <div key={group.category} className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{group.category}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {group.items.map((item) => (
+                  <p className="mb-3 font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{group.category}</p>
+                  <div className="space-y-0">
+                    {group.items.map((item, idx) => (
                       <span
                         key={item}
-                        className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
+                        className="inline-block font-body text-sm text-on-surface"
                       >
-                        {item}
+                        {item}{idx < group.items.length - 1 && <span className="mx-1.5 text-on-surface/25">&middot;</span>}
                       </span>
                     ))}
                   </div>
@@ -296,18 +296,18 @@ export default function AboutPage() {
             </div>
 
             {/* Education + Patents column */}
-            <div className="space-y-6">
-              <div className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-6 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Education</p>
-                <p className="mt-3 font-headline text-xl font-bold tracking-tight text-on-surface">B.A. Economics, cum laude</p>
-                <p className="mt-1 font-body text-base text-on-surface">Lake Forest College &middot; Lake Forest, Illinois &middot; 2016</p>
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
+                <p className="mb-2 font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Education</p>
+                <p className="font-headline text-lg font-bold tracking-tight text-on-surface">B.A. Economics, cum laude</p>
+                <p className="font-body text-sm text-on-surface/70">Lake Forest College &middot; Lake Forest, Illinois &middot; 2016</p>
               </div>
 
-              <div className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-6 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Patents</p>
-                <ul className="mt-3 space-y-2">
-                  {patents.map((patent) => (
-                    <li key={patent} className="font-body text-sm leading-relaxed text-on-surface">
+              <div className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
+                <p className="mb-2 font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Patents</p>
+                <ul className="space-y-0">
+                  {patents.map((patent, idx) => (
+                    <li key={patent} className={`py-2 font-body text-sm leading-relaxed text-on-surface ${idx < patents.length - 1 ? 'border-b border-outline-variant/10' : ''}`}>
                       {patent}
                     </li>
                   ))}
