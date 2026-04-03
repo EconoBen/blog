@@ -1,66 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" fill="none">
-  <!-- Book illustration: thick book at angle, hand-drawn style -->
-  <!-- Inspired by sketch reference: front cover, spine, page edges visible -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 480" fill="none">
+  <!-- Classic standing hardcover book — front cover + spine visible, pages at top -->
 
-  <!-- Shadow under book -->
-  <ellipse cx="210" cy="460" rx="140" ry="12" fill="#1d1c16" opacity="0.06"/>
+  <!-- Shadow -->
+  <ellipse cx="185" cy="468" rx="110" ry="10" fill="#1d1c16" opacity="0.08"/>
 
-  <!-- Back cover (slightly visible behind pages) -->
-  <path d="M 82 68 L 82 400 L 310 430 L 310 98 Z" fill="#e8e4dc" stroke="#1d1c16" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Page block (visible at top between covers) -->
+  <path d="M 88 38 L 88 42 L 290 42 L 290 38 Z" fill="#f5f0e8" stroke="#c0bdb6" stroke-width="0.5"/>
+  <path d="M 88 34 L 88 38 L 290 38 L 290 34 Z" fill="#faf8f5" stroke="#c0bdb6" stroke-width="0.5"/>
+  <path d="M 88 30 L 88 34 L 290 34 L 290 30 Z" fill="#fef9ef" stroke="#c0bdb6" stroke-width="0.5"/>
+  <path d="M 88 26 L 88 30 L 290 30 L 290 26 Z" fill="#fff" stroke="#d0cdc6" stroke-width="0.4"/>
+  <!-- Page edge lines -->
+  <line x1="92" y1="28" x2="286" y2="28" stroke="#d8d4cc" stroke-width="0.4"/>
+  <line x1="92" y1="32" x2="286" y2="32" stroke="#d8d4cc" stroke-width="0.3"/>
+  <line x1="92" y1="36" x2="286" y2="36" stroke="#d8d4cc" stroke-width="0.3"/>
+  <line x1="92" y1="40" x2="286" y2="40" stroke="#d8d4cc" stroke-width="0.2"/>
 
-  <!-- Page edges (top) — multiple lines suggesting pages -->
-  <path d="M 86 68 L 86 66 L 306 96 L 306 98" fill="#f5f0e8" stroke="#1d1c16" stroke-width="1.2"/>
-  <path d="M 88 64 L 88 62 L 304 92 L 304 94" fill="#faf8f5" stroke="#1d1c16" stroke-width="1"/>
-  <path d="M 90 60 L 90 58 L 302 88 L 302 90" fill="#fef9ef" stroke="#1d1c16" stroke-width="0.8"/>
-  <path d="M 92 56 L 92 54 L 300 84 L 300 86" fill="#fff" stroke="#1d1c16" stroke-width="0.6"/>
+  <!-- Spine (left side, slightly angled) -->
+  <path d="M 50 20 L 88 26 L 88 448 L 50 440 Z" fill="#0035a0" stroke="#002a80" stroke-width="1.5" stroke-linejoin="round"/>
 
-  <!-- Page edge lines on top surface -->
-  <line x1="94" y1="55" x2="298" y2="85" stroke="#1d1c16" stroke-width="0.4" opacity="0.3"/>
-  <line x1="96" y1="57" x2="296" y2="87" stroke="#1d1c16" stroke-width="0.4" opacity="0.2"/>
-  <line x1="100" y1="61" x2="294" y2="91" stroke="#1d1c16" stroke-width="0.4" opacity="0.15"/>
+  <!-- Spine highlight strip -->
+  <path d="M 54 28 L 60 29 L 60 436 L 54 434 Z" fill="white" opacity="0.1"/>
 
-  <!-- Spine -->
-  <path d="M 60 42 L 60 388 L 82 400 L 82 54 Z" fill="#0035a0" stroke="#1d1c16" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Spine horizontal bands (top) -->
+  <path d="M 52 60 L 86 65 L 86 72 L 52 67 Z" fill="white" opacity="0.25"/>
+  <path d="M 52 80 L 86 85 L 86 88 L 52 83 Z" fill="white" opacity="0.2"/>
 
-  <!-- Spine highlight -->
-  <path d="M 64 48 L 64 384 L 68 386 L 68 50 Z" fill="white" opacity="0.12"/>
+  <!-- Spine horizontal bands (bottom) -->
+  <path d="M 52 390 L 86 394 L 86 401 L 52 397 Z" fill="white" opacity="0.25"/>
+  <path d="M 52 408 L 86 412 L 86 415 L 52 411 Z" fill="white" opacity="0.2"/>
 
-  <!-- Spine top edge -->
-  <path d="M 60 42 L 92 54 L 82 54 L 60 42" fill="#0035a0" stroke="#1d1c16" stroke-width="1.5" stroke-linejoin="round" opacity="0.7"/>
+  <!-- Spine text -->
+  <text x="70" y="270" font-family="'Space Grotesk', sans-serif" font-size="11" font-weight="700" fill="white" letter-spacing="0.2em" opacity="0.6" transform="rotate(-90, 70, 270)">AGENT MEMORY</text>
 
   <!-- Front cover -->
-  <path d="M 82 54 L 310 84 L 310 430 L 82 400 Z" fill="#fef9ef" stroke="#1d1c16" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M 88 26 L 290 26 L 290 452 L 88 448 Z" fill="#0035a0" stroke="#002a80" stroke-width="1.5" stroke-linejoin="round"/>
 
-  <!-- Front cover inner border -->
-  <path d="M 98 72 L 296 98 L 296 416 L 98 388 Z" fill="none" stroke="#1d1c16" stroke-width="0.8" opacity="0.15"/>
+  <!-- Cover inner border -->
+  <rect x="100" y="40" width="178" height="398" rx="2" fill="none" stroke="white" stroke-width="0.6" opacity="0.12"/>
 
-  <!-- Title area on front cover -->
-  <!-- "AGENT" -->
-  <text x="116" y="190" font-family="'Space Grotesk', sans-serif" font-size="38" font-weight="700" fill="#1d1c16" letter-spacing="0.05em" transform="rotate(1.8)">AGENT</text>
+  <!-- Cover horizontal bands matching spine -->
+  <rect x="100" y="58" width="178" height="8" fill="white" opacity="0.15"/>
+  <rect x="100" y="74" width="178" height="3" fill="white" opacity="0.1"/>
 
-  <!-- "MEMORY" -->
-  <text x="116" y="236" font-family="'Space Grotesk', sans-serif" font-size="38" font-weight="700" fill="#1d1c16" letter-spacing="0.05em" transform="rotate(1.8)">MEMORY</text>
+  <rect x="100" y="388" width="178" height="8" fill="white" opacity="0.15"/>
+  <rect x="100" y="404" width="178" height="3" fill="white" opacity="0.1"/>
 
-  <!-- Subtitle line -->
-  <line x1="116" y1="254" x2="270" y2="262" stroke="#0035a0" stroke-width="2" opacity="0.6"/>
+  <!-- Title on front cover -->
+  <text x="120" y="180" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="800" fill="white" letter-spacing="0.02em">AGENT</text>
+  <text x="120" y="222" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="800" fill="white" letter-spacing="0.02em">MEMORY</text>
 
-  <!-- Author -->
-  <text x="116" y="350" font-family="'Inter', sans-serif" font-size="13" font-weight="500" fill="#555f70" letter-spacing="0.08em" transform="rotate(1.8)">BEN LABASCHIN</text>
+  <!-- Subtle divider under title -->
+  <rect x="120" y="238" width="60" height="2" fill="white" opacity="0.35"/>
 
-  <!-- Small decorative element — circuit/node pattern suggesting AI -->
-  <circle cx="130" cy="290" r="3" fill="#0035a0" opacity="0.4"/>
-  <circle cx="160" cy="295" r="2" fill="#0035a0" opacity="0.3"/>
-  <circle cx="190" cy="292" r="3" fill="#0035a0" opacity="0.4"/>
-  <circle cx="220" cy="298" r="2" fill="#0035a0" opacity="0.3"/>
-  <circle cx="250" cy="294" r="3" fill="#0035a0" opacity="0.4"/>
-  <line x1="133" y1="290" x2="157" y2="295" stroke="#0035a0" stroke-width="0.8" opacity="0.25"/>
-  <line x1="163" y1="295" x2="187" y2="292" stroke="#0035a0" stroke-width="0.8" opacity="0.25"/>
-  <line x1="193" y1="292" x2="217" y2="298" stroke="#0035a0" stroke-width="0.8" opacity="0.25"/>
-  <line x1="223" y1="298" x2="247" y2="294" stroke="#0035a0" stroke-width="0.8" opacity="0.25"/>
+  <!-- Subtitle area -->
+  <text x="120" y="268" font-family="'Inter', sans-serif" font-size="10" font-weight="400" fill="white" opacity="0.5" letter-spacing="0.06em">HOW AI SYSTEMS REMEMBER</text>
 
-  <!-- Spine text (rotated) -->
-  <text x="72" y="260" font-family="'Space Grotesk', sans-serif" font-size="10" font-weight="600" fill="white" letter-spacing="0.15em" transform="rotate(-90, 72, 260)" opacity="0.7">AGENT MEMORY</text>
+  <!-- Small node pattern suggesting AI/memory -->
+  <circle cx="130" cy="310" r="3" fill="white" opacity="0.2"/>
+  <circle cx="155" cy="305" r="2" fill="white" opacity="0.15"/>
+  <circle cx="180" cy="312" r="3" fill="white" opacity="0.2"/>
+  <circle cx="205" cy="307" r="2" fill="white" opacity="0.15"/>
+  <circle cx="230" cy="314" r="3" fill="white" opacity="0.2"/>
+  <line x1="133" y1="310" x2="153" y2="305" stroke="white" stroke-width="0.6" opacity="0.12"/>
+  <line x1="157" y1="305" x2="177" y2="312" stroke="white" stroke-width="0.6" opacity="0.12"/>
+  <line x1="183" y1="312" x2="203" y2="307" stroke="white" stroke-width="0.6" opacity="0.12"/>
+  <line x1="207" y1="307" x2="227" y2="314" stroke="white" stroke-width="0.6" opacity="0.12"/>
 
-  <!-- Bottom edge thickness -->
-  <path d="M 60 388 L 82 400 L 310 430 L 310 426 L 82 396 L 60 384 Z" fill="#d8d4cc" stroke="#1d1c16" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Author name -->
+  <text x="120" y="360" font-family="'Inter', sans-serif" font-size="11" font-weight="500" fill="white" opacity="0.45" letter-spacing="0.1em">BEN LABASCHIN</text>
+
+  <!-- Bottom edge (book thickness) -->
+  <path d="M 50 440 L 88 448 L 290 452 L 290 456 L 88 452 L 50 444 Z" fill="#002a80" stroke="#002a80" stroke-width="1" stroke-linejoin="round"/>
+
+  <!-- Top cover edge -->
+  <path d="M 50 20 L 88 26 L 290 26 L 290 22 L 88 22 L 50 16 Z" fill="#003db8" stroke="#002a80" stroke-width="0.8" stroke-linejoin="round"/>
 </svg>
