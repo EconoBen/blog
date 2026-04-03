@@ -41,7 +41,7 @@ export default async function TagsPage() {
               <span className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
                 Archive &amp; Taxonomy
               </span>
-              <h1 className="font-headline text-5xl font-black tracking-tight text-on-surface md:text-6xl">
+              <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
                 Topic index.
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">

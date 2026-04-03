@@ -187,7 +187,7 @@ export default function CodeAIPage() {
         <div className="space-y-5 py-12 md:py-16">
           <div className="max-w-[58rem] space-y-4">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Editorial archive</p>
-            <h1 className="font-headline text-[clamp(2.2rem,6vw,5rem)] font-bold tracking-tight text-on-surface">
+            <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
               {title}
             </h1>
             <p className="max-w-[46rem] font-body text-lg leading-relaxed text-secondary">

@@ -114,7 +114,7 @@ function SearchContent() {
           <div className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
             Search &amp; Discovery
           </div>
-          <h1 className="mb-5 font-headline text-5xl font-black tracking-tighter text-on-surface md:text-6xl">
+          <h1 className="mb-5 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
             Search the archive.
           </h1>
           <p className="max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">

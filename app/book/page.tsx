@@ -54,7 +54,7 @@ export default function BookPage() {
                 Early release direction
               </span>
             </div>
-            <h1 className="max-w-none font-headline text-4xl font-black leading-[0.92] tracking-tighter text-on-surface sm:text-5xl md:max-w-[7ch] md:text-8xl md:leading-none">
+            <h1 className="max-w-none font-headline text-4xl font-black tracking-tight text-on-surface md:max-w-[7ch] md:text-5xl">
               Agent Memory
             </h1>
             <p className="max-w-xl font-body text-lg italic leading-relaxed text-on-surface/60 sm:text-xl md:text-3xl">

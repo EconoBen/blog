@@ -131,7 +131,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
               </span>
               <span className="font-label text-sm italic text-[#555f70]">{dateLabel}</span>
             </div>
-            <h1 className="mb-5 max-w-3xl font-headline text-3xl font-extrabold tracking-tight text-[#1d1c16] sm:text-5xl lg:text-6xl">
+            <h1 className="mb-5 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
               {item.title}
             </h1>
             <p className="max-w-2xl font-body text-base italic leading-relaxed text-[#434655] sm:text-xl">

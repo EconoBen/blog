@@ -72,7 +72,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
             <span>/</span>
             <span className="font-bold text-on-surface">{monthName}</span>
           </div>
-          <h1 className="mb-4 font-headline text-6xl font-black tracking-tighter text-on-surface md:text-8xl">
+          <h1 className="mb-4 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
             {monthName} <span className="font-body font-light italic text-primary">{yearLabel}</span>
           </h1>
           <p className="max-w-2xl font-body text-xl leading-relaxed text-on-surface-variant md:text-2xl">

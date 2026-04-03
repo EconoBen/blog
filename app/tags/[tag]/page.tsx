@@ -90,7 +90,7 @@ export default async function TagPage({ params }: TagPageProps) {
               <span className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
                 Topic archive
               </span>
-              <h1 className="mt-4 font-headline text-4xl font-black tracking-tighter text-on-surface sm:text-5xl md:text-6xl">
+              <h1 className="mt-4 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
                 {tag}
               </h1>
               <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">

@@ -47,7 +47,7 @@ const ShellHomeEmptyState = () => (
         <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#0035a0]">
           Technical editorial
         </p>
-        <h1 className="mt-6 font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl">
+        <h1 className="mt-6 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
           Writing about how AI systems remember, fail, and scale.
         </h1>
         <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#1d1c16] md:text-3xl">
@@ -93,7 +93,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Technical editorial
             </p>
-            <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
+            <h1 className="mt-6 max-w-4xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
               Writing about how AI systems <span className="font-body italic font-normal text-[#0035a0]">remember</span>, fail, and scale
             </h1>
             <div className="mt-10">

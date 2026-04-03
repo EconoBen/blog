@@ -87,7 +87,7 @@ export default async function ArchivePage() {
           <span className="mb-4 block font-label text-xs uppercase tracking-[0.2em] text-secondary">
             Chronological Index
           </span>
-          <h1 className="mb-8 font-headline text-6xl font-black tracking-tighter text-on-surface md:text-7xl">
+          <h1 className="mb-8 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
             Archive.
           </h1>
           <p className="font-body text-xl italic leading-relaxed text-on-surface-variant md:text-2xl">

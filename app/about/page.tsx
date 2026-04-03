@@ -156,7 +156,7 @@ export default function AboutPage() {
           {/* Left column */}
           <div className="space-y-5">
             <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">About</span>
-            <h1 className="max-w-4xl font-headline text-5xl font-black tracking-tighter text-on-surface md:text-7xl">
+            <h1 className="max-w-4xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
               Ben Labaschin
             </h1>
             <p className="max-w-2xl font-body text-lg leading-relaxed text-on-surface md:text-xl">
