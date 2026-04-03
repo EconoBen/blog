@@ -175,7 +175,7 @@ export function EditorialPageFrame({
   const copyrightYear = new Date().getFullYear();
 
   return (
-    <div className={`min-h-screen bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
+    <div className={`graph-paper-bg min-h-screen text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
         <EditorialTopbar currentPath={currentPath} />
         <div className="h-[70px] md:h-[80px]" aria-hidden="true" />

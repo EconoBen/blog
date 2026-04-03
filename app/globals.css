@@ -8699,6 +8699,20 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   100% { transform: translateX(100%); }
 }
 
+.graph-paper-bg {
+  background-color: #fef9ef;
+  background-image:
+    linear-gradient(rgba(0, 53, 160, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 53, 160, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(0, 53, 160, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 53, 160, 0.02) 1px, transparent 1px);
+  background-size:
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px;
+}
+
 @keyframes gradient-line {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
