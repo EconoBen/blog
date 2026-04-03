@@ -13,93 +13,29 @@ export default function PublicationsPage() {
   const sorted = [...publications].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
-  const featured = sorted.find((p) => p.featured) ?? sorted[0];
-  const rest = featured ? sorted.filter((p) => p.id !== featured.id) : sorted;
-  const byYear = rest.reduce<Record<number, Publication[]>>((acc, pub) => {
-    (acc[pub.year] ??= []).push(pub);
-    return acc;
-  }, {});
-  const years = Object.keys(byYear).map(Number).sort((a, b) => b - a);
-
   return (
     <EditorialPageFrame currentPath="/publications">
-      {/* ── Hero: featured publication ── */}
-      {featured && (
-        <section className="mx-auto max-w-[1440px] px-8 pb-12 pt-14 md:pb-16 md:pt-20">
-          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Featured publication</p>
-          <article className="mt-6 overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] lg:grid lg:grid-cols-[minmax(0,0.4fr)_minmax(0,0.6fr)]">
-            {/* Book cover */}
-            <div className="flex items-center justify-center bg-surface-container-low p-8 md:p-12">
-              {featured.coverImage ? (
-                <img
-                  src={featured.coverImage}
-                  alt={featured.title}
-                  className="aspect-[3/4] max-h-[420px] w-auto rounded-lg object-cover shadow-[8px_8px_0_rgba(29,28,22,0.08)]"
-                />
-              ) : (
-                <div className="flex aspect-[3/4] w-full max-w-[280px] items-center justify-center rounded-lg bg-[linear-gradient(135deg,_#1d1c16,_#32302a)] p-8 shadow-[8px_8px_0_rgba(29,28,22,0.08)]">
-                  <div className="space-y-3 text-center">
-                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#dce5ff]">{getType(featured)}</p>
-                    <p className="font-headline text-2xl font-bold leading-tight text-[#fef9ef]">{featured.title}</p>
-                  </div>
-                </div>
-              )}
-            </div>
+      {/* ── Hero ── */}
+      <section className="mx-auto max-w-[1440px] px-8 pb-12 pt-14 md:pb-16 md:pt-20">
+        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Publications</p>
+        <h1 className="mt-4 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-6xl">
+          Books, reports, and papers
+        </h1>
+        <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface">
+          {sorted.length} publications — newest first
+        </p>
+      </section>
 
-            {/* Details */}
-            <div className="space-y-5 p-8 md:p-12">
-              <div className="space-y-2">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{getType(featured)}</p>
-                <h2 className="font-headline text-3xl font-bold leading-snug text-on-surface md:text-4xl">{featured.title}</h2>
-              </div>
-              <p className="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface">{featured.authors}</p>
-              {featured.venue && <p className="font-label text-[10px] uppercase tracking-widest text-on-surface">{featured.venue}</p>}
-              <time className="block font-label text-[10px] uppercase tracking-widest text-on-surface">{fmtDate(featured.date)}</time>
-              {featured.abstract && (
-                <p className="max-w-xl font-body text-lg leading-relaxed text-on-surface">{featured.abstract}</p>
-              )}
-              <div className="flex flex-wrap gap-2">
-                {featured.topics.slice(0, 6).map((t) => (
-                  <span key={t} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">{t}</span>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-3 pt-2">
-                {getHref(featured) && (
-                  <a href={getHref(featured)!} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
-                    {getAction(featured)}
-                  </a>
-                )}
-                {featured.bibtex && (
-                  <a href={`data:text/plain;charset=utf-8,${encodeURIComponent(featured.bibtex)}`} download={`${featured.id}.bib`} className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
-                    BibTeX
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
-        </section>
-      )}
-
-      {/* ── Archive by year ── */}
-      {years.map((year) => {
-        const pubs = byYear[year];
-        return (
-          <section key={year} className="border-t border-outline-variant/20 py-12 md:py-16" id={`publication-year-${year}`}>
-            <div className="mx-auto max-w-[1440px] px-8">
-              <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-                <h2 className="font-headline text-xl font-bold text-on-surface">{year}</h2>
-                <p className="font-label text-[10px] uppercase tracking-widest text-on-surface">{pubs.length} publication{pubs.length !== 1 ? 's' : ''}</p>
-              </div>
-
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {pubs.map((pub) => (
-                  <BookCard key={pub.id} publication={pub} />
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })}
+      {/* ── All publications in a flat grid ── */}
+      <section className="border-t border-outline-variant/20 py-12 md:py-16">
+        <div className="mx-auto max-w-[1440px] px-8">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {sorted.map((pub) => (
+              <BookCard key={pub.id} publication={pub} />
+            ))}
+          </div>
+        </div>
+      </section>
     </EditorialPageFrame>
   );
 }
