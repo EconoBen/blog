@@ -1,148 +1,180 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import type { FormEvent } from 'react';
+import { Suspense, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { SearchResult } from '../services/UnifiedSearchService';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
+import type { SearchResult } from '../services/UnifiedSearchService';
+
+function formatResultDate(date?: Date) {
+  if (!date) return null;
+
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+}
 
 function SearchContent() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const query = searchParams.get('q') || '';
-  
+
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState(query);
 
   useEffect(() => {
-    if (query) {
-      performSearch(query);
-    }
-  }, [query]);
+    setSearchQuery(query);
 
-  const performSearch = async (searchTerm: string) => {
-    if (!searchTerm.trim()) {
-      setResults([]);
+    const performSearch = async (searchTerm: string) => {
+      if (!searchTerm.trim()) {
+        setResults([]);
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
+        const data = await response.json();
+        setResults(data.results || []);
+      } catch (error) {
+        console.error('Search error:', error);
+        setResults([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (query) {
+      void performSearch(query);
       return;
     }
 
-    setLoading(true);
-    try {
-      const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
-      const data = await response.json();
-      setResults(data.results || []);
-    } catch (error) {
-      console.error('Search error:', error);
-      setResults([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    setResults([]);
+  }, [query]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      window.location.href = `/search?q=${encodeURIComponent(searchQuery)}`;
+
+    const nextQuery = searchQuery.trim();
+    if (!nextQuery) {
+      router.replace('/search');
+      return;
     }
+
+    router.replace(`/search?q=${encodeURIComponent(nextQuery)}`);
   };
 
   const typeLabels: Record<string, string> = {
-    post: 'Blog Post',
+    post: 'Blog post',
     talk: 'Talk',
     publication: 'Publication',
     archive: 'Archive',
-    'code-ai': 'Code & Tools'
-  };
-
-  const typeColors: Record<string, string> = {
-    post: 'bg-blue-100 text-blue-800',
-    talk: 'bg-green-100 text-green-800',
-    publication: 'bg-purple-100 text-purple-800',
-    archive: 'bg-gray-100 text-gray-800',
-    'code-ai': 'bg-orange-100 text-orange-800'
+    'code-ai': 'Code & tools',
   };
 
   return (
-    <div className="search-results-page">
-      <div className="page-header">
-        <h1 className="page-title">Search Results</h1>
-      </div>
-
-      <form onSubmit={handleSearch} className="search-input-container">
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search posts, talks, publications..."
-          className="search-input-large"
-          autoFocus
-        />
-      </form>
-
-      {loading ? (
-        <div className="search-loading">
-          <div className="loading-spinner"></div>
-          <p>Searching...</p>
-        </div>
-      ) : query && results.length === 0 ? (
-        <div className="no-results">
-          <p>No results found for "{query}"</p>
-          <p className="text-sm text-gray-600 mt-2">
-            Try different keywords or check your spelling
+    <EditorialPageFrame currentPath="/search" pageClassName="editorial-book-page">
+      <section className="editorial-page-hero">
+        <div className="editorial-page-hero-copy">
+          <p className="editorial-home-kicker">Search</p>
+          <h1 className="editorial-page-title">Search Results</h1>
+          <p className="editorial-page-copy">
+            Search posts, talks, publications, and code notes without leaving the editorial index.
           </p>
         </div>
-      ) : results.length > 0 ? (
-        <div className="search-results-container">
-          <p className="results-count">
-            Found {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
-          </p>
-          
-          {results.map((result) => (
-            <Link 
-              key={`${result.type}-${result.title}`}
-              href={result.url}
-              className="search-result-item"
-            >
-              <div className="search-result-content">
-                
-                <div className="search-result-details">
-                  <span className={`search-result-type ${typeColors[result.type]}`}>
-                    {typeLabels[result.type]}
-                  </span>
-                  
-                  <h2 className="search-result-title">{result.title}</h2>
-                  
-                  <p className="search-result-description">
-                    {result.description}
-                  </p>
-                  
-                  <div className="search-result-meta">
-                    {result.date && (
-                      <time>
-                        {new Date(result.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </time>
-                    )}
-                    
-                    {result.tags && result.tags.length > 0 && (
-                      <div className="search-result-tags">
-                        {result.tags.slice(0, 3).map((tag: string) => (
-                          <span key={tag} className="tag-small">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+        <aside className="editorial-page-aside">
+          <p className="editorial-home-card-label">Search status</p>
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">{results.length}</span>
+              <span className="editorial-page-metric-label">results on the current query</span>
+            </div>
+            <div>
+              <Link href="/archive" className="editorial-post-link">
+                Browse archive
+              </Link>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section className="editorial-list-section">
+        <form onSubmit={handleSearch} className="search-input-container">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search posts, talks, publications..."
+            className="search-input-large"
+            autoFocus
+          />
+        </form>
+
+        {!query ? (
+          <div className="editorial-page-aside">
+            <p className="editorial-home-card-label">Try searching for</p>
+            <div className="editorial-chip-row">
+              {['memory', 'retrieval', 'economics', 'forecasting'].map((term) => (
+                <Link key={term} href={`/search?q=${encodeURIComponent(term)}`} className="editorial-chip">
+                  {term}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : loading ? (
+          <div className="search-loading">
+            <div className="loading-spinner"></div>
+            <p>Searching...</p>
+          </div>
+        ) : results.length === 0 ? (
+          <div className="no-results">
+            <p>No results found for "{query}"</p>
+            <p className="text-sm text-gray-600 mt-2">
+              Try different keywords or check your spelling
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="results-count">
+              Found {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+            </p>
+
+            <div className="editorial-post-grid">
+              {results.map((result) => (
+                <Link
+                  key={`${result.type}-${result.title}`}
+                  href={result.url}
+                  className="editorial-post-card search-result-item"
+                >
+                  <div className="editorial-post-meta">
+                    <span>{typeLabels[result.type]}</span>
+                    {formatResultDate(result.date) && <span>{formatResultDate(result.date)}</span>}
                   </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      ) : null}
-    </div>
+
+                  <h2>{result.title}</h2>
+
+                  {result.description && <p className="editorial-post-summary">{result.description}</p>}
+
+                  <div className="editorial-chip-row">
+                    {result.tags?.slice(0, 3).map((tag) => (
+                      <span key={tag} className="editorial-chip">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span className="editorial-post-link">Open result</span>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    </EditorialPageFrame>
   );
 }
 

@@ -18,6 +18,7 @@ export default function TalksPage() {
   const talks = [...talksConfig.talks].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
+  const latestTalk = talks[0];
 
   return (
     <EditorialPageFrame currentPath="/talks">
@@ -28,19 +29,28 @@ export default function TalksPage() {
           <p className="editorial-page-copy">
             A running record of talks, podcasts, and community appearances on memory systems, AI engineering, and production workflows.
           </p>
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">Podcasts</span>
+            <span className="editorial-chip">Conferences</span>
+            <span className="editorial-chip">Streams</span>
+            <span className="editorial-chip">Transcripts</span>
+          </div>
         </div>
         <aside className="editorial-page-aside">
-          <p className="editorial-home-card-label">Speaking themes</p>
+          <p className="editorial-home-card-label">At a glance</p>
           <div className="editorial-page-metric-list">
             <div>
-              <span className="editorial-page-metric-value">memory</span>
-              <span className="editorial-page-metric-label">agent systems and retrieval</span>
+              <span className="editorial-page-metric-value">{talks.length}</span>
+              <span className="editorial-page-metric-label">recorded appearances</span>
             </div>
             <div>
-              <span className="editorial-page-metric-value">production</span>
-              <span className="editorial-page-metric-label">real deployment and operations</span>
+              <span className="editorial-page-metric-value">{latestTalk ? formatDate(latestTalk.date) : 'n/a'}</span>
+              <span className="editorial-page-metric-label">latest appearance</span>
             </div>
           </div>
+          <p className="editorial-post-summary">
+            Newest entries appear first, with watch and read links preserved where they exist.
+          </p>
         </aside>
       </section>
 
@@ -57,7 +67,7 @@ export default function TalksPage() {
       <section className="editorial-list-section">
         <div className="editorial-list-heading">
           <p className="editorial-home-section-label">Appearances</p>
-          <h2 className="editorial-page-section-title">Selected talks and recordings.</h2>
+          <h2 className="editorial-page-section-title">Selected talks and recordings, newest first.</h2>
         </div>
         <div className="editorial-talk-grid">
           {talks.map((talk) => {

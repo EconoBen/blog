@@ -1,17 +1,17 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { gistItems, gistCategories, WorkshopItem } from '../../config/workshopGists';
+import { workshopConfig } from '../../config/workshopConfig';
+import { getSiteUrl } from '../../utils/siteUrl';
+import { getCodeToolsItemById, getCodeToolsStaticParams, getCodeToolsUrl } from '../../utils/codeTools';
 
 export async function generateStaticParams() {
-  return gistItems.map((item) => ({
-    id: item.id,
-  }));
+  return getCodeToolsStaticParams();
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const item = gistItems.find(i => i.id === id);
+  const item = getCodeToolsItemById(id);
   
   if (!item) {
     return {
@@ -22,10 +22,14 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return {
     title: `${item.title} | Code & Tools | Economic Notes`,
     description: item.description,
+    alternates: {
+      canonical: `${getSiteUrl()}${getCodeToolsUrl(id)}`,
+    },
     openGraph: {
       title: item.title,
       description: item.description,
       type: 'article',
+      url: `${getSiteUrl()}${getCodeToolsUrl(id)}`,
       publishedTime: item.date ? new Date(item.date).toISOString() : undefined,
       tags: item.tags,
     },
@@ -34,13 +38,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function CodeAIDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const item = gistItems.find(i => i.id === id);
+  const item = getCodeToolsItemById(id);
   
   if (!item) {
     notFound();
   }
 
-  const categoryConfig = gistCategories.find(cat => cat.id === item.category);
+  const categoryConfig = workshopConfig.categories.find(cat => cat.id === item.category);
 
   return (
     <article className="code-ai-detail">

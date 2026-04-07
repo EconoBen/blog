@@ -47,9 +47,25 @@ export default function AboutPage() {
           <p className="editorial-page-copy">
             I work at the intersection of AI systems, technical writing, and research. This site is where those threads meet: essays, talks, reports, and the forthcoming book on agent memory.
           </p>
+          <div className="editorial-chip-row">
+            <span className="editorial-chip">AI systems</span>
+            <span className="editorial-chip">Writing</span>
+            <span className="editorial-chip">Research</span>
+            <span className="editorial-chip">Speaking</span>
+          </div>
         </div>
         <aside className="editorial-page-aside editorial-about-photo-card">
           <img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas" />
+          <div className="editorial-page-metric-list">
+            <div>
+              <span className="editorial-page-metric-value">systems</span>
+              <span className="editorial-page-metric-label">AI platforms and memory</span>
+            </div>
+            <div>
+              <span className="editorial-page-metric-value">public</span>
+              <span className="editorial-page-metric-label">writing, talks, and reports</span>
+            </div>
+          </div>
         </aside>
       </section>
 

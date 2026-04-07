@@ -1,9 +1,10 @@
 import { MetadataRoute } from 'next';
 import { postService } from '../services/PostService';
-import { gistItems } from '../config/workshopGists';
+import { getCodeToolsItems, getCodeToolsLatestDate, getCodeToolsUrl } from './utils/codeTools';
+import { getSiteUrl } from './utils/siteUrl';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://economicsnotes.com';
+  const baseUrl = getSiteUrl();
   
   // Get all posts
   const posts = await postService.getAllPosts();
@@ -24,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/code-ai`,
-      lastModified: new Date(),
+      lastModified: getCodeToolsLatestDate(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
@@ -63,8 +64,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Code & Tools (workshop) pages
-  const codeAiPages: MetadataRoute.Sitemap = gistItems.map((item: any) => ({
-    url: `${baseUrl}/code-ai/${item.slug}`,
+  const codeAiPages: MetadataRoute.Sitemap = getCodeToolsItems().map((item: any) => ({
+    url: `${baseUrl}${getCodeToolsUrl(item.id)}`,
     lastModified: item.date ? new Date(item.date) : new Date(),
     changeFrequency: 'monthly',
     priority: 0.6,
