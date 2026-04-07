@@ -8,13 +8,16 @@ export const metadata: Metadata = {
   description: 'Essays on AI systems, engineering, memory, and adjacent technical work.',
 };
 
+const formatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+
+const getPrimaryTag = (tags: string[]): string => tags[0] ?? 'Essay';
+
 export default async function PostsPage() {
   const posts = await postService.getAllPosts();
-  const formatter = new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
   const featuredPost = posts[0];
 
   return (
@@ -48,7 +51,7 @@ export default async function PostsPage() {
       </section>
 
       <section className="editorial-home-proof-strip" aria-label="Posts summary">
-        <span>long-form essays</span>
+        <span>{posts.length} posts</span>
         <span>/</span>
         <span>systems + infrastructure</span>
         <span>/</span>
@@ -64,26 +67,35 @@ export default async function PostsPage() {
         </div>
 
         <div className="editorial-post-grid">
-        {posts.map((post) => (
-          <article key={post.slug} className="editorial-post-card">
-            <div className="editorial-post-meta">
-              <span>{post.tags[0] ?? 'Essay'}</span>
-              <span>{formatter.format(post.date)}</span>
-            </div>
-            <h2>{post.title}</h2>
-            {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
-            <div className="editorial-chip-row">
-              {post.tags.slice(0, 3).map((tag) => (
-                <span key={tag} className="editorial-chip">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <Link href={`/posts/${post.slug}`} className="editorial-post-link">
-              Read the post
-            </Link>
-          </article>
-        ))}
+          {posts.map((post) => (
+            <article key={post.slug} className="editorial-post-card">
+              <div className="editorial-post-meta">
+                {post.tags[0] ? (
+                  <Link href={`/tags/${encodeURIComponent(post.tags[0])}`} className="editorial-chip">
+                    <span>{post.tags[0]}</span>
+                  </Link>
+                ) : (
+                  <span className="editorial-chip">Essay</span>
+                )}
+                <span>{formatter.format(post.date)}</span>
+                {post.readingTime && <span>{post.readingTime} min read</span>}
+              </div>
+              <h2>
+                <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+              </h2>
+              {post.summary && <p className="editorial-post-summary">{post.summary}</p>}
+              <div className="editorial-chip-row">
+                {post.tags.slice(0, 3).map((tag) => (
+                  <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+              <Link href={`/posts/${post.slug}`} className="editorial-post-link">
+                Read the post
+              </Link>
+            </article>
+          ))}
         </div>
       </section>
     </EditorialPageFrame>
