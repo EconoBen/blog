@@ -118,58 +118,58 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           </div>
 
           <aside className="lg:col-span-5">
-            <article className="overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)] transition-transform duration-300 hover:-translate-y-1">
-              <div className="relative h-72 overflow-hidden">
-                {imageSourceFor(featuredPost) ? (
-                  <img
-                    src={imageSourceFor(featuredPost) as string}
-                    alt={featuredPost.title}
-                    className="h-full w-full object-cover opacity-85"
-                  />
-                ) : (
-                  <div className="flex h-full items-end bg-[linear-gradient(135deg,#e8eef8_0%,#e8eef8_100%)] p-8">
-                    <div>
-                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#bdc7db]">
-                        Latest writing
-                      </p>
-                      <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-none">
-                        {featuredPost.title}
-                      </p>
+            <Link href={`/posts/${featuredPost.slug}`} className="block text-inherit no-underline">
+              <article className="cursor-pointer overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)] transition-transform duration-300 hover:-translate-y-1">
+                <div className="relative h-72 overflow-hidden">
+                  {imageSourceFor(featuredPost) ? (
+                    <img
+                      src={imageSourceFor(featuredPost) as string}
+                      alt={featuredPost.title}
+                      className="h-full w-full object-cover opacity-85"
+                    />
+                  ) : (
+                    <div className="flex h-full items-end bg-[linear-gradient(135deg,#e8eef8_0%,#e8eef8_100%)] p-8">
+                      <div>
+                        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#bdc7db]">
+                          Latest writing
+                        </p>
+                        <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-none">
+                          {featuredPost.title}
+                        </p>
+                      </div>
                     </div>
+                  )}
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(232,238,248,0)_35%,rgba(232,238,248,0.84)_100%)]" />
+                  <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
+                    <span className="rounded-sm bg-[#0035a0] px-3 py-1 font-label font-bold text-white" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
+                      Latest post
+                    </span>
+                    <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
                   </div>
-                )}
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(232,238,248,0)_35%,rgba(232,238,248,0.84)_100%)]" />
-                <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
-                  <span className="rounded-sm bg-[#0035a0] px-3 py-1 font-label font-bold text-white" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
-                    Latest post
-                  </span>
-                  <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
                 </div>
-              </div>
-              <div className="p-8">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
-                  {primaryTag(featuredPost)}
-                </p>
-                <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
-                  <Link href={`/posts/${featuredPost.slug}`} className="transition-colors hover:text-[#0035a0]">
+                <div className="p-8">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
+                    {primaryTag(featuredPost)}
+                  </p>
+                  <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
                     {featuredPost.title}
-                  </Link>
-                </h2>
-                <p className="mt-4 text-lg leading-relaxed text-[#555f70]">
-                  {excerptFor(featuredPost)}
-                </p>
-                <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
-                  <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Read now'}</span>
-                  <span>{dateFormatter.format(featuredPost.date)}</span>
-                  <span>{featuredPost.tags.length ? `${featuredPost.tags.length} tags` : 'Editorial post'}</span>
+                  </h2>
+                  <p className="mt-4 text-lg leading-relaxed text-[#555f70]">
+                    {excerptFor(featuredPost)}
+                  </p>
+                  <div className="mt-8 flex flex-wrap gap-4 text-[11px] uppercase tracking-[0.22em] text-[#555f70]">
+                    <span>{featuredPost.readingTime ? `${featuredPost.readingTime} min read` : 'Read now'}</span>
+                    <span>{dateFormatter.format(featuredPost.date)}</span>
+                    <span>{featuredPost.tags.length ? `${featuredPost.tags.length} tags` : 'Editorial post'}</span>
+                  </div>
+                  <div className="mt-8">
+                    <span className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#0035a0]">
+                      Read the post
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-8">
-                  <Link href={`/posts/${featuredPost.slug}`} className="inline-flex items-center gap-2 font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#0035a0] transition-transform hover:translate-x-1">
-                    Read the post
-                  </Link>
-                </div>
-              </div>
-            </article>
+              </article>
+            </Link>
           </aside>
         </div>
       </section>
@@ -222,65 +222,61 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[leadDiscoveryPost, ...supportingPosts, secondaryPost].filter(Boolean).map((post) => (
-              <article key={(post as Post).slug} className="group sticky-note overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
-                <div className="space-y-5">
-                  <div className="space-y-2">
+              <Link key={(post as Post).slug} href={`/posts/${(post as Post).slug}`} className="group block h-full text-inherit no-underline">
+                <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
+                  <div className="flex flex-1 flex-col">
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                       {primaryTag(post as Post)}
                     </p>
-                    <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#0035a0]">
-                      <Link href={`/posts/${(post as Post).slug}`}>
-                        {(post as Post).title}
-                      </Link>
+                    <h3 className="mt-2 font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#0035a0]">
+                      {(post as Post).title}
                     </h3>
+                    <time className="mt-3 block font-label text-[10px] uppercase tracking-widest text-[#555f70]">{dateFormatter.format((post as Post).date)}</time>
+                    <p className="mt-4 flex-1 text-base leading-relaxed text-[#1d1c16]">
+                      {excerptFor(post as Post, 140)}
+                    </p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {(post as Post).tags.slice(0, 3).map((tag) => (
+                        <span key={tag} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-5">
+                      <span className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16]">
+                        Read the post
+                      </span>
+                    </div>
                   </div>
-                  <time className="block font-label text-[10px] uppercase tracking-widest text-[#1d1c16]">{dateFormatter.format((post as Post).date)}</time>
-                  <p className="text-base leading-relaxed text-[#1d1c16]">
-                    {excerptFor(post as Post, 140)}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {(post as Post).tags.slice(0, 3).map((tag) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16] transition-all hover:-translate-y-0.5 hover:border-[#0035a0]/30 hover:text-[#0035a0]">
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
-                  <div className="flex flex-wrap gap-3 pt-1">
-                    <Link href={`/posts/${(post as Post).slug}`} className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
-                      Read the post
-                    </Link>
-                  </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             ))}
 
-            <article className="group sticky-note overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
-              <div className="space-y-5">
-                <div className="space-y-2">
+            <Link href="/book" className="group block h-full text-inherit no-underline">
+              <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
+                <div className="flex flex-1 flex-col">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                     Upcoming publication
                   </p>
-                  <h3 className="font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#0035a0]">
-                    <Link href="/book">
-                      Agent Memory
-                    </Link>
+                  <h3 className="mt-2 font-headline text-2xl font-bold leading-snug text-[#1d1c16] transition-colors group-hover:text-[#0035a0]">
+                    Agent Memory
                   </h3>
+                  <p className="mt-4 flex-1 text-base leading-relaxed text-[#1d1c16]">
+                    A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">AI Memory</span>
+                    <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Production Systems</span>
+                    <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
+                  </div>
+                  <div className="mt-5">
+                    <span className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16]">
+                      Follow the book
+                    </span>
+                  </div>
                 </div>
-                <p className="text-base leading-relaxed text-[#1d1c16]">
-                  A practical guide to how AI systems remember, retrieve, compress, and act on information in production. The book extends the same technical arc as the posts and talks.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">AI Memory</span>
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Production Systems</span>
-                  <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Book</span>
-                </div>
-                <div className="flex flex-wrap gap-3 pt-1">
-                  <Link href="/book" className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
-                    Follow the book
-                  </Link>
-                </div>
-              </div>
-            </article>
+              </article>
+            </Link>
           </div>
         </div>
       </section>

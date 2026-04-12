@@ -90,10 +90,10 @@ export default async function TagPage({ params }: TagPageProps) {
               <span className="font-label text-xs font-bold uppercase tracking-[0.2em] text-secondary">
                 Topic archive
               </span>
-              <h1 className="mt-4 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
+              <h1 className="mt-6 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
                 {tag}
               </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">
                 {posts.length} post{posts.length === 1 ? '' : 's'} collected under this topic, grouped by year and left fully linked for browsing.
               </p>
             </div>
@@ -142,7 +142,7 @@ export default async function TagPage({ params }: TagPageProps) {
                     <h2 className="font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
                       {yearGroup.year}
                     </h2>
-                    <p className="mt-2 font-body text-sm text-on-surface-variant">
+                    <p className="mt-3 font-body text-sm text-on-surface-variant">
                       {yearGroup.posts.length} post{yearGroup.posts.length === 1 ? '' : 's'} in this year.
                     </p>
                   </div>
@@ -191,7 +191,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
           <aside className="space-y-6 lg:col-span-4 lg:order-last lg:sticky lg:top-32">
             <div className="hidden sticky-note p-6 md:block md:p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Topic notes</h2>
+              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Topic notes</h2>
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
                   ['Posts', `${posts.length}`],
@@ -200,7 +200,7 @@ export default async function TagPage({ params }: TagPageProps) {
                 ].map(([label, value]) => (
                   <div key={label} className="sticky-note p-4">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
-                    <span className="mt-2 block font-body text-lg text-on-surface-variant">{value}</span>
+                    <span className="mt-3 block font-body text-lg text-on-surface-variant">{value}</span>
                   </div>
                 ))}
               </div>
@@ -208,7 +208,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
             {relatedTags.length > 0 ? (
               <div className="hidden sticky-note p-6 md:block md:p-8">
-                <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Related tags</h2>
+                <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.5rem' }}>Related tags</h2>
                 <div className="flex flex-wrap gap-2">
                   {relatedTags.map(([relatedTag, count]) => (
                     <Link
@@ -225,7 +225,7 @@ export default async function TagPage({ params }: TagPageProps) {
             ) : null}
 
             <div className="hidden sticky-note p-6 md:block md:p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse beyond this topic</h2>
+              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>Browse beyond this topic</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
                 Switch from this topic trail to the full archive or run a direct search if you want a broader slice of the same material.
               </p>

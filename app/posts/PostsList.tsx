@@ -198,37 +198,37 @@ export function PostsList({ posts, latestSlug }: { posts: Post[]; latestSlug?: s
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <article
-              key={post.slug}
-              className="group sticky-note overflow-hidden p-6 transition-transform duration-300 hover:-translate-y-1"
-
-            >
-              <div className="space-y-4">
+            <Link key={post.slug} href={`/posts/${post.slug}`} className="group block h-full text-inherit no-underline">
+              <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-6 text-[#1d1c16] transition-transform duration-300 hover:-translate-y-1">
                 <PostIllustration post={post} />
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex flex-1 flex-col">
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{primaryTag(post)}</p>
                     <time className="font-label text-[10px] uppercase tracking-widest text-on-surface" suppressHydrationWarning>{shortDateFormatter.format(new Date(post.date))}</time>
                   </div>
-                  <h3 className="font-headline text-xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
-                    <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+                  <h3 className="mt-2 font-headline text-xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
+                    {post.title}
                   </h3>
+                  {post.summary ? (
+                    <p className="mt-3 flex-1 line-clamp-3 font-body text-sm leading-relaxed text-on-surface">{post.summary}</p>
+                  ) : (
+                    <div className="flex-1" />
+                  )}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {post.tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-5">
+                    <span className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface">
+                      Read the post
+                    </span>
+                  </div>
                 </div>
-                {post.summary && (
-                  <p className="line-clamp-3 font-body text-sm leading-relaxed text-on-surface">{post.summary}</p>
-                )}
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.slice(0, 3).map((tag) => (
-                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-primary">
-                      {tag}
-                    </Link>
-                  ))}
-                </div>
-                <Link href={`/posts/${post.slug}`} className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
-                  Read the post
-                </Link>
-              </div>
-            </article>
+              </article>
+            </Link>
           ))}
         </div>
       )}
