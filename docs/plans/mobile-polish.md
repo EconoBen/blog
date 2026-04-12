@@ -114,10 +114,10 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 14: Post detail page mobile spacing
 
-- [ ] In `app/posts/[slug]/page.tsx`, reduce hero section horizontal padding from `px-8` to `px-5 md:px-8`
-- [ ] The action buttons ("Back to posts", "Browse this topic", "Browse this month") should stack vertically or wrap cleanly at 390px
-- [ ] The cover image should have a small border-radius on mobile for visual consistency
-- [ ] Reduce article body padding from `px-8` to `px-5 md:px-8`
+- [x] In `app/posts/[slug]/page.tsx`, reduce hero section horizontal padding from `px-8` to `px-5 md:px-8`
+- [x] The action buttons ("Back to posts", "Browse this topic", "Browse this month") should stack vertically or wrap cleanly at 390px
+- [x] The cover image should have a small border-radius on mobile for visual consistency
+- [x] Reduce article body padding from `px-8` to `px-5 md:px-8`
 
 ---
 
