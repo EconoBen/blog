@@ -45,7 +45,7 @@ const ShellHomeEmptyState = () => (
     <section className="mx-auto max-w-[1440px] px-8 py-24 md:py-32">
       <div className="max-w-3xl">
         <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#0035a0]">
-          Technical editorial
+          AI/ML Engineering &amp; Writing
         </p>
         <h1 className="mt-6 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
           Writing about how AI systems remember, fail, and scale.
@@ -92,13 +92,13 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#0035a0]">
-              Technical editorial
+              AI/ML Engineering &amp; Writing
             </p>
             <h1 className="mt-6 max-w-4xl font-headline text-5xl font-black tracking-tighter text-[#1d1c16] md:text-7xl lg:text-8xl">
               Writing about how AI systems <span className="font-body italic font-normal text-[#0035a0]">remember</span>, fail, and scale.
             </h1>
             <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70] md:text-3xl">
-              A public platform for posts, talks, publications, and the forthcoming book on Agent Memory.
+              Posts, talks, publications, and the work surrounding my upcoming O&rsquo;Reilly book on AI agent memory.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <Link href="/book" className="rounded-lg bg-[#0035a0] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 hover:bg-[#002a80]" style={{ color: '#ffffff', WebkitTextFillColor: '#ffffff' }}>
@@ -174,16 +174,38 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      {/* ── Stats bar ── */}
-      <section className="mx-auto max-w-[1440px] px-8">
-        <div className="flex flex-wrap items-center gap-4 border-y border-[#c3c6d7]/40 py-5 font-label text-xs font-bold uppercase tracking-[0.22em] text-[#555f70]">
-          <span>{posts.length} published posts</span>
-          <span className="hidden sm:inline">/</span>
-          <span>{uniqueTags} unique topics</span>
-          <span className="hidden sm:inline">/</span>
-          <span>{yearsRepresented} years represented</span>
-          <span className="hidden sm:inline">/</span>
-          <span>{postsWithImages} posts with images</span>
+      {/* ── Current Focus ── */}
+      <section className="mx-auto max-w-[1440px] px-8 py-14">
+        <div className="h-px w-full bg-[#1d1c16]/8" />
+        <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Current Focus</h2>
+        <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
+          {[
+            {
+              label: 'Building',
+              title: 'Enterprise GenAI',
+              body: 'Founding engineer at Workhelix, building the Nucleus platform that helps enterprises measure and grow AI ROI. Async LLM APIs, embedding pipelines, and agent deployment for Fortune 50 customers like Autodesk and Nasdaq.',
+              stat: 'Founding Engineer',
+            },
+            {
+              label: 'Writing',
+              title: 'An O\u2019Reilly Book on Agent Memory',
+              body: 'Writing Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time for O\u2019Reilly. Previously published two O\u2019Reilly reports on AI agents and co-authored AEA research on how LLMs reshape firm-level labor exposure.',
+              stat: 'Book in progress',
+            },
+            {
+              label: 'Speaking',
+              title: 'What\u2019s Next on Stage',
+              body: 'Turning the Agent Memory book into live talks: how to build AI agents that persist state, manage context, and work across sessions. Speaking throughout 2026 at conferences and meetups. Interested in having me speak? Let\u2019s talk.',
+              stat: '2026 engagements open',
+            },
+          ].map((item) => (
+            <div key={item.label} className="sticky-note flex flex-col p-7">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">{item.label}</p>
+              <h3 className="mt-3 font-headline text-2xl font-bold text-[#1d1c16]">{item.title}</h3>
+              <p className="mt-3 font-body text-sm leading-relaxed text-[#555f70]">{item.body}</p>
+              <p className="mt-auto pt-5 font-label text-[11px] font-bold uppercase tracking-[0.1em] text-[#0035a0]">{item.stat}</p>
+            </div>
+          ))}
         </div>
       </section>
 

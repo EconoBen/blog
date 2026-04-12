@@ -21,9 +21,6 @@ export default function PublicationsPage() {
         <h1 className="mt-4 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
           Books, reports, and papers
         </h1>
-        <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface">
-          {sorted.length} publications — newest first
-        </p>
       </section>
 
       {/* ── All publications in a flat grid ── */}

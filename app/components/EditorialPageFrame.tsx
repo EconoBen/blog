@@ -180,9 +180,9 @@ export function EditorialPageFrame({
       <div>
         <EditorialTopbar currentPath={currentPath} />
         <div className="h-[70px] md:h-[80px]" aria-hidden="true" />
-        <main className={currentPath !== '/' ? 'lg:pr-20 xl:pr-24' : ''}>{children}</main>
+        <main className="lg:pr-20 xl:pr-24">{children}</main>
         <ScrollToTop />
-        {currentPath !== '/' && <StickyContactRemote />}
+        <StickyContactRemote />
         <footer className="mt-12 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-8 py-5 md:flex-row">
             <div className="font-headline text-xs uppercase tracking-wide text-[#1d1c16]" suppressHydrationWarning>
