@@ -148,7 +148,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       {/* ── Audio + Tags sidebar ── */}
       <section className="border-t border-outline-variant/20">
-        <div className="mx-auto max-w-[1440px] px-8 py-12 md:py-16">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div className="sticky-note p-6 md:p-8">
               <div className="flex flex-wrap gap-3 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
@@ -185,7 +185,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* ── Related reading ── */}
       {(newerPost || olderPost) && (
         <section className="border-t border-outline-variant/20">
-          <div className="mx-auto max-w-[1440px] px-8 py-12 md:py-16">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Related reading</p>
             <h2 className="mt-3 font-headline text-3xl font-bold tracking-tight text-[#1d1c16]">
               Move to the adjacent posts in the archive.

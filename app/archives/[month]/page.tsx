@@ -61,7 +61,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
 
   return (
     <EditorialPageFrame currentPath="/archive">
-      <main className="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-16">
+      <div className="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-16">
         <div className="mb-10 max-w-3xl md:mb-16">
           <div className="mb-4 flex flex-wrap items-center gap-1.5 font-headline text-[10px] uppercase tracking-[0.2em] text-secondary md:mb-6 md:gap-2">
             <Link href="/archive" className="transition-colors hover:text-primary hover:underline underline-offset-2">
@@ -150,7 +150,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
             </Link>
           </div>
         </section>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

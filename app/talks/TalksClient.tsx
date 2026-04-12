@@ -372,7 +372,7 @@ export default function TalksClient() {
       : `${filteredTalks.length} session${filteredTalks.length === 1 ? '' : 's'} tagged ${activeFilter}.`;
 
   return (
-    <section className="mx-auto max-w-[1440px] px-8">
+    <section className="mx-auto max-w-[1440px] px-5 md:px-8">
       {featuredTalk && (
         <div className="space-y-5">
           <FeaturedTalk talk={featuredTalk} />

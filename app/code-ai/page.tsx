@@ -11,7 +11,6 @@ import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
 import {
   formatCodeToolsDate,
   getCodeToolsCategoryCounts,
-  getCodeToolsFeaturedItems,
   getCodeToolsItemLineCount,
   getCodeToolsItems,
   getCodeToolsLanguageLabel,
@@ -107,7 +106,6 @@ export default function CodeAIPage() {
   const { title, subtitle, categories } = workshopConfig;
   const allItems = getCodeToolsItems();
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
-  const featuredItems = getCodeToolsFeaturedItems(allItems);
   const categoryLabelById = Object.fromEntries(categories.map((category) => [category.id, category.label]));
   const visibleCategories = categories.filter((category) => (
     category.id === 'all' || (categoryCounts[category.id] ?? 0) > 0
@@ -129,9 +127,6 @@ export default function CodeAIPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const selectedCategoryLabel = categoryLabelById[selectedCategory] ?? 'All';
-  // Featured items are now integrated into the main index
-  const selectedCount = filteredItems.length;
 
   const groupedItems = filteredItems.reduce((acc, item) => {
     if (!acc[item.category]) {

@@ -42,7 +42,7 @@ export default async function TagsPage() {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto min-h-screen max-w-7xl px-5 py-12 md:px-8 md:py-20">
+      <div className="mx-auto min-h-screen max-w-7xl px-5 py-12 md:px-8 md:py-20">
         <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="space-y-8 lg:col-span-8">
             <div className="max-w-3xl">
@@ -163,7 +163,7 @@ export default async function TagsPage() {
             </div>
           </aside>
         </section>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

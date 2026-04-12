@@ -215,7 +215,7 @@ export default function AboutPage() {
               stat: '2026 engagements open',
             },
           ].map((item) => (
-            <div key={item.label} className="sticky-note flex flex-col p-7">
+            <div key={item.label} className="sticky-note flex flex-col p-5 md:p-7">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">{item.label}</p>
               <h3 className="mt-3 font-headline text-2xl font-bold text-[#1d1c16]">{item.title}</h3>
               <p className="mt-3 font-body text-sm leading-relaxed text-[#555f70]">{item.body}</p>

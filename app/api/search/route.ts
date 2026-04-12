@@ -37,7 +37,7 @@ export async function GET(request: Request) {
         })),
         posts,
       },
-      { status: 500, headers: { 'Cache-Control': 'no-store' } }
+      { headers: { 'Cache-Control': 'no-store' } }
     );
   }
 }

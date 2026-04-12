@@ -65,7 +65,6 @@ const activeMobileNavStyle: CSSProperties = {
 export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const compactShell = isCompactShell(currentPath);
   const mobilePrimaryNavItems = prioritizeActiveItem(primaryNavItems, currentPath);
-  const mobileDiscoveryNavItems = prioritizeActiveItem(discoveryNavItems, currentPath);
   const brandLabel = 'ECONOBEN.DEV';
   const headerClassName = compactShell
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
@@ -130,7 +129,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         aria-label="Primary"
       >
         <div className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {primaryNavItems.map((item) => {
+          {mobilePrimaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
             return (

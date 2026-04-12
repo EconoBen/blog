@@ -109,7 +109,7 @@ function SearchContent() {
 
   return (
     <EditorialPageFrame currentPath="/search">
-      <main className="mx-auto min-h-screen max-w-7xl px-5 py-10 md:px-8 md:py-20">
+      <div className="mx-auto min-h-screen max-w-7xl px-5 py-10 md:px-8 md:py-20">
         <header className="mb-12 max-w-3xl">
           <div className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
             Search &amp; Discovery
@@ -320,7 +320,7 @@ function SearchContent() {
             </div>
           </aside>
         </div>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

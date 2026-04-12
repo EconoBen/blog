@@ -122,7 +122,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
 
   return (
     <EditorialPageFrame currentPath="/code-ai" pageClassName="editorial-book-page">
-      <main className="mx-auto max-w-7xl px-8 py-14 sm:py-16">
+      <div className="mx-auto max-w-7xl px-5 md:px-8 py-14 sm:py-16">
         <section className="mb-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
           <div className="order-1 lg:col-span-8 lg:order-2">
             <div className="mb-5 flex flex-wrap items-center gap-3">
@@ -334,7 +334,7 @@ export default async function CodeAIDetailPage({ params }: { params: Promise<{ i
             )}
           </div>
         </section>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

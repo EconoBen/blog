@@ -82,7 +82,7 @@ export default async function ArchivePage() {
 
   return (
     <EditorialPageFrame currentPath="/archive">
-      <main className="mx-auto max-w-7xl px-5 pb-28 pt-14 md:px-8 md:pt-20">
+      <div className="mx-auto max-w-7xl px-5 pb-28 pt-14 md:px-8 md:pt-20">
         <header className="mb-12 max-w-3xl md:mb-20">
           <span className="mb-4 block font-label text-xs uppercase tracking-[0.2em] text-secondary">
             Chronological Index
@@ -248,7 +248,7 @@ export default async function ArchivePage() {
             </section>
           </div>
         </div>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }
