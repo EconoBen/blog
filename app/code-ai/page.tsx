@@ -21,7 +21,7 @@ import {
 
 function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onCopy: () => void; copyLabel: string }) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_16px_32px_rgba(29,28,22,0.06)]">
+    <div className="sticky-note overflow-hidden">
       <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
         <div className="space-y-0.5">
           <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
@@ -92,6 +92,17 @@ export default function CodeAIPage() {
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<'compact' | 'full'>('compact');
   const [copyStates, setCopyStates] = useState<Record<string, string>>({});
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
+
+  const toggleGroup = (category: string) => {
+    const next = new Set(collapsedGroups);
+    if (next.has(category)) {
+      next.delete(category);
+    } else {
+      next.add(category);
+    }
+    setCollapsedGroups(next);
+  };
 
   const { title, subtitle, categories } = workshopConfig;
   const allItems = getCodeToolsItems();
@@ -184,7 +195,7 @@ export default function CodeAIPage() {
     <EditorialPageFrame currentPath="/code-ai">
       <section className="mx-auto max-w-[1440px] px-8 pb-14 pt-2">
         {/* Hero */}
-        <div className="space-y-5 py-12 md:py-16">
+        <div className="space-y-5 py-8 md:py-10">
           <div className="max-w-[58rem] space-y-4">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Editorial archive</p>
             <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
@@ -196,292 +207,311 @@ export default function CodeAIPage() {
           </div>
         </div>
 
-        {/* Browse and filter — full index */}
+        {/* Browse and filter — sidebar + content */}
         <section className="border-t border-outline-variant/20 pt-6 pb-12 md:pt-8 md:pb-16" id="code-tools-index">
-          <div className="space-y-5">
-            <div className="flex flex-wrap items-baseline justify-between gap-4">
-              <div className="space-y-1">
-                <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Browse and filter</p>
-                <h2 className="max-w-[22ch] font-headline text-[clamp(1.3rem,2.5vw,1.8rem)] font-bold tracking-tight text-on-surface">
-                  Search by title, tag, filename, or category.
-                </h2>
-              </div>
-              <p className="max-w-[24ch] font-body text-sm leading-relaxed text-secondary">
-                The list below is the archive. Use filters only when you need to narrow it.
-              </p>
-            </div>
-
-            <div className="space-y-3 rounded-2xl border border-outline-variant/15 bg-surface-container-low p-4 shadow-[0_18px_50px_rgba(29,28,22,0.04)]">
-              <div role="search" aria-label="Code & Tools search">
-                <input
-                  type="text"
-                  placeholder="Search entries, tags, filenames, or descriptions..."
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  className="w-full rounded-xl border border-outline-variant/15 bg-surface-container-lowest px-4 py-3 font-body text-base text-on-surface placeholder:text-secondary/60 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10"
-                />
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <div className="flex flex-wrap gap-2">
-                  {orderedVisibleCategories.map((category) => {
-                    const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
-                    const active = selectedCategory === category.id;
-
-                    return (
-                      <button
-                        key={category.id}
-                        type="button"
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`inline-flex shrink-0 items-center gap-1.5 rounded-full px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                          active
-                            ? 'bg-surface-container-highest text-on-surface'
-                            : 'bg-surface-container-low text-secondary hover:bg-secondary-container hover:text-primary'
-                        }`}
-                        aria-pressed={active}
-                      >
-                        <span>{category.icon}</span>
-                        <span>{category.label}</span>
-                        <span>({count})</span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="flex items-center gap-2 rounded-full border border-outline-variant/15 bg-surface-container-lowest/80 p-1">
-                  <button
-                    type="button"
-                    className={`rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                      viewMode === 'compact'
-                        ? 'bg-surface-container-lowest text-on-surface shadow-sm'
-                        : 'text-secondary hover:text-on-surface'
-                    }`}
-                    onClick={() => setViewMode('compact')}
-                    aria-pressed={viewMode === 'compact'}
-                  >
-                    Archive
-                  </button>
-                  <button
-                    type="button"
-                    className={`rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                      viewMode === 'full'
-                        ? 'bg-surface-container-lowest text-on-surface shadow-sm'
-                        : 'text-secondary hover:text-on-surface'
-                    }`}
-                    onClick={() => setViewMode('full')}
-                    aria-pressed={viewMode === 'full'}
-                  >
-                    Reader
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-between gap-3 py-5">
-            <p className="font-body text-sm text-secondary">
-              Showing <strong className="text-on-surface">{filteredItems.length}</strong> of <strong className="text-on-surface">{allItems.length}</strong> items in <strong className="text-on-surface">{selectedCategoryLabel}</strong>
-              {searchQuery ? <> for <strong className="text-on-surface">&ldquo;{searchQuery}&rdquo;</strong></> : null}
-            </p>
-          </div>
-
-          {viewMode === 'compact' ? (
-            <div className="space-y-8">
-              {orderedGroupEntries.map(([category, categoryItems]) => (
-                <section
-                  key={category}
-                  className="rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-5 shadow-[0_18px_50px_rgba(29,28,22,0.04)]"
+          <div className="flex flex-col gap-8 lg:flex-row">
+            {/* ── Left sidebar: filters ── */}
+            <aside className="shrink-0 lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] lg:w-[260px] lg:overflow-y-auto">
+              <div className="mb-4 flex items-center gap-2 rounded-full border border-outline-variant/15 p-1" style={{ background: '#fdf8ec' }}>
+                <button
+                  type="button"
+                  className={`flex-1 rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'compact'
+                      ? 'text-on-surface shadow-sm'
+                      : 'text-on-surface/50 hover:text-on-surface'
+                  }`}
+                  style={viewMode === 'compact' ? { background: '#fdf8ec' } : undefined}
+                  onClick={() => setViewMode('compact')}
+                  aria-pressed={viewMode === 'compact'}
                 >
-                  <div className="mb-5 flex flex-wrap items-baseline justify-between gap-4">
-                    <h3 className="font-headline text-xl font-bold text-on-surface">
-                      {categoryLabelById[category] || category}
-                      <span className="ml-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-                        ({categoryItems.length})
-                      </span>
-                    </h3>
-                    <p className="max-w-[28ch] font-body text-sm leading-relaxed text-secondary">
-                      Browse the strongest entries in this thread, then open the writeup or source from the detail page.
-                    </p>
-                  </div>
+                  Archive
+                </button>
+                <button
+                  type="button"
+                  className={`flex-1 rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'full'
+                      ? 'text-on-surface shadow-sm'
+                      : 'text-on-surface/50 hover:text-on-surface'
+                  }`}
+                  style={viewMode === 'full' ? { background: '#fdf8ec' } : undefined}
+                  onClick={() => setViewMode('full')}
+                  aria-pressed={viewMode === 'full'}
+                >
+                  Reader
+                </button>
+              </div>
+              <div className="sticky-note space-y-6 p-5">
+                <div className="space-y-1">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Browse and filter</p>
+                  <p className="font-body text-sm leading-relaxed text-secondary">
+                    Search by title, tag, filename, or category.
+                  </p>
+                </div>
 
-                  <div className="space-y-4">
-                    {categoryItems.map((item) => {
-                      const isExpanded = expandedItems.has(item.id);
+                <div role="search" aria-label="Code & Tools search">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    className="w-full rounded-xl border border-outline-variant/15 bg-surface-container-lowest px-4 py-3 font-body text-sm text-on-surface placeholder:text-secondary/60 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                {/* Category filters — vertical stack */}
+                <div className="space-y-2">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Categories</p>
+                  <div className="flex flex-col gap-1">
+                    {orderedVisibleCategories.map((category) => {
+                      const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
+                      const active = selectedCategory === category.id;
 
                       return (
-                        <article
-                          key={item.id}
-                          className="rounded-2xl border border-outline-variant/15 bg-surface-container-low p-5 shadow-[0_18px_50px_rgba(29,28,22,0.04)]"
+                        <button
+                          key={category.id}
+                          type="button"
+                          onClick={() => setSelectedCategory(category.id)}
+                          className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                            active
+                              ? 'bg-surface-container-highest text-on-surface'
+                              : 'text-secondary hover:bg-secondary-container hover:text-primary'
+                          }`}
+                          aria-pressed={active}
                         >
-                          <div className="space-y-4">
-                            <div className="flex flex-wrap items-start justify-between gap-4">
-                              <div className="max-w-[58ch] space-y-2">
-                                <div className="flex flex-wrap items-center gap-3">
-                                  {item.date && (
-                                    <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
-                                      {formatCodeToolsDate(item.date)}
-                                    </span>
-                                  )}
-                                  <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-                                    {getCodeToolsLanguageLabel(item.language)}
-                                  </span>
-                                  <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
-                                    {getCodeToolsItemLineCount(item)} lines
-                                  </span>
-                                </div>
-
-                                <h3 className="font-headline text-xl font-bold leading-snug text-on-surface">
-                                  <Link href={getCodeToolsUrl(item.id)} className="transition-colors hover:text-primary">
-                                    {item.title}
-                                  </Link>
-                                </h3>
-                                <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
-                              </div>
-
-                              {item.featured && (
-                                <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                                  Featured
-                                </span>
-                              )}
-                            </div>
-
-                            <div className="flex flex-wrap gap-2">
-                              {item.tags.slice(0, 4).map((tag) => (
-                                <span
-                                  key={tag}
-                                  className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-
-                            <div className="flex flex-wrap gap-3">
-                              <Link
-                                href={getCodeToolsUrl(item.id)}
-                                className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
-                              >
-                                Open detail page
-                              </Link>
-                              <button
-                                type="button"
-                                onClick={() => toggleExpanded(item.id)}
-                                className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface"
-                              >
-                                {isExpanded ? 'Hide preview' : 'Show preview'}
-                              </button>
-                            </div>
-
-                            {isExpanded && (
-                              <div className="space-y-4 pt-2">
-                                {item.writeup && (
-                                  <div className="item-writeup rounded-2xl border border-outline-variant/15 bg-surface-container-lowest p-5">
-                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
-                                  </div>
-                                )}
-
-                                <SnippetCodeBlock
-                                  item={item}
-                                  onCopy={() => copyToClipboard(item.content, item.id)}
-                                  copyLabel={copyStates[item.id] || 'Copy'}
-                                />
-                              </div>
-                            )}
-                          </div>
-                        </article>
+                          <span>{category.icon}</span>
+                          <span className="flex-1 truncate">{category.label}</span>
+                          <span className="tabular-nums text-[10px] text-secondary">{count}</span>
+                        </button>
                       );
                     })}
                   </div>
-                </section>
-              ))}
-            </div>
-          ) : (
-            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-              {filteredItems.map((item) => {
-                return (
-                  <article
-                    key={item.id}
-                    className="group rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-6 shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1"
-                  >
-                    <div className="space-y-4">
-                      <div className="flex flex-wrap items-center gap-3">
-                        {item.category && (
-                          <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-                            {categoryLabelById[item.category] || item.category}
-                          </span>
-                        )}
-                        {item.date && (
-                          <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
-                            {formatCodeToolsDate(item.date)}
-                          </span>
-                        )}
-                        <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
-                          {getCodeToolsLanguageLabel(item.language)}
-                        </span>
-                        <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
-                          {getCodeToolsItemLineCount(item)} lines
-                        </span>
-                      </div>
+                </div>
 
-                      <h2 className="font-headline text-2xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
-                        <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
-                      </h2>
-                      <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
+                {/* Results count */}
+                <div className="border-t border-outline-variant/15 pt-4">
+                  <p className="font-body text-xs text-secondary">
+                    <strong className="text-on-surface">{filteredItems.length}</strong> of <strong className="text-on-surface">{allItems.length}</strong> items
+                    {searchQuery ? <> for &ldquo;{searchQuery}&rdquo;</> : null}
+                  </p>
+                </div>
+              </div>
+            </aside>
 
-                      <div className="flex flex-wrap gap-2">
-                        {item.featured && (
-                          <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                            Featured
-                          </span>
-                        )}
-                        {item.filename && (
-                          <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
-                            {item.filename}
-                          </span>
-                        )}
-                        {item.tags.slice(0, 4).map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {item.writeup && (
-                        <div className="item-writeup rounded-2xl border border-outline-variant/15 bg-surface-container-lowest p-5">
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
-                        </div>
-                      )}
-
-                      <SnippetCodeBlock
-                        item={item}
-                        onCopy={() => copyToClipboard(item.content, item.id)}
-                        copyLabel={copyStates[item.id] || 'Copy'}
-                      />
-
-                      <Link
-                        href={getCodeToolsUrl(item.id)}
-                        className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+            {/* ── Right content: results ── */}
+            <div className="min-w-0 flex-1">
+              {viewMode === 'compact' ? (
+                <div className="space-y-8">
+                  {orderedGroupEntries.map(([category, categoryItems]) => (
+                    <section
+                      key={category}
+                      className="sticky-note p-5"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleGroup(category)}
+                        className="flex w-full flex-wrap items-center justify-between gap-4 text-left"
                       >
-                        Read detail
-                      </Link>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          )}
+                        <h3 className="font-headline text-xl font-bold text-on-surface">
+                          {categoryLabelById[category] || category}
+                          <span className="ml-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                            ({categoryItems.length})
+                          </span>
+                        </h3>
+                        <span className="flex items-center gap-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                          {collapsedGroups.has(category) ? 'Show' : 'Hide'}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`h-4 w-4 transition-transform duration-200 ${collapsedGroups.has(category) ? '' : 'rotate-180'}`}
+                          >
+                            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                      </button>
 
-          {filteredItems.length === 0 && (
-            <div className="mt-5 rounded-2xl bg-surface-container-low p-10 text-center">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">No matches</p>
-              <p className="mt-3 font-body text-base leading-relaxed text-secondary">
-                No snippets match the current filter. Try a different category, clear the search, or switch to Reader mode to browse the whole collection.
-              </p>
+                      {!collapsedGroups.has(category) && (
+                      <div className="mt-5 space-y-4">
+                        {categoryItems.map((item) => {
+                          const isExpanded = expandedItems.has(item.id);
+
+                          return (
+                            <article
+                              key={item.id}
+                              className="sticky-note p-5"
+                            >
+                              <div className="space-y-4">
+                                <div className="flex flex-wrap items-start justify-between gap-4">
+                                  <div className="max-w-[58ch] space-y-2">
+                                    <div className="flex flex-wrap items-center gap-3">
+                                      {item.date && (
+                                        <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                                          {formatCodeToolsDate(item.date)}
+                                        </span>
+                                      )}
+                                      <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                                        {getCodeToolsLanguageLabel(item.language)}
+                                      </span>
+                                      <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                                        {getCodeToolsItemLineCount(item)} lines
+                                      </span>
+                                    </div>
+
+                                    <h3 className="font-headline text-xl font-bold leading-snug text-on-surface">
+                                      <Link href={getCodeToolsUrl(item.id)} className="transition-colors hover:text-primary">
+                                        {item.title}
+                                      </Link>
+                                    </h3>
+                                    <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
+                                  </div>
+
+                                  {item.featured && (
+                                    <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                                      Featured
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="flex flex-wrap gap-2">
+                                  {item.tags.slice(0, 4).map((tag) => (
+                                    <span
+                                      key={tag}
+                                      className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-3">
+                                  <Link
+                                    href={getCodeToolsUrl(item.id)}
+                                    className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+                                  >
+                                    Open detail page
+                                  </Link>
+                                  <button
+                                    type="button"
+                                    onClick={() => toggleExpanded(item.id)}
+                                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface"
+                                  >
+                                    {isExpanded ? 'Hide preview' : 'Show preview'}
+                                  </button>
+                                </div>
+
+                                {isExpanded && (
+                                  <div className="space-y-4 pt-2">
+                                    {item.writeup && (
+                                      <div className="item-writeup sticky-note p-5">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                                      </div>
+                                    )}
+
+                                    <SnippetCodeBlock
+                                      item={item}
+                                      onCopy={() => copyToClipboard(item.content, item.id)}
+                                      copyLabel={copyStates[item.id] || 'Copy'}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            </article>
+                          );
+                        })}
+                      </div>
+                      )}
+                    </section>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-8 md:grid-cols-2">
+                  {filteredItems.map((item) => {
+                    return (
+                      <article
+                        key={item.id}
+                        className="sticky-note group p-6 transition-transform duration-300 hover:-translate-y-1"
+                      >
+                        <div className="space-y-4">
+                          <div className="flex flex-wrap items-center gap-3">
+                            {item.category && (
+                              <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                                {categoryLabelById[item.category] || item.category}
+                              </span>
+                            )}
+                            {item.date && (
+                              <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                                {formatCodeToolsDate(item.date)}
+                              </span>
+                            )}
+                            <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                              {getCodeToolsLanguageLabel(item.language)}
+                            </span>
+                            <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                              {getCodeToolsItemLineCount(item)} lines
+                            </span>
+                          </div>
+
+                          <h2 className="font-headline text-2xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
+                            <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+                          </h2>
+                          <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
+
+                          <div className="flex flex-wrap gap-2">
+                            {item.featured && (
+                              <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                                Featured
+                              </span>
+                            )}
+                            {item.filename && (
+                              <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                                {item.filename}
+                              </span>
+                            )}
+                            {item.tags.slice(0, 4).map((tag) => (
+                              <span
+                                key={tag}
+                                className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+
+                          {item.writeup && (
+                            <div className="item-writeup sticky-note p-5">
+                              <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                            </div>
+                          )}
+
+                          <SnippetCodeBlock
+                            item={item}
+                            onCopy={() => copyToClipboard(item.content, item.id)}
+                            copyLabel={copyStates[item.id] || 'Copy'}
+                          />
+
+                          <Link
+                            href={getCodeToolsUrl(item.id)}
+                            className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+                          >
+                            Read detail
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              )}
+
+              {filteredItems.length === 0 && (
+                <div className="sticky-note mt-5 p-10 text-center">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">No matches</p>
+                  <p className="mt-3 font-body text-base leading-relaxed text-secondary">
+                    No snippets match the current filter. Try a different category, clear the search, or switch to Reader mode to browse the whole collection.
+                  </p>
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </section>
       </section>
     </EditorialPageFrame>

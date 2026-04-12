@@ -81,7 +81,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
         </div>
 
         <section className="space-y-8">
-          <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-secondary">
+          <div className="flex flex-wrap items-center gap-3 sticky-note px-4 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-secondary">
             <span>{monthPosts.length} post{monthPosts.length === 1 ? '' : 's'}</span>
             <span className="h-1 w-1 rounded-full bg-outline-variant" />
             <span>{uniqueTags} unique tags</span>
@@ -120,7 +120,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
             ))}
           </div>
 
-          <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5">
+          <div className="sticky-note p-5">
             <h3 className="mb-4 font-headline text-xs font-bold uppercase tracking-widest text-secondary">
               Month at a glance
             </h3>
@@ -130,7 +130,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
                 ['Unique tags', `${uniqueTags}`],
                 ['Year', yearLabel ?? year],
               ].map(([labelText, value]) => (
-                <div key={labelText} className="flex items-center justify-between rounded-xl border border-outline-variant/20 bg-surface px-4 py-3">
+                <div key={labelText} className="flex items-center justify-between sticky-note px-4 py-3">
                   <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{labelText}</span>
                   <span className="font-headline text-lg font-bold text-on-surface">{value}</span>
                 </div>

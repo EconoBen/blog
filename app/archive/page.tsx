@@ -108,8 +108,8 @@ export default async function ArchivePage() {
                       <a
                         href={`#year-${entry.year}`}
                         className={index === 0
-                          ? 'block rounded-2xl border border-primary/40 bg-primary/5 px-4 py-4 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08]'
-                          : 'block rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-4 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high'}
+                          ? 'block sticky-note px-4 py-4 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08]'
+                          : 'block sticky-note px-4 py-4 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high'}
                       >
                         <div className="flex items-baseline justify-between gap-4">
                           <span className="font-headline text-2xl font-bold tracking-tighter">{entry.year}</span>
@@ -124,7 +124,7 @@ export default async function ArchivePage() {
                 </ul>
               </div>
 
-              <div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5">
+              <div className="sticky-note p-5">
                 <h3 className="mb-4 font-headline text-sm font-bold text-on-surface">Archive at a glance</h3>
                 <div className="grid gap-3">
                   {[
@@ -132,7 +132,7 @@ export default async function ArchivePage() {
                     ['Years covered', `${years.length}`],
                     ['Unique tags', `${uniqueTags}`],
                   ].map(([labelText, value]) => (
-                    <div key={labelText} className="flex items-center justify-between rounded-xl border border-outline-variant/20 bg-surface px-4 py-3">
+                    <div key={labelText} className="flex items-center justify-between sticky-note px-4 py-3">
                       <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">{labelText}</span>
                       <span className="font-headline text-lg font-bold text-on-surface">{value}</span>
                     </div>
@@ -224,7 +224,7 @@ export default async function ArchivePage() {
               </section>
             ))}
 
-            <section className="rounded-xl border border-outline-variant/20 bg-surface-container-low p-10">
+            <section className="sticky-note p-10">
               <div className="max-w-xl">
                 <h3 className="mb-4 font-headline text-3xl font-bold">Keep browsing.</h3>
                 <p className="mb-8 font-body text-lg leading-relaxed text-on-surface-variant">

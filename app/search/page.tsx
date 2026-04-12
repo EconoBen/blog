@@ -171,14 +171,14 @@ function SearchContent() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="space-y-10 lg:col-span-8">
             {!normalizedQuery ? (
-              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-6 md:p-8">
+              <section className="sticky-note p-6 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">Start with a topic, title fragment, or name.</h2>
                 <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
                   Search is broad by design. Exact titles, tag terms, and short phrases all work, and the results stay grouped by content type.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {starterTips.map(([label, description]) => (
-                    <div key={label} className="rounded-xl bg-surface p-4">
+                    <div key={label} className="sticky-note p-4">
                       <h3 className="font-headline text-sm font-bold uppercase tracking-widest text-secondary">{label}</h3>
                       <p className="mt-3 font-body text-sm leading-relaxed text-on-surface-variant">{description}</p>
                     </div>
@@ -186,15 +186,15 @@ function SearchContent() {
                 </div>
               </section>
             ) : loading ? (
-              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-highest p-6 md:p-8">
-                <p className="font-headline text-xl font-bold text-on-surface">Searching…</p>
+              <section className="sticky-note p-6 md:p-8">
+                <p className="font-headline text-xl font-bold text-on-surface">Searching...</p>
                 <p className="mt-3 font-body text-base text-on-surface-variant">
-                  Gathering results for “{normalizedQuery}”.
+                  Gathering results for &ldquo;{normalizedQuery}&rdquo;.
                 </p>
               </section>
             ) : results.length === 0 ? (
-              <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-highest p-6 md:p-8">
-                <h2 className="font-headline text-2xl font-bold text-on-surface">No results for “{normalizedQuery}”.</h2>
+              <section className="sticky-note p-6 md:p-8">
+                <h2 className="font-headline text-2xl font-bold text-on-surface">No results for &ldquo;{normalizedQuery}&rdquo;.</h2>
                 <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
                   Try a broader phrase, a title fragment, or one of the suggested terms in the side rail.
                 </p>
@@ -217,7 +217,7 @@ function SearchContent() {
                     {typeResults.map((result) => (
                       <article
                         key={`${result.type}-${result.url}`}
-                        className="rounded-2xl border border-outline-variant/10 bg-surface-container-low px-5 py-5 transition-colors hover:bg-surface-container-high md:px-6 md:py-6"
+                        className="sticky-note px-5 py-5 md:px-6 md:py-6"
                       >
                         <Link href={result.url} className="block">
                           <div className="flex flex-col gap-3">
@@ -266,7 +266,7 @@ function SearchContent() {
           </div>
 
           <aside className="space-y-6 lg:col-span-4 lg:sticky lg:top-32">
-            <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
+            <div className="sticky-note p-6 md:p-8">
               <h2 className="mb-6 font-headline text-lg font-bold text-on-surface">Search summary</h2>
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {[
@@ -274,7 +274,7 @@ function SearchContent() {
                   ['Results', loading ? 'Searching' : `${results.length}`],
                   ['Sections', `${groupedResults.length}`],
                 ].map(([label, value]) => (
-                  <div key={label} className="rounded-xl bg-surface-container-highest px-4 py-3">
+                  <div key={label} className="sticky-note px-4 py-3">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
                     <span className="mt-2 block font-body text-sm text-on-surface-variant">{value}</span>
                   </div>
@@ -282,7 +282,7 @@ function SearchContent() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-surface p-6 md:p-8">
+            <div className="sticky-note p-6 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Navigate elsewhere</h2>
               <p className="mb-5 font-body text-sm leading-relaxed text-on-surface-variant">
                 If search is not the fastest route, jump directly to the archive, tags, or tools surface.

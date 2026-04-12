@@ -49,7 +49,7 @@ export default async function TagsPage() {
               </p>
             </div>
 
-            <section className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-6 md:p-8">
+            <section className="sticky-note p-6 md:p-8">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <h2 className="font-headline text-xl font-bold text-on-surface">Top tags</h2>
@@ -67,7 +67,7 @@ export default async function TagsPage() {
                   <Link
                     key={tagEntry.tag}
                     href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
-                    className="flex items-center justify-between gap-3 rounded-2xl border border-outline-variant/10 bg-surface px-4 py-3 transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                    className="sticky-note flex items-center justify-between gap-3 px-4 py-3 transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
                   >
                     <span className="min-w-0 font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                       {tagEntry.tag}
@@ -80,20 +80,15 @@ export default async function TagsPage() {
               </div>
             </section>
 
-            <section className="space-y-6">
-              <div className="flex flex-col gap-4 border-b border-outline-variant/10 pb-4 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <h2 className="font-headline text-xl font-bold text-on-surface">Alphabetical index</h2>
-                  <p className="mt-2 font-body text-sm text-on-surface-variant">
-                    All tags, grouped by first letter, with counts kept visible but understated.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-2">
+            <section className="sticky-note p-6 md:p-8">
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="font-headline text-xl font-bold text-on-surface">Alphabetical index</h2>
+                <div className="flex flex-wrap gap-1">
                   {sortedLetters.map((letter) => (
                     <a
                       key={letter}
                       href={`#tag-letter-${letter}`}
-                      className="rounded-full border border-outline-variant/10 bg-surface-container-low px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                      className="px-1.5 py-0.5 font-label text-[10px] font-bold uppercase tracking-wider text-secondary transition-colors hover:text-primary"
                     >
                       {letter}
                     </a>
@@ -101,37 +96,28 @@ export default async function TagsPage() {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {sortedLetters.map((letter) => (
-                  <section key={letter} id={`tag-letter-${letter}`} className="rounded-2xl border border-outline-variant/10 bg-surface-container-low p-5 md:p-6">
-                    <div className="flex flex-wrap items-baseline justify-between gap-4">
-                      <h3 className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">
-                        {letter}
-                      </h3>
-                      <span className="font-body text-sm italic text-secondary">
-                        {tagsByLetter[letter].length} tag{tagsByLetter[letter].length === 1 ? '' : 's'}
-                      </span>
-                    </div>
-                    <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                      {tagsByLetter[letter].map((tagEntry) => (
-                        <Link
-                          key={tagEntry.tag}
-                          href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
-                          className="flex items-center justify-between gap-2 rounded-xl bg-surface px-3 py-2.5 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
-                        >
-                          <span className="min-w-0 truncate">{tagEntry.tag}</span>
-                          <span className="shrink-0 text-secondary">{tagEntry.count}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  </section>
+                  <div key={letter} id={`tag-letter-${letter}`} className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="w-5 shrink-0 font-headline text-sm font-black text-on-surface/30">{letter}</span>
+                    {tagsByLetter[letter].map((tagEntry) => (
+                      <Link
+                        key={tagEntry.tag}
+                        href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
+                        className="inline-flex items-center gap-1 rounded-full bg-surface-container-low px-2.5 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-primary"
+                      >
+                        {tagEntry.tag}
+                        <span className="text-secondary/60">{tagEntry.count}</span>
+                      </Link>
+                    ))}
+                  </div>
                 ))}
               </div>
             </section>
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-32 lg:col-span-4">
-            <div className="rounded-2xl bg-surface-container-highest p-6 md:p-8">
+            <div className="sticky-note p-6 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Tag archive</h2>
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
@@ -139,7 +125,7 @@ export default async function TagsPage() {
                   ['Posts covered', `${posts.length}`],
                   ['Top tag count', `${topTags[0]?.count ?? 0}`],
                 ].map(([label, value]) => (
-                  <div key={label} className="rounded-xl bg-surface-container-low p-4">
+                  <div key={label} className="sticky-note p-4">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
                     <span className="mt-2 block font-body text-lg text-on-surface-variant">{value}</span>
                   </div>
@@ -147,7 +133,7 @@ export default async function TagsPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-surface-container-low p-6 md:p-8">
+            <div className="sticky-note p-6 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse routes</h2>
               <div className="flex flex-wrap gap-3">
                 <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
@@ -159,7 +145,7 @@ export default async function TagsPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl border border-outline-variant/20 bg-surface p-6 md:p-8">
+            <div className="sticky-note p-6 md:p-8">
               <h2 className="mb-3 font-headline text-lg font-bold text-on-surface">A useful starting point</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
                 Pick a high-frequency tag first if you want breadth, or use the alphabetical index when you already know the subject you are chasing.

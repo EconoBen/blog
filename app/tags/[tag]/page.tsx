@@ -152,7 +152,7 @@ export default async function TagPage({ params }: TagPageProps) {
                   {yearGroup.posts.map((post) => (
                     <article
                       key={post.slug}
-                      className="rounded-2xl border border-outline-variant/10 bg-surface-container-low px-5 py-5 transition-colors hover:bg-surface-container-high md:px-6 md:py-6"
+                      className="sticky-note px-5 py-5 transition-colors md:px-6 md:py-6"
                     >
                       <div className="flex flex-col gap-4">
                         <div className="flex flex-wrap items-center gap-4 font-label text-xs uppercase tracking-widest text-secondary">
@@ -190,7 +190,7 @@ export default async function TagPage({ params }: TagPageProps) {
           </div>
 
           <aside className="space-y-6 lg:col-span-4 lg:order-last lg:sticky lg:top-32">
-            <div className="hidden rounded-2xl bg-surface-container-highest p-6 md:block md:p-8">
+            <div className="hidden sticky-note p-6 md:block md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Topic notes</h2>
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
@@ -198,7 +198,7 @@ export default async function TagPage({ params }: TagPageProps) {
                   ['Years covered', `${postsByYear.length}`],
                   ['Related tags', `${relatedTags.length}`],
                 ].map(([label, value]) => (
-                  <div key={label} className="rounded-xl bg-surface-container-low p-4">
+                  <div key={label} className="sticky-note p-4">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
                     <span className="mt-2 block font-body text-lg text-on-surface-variant">{value}</span>
                   </div>
@@ -207,7 +207,7 @@ export default async function TagPage({ params }: TagPageProps) {
             </div>
 
             {relatedTags.length > 0 ? (
-              <div className="hidden rounded-2xl bg-surface-container-low p-6 md:block md:p-8">
+              <div className="hidden sticky-note p-6 md:block md:p-8">
                 <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Related tags</h2>
                 <div className="flex flex-wrap gap-2">
                   {relatedTags.map(([relatedTag, count]) => (
@@ -224,7 +224,7 @@ export default async function TagPage({ params }: TagPageProps) {
               </div>
             ) : null}
 
-            <div className="hidden rounded-2xl border border-outline-variant/20 bg-surface p-6 md:block md:p-8">
+            <div className="hidden sticky-note p-6 md:block md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse beyond this topic</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
                 Switch from this topic trail to the full archive or run a direct search if you want a broader slice of the same material.

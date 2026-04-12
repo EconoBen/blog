@@ -1,37 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 420" fill="none">
-  <!-- Standing hardcover book — matching reference silhouette exactly -->
-  <!-- Slightly angled: spine visible on left, front cover facing right -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 380" fill="none">
+  <!-- Flat front cover of a book -->
 
-  <!-- Page edges at top (thin white strips between covers) -->
-  <path d="M 78 32 L 78 28 L 252 38 L 252 42 Z" fill="#f0ede6"/>
-  <path d="M 78 28 L 78 24 L 252 34 L 252 38 Z" fill="#f5f2ec"/>
-  <path d="M 78 24 L 78 20 L 252 30 L 252 34 Z" fill="#faf8f4"/>
-  <path d="M 78 20 L 78 17 L 252 27 L 252 30 Z" fill="#fff"/>
+  <!-- Subtle drop shadow -->
+  <rect x="8" y="8" width="220" height="340" rx="4" fill="#1a1a1a" opacity="0.08"/>
 
-  <!-- Spine (left side, slightly angled inward) -->
-  <path d="M 38 8 L 78 17 L 78 378 L 38 366 Z" fill="#0035a0"/>
+  <!-- Cover -->
+  <rect x="4" y="4" width="220" height="340" rx="3" fill="#0035a0"/>
 
-  <!-- Spine white bands — top -->
-  <path d="M 42 38 L 74 45 L 74 52 L 42 45 Z" fill="white" opacity="0.35"/>
-  <path d="M 42 58 L 74 65 L 74 68 L 42 61 Z" fill="white" opacity="0.25"/>
+  <!-- Subtle top-left radial glow -->
+  <rect x="4" y="4" width="220" height="340" rx="3" fill="url(#coverGlow)"/>
 
-  <!-- Spine white bands — bottom -->
-  <path d="M 42 318 L 74 325 L 74 332 L 42 325 Z" fill="white" opacity="0.35"/>
-  <path d="M 42 338 L 74 345 L 74 348 L 42 341 Z" fill="white" opacity="0.25"/>
+  <!-- Top decorative band -->
+  <rect x="4" y="44" width="220" height="1" fill="white" opacity="0.15"/>
+  <rect x="4" y="56" width="220" height="0.5" fill="white" opacity="0.1"/>
 
-  <!-- Front cover (main face, solid fill) -->
-  <path d="M 78 17 L 252 27 L 252 392 L 78 378 Z" fill="#0035a0"/>
+  <!-- Bottom decorative band -->
+  <rect x="4" y="300" width="220" height="0.5" fill="white" opacity="0.1"/>
+  <rect x="4" y="310" width="220" height="1" fill="white" opacity="0.15"/>
 
-  <!-- Title on cover -->
-  <text x="100" y="160" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="800" fill="white" opacity="0.9" letter-spacing="0.02em">AGENT</text>
-  <text x="100" y="198" font-family="'Space Grotesk', sans-serif" font-size="32" font-weight="800" fill="white" opacity="0.9" letter-spacing="0.02em">MEMORY</text>
+  <!-- Publisher badge area -->
+  <text x="30" y="34" font-family="'Inter', sans-serif" font-size="7" font-weight="600" fill="white" opacity="0.35" letter-spacing="0.18em">O'REILLY</text>
 
-  <!-- Thin divider -->
-  <path d="M 100 210 L 156 212 L 156 213 L 100 211 Z" fill="white" opacity="0.3"/>
+  <!-- Title -->
+  <text x="30" y="145" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="800" fill="white" opacity="0.95" letter-spacing="-0.01em">AGENT</text>
+  <text x="30" y="185" font-family="'Space Grotesk', sans-serif" font-size="36" font-weight="800" fill="white" opacity="0.95" letter-spacing="-0.01em">MEMORY</text>
+
+  <!-- Divider line -->
+  <rect x="30" y="198" width="60" height="2" rx="1" fill="white" opacity="0.3"/>
+
+  <!-- Subtitle -->
+  <text x="30" y="222" font-family="'Inter', sans-serif" font-size="8.5" font-weight="400" fill="white" opacity="0.5" letter-spacing="0.02em">How AI systems remember,</text>
+  <text x="30" y="234" font-family="'Inter', sans-serif" font-size="8.5" font-weight="400" fill="white" opacity="0.5" letter-spacing="0.02em">retrieve, compress, and act</text>
+  <text x="30" y="246" font-family="'Inter', sans-serif" font-size="8.5" font-weight="400" fill="white" opacity="0.5" letter-spacing="0.02em">on information in production.</text>
 
   <!-- Author -->
-  <text x="100" y="310" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="white" opacity="0.4" letter-spacing="0.1em">BEN LABASCHIN</text>
+  <text x="30" y="330" font-family="'Inter', sans-serif" font-size="9" font-weight="500" fill="white" opacity="0.45" letter-spacing="0.12em">BEN LABASCHIN</text>
 
-  <!-- Bottom edge (thickness) -->
-  <path d="M 38 366 L 78 378 L 252 392 L 252 398 L 78 384 L 38 372 Z" fill="#002a80"/>
+  <!-- Subtle spine edge on the left -->
+  <rect x="4" y="4" width="4" height="340" rx="2" fill="#002480" opacity="0.5"/>
+
+  <defs>
+    <radialGradient id="coverGlow" cx="0.15" cy="0.12" r="0.85">
+      <stop offset="0%" stop-color="white" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
 </svg>

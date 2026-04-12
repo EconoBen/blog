@@ -90,129 +90,156 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
   return (
     <EditorialPageFrame currentPath="/posts">
-      <section className="editorial-page-hero">
-        <div className="editorial-page-hero-copy">
-          <p className="editorial-home-kicker">{primaryTag ?? 'Post'}</p>
-          <h1 className="editorial-page-title">{post.title}</h1>
-          {post.summary && <p className="editorial-page-copy">{post.summary}</p>}
-          <div className="editorial-post-meta">
+      {/* ── Hero ── */}
+      <section className="mx-auto max-w-[1440px] px-8 pb-8 pt-14 md:pb-12 md:pt-20">
+        <div className="max-w-3xl">
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
+            {primaryTag ?? 'Post'}
+          </p>
+          <h1 className="mt-4 font-headline text-4xl font-black tracking-tight text-[#1d1c16] md:text-5xl">
+            {post.title}
+          </h1>
+          {post.summary && (
+            <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-[#555f70]">
+              {post.summary}
+            </p>
+          )}
+          <div className="mt-4 flex flex-wrap gap-4 font-label text-[10px] uppercase tracking-widest text-[#555f70]">
             <span>Published {longDateFormatter.format(post.date)}</span>
             <span>{post.readingTime ? `${post.readingTime} min read` : 'Long-form post'}</span>
             <span>Filed in {monthYearFormatter.format(post.date)}</span>
           </div>
-          <div className="editorial-home-actions">
-            <Link href="/posts" className="editorial-home-button editorial-home-button-secondary">
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
               Back to posts
             </Link>
-            {primaryTag ? (
-              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="editorial-home-button editorial-home-button-primary">
+            {primaryTag && (
+              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="rounded-lg bg-[#0035a0] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-transform hover:-translate-y-1" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
                 Browse this topic
               </Link>
-            ) : null}
-            <Link href={`/archives/${archiveMonth}`} className="editorial-home-button editorial-home-button-secondary">
+            )}
+            <Link href={`/archives/${archiveMonth}`} className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
               Browse this month
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Article</p>
-          <h2 className="editorial-page-section-title">Markdown, links, code blocks, and embedded media stay intact in the reading view.</h2>
+      {/* ── Cover image ── */}
+      {post.coverImage && (
+        <div className="mx-auto max-w-[1440px] px-8">
+          <img
+            src={post.coverImage}
+            alt={post.title}
+            className="w-full rounded-2xl object-cover"
+            style={{ maxHeight: '480px' }}
+          />
         </div>
+      )}
 
-        <div className="blog-content">
-          <MarkdownRenderer content={post.content} />
+      {/* ── Article body ── */}
+      <section className="border-t border-outline-variant/20 mt-8">
+        <div className="mx-auto max-w-[860px] px-8 py-12 md:py-16">
+          <div className="blog-content prose-lg">
+            <MarkdownRenderer content={post.coverImage ? post.content.replace(new RegExp(`!\\[[^\\]]*\\]\\(${post.coverImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'm'), '') : post.content} />
+          </div>
         </div>
       </section>
 
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Reading frame</p>
-          <h2 className="editorial-page-section-title">Audio, tags, and the cover image stay available after the article begins.</h2>
-        </div>
-
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="rounded-3xl border border-outline-variant/20 bg-surface-container-low p-6 md:p-8">
-            <div className="flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
-              <span>Published {longDateFormatter.format(post.date)}</span>
-              <span>{post.readingTime ? `${post.readingTime} min read` : 'Essay'}</span>
-              <span>{post.tags.length} topic{post.tags.length === 1 ? '' : 's'}</span>
+      {/* ── Audio + Tags sidebar ── */}
+      <section className="border-t border-outline-variant/20">
+        <div className="mx-auto max-w-[1440px] px-8 py-12 md:py-16">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
+            <div className="sticky-note p-6 md:p-8">
+              <div className="flex flex-wrap gap-3 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
+                <span>Published {longDateFormatter.format(post.date)}</span>
+                <span>{post.readingTime ? `${post.readingTime} min read` : 'Essay'}</span>
+                <span>{post.tags.length} topic{post.tags.length === 1 ? '' : 's'}</span>
+              </div>
+              <div className="mt-6">
+                {audioUrl ? (
+                  <AudioPlayer
+                    audioUrl={audioUrl}
+                    title="Listen to this post"
+                    className="post-audio-player"
+                  />
+                ) : (
+                  <p className="font-body text-sm text-[#555f70]">No audio version is available for this post yet.</p>
+                )}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {post.tags.length > 0
+                  ? post.tags.map((tag) => (
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16] transition-colors hover:bg-[#ede8de]">
+                        {tag}
+                      </Link>
+                    ))
+                  : <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Essay</span>}
+              </div>
             </div>
-            <div className="mt-6">
-              {audioUrl ? (
-                <AudioPlayer
-                  audioUrl={audioUrl}
-                  title="Listen to this post"
-                  className="post-audio-player"
-                />
-              ) : (
-                <p className="editorial-post-summary">No audio version is available for this post yet.</p>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── Related reading ── */}
+      {(newerPost || olderPost) && (
+        <section className="border-t border-outline-variant/20">
+          <div className="mx-auto max-w-[1440px] px-8 py-12 md:py-16">
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Related reading</p>
+            <h2 className="mt-3 font-headline text-3xl font-bold tracking-tight text-[#1d1c16]">
+              Move to the adjacent posts in the archive.
+            </h2>
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              {newerPost && (
+                <article className="sticky-note p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Newer post</p>
+                  <h3 className="mt-3 font-headline text-xl font-bold leading-snug text-[#1d1c16] md:text-2xl">
+                    <Link href={`/posts/${newerPost.slug}`} className="transition-colors hover:text-[#0035a0]">
+                      {newerPost.title}
+                    </Link>
+                  </h3>
+                  {newerPost.summary && (
+                    <p className="mt-3 font-body text-base leading-relaxed text-[#555f70]">{newerPost.summary}</p>
+                  )}
+                  <div className="mt-4 flex flex-wrap gap-3 font-label text-[10px] uppercase tracking-widest text-[#555f70]">
+                    <span>{longDateFormatter.format(newerPost.date)}</span>
+                    <span>{newerPost.readingTime ? `${newerPost.readingTime} min read` : 'Long-form post'}</span>
+                  </div>
+                  <div className="mt-4">
+                    <Link href={`/posts/${newerPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#0035a0] transition-transform hover:translate-x-1">
+                      Read newer post →
+                    </Link>
+                  </div>
+                </article>
+              )}
+
+              {olderPost && (
+                <article className="sticky-note p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Older post</p>
+                  <h3 className="mt-3 font-headline text-xl font-bold leading-snug text-[#1d1c16] md:text-2xl">
+                    <Link href={`/posts/${olderPost.slug}`} className="transition-colors hover:text-[#0035a0]">
+                      {olderPost.title}
+                    </Link>
+                  </h3>
+                  {olderPost.summary && (
+                    <p className="mt-3 font-body text-base leading-relaxed text-[#555f70]">{olderPost.summary}</p>
+                  )}
+                  <div className="mt-4 flex flex-wrap gap-3 font-label text-[10px] uppercase tracking-widest text-[#555f70]">
+                    <span>{longDateFormatter.format(olderPost.date)}</span>
+                    <span>{olderPost.readingTime ? `${olderPost.readingTime} min read` : 'Long-form post'}</span>
+                  </div>
+                  <div className="mt-4">
+                    <Link href={`/posts/${olderPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#0035a0] transition-transform hover:translate-x-1">
+                      Read older post →
+                    </Link>
+                  </div>
+                </article>
               )}
             </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {post.tags.length > 0
-                ? post.tags.map((tag) => (
-                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="editorial-chip">
-                      {tag}
-                    </Link>
-                  ))
-                : <span className="editorial-chip">Essay</span>}
-            </div>
           </div>
-
-          {post.coverImage ? (
-            <img
-              src={post.coverImage}
-              alt={post.title}
-              className="blog-image"
-            />
-          ) : null}
-        </div>
-      </section>
-
-      <section className="editorial-list-section">
-        <div className="editorial-list-heading">
-          <p className="editorial-home-section-label">Related reading</p>
-          <h2 className="editorial-page-section-title">Move to the adjacent posts in the archive.</h2>
-        </div>
-        <div className="editorial-two-column">
-          {newerPost ? (
-            <article className="editorial-home-card">
-              <p className="editorial-home-card-label">Newer post</p>
-              <h3>
-                <Link href={`/posts/${newerPost.slug}`}>{newerPost.title}</Link>
-              </h3>
-              {newerPost.summary && <p>{newerPost.summary}</p>}
-              <div className="editorial-post-meta">
-                <span>{longDateFormatter.format(newerPost.date)}</span>
-                <span>{newerPost.readingTime ? `${newerPost.readingTime} min read` : 'Long-form post'}</span>
-              </div>
-              <Link href={`/posts/${newerPost.slug}`} className="editorial-home-card-link">
-                Read newer post
-              </Link>
-            </article>
-          ) : null}
-
-          {olderPost ? (
-            <article className="editorial-home-card">
-              <p className="editorial-home-card-label">Older post</p>
-              <h3>
-                <Link href={`/posts/${olderPost.slug}`}>{olderPost.title}</Link>
-              </h3>
-              {olderPost.summary && <p>{olderPost.summary}</p>}
-              <div className="editorial-post-meta">
-                <span>{longDateFormatter.format(olderPost.date)}</span>
-                <span>{olderPost.readingTime ? `${olderPost.readingTime} min read` : 'Long-form post'}</span>
-              </div>
-              <Link href={`/posts/${olderPost.slug}`} className="editorial-home-card-link">
-                Read older post
-              </Link>
-            </article>
-          ) : null}
-        </div>
-      </section>
+        </section>
+      )}
     </EditorialPageFrame>
   );
 }

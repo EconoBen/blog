@@ -42,37 +42,75 @@ export default function BookPage() {
   return (
     <EditorialPageFrame currentPath="/book">
       <main className="mx-auto max-w-[1440px] px-8">
+        {/* Book facts */}
+        <section className="sticky-note mt-6 grid grid-cols-1 gap-8 p-8 sm:grid-cols-2 sm:gap-10 sm:p-10 md:grid-cols-4 md:p-12">
+          {bookFacts.map(([label, value]) => (
+            <div key={label} className="space-y-2">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
+                {label}
+              </p>
+              <p className="font-headline text-lg font-bold text-on-surface">{value}</p>
+            </div>
+          ))}
+        </section>
+
         {/* Hero */}
-        <header className="grid grid-cols-1 items-start gap-8 py-12 md:grid-cols-12 md:items-center md:gap-12 md:py-16">
-          <div className="order-1 space-y-6 md:col-span-7 md:order-none">
+        <header className="grid grid-cols-1 items-start gap-8 pb-4 pt-12 md:grid-cols-12 md:items-center md:gap-12 md:pb-6 md:pt-16">
+          <div className="order-1 space-y-8 md:col-span-7 md:order-none">
+            {/* Status badge */}
             <div className="flex items-center gap-3">
-              <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                Book / Research
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#0035a0] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_4px_12px_rgba(0,53,160,0.25)]">
+                <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+                In progress
               </span>
-              <span className="h-px w-8 bg-outline-variant/20" aria-hidden="true" />
-              <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface/50">
-                Early release direction
+              <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface/40">
+                O&apos;Reilly Media
               </span>
             </div>
-            <h1 className="max-w-none font-headline text-4xl font-black tracking-tight text-on-surface md:max-w-[7ch] md:text-5xl">
-              Agent Memory
-            </h1>
-            <p className="max-w-xl font-body text-lg italic leading-relaxed text-on-surface/60 sm:text-xl md:text-3xl">
-              {bookSubtitle}
-            </p>
-            <div className="flex flex-col gap-3 pt-3 sm:flex-row sm:flex-wrap sm:gap-4 md:gap-6 md:pt-4">
+
+            {/* Headline */}
+            <div className="space-y-3">
+              <h1 className="font-headline text-5xl font-black tracking-tight text-on-surface md:text-6xl">
+                Agent Memory
+              </h1>
+              <p className="max-w-lg font-body text-xl leading-relaxed text-on-surface/70 md:text-2xl">
+                {bookSubtitle}
+              </p>
+            </div>
+
+            {/* Key details */}
+            <div className="flex flex-wrap gap-x-8 gap-y-2 border-l-2 border-[#0035a0]/20 pl-5">
+              <div>
+                <p className="font-label text-[9px] font-bold uppercase tracking-[0.2em] text-on-surface/40">Format</p>
+                <p className="font-headline text-sm font-bold text-on-surface">Print + Digital</p>
+              </div>
+              <div>
+                <p className="font-label text-[9px] font-bold uppercase tracking-[0.2em] text-on-surface/40">Focus</p>
+                <p className="font-headline text-sm font-bold text-on-surface">Agent memory systems</p>
+              </div>
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
                 href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="inline-flex items-center justify-center rounded-lg bg-primary-container px-7 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-primary transition-transform hover:-translate-y-1"
+                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 bg-white px-8 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-1 hover:border-[#0035a0]/40 hover:shadow-[0_8px_20px_rgba(0,53,160,0.1)]"
               >
                 Get book updates
               </a>
               <Link
                 href="/publications"
-                className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-7 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
+                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 bg-white px-8 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-1 hover:border-[#0035a0]/40 hover:shadow-[0_8px_20px_rgba(0,53,160,0.1)]"
               >
                 See related work
               </Link>
+            </div>
+
+            {/* Follow the research — inline */}
+            <div className="border-t border-outline-variant/15 pt-6">
+              <p className="max-w-lg font-body text-sm leading-relaxed text-on-surface/50">
+                No fake signup form — just email if you want updates on Agent Memory or want to talk about the posts, talks, or publications that feed into it.
+              </p>
             </div>
           </div>
 
@@ -87,9 +125,9 @@ export default function BookPage() {
         </header>
 
         {/* Central thesis */}
-        <section className="py-12 md:py-16">
+        <section className="py-2 md:py-3">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-            <div className="flex min-h-[300px] flex-col justify-between rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-6 shadow-[0_18px_50px_rgba(29,28,22,0.04)] sm:p-10 md:col-span-2 md:min-h-[400px] md:p-12">
+            <div className="sticky-note flex min-h-[300px] flex-col justify-between p-6 sm:p-10 md:col-span-2 md:min-h-[400px] md:p-12">
               <div className="max-w-xl">
                 <span className="mb-4 block font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
                   Central Thesis
@@ -104,18 +142,12 @@ export default function BookPage() {
                   live.
                 </p>
               </div>
-              <div className="mt-7 flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-container">
-                  <span className="material-symbols-outlined text-on-primary" aria-hidden="true">
-                    psychology
-                  </span>
-                </div>
-                <span className="max-w-[18ch] font-label text-[11px] font-bold uppercase tracking-widest text-on-surface">
-                  Architectural Deep-Dive
-                </span>
+              <div className="mt-7 inline-flex items-center gap-3 rounded-lg border border-outline-variant/15 px-4 py-3">
+                <span className="font-headline text-lg" aria-hidden="true">🧠</span>
+                <span className="font-headline text-sm font-bold text-on-surface">Architectural Deep-Dive</span>
               </div>
             </div>
-            <div className="flex flex-col justify-center rounded-2xl border border-outline-variant/15 bg-surface-container-low p-7 shadow-[0_18px_50px_rgba(29,28,22,0.04)] sm:p-10">
+            <div className="sticky-note flex flex-col justify-center p-7 sm:p-10">
               <h4 className="mb-5 font-headline text-4xl font-black text-on-surface/10 sm:text-5xl">01.</h4>
               <p className="font-body text-base italic leading-relaxed text-on-surface/70 sm:text-lg">
                 Memory is not just storage. It is the structure that decides what historical intent
@@ -153,43 +185,7 @@ export default function BookPage() {
           </div>
         </section>
 
-        {/* Book facts */}
-        <section className="my-12 grid grid-cols-1 gap-8 rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-8 shadow-[0_18px_50px_rgba(29,28,22,0.04)] sm:grid-cols-2 sm:gap-10 sm:p-10 md:my-16 md:grid-cols-4 md:p-12">
-          {bookFacts.map(([label, value]) => (
-            <div key={label} className="space-y-2">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                {label}
-              </p>
-              <p className="font-headline text-lg font-bold text-on-surface">{value}</p>
-            </div>
-          ))}
-        </section>
 
-        {/* CTA */}
-        <section className="border-t border-outline-variant/20 py-12 md:py-16">
-          <div className="mx-auto w-full max-w-3xl space-y-8 text-center">
-            <div className="space-y-4">
-              <h2 className="font-headline text-4xl font-black tracking-tighter text-on-surface sm:text-5xl">
-                Follow the research.
-              </h2>
-              <p className="font-body text-lg text-on-surface/60 sm:text-xl">
-                There is no fake signup form here. Email if you want updates on Agent Memory or
-                want to talk about the posts, talks, or publications that feed into it.
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <a
-                href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
-              >
-                Email for updates
-              </a>
-            </div>
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-              Posts, talks, and publications will keep carrying the work in the meantime.
-            </p>
-          </div>
-        </section>
       </main>
     </EditorialPageFrame>
   );

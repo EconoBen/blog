@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
 import { ScrollToTop } from './ScrollToTop';
+import { StickyContactRemote } from './StickyContactRemote';
 
 const primaryNavItems = [
   { href: '/', label: 'Home' },
@@ -19,9 +20,7 @@ const discoveryNavItems = [
 
 const footerLinks = [
   { href: '/archive', label: 'Archive' },
-  { href: '/code-ai', label: 'Code & Tools' },
   { href: '/tags', label: 'Tags' },
-  { href: '/about', label: 'CV' },
   { href: 'mailto:benjaminlabaschindev@gmail.com', label: 'Contact' },
 ];
 
@@ -108,12 +107,13 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         <nav className="hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Primary">
           {primaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
+            const isBook = item.href === '/book';
 
             return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={desktopNavItemClassName(active)}
+                  className={`${desktopNavItemClassName(active)}${isBook && !active ? ' nav-shine' : ''}`}
                   aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
@@ -148,12 +148,13 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         <div className="flex flex-wrap gap-2 pb-1">
           {mobilePrimaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
+            const isBook = item.href === '/book';
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={mobileNavItemClassName(active)}
+                className={`${mobileNavItemClassName(active)}${isBook && !active ? ' nav-shine nav-shine-pill' : ''}`}
                 style={active ? activeMobileNavStyle : undefined}
                 aria-current={active ? 'page' : undefined}
               >
@@ -175,16 +176,17 @@ export function EditorialPageFrame({
   const copyrightYear = new Date().getFullYear();
 
   return (
-    <div className={`graph-paper-bg min-h-screen text-[#1d1c16] ${pageClassName}`.trim()}>
+    <div className={`bg-[#fef9ef] min-h-screen text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
         <EditorialTopbar currentPath={currentPath} />
         <div className="h-[70px] md:h-[80px]" aria-hidden="true" />
-        <main>{children}</main>
+        <main className={currentPath !== '/' ? 'lg:pr-20 xl:pr-24' : ''}>{children}</main>
         <ScrollToTop />
+        {currentPath !== '/' && <StickyContactRemote />}
         <footer className="mt-12 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-8 py-5 md:flex-row">
-            <div className="font-headline text-xs uppercase tracking-wide text-[#1d1c16]">
-              {copyrightYear > 2024 ? `© 2024-${copyrightYear} Ben` : '© 2024 Ben'} - Technical Curator &amp; Economist
+            <div className="font-headline text-xs uppercase tracking-wide text-[#1d1c16]" suppressHydrationWarning>
+              {copyrightYear > 2024 ? `© 2024-${copyrightYear}` : '© 2024'} Ben Labaschin
             </div>
             <nav className="flex flex-wrap justify-center gap-5">
               {footerLinks.map((item) => {

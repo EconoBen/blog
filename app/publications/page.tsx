@@ -16,7 +16,7 @@ export default function PublicationsPage() {
   return (
     <EditorialPageFrame currentPath="/publications">
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-12 pt-14 md:pb-16 md:pt-20">
+      <section className="mx-auto max-w-[1440px] px-8 pb-6 pt-14 md:pb-8 md:pt-20">
         <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Publications</p>
         <h1 className="mt-4 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
           Books, reports, and papers
@@ -27,7 +27,7 @@ export default function PublicationsPage() {
       </section>
 
       {/* ── All publications in a flat grid ── */}
-      <section className="border-t border-outline-variant/20 py-12 md:py-16">
+      <section className="border-t border-outline-variant/20 pt-4 pb-12 md:pt-5 md:pb-16">
         <div className="mx-auto max-w-[1440px] px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {sorted.map((pub) => (
@@ -47,7 +47,7 @@ function BookCard({ publication }: { publication: Publication }) {
   return (
     <article
       id={publication.id}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1"
+      className="group flex h-full flex-col overflow-hidden sticky-note transition-transform duration-300 hover:-translate-y-1"
     >
       {/* Book cover area */}
       <div className="relative flex items-center justify-center bg-surface-container-low p-6">

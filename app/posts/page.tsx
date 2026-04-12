@@ -40,7 +40,7 @@ export default async function PostsPage() {
   return (
     <EditorialPageFrame currentPath="/posts">
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-12 pt-14 md:pb-16 md:pt-20">
+      <section className="mx-auto max-w-[1440px] px-8 pb-6 pt-14 md:pb-8 md:pt-20">
         <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Reading archive</p>
         <h1 className="mt-4 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
           Posts
@@ -48,20 +48,12 @@ export default async function PostsPage() {
         <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface">
           Essays, reports, and field notes on AI systems, developer tooling, and applied economics
         </p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <Link href={`/posts/${posts[0]?.slug}`} className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
-            Read latest post
-          </Link>
-          <Link href="/archive" className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
-            Open archive
-          </Link>
-        </div>
       </section>
 
       {/* ── Posts list with view toggle ── */}
-      <section className="border-t border-outline-variant/20 py-12 md:py-16">
+      <section className="border-t border-outline-variant/20 pt-4 pb-12 md:pt-5 md:pb-16">
         <div className="mx-auto max-w-[1440px] px-8">
-          <PostsList posts={serializedPosts as any} />
+          <PostsList posts={serializedPosts as any} latestSlug={posts[0]?.slug} />
         </div>
       </section>
 
@@ -71,7 +63,7 @@ export default async function PostsPage() {
           <p className="mb-8 font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Recurring topics</p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {topTags.map(({ tag, count, samplePosts }) => (
-              <article key={tag} className="group overflow-hidden rounded-2xl border border-outline-variant/15 bg-surface-container-highest p-6 shadow-[0_18px_50px_rgba(29,28,22,0.04)] transition-transform duration-300 hover:-translate-y-1">
+              <article key={tag} className="group overflow-hidden sticky-note p-6 transition-transform duration-300 hover:-translate-y-1">
                 <div className="space-y-4">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{count} posts</p>
                   <h3 className="font-headline text-xl font-bold text-on-surface transition-colors group-hover:text-primary">
