@@ -7,16 +7,18 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import type { SearchResult } from '../services/UnifiedSearchService';
 
+const longDateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
 function formatResultDate(date?: Date | string) {
   if (!date) {
     return null;
   }
 
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(new Date(date));
+  return longDateFormatter.format(new Date(date));
 }
 
 const resultTypeOrder: SearchResult['type'][] = ['tag', 'post', 'publication', 'talk', 'code-ai'];

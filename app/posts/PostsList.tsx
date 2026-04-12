@@ -6,7 +6,7 @@ import Link from 'next/link';
 interface Post {
   slug: string;
   title: string;
-  date: Date;
+  date: string | Date;
   summary?: string;
   tags: string[];
   coverImage?: string;

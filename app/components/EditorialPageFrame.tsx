@@ -162,7 +162,7 @@ export function EditorialPageFrame({
       <div>
         <EditorialTopbar currentPath={currentPath} />
         <div className="h-[100px] md:h-[80px]" aria-hidden="true" />
-        <main className="lg:pr-20 xl:pr-24">{children}</main>
+        <main>{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
         <section id="subscribe" className="banner-glow bg-[#e8eef8] py-16 sm:py-20">

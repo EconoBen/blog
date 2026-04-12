@@ -100,8 +100,10 @@ function BookCard({ publication }: { publication: Publication }) {
 }
 
 /* ── Helpers ── */
+const shortDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
 function fmtDate(date: string) {
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date));
+  return shortDateFormatter.format(new Date(date));
 }
 
 function getType(pub: Publication) {
