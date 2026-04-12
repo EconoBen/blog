@@ -307,4 +307,12 @@ Direct human-guided design session covering about page redesign, talks page impr
 - [ ] Search page card clickability not yet addressed
 - [ ] Some hover affordances may still be missing on less-visited pages
 
-Commits: `0cc39834`, `8b92bd58`, `0038c450`, `a07b3912`, `7155bcd0`, `e29d5e6f`, `784f79de`, `09a6e98c`. Pushed to `origin/feat/site-current-review` on April 12, 2026.
+### Additional hover and spacing fixes (continued session)
+- [x] 14.40 Tags page: hover raise on top tag cards, letter jump links, alphabetical pills, browse route links
+- [x] 14.41 Tag detail page: hover raise on "Open archive", "Search this topic", "Back to tags"
+- [x] 14.42 Search page: fixed "Suggested queries" spacing, sidebar heading spacing
+- [x] 14.43 ECONOBEN.DEV brand: raise on hover
+- [x] 14.44 Discovery nav (Tags, Search): raise on hover
+- [x] 14.45 Footer links: raise on hover
+
+Commits: `0cc39834`, `8b92bd58`, `0038c450`, `a07b3912`, `7155bcd0`, `e29d5e6f`, `784f79de`, `09a6e98c`, `054a3cd9`, `4d99a78a`. Pushed to `origin/feat/site-current-review` on April 12, 2026.
