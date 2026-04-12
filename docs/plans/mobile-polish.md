@@ -125,9 +125,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 15: Publications mobile card spacing
 
-- [ ] In `app/publications/page.tsx`, verify publication cards stack cleanly on mobile
-- [ ] Reduce card padding if needed
-- [ ] Ensure cover images don't overflow on 390px
+- [x] In `app/publications/page.tsx`, verify publication cards stack cleanly on mobile
+- [x] Reduce card padding if needed
+- [x] Ensure cover images don't overflow on 390px
 
 ---
 
