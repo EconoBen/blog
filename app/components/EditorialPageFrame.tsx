@@ -82,27 +82,10 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   return (
     <header className={headerClassName}>
       <div className="mx-auto flex max-w-[1440px] flex-col gap-2.5 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8 md:px-8 md:py-5">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
           <Link href="/" className={brandClassName} aria-label="Go to home">
             {brandLabel}
           </Link>
-          <nav className="flex items-center gap-2 md:hidden" aria-label="Discovery">
-            {mobileDiscoveryNavItems.map((item) => {
-              const active = isActivePath(currentPath, item.href);
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={mobileNavItemClassName(active)}
-                  style={active ? activeMobileNavStyle : undefined}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-          </nav>
         </div>
         <nav className="hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Primary">
           {primaryNavItems.map((item) => {
@@ -145,16 +128,15 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         className="mx-auto max-w-[1440px] px-4 pb-2.5 md:hidden sm:px-6"
         aria-label="Primary"
       >
-        <div className="flex flex-wrap gap-2 pb-1">
-          {mobilePrimaryNavItems.map((item) => {
+        <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {primaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
-            const isBook = item.href === '/book';
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`${mobileNavItemClassName(active)}${isBook && !active ? ' nav-shine nav-shine-pill' : ''}`}
+                className={mobileNavItemClassName(active)}
                 style={active ? activeMobileNavStyle : undefined}
                 aria-current={active ? 'page' : undefined}
               >
@@ -179,7 +161,7 @@ export function EditorialPageFrame({
     <div className={`bg-[#fef9ef] min-h-screen text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
         <EditorialTopbar currentPath={currentPath} />
-        <div className="h-[160px] md:h-[80px]" aria-hidden="true" />
+        <div className="h-[100px] md:h-[80px]" aria-hidden="true" />
         <main className="lg:pr-20 xl:pr-24">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
