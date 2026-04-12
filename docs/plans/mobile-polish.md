@@ -135,9 +135,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 16: Tags page mobile density
 
-- [ ] In `app/tags/page.tsx`, reduce the "Top tags" grid to single column on mobile — verify `sm:grid-cols-2` doesn't kick in too early
-- [ ] The alphabetical index letter-pill rows should wrap cleanly — verify
-- [ ] Reduce section padding from `p-6 md:p-8` to `p-4 md:p-8` on mobile
+- [x] In `app/tags/page.tsx`, reduce the "Top tags" grid to single column on mobile — verify `sm:grid-cols-2` doesn't kick in too early
+- [x] The alphabetical index letter-pill rows should wrap cleanly — verify
+- [x] Reduce section padding from `p-6 md:p-8` to `p-4 md:p-8` on mobile
 
 ### Task 17: Search page mobile spacing
 
