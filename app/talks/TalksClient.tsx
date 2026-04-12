@@ -307,7 +307,7 @@ function TalkCard({
         </div>
       )}
 
-      <div className="flex flex-1 flex-col space-y-3 p-5">
+      <div className="flex flex-1 flex-col space-y-3 p-4 md:p-5">
         <div className="flex flex-wrap items-center gap-3" suppressHydrationWarning>
           <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{talk.event}</span>
           <span className="font-label text-[10px] uppercase tracking-widest text-secondary" suppressHydrationWarning>{formatDate(talk.date)}</span>

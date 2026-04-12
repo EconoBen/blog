@@ -93,9 +93,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 11: Tighten talks archive cards on mobile
 
-- [ ] In `app/talks/TalksClient.tsx`, reduce card padding in the `TalkCard` component from `p-5` to `p-4` on mobile
-- [ ] Ensure date/event labels don't overlap with the card edges
-- [ ] The Spotify embed in grid cards (152px height) should be full-width — verify
+- [x] In `app/talks/TalksClient.tsx`, reduce card padding in the `TalkCard` component from `p-5` to `p-4` on mobile
+- [x] Ensure date/event labels don't overlap with the card edges
+- [x] The Spotify embed in grid cards (152px height) should be full-width — verify
 
 ### Task 12: Tighten topic filter pills on mobile
 
