@@ -304,8 +304,12 @@ Direct human-guided design session covering about page redesign, talks page impr
 - [ ] `/code-ai` still needs editorial cleanup (13.4 still open)
 - [ ] `/posts` list view not yet updated to match grid view clickability
 - [ ] Mobile responsiveness not yet audited this session
-- [ ] Search page card clickability not yet addressed
-- [ ] Some hover affordances may still be missing on less-visited pages
+- [ ] Search results cards not yet made fully clickable
+- [ ] `/book` page not reviewed this session
+- [ ] `/archive` and `/archives/[month]` not given full spacing/clickability pass
+- [ ] `/publications` not given spacing or clickability audit beyond subtitle removal
+- [ ] Production build (`next build`) not verified — only dev server tested
+- [ ] Some hover affordances may still be missing on less-visited pages (e.g. code-ai filters, book page CTAs)
 
 ### Additional hover and spacing fixes (continued session)
 - [x] 14.40 Tags page: hover raise on top tag cards, letter jump links, alphabetical pills, browse route links
