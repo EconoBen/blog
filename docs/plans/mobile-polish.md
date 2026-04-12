@@ -72,8 +72,8 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 8: About page mobile highlights
 
-- [ ] The two-column highlights grid should be single column on mobile — verify `md:grid-cols-2` is working correctly
-- [ ] Reduce spacing between highlight items if too loose on mobile
+- [x] The two-column highlights grid should be single column on mobile — verify `md:grid-cols-2` is working correctly
+- [x] Reduce spacing between highlight items if too loose on mobile
 
 ### Task 9: About page mobile experience section
 

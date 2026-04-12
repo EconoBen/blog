@@ -148,19 +148,19 @@ export default function AboutPage() {
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Highlights</h2>
         <div className="mt-4 grid grid-cols-1 gap-x-16 md:grid-cols-2">
           <div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">Workhelix</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 Founding ML Engineer. Enterprise GenAI platforms from seed to <span className="font-headline font-black text-[#0035a0]">$75M</span> Series A, backed by Andrew Ng, Mira Murati, and Yann LeCun.
               </p>
             </div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">O&rsquo;Reilly Media</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">2</span> published reports on AI agents. <span className="font-headline font-black text-[#0035a0]">1</span>{' '}book in progress: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.
               </p>
             </div>
-            <div className="border-b border-[#1d1c16]/8 py-4 md:border-b-0">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4 md:border-b-0">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">AEA Papers &amp; Proceedings</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">1</span>{' '}peer-reviewed publication extending &ldquo;GPTs Are GPTs&rdquo; to measure firm-level LLM exposure.
@@ -168,19 +168,19 @@ export default function AboutPage() {
             </div>
           </div>
           <div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">Talks &amp; Guest Lectures</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">7</span> appearances across <span className="font-headline font-black text-[#0035a0]">6</span> venues: ODSC West, Wharton, AI.Science, Normconf, MLOps Community, and Into the Hopper podcast.
               </p>
             </div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">USPTO Patents</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">2</span> patent applications: Shared Mobility Simulation and Prediction System, and Matching Drivers With Shared Vehicles.
               </p>
             </div>
-            <div className="py-4">
+            <div className="py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">Industry Experience</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">9</span> years building production ML systems across <span className="font-headline font-black text-[#0035a0]">5</span> companies, from telematics risk modeling to enterprise LLM platforms.
