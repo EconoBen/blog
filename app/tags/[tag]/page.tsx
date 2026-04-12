@@ -150,39 +150,38 @@ export default async function TagPage({ params }: TagPageProps) {
 
                 <div className="space-y-4">
                   {yearGroup.posts.map((post) => (
-                    <article
+                    <Link
                       key={post.slug}
-                      className="sticky-note px-5 py-5 transition-colors md:px-6 md:py-6"
+                      href={`/posts/${post.slug}`}
+                      className="group block no-underline"
+                      style={{ color: 'inherit', textDecoration: 'none' }}
                     >
-                      <div className="flex flex-col gap-4">
-                        <div className="flex flex-wrap items-center gap-4 font-label text-xs uppercase tracking-widest text-secondary">
+                      <article className="sticky-note cursor-pointer px-5 py-5 transition-all duration-300 hover:-translate-y-1 md:px-6 md:py-6">
+                        <div className="flex flex-wrap items-center gap-4 font-label text-xs uppercase tracking-widest text-secondary" suppressHydrationWarning>
                           <span>{longDateFormatter.format(post.date)}</span>
                           <span className="h-1 w-1 rounded-full bg-outline-variant" />
                           <span>{post.readingTime ? `${post.readingTime} min read` : `${post.tags.length} tags`}</span>
                         </div>
-                        <h3 className="font-headline text-2xl font-bold tracking-tight text-on-surface md:text-3xl">
-                          <Link href={`/posts/${post.slug}`} className="transition-colors hover:text-primary">
-                            {post.title}
-                          </Link>
+                        <h3 className="mt-3 font-headline text-2xl font-bold tracking-tight text-on-surface transition-colors group-hover:text-primary md:text-3xl">
+                          {post.title}
                         </h3>
                         {post.summary ? (
-                          <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant">
+                          <p className="mt-3 max-w-2xl text-base leading-relaxed text-on-surface-variant">
                             {post.summary}
                           </p>
                         ) : null}
-                        <div className="flex flex-wrap gap-2">
+                        <div className="mt-4 flex flex-wrap gap-2">
                           {post.tags.map((postTag) => (
-                            <Link
+                            <span
                               key={`${post.slug}-${postTag}`}
-                              href={`/tags/${encodeURIComponent(postTag)}`}
-                              className="rounded-full bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
+                              className="rounded-full bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary"
                             >
                               {postTag}
-                            </Link>
+                            </span>
                           ))}
                         </div>
-                      </div>
-                    </article>
+                      </article>
+                    </Link>
                   ))}
                 </div>
               </section>

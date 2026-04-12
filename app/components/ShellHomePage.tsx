@@ -118,7 +118,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           </div>
 
           <aside className="lg:col-span-5">
-            <Link href={`/posts/${featuredPost.slug}`} className="block text-inherit no-underline">
+            <Link href={`/posts/${featuredPost.slug}`} className="block no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
               <article className="cursor-pointer overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)] transition-transform duration-300 hover:-translate-y-1">
                 <div className="relative h-72 overflow-hidden">
                   {imageSourceFor(featuredPost) ? (
@@ -222,7 +222,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[leadDiscoveryPost, ...supportingPosts, secondaryPost].filter(Boolean).map((post) => (
-              <Link key={(post as Post).slug} href={`/posts/${(post as Post).slug}`} className="group block h-full text-inherit no-underline">
+              <Link key={(post as Post).slug} href={`/posts/${(post as Post).slug}`} className="group block h-full no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
                 <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
                   <div className="flex flex-1 flex-col">
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
@@ -252,7 +252,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               </Link>
             ))}
 
-            <Link href="/book" className="group block h-full text-inherit no-underline">
+            <Link href="/book" className="group block h-full no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
               <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
                 <div className="flex flex-1 flex-col">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">

@@ -198,7 +198,7 @@ export function PostsList({ posts, latestSlug }: { posts: Post[]; latestSlug?: s
       ) : (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <Link key={post.slug} href={`/posts/${post.slug}`} className="group block h-full text-inherit no-underline">
+            <Link key={post.slug} href={`/posts/${post.slug}`} className="group block h-full no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
               <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-6 text-[#1d1c16] transition-transform duration-300 hover:-translate-y-1">
                 <PostIllustration post={post} />
                 <div className="flex flex-1 flex-col">
