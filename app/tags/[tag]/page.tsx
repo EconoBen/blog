@@ -101,19 +101,19 @@ export default async function TagPage({ params }: TagPageProps) {
             <div className="flex flex-wrap gap-2 lg:hidden">
               <Link
                 href="/tags"
-                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
               >
                 Back to tags
               </Link>
               <Link
                 href="/archive"
-                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
               >
                 Open archive
               </Link>
               <Link
                 href={`/search?q=${encodeURIComponent(tag)}`}
-                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
               >
                 Search this topic
               </Link>
@@ -229,10 +229,10 @@ export default async function TagPage({ params }: TagPageProps) {
                 Switch from this topic trail to the full archive or run a direct search if you want a broader slice of the same material.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+                <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">
                   Open archive
                 </Link>
-                <Link href={`/search?q=${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+                <Link href={`/search?q=${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">
                   Search this topic
                 </Link>
               </div>

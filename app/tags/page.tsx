@@ -75,7 +75,7 @@ export default async function TagsPage() {
                   <Link
                     key={tagEntry.tag}
                     href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
-                    className="sticky-note flex items-center justify-between gap-3 px-4 py-3 transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                    className="sticky-note flex items-center justify-between gap-3 px-4 py-3 transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
                   >
                     <span className="min-w-0 font-label text-xs font-bold uppercase tracking-wider text-on-surface-variant">
                       {tagEntry.tag}
@@ -96,7 +96,7 @@ export default async function TagsPage() {
                     <a
                       key={letter}
                       href={`#tag-letter-${letter}`}
-                      className="px-1.5 py-0.5 font-label text-[10px] font-bold uppercase tracking-wider text-secondary transition-colors hover:text-primary"
+                      className="px-1.5 py-0.5 font-label text-[10px] font-bold uppercase tracking-wider text-secondary transition-all hover:text-primary hover:-translate-y-0.5"
                     >
                       {letter}
                     </a>
@@ -113,7 +113,7 @@ export default async function TagsPage() {
                         <Link
                           key={tagEntry.tag}
                           href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
-                          className="inline-flex items-center gap-1 rounded-full bg-surface-container-low px-2.5 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-primary"
+                          className="inline-flex items-center gap-1 rounded-full bg-surface-container-low px-2.5 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-primary"
                         >
                           {tagEntry.tag}
                           <span className="text-secondary/60">({tagEntry.count})</span>
@@ -146,10 +146,10 @@ export default async function TagsPage() {
             <div className="sticky-note p-6 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse routes</h2>
               <div className="flex flex-wrap gap-3">
-                <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+                <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">
                   Browse archive
                 </Link>
-                <Link href="/search" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container">
+                <Link href="/search" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">
                   Search site
                 </Link>
               </div>

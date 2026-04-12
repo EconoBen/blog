@@ -267,7 +267,7 @@ function SearchContent() {
 
           <aside className="space-y-6 lg:col-span-4 lg:sticky lg:top-32">
             <div className="sticky-note p-6 md:p-8">
-              <h2 className="mb-6 font-headline text-lg font-bold text-on-surface">Search summary</h2>
+              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Search summary</h2>
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {[
                   ['Query', normalizedQuery || 'None'],
@@ -276,15 +276,15 @@ function SearchContent() {
                 ].map(([label, value]) => (
                   <div key={label} className="sticky-note px-4 py-3">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
-                    <span className="mt-2 block font-body text-sm text-on-surface-variant">{value}</span>
+                    <span className="mt-3 block font-body text-sm text-on-surface-variant">{value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="sticky-note p-6 md:p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Navigate elsewhere</h2>
-              <p className="mb-5 font-body text-sm leading-relaxed text-on-surface-variant">
+              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>Navigate elsewhere</h2>
+              <p className="font-body text-sm leading-relaxed text-on-surface-variant" style={{ marginBottom: '1.25rem' }}>
                 If search is not the fastest route, jump directly to the archive, tags, or tools surface.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -303,7 +303,7 @@ function SearchContent() {
                 ))}
               </div>
 
-              <h3 className="mb-3 mt-6 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+              <h3 className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
                 Suggested queries
               </h3>
               <div className="flex flex-wrap gap-2">

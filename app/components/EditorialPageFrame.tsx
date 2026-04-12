@@ -69,7 +69,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const headerClassName = compactShell
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
     : 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
-  const brandClassName = 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] transition-colors duration-200 hover:text-[#0035a0]';
+  const brandClassName = 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] transition-all duration-200 hover:text-[#0035a0] hover:-translate-y-0.5';
   const desktopNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 rounded-t-lg rounded-b-none bg-[#0035a0] font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap !text-white [&]:text-white'
@@ -131,7 +131,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                   href={item.href}
                   className={active
                     ? 'inline-flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#555f70]'
-                    : 'inline-flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#999] transition-colors duration-200 hover:text-[#555f70]'
+                    : 'flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#999] transition-all duration-200 hover:text-[#555f70] hover:-translate-y-0.5'
                   }
                   aria-current={active ? 'page' : undefined}
                 >
@@ -193,7 +193,7 @@ export function EditorialPageFrame({
                 const isInternal = item.href.startsWith('/');
                 const isHttpLink = item.href.startsWith('http://') || item.href.startsWith('https://');
                 const linkClassName =
-                  'font-headline text-xs uppercase tracking-wide text-[#1d1c16] opacity-80 transition-opacity hover:opacity-100 hover:underline';
+                  'font-headline text-xs uppercase tracking-wide text-[#1d1c16] opacity-80 transition-all hover:opacity-100 hover:underline hover:-translate-y-0.5';
 
                 if (!isInternal) {
                   return (
