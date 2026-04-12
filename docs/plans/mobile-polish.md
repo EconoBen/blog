@@ -99,8 +99,8 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 12: Tighten topic filter pills on mobile
 
-- [ ] The filter pills row ("ALL TALKS", "AI", "AGENTS"...) should scroll horizontally on mobile — verify the existing `overflow-x-auto` is working
-- [ ] Reduce pill padding if they feel oversized on 390px
+- [x] The filter pills row ("ALL TALKS", "AI", "AGENTS"...) should scroll horizontally on mobile — verify the existing `overflow-x-auto` is working
+- [x] Reduce pill padding if they feel oversized on 390px
 
 ---
 

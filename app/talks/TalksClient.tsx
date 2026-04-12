@@ -405,12 +405,12 @@ export default function TalksClient() {
                 </div>
               </div>
               <div
-                className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:overflow-visible lg:pb-0"
+                className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-2 lg:flex-wrap lg:overflow-visible lg:pb-0"
                 aria-label="Talk topics"
               >
                 <button
                   type="button"
-                  className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  className={`shrink-0 px-2.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-wider transition-colors lg:px-3.5 lg:py-2 lg:text-[11px] ${
                     activeFilter === 'all'
                       ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white'
                       : 'text-on-surface/50 hover:text-on-surface'
@@ -424,7 +424,7 @@ export default function TalksClient() {
                   <button
                     type="button"
                     key={topic}
-                    className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    className={`shrink-0 px-2.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-wider transition-colors lg:px-3.5 lg:py-2 lg:text-[11px] ${
                       activeFilter === topic
                         ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white'
                         : 'text-on-surface/50 hover:text-on-surface'
