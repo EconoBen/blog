@@ -87,9 +87,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 10: Remove redundant "OPEN PLAYER" button on mobile
 
-- [ ] In `app/talks/TalksClient.tsx`, the `FeaturedTalk` component shows a Spotify embed AND an "Open player" button/span below it — hide the button on mobile when the embed is already visible
-- [ ] Add `hidden` class to the "Open player" span for Spotify-only talks, or remove it entirely since the embed IS the player
-- [ ] Keep "Listen on Spotify" external link and "Transcript" link visible
+- [x] In `app/talks/TalksClient.tsx`, the `FeaturedTalk` component shows a Spotify embed AND an "Open player" button/span below it — hide the button on mobile when the embed is already visible
+- [x] Add `hidden` class to the "Open player" span for Spotify-only talks, or remove it entirely since the embed IS the player
+- [x] Keep "Listen on Spotify" external link and "Transcript" link visible
 
 ### Task 11: Tighten talks archive cards on mobile
 

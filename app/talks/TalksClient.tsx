@@ -130,7 +130,7 @@ function TalkMediaPreview({
         </svg>
         <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Podcast</p>
         <p className="max-w-sm font-headline text-xl font-bold leading-tight">{talk.event}</p>
-        <span className="inline-flex items-center gap-2 rounded-lg bg-[#0035a0]/8 px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0]">
+        <span className="hidden items-center gap-2 rounded-lg bg-[#0035a0]/8 px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] md:inline-flex">
           Open player
         </span>
       </div>
