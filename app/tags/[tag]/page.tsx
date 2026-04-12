@@ -175,7 +175,7 @@ export default async function TagPage({ params }: TagPageProps) {
                             <Link
                               key={`${post.slug}-${postTag}`}
                               href={`/tags/${encodeURIComponent(postTag)}`}
-                              className="rounded-full bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                              className="rounded-full bg-surface px-3 py-1 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
                             >
                               {postTag}
                             </Link>
@@ -214,7 +214,7 @@ export default async function TagPage({ params }: TagPageProps) {
                     <Link
                       key={relatedTag}
                       href={`/tags/${encodeURIComponent(relatedTag)}`}
-                      className="inline-flex items-center gap-2 rounded-full bg-surface px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+                      className="inline-flex items-center gap-2 rounded-full bg-surface px-3 py-2 font-label text-xs text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-surface-container-high hover:text-on-surface"
                     >
                       <span>{relatedTag}</span>
                       <span className="text-secondary">{count}</span>

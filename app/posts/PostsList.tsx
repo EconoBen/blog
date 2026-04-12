@@ -176,7 +176,7 @@ export function PostsList({ posts, latestSlug }: { posts: Post[]; latestSlug?: s
                 )}
                 <div className="flex flex-wrap gap-2">
                   {post.tags.slice(0, 5).map((tag) => (
-                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-primary">
                       {tag}
                     </Link>
                   ))}
@@ -219,7 +219,7 @@ export function PostsList({ posts, latestSlug }: { posts: Post[]; latestSlug?: s
                 )}
                 <div className="flex flex-wrap gap-2">
                   {post.tags.slice(0, 3).map((tag) => (
-                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                    <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-primary">
                       {tag}
                     </Link>
                   ))}

@@ -156,7 +156,7 @@ function SearchContent() {
               <Link
                 key={term}
                 href={`/search?q=${encodeURIComponent(term)}`}
-                className="rounded-full bg-surface-container-low px-4 py-1.5 font-label text-xs font-semibold text-secondary transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                className="rounded-full bg-surface-container-low px-4 py-1.5 font-label text-xs font-semibold text-secondary transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
               >
                 {term}
               </Link>
@@ -296,7 +296,7 @@ function SearchContent() {
                   <Link
                     key={label}
                     href={href}
-                    className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-colors hover:bg-secondary-container hover:text-on-secondary-container"
+                    className="rounded-full bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container"
                   >
                     {label}
                   </Link>
@@ -311,7 +311,7 @@ function SearchContent() {
                   <Link
                     key={term}
                     href={`/search?q=${encodeURIComponent(term)}`}
-                    className="rounded-full bg-surface-container-low px-3 py-2 font-label text-xs text-on-surface-variant transition-colors hover:bg-surface-container-high"
+                    className="rounded-full bg-surface-container-low px-3 py-2 font-label text-xs text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-surface-container-high"
                   >
                     {term}
                   </Link>

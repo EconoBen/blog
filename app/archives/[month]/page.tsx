@@ -64,7 +64,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
       <main className="mx-auto max-w-7xl px-8 py-16">
         <div className="mb-16 max-w-3xl">
           <div className="mb-6 flex items-center gap-2 font-headline text-[10px] uppercase tracking-[0.2em] text-secondary">
-            <Link href="/archive" className="transition-colors hover:text-primary">
+            <Link href="/archive" className="transition-colors hover:text-primary hover:underline underline-offset-2">
               Archive
             </Link>
             <span>/</span>

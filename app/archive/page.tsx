@@ -141,7 +141,7 @@ export default async function ArchivePage() {
                 {latestMonth ? (
                   <Link
                     href={latestMonth.monthHref}
-                    className="mt-6 inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-primary transition-colors hover:text-primary-container"
+                    className="mt-6 inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-primary transition-all hover:-translate-y-0.5 hover:text-primary-container"
                   >
                     Latest month {latestMonth.monthLabel} {latestMonth.year}
                   </Link>
