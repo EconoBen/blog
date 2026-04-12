@@ -141,9 +141,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 17: Search page mobile spacing
 
-- [ ] In `app/search/page.tsx`, reduce header section padding
-- [ ] The "Start with a topic" starter tips grid should be single column on mobile — verify `sm:grid-cols-3` stacks properly
-- [ ] Reduce padding inside sticky-note cards on mobile
+- [x] In `app/search/page.tsx`, reduce header section padding
+- [x] The "Start with a topic" starter tips grid should be single column on mobile — verify `sm:grid-cols-3` stacks properly
+- [x] Reduce padding inside sticky-note cards on mobile
 
 ---
 
