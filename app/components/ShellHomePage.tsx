@@ -110,7 +110,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
               {topTags.map(([tag, count]) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#ede8de] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70] transition-colors hover:bg-[#e7e2d8]">
+                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#ede8de] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70] transition-all hover:-translate-y-0.5 hover:bg-[#e7e2d8] hover:text-[#0035a0]">
                   {tag} ({count})
                 </Link>
               ))}
@@ -118,7 +118,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           </div>
 
           <aside className="lg:col-span-5">
-            <article className="overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)]">
+            <article className="overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)] transition-transform duration-300 hover:-translate-y-1">
               <div className="relative h-72 overflow-hidden">
                 {imageSourceFor(featuredPost) ? (
                   <img
@@ -215,7 +215,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Selected work
             </p>
-            <Link href="/archive" className="border-b border-[#1d1c16] pb-0.5 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
+            <Link href="/archive" className="border-b border-[#1d1c16] pb-0.5 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16] transition-all hover:-translate-y-0.5 hover:text-[#0035a0] hover:border-[#0035a0]">
               View archive
             </Link>
           </div>
@@ -240,7 +240,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {(post as Post).tags.slice(0, 3).map((tag) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">
+                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16] transition-all hover:-translate-y-0.5 hover:border-[#0035a0]/30 hover:text-[#0035a0]">
                         {tag}
                       </Link>
                     ))}

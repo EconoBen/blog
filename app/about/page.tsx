@@ -288,7 +288,7 @@ export default function AboutPage() {
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Publications &amp; Talks</h2>
         <div className="mt-4 space-y-0">
           {selectedWriting.map((pub) => (
-            <Link key={`${pub.year}-${pub.title}`} href={pub.href} className="flex flex-col gap-1 border-b border-[#1d1c16]/6 py-4 transition-colors hover:bg-[#fdf8ec] md:flex-row md:items-baseline md:justify-between">
+            <Link key={`${pub.year}-${pub.title}`} href={pub.href} className="block border-b border-[#1d1c16]/6 py-4 transition-all hover:bg-[#fdf8ec] hover:pl-2 md:flex md:flex-row md:items-baseline md:justify-between">
               <div className="flex items-baseline gap-4">
                 <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">{pub.year}</span>
                 <h3 className="font-headline text-base font-bold text-[#1d1c16] transition-colors hover:text-[#0035a0] md:text-lg">{pub.title}</h3>

@@ -69,11 +69,11 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const headerClassName = compactShell
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
     : 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
-  const brandClassName = 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16]';
+  const brandClassName = 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] transition-colors duration-200 hover:text-[#0035a0]';
   const desktopNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 rounded-t-lg rounded-b-none bg-[#0035a0] font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap !text-white [&]:text-white'
-      : 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:text-[#0035a0]';
+      : 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-all duration-200 hover:text-[#0035a0] hover:-translate-y-0.5';
   const mobileNavItemClassName = (active: boolean) =>
     active
       ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#0035a0]/15 bg-[#0035a0] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
