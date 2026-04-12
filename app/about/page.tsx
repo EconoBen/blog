@@ -136,7 +136,7 @@ export default function AboutPage() {
             <img
               src="/assets/atlas_and_I.jpg"
               alt="Ben Labaschin with Atlas"
-              className="h-[400px] w-full object-cover"
+              className="h-[280px] md:h-[400px] w-full object-cover"
             />
           </div>
         </div>

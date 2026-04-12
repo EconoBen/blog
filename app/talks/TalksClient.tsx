@@ -36,14 +36,6 @@ const getPrimarySourceLabel = (talk: Talk): string => {
   return 'Watch on YouTube';
 };
 
-const getPrimaryActionLabel = (talk: Talk): string => {
-  if (talk.spotifyUrl && !talk.youtubeId) {
-    return 'Open player';
-  }
-
-  return 'Play in page';
-};
-
 const getPrimarySourceUrl = (talk: Talk): string | null => talk.spotifyUrl ?? getYouTubeUrl(talk);
 
 function TalkMediaPreview({
@@ -365,7 +357,7 @@ export default function TalksClient() {
       : sortedTalks.filter((talk) => talk.topics.includes(activeFilter));
 
   const featuredTalk = filteredTalks[0] ?? null;
-  const archiveTalks = filteredTalks;
+  const archiveTalks = filteredTalks.slice(1);
   const archiveSummary =
     activeFilter === 'all'
       ? `${archiveTalks.length} more session${archiveTalks.length === 1 ? '' : 's'} below the featured recording.`

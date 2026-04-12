@@ -178,9 +178,13 @@ export default function CodeAIPage() {
     setExpandedItems(nextExpanded);
   };
 
-  const copyToClipboard = (content: string, itemId: string) => {
-    navigator.clipboard.writeText(content);
-    setCopyStates((prev) => ({ ...prev, [itemId]: 'Copied' }));
+  const copyToClipboard = async (content: string, itemId: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopyStates((prev) => ({ ...prev, [itemId]: 'Copied' }));
+    } catch {
+      setCopyStates((prev) => ({ ...prev, [itemId]: 'Failed' }));
+    }
     window.setTimeout(() => {
       setCopyStates((prev) => ({ ...prev, [itemId]: 'Copy' }));
     }, 2000);
