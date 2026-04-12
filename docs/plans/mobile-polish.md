@@ -57,8 +57,8 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 6: Tighten Selected Work cards on mobile
 
-- [ ] In `app/components/ShellHomePage.tsx`, reduce card padding from `p-8` to `p-5 md:p-8` for the selected work cards
-- [ ] Ensure "Read the post" / "Follow the book" buttons have consistent spacing from bottom
+- [x] In `app/components/ShellHomePage.tsx`, reduce card padding from `p-8` to `p-5 md:p-8` for the selected work cards
+- [x] Ensure "Read the post" / "Follow the book" buttons have consistent spacing from bottom
 
 ---
 
