@@ -162,10 +162,10 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 19: Book page mobile polish
 
-- [ ] In `app/book/page.tsx`, verify the status cards ("In progress", "O'Reilly Media", etc.) stack cleanly
-- [ ] The book cover image should be centered and not too wide on mobile
-- [ ] Reduce hero section padding on mobile
-- [ ] "GET BOOK UPDATES" and "SEE RELATED WORK" buttons should be full-width on mobile
+- [x] In `app/book/page.tsx`, verify the status cards ("In progress", "O'Reilly Media", etc.) stack cleanly
+- [x] The book cover image should be centered and not too wide on mobile
+- [x] Reduce hero section padding on mobile
+- [x] "GET BOOK UPDATES" and "SEE RELATED WORK" buttons should be full-width on mobile
 
 ---
 
