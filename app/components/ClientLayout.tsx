@@ -47,19 +47,23 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     window.addEventListener('resize', checkMobile);
 
     // Load saved sidebar width from localStorage
-    const savedWidth = localStorage.getItem('sidebarWidth');
-    if (savedWidth) {
-      setSidebarWidth(parseInt(savedWidth, 10));
-    }
+    try {
+      const savedWidth = localStorage.getItem('sidebarWidth');
+      if (savedWidth) {
+        setSidebarWidth(parseInt(savedWidth, 10));
+      }
 
-    // Load saved sidebar state, but default to open on desktop if no saved state
-    const savedState = localStorage.getItem('sidebarOpen');
-    const isDesktop = window.innerWidth >= 768;
-    if (savedState !== null) {
-      setSidebarOpen(savedState === 'true');
-    } else if (isDesktop) {
-      // Default to open on desktop if no saved preference
-      setSidebarOpen(true);
+      // Load saved sidebar state, but default to open on desktop if no saved state
+      const savedState = localStorage.getItem('sidebarOpen');
+      const isDesktop = window.innerWidth >= 768;
+      if (savedState !== null) {
+        setSidebarOpen(savedState === 'true');
+      } else if (isDesktop) {
+        // Default to open on desktop if no saved preference
+        setSidebarOpen(true);
+      }
+    } catch {
+      // localStorage may be unavailable (e.g. Safari private browsing)
     }
 
     return () => {
@@ -70,7 +74,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
   const toggleSidebar = useCallback(() => {
     const newState = !sidebarOpen;
     setSidebarOpen(newState);
-    localStorage.setItem('sidebarOpen', String(newState));
+    try { localStorage.setItem('sidebarOpen', String(newState)); } catch { /* noop */ }
   }, [sidebarOpen]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -91,7 +95,7 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
     const handleMouseUp = () => {
       if (isResizing) {
         setIsResizing(false);
-        localStorage.setItem('sidebarWidth', String(sidebarWidth));
+        try { localStorage.setItem('sidebarWidth', String(sidebarWidth)); } catch { /* noop */ }
       }
     };
 

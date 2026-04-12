@@ -1,5 +1,7 @@
 import { postService } from '../../services/PostService';
 import { getCodeToolsItems, getCodeToolsUrl } from '../utils/codeTools';
+import { talksConfig } from '../config/talksConfig';
+import { publicationsConfig } from '../config/publicationsConfig';
 
 export interface SearchResult {
   type: 'tag' | 'post' | 'talk' | 'publication' | 'code-ai';
@@ -12,63 +14,6 @@ export interface SearchResult {
   authors?: string[];
   relatedCount?: number;
 }
-
-interface Talk {
-  title: string;
-  event: string;
-  date: string;
-  location: string;
-  type: string;
-  description?: string;
-  url?: string;
-  presenters?: string[];
-  slides?: string;
-  video?: string;
-  audio?: string;
-  tags?: string[];
-}
-
-interface Publication {
-  title: string;
-  authors: string[];
-  year: number;
-  type: string;
-  journal?: string;
-  conference?: string;
-  publisher?: string;
-  pages?: string;
-  doi?: string;
-  url?: string;
-  abstract?: string;
-  tags?: string[];
-}
-
-// Sample talks data - in a real app, this would come from a database or JSON file
-const talks: Talk[] = [
-  {
-    title: "AI and Machine Learning in Economics",
-    event: "Economic Research Conference 2024",
-    date: "2024-06-15",
-    location: "Virtual",
-    type: "conference",
-    description: "Exploring the applications of AI in economic modeling and forecasting",
-    tags: ["AI", "economics", "machine learning"],
-  },
-  // Add more talks as needed
-];
-
-// Sample publications data - in a real app, this would come from a database or JSON file
-const publications: Publication[] = [
-  {
-    title: "Machine Learning Applications in Economic Forecasting",
-    authors: ["Benjamin Labaschin", "Co-Author"],
-    year: 2024,
-    type: "journal",
-    journal: "Journal of Economic Technology",
-    tags: ["machine learning", "economics", "forecasting"],
-  },
-  // Add more publications as needed
-];
 
 class UnifiedSearchService {
   async search(query: string): Promise<SearchResult[]> {
@@ -98,40 +43,40 @@ class UnifiedSearchService {
       }
     });
 
-    // Search talks
-    talks.forEach(talk => {
+    // Search talks (from real config data)
+    talksConfig.talks.forEach(talk => {
       if (
         talk.title.toLowerCase().includes(searchTerm) ||
         talk.event.toLowerCase().includes(searchTerm) ||
         talk.description?.toLowerCase().includes(searchTerm) ||
-        talk.tags?.some(tag => tag.toLowerCase().includes(searchTerm))
+        talk.topics?.some(topic => topic.toLowerCase().includes(searchTerm))
       ) {
         results.push({
           type: 'talk',
           title: talk.title,
-          description: `${talk.event} - ${talk.location}`,
-          url: `/talks#${talk.title.toLowerCase().replace(/\s+/g, '-')}`,
+          description: `${talk.event}`,
+          url: `/talks#${talk.id}`,
           date: new Date(talk.date),
-          tags: talk.tags,
+          tags: talk.topics,
         });
       }
     });
 
-    // Search publications
-    publications.forEach(pub => {
+    // Search publications (from real config data)
+    publicationsConfig.publications.forEach(pub => {
       if (
         pub.title.toLowerCase().includes(searchTerm) ||
-        pub.authors.some(author => author.toLowerCase().includes(searchTerm)) ||
+        pub.authors.toLowerCase().includes(searchTerm) ||
         pub.abstract?.toLowerCase().includes(searchTerm) ||
-        pub.tags?.some(tag => tag.toLowerCase().includes(searchTerm))
+        pub.topics?.some(topic => topic.toLowerCase().includes(searchTerm))
       ) {
         results.push({
           type: 'publication',
           title: pub.title,
-          description: `${pub.year} - ${pub.journal || pub.conference || pub.publisher}`,
-          url: `/publications#${pub.title.toLowerCase().replace(/\s+/g, '-')}`,
-          tags: pub.tags,
-          authors: pub.authors,
+          description: `${pub.year} - ${pub.venue || ''}`,
+          url: `/publications#${pub.id}`,
+          tags: pub.topics,
+          authors: [pub.authors],
         });
       }
     });

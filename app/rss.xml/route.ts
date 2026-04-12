@@ -11,6 +11,10 @@ const escapeXml = (value: string): string => {
     .replace(/'/g, '&apos;');
 };
 
+const escapeCdata = (value: string): string => {
+  return value.replace(/]]>/g, ']]]]><![CDATA[>');
+};
+
 export async function GET() {
   const siteUrl = getSiteUrl();
   const posts = await postService.getAllPosts().catch((error) => {
@@ -33,13 +37,13 @@ export async function GET() {
     <webMaster>${escapeXml('benjamin.labaschin@gmail.com (Benjamin Labaschin)')}</webMaster>
     ${posts.slice(0, 20).map((post: any) => `
     <item>
-      <title><![CDATA[${post.title}]]></title>
-      <description><![CDATA[${post.summary || `${post.content.substring(0, 200)}...`}]]></description>
+      <title><![CDATA[${escapeCdata(post.title)}]]></title>
+      <description><![CDATA[${escapeCdata(post.summary || `${post.content.substring(0, 200)}...`)}]]></description>
       <link>${siteUrl}/posts/${post.slug}</link>
       <guid isPermaLink="true">${siteUrl}/posts/${post.slug}</guid>
       <pubDate>${post.date.toUTCString()}</pubDate>
       ${post.tags.map((tag: string) => `<category>${escapeXml(tag)}</category>`).join('\n      ')}
-      <content:encoded><![CDATA[${post.content}]]></content:encoded>
+      <content:encoded><![CDATA[${escapeCdata(post.content)}]]></content:encoded>
     </item>`).join('')}
   </channel>
 </rss>`;
