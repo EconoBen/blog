@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { talksConfig, type Talk } from '../config/talksConfig';
 
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -48,26 +48,13 @@ const getPrimarySourceUrl = (talk: Talk): string | null => talk.spotifyUrl ?? ge
 
 function TalkMediaPreview({
   talk,
-  isOpen,
-  onOpen,
 }: {
   talk: Talk;
-  isOpen: boolean;
-  onOpen: () => void;
 }) {
   const [playerOpen, setPlayerOpen] = useState(false);
   const spotifyEmbedUrl = getSpotifyEmbedUrl(talk);
   const youtubeEmbedUrl = getYouTubeEmbedUrl(talk);
   const isSpotifyOnly = Boolean(talk.spotifyUrl && !talk.youtubeId);
-
-  useEffect(() => {
-    if (isOpen) setPlayerOpen(true);
-  }, [isOpen]);
-
-  const handleOpen = () => {
-    setPlayerOpen(true);
-    onOpen();
-  };
 
   if (playerOpen && isSpotifyOnly && spotifyEmbedUrl) {
     return (
@@ -109,7 +96,7 @@ function TalkMediaPreview({
     return (
       <button
         type="button"
-        onClick={handleOpen}
+        onClick={() => setPlayerOpen(true)}
         className="group relative block h-full w-full overflow-hidden text-left"
         aria-label={`Open ${talk.title} in the inline player`}
       >
@@ -133,7 +120,7 @@ function TalkMediaPreview({
   return (
     <button
       type="button"
-      onClick={handleOpen}
+      onClick={() => setPlayerOpen(true)}
       className="flex h-full w-full items-center justify-center bg-[#fdf8ec] text-left"
       aria-label={`Open ${talk.title} in the inline player`}
     >
@@ -151,22 +138,14 @@ function TalkMediaPreview({
   );
 }
 
-function FeaturedTalk({
-  talk,
-  isOpen,
-  onOpen,
-}: {
-  talk: Talk;
-  isOpen: boolean;
-  onOpen: () => void;
-}) {
+function FeaturedTalk({ talk }: { talk: Talk }) {
   const primarySourceUrl = getPrimarySourceUrl(talk);
 
   return (
     <article className="sticky-note overflow-hidden featured-shimmer transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(29,28,22,0.1)]">
       <div className="flex flex-col gap-0 lg:flex-row lg:items-stretch">
-        <div className="h-[160px] shrink-0 bg-surface-container-low lg:h-auto lg:w-[280px]" suppressHydrationWarning>
-          <TalkMediaPreview talk={talk} isOpen={isOpen} onOpen={onOpen} />
+        <div className="h-[160px] shrink-0 bg-surface-container-low lg:h-auto lg:w-[280px]">
+          <TalkMediaPreview talk={talk} />
         </div>
         <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-3 p-5 md:p-6">
           <div className="flex-1 space-y-2">
@@ -188,13 +167,9 @@ function FeaturedTalk({
                 {getPrimarySourceLabel(talk)}
               </a>
             )}
-            <button
-              type="button"
-              onClick={onOpen}
-              className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface"
-            >
+            <span className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface">
               {getPrimaryActionLabel(talk)}
-            </button>
+            </span>
             {talk.transcriptUrl && (
               <a
                 href={talk.transcriptUrl}
@@ -326,9 +301,6 @@ function TalkCard({
 }
 
 export default function TalksClient() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
   const { talks } = talksConfig;
@@ -363,7 +335,7 @@ export default function TalksClient() {
     <section className="mx-auto max-w-[1440px] px-8">
       {featuredTalk && (
         <div className="space-y-5">
-          <FeaturedTalk talk={featuredTalk} isOpen={false} onOpen={() => {}} />
+          <FeaturedTalk talk={featuredTalk} />
           <div className="pt-1">
             <div className="sticky-note space-y-4 px-4 py-4 lg:px-5">
               <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
