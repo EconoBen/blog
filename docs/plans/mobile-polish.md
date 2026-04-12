@@ -151,10 +151,10 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 18: Code & Tools mobile density
 
-- [ ] In `app/code-ai/page.tsx`, reduce the per-card button stack ("OPEN DETAIL PAGE" + "SHOW PREVIEW") — on mobile, consider making them a single row or reducing to one primary button
-- [ ] The category pills section is too dense — reduce padding and gap
-- [ ] The "ARCHIVE / READER" toggle should be smaller on mobile
-- [ ] Reduce card padding from whatever it is to `p-4` on mobile
+- [x] In `app/code-ai/page.tsx`, reduce the per-card button stack ("OPEN DETAIL PAGE" + "SHOW PREVIEW") — on mobile, consider making them a single row or reducing to one primary button
+- [x] The category pills section is too dense — reduce padding and gap
+- [x] The "ARCHIVE / READER" toggle should be smaller on mobile
+- [x] Reduce card padding from whatever it is to `p-4` on mobile
 
 ---
 
