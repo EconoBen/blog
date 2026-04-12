@@ -37,8 +37,8 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 3: Tighten mobile footer spacing
 
-- [ ] In `app/components/EditorialPageFrame.tsx`, reduce footer padding on mobile: change `py-5` to `py-4` and `gap-4` to `gap-3` for the footer container on small screens
-- [ ] Ensure footer links don't wrap awkwardly at 390px
+- [x] In `app/components/EditorialPageFrame.tsx`, reduce footer padding on mobile: change `py-5` to `py-4` and `gap-4` to `gap-3` for the footer container on small screens
+- [x] Ensure footer links don't wrap awkwardly at 390px
 
 ---
 

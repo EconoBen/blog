@@ -172,11 +172,11 @@ export function EditorialPageFrame({
           </div>
         </section>
         <footer className="w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-8 py-5 md:flex-row">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-3 px-5 py-4 md:flex-row md:gap-4 md:px-8 md:py-5">
             <div className="font-headline text-xs uppercase tracking-wide text-[#1d1c16]" suppressHydrationWarning>
               {copyrightYear > 2024 ? `© 2024-${copyrightYear}` : '© 2024'} Ben Labaschin
             </div>
-            <nav className="flex flex-wrap justify-center gap-5">
+            <nav className="flex flex-wrap justify-center gap-4 md:gap-5">
               {footerLinks.map((item) => {
                 const isInternal = item.href.startsWith('/');
                 const isHttpLink = item.href.startsWith('http://') || item.href.startsWith('https://');
