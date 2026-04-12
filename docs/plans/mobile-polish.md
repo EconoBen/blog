@@ -108,9 +108,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 13: Posts grid cards mobile padding
 
-- [ ] In `app/posts/PostsList.tsx`, reduce grid card padding from `p-6` to `p-4 md:p-6`
-- [ ] The `PostIllustration` component height (80px) may be too tall relative to content on mobile — consider reducing to 60px on mobile
-- [ ] Verify cards still have equal height and "Read the post" stays at bottom
+- [x] In `app/posts/PostsList.tsx`, reduce grid card padding from `p-6` to `p-4 md:p-6`
+- [x] The `PostIllustration` component height (80px) may be too tall relative to content on mobile — consider reducing to 60px on mobile
+- [x] Verify cards still have equal height and "Read the post" stays at bottom
 
 ### Task 14: Post detail page mobile spacing
 

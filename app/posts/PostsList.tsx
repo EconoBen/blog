@@ -86,7 +86,7 @@ function PostIllustration({ post }: { post: Post }) {
   const s3 = 8 + ((seed >> 5) % 10);
 
   return (
-    <div className="overflow-hidden rounded-lg" style={{ background: theme.bg, height: 80, position: 'relative' }}>
+    <div className="h-[60px] overflow-hidden rounded-lg md:h-[80px]" style={{ background: theme.bg, position: 'relative' }}>
       <div style={{ position: 'absolute', inset: 0, backgroundImage: theme.gradient, opacity: 0.7 }} />
       <div style={{ position: 'absolute', left: `${x1}%`, top: `${y1}%`, width: s1 * 2, height: s1 * 2, borderRadius: '50%', background: theme.dotColor, opacity: 0.25 }} />
       <div style={{ position: 'absolute', left: `${x2}%`, top: `${y2}%`, width: s2 * 2, height: s2 * 2, borderRadius: 2, background: theme.accentColor, opacity: 0.15, transform: 'rotate(45deg)' }} />
@@ -199,7 +199,7 @@ export function PostsList({ posts, latestSlug }: { posts: Post[]; latestSlug?: s
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
             <Link key={post.slug} href={`/posts/${post.slug}`} className="group block h-full no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-6 text-[#1d1c16] transition-transform duration-300 hover:-translate-y-1">
+              <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-4 text-[#1d1c16] transition-transform duration-300 hover:-translate-y-1 md:p-6">
                 <PostIllustration post={post} />
                 <div className="flex flex-1 flex-col">
                   <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
