@@ -118,7 +118,7 @@ export default function AboutPage() {
     <EditorialPageFrame currentPath="/about">
 
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-16 pt-16 md:pt-24">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16 pt-10 md:pt-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_420px] lg:items-start">
           <div>
             <div className="font-headline text-[clamp(4rem,10vw,6rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#1d1c16]" style={{ marginLeft: '-0.04em' }}>
@@ -143,7 +143,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Highlights ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-16">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Highlights</h2>
         <div className="mt-4 grid grid-cols-1 gap-x-16 md:grid-cols-2">
@@ -191,7 +191,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Current Focus ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Current Focus</h2>
         <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -249,7 +249,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Career ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Experience</h2>
         <div className="mt-4">
@@ -283,7 +283,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Publications & Talks ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Publications &amp; Talks</h2>
         <div className="mt-4 space-y-0">
@@ -308,7 +308,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Skills ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Technical Skills</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -322,7 +322,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Education ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Education</h2>
         <div className="mt-4">
@@ -332,7 +332,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Patents ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Patents</h2>
         <div className="mt-4 space-y-4">
@@ -348,7 +348,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Contact ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-16">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Contact</h2>
         <div className="mt-4 flex flex-wrap items-center gap-3">

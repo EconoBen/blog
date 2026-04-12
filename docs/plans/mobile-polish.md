@@ -66,9 +66,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 7: About page mobile spacing
 
-- [ ] In `app/about/page.tsx`, reduce section padding from `px-8` to `px-5 md:px-8` on all sections
-- [ ] Reduce the hero top padding from `pt-16 md:pt-24` to `pt-10 md:pt-24`
-- [ ] Ensure the photo doesn't overflow its container at 390px
+- [x] In `app/about/page.tsx`, reduce section padding from `px-8` to `px-5 md:px-8` on all sections
+- [x] Reduce the hero top padding from `pt-16 md:pt-24` to `pt-10 md:pt-24`
+- [x] Ensure the photo doesn't overflow its container at 390px
 
 ### Task 8: About page mobile highlights
 
