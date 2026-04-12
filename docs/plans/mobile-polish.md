@@ -173,9 +173,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 20: Archive mobile spacing
 
-- [ ] In `app/archive/page.tsx`, verify the year groups and month links stack properly on mobile
-- [ ] In `app/archives/[month]/page.tsx`, reduce padding and verify post listings don't overflow
-- [ ] Ensure breadcrumb navigation wraps cleanly
+- [x] In `app/archive/page.tsx`, verify the year groups and month links stack properly on mobile
+- [x] In `app/archives/[month]/page.tsx`, reduce padding and verify post listings don't overflow
+- [x] Ensure breadcrumb navigation wraps cleanly
 
 ---
 

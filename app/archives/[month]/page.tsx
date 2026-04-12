@@ -61,9 +61,9 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
 
   return (
     <EditorialPageFrame currentPath="/archive">
-      <main className="mx-auto max-w-7xl px-8 py-16">
-        <div className="mb-16 max-w-3xl">
-          <div className="mb-6 flex items-center gap-2 font-headline text-[10px] uppercase tracking-[0.2em] text-secondary">
+      <main className="mx-auto max-w-7xl px-5 py-10 md:px-8 md:py-16">
+        <div className="mb-10 max-w-3xl md:mb-16">
+          <div className="mb-4 flex flex-wrap items-center gap-1.5 font-headline text-[10px] uppercase tracking-[0.2em] text-secondary md:mb-6 md:gap-2">
             <Link href="/archive" className="transition-colors hover:text-primary hover:underline underline-offset-2">
               Archive
             </Link>
@@ -81,7 +81,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
         </div>
 
         <section className="space-y-8">
-          <div className="flex flex-wrap items-center gap-3 sticky-note px-4 py-4 font-label text-[10px] uppercase tracking-[0.2em] text-secondary">
+          <div className="flex flex-wrap items-center gap-2 sticky-note px-3 py-3 font-label text-[10px] uppercase tracking-[0.2em] text-secondary md:gap-3 md:px-4 md:py-4">
             <span>{monthPosts.length} post{monthPosts.length === 1 ? '' : 's'}</span>
             <span className="h-1 w-1 rounded-full bg-outline-variant" />
             <span>{uniqueTags} unique tags</span>
@@ -91,7 +91,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
 
           <div className="divide-y divide-outline-variant/20 border-y border-outline-variant/20">
             {monthPosts.map((post) => (
-              <article key={post.slug} className="py-8">
+              <article key={post.slug} className="py-6 md:py-8">
                 <time className="mb-3 block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
                   {longDateFormatter.format(post.date)}
                 </time>
@@ -120,7 +120,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
             ))}
           </div>
 
-          <div className="sticky-note p-5">
+          <div className="sticky-note p-4 md:p-5">
             <h3 className="mb-4 font-headline text-xs font-bold uppercase tracking-widest text-secondary">
               Month at a glance
             </h3>
@@ -138,14 +138,14 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            <Link href="/archive" className="rounded-md border border-outline-variant/20 bg-surface-container-low px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high">
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-3">
+            <Link href="/archive" className="rounded-md border border-outline-variant/20 bg-surface-container-low px-5 py-3 text-center font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high">
               Back to archive
             </Link>
-            <Link href="/tags" className="rounded-md border border-outline-variant/20 bg-surface-container-low px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high">
+            <Link href="/tags" className="rounded-md border border-outline-variant/20 bg-surface-container-low px-5 py-3 text-center font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high">
               Browse tags
             </Link>
-            <Link href="/search" className="rounded-md border border-outline-variant/20 bg-surface-container-low px-5 py-3 font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high">
+            <Link href="/search" className="rounded-md border border-outline-variant/20 bg-surface-container-low px-5 py-3 text-center font-label text-xs font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-high">
               Search archive
             </Link>
           </div>
