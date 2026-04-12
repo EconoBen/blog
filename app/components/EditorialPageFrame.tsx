@@ -77,8 +77,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
       : 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-all duration-200 hover:text-[#0035a0] hover:-translate-y-0.5';
   const mobileNavItemClassName = (active: boolean) =>
     active
-      ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#0035a0]/15 bg-[#0035a0] px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-1.5 text-[10px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#0035a0]/30 hover:bg-[#0035a0]/10 hover:text-[#0035a0]';
+      ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#0035a0]/15 bg-[#0035a0] px-2.5 py-1 text-[9px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-2.5 py-1 text-[9px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#0035a0]/30 hover:bg-[#0035a0]/10 hover:text-[#0035a0]';
 
   return (
     <header className={headerClassName}>
@@ -129,7 +129,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         className="mx-auto max-w-[1440px] px-4 pb-2.5 md:hidden sm:px-6"
         aria-label="Primary"
       >
-        <div className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {primaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 

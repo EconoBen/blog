@@ -24,10 +24,10 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 1: Tighten mobile nav pill sizing
 
-- [ ] Reduce mobile nav pill font size from `text-[10px]` to `text-[9px]` and padding from `px-3 py-1.5` to `px-2.5 py-1` in `mobileNavItemClassName` in `app/components/EditorialPageFrame.tsx`
-- [ ] Reduce gap between pills from `gap-2` to `gap-1.5` in the mobile nav scroll strip
-- [ ] Verify nav still scrolls horizontally and active pill is visually distinct
-- [ ] Verify desktop nav is completely unchanged at 1440px
+- [x] Reduce mobile nav pill font size from `text-[10px]` to `text-[9px]` and padding from `px-3 py-1.5` to `px-2.5 py-1` in `mobileNavItemClassName` in `app/components/EditorialPageFrame.tsx`
+- [x] Reduce gap between pills from `gap-2` to `gap-1.5` in the mobile nav scroll strip
+- [x] Verify nav still scrolls horizontally and active pill is visually distinct
+- [x] Verify desktop nav is completely unchanged at 1440px
 
 ### Task 2: Fix ScrollToTop button overlap
 
