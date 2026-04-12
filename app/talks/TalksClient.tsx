@@ -139,24 +139,78 @@ function TalkMediaPreview({
 }
 
 function FeaturedTalk({ talk }: { talk: Talk }) {
+  const [videoOpen, setVideoOpen] = useState(false);
   const primarySourceUrl = getPrimarySourceUrl(talk);
+  const spotifyEmbedUrl = getSpotifyEmbedUrl(talk);
+  const youtubeEmbedUrl = getYouTubeEmbedUrl(talk);
+  const isSpotifyOnly = Boolean(talk.spotifyUrl && !talk.youtubeId);
 
   return (
     <article className="sticky-note overflow-hidden featured-shimmer transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(29,28,22,0.1)]">
-      <div className="flex flex-col gap-0 lg:flex-row lg:items-stretch">
-        <div className="h-[160px] shrink-0 bg-surface-container-low lg:h-auto lg:w-[280px]">
-          <TalkMediaPreview talk={talk} />
+      {/* Spotify: show embed directly */}
+      {isSpotifyOnly && spotifyEmbedUrl && (
+        <div className="border-b border-[#1d1c16]/6">
+          <iframe
+            src={spotifyEmbedUrl}
+            title={talk.title}
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+            className="h-[152px] w-full"
+          />
         </div>
-        <div className="flex flex-1 flex-wrap items-center gap-x-8 gap-y-3 p-5 md:p-6">
+      )}
+
+      {/* YouTube: show thumbnail or embed */}
+      {talk.youtubeId && (
+        <div className="relative aspect-video max-h-[360px] w-full overflow-hidden bg-surface-container-low">
+          {videoOpen && youtubeEmbedUrl ? (
+            <iframe
+              src={youtubeEmbedUrl}
+              title={talk.title}
+              frameBorder="0"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              className="h-full w-full"
+            />
+          ) : (
+            <button
+              type="button"
+              onClick={() => setVideoOpen(true)}
+              className="group relative block h-full w-full overflow-hidden text-left"
+              aria-label={`Play ${talk.title}`}
+            >
+              <img
+                src={`https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`}
+                alt={talk.title}
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1d1c16]/50 via-transparent to-transparent" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-[#1d1c16] shadow-xl transition-transform duration-300 group-hover:scale-110">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="ml-1 h-7 w-7">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </button>
+          )}
+        </div>
+      )}
+
+      <div className="p-5 md:p-6">
+        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
           <div className="flex-1 space-y-2">
             <div className="flex flex-wrap items-center gap-3">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{talk.event}</p>
               <span className="font-label text-[10px] uppercase tracking-widest text-secondary">{formatDate(talk.date)}</span>
             </div>
             <h2 className="font-headline text-xl font-bold tracking-tight text-on-surface md:text-2xl">{talk.title}</h2>
-            <p className="line-clamp-2 max-w-2xl font-body text-sm leading-relaxed text-secondary">{talk.description}</p>
+            <p className="max-w-2xl font-body text-sm leading-relaxed text-secondary">{talk.description}</p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex shrink-0 flex-wrap items-center gap-3">
             {primarySourceUrl && (
               <a
                 href={primarySourceUrl}
@@ -167,9 +221,6 @@ function FeaturedTalk({ talk }: { talk: Talk }) {
                 {getPrimarySourceLabel(talk)}
               </a>
             )}
-            <span className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface">
-              {getPrimaryActionLabel(talk)}
-            </span>
             {talk.transcriptUrl && (
               <a
                 href={talk.transcriptUrl}
@@ -206,66 +257,55 @@ function TalkCard({
         viewMode === 'grid' ? 'flex h-full flex-col' : 'lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]'
       }`}
     >
-      <div className={`relative overflow-hidden bg-surface-container-low ${viewMode === 'grid' ? 'aspect-video' : 'aspect-video lg:aspect-auto lg:min-h-full'}`}>
-        {isOpen && isSpotifyOnly && spotifyEmbedUrl ? (
+      {isSpotifyOnly && spotifyEmbedUrl ? (
+        <div className="bg-[#282828]">
           <iframe
             src={spotifyEmbedUrl}
             title={talk.title}
             frameBorder="0"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
             loading="lazy"
-            className="h-full w-full"
+            className="h-[152px] w-full"
           />
-        ) : isOpen && youtubeEmbedUrl ? (
-          <iframe
-            src={youtubeEmbedUrl}
-            title={talk.title}
-            frameBorder="0"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
-            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            referrerPolicy="strict-origin-when-cross-origin"
-            loading="lazy"
-            className="h-full w-full"
-          />
-        ) : (
-          <>
-            {/* Thumbnail */}
-            {talk.youtubeId ? (
-              <img
-                src={`https://img.youtube.com/vi/${talk.youtubeId}/hqdefault.jpg`}
-                alt={talk.title}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-[#fdf8ec]">
-                <div className="text-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="mx-auto h-10 w-10 text-[#0035a0]/40">
-                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+        </div>
+      ) : (
+        <div className={`relative overflow-hidden bg-surface-container-low ${viewMode === 'grid' ? 'aspect-video' : 'aspect-video lg:aspect-auto lg:min-h-full'}`}>
+          {isOpen && youtubeEmbedUrl ? (
+            <iframe
+              src={youtubeEmbedUrl}
+              title={talk.title}
+              frameBorder="0"
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+              className="h-full w-full"
+            />
+          ) : (
+            <>
+              {talk.youtubeId && (
+                <img
+                  src={`https://img.youtube.com/vi/${talk.youtubeId}/hqdefault.jpg`}
+                  alt={talk.title}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
+              <button
+                type="button"
+                onClick={() => setIsOpen(true)}
+                className="absolute inset-0 z-10 flex items-center justify-center"
+                aria-label={`Open ${talk.title} in the inline player`}
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#1d1c16] shadow-md transition-transform duration-300 hover:scale-110">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="ml-0.5 h-4 w-4">
+                    <path d="M8 5v14l11-7z" />
                   </svg>
-                  <p className="mt-2 font-label text-[10px] font-bold uppercase tracking-widest text-[#555f70]">Podcast</p>
                 </div>
-              </div>
-            )}
-            {/* Play button */}
-            <button
-              type="button"
-              onClick={() => setIsOpen(true)}
-              className="absolute inset-0 z-10 flex items-center justify-center"
-              aria-label={`Open ${talk.title} in the inline player`}
-            >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-[#1d1c16] shadow-md transition-transform duration-300 hover:scale-110">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="ml-0.5 h-4 w-4">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </button>
-          </>
-        )}
-      </div>
+              </button>
+            </>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col space-y-3 p-5">
         <div className="flex flex-wrap items-center gap-3" suppressHydrationWarning>
@@ -325,7 +365,7 @@ export default function TalksClient() {
       : sortedTalks.filter((talk) => talk.topics.includes(activeFilter));
 
   const featuredTalk = filteredTalks[0] ?? null;
-  const archiveTalks = featuredTalk ? filteredTalks.slice(1) : filteredTalks;
+  const archiveTalks = filteredTalks;
   const archiveSummary =
     activeFilter === 'all'
       ? `${archiveTalks.length} more session${archiveTalks.length === 1 ? '' : 's'} below the featured recording.`
