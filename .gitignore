@@ -36,3 +36,12 @@ public/audio/
 # Dolt database files (added by bd init)
 .dolt/
 *.db
+
+# ralphex progress logs
+.ralphex/progress/
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Screenshots from visual regression testing
+screenshots/

@@ -183,7 +183,7 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 21: Full mobile regression check
 
-- [ ] Run Playwright screenshots at 390x844 for all pages: `/`, `/about`, `/posts`, `/posts/[slug]`, `/talks`, `/publications`, `/book`, `/tags`, `/tags/[tag]`, `/search`, `/archive`, `/code-ai`
-- [ ] Run Playwright screenshots at 1440x900 for all the same pages to confirm desktop is unchanged
-- [ ] `npx next dev --webpack -p 3000` — verify no build errors or console errors
+- [x] Run Playwright screenshots at 390x844 for all pages: `/`, `/about`, `/posts`, `/posts/[slug]`, `/talks`, `/publications`, `/book`, `/tags`, `/tags/[tag]`, `/search`, `/archive`, `/code-ai`
+- [x] Run Playwright screenshots at 1440x900 for all the same pages to confirm desktop is unchanged
+- [x] `npx next dev --webpack -p 3000` — verify no build errors or console errors
 - [ ] Create PR: `gh pr create --title "fix: comprehensive mobile polish pass" --body "Mobile audit findings from 390px Playwright screenshots. Tightened spacing, removed redundant elements, improved density across all pages. Desktop unchanged."`
