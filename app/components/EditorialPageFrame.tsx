@@ -179,7 +179,7 @@ export function EditorialPageFrame({
     <div className={`bg-[#fef9ef] min-h-screen text-[#1d1c16] ${pageClassName}`.trim()}>
       <div>
         <EditorialTopbar currentPath={currentPath} />
-        <div className="h-[70px] md:h-[80px]" aria-hidden="true" />
+        <div className="h-[160px] md:h-[80px]" aria-hidden="true" />
         <main className="lg:pr-20 xl:pr-24">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
