@@ -52,8 +52,8 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 5: Tighten Current Focus cards on mobile
 
-- [ ] In `app/components/ShellHomePage.tsx`, reduce padding inside Current Focus cards from `p-7` to `p-5` on mobile by using `p-5 md:p-7`
-- [ ] Ensure stat labels at bottom of cards don't clip
+- [x] In `app/components/ShellHomePage.tsx`, reduce padding inside Current Focus cards from `p-7` to `p-5` on mobile by using `p-5 md:p-7`
+- [x] Ensure stat labels at bottom of cards don't clip
 
 ### Task 6: Tighten Selected Work cards on mobile
 

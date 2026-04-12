@@ -175,7 +175,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       </section>
 
       {/* ── Current Focus ── */}
-      <section className="mx-auto max-w-[1440px] px-8 py-14">
+      <section className="mx-auto max-w-[1440px] px-5 py-14 md:px-8">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Current Focus</h2>
         <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -199,7 +199,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               stat: '2026 engagements open',
             },
           ].map((item) => (
-            <div key={item.label} className="sticky-note flex flex-col p-7">
+            <div key={item.label} className="sticky-note flex flex-col p-5 md:p-7">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">{item.label}</p>
               <h3 className="mt-3 font-headline text-2xl font-bold text-[#1d1c16]">{item.title}</h3>
               <p className="mt-3 font-body text-sm leading-relaxed text-[#555f70]">{item.body}</p>
