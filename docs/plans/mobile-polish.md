@@ -31,9 +31,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 2: Fix ScrollToTop button overlap
 
-- [ ] In `app/components/ScrollToTop.tsx`, add `z-50` and ensure the button doesn't overlap content on mobile
-- [ ] If the button uses `fixed bottom-X left-X`, increase bottom offset to clear the mobile contact section
-- [ ] Verify the button is accessible and doesn't cover interactive elements
+- [x] In `app/components/ScrollToTop.tsx`, add `z-50` and ensure the button doesn't overlap content on mobile
+- [x] If the button uses `fixed bottom-X left-X`, increase bottom offset to clear the mobile contact section
+- [x] Verify the button is accessible and doesn't cover interactive elements
 
 ### Task 3: Tighten mobile footer spacing
 
