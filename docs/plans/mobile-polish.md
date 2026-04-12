@@ -77,9 +77,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 9: About page mobile experience section
 
-- [ ] Experience entries: ensure the role title and date don't overlap on small screens
-- [ ] The `flex-col md:flex-row md:items-baseline md:justify-between` pattern should stack properly — verify
-- [ ] Reduce bullet text size slightly on mobile if lines are too long
+- [x] Experience entries: ensure the role title and date don't overlap on small screens
+- [x] The `flex-col md:flex-row md:items-baseline md:justify-between` pattern should stack properly — verify
+- [x] Reduce bullet text size slightly on mobile if lines are too long
 
 ---
 

@@ -255,16 +255,16 @@ export default function AboutPage() {
         <div className="mt-4">
           {experience.map((item) => (
             <div key={`${item.company}-${item.role}`} className="border-b border-[#1d1c16]/6 py-6">
-              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-                <h3 className="font-headline text-lg font-bold text-[#1d1c16]">
+              <div className="flex flex-col gap-0.5 md:flex-row md:items-baseline md:justify-between md:gap-4">
+                <h3 className="font-headline text-base md:text-lg font-bold text-[#1d1c16]">
                   {item.role}, {item.company}
                 </h3>
-                <span className="shrink-0 font-label text-[12px] font-medium text-[#555f70]">{item.period}</span>
+                <span className="shrink-0 font-label text-[11px] md:text-[12px] font-medium text-[#555f70]">{item.period}</span>
               </div>
               {item.bullets.length > 0 && (
                 <ul className="mt-3 space-y-2 pl-5" style={{ listStyleType: 'disc' }}>
                   {item.bullets.map((bullet) => (
-                    <li key={bullet} className="font-body text-sm leading-relaxed text-[#555f70] marker:text-[#0035a0]">
+                    <li key={bullet} className="font-body text-xs md:text-sm leading-relaxed text-[#555f70] marker:text-[#0035a0]">
                       {bullet}
                     </li>
                   ))}
