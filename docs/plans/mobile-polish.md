@@ -46,9 +46,9 @@ A Playwright-based mobile audit at 390x844 (iPhone 14 Pro) revealed pervasive sp
 
 ### Task 4: Tighten home page hero buttons on mobile
 
-- [ ] In `app/components/ShellHomePage.tsx`, make "FOLLOW THE BOOK" and "BROWSE SELECTED WRITING" buttons full-width on mobile by adding `w-full sm:w-auto` class
-- [ ] Reduce button text size on mobile if needed for readability
-- [ ] Verify the featured post card stacks cleanly below the hero text
+- [x] In `app/components/ShellHomePage.tsx`, make "FOLLOW THE BOOK" and "BROWSE SELECTED WRITING" buttons full-width on mobile by adding `w-full sm:w-auto` class
+- [x] Reduce button text size on mobile if needed for readability
+- [x] Verify the featured post card stacks cleanly below the hero text
 
 ### Task 5: Tighten Current Focus cards on mobile
 
