@@ -91,7 +91,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   return (
     <EditorialPageFrame currentPath="/posts">
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-8 pt-14 md:pb-12 md:pt-20">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-8 pt-14 md:pb-12 md:pt-20">
         <div className="max-w-3xl">
           <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
             {primaryTag ?? 'Post'}
@@ -109,16 +109,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <span>{post.readingTime ? `${post.readingTime} min read` : 'Long-form post'}</span>
             <span>Filed in {monthYearFormatter.format(post.date)}</span>
           </div>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
+          <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
+            <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] text-center transition-transform hover:-translate-y-1">
               Back to posts
             </Link>
             {primaryTag && (
-              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="rounded-lg bg-[#0035a0] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-transform hover:-translate-y-1" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
+              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="rounded-lg bg-[#0035a0] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white text-center transition-transform hover:-translate-y-1" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
                 Browse this topic
               </Link>
             )}
-            <Link href={`/archives/${archiveMonth}`} className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] transition-transform hover:-translate-y-1">
+            <Link href={`/archives/${archiveMonth}`} className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] text-center transition-transform hover:-translate-y-1">
               Browse this month
             </Link>
           </div>
@@ -127,11 +127,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       {/* ── Cover image ── */}
       {post.coverImage && (
-        <div className="mx-auto max-w-[1440px] px-8">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-8">
           <img
             src={post.coverImage}
             alt={post.title}
-            className="w-full rounded-2xl object-cover"
+            className="w-full rounded-xl md:rounded-2xl object-cover"
             style={{ maxHeight: '480px' }}
           />
         </div>
@@ -139,7 +139,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       {/* ── Article body ── */}
       <section className="border-t border-outline-variant/20 mt-8">
-        <div className="mx-auto max-w-[860px] px-8 py-12 md:py-16">
+        <div className="mx-auto max-w-[860px] px-5 md:px-8 py-12 md:py-16">
           <div className="blog-content prose-lg">
             <MarkdownRenderer content={post.coverImage ? post.content.replace(new RegExp(`!\\[[^\\]]*\\]\\(${post.coverImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'm'), '') : post.content} />
           </div>
@@ -148,7 +148,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       {/* ── Audio + Tags sidebar ── */}
       <section className="border-t border-outline-variant/20">
-        <div className="mx-auto max-w-[1440px] px-8 py-12 md:py-16">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div className="sticky-note p-6 md:p-8">
               <div className="flex flex-wrap gap-3 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
@@ -185,7 +185,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* ── Related reading ── */}
       {(newerPost || olderPost) && (
         <section className="border-t border-outline-variant/20">
-          <div className="mx-auto max-w-[1440px] px-8 py-12 md:py-16">
+          <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
             <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Related reading</p>
             <h2 className="mt-3 font-headline text-3xl font-bold tracking-tight text-[#1d1c16]">
               Move to the adjacent posts in the archive.

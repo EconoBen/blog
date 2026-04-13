@@ -36,14 +36,6 @@ const getPrimarySourceLabel = (talk: Talk): string => {
   return 'Watch on YouTube';
 };
 
-const getPrimaryActionLabel = (talk: Talk): string => {
-  if (talk.spotifyUrl && !talk.youtubeId) {
-    return 'Open player';
-  }
-
-  return 'Play in page';
-};
-
 const getPrimarySourceUrl = (talk: Talk): string | null => talk.spotifyUrl ?? getYouTubeUrl(talk);
 
 function TalkMediaPreview({
@@ -130,7 +122,7 @@ function TalkMediaPreview({
         </svg>
         <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Podcast</p>
         <p className="max-w-sm font-headline text-xl font-bold leading-tight">{talk.event}</p>
-        <span className="inline-flex items-center gap-2 rounded-lg bg-[#0035a0]/8 px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0]">
+        <span className="hidden items-center gap-2 rounded-lg bg-[#0035a0]/8 px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] md:inline-flex">
           Open player
         </span>
       </div>
@@ -307,7 +299,7 @@ function TalkCard({
         </div>
       )}
 
-      <div className="flex flex-1 flex-col space-y-3 p-5">
+      <div className="flex flex-1 flex-col space-y-3 p-4 md:p-5">
         <div className="flex flex-wrap items-center gap-3" suppressHydrationWarning>
           <span className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{talk.event}</span>
           <span className="font-label text-[10px] uppercase tracking-widest text-secondary" suppressHydrationWarning>{formatDate(talk.date)}</span>
@@ -365,14 +357,9 @@ export default function TalksClient() {
       : sortedTalks.filter((talk) => talk.topics.includes(activeFilter));
 
   const featuredTalk = filteredTalks[0] ?? null;
-  const archiveTalks = filteredTalks;
-  const archiveSummary =
-    activeFilter === 'all'
-      ? `${archiveTalks.length} more session${archiveTalks.length === 1 ? '' : 's'} below the featured recording.`
-      : `${filteredTalks.length} session${filteredTalks.length === 1 ? '' : 's'} tagged ${activeFilter}.`;
-
+  const archiveTalks = filteredTalks.slice(1);
   return (
-    <section className="mx-auto max-w-[1440px] px-8">
+    <section className="mx-auto max-w-[1440px] px-5 md:px-8">
       {featuredTalk && (
         <div className="space-y-5">
           <FeaturedTalk talk={featuredTalk} />
@@ -405,12 +392,12 @@ export default function TalksClient() {
                 </div>
               </div>
               <div
-                className="flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:flex-wrap lg:overflow-visible lg:pb-0"
+                className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:gap-2 lg:flex-wrap lg:overflow-visible lg:pb-0"
                 aria-label="Talk topics"
               >
                 <button
                   type="button"
-                  className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  className={`shrink-0 px-2.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-wider transition-colors lg:px-3.5 lg:py-2 lg:text-[11px] ${
                     activeFilter === 'all'
                       ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white'
                       : 'text-on-surface/50 hover:text-on-surface'
@@ -424,7 +411,7 @@ export default function TalksClient() {
                   <button
                     type="button"
                     key={topic}
-                    className={`shrink-0 px-3.5 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    className={`shrink-0 px-2.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-wider transition-colors lg:px-3.5 lg:py-2 lg:text-[11px] ${
                       activeFilter === topic
                         ? 'rounded-t-lg rounded-b-none bg-[#0035a0] text-white'
                         : 'text-on-surface/50 hover:text-on-surface'

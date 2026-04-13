@@ -83,7 +83,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:px-8 md:py-20">
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:px-8 md:py-20">
         <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="space-y-10 lg:col-span-8 lg:order-first">
             <div className="max-w-3xl">
@@ -239,7 +239,7 @@ export default async function TagPage({ params }: TagPageProps) {
             </div>
           </aside>
         </section>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

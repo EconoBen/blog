@@ -88,7 +88,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
   return (
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
       {/* ── Hero — editorial headline + featured post ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-20 pt-14 md:pb-24 md:pt-28">
+      <section className="mx-auto max-w-[1440px] px-5 pb-20 pt-14 md:px-8 md:pb-24 md:pt-28">
         <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#0035a0]">
@@ -100,11 +100,11 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             <p className="mt-6 max-w-2xl text-2xl leading-relaxed text-[#555f70] md:text-3xl">
               Posts, talks, publications, and the work surrounding my upcoming O&rsquo;Reilly book on AI agent memory.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Link href="/book" className="rounded-lg bg-[#0035a0] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 hover:bg-[#002a80]" style={{ color: '#ffffff', WebkitTextFillColor: '#ffffff' }}>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              <Link href="/book" className="w-full rounded-lg bg-[#0035a0] px-8 py-4 text-center font-headline text-xs font-bold uppercase tracking-wider text-white transition-transform hover:-translate-y-1 hover:bg-[#002a80] sm:w-auto sm:text-sm" style={{ color: '#ffffff', WebkitTextFillColor: '#ffffff' }}>
                 Follow the book
               </Link>
-              <Link href="/posts" className="rounded-lg bg-[#ede8de] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1">
+              <Link href="/posts" className="w-full rounded-lg bg-[#ede8de] px-8 py-4 text-center font-headline text-xs font-bold uppercase tracking-wider text-[#1d1c16] transition-transform hover:-translate-y-1 sm:w-auto sm:text-sm">
                 Browse selected writing
               </Link>
             </div>
@@ -120,7 +120,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           <aside className="lg:col-span-5">
             <Link href={`/posts/${featuredPost.slug}`} className="block no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
               <article className="cursor-pointer overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)] transition-transform duration-300 hover:-translate-y-1">
-                <div className="relative h-72 overflow-hidden">
+                <div className="relative h-52 overflow-hidden sm:h-72">
                   {imageSourceFor(featuredPost) ? (
                     <img
                       src={imageSourceFor(featuredPost) as string}
@@ -147,11 +147,11 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
                     <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
                   </div>
                 </div>
-                <div className="p-8">
+                <div className="p-5 sm:p-8">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
                     {primaryTag(featuredPost)}
                   </p>
-                  <h2 className="mt-4 font-headline text-3xl font-bold leading-tight text-[#1d1c16] md:text-4xl">
+                  <h2 className="mt-3 font-headline text-2xl font-bold leading-tight text-[#1d1c16] sm:mt-4 sm:text-3xl md:text-4xl">
                     {featuredPost.title}
                   </h2>
                   <p className="mt-4 text-lg leading-relaxed text-[#555f70]">
@@ -175,7 +175,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       </section>
 
       {/* ── Current Focus ── */}
-      <section className="mx-auto max-w-[1440px] px-8 py-14">
+      <section className="mx-auto max-w-[1440px] px-5 py-14 md:px-8">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Current Focus</h2>
         <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -199,7 +199,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               stat: '2026 engagements open',
             },
           ].map((item) => (
-            <div key={item.label} className="sticky-note flex flex-col p-7">
+            <div key={item.label} className="sticky-note flex flex-col p-5 md:p-7">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">{item.label}</p>
               <h3 className="mt-3 font-headline text-2xl font-bold text-[#1d1c16]">{item.title}</h3>
               <p className="mt-3 font-body text-sm leading-relaxed text-[#555f70]">{item.body}</p>
@@ -210,7 +210,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       </section>
 
       <section className="py-16 sm:py-20 md:py-24">
-        <div className="mx-auto max-w-[1440px] px-8">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-8">
           <div className="mb-10 flex flex-wrap items-center justify-between gap-4 sm:mb-12">
             <p className="inline-block rounded-sm bg-[#dce5ff] px-2 py-1 font-label text-xs font-bold uppercase tracking-[0.2em] text-[#1d1c16]">
               Selected work
@@ -223,7 +223,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
             {[leadDiscoveryPost, ...supportingPosts, secondaryPost].filter(Boolean).map((post) => (
               <Link key={(post as Post).slug} href={`/posts/${(post as Post).slug}`} className="group block h-full no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
-                <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
+                <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-5 transition-transform duration-300 hover:-translate-y-1 md:p-8">
                   <div className="flex flex-1 flex-col">
                     <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                       {primaryTag(post as Post)}
@@ -253,7 +253,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             ))}
 
             <Link href="/book" className="group block h-full no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
-              <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-8 transition-transform duration-300 hover:-translate-y-1">
+              <article className="sticky-note flex h-full cursor-pointer flex-col overflow-hidden p-5 transition-transform duration-300 hover:-translate-y-1 md:p-8">
                 <div className="flex flex-1 flex-col">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#1d1c16]">
                     Upcoming publication

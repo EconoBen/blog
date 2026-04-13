@@ -7,16 +7,18 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import type { SearchResult } from '../services/UnifiedSearchService';
 
+const longDateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
 function formatResultDate(date?: Date | string) {
   if (!date) {
     return null;
   }
 
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(new Date(date));
+  return longDateFormatter.format(new Date(date));
 }
 
 const resultTypeOrder: SearchResult['type'][] = ['tag', 'post', 'publication', 'talk', 'code-ai'];
@@ -66,6 +68,8 @@ function SearchContent() {
   useEffect(() => {
     setSearchQuery(query);
 
+    const abortController = new AbortController();
+
     const performSearch = async (searchTerm: string) => {
       if (!searchTerm.trim()) {
         setResults([]);
@@ -74,23 +78,33 @@ function SearchContent() {
 
       setLoading(true);
       try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
+        const response = await fetch(
+          `/api/search?q=${encodeURIComponent(searchTerm)}`,
+          { signal: abortController.signal },
+        );
         const data = await response.json();
-        setResults(data.results || []);
+        if (!abortController.signal.aborted) {
+          setResults(data.results || []);
+        }
       } catch (error) {
-        console.error('Search error:', error);
-        setResults([]);
+        if (!abortController.signal.aborted) {
+          console.error('Search error:', error);
+          setResults([]);
+        }
       } finally {
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
 
     if (query) {
       void performSearch(query);
-      return;
+      return () => { abortController.abort(); };
     }
 
     setResults([]);
+    return () => { abortController.abort(); };
   }, [query]);
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
@@ -109,7 +123,7 @@ function SearchContent() {
 
   return (
     <EditorialPageFrame currentPath="/search">
-      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16 md:py-20">
+      <div className="mx-auto min-h-screen max-w-7xl px-5 py-10 md:px-8 md:py-20">
         <header className="mb-12 max-w-3xl">
           <div className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
             Search &amp; Discovery
@@ -171,14 +185,14 @@ function SearchContent() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="space-y-10 lg:col-span-8">
             {!normalizedQuery ? (
-              <section className="sticky-note p-6 md:p-8">
+              <section className="sticky-note p-4 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">Start with a topic, title fragment, or name.</h2>
                 <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
                   Search is broad by design. Exact titles, tag terms, and short phrases all work, and the results stay grouped by content type.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {starterTips.map(([label, description]) => (
-                    <div key={label} className="sticky-note p-4">
+                    <div key={label} className="sticky-note p-3 md:p-4">
                       <h3 className="font-headline text-sm font-bold uppercase tracking-widest text-secondary">{label}</h3>
                       <p className="mt-3 font-body text-sm leading-relaxed text-on-surface-variant">{description}</p>
                     </div>
@@ -186,14 +200,14 @@ function SearchContent() {
                 </div>
               </section>
             ) : loading ? (
-              <section className="sticky-note p-6 md:p-8">
+              <section className="sticky-note p-4 md:p-8">
                 <p className="font-headline text-xl font-bold text-on-surface">Searching...</p>
                 <p className="mt-3 font-body text-base text-on-surface-variant">
                   Gathering results for &ldquo;{normalizedQuery}&rdquo;.
                 </p>
               </section>
             ) : results.length === 0 ? (
-              <section className="sticky-note p-6 md:p-8">
+              <section className="sticky-note p-4 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">No results for &ldquo;{normalizedQuery}&rdquo;.</h2>
                 <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
                   Try a broader phrase, a title fragment, or one of the suggested terms in the side rail.
@@ -266,7 +280,7 @@ function SearchContent() {
           </div>
 
           <aside className="space-y-6 lg:col-span-4 lg:sticky lg:top-32">
-            <div className="sticky-note p-6 md:p-8">
+            <div className="sticky-note p-4 md:p-8">
               <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Search summary</h2>
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {[
@@ -282,7 +296,7 @@ function SearchContent() {
               </div>
             </div>
 
-            <div className="sticky-note p-6 md:p-8">
+            <div className="sticky-note p-4 md:p-8">
               <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>Navigate elsewhere</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant" style={{ marginBottom: '1.25rem' }}>
                 If search is not the fastest route, jump directly to the archive, tags, or tools surface.
@@ -320,7 +334,7 @@ function SearchContent() {
             </div>
           </aside>
         </div>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

@@ -14,11 +14,14 @@ export async function GET(request: Request) {
   }
 
   try {
-    const results = await unifiedSearchService.search(query);
+    const [results, matchingPosts] = await Promise.all([
+      unifiedSearchService.search(query),
+      postService.searchPosts(query),
+    ]);
     return NextResponse.json(
       {
         results,
-        posts: results.filter((result) => result.type === 'post'),
+        posts: matchingPosts.slice(0, 5),
       },
       { headers: { 'Cache-Control': 'no-store' } }
     );
@@ -37,7 +40,7 @@ export async function GET(request: Request) {
         })),
         posts,
       },
-      { status: 500, headers: { 'Cache-Control': 'no-store' } }
+      { headers: { 'Cache-Control': 'no-store' } }
     );
   }
 }

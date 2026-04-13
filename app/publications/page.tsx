@@ -16,7 +16,7 @@ export default function PublicationsPage() {
   return (
     <EditorialPageFrame currentPath="/publications">
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-6 pt-14 md:pb-8 md:pt-20">
+      <section className="mx-auto max-w-[1440px] px-5 pb-6 pt-14 md:px-8 md:pb-8 md:pt-20">
         <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Publications</p>
         <h1 className="mt-4 max-w-3xl font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
           Books, reports, and papers
@@ -25,7 +25,7 @@ export default function PublicationsPage() {
 
       {/* ── All publications in a flat grid ── */}
       <section className="border-t border-outline-variant/20 pt-4 pb-12 md:pt-5 md:pb-16">
-        <div className="mx-auto max-w-[1440px] px-8">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-8">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {sorted.map((pub) => (
               <BookCard key={pub.id} publication={pub} />
@@ -47,17 +47,17 @@ function BookCard({ publication }: { publication: Publication }) {
       className="group flex h-full flex-col overflow-hidden sticky-note transition-transform duration-300 hover:-translate-y-1"
     >
       {/* Book cover area */}
-      <div className="relative flex items-center justify-center bg-surface-container-low p-6">
+      <div className="relative flex items-center justify-center bg-surface-container-low p-4 md:p-6">
         {/* Spine accent */}
         <div className="absolute inset-y-0 left-0 w-1.5 bg-primary/20" />
         {publication.coverImage ? (
           <img
             src={publication.coverImage}
             alt={publication.title}
-            className="aspect-[3/4] h-48 w-auto rounded object-cover shadow-[4px_4px_0_rgba(29,28,22,0.06)] transition-transform duration-700 group-hover:scale-105"
+            className="aspect-[3/4] h-40 w-auto rounded object-cover shadow-[4px_4px_0_rgba(29,28,22,0.06)] transition-transform duration-700 group-hover:scale-105 md:h-48"
           />
         ) : (
-          <div className="flex aspect-[3/4] h-48 items-center justify-center rounded bg-[linear-gradient(135deg,_#1d1c16,_#32302a)] p-4 shadow-[4px_4px_0_rgba(29,28,22,0.06)]">
+          <div className="flex aspect-[3/4] h-40 items-center justify-center rounded bg-[linear-gradient(135deg,_#1d1c16,_#32302a)] p-4 shadow-[4px_4px_0_rgba(29,28,22,0.06)] md:h-48">
             <div className="space-y-2 text-center">
               <p className="font-label text-[8px] font-bold uppercase tracking-[0.3em] text-[#dce5ff]">{getType(publication)}</p>
               <p className="font-headline text-sm font-bold leading-tight text-[#fef9ef]">{publication.title}</p>
@@ -68,7 +68,7 @@ function BookCard({ publication }: { publication: Publication }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col space-y-3 p-6">
+      <div className="flex flex-1 flex-col space-y-3 p-4 md:p-6">
         <div className="space-y-1">
           <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{getType(publication)}</p>
           <h3 className="font-headline text-lg font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
@@ -100,8 +100,10 @@ function BookCard({ publication }: { publication: Publication }) {
 }
 
 /* ── Helpers ── */
+const shortDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
 function fmtDate(date: string) {
-  return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(date));
+  return shortDateFormatter.format(new Date(date));
 }
 
 function getType(pub: Publication) {

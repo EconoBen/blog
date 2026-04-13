@@ -118,7 +118,7 @@ export default function AboutPage() {
     <EditorialPageFrame currentPath="/about">
 
       {/* ── Hero ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-16 pt-16 md:pt-24">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16 pt-10 md:pt-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_420px] lg:items-start">
           <div>
             <div className="font-headline text-[clamp(4rem,10vw,6rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#1d1c16]" style={{ marginLeft: '-0.04em' }}>
@@ -136,31 +136,31 @@ export default function AboutPage() {
             <img
               src="/assets/atlas_and_I.jpg"
               alt="Ben Labaschin with Atlas"
-              className="h-[400px] w-full object-cover"
+              className="h-[280px] md:h-[400px] w-full object-cover"
             />
           </div>
         </div>
       </section>
 
       {/* ── Highlights ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-16">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Highlights</h2>
         <div className="mt-4 grid grid-cols-1 gap-x-16 md:grid-cols-2">
           <div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">Workhelix</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 Founding ML Engineer. Enterprise GenAI platforms from seed to <span className="font-headline font-black text-[#0035a0]">$75M</span> Series A, backed by Andrew Ng, Mira Murati, and Yann LeCun.
               </p>
             </div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">O&rsquo;Reilly Media</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">2</span> published reports on AI agents. <span className="font-headline font-black text-[#0035a0]">1</span>{' '}book in progress: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.
               </p>
             </div>
-            <div className="border-b border-[#1d1c16]/8 py-4 md:border-b-0">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4 md:border-b-0">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">AEA Papers &amp; Proceedings</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">1</span>{' '}peer-reviewed publication extending &ldquo;GPTs Are GPTs&rdquo; to measure firm-level LLM exposure.
@@ -168,19 +168,19 @@ export default function AboutPage() {
             </div>
           </div>
           <div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">Talks &amp; Guest Lectures</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">7</span> appearances across <span className="font-headline font-black text-[#0035a0]">6</span> venues: ODSC West, Wharton, AI.Science, Normconf, MLOps Community, and Into the Hopper podcast.
               </p>
             </div>
-            <div className="border-b border-[#1d1c16]/8 py-4">
+            <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">USPTO Patents</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">2</span> patent applications: Shared Mobility Simulation and Prediction System, and Matching Drivers With Shared Vehicles.
               </p>
             </div>
-            <div className="py-4">
+            <div className="py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">Industry Experience</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
                 <span className="font-headline font-black text-[#0035a0]">9</span> years building production ML systems across <span className="font-headline font-black text-[#0035a0]">5</span> companies, from telematics risk modeling to enterprise LLM platforms.
@@ -191,7 +191,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Current Focus ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Current Focus</h2>
         <div className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -215,7 +215,7 @@ export default function AboutPage() {
               stat: '2026 engagements open',
             },
           ].map((item) => (
-            <div key={item.label} className="sticky-note flex flex-col p-7">
+            <div key={item.label} className="sticky-note flex flex-col p-5 md:p-7">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">{item.label}</p>
               <h3 className="mt-3 font-headline text-2xl font-bold text-[#1d1c16]">{item.title}</h3>
               <p className="mt-3 font-body text-sm leading-relaxed text-[#555f70]">{item.body}</p>
@@ -249,22 +249,22 @@ export default function AboutPage() {
       </section>
 
       {/* ── Career ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Experience</h2>
         <div className="mt-4">
           {experience.map((item) => (
             <div key={`${item.company}-${item.role}`} className="border-b border-[#1d1c16]/6 py-6">
-              <div className="flex flex-col gap-1 md:flex-row md:items-baseline md:justify-between">
-                <h3 className="font-headline text-lg font-bold text-[#1d1c16]">
+              <div className="flex flex-col gap-0.5 md:flex-row md:items-baseline md:justify-between md:gap-4">
+                <h3 className="font-headline text-base md:text-lg font-bold text-[#1d1c16]">
                   {item.role}, {item.company}
                 </h3>
-                <span className="shrink-0 font-label text-[12px] font-medium text-[#555f70]">{item.period}</span>
+                <span className="shrink-0 font-label text-[11px] md:text-[12px] font-medium text-[#555f70]">{item.period}</span>
               </div>
               {item.bullets.length > 0 && (
                 <ul className="mt-3 space-y-2 pl-5" style={{ listStyleType: 'disc' }}>
                   {item.bullets.map((bullet) => (
-                    <li key={bullet} className="font-body text-sm leading-relaxed text-[#555f70] marker:text-[#0035a0]">
+                    <li key={bullet} className="font-body text-xs md:text-sm leading-relaxed text-[#555f70] marker:text-[#0035a0]">
                       {bullet}
                     </li>
                   ))}
@@ -283,7 +283,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Publications & Talks ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Publications &amp; Talks</h2>
         <div className="mt-4 space-y-0">
@@ -308,7 +308,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Skills ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Technical Skills</h2>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -322,7 +322,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Education ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Education</h2>
         <div className="mt-4">
@@ -332,7 +332,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Patents ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-14">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Patents</h2>
         <div className="mt-4 space-y-4">
@@ -348,7 +348,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── Contact ── */}
-      <section className="mx-auto max-w-[1440px] px-8 pb-16">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16">
         <div className="h-px w-full bg-[#1d1c16]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Contact</h2>
         <div className="mt-4 flex flex-wrap items-center gap-3">

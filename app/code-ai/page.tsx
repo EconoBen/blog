@@ -11,7 +11,6 @@ import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
 import {
   formatCodeToolsDate,
   getCodeToolsCategoryCounts,
-  getCodeToolsFeaturedItems,
   getCodeToolsItemLineCount,
   getCodeToolsItems,
   getCodeToolsLanguageLabel,
@@ -107,7 +106,6 @@ export default function CodeAIPage() {
   const { title, subtitle, categories } = workshopConfig;
   const allItems = getCodeToolsItems();
   const categoryCounts = getCodeToolsCategoryCounts(allItems);
-  const featuredItems = getCodeToolsFeaturedItems(allItems);
   const categoryLabelById = Object.fromEntries(categories.map((category) => [category.id, category.label]));
   const visibleCategories = categories.filter((category) => (
     category.id === 'all' || (categoryCounts[category.id] ?? 0) > 0
@@ -129,9 +127,6 @@ export default function CodeAIPage() {
     return matchesCategory && matchesSearch;
   });
 
-  const selectedCategoryLabel = categoryLabelById[selectedCategory] ?? 'All';
-  // Featured items are now integrated into the main index
-  const selectedCount = filteredItems.length;
 
   const groupedItems = filteredItems.reduce((acc, item) => {
     if (!acc[item.category]) {
@@ -173,6 +168,11 @@ export default function CodeAIPage() {
       return a.label.localeCompare(b.label);
     });
 
+  const allCategoryOption = visibleCategories.find((category) => category.id === 'all');
+  const sidebarCategories = allCategoryOption
+    ? [allCategoryOption, ...orderedVisibleCategories]
+    : orderedVisibleCategories;
+
   const toggleExpanded = (itemId: string) => {
     const nextExpanded = new Set(expandedItems);
     if (nextExpanded.has(itemId)) {
@@ -183,9 +183,13 @@ export default function CodeAIPage() {
     setExpandedItems(nextExpanded);
   };
 
-  const copyToClipboard = (content: string, itemId: string) => {
-    navigator.clipboard.writeText(content);
-    setCopyStates((prev) => ({ ...prev, [itemId]: 'Copied' }));
+  const copyToClipboard = async (content: string, itemId: string) => {
+    try {
+      await navigator.clipboard.writeText(content);
+      setCopyStates((prev) => ({ ...prev, [itemId]: 'Copied' }));
+    } catch {
+      setCopyStates((prev) => ({ ...prev, [itemId]: 'Failed' }));
+    }
     window.setTimeout(() => {
       setCopyStates((prev) => ({ ...prev, [itemId]: 'Copy' }));
     }, 2000);
@@ -193,7 +197,7 @@ export default function CodeAIPage() {
 
   return (
     <EditorialPageFrame currentPath="/code-ai">
-      <section className="mx-auto max-w-[1440px] px-8 pb-14 pt-2">
+      <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-14 pt-2">
         {/* Hero */}
         <div className="space-y-5 py-8 md:py-10">
           <div className="max-w-[58rem] space-y-4">
@@ -212,10 +216,10 @@ export default function CodeAIPage() {
           <div className="flex flex-col gap-8 lg:flex-row">
             {/* ── Left sidebar: filters ── */}
             <aside className="shrink-0 lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] lg:w-[260px] lg:overflow-y-auto">
-              <div className="mb-4 flex items-center gap-2 rounded-full border border-outline-variant/15 p-1" style={{ background: '#fdf8ec' }}>
+              <div className="mb-3 md:mb-4 flex items-center gap-1.5 md:gap-2 rounded-full border border-outline-variant/15 p-0.5 md:p-1" style={{ background: '#fdf8ec' }}>
                 <button
                   type="button"
-                  className={`flex-1 rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  className={`flex-1 rounded-full px-2.5 py-1.5 md:px-3 md:py-2 font-label text-[10px] md:text-[11px] font-bold uppercase tracking-wider transition-colors ${
                     viewMode === 'compact'
                       ? 'text-on-surface shadow-sm'
                       : 'text-on-surface/50 hover:text-on-surface'
@@ -228,7 +232,7 @@ export default function CodeAIPage() {
                 </button>
                 <button
                   type="button"
-                  className={`flex-1 rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                  className={`flex-1 rounded-full px-2.5 py-1.5 md:px-3 md:py-2 font-label text-[10px] md:text-[11px] font-bold uppercase tracking-wider transition-colors ${
                     viewMode === 'full'
                       ? 'text-on-surface shadow-sm'
                       : 'text-on-surface/50 hover:text-on-surface'
@@ -259,10 +263,10 @@ export default function CodeAIPage() {
                 </div>
 
                 {/* Category filters — vertical stack */}
-                <div className="space-y-2">
+                <div className="space-y-1.5 md:space-y-2">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Categories</p>
-                  <div className="flex flex-col gap-1">
-                    {orderedVisibleCategories.map((category) => {
+                  <div className="flex flex-col gap-0.5 md:gap-1">
+                    {sidebarCategories.map((category) => {
                       const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
                       const active = selectedCategory === category.id;
 
@@ -271,7 +275,7 @@ export default function CodeAIPage() {
                           key={category.id}
                           type="button"
                           onClick={() => setSelectedCategory(category.id)}
-                          className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                          className={`flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2 text-left font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
                             active
                               ? 'bg-surface-container-highest text-on-surface'
                               : 'text-secondary hover:bg-secondary-container hover:text-primary'
@@ -304,7 +308,7 @@ export default function CodeAIPage() {
                   {orderedGroupEntries.map(([category, categoryItems]) => (
                     <section
                       key={category}
-                      className="sticky-note p-5"
+                      className="sticky-note p-4 md:p-5"
                     >
                       <button
                         type="button"
@@ -338,7 +342,7 @@ export default function CodeAIPage() {
                           return (
                             <article
                               key={item.id}
-                              className="sticky-note p-5"
+                              className="sticky-note p-4 md:p-5"
                             >
                               <div className="space-y-4">
                                 <div className="flex flex-wrap items-start justify-between gap-4">
@@ -383,17 +387,17 @@ export default function CodeAIPage() {
                                   ))}
                                 </div>
 
-                                <div className="flex flex-wrap gap-3">
+                                <div className="flex flex-wrap gap-2 md:gap-3">
                                   <Link
                                     href={getCodeToolsUrl(item.id)}
-                                    className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+                                    className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-3 py-1.5 md:px-4 md:py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
                                   >
                                     Open detail page
                                   </Link>
                                   <button
                                     type="button"
                                     onClick={() => toggleExpanded(item.id)}
-                                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface cursor-pointer transition-all hover:-translate-y-0.5 hover:border-[#0035a0]/30 hover:text-[#0035a0]"
+                                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-3 py-1.5 md:px-4 md:py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface cursor-pointer transition-all hover:-translate-y-0.5 hover:border-[#0035a0]/30 hover:text-[#0035a0]"
                                   >
                                     {isExpanded ? 'Hide preview' : 'Show preview'}
                                   </button>
@@ -429,7 +433,7 @@ export default function CodeAIPage() {
                     return (
                       <article
                         key={item.id}
-                        className="sticky-note group p-6 transition-transform duration-300 hover:-translate-y-1"
+                        className="sticky-note group p-4 md:p-6 transition-transform duration-300 hover:-translate-y-1"
                       >
                         <div className="space-y-4">
                           <div className="flex flex-wrap items-center gap-3">

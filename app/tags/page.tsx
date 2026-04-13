@@ -42,7 +42,7 @@ export default async function TagsPage() {
 
   return (
     <EditorialPageFrame currentPath="/tags">
-      <main className="mx-auto min-h-screen max-w-7xl px-8 py-16 md:py-20">
+      <div className="mx-auto min-h-screen max-w-7xl px-5 py-12 md:px-8 md:py-20">
         <section className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start">
           <div className="space-y-8 lg:col-span-8">
             <div className="max-w-3xl">
@@ -57,7 +57,7 @@ export default async function TagsPage() {
               </p>
             </div>
 
-            <section className="sticky-note p-6 md:p-8">
+            <section className="sticky-note p-4 md:p-8">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <h2 className="font-headline text-xl font-bold text-on-surface">Top tags</h2>
@@ -88,7 +88,7 @@ export default async function TagsPage() {
               </div>
             </section>
 
-            <section className="sticky-note p-6 md:p-8">
+            <section className="sticky-note p-4 md:p-8">
               <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
                 <h2 className="font-headline text-xl font-bold text-on-surface">Alphabetical index</h2>
                 <div className="flex flex-wrap gap-1">
@@ -127,7 +127,7 @@ export default async function TagsPage() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-32 lg:col-span-4">
-            <div className="sticky-note p-6 md:p-8">
+            <div className="sticky-note p-4 md:p-8">
               <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Tag archive</h2>
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
@@ -143,7 +143,7 @@ export default async function TagsPage() {
               </div>
             </div>
 
-            <div className="sticky-note p-6 md:p-8">
+            <div className="sticky-note p-4 md:p-8">
               <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse routes</h2>
               <div className="flex flex-wrap gap-3">
                 <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">
@@ -155,7 +155,7 @@ export default async function TagsPage() {
               </div>
             </div>
 
-            <div className="sticky-note p-6 md:p-8">
+            <div className="sticky-note p-4 md:p-8">
               <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>A useful starting point</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
                 Pick a high-frequency tag first if you want breadth, or use the alphabetical index when you already know the subject you are chasing.
@@ -163,7 +163,7 @@ export default async function TagsPage() {
             </div>
           </aside>
         </section>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }

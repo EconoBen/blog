@@ -82,8 +82,8 @@ export default async function ArchivePage() {
 
   return (
     <EditorialPageFrame currentPath="/archive">
-      <main className="mx-auto max-w-7xl px-8 pb-28 pt-20">
-        <header className="mb-20 max-w-3xl">
+      <div className="mx-auto max-w-7xl px-5 pb-28 pt-14 md:px-8 md:pt-20">
+        <header className="mb-12 max-w-3xl md:mb-20">
           <span className="mb-4 block font-label text-xs uppercase tracking-[0.2em] text-secondary">
             Chronological Index
           </span>
@@ -97,7 +97,7 @@ export default async function ArchivePage() {
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <aside className="lg:col-span-3">
-            <nav className="sticky top-32 space-y-10">
+            <nav className="sticky top-32 space-y-6 md:space-y-10">
               <div>
                 <h2 className="mb-6 font-label text-[10px] uppercase tracking-[0.3em] text-secondary">
                   Years
@@ -108,10 +108,10 @@ export default async function ArchivePage() {
                       <a
                         href={`#year-${entry.year}`}
                         className={index === 0
-                          ? 'block sticky-note px-4 py-4 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08]'
-                          : 'block sticky-note px-4 py-4 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high'}
+                          ? 'block sticky-note px-3 py-3 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08] md:px-4 md:py-4'
+                          : 'block sticky-note px-3 py-3 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high md:px-4 md:py-4'}
                       >
-                        <div className="flex items-baseline justify-between gap-4">
+                        <div className="flex items-baseline justify-between gap-3">
                           <span className="font-headline text-2xl font-bold tracking-tighter">{entry.year}</span>
                           <span className="font-label text-[10px] uppercase tracking-[0.2em]">{entry.months.length} month{entry.months.length === 1 ? '' : 's'}</span>
                         </div>
@@ -150,10 +150,10 @@ export default async function ArchivePage() {
             </nav>
           </aside>
 
-          <div className="space-y-20 lg:col-span-9">
+          <div className="space-y-14 lg:col-span-9 md:space-y-20">
             {yearEntries.map((entry) => (
               <section key={entry.year} id={`year-${entry.year}`} className="scroll-mt-32">
-                <div className="mb-10 flex flex-col gap-3 border-b border-outline-variant/20 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                <div className="mb-6 flex flex-col gap-2 border-b border-outline-variant/20 pb-3 sm:flex-row sm:items-end sm:justify-between md:mb-10 md:gap-3 md:pb-4">
                   <div>
                     <h2 className="font-headline text-4xl font-black tracking-tighter text-on-surface">{entry.year}</h2>
                     <p className="mt-2 font-body text-base leading-relaxed text-on-surface-variant">
@@ -165,9 +165,9 @@ export default async function ArchivePage() {
                   </span>
                 </div>
 
-                <div className="space-y-12">
+                <div className="space-y-8 md:space-y-12">
                   {entry.months.map((month) => (
-                    <section key={month.key} className="border-l border-outline-variant/20 pl-6">
+                    <section key={month.key} className="border-l border-outline-variant/20 pl-4 md:pl-6">
                       <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
                         <div>
                           <h3 className="font-headline text-2xl font-bold text-on-surface">{month.monthLabel}</h3>
@@ -188,7 +188,7 @@ export default async function ArchivePage() {
                           <Link
                             key={post.slug}
                             href={`/posts/${post.slug}`}
-                            className="block py-5 transition-colors hover:text-primary"
+                            className="block py-4 transition-colors hover:text-primary md:py-5"
                           >
                             <div className="grid gap-3 md:grid-cols-[110px_minmax(0,1fr)] md:gap-6">
                               <div className="font-label text-xs uppercase tracking-widest text-secondary">
@@ -224,22 +224,22 @@ export default async function ArchivePage() {
               </section>
             ))}
 
-            <section className="sticky-note p-10">
+            <section className="sticky-note p-6 md:p-10">
               <div className="max-w-xl">
                 <h3 className="mb-4 font-headline text-3xl font-bold">Keep browsing.</h3>
                 <p className="mb-8 font-body text-lg leading-relaxed text-on-surface-variant">
                   Move from the archive into tags or search when subject matters more than date.
                 </p>
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                   <Link
                     href="/tags"
-                    className="rounded-md bg-primary-container px-6 py-3 font-label text-sm font-bold uppercase tracking-widest text-on-primary"
+                    className="rounded-md bg-primary-container px-6 py-3 text-center font-label text-sm font-bold uppercase tracking-widest text-on-primary"
                   >
                     Browse tags
                   </Link>
                   <Link
                     href="/search"
-                    className="rounded-md border border-outline-variant bg-surface px-6 py-3 font-label text-sm font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-low"
+                    className="rounded-md border border-outline-variant bg-surface px-6 py-3 text-center font-label text-sm font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-low"
                   >
                     Search archive
                   </Link>
@@ -248,7 +248,7 @@ export default async function ArchivePage() {
             </section>
           </div>
         </div>
-      </main>
+      </div>
     </EditorialPageFrame>
   );
 }
