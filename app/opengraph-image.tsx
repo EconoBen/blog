@@ -44,6 +44,7 @@ export default async function Image() {
               textTransform: 'uppercase',
               letterSpacing: '0.2em',
               color: '#0035a0',
+              display: 'flex',
             }}
           >
             AI/ML Engineering & Writing
@@ -57,11 +58,12 @@ export default async function Image() {
               letterSpacing: '-0.03em',
               lineHeight: 1.05,
               marginTop: 16,
+              display: 'flex',
+              flexDirection: 'column',
             }}
           >
-            ECONOBEN
-            <br />
-            .DEV
+            <div style={{ display: 'flex' }}>ECONOBEN</div>
+            <div style={{ display: 'flex' }}>.DEV</div>
           </div>
           <div
             style={{
@@ -70,10 +72,10 @@ export default async function Image() {
               lineHeight: 1.5,
               marginTop: 20,
               maxWidth: 500,
+              display: 'flex',
             }}
           >
-            Posts, talks, publications, and the work surrounding my upcoming
-            O'Reilly book on AI agent memory.
+            Posts, talks, publications, and the work surrounding my upcoming O&apos;Reilly book on AI agent memory.
           </div>
           <div
             style={{
@@ -84,6 +86,7 @@ export default async function Image() {
               marginTop: 'auto',
               textTransform: 'uppercase',
               letterSpacing: '0.1em',
+              display: 'flex',
             }}
           >
             econoben.dev
@@ -103,7 +106,6 @@ export default async function Image() {
           <div
             style={{
               color: '#fff',
-              textAlign: 'center',
               padding: 40,
               display: 'flex',
               flexDirection: 'column',
@@ -116,11 +118,13 @@ export default async function Image() {
                 fontSize: 28,
                 fontWeight: 900,
                 letterSpacing: '0.05em',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
             >
-              STAFF AI/ML
-              <br />
-              ENGINEER
+              <div style={{ display: 'flex' }}>STAFF AI/ML</div>
+              <div style={{ display: 'flex' }}>ENGINEER</div>
             </div>
             <div
               style={{
@@ -128,11 +132,13 @@ export default async function Image() {
                 opacity: 0.7,
                 marginTop: 12,
                 lineHeight: 1.5,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
             >
-              Writer · Speaker
-              <br />
-              O'Reilly Author
+              <div style={{ display: 'flex' }}>Writer · Speaker</div>
+              <div style={{ display: 'flex' }}>O&apos;Reilly Author</div>
             </div>
           </div>
         </div>
