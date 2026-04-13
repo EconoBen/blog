@@ -19,8 +19,8 @@ export default async function Image() {
     (
       <div
         style={{
-          width: '100%',
-          height: '100%',
+          width: 1200,
+          height: 630,
           display: 'flex',
           background: '#fef9ef',
           fontFamily: 'Inter',
