@@ -1,8 +1,8 @@
 import { postService } from '../../services/PostService';
-import { gistItems } from '../../config/workshopGists';
+import { getCodeToolsItems, getCodeToolsUrl } from '../utils/codeTools';
 
 export interface SearchResult {
-  type: 'post' | 'talk' | 'publication' | 'code-ai';
+  type: 'tag' | 'post' | 'talk' | 'publication' | 'code-ai';
   title: string;
   description?: string;
   url: string;
@@ -10,6 +10,7 @@ export interface SearchResult {
   tags?: string[];
   category?: string;
   authors?: string[];
+  relatedCount?: number;
 }
 
 interface Talk {
@@ -135,8 +136,10 @@ class UnifiedSearchService {
       }
     });
 
-    // Search Code & Tools (workshop) items
-    gistItems.forEach((item: any) => {
+    const codeToolsItems = getCodeToolsItems();
+
+    // Search Code & Tools items
+    codeToolsItems.forEach((item: any) => {
       if (
         item.title.toLowerCase().includes(searchTerm) ||
         item.description.toLowerCase().includes(searchTerm) ||
@@ -146,7 +149,7 @@ class UnifiedSearchService {
           type: 'code-ai',
           title: item.title,
           description: item.description,
-          url: `/code-ai/${item.slug}`,
+          url: getCodeToolsUrl(item.id),
           date: item.date ? new Date(item.date) : undefined,
           tags: item.tags,
           category: item.category,
@@ -179,6 +182,7 @@ class UnifiedSearchService {
 
     const searchTerm = query.toLowerCase().trim();
     const suggestions = new Set<string>();
+    const codeToolsItems = getCodeToolsItems();
 
     // Get suggestions from post titles and tags
     const posts = await postService.getAllPosts();
@@ -193,8 +197,8 @@ class UnifiedSearchService {
       });
     });
 
-    // Get suggestions from gist items
-    gistItems.forEach((item: any) => {
+    // Get suggestions from code tools items
+    codeToolsItems.forEach((item: any) => {
       if (item.title.toLowerCase().includes(searchTerm)) {
         suggestions.add(item.title);
       }

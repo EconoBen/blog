@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgAgent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
+    </linearGradient>
+    <radialGradient id="nodeGlowA" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="edgeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgAgent)"/>
+
+  <!-- Network edges (connections between nodes) -->
+  <g stroke="#004ac6" stroke-width="1.5" fill="none">
+    <!-- Central hub connections -->
+    <line x1="600" y1="290" x2="380" y2="180" stroke-opacity="0.4"/>
+    <line x1="600" y1="290" x2="820" y2="180" stroke-opacity="0.4"/>
+    <line x1="600" y1="290" x2="350" y2="400" stroke-opacity="0.35"/>
+    <line x1="600" y1="290" x2="850" y2="420" stroke-opacity="0.35"/>
+    <line x1="600" y1="290" x2="600" y2="500" stroke-opacity="0.3"/>
+
+    <!-- Secondary connections -->
+    <line x1="380" y1="180" x2="220" y2="130" stroke-opacity="0.2"/>
+    <line x1="380" y1="180" x2="250" y2="280" stroke-opacity="0.2"/>
+    <line x1="380" y1="180" x2="350" y2="400" stroke-opacity="0.15"/>
+    <line x1="820" y1="180" x2="960" y2="130" stroke-opacity="0.2"/>
+    <line x1="820" y1="180" x2="950" y2="290" stroke-opacity="0.2"/>
+    <line x1="820" y1="180" x2="850" y2="420" stroke-opacity="0.15"/>
+    <line x1="350" y1="400" x2="220" y2="480" stroke-opacity="0.15"/>
+    <line x1="350" y1="400" x2="450" y2="510" stroke-opacity="0.15"/>
+    <line x1="850" y1="420" x2="980" y2="460" stroke-opacity="0.15"/>
+    <line x1="850" y1="420" x2="750" y2="510" stroke-opacity="0.15"/>
+    <line x1="600" y1="500" x2="450" y2="510" stroke-opacity="0.12"/>
+    <line x1="600" y1="500" x2="750" y2="510" stroke-opacity="0.12"/>
+
+    <!-- Tertiary connections -->
+    <line x1="220" y1="130" x2="150" y2="220" stroke-opacity="0.1"/>
+    <line x1="960" y1="130" x2="1030" y2="220" stroke-opacity="0.1"/>
+    <line x1="250" y1="280" x2="150" y2="220" stroke-opacity="0.1"/>
+    <line x1="950" y1="290" x2="1030" y2="220" stroke-opacity="0.1"/>
+  </g>
+
+  <!-- Animated pulse lines (data flowing) -->
+  <g stroke="#fef9ef" stroke-width="1" stroke-opacity="0.08" stroke-dasharray="3 8">
+    <line x1="600" y1="290" x2="380" y2="180"/>
+    <line x1="600" y1="290" x2="820" y2="180"/>
+    <line x1="380" y1="180" x2="820" y2="180"/>
+  </g>
+
+  <!-- Central node (main agent) -->
+  <circle cx="600" cy="290" r="40" fill="url(#nodeGlowA)"/>
+  <circle cx="600" cy="290" r="28" fill="none" stroke="#004ac6" stroke-width="2.5" stroke-opacity="0.7"/>
+  <circle cx="600" cy="290" r="16" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.45"/>
+  <circle cx="600" cy="290" r="8" fill="#004ac6" opacity="0.8"/>
+
+  <!-- Primary nodes (sub-agents) -->
+  <g>
+    <!-- Top-left -->
+    <circle cx="380" cy="180" r="24" fill="url(#nodeGlowA)"/>
+    <circle cx="380" cy="180" r="18" fill="none" stroke="#004ac6" stroke-width="2" stroke-opacity="0.55"/>
+    <circle cx="380" cy="180" r="7" fill="#004ac6" opacity="0.6"/>
+
+    <!-- Top-right -->
+    <circle cx="820" cy="180" r="24" fill="url(#nodeGlowA)"/>
+    <circle cx="820" cy="180" r="18" fill="none" stroke="#004ac6" stroke-width="2" stroke-opacity="0.55"/>
+    <circle cx="820" cy="180" r="7" fill="#004ac6" opacity="0.6"/>
+
+    <!-- Bottom-left -->
+    <circle cx="350" cy="400" r="20" fill="url(#nodeGlowA)"/>
+    <circle cx="350" cy="400" r="15" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.45"/>
+    <circle cx="350" cy="400" r="6" fill="#004ac6" opacity="0.5"/>
+
+    <!-- Bottom-right -->
+    <circle cx="850" cy="420" r="20" fill="url(#nodeGlowA)"/>
+    <circle cx="850" cy="420" r="15" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.45"/>
+    <circle cx="850" cy="420" r="6" fill="#004ac6" opacity="0.5"/>
+
+    <!-- Bottom-center -->
+    <circle cx="600" cy="500" r="16" fill="url(#nodeGlowA)"/>
+    <circle cx="600" cy="500" r="12" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.35"/>
+    <circle cx="600" cy="500" r="5" fill="#004ac6" opacity="0.45"/>
+  </g>
+
+  <!-- Tertiary nodes (smaller, edge of network) -->
+  <g>
+    <circle cx="220" cy="130" r="8" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.25"/>
+    <circle cx="220" cy="130" r="3" fill="#004ac6" opacity="0.3"/>
+
+    <circle cx="960" cy="130" r="8" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.25"/>
+    <circle cx="960" cy="130" r="3" fill="#004ac6" opacity="0.3"/>
+
+    <circle cx="250" cy="280" r="8" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.25"/>
+    <circle cx="250" cy="280" r="3" fill="#004ac6" opacity="0.3"/>
+
+    <circle cx="950" cy="290" r="8" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.25"/>
+    <circle cx="950" cy="290" r="3" fill="#004ac6" opacity="0.3"/>
+
+    <circle cx="150" cy="220" r="6" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+    <circle cx="150" cy="220" r="2.5" fill="#004ac6" opacity="0.2"/>
+
+    <circle cx="1030" cy="220" r="6" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+    <circle cx="1030" cy="220" r="2.5" fill="#004ac6" opacity="0.2"/>
+
+    <circle cx="220" cy="480" r="7" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.2"/>
+    <circle cx="220" cy="480" r="3" fill="#004ac6" opacity="0.25"/>
+
+    <circle cx="450" cy="510" r="7" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.2"/>
+    <circle cx="450" cy="510" r="3" fill="#004ac6" opacity="0.25"/>
+
+    <circle cx="750" cy="510" r="7" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.2"/>
+    <circle cx="750" cy="510" r="3" fill="#004ac6" opacity="0.25"/>
+
+    <circle cx="980" cy="460" r="7" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.2"/>
+    <circle cx="980" cy="460" r="3" fill="#004ac6" opacity="0.25"/>
+  </g>
+
+  <!-- Hexagonal hint around central node -->
+  <polygon points="600,248 637,269 637,311 600,332 563,311 563,269"
+           fill="none" stroke="#fef9ef" stroke-width="0.75" stroke-opacity="0.1"/>
+
+  <!-- Corner accents -->
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="30" y2="70" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+</svg>

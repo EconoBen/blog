@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="1" x2="0.8" y2="0">
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
+    </linearGradient>
+    <linearGradient id="rocketTrail" x1="0" y1="1" x2="0.5" y2="0">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#004ac6" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0.7"/>
+    </linearGradient>
+    <radialGradient id="starGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fef9ef" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#fef9ef" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg3)"/>
+
+  <!-- Star field -->
+  <g fill="#fef9ef">
+    <circle cx="80" cy="60" r="1.2" opacity="0.3"/>
+    <circle cx="200" cy="120" r="0.8" opacity="0.2"/>
+    <circle cx="350" cy="45" r="1" opacity="0.25"/>
+    <circle cx="520" cy="90" r="1.5" opacity="0.15"/>
+    <circle cx="680" cy="30" r="0.8" opacity="0.3"/>
+    <circle cx="830" cy="75" r="1.2" opacity="0.2"/>
+    <circle cx="960" cy="50" r="1" opacity="0.25"/>
+    <circle cx="1100" cy="95" r="0.8" opacity="0.2"/>
+    <circle cx="150" cy="200" r="0.6" opacity="0.15"/>
+    <circle cx="450" cy="170" r="1" opacity="0.2"/>
+    <circle cx="750" cy="140" r="0.8" opacity="0.15"/>
+    <circle cx="1050" cy="180" r="1.2" opacity="0.2"/>
+    <circle cx="300" cy="260" r="0.6" opacity="0.1"/>
+    <circle cx="900" cy="220" r="0.8" opacity="0.15"/>
+    <circle cx="1150" cy="270" r="0.6" opacity="0.1"/>
+  </g>
+
+  <!-- Ascending trajectory path -->
+  <path d="M 150 550 C 250 520, 350 480, 450 430 C 550 380, 620 340, 700 280 C 780 220, 840 170, 920 130 C 1000 90, 1050 75, 1100 60"
+        fill="none" stroke="url(#rocketTrail)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Trajectory glow -->
+  <path d="M 150 550 C 250 520, 350 480, 450 430 C 550 380, 620 340, 700 280 C 780 220, 840 170, 920 130 C 1000 90, 1050 75, 1100 60"
+        fill="none" stroke="#004ac6" stroke-width="12" stroke-opacity="0.06" stroke-linecap="round"/>
+
+  <!-- Milestone dots along the path -->
+  <g>
+    <!-- Q1 milestone -->
+    <circle cx="250" cy="510" r="7" fill="#e8eef8" stroke="#004ac6" stroke-width="2" stroke-opacity="0.5"/>
+    <circle cx="250" cy="510" r="3" fill="#004ac6" fill-opacity="0.5"/>
+
+    <!-- Q2 milestone -->
+    <circle cx="480" cy="415" r="8" fill="#e8eef8" stroke="#004ac6" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="480" cy="415" r="3.5" fill="#004ac6" fill-opacity="0.6"/>
+
+    <!-- Q3 milestone -->
+    <circle cx="720" cy="268" r="9" fill="#e8eef8" stroke="#004ac6" stroke-width="2" stroke-opacity="0.7"/>
+    <circle cx="720" cy="268" r="4" fill="#004ac6" fill-opacity="0.7"/>
+
+    <!-- Q4 milestone -->
+    <circle cx="950" cy="118" r="10" fill="#e8eef8" stroke="#004ac6" stroke-width="2.5" stroke-opacity="0.8"/>
+    <circle cx="950" cy="118" r="4.5" fill="#004ac6" fill-opacity="0.8"/>
+  </g>
+
+  <!-- Rocket shape at the top of trajectory -->
+  <g transform="translate(1100, 60) rotate(-60)">
+    <!-- Rocket body -->
+    <path d="M 0 -22 C 8 -18, 10 -5, 10 8 L 6 14 L -6 14 L -10 8 C -10 -5, -8 -18, 0 -22 Z"
+          fill="#fef9ef" fill-opacity="0.25" stroke="#fef9ef" stroke-opacity="0.4" stroke-width="1"/>
+    <!-- Rocket window -->
+    <circle cy="-6" r="3" fill="#004ac6" fill-opacity="0.5"/>
+    <!-- Fins -->
+    <path d="M -10 8 L -16 16 L -6 14 Z" fill="#004ac6" fill-opacity="0.3"/>
+    <path d="M 10 8 L 16 16 L 6 14 Z" fill="#004ac6" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Exhaust particles -->
+  <g fill="#004ac6">
+    <circle cx="130" cy="560" r="2" opacity="0.2"/>
+    <circle cx="145" cy="565" r="1.5" opacity="0.15"/>
+    <circle cx="160" cy="555" r="1" opacity="0.1"/>
+  </g>
+
+  <!-- Dashed horizontal lines at milestones suggesting targets/goals -->
+  <g stroke="#95a0b4" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="8 6">
+    <line x1="0" y1="510" x2="250" y2="510"/>
+    <line x1="0" y1="415" x2="480" y2="415"/>
+    <line x1="0" y1="268" x2="720" y2="268"/>
+    <line x1="0" y1="118" x2="950" y2="118"/>
+  </g>
+
+  <!-- Bright star at apex -->
+  <ellipse cx="1100" cy="58" rx="30" ry="30" fill="url(#starGlow)"/>
+</svg>

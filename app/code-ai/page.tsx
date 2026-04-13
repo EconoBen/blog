@@ -1,431 +1,519 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { workshopConfig, WorkshopItem } from '../config/workshopConfig';
-import { gistItems } from '../config/workshopGists';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
+import { workshopConfig, type WorkshopItem } from '../config/workshopConfig';
+import {
+  formatCodeToolsDate,
+  getCodeToolsCategoryCounts,
+  getCodeToolsFeaturedItems,
+  getCodeToolsItemLineCount,
+  getCodeToolsItems,
+  getCodeToolsLanguageLabel,
+  getCodeToolsUrl,
+  normalizeCodeToolsLanguage,
+} from '../utils/codeTools';
 
-// Map common language aliases to Prism language names
-const languageMap: Record<string, string> = {
-  'js': 'javascript',
-  'ts': 'typescript',
-  'py': 'python',
-  'rb': 'ruby',
-  'sh': 'bash',
-  'shell': 'bash',
-  'zsh': 'bash',
-  'yml': 'yaml',
-  'dockerfile': 'docker',
-  'text': 'plaintext',
-  'txt': 'plaintext',
-  'code': 'plaintext',
-  'toml': 'toml',
-  'gitconfig': 'ini',
-  'ini': 'ini',
-  'conf': 'ini',
-  'cfg': 'ini',
-};
+function SnippetCodeBlock({ item, onCopy, copyLabel }: { item: WorkshopItem; onCopy: () => void; copyLabel: string }) {
+  return (
+    <div className="sticky-note overflow-hidden">
+      <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
+        <div className="space-y-0.5">
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
+            {getCodeToolsLanguageLabel(item.language)}
+          </p>
+          <p className="font-body text-sm text-secondary">
+            {item.filename || 'Inline snippet'}
+          </p>
+        </div>
 
-// Get a display-friendly language name
-const getDisplayLanguage = (lang: string | undefined): string => {
-  const lowered = lang?.toLowerCase() || 'text';
-  const normalized = languageMap[lowered] || lowered;
-  const displayNames: Record<string, string> = {
-    'javascript': 'JavaScript',
-    'typescript': 'TypeScript',
-    'python': 'Python',
-    'bash': 'Bash',
-    'shell': 'Shell',
-    'json': 'JSON',
-    'yaml': 'YAML',
-    'markdown': 'Markdown',
-    'css': 'CSS',
-    'html': 'HTML',
-    'sql': 'SQL',
-    'go': 'Go',
-    'rust': 'Rust',
-    'java': 'Java',
-    'csharp': 'C#',
-    'cpp': 'C++',
-    'c': 'C',
-    'ruby': 'Ruby',
-    'php': 'PHP',
-    'swift': 'Swift',
-    'kotlin': 'Kotlin',
-    'docker': 'Dockerfile',
-    'plaintext': 'Text',
-    'toml': 'TOML',
-  };
-  return displayNames[normalized] || normalized.charAt(0).toUpperCase() + normalized.slice(1);
-};
+        <div className="flex flex-wrap justify-end gap-2">
+          {item.gistUrl && (
+            <a
+              href={item.gistUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-surface-container-low px-3 py-1.5 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+            >
+              Gist
+            </a>
+          )}
+          <button
+            type="button"
+            onClick={onCopy}
+            className="inline-flex items-center justify-center rounded-full bg-surface-container-low px-3 py-1.5 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+          >
+            {copyLabel}
+          </button>
+        </div>
+      </div>
 
-/**
- * Code & Tools component with compact, navigable layout for code snippets and AI insights
- */
+      <div>
+        <SyntaxHighlighter
+          language={normalizeCodeToolsLanguage(item.language)}
+          style={oneLight}
+          showLineNumbers
+          wrapLines
+          lineNumberStyle={{
+            minWidth: '3em',
+            paddingRight: '1em',
+            textAlign: 'right',
+            userSelect: 'none',
+            opacity: 0.45,
+          }}
+          customStyle={{
+            margin: 0,
+            padding: '1rem',
+            fontSize: '0.88rem',
+            lineHeight: '1.7',
+            background: 'transparent',
+          }}
+          codeTagProps={{
+            style: {
+              fontFamily: "'IBM Plex Mono', 'Consolas', 'Monaco', monospace",
+            },
+          }}
+        >
+          {item.content}
+        </SyntaxHighlighter>
+      </div>
+    </div>
+  );
+}
+
 export default function CodeAIPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<'compact' | 'full'>('compact');
+  const [copyStates, setCopyStates] = useState<Record<string, string>>({});
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<string>>(new Set());
+
+  const toggleGroup = (category: string) => {
+    const next = new Set(collapsedGroups);
+    if (next.has(category)) {
+      next.delete(category);
+    } else {
+      next.add(category);
+    }
+    setCollapsedGroups(next);
+  };
 
   const { title, subtitle, categories } = workshopConfig;
+  const allItems = getCodeToolsItems();
+  const categoryCounts = getCodeToolsCategoryCounts(allItems);
+  const featuredItems = getCodeToolsFeaturedItems(allItems);
+  const categoryLabelById = Object.fromEntries(categories.map((category) => [category.id, category.label]));
+  const visibleCategories = categories.filter((category) => (
+    category.id === 'all' || (categoryCounts[category.id] ?? 0) > 0
+  ));
 
-  // Combine manual items with fetched gist items
-  const allItems = [...workshopConfig.items, ...gistItems];
-
-  // Sort all items by date, most recent first
-  const sortedItems = allItems.sort((a, b) => {
-    const dateA = a.date ? new Date(a.date).getTime() : 0;
-    const dateB = b.date ? new Date(b.date).getTime() : 0;
-    return dateB - dateA; // Most recent first
-  });
-
-  // Filter items based on category and search
-  const filteredItems = sortedItems.filter((item: WorkshopItem) => {
+  const filteredItems = allItems.filter((item: WorkshopItem) => {
+    const query = searchQuery.toLowerCase();
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
-    const matchesSearch = searchQuery === '' ||
-      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    const categoryLabel = categoryLabelById[item.category] ?? item.category;
+    const matchesSearch =
+      query === '' ||
+      item.title.toLowerCase().includes(query) ||
+      item.description.toLowerCase().includes(query) ||
+      item.tags.some((tag: string) => tag.toLowerCase().includes(query)) ||
+      item.filename?.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query) ||
+      categoryLabel.toLowerCase().includes(query);
 
     return matchesCategory && matchesSearch;
   });
 
-  // Group items by category for hierarchical display, maintaining date order
+  const selectedCategoryLabel = categoryLabelById[selectedCategory] ?? 'All';
+  // Featured items are now integrated into the main index
+  const selectedCount = filteredItems.length;
+
   const groupedItems = filteredItems.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
     }
+
     acc[item.category].push(item);
     return acc;
   }, {} as Record<string, WorkshopItem[]>);
+  const orderedGroupEntries = Object.entries(groupedItems).sort(([, itemsA], [, itemsB]) => {
+    const countA = itemsA.length;
+    const countB = itemsB.length;
 
-  // Toggle item expansion
-  const toggleExpanded = (itemId: string) => {
-    const newExpanded = new Set(expandedItems);
-    if (newExpanded.has(itemId)) {
-      newExpanded.delete(itemId);
-    } else {
-      newExpanded.add(itemId);
+    if (countA !== countB) {
+      return countB - countA;
     }
-    setExpandedItems(newExpanded);
+
+    const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
+    const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
+
+    if (latestA !== latestB) {
+      return latestB - latestA;
+    }
+
+    const labelA = categoryLabelById[itemsA[0]?.category ?? ''] || itemsA[0]?.category || '';
+    const labelB = categoryLabelById[itemsB[0]?.category ?? ''] || itemsB[0]?.category || '';
+    return labelA.localeCompare(labelB);
+  });
+  const orderedVisibleCategories = visibleCategories
+    .filter((category) => category.id !== 'all')
+    .sort((a, b) => {
+      const countA = categoryCounts[a.id] ?? 0;
+      const countB = categoryCounts[b.id] ?? 0;
+
+      if (countA !== countB) {
+        return countB - countA;
+      }
+
+      return a.label.localeCompare(b.label);
+    });
+
+  const toggleExpanded = (itemId: string) => {
+    const nextExpanded = new Set(expandedItems);
+    if (nextExpanded.has(itemId)) {
+      nextExpanded.delete(itemId);
+    } else {
+      nextExpanded.add(itemId);
+    }
+    setExpandedItems(nextExpanded);
   };
 
-  // Track copy button states per item
-  const [copyStates, setCopyStates] = useState<Record<string, string>>({});
-
-  // Copy to clipboard with feedback
   const copyToClipboard = (content: string, itemId: string) => {
     navigator.clipboard.writeText(content);
-    setCopyStates(prev => ({ ...prev, [itemId]: 'Copied!' }));
-    setTimeout(() => {
-      setCopyStates(prev => ({ ...prev, [itemId]: 'Copy' }));
+    setCopyStates((prev) => ({ ...prev, [itemId]: 'Copied' }));
+    window.setTimeout(() => {
+      setCopyStates((prev) => ({ ...prev, [itemId]: 'Copy' }));
     }, 2000);
   };
 
-  // Get normalized language for syntax highlighter
-  const getNormalizedLanguage = (lang: string | undefined): string => {
-    if (!lang) return 'text';
-    return languageMap[lang.toLowerCase()] || lang.toLowerCase();
-  };
-
-  // Format date for display
-  const formatDate = (date: Date | string | undefined) => {
-    if (!date) return '';
-    const d = new Date(date);
-    return d.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
-
   return (
-    <div className="code-ai-container">
-      <div className="code-ai-header">
-        <h1>{title}</h1>
-        <p className="code-ai-subtitle">
-          {subtitle}
-        </p>
-      </div>
-
-      <div className="code-ai-controls">
-        <div className="code-ai-search">
-          <input
-            type="text"
-            placeholder="Search snippets..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="code-ai-search-input"
-          />
+    <EditorialPageFrame currentPath="/code-ai">
+      <section className="mx-auto max-w-[1440px] px-8 pb-14 pt-2">
+        {/* Hero */}
+        <div className="space-y-5 py-8 md:py-10">
+          <div className="max-w-[58rem] space-y-4">
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Editorial archive</p>
+            <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
+              {title}
+            </h1>
+            <p className="max-w-[46rem] font-body text-lg leading-relaxed text-secondary">
+              {subtitle}
+            </p>
+          </div>
         </div>
 
-        <div className="code-ai-view-toggle">
-          <button
-            className={`view-toggle-btn ${viewMode === 'compact' ? 'active' : ''}`}
-            onClick={() => setViewMode('compact')}
-            title="Compact view"
-          >
-            ☰
-          </button>
-          <button
-            className={`view-toggle-btn ${viewMode === 'full' ? 'active' : ''}`}
-            onClick={() => setViewMode('full')}
-            title="Full view"
-          >
-            ⊞
-          </button>
-        </div>
-      </div>
-
-      <div className="code-ai-layout">
-        {/* Sidebar Navigation */}
-        <aside className="code-ai-sidebar">
-          <h3>Categories</h3>
-          <nav className="code-ai-nav">
-            {categories.map(category => {
-              const count = category.id === 'all'
-                ? allItems.length
-                : allItems.filter(item => item.category === category.id).length;
-
-              return (
+        {/* Browse and filter — sidebar + content */}
+        <section className="border-t border-outline-variant/20 pt-6 pb-12 md:pt-8 md:pb-16" id="code-tools-index">
+          <div className="flex flex-col gap-8 lg:flex-row">
+            {/* ── Left sidebar: filters ── */}
+            <aside className="shrink-0 lg:sticky lg:top-[100px] lg:h-[calc(100vh-120px)] lg:w-[260px] lg:overflow-y-auto">
+              <div className="mb-4 flex items-center gap-2 rounded-full border border-outline-variant/15 p-1" style={{ background: '#fdf8ec' }}>
                 <button
-                  key={category.id}
-                  className={`code-ai-nav-item ${selectedCategory === category.id ? 'active' : ''}`}
-                  onClick={() => setSelectedCategory(category.id)}
+                  type="button"
+                  className={`flex-1 rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'compact'
+                      ? 'text-on-surface shadow-sm'
+                      : 'text-on-surface/50 hover:text-on-surface'
+                  }`}
+                  style={viewMode === 'compact' ? { background: '#fdf8ec' } : undefined}
+                  onClick={() => setViewMode('compact')}
+                  aria-pressed={viewMode === 'compact'}
                 >
-                  <span className="nav-icon">{category.icon}</span>
-                  <span className="nav-label">{category.label}</span>
-                  <span className="nav-count">{count}</span>
+                  Archive
                 </button>
-              );
-            })}
-          </nav>
-        </aside>
+                <button
+                  type="button"
+                  className={`flex-1 rounded-full px-3 py-2 font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                    viewMode === 'full'
+                      ? 'text-on-surface shadow-sm'
+                      : 'text-on-surface/50 hover:text-on-surface'
+                  }`}
+                  style={viewMode === 'full' ? { background: '#fdf8ec' } : undefined}
+                  onClick={() => setViewMode('full')}
+                  aria-pressed={viewMode === 'full'}
+                >
+                  Reader
+                </button>
+              </div>
+              <div className="sticky-note space-y-6 p-5">
+                <div className="space-y-1">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">Browse and filter</p>
+                  <p className="font-body text-sm leading-relaxed text-secondary">
+                    Search by title, tag, filename, or category.
+                  </p>
+                </div>
 
-        {/* Main Content Area */}
-        <main className="code-ai-main">
-          {viewMode === 'compact' ? (
-            // Compact List View
-            <div className="code-ai-list">
-              {Object.entries(groupedItems)
-                .sort(([, itemsA], [, itemsB]) => {
-                  // Sort categories by most recent item date
-                  const latestA = itemsA[0]?.date ? new Date(itemsA[0].date).getTime() : 0;
-                  const latestB = itemsB[0]?.date ? new Date(itemsB[0].date).getTime() : 0;
-                  return latestB - latestA;
-                })
-                .map(([category, categoryItems]) => (
-                <div key={category} className="code-ai-category-group">
-                  <h3 className="category-group-title">
-                    {categories.find(c => c.id === category)?.label || category}
-                  </h3>
-                  {categoryItems.map(item => (
-                    <div key={item.id} className="code-ai-item-compact">
-                      <div className="item-header" onClick={() => toggleExpanded(item.id)}>
-                        <div className="item-title-row">
-                          <span className="expand-icon">
-                            {expandedItems.has(item.id) ? '▼' : '▶'}
+                <div role="search" aria-label="Code & Tools search">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchQuery}
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    className="w-full rounded-xl border border-outline-variant/15 bg-surface-container-lowest px-4 py-3 font-body text-sm text-on-surface placeholder:text-secondary/60 focus:border-primary/30 focus:outline-none focus:ring-2 focus:ring-primary/10"
+                  />
+                </div>
+
+                {/* Category filters — vertical stack */}
+                <div className="space-y-2">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Categories</p>
+                  <div className="flex flex-col gap-1">
+                    {orderedVisibleCategories.map((category) => {
+                      const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
+                      const active = selectedCategory === category.id;
+
+                      return (
+                        <button
+                          key={category.id}
+                          type="button"
+                          onClick={() => setSelectedCategory(category.id)}
+                          className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left font-label text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                            active
+                              ? 'bg-surface-container-highest text-on-surface'
+                              : 'text-secondary hover:bg-secondary-container hover:text-primary'
+                          }`}
+                          aria-pressed={active}
+                        >
+                          <span>{category.icon}</span>
+                          <span className="flex-1 truncate">{category.label}</span>
+                          <span className="tabular-nums text-[10px] text-secondary">{count}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Results count */}
+                <div className="border-t border-outline-variant/15 pt-4">
+                  <p className="font-body text-xs text-secondary">
+                    <strong className="text-on-surface">{filteredItems.length}</strong> of <strong className="text-on-surface">{allItems.length}</strong> items
+                    {searchQuery ? <> for &ldquo;{searchQuery}&rdquo;</> : null}
+                  </p>
+                </div>
+              </div>
+            </aside>
+
+            {/* ── Right content: results ── */}
+            <div className="min-w-0 flex-1">
+              {viewMode === 'compact' ? (
+                <div className="space-y-8">
+                  {orderedGroupEntries.map(([category, categoryItems]) => (
+                    <section
+                      key={category}
+                      className="sticky-note p-5"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => toggleGroup(category)}
+                        className="flex w-full flex-wrap items-center justify-between gap-4 text-left"
+                      >
+                        <h3 className="font-headline text-xl font-bold text-on-surface">
+                          {categoryLabelById[category] || category}
+                          <span className="ml-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                            ({categoryItems.length})
                           </span>
-                          <h4>{item.title}</h4>
-                          <div className="item-badges">
-                            {item.date && (
-                              <span className="date-badge">
-                                {formatDate(item.date)}
+                        </h3>
+                        <span className="flex items-center gap-2 font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                          {collapsedGroups.has(category) ? 'Show' : 'Hide'}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className={`h-4 w-4 transition-transform duration-200 ${collapsedGroups.has(category) ? '' : 'rotate-180'}`}
+                          >
+                            <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
+                          </svg>
+                        </span>
+                      </button>
+
+                      {!collapsedGroups.has(category) && (
+                      <div className="mt-5 space-y-4">
+                        {categoryItems.map((item) => {
+                          const isExpanded = expandedItems.has(item.id);
+
+                          return (
+                            <article
+                              key={item.id}
+                              className="sticky-note p-5"
+                            >
+                              <div className="space-y-4">
+                                <div className="flex flex-wrap items-start justify-between gap-4">
+                                  <div className="max-w-[58ch] space-y-2">
+                                    <div className="flex flex-wrap items-center gap-3">
+                                      {item.date && (
+                                        <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                                          {formatCodeToolsDate(item.date)}
+                                        </span>
+                                      )}
+                                      <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                                        {getCodeToolsLanguageLabel(item.language)}
+                                      </span>
+                                      <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                                        {getCodeToolsItemLineCount(item)} lines
+                                      </span>
+                                    </div>
+
+                                    <h3 className="font-headline text-xl font-bold leading-snug text-on-surface">
+                                      <Link href={getCodeToolsUrl(item.id)} className="transition-colors hover:text-primary">
+                                        {item.title}
+                                      </Link>
+                                    </h3>
+                                    <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
+                                  </div>
+
+                                  {item.featured && (
+                                    <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                                      Featured
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="flex flex-wrap gap-2">
+                                  {item.tags.slice(0, 4).map((tag) => (
+                                    <span
+                                      key={tag}
+                                      className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-3">
+                                  <Link
+                                    href={getCodeToolsUrl(item.id)}
+                                    className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+                                  >
+                                    Open detail page
+                                  </Link>
+                                  <button
+                                    type="button"
+                                    onClick={() => toggleExpanded(item.id)}
+                                    className="inline-flex items-center justify-center rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface cursor-pointer transition-all hover:-translate-y-0.5 hover:border-[#0035a0]/30 hover:text-[#0035a0]"
+                                  >
+                                    {isExpanded ? 'Hide preview' : 'Show preview'}
+                                  </button>
+                                </div>
+
+                                {isExpanded && (
+                                  <div className="space-y-4 pt-2">
+                                    {item.writeup && (
+                                      <div className="item-writeup sticky-note p-5">
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
+                                      </div>
+                                    )}
+
+                                    <SnippetCodeBlock
+                                      item={item}
+                                      onCopy={() => copyToClipboard(item.content, item.id)}
+                                      copyLabel={copyStates[item.id] || 'Copy'}
+                                    />
+                                  </div>
+                                )}
+                              </div>
+                            </article>
+                          );
+                        })}
+                      </div>
+                      )}
+                    </section>
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-8 md:grid-cols-2">
+                  {filteredItems.map((item) => {
+                    return (
+                      <article
+                        key={item.id}
+                        className="sticky-note group p-6 transition-transform duration-300 hover:-translate-y-1"
+                      >
+                        <div className="space-y-4">
+                          <div className="flex flex-wrap items-center gap-3">
+                            {item.category && (
+                              <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                                {categoryLabelById[item.category] || item.category}
                               </span>
                             )}
-                            <span className={`language-badge ${item.language}`}>
-                              {item.language}
+                            {item.date && (
+                              <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                                {formatCodeToolsDate(item.date)}
+                              </span>
+                            )}
+                            <span className="font-label text-[10px] font-bold uppercase tracking-widest text-secondary">
+                              {getCodeToolsLanguageLabel(item.language)}
+                            </span>
+                            <span className="font-label text-[10px] uppercase tracking-widest text-secondary">
+                              {getCodeToolsItemLineCount(item)} lines
                             </span>
                           </div>
-                        </div>
-                        <p className="item-description">{item.description}</p>
-                      </div>
 
-                      {expandedItems.has(item.id) && (
-                        <div className="item-expanded">
+                          <h2 className="font-headline text-2xl font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
+                            <Link href={getCodeToolsUrl(item.id)}>{item.title}</Link>
+                          </h2>
+                          <p className="font-body text-base leading-relaxed text-secondary">{item.description}</p>
+
+                          <div className="flex flex-wrap gap-2">
+                            {item.featured && (
+                              <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                                Featured
+                              </span>
+                            )}
+                            {item.filename && (
+                              <span className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface">
+                                {item.filename}
+                              </span>
+                            )}
+                            {item.tags.slice(0, 4).map((tag) => (
+                              <span
+                                key={tag}
+                                className="rounded-full bg-surface-container-low px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-on-surface"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+
                           {item.writeup && (
-                            <div className="item-writeup">
+                            <div className="item-writeup sticky-note p-5">
                               <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
                             </div>
                           )}
-                          <div className="code-block">
-                            <div className="code-header">
-                              <div className="code-filename">{getDisplayLanguage(item.language)}</div>
-                              <div className="code-actions">
-                                {item.gistUrl && (
-                                  <a
-                                    href={item.gistUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="code-action gist-link"
-                                    title="View on GitHub"
-                                  >
-                                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                                    </svg>
-                                    Gist
-                                  </a>
-                                )}
-                                <button
-                                  className="code-action"
-                                  onClick={() => copyToClipboard(item.content, item.id)}
-                                >
-                                  {copyStates[item.id] || 'Copy'}
-                                </button>
-                              </div>
-                            </div>
-                            <div className="code-container">
-                              <SyntaxHighlighter
-                                language={getNormalizedLanguage(item.language)}
-                                style={oneDark}
-                                showLineNumbers
-                                wrapLines
-                                lineNumberStyle={{
-                                  minWidth: '3em',
-                                  paddingRight: '1em',
-                                  textAlign: 'right',
-                                  userSelect: 'none',
-                                  opacity: 0.5,
-                                }}
-                                customStyle={{
-                                  margin: 0,
-                                  padding: '1rem',
-                                  fontSize: '0.875rem',
-                                  lineHeight: '1.6',
-                                  borderRadius: '0 0 8px 8px',
-                                  background: '#282c34',
-                                }}
-                                codeTagProps={{
-                                  style: {
-                                    fontFamily: "'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace",
-                                  }
-                                }}
-                              >
-                                {item.content}
-                              </SyntaxHighlighter>
-                            </div>
-                          </div>
-                          <div className="item-footer">
-                            <div className="item-tags">
-                              {item.tags.map((tag: string) => (
-                                <span key={tag} className="tag">#{tag}</span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          ) : (
-            // Full Card View (original grid layout)
-            <div className="code-ai-grid">
-              {filteredItems.map(item => (
-                <div key={item.id} className="code-ai-card">
-                  <div className="code-ai-card-header">
-                    <h3>{item.title}</h3>
-                    <div className="code-ai-card-badges">
-                      {item.date && (
-                        <span className="code-ai-date">
-                          {formatDate(item.date)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
 
-                  <p className="code-ai-card-description">{item.description}</p>
+                          <SnippetCodeBlock
+                            item={item}
+                            onCopy={() => copyToClipboard(item.content, item.id)}
+                            copyLabel={copyStates[item.id] || 'Copy'}
+                          />
 
-                  {item.writeup && (
-                    <div className="item-writeup">
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{item.writeup}</ReactMarkdown>
-                    </div>
-                  )}
-
-                  <div className="code-block">
-                    <div className="code-header">
-                      <div className="code-filename">{getDisplayLanguage(item.language)}</div>
-                      <div className="code-actions">
-                        {item.gistUrl && (
-                          <a
-                            href={item.gistUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="code-action gist-link"
-                            title="View on GitHub"
+                          <Link
+                            href={getCodeToolsUrl(item.id)}
+                            className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
                           >
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
-                              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                            </svg>
-                            Gist
-                          </a>
-                        )}
-                        <button
-                          className="code-action"
-                          onClick={() => copyToClipboard(item.content, item.id)}
-                        >
-                          {copyStates[item.id] || 'Copy'}
-                        </button>
-                      </div>
-                    </div>
-                    <div className="code-container">
-                      <SyntaxHighlighter
-                        language={getNormalizedLanguage(item.language)}
-                        style={oneDark}
-                        showLineNumbers
-                        wrapLines
-                        lineNumberStyle={{
-                          minWidth: '3em',
-                          paddingRight: '1em',
-                          textAlign: 'right',
-                          userSelect: 'none',
-                          opacity: 0.5,
-                        }}
-                        customStyle={{
-                          margin: 0,
-                          padding: '1rem',
-                          fontSize: '0.875rem',
-                          lineHeight: '1.6',
-                          borderRadius: '0 0 8px 8px',
-                          background: '#282c34',
-                        }}
-                        codeTagProps={{
-                          style: {
-                            fontFamily: "'JetBrains Mono', 'Fira Code', 'Consolas', 'Monaco', monospace",
-                          }
-                        }}
-                      >
-                        {item.content}
-                      </SyntaxHighlighter>
-                    </div>
-                  </div>
-
-                  <div className="code-ai-card-footer">
-                    <div className="code-ai-tags">
-                      {item.tags.map((tag: string) => (
-                        <span key={tag} className="code-ai-tag">
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                            Read detail
+                          </Link>
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
-              ))}
-            </div>
-          )}
+              )}
 
-          {filteredItems.length === 0 && (
-            <div className="code-ai-empty">
-              <p>No snippets found matching your criteria.</p>
+              {filteredItems.length === 0 && (
+                <div className="sticky-note mt-5 p-10 text-center">
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">No matches</p>
+                  <p className="mt-3 font-body text-base leading-relaxed text-secondary">
+                    No snippets match the current filter. Try a different category, clear the search, or switch to Reader mode to browse the whole collection.
+                  </p>
+                </div>
+              )}
             </div>
-          )}
-        </main>
-      </div>
-    </div>
+          </div>
+        </section>
+      </section>
+    </EditorialPageFrame>
   );
 }

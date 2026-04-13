@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Page Mockup — ECONOBEN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #f7f1e8; color: #1d1c16; }
+  .page { max-width: 1440px; margin: 0 auto; background: #fef9ef; min-height: 100vh; }
+
+  /* Nav */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 80px; border-bottom: 1px solid rgba(29,28,22,0.08); background: rgba(254,249,239,0.96); backdrop-filter: blur(12px); }
+  .nav-logo { font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 900; font-size: 22px; color: #1d1c16; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+  .nav-links span { padding: 8px 12px; color: #555f70; border-radius: 6px; }
+  .nav-links .active { background: #0035a0; color: #fff; border-radius: 6px 6px 0 0; }
+
+  /* Tokens */
+  .section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #0035a0; }
+  .btn-blue { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; background: #0035a0; color: #fff; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; transition: transform 0.2s; }
+  .btn-blue:hover { transform: translateY(-2px); }
+  .btn-surface { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); color: #1d1c16; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; transition: transform 0.2s; }
+  .btn-surface:hover { transform: translateY(-2px); }
+
+  /* Hero */
+  .hero { padding: 80px 80px 60px; }
+  .hero .name { font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 96px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; color: #1d1c16; }
+  .hero .role { font-size: 14px; font-weight: 700; color: #0035a0; margin-top: 24px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .hero .divider-short { width: 200px; height: 1px; background: rgba(29,28,22,0.12); margin-top: 20px; }
+  .hero .bio { font-size: 18px; line-height: 1.7; color: #555f70; margin-top: 20px; max-width: 640px; font-family: 'Newsreader', serif; }
+
+  /* Proof */
+  .proof { padding: 0 80px 60px; display: grid; grid-template-columns: 460px 1fr; gap: 60px; }
+  .proof-photo { height: 300px; border-radius: 16px; background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); display: flex; align-items: center; justify-content: center; color: #999; font-size: 14px; overflow: hidden; }
+  .proof-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .proof-item { padding: 16px 0; border-bottom: 1px solid rgba(29,28,22,0.08); }
+  .proof-item .org { font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 22px; font-weight: 700; color: #1d1c16; }
+  .proof-item .detail { font-size: 13px; color: #555f70; margin-top: 2px; }
+  .proof-item:last-child { border-bottom: none; }
+
+  /* Focus */
+  .focus { padding: 0 80px 50px; }
+  .focus .divider-full { height: 1px; background: rgba(29,28,22,0.08); margin-bottom: 24px; }
+  .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 16px; }
+  .focus-card { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 12px; padding: 28px; min-height: 200px; display: flex; flex-direction: column; }
+  .focus-card .label { font-size: 10px; font-weight: 700; color: #0035a0; text-transform: uppercase; letter-spacing: 0.2em; }
+  .focus-card .title { font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 24px; font-weight: 700; margin-top: 10px; color: #1d1c16; }
+  .focus-card .body { font-size: 13px; line-height: 1.7; color: #555f70; margin-top: 10px; }
+  .focus-card .stat { font-size: 11px; font-weight: 700; color: #0035a0; margin-top: auto; padding-top: 16px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* CTAs */
+  .ctas { padding: 0 80px 50px; display: flex; gap: 12px; }
+
+  /* Career */
+  .career { padding: 0 80px 50px; }
+  .career .divider-full { height: 1px; background: rgba(29,28,22,0.08); margin-bottom: 24px; }
+  .career-entry { display: grid; grid-template-columns: 80px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid rgba(29,28,22,0.06); }
+  .career-entry .year { font-size: 12px; font-weight: 500; color: #555f70; padding-top: 4px; }
+  .career-entry .role-title { font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; }
+  .career-entry .desc { font-size: 13px; color: #555f70; margin-top: 4px; line-height: 1.6; }
+
+  /* Skills */
+  .skills { padding: 0 80px 80px; }
+  .skills .divider-full { height: 1px; background: rgba(29,28,22,0.08); margin-bottom: 24px; }
+  .skills .text { font-size: 13px; color: #555f70; line-height: 1.8; margin-top: 8px; }
+  .skills .education { font-size: 13px; color: #1d1c16; margin-top: 16px; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="nav">
+    <div class="nav-logo">ECONOBEN.DEV</div>
+    <div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div>
+  </div>
+
+  <div class="hero">
+    <div class="name">Ben<br>Labaschin</div>
+    <div class="role">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+    <div class="divider-short"></div>
+    <div class="bio">Building AI systems that survive contact with reality. Writing about the constraints that appear once they ship. Speaking about what I learn along the way.</div>
+  </div>
+
+  <div class="proof">
+    <div class="proof-photo">Photo</div>
+    <div>
+      <div class="section-label">Proof</div>
+      <div class="proof-item"><div class="org">Workhelix</div><div class="detail">Founding ML Engineer, enterprise GenAI platforms</div></div>
+      <div class="proof-item"><div class="org">O'Reilly Media</div><div class="detail">Two books: What Are AI Agents? + Managing Memory</div></div>
+      <div class="proof-item"><div class="org">AEA</div><div class="detail">Research: Extending "GPTs Are GPTs" to Firms</div></div>
+      <div class="proof-item"><div class="org">ODSC &middot; Wharton &middot; AI.Science</div><div class="detail">Conference talks and guest lectures</div></div>
+    </div>
+  </div>
+
+  <div class="focus">
+    <div class="divider-full"></div>
+    <div class="section-label">Current Focus</div>
+    <div class="focus-grid">
+      <div class="focus-card">
+        <div class="label">Building</div>
+        <div class="title">Production AI</div>
+        <div class="body">Enterprise GenAI, async LLM APIs, embeddings, retrieval and evaluation at Workhelix for Fortune 50 customers.</div>
+        <div class="stat">$75M Series A</div>
+      </div>
+      <div class="focus-card">
+        <div class="label">Writing</div>
+        <div class="title">Books & Research</div>
+        <div class="body">Two O'Reilly books on AI agents and memory. AEA research on firm-level LLM exposure. Technical blog essays.</div>
+        <div class="stat">6 publications</div>
+      </div>
+      <div class="focus-card">
+        <div class="label">Speaking</div>
+        <div class="title">Teaching in Public</div>
+        <div class="body">Conference talks and workshops that translate writing and research into live technical communication.</div>
+        <div class="stat">5+ conferences</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ctas">
+    <a class="btn-blue" href="#">See talks</a>
+    <a class="btn-surface" href="#">Publications</a>
+    <a class="btn-surface" href="#">Download resume</a>
+  </div>
+
+  <div class="career">
+    <div class="divider-full"></div>
+    <div class="section-label">Career</div>
+    <div class="career-entry"><div class="year">2022 —</div><div><div class="role-title">Staff AI/ML Engineer, Workhelix</div><div class="desc">Founding engineer. Enterprise GenAI platforms, async LLM APIs, embedding systems. Seed to Series A ($75M valuation).</div></div></div>
+    <div class="career-entry"><div class="year">2021 —</div><div><div class="role-title">Senior Data Scientist, Hopper</div><div class="desc">ML engineering for Capital One Travel. Multi-tenant systems, price freeze algorithms. $96M investment.</div></div></div>
+    <div class="career-entry"><div class="year">2021</div><div><div class="role-title">Data Scientist, XPO Logistics</div><div class="desc">$8M in savings. Shipment prioritization and automated pricing with XGBoost.</div></div></div>
+    <div class="career-entry"><div class="year">2019 —</div><div><div class="role-title">Data Scientist, Revantage (Blackstone)</div><div class="desc">A/B testing, regression modeling, real estate investment analytics.</div></div></div>
+    <div class="career-entry"><div class="year">2017 —</div><div><div class="role-title">Economist Researcher, Arity (Allstate)</div><div class="desc">Telematics risk modeling. 2 patents. 2019 Hackathon winner.</div></div></div>
+    <div class="career-entry"><div class="year">2023 —</div><div><div class="role-title">Adjunct Lecturer, Chapman University</div><div class="desc">Python AI/ML curriculum for 30+ students.</div></div></div>
+  </div>
+
+  <div class="skills">
+    <div class="divider-full"></div>
+    <div class="section-label">Skills</div>
+    <div class="text">Python &middot; Java &middot; C# &middot; R &middot; SQL &middot; Shell &middot; JavaScript &middot; GenAI &middot; PyTorch &middot; TensorFlow &middot; Transformers &middot; NLP &middot; AWS &middot; GCP &middot; Azure &middot; Docker &middot; FastAPI &middot; PostgreSQL &middot; BigQuery &middot; Snowflake</div>
+    <div class="education">B.A. Economics, cum laude — Lake Forest College, 2016</div>
+    <div style="margin-top:16px;"><div class="section-label">Patents</div></div>
+    <div class="text">Shared Mobility Simulation (USPTO 20190347941) &middot; Matching Drivers With Shared Vehicles (USPTO 20190347582)</div>
+  </div>
+</div>
+
+</body>
+</html>

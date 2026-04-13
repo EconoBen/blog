@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Page Mockup — ECONOBEN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #e8e3da; color: #1d1c16; }
+  .page { max-width: 1440px; margin: 40px auto; background: #fef9ef; min-height: 600px; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 55px rgba(16,34,54,0.1); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 80px; border-bottom: 1px solid rgba(29,28,22,0.08); background: rgba(254,249,239,0.96); }
+  .nav-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 22px; color: #1d1c16; }
+  .nav-links { display: flex; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+  .nav-links span { padding: 8px 12px; color: #555f70; }
+  .nav-links .active { background: #0035a0; color: #fff; border-radius: 6px 6px 0 0; }
+  .divider { height: 1px; background: rgba(29,28,22,0.08); }
+  .sec-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #0035a0; }
+  .btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; background: #0035a0; color: #fff; border-radius: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; }
+  .btn-outline { display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px; background: transparent; border: 1px solid rgba(0,53,160,0.2); color: #0035a0; border-radius: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; }
+
+  .hero { padding: 60px 80px 40px; display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: start; }
+  .hero .badge { display: inline-flex; align-items: center; gap: 8px; background: #0035a0; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; }
+  .hero .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
+  .hero .publisher { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #555f70; margin-left: 12px; }
+  .hero h1 { font-family: 'Space Grotesk', sans-serif; font-size: 56px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-top: 24px; }
+  .hero .subtitle { font-family: 'Newsreader', serif; font-size: 22px; line-height: 1.6; color: #555f70; margin-top: 16px; max-width: 520px; }
+  .hero .book-img img { width: 100%; display: block; }
+
+  .audience-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+  .audience-card { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 12px; padding: 28px; }
+  .audience-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; }
+  .audience-card p { font-size: 14px; line-height: 1.7; color: #555f70; margin-top: 8px; }
+
+  .questions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px; }
+  .question-card { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 12px; padding: 28px; }
+  .question-card .q { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; }
+  .question-card .a { font-size: 14px; line-height: 1.7; color: #555f70; margin-top: 8px; }
+  .question-card .ref { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #0035a0; margin-top: 12px; }
+
+  .concepts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+  .concept { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 10px; padding: 20px; }
+  .concept h4 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: #1d1c16; }
+  .concept p { font-size: 13px; line-height: 1.6; color: #555f70; margin-top: 6px; }
+
+  .timeline { margin-top: 24px; }
+  .timeline-row { display: grid; grid-template-columns: 60px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(29,28,22,0.06); }
+  .timeline-row:last-child { border-bottom: none; }
+  .timeline-num { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900; color: #0035a0; opacity: 0.2; }
+  .timeline-title { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; }
+  .timeline-desc { font-size: 14px; line-height: 1.6; color: #555f70; margin-top: 4px; }
+  .timeline-part { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: #0035a0; padding: 20px 0 8px; }
+
+  .cta-box { background: #0035a0; border-radius: 16px; padding: 48px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .cta-box h2 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 900; }
+  .cta-box p { font-size: 16px; line-height: 1.6; opacity: 0.8; margin-top: 8px; max-width: 480px; }
+  .cta-box .btn { display: inline-flex; padding: 14px 28px; background: #fff; color: #0035a0; border-radius: 8px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span class="active">New Book</span><span>Code & Tools</span><span>About</span></div></div>
+
+  <!-- ── Hero ── -->
+  <div class="hero">
+    <div>
+      <div style="display:flex; align-items:center;">
+        <span class="badge"><span class="dot"></span> In Progress</span>
+        <span class="publisher">O&rsquo;Reilly Media</span>
+      </div>
+      <h1>Agent Memory</h1>
+      <p class="subtitle">Building Stateful AI Agents That Remember, Adapt, and Work Across Time</p>
+      <div style="margin-top:24px; display:flex; gap:12px;">
+        <a class="btn-primary" href="#">Get book updates</a>
+        <a class="btn-outline" href="#">See related work</a>
+      </div>
+    </div>
+    <div class="book-img"><img src="/assets/book-illustration.svg" alt="Agent Memory book cover"></div>
+  </div>
+
+  <!-- ── Who This Book Is For ── -->
+  <div style="padding:0 80px 40px;">
+    <div class="divider" style="margin-bottom:30px;"></div>
+    <div class="sec-label">Who This Book Is For</div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h3>Engineers building agents</h3>
+        <p>You&rsquo;re past the prompt-and-pray stage. You need memory that works across sessions, handles corrections, and doesn&rsquo;t rot as it grows.</p>
+      </div>
+      <div class="audience-card">
+        <h3>Teams shipping AI products</h3>
+        <p>Your agent works in demos but breaks in production. This book covers the operational patterns that make memory reliable at scale.</p>
+      </div>
+      <div class="audience-card">
+        <h3>Anyone designing stateful AI</h3>
+        <p>If you&rsquo;re deciding how an AI system should remember, forget, and share information, this is the architectural reference.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Questions This Book Answers ── -->
+  <div style="padding:0 80px 50px;">
+    <div class="divider" style="margin-bottom:30px;"></div>
+    <div class="sec-label">Questions This Book Answers</div>
+    <div class="questions-grid">
+      <div class="question-card">
+        <div class="q">How do I stop my agent from forgetting everything between sessions?</div>
+        <div class="a">The book separates context from memory and shows how to build retention that survives session boundaries without polluting future interactions.</div>
+        <div class="ref">Chapters 1 &ndash; 2</div>
+      </div>
+      <div class="question-card">
+        <div class="q">What should my agent actually remember?</div>
+        <div class="a">Not everything. The book defines practical rules for what to keep, what to compress, and what to deliberately forget.</div>
+        <div class="ref">Chapter 3</div>
+      </div>
+      <div class="question-card">
+        <div class="q">How do I write memory without filling it with noise?</div>
+        <div class="a">Write triggers, thresholds, restraint. The book covers when to write, when to wait, and how to avoid memory pollution.</div>
+        <div class="ref">Chapter 4</div>
+      </div>
+      <div class="question-card">
+        <div class="q">My retrieval keeps pulling the wrong memories. Now what?</div>
+        <div class="a">The book covers query formation, ranking, context loading, semantic caching, and how to evaluate whether retrieval is helping or hurting.</div>
+        <div class="ref">Chapter 6</div>
+      </div>
+      <div class="question-card">
+        <div class="q">How do I keep memory useful as it grows?</div>
+        <div class="a">Rollups, summaries, corrections, versioning, duplicate detection, and maintenance strategies that prevent memory rot.</div>
+        <div class="ref">Chapter 7</div>
+      </div>
+      <div class="question-card">
+        <div class="q">What happens when memory goes wrong?</div>
+        <div class="a">Poisoning, leakage, staleness, over-trust. The book closes with detection, repair, rollback, and designing memory to fail safely.</div>
+        <div class="ref">Chapter 10</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What You'll Learn to Build ── -->
+  <div style="padding:0 80px 50px;">
+    <div class="divider" style="margin-bottom:30px;"></div>
+    <div class="sec-label">What You&rsquo;ll Learn to Build</div>
+    <div class="concepts-grid">
+      <div class="concept">
+        <h4>Design a memory API</h4>
+        <p>Give your agent the verbs it needs: write, retrieve, update, forget, consolidate</p>
+      </div>
+      <div class="concept">
+        <h4>Decide what to keep</h4>
+        <p>Build practical retention rules instead of storing everything and hoping</p>
+      </div>
+      <div class="concept">
+        <h4>Retrieve without hallucinating</h4>
+        <p>Form better queries, rank candidates, and measure whether recall is helping</p>
+      </div>
+      <div class="concept">
+        <h4>Resume interrupted work</h4>
+        <p>Checkpoints, durable state, and handoff patterns for long-running agents</p>
+      </div>
+      <div class="concept">
+        <h4>Maintain memory at scale</h4>
+        <p>Prevent rot, resolve duplicates, and keep memory useful as it grows</p>
+      </div>
+      <div class="concept">
+        <h4>Share memory safely</h4>
+        <p>Ownership, boundaries, and coordination across agents and teams</p>
+      </div>
+      <div class="concept">
+        <h4>Design for failure</h4>
+        <p>Poisoning, leakage, rollback, and guardrails that limit blast radius</p>
+      </div>
+      <div class="concept">
+        <h4>Evaluate memory quality</h4>
+        <p>Baselines, regressions, and knowing when memory is making things worse</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── What the Book Covers ── -->
+  <div style="padding:0 80px 50px;">
+    <div class="divider" style="margin-bottom:30px;"></div>
+    <div class="sec-label">What the Book Covers</div>
+    <div style="font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:900; margin-top:8px;">10 chapters across 3 parts.</div>
+    <div class="timeline">
+      <div class="timeline-part">Part I &mdash; Agents, Memory, and the Act of Remembering</div>
+      <div class="timeline-row"><div class="timeline-num">01</div><div><div class="timeline-title">The Work of Remembering</div><div class="timeline-desc">What memory means for an agent, how it differs from context, and why continuity changes everything.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">02</div><div><div class="timeline-title">What the Agent Can Read and Write</div><div class="timeline-desc">Where memory lives, the five working verbs, and giving the agent a memory API.</div></div></div>
+
+      <div class="timeline-part">Part II &mdash; Building and Managing Agent Memory</div>
+      <div class="timeline-row"><div class="timeline-num">03</div><div><div class="timeline-title">Choosing What Becomes Memory</div><div class="timeline-desc">Rules for retention, compression, forgetting, and knowing when memory helps.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">04</div><div><div class="timeline-title">How Memory Gets Written</div><div class="timeline-desc">Write triggers, normalization, correction, and failure modes in the write path.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">05</div><div><div class="timeline-title">Where Memory Lives and Who Controls It</div><div class="timeline-desc">Client vs server, portability, inspectability, and the control model.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">06</div><div><div class="timeline-title">Finding the Right Memory</div><div class="timeline-desc">Retrieval, ranking, context loading, caching, and evaluating quality.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">07</div><div><div class="timeline-title">Keeping Memory Useful Over Time</div><div class="timeline-desc">Rollups, corrections, versioning, duplicates, and maintenance strategies.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">08</div><div><div class="timeline-title">More Than Memory: State and Resumability</div><div class="timeline-desc">Checkpoints, durable work, resume, replay, and human pause points.</div></div></div>
+
+      <div class="timeline-part">Part III &mdash; Shared Memory, Risk, and Recovery</div>
+      <div class="timeline-row"><div class="timeline-num">09</div><div><div class="timeline-title">Shared Memory: Coordination, Boundaries, and Conflict</div><div class="timeline-desc">Ownership, leakage, multi-agent coordination, and provenance.</div></div></div>
+      <div class="timeline-row"><div class="timeline-num">10</div><div><div class="timeline-title">Dangerous Memory: Risk, Failure, and Recovery</div><div class="timeline-desc">Poisoning, detection, repair, rollback, and designing memory to fail safely.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <div style="padding:0 80px 60px;">
+    <div class="cta-box">
+      <div>
+        <h2>Get notified when Agent Memory ships.</h2>
+        <p>No spam, no fake waitlist. Just an email when the book is ready, plus occasional updates on the writing process.</p>
+      </div>
+      <a class="btn" href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates">Email for updates</a>
+    </div>
+  </div>
+
+</div>
+
+<div style="height:80px;"></div>
+
+</body>
+</html>

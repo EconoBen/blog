@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg25" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
+    </linearGradient>
+    <linearGradient id="lineGrad25" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.1"/>
+      <stop offset="30%" stop-color="#004ac6" stop-opacity="0.7"/>
+      <stop offset="70%" stop-color="#004ac6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0.1"/>
+    </linearGradient>
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg25)"/>
+
+  <!-- Horizontal timeline line -->
+  <line x1="100" y1="315" x2="1100" y2="315" stroke="url(#lineGrad25)" stroke-width="2"/>
+
+  <!-- Timeline tick marks (months) -->
+  <g stroke="#95a0b4" stroke-width="1" stroke-opacity="0.3">
+    <line x1="180" y1="305" x2="180" y2="325"/>
+    <line x1="260" y1="305" x2="260" y2="325"/>
+    <line x1="340" y1="305" x2="340" y2="325"/>
+    <line x1="420" y1="305" x2="420" y2="325"/>
+    <line x1="500" y1="305" x2="500" y2="325"/>
+    <line x1="580" y1="305" x2="580" y2="325"/>
+    <line x1="660" y1="305" x2="660" y2="325"/>
+    <line x1="740" y1="305" x2="740" y2="325"/>
+    <line x1="820" y1="305" x2="820" y2="325"/>
+    <line x1="900" y1="305" x2="900" y2="325"/>
+    <line x1="980" y1="305" x2="980" y2="325"/>
+    <line x1="1060" y1="305" x2="1060" y2="325"/>
+  </g>
+
+  <!-- Milestone markers (circles above/below timeline) -->
+  <!-- Q1 milestones -->
+  <circle cx="220" cy="315" r="8" fill="#004ac6" opacity="0.5"/>
+  <circle cx="220" cy="315" r="4" fill="#fef9ef" opacity="0.6"/>
+  <line x1="220" y1="307" x2="220" y2="230" stroke="#004ac6" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="220" cy="220" r="18" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.35"/>
+  <circle cx="220" cy="220" r="6" fill="#004ac6" opacity="0.4"/>
+
+  <!-- Q1 second -->
+  <circle cx="340" cy="315" r="6" fill="#004ac6" opacity="0.45"/>
+  <circle cx="340" cy="315" r="3" fill="#fef9ef" opacity="0.5"/>
+  <line x1="340" y1="323" x2="340" y2="400" stroke="#004ac6" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="340" cy="410" r="14" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle cx="340" cy="410" r="5" fill="#004ac6" opacity="0.35"/>
+
+  <!-- Q2 milestone (large) -->
+  <circle cx="500" cy="315" r="12" fill="#004ac6" opacity="0.65"/>
+  <circle cx="500" cy="315" r="5" fill="#fef9ef" opacity="0.75"/>
+  <line x1="500" y1="303" x2="500" y2="180" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle cx="500" cy="165" r="28" fill="none" stroke="#004ac6" stroke-width="2" stroke-opacity="0.45"/>
+  <circle cx="500" cy="165" r="14" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="500" cy="165" r="8" fill="#004ac6" opacity="0.5"/>
+
+  <!-- Q2 second -->
+  <circle cx="620" cy="315" r="7" fill="#004ac6" opacity="0.5"/>
+  <circle cx="620" cy="315" r="3" fill="#fef9ef" opacity="0.6"/>
+  <line x1="620" y1="323" x2="620" y2="430" stroke="#004ac6" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="620" cy="445" r="20" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.35"/>
+  <circle cx="620" cy="445" r="7" fill="#004ac6" opacity="0.4"/>
+
+  <!-- Q3 milestone -->
+  <circle cx="740" cy="315" r="10" fill="#004ac6" opacity="0.6"/>
+  <circle cx="740" cy="315" r="4" fill="#fef9ef" opacity="0.7"/>
+  <line x1="740" y1="305" x2="740" y2="200" stroke="#004ac6" stroke-width="1" stroke-opacity="0.35"/>
+  <circle cx="740" cy="185" r="22" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle cx="740" cy="185" r="10" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.25"/>
+  <circle cx="740" cy="185" r="6" fill="#004ac6" opacity="0.45"/>
+
+  <!-- Q4 milestone (largest - year end) -->
+  <circle cx="940" cy="315" r="14" fill="#004ac6" opacity="0.8"/>
+  <circle cx="940" cy="315" r="6" fill="#fef9ef" opacity="0.9"/>
+  <line x1="940" y1="301" x2="940" y2="150" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="940" cy="130" r="35" fill="none" stroke="#004ac6" stroke-width="2" stroke-opacity="0.5"/>
+  <circle cx="940" cy="130" r="20" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.35"/>
+  <circle cx="940" cy="130" r="10" fill="#004ac6" opacity="0.6"/>
+
+  <!-- Connecting arcs between milestones (engagement flow) -->
+  <path d="M238 220 Q370 140 490 165" fill="none" stroke="#fef9ef" stroke-width="1" stroke-opacity="0.12" stroke-dasharray="4 3"/>
+  <path d="M520 165 Q630 120 730 185" fill="none" stroke="#fef9ef" stroke-width="1" stroke-opacity="0.12" stroke-dasharray="4 3"/>
+  <path d="M760 185 Q850 100 930 130" fill="none" stroke="#fef9ef" stroke-width="1" stroke-opacity="0.15" stroke-dasharray="4 3"/>
+
+  <!-- Decorative dots cluster (publishing activity) -->
+  <g fill="#95a0b4" opacity="0.15">
+    <circle cx="160" cy="500" r="2"/>
+    <circle cx="175" cy="510" r="2"/>
+    <circle cx="190" cy="495" r="2"/>
+    <circle cx="1020" cy="480" r="2"/>
+    <circle cx="1035" cy="495" r="2"/>
+    <circle cx="1050" cy="485" r="2"/>
+  </g>
+
+  <!-- Subtle radial glow behind main milestone -->
+  <circle cx="940" cy="130" r="60" fill="url(#nodeGlow)"/>
+
+  <!-- Corner accents -->
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="30" y2="70" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+</svg>

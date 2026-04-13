@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg24" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
+    </linearGradient>
+    <radialGradient id="targetGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.12"/>
+      <stop offset="70%" stop-color="#004ac6" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fef9ef" stop-opacity="0"/>
+      <stop offset="60%" stop-color="#fef9ef" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fef9ef" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg24)"/>
+
+  <!-- Target/bullseye (centered slightly left) -->
+  <g transform="translate(520, 315)">
+    <!-- Glow -->
+    <circle cx="0" cy="0" r="220" fill="url(#targetGlow)"/>
+
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="200" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.2"/>
+
+    <!-- Segments (radiating) -->
+    <path d="M0,-200 A200,200 0 0,1 200,0" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+    <path d="M200,0 A200,200 0 0,1 0,200" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+    <path d="M0,200 A200,200 0 0,1 -200,0" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+    <path d="M-200,0 A200,200 0 0,1 0,-200" fill="none" stroke="#004ac6" stroke-width="1" stroke-opacity="0.15"/>
+
+    <!-- Ring 2 -->
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#004ac6" stroke-width="1.5" stroke-opacity="0.3"/>
+
+    <!-- Segment fills (alternating opacity) -->
+    <path d="M0,0 L0,-150 A150,150 0 0,1 150,0 Z" fill="#004ac6" opacity="0.04"/>
+    <path d="M0,0 L0,150 A150,150 0 0,1 -150,0 Z" fill="#004ac6" opacity="0.04"/>
+
+    <!-- Ring 3 -->
+    <circle cx="0" cy="0" r="100" fill="none" stroke="#004ac6" stroke-width="2" stroke-opacity="0.45"/>
+
+    <!-- Segment fills inner -->
+    <path d="M0,0 L100,0 A100,100 0 0,1 0,100 Z" fill="#004ac6" opacity="0.06"/>
+    <path d="M0,0 L-100,0 A100,100 0 0,1 0,-100 Z" fill="#004ac6" opacity="0.06"/>
+
+    <!-- Ring 4 -->
+    <circle cx="0" cy="0" r="55" fill="none" stroke="#004ac6" stroke-width="2" stroke-opacity="0.6"/>
+    <circle cx="0" cy="0" r="55" fill="#004ac6" opacity="0.05"/>
+
+    <!-- Bullseye center -->
+    <circle cx="0" cy="0" r="18" fill="#004ac6" opacity="0.7"/>
+    <circle cx="0" cy="0" r="8" fill="#fef9ef" opacity="0.6"/>
+
+    <!-- Cross hairs -->
+    <line x1="0" y1="-210" x2="0" y2="-22" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="0" y1="22" x2="0" y2="210" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="-210" y1="0" x2="-22" y2="0" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="22" y1="0" x2="210" y2="0" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+  </g>
+
+  <!-- Arrow 1 (embedded in target, near center) -->
+  <g transform="translate(520, 315)">
+    <!-- Arrow shaft -->
+    <line x1="-180" y1="40" x2="5" y2="-8" stroke="url(#arrowGrad)" stroke-width="2.5"/>
+    <!-- Arrow head -->
+    <polygon points="8,-10 -2,-4 2,-16" fill="#fef9ef" opacity="0.8"/>
+    <!-- Fletching -->
+    <line x1="-175" y1="38" x2="-185" y2="28" stroke="#fef9ef" stroke-width="1" stroke-opacity="0.3"/>
+    <line x1="-178" y1="42" x2="-192" y2="38" stroke="#fef9ef" stroke-width="1" stroke-opacity="0.3"/>
+  </g>
+
+  <!-- Arrow 2 (slight miss, in ring 3) -->
+  <g transform="translate(520, 315)">
+    <line x1="-150" y1="-100" x2="30" y2="-45" stroke="#95a0b4" stroke-width="1.5" stroke-opacity="0.3"/>
+    <polygon points="33,-46 24,-40 26,-52" fill="#95a0b4" opacity="0.35"/>
+    <line x1="-146" y1="-98" x2="-155" y2="-110" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+    <line x1="-150" y1="-102" x2="-162" y2="-106" stroke="#95a0b4" stroke-width="0.75" stroke-opacity="0.2"/>
+  </g>
+
+  <!-- Radiating segments outside target (achievement arcs) -->
+  <g transform="translate(520, 315)" fill="none" stroke-opacity="0.12">
+    <path d="M-220,60 A230,230 0 0,1 -180,-140" stroke="#004ac6" stroke-width="3"/>
+    <path d="M160,-160 A230,230 0 0,1 230,20" stroke="#004ac6" stroke-width="3"/>
+    <path d="M180,130 A230,230 0 0,1 40,225" stroke="#004ac6" stroke-width="3"/>
+  </g>
+
+  <!-- Small diamond accents (goals) -->
+  <g fill="#004ac6" opacity="0.15">
+    <rect x="830" y="160" width="8" height="8" rx="1" transform="rotate(45 834 164)"/>
+    <rect x="870" y="200" width="6" height="6" rx="1" transform="rotate(45 873 203)"/>
+    <rect x="900" y="140" width="10" height="10" rx="1" transform="rotate(45 905 145)"/>
+    <rect x="200" y="460" width="7" height="7" rx="1" transform="rotate(45 203.5 463.5)"/>
+    <rect x="240" y="490" width="5" height="5" rx="1" transform="rotate(45 242.5 492.5)"/>
+  </g>
+
+  <!-- Corner accents -->
+  <line x1="30" y1="30" x2="70" y2="30" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="30" y1="30" x2="30" y2="70" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1130" y2="600" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="1170" y1="600" x2="1170" y2="560" stroke="#95a0b4" stroke-width="1" stroke-opacity="0.25"/>
+</svg>

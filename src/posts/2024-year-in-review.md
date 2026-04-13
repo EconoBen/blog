@@ -3,6 +3,7 @@ title: "2024: My Year In Review — AI, Archery, and Goals"
 date: "2024-12-31"
 summary: "Reflections on a year of growth, experimentation, and resilience—covering professional wins, personal pursuits like archery and lifting, and the challenges of navigating health setbacks. Plus, my goals for 2025."
 tags: ["year in review", "LLMs", "archery", "health", "personal growth", "AI"]
+image: "/assets/covers/2024-year-in-review.svg"
 ---
 
 

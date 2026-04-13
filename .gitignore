@@ -32,3 +32,7 @@ public/audio/
 # Audio cache
 .audio-cache.json
 .s3-upload-cache.json
+
+# Dolt database files (added by bd init)
+.dolt/
+*.db

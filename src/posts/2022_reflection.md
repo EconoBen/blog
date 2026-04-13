@@ -3,6 +3,7 @@ title: "2022: My Year in Review"
 date: "2022-12-31"
 tags: ["Year in Review", "Personal Goals", "Startup Life", "NormConf", "2022 Reflection"]
 summary: "A personal recap of the milestones, memories, and goals that shaped 2022—from paying off loans and co-organizing NormConf to hiking Sequoia and building a PC—with a look ahead to ambitions for 2023."
+image: "/assets/covers/2022-year-in-review.svg"
 ---
 
 

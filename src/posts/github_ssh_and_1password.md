@@ -3,6 +3,7 @@ title: "The *Right* Way to Maintain Multiple GitHub Accounts Using 1Password's S
 date: "2022-08-22"
 tags: ["SSH", "GitHub", "1Password", "Developer Tooling", "Multi-Account Setup"]
 summary: "A walkthrough for managing multiple GitHub accounts with 1Password's SSH key integration, covering common pitfalls and offering a cleaner setup than the official docs."
+image: "/assets/covers/github-ssh-1password.svg"
 ---
 
 

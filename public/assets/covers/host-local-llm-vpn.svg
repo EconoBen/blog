@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8eef8"/>
+      <stop offset="100%" stop-color="#dce5f4"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="tunnelGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#004ac6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0.5"/>
+    </linearGradient>
+    <radialGradient id="nodeGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#004ac6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#004ac6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg8)"/>
+
+  <!-- Shield / tunnel shape — central motif -->
+  <g transform="translate(600, 300)">
+    <!-- Outer shield outline -->
+    <path d="M 0 -180 C 140 -180, 180 -140, 180 -40 C 180 60, 120 160, 0 210 C -120 160, -180 60, -180 -40 C -180 -140, -140 -180, 0 -180 Z"
+          fill="url(#shieldGrad)" stroke="#004ac6" stroke-opacity="0.3" stroke-width="2"/>
+
+    <!-- Inner shield ring -->
+    <path d="M 0 -140 C 110 -140, 140 -110, 140 -30 C 140 50, 90 125, 0 165 C -90 125, -140 50, -140 -30 C -140 -110, -110 -140, 0 -140 Z"
+          fill="none" stroke="#004ac6" stroke-opacity="0.15" stroke-width="1"/>
+
+    <!-- Tunnel/corridor lines converging to center -->
+    <g stroke="#004ac6" stroke-opacity="0.12" stroke-width="1">
+      <!-- Horizontal tunnel lines -->
+      <line x1="-140" y1="-60" x2="140" y2="-60"/>
+      <line x1="-135" y1="-30" x2="135" y2="-30"/>
+      <line x1="-140" y1="0" x2="140" y2="0"/>
+      <line x1="-135" y1="30" x2="135" y2="30"/>
+      <line x1="-120" y1="60" x2="120" y2="60"/>
+    </g>
+
+    <!-- Central lock/secure icon -->
+    <rect x="-20" y="-15" width="40" height="32" rx="5" fill="#e8eef8" stroke="#004ac6" stroke-opacity="0.5" stroke-width="1.5"/>
+    <path d="M -10 -15 L -10 -28 C -10 -42, 10 -42, 10 -28 L 10 -15" fill="none" stroke="#004ac6" stroke-opacity="0.4" stroke-width="1.5"/>
+    <circle cy="2" r="4" fill="#004ac6" fill-opacity="0.4"/>
+    <line x1="0" y1="4" x2="0" y2="12" stroke="#004ac6" stroke-opacity="0.35" stroke-width="1.5"/>
+  </g>
+
+  <!-- Data flow lines — incoming from left (remote access) -->
+  <g fill="none" stroke-linecap="round">
+    <!-- Flow line 1 -->
+    <path d="M 60 200 C 140 200, 200 230, 300 260 C 380 285, 420 290, 460 295"
+          stroke="#004ac6" stroke-opacity="0.3" stroke-width="1.5"/>
+    <!-- Flow line 2 -->
+    <path d="M 60 320 C 160 320, 240 310, 340 305 C 400 302, 430 300, 460 300"
+          stroke="#fef9ef" stroke-opacity="0.12" stroke-width="1.5"/>
+    <!-- Flow line 3 -->
+    <path d="M 60 440 C 140 440, 220 400, 320 360 C 380 335, 420 315, 460 308"
+          stroke="#004ac6" stroke-opacity="0.2" stroke-width="1.5"/>
+  </g>
+
+  <!-- Data flow — outgoing to right (to LLM) -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M 740 295 C 780 290, 820 285, 900 260 C 980 235, 1040 210, 1120 200"
+          stroke="#004ac6" stroke-opacity="0.3" stroke-width="1.5"/>
+    <path d="M 740 300 C 800 300, 860 305, 940 310 C 1020 315, 1060 318, 1120 320"
+          stroke="#fef9ef" stroke-opacity="0.12" stroke-width="1.5"/>
+    <path d="M 740 308 C 780 315, 820 330, 900 360 C 980 390, 1040 420, 1120 440"
+          stroke="#004ac6" stroke-opacity="0.2" stroke-width="1.5"/>
+  </g>
+
+  <!-- Data flow dots (moving particles) -->
+  <g fill="#004ac6">
+    <circle cx="180" cy="210" r="2.5" opacity="0.35"/>
+    <circle cx="280" cy="250" r="2" opacity="0.25"/>
+    <circle cx="160" cy="325" r="2" opacity="0.2"/>
+    <circle cx="240" cy="395" r="2.5" opacity="0.25"/>
+
+    <circle cx="880" cy="255" r="2.5" opacity="0.3"/>
+    <circle cx="1000" cy="225" r="2" opacity="0.2"/>
+    <circle cx="950" cy="315" r="2" opacity="0.2"/>
+    <circle cx="1000" cy="405" r="2.5" opacity="0.25"/>
+  </g>
+
+  <!-- Remote device nodes (left side) -->
+  <g transform="translate(60, 200)">
+    <ellipse rx="18" ry="18" fill="url(#nodeGlow)"/>
+    <circle r="6" fill="none" stroke="#004ac6" stroke-opacity="0.4" stroke-width="1.5"/>
+    <circle r="2" fill="#004ac6" fill-opacity="0.5"/>
+  </g>
+  <g transform="translate(60, 320)">
+    <ellipse rx="18" ry="18" fill="url(#nodeGlow)"/>
+    <circle r="6" fill="none" stroke="#fef9ef" stroke-opacity="0.2" stroke-width="1.5"/>
+    <circle r="2" fill="#fef9ef" fill-opacity="0.3"/>
+  </g>
+  <g transform="translate(60, 440)">
+    <ellipse rx="18" ry="18" fill="url(#nodeGlow)"/>
+    <circle r="6" fill="none" stroke="#004ac6" stroke-opacity="0.3" stroke-width="1.5"/>
+    <circle r="2" fill="#004ac6" fill-opacity="0.4"/>
+  </g>
+
+  <!-- LLM server node (right side) -->
+  <g transform="translate(1140, 320)">
+    <rect x="-30" y="-50" width="60" height="100" rx="6" fill="none" stroke="#004ac6" stroke-opacity="0.25" stroke-width="1.5"/>
+
+    <!-- Server rack lines -->
+    <line x1="-20" y1="-30" x2="20" y2="-30" stroke="#004ac6" stroke-opacity="0.15" stroke-width="1"/>
+    <line x1="-20" y1="-10" x2="20" y2="-10" stroke="#004ac6" stroke-opacity="0.15" stroke-width="1"/>
+    <line x1="-20" y1="10" x2="20" y2="10" stroke="#004ac6" stroke-opacity="0.15" stroke-width="1"/>
+    <line x1="-20" y1="30" x2="20" y2="30" stroke="#004ac6" stroke-opacity="0.15" stroke-width="1"/>
+
+    <!-- Status lights -->
+    <circle cx="-15" cy="-38" r="2" fill="#004ac6" fill-opacity="0.5"/>
+    <circle cx="-8" cy="-38" r="2" fill="#004ac6" fill-opacity="0.3"/>
+
+    <!-- Neural net suggestion -->
+    <circle cx="0" cy="-20" r="3" fill="#004ac6" fill-opacity="0.15"/>
+    <circle cx="0" cy="0" r="3" fill="#004ac6" fill-opacity="0.15"/>
+    <circle cx="0" cy="20" r="3" fill="#004ac6" fill-opacity="0.15"/>
+    <line x1="0" y1="-17" x2="0" y2="-3" stroke="#004ac6" stroke-opacity="0.1" stroke-width="0.5"/>
+    <line x1="0" y1="3" x2="0" y2="17" stroke="#004ac6" stroke-opacity="0.1" stroke-width="0.5"/>
+  </g>
+
+  <!-- Network mesh background — very subtle -->
+  <g stroke="#95a0b4" stroke-opacity="0.03" stroke-width="0.5">
+    <line x1="100" y1="100" x2="300" y2="180"/>
+    <line x1="300" y1="180" x2="200" y2="350"/>
+    <line x1="900" y1="180" x2="1000" y2="350"/>
+    <line x1="1000" y1="350" x2="1100" y2="500"/>
+    <line x1="150" y1="500" x2="300" y2="450"/>
+    <line x1="900" y1="500" x2="1050" y2="450"/>
+  </g>
+</svg>

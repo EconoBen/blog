@@ -3,6 +3,7 @@ title: "2023: My Year In Review"
 date: "2023-12-30"
 summary: "A reflection on a year of growth, gratitude, teaching, travel, and paying off the final student loan. Here’s what I accomplished in 2023 and what I’m hoping to do in 2024."
 tags: ["year in review", "student loans", "teaching", "travel", "machine learning", "LLMs", "writing"]
+image: "/assets/covers/2023-year-in-review.svg"
 ---
 
 

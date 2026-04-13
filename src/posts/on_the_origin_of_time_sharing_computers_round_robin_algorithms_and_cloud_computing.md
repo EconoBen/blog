@@ -3,6 +3,7 @@ title: On the Origin of Time-Sharing Computers, Round-Robin Algorithms, and Clou
 date: "2020-08-30"
 tags: ["Time-Sharing", "Computer History", "Cloud Computing", "ARPA", "Round-Robin", "Economics of Computing"]
 summary: "An exploration of time-sharing's origins—from Cold War military investments and Project MAC to the round-robin algorithm—and how these foundational ideas helped shape cloud computing as we know it."
+image: "/assets/covers/time-sharing-computers.svg"
 ---
 
 ![The Fighting Temeraire, JMW Turner, National Gallery](/assets/2022/08/1024px-The_Fighting_Temeraire_JMW_Turner_National_Gallery.jpg)

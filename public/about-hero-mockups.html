@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Hero Mockups — ECONOBEN.DEV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #e8e3da; color: #1d1c16; }
+
+  .option-label {
+    max-width: 1440px; margin: 60px auto 0; padding: 0 80px;
+    font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.2em; color: #0035a0;
+  }
+  .option-desc {
+    max-width: 1440px; margin: 8px auto 24px; padding: 0 80px;
+    font-size: 14px; color: #555f70; line-height: 1.6;
+  }
+
+  .page { max-width: 1440px; margin: 0 auto 80px; background: #fef9ef; min-height: 600px; border-radius: 12px; overflow: hidden; box-shadow: 0 18px 55px rgba(16,34,54,0.1); }
+
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 80px; border-bottom: 1px solid rgba(29,28,22,0.08); background: rgba(254,249,239,0.96); }
+  .nav-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 22px; color: #1d1c16; }
+  .nav-links { display: flex; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+  .nav-links span { padding: 8px 12px; color: #555f70; }
+  .nav-links .active { background: #0035a0; color: #fff; border-radius: 6px 6px 0 0; }
+
+  .divider { height: 1px; background: rgba(29,28,22,0.08); }
+  .bio-text { font-size: 17px; line-height: 1.7; color: #555f70; font-family: 'Newsreader', serif; max-width: 580px; }
+  .role-label { font-size: 13px; font-weight: 700; color: #0035a0; letter-spacing: 0.15em; text-transform: uppercase; }
+  .section-pad { padding: 0 80px 60px; }
+  .section-pad h2 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 900; color: #1d1c16; }
+
+  /* Shared hero */
+  .hero { padding: 80px 80px 60px; display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: start; }
+  .hero .name { font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; color: #1d1c16; }
+  .hero .photo { border-radius: 16px; overflow: hidden; border: 1px solid rgba(210,200,170,0.5); }
+  .hero .photo img { width: 100%; height: 400px; object-fit: cover; display: block; }
+
+  /* ══════════════════════════════════════════════
+     OPTION A — Stat cards (original)
+     ══════════════════════════════════════════════ */
+  .a-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 16px; }
+  .a-stat-card { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 10px; padding: 20px; text-align: center; }
+  .a-stat-card .number { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 900; color: #0035a0; }
+  .a-stat-card .label { font-size: 11px; font-weight: 600; color: #555f70; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* ══════════════════════════════════════════════
+     OPTION B — Highlights list (two-column)
+     ══════════════════════════════════════════════ */
+  .b-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; margin-top: 4px; }
+  .hl-org { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #1d1c16; }
+  .hl-detail { font-size: 13px; color: #555f70; margin-top: 2px; }
+  .hl-item { padding: 14px 0; border-bottom: 1px solid rgba(29,28,22,0.08); }
+  .hl-item:last-child { border-bottom: none; }
+
+  /* ══════════════════════════════════════════════
+     OPTION C — Stats + Highlights side by side
+     ══════════════════════════════════════════════ */
+  .c-mixed { display: grid; grid-template-columns: 1fr 280px; gap: 48px; margin-top: 16px; }
+  .c-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; align-content: start; }
+  .c-stat-tile { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 10px; padding: 18px 16px; }
+  .c-stat-tile .number { font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 900; color: #0035a0; }
+  .c-stat-tile .label { font-size: 10px; font-weight: 600; color: #555f70; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.4; }
+  .c-hl-item { padding: 14px 0; border-bottom: 1px solid rgba(29,28,22,0.08); }
+  .c-hl-item:last-child { border-bottom: none; }
+  .c-hl-org { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; }
+  .c-hl-detail { font-size: 13px; color: #555f70; margin-top: 2px; }
+
+  /* ══════════════════════════════════════════════
+     OPTION D — Stats embedded in highlights (ledger)
+     ══════════════════════════════════════════════ */
+  .d-list { margin-top: 16px; }
+  .d-row { display: grid; grid-template-columns: 80px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid rgba(29,28,22,0.08); align-items: baseline; }
+  .d-row:last-child { border-bottom: none; }
+  .d-num { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #0035a0; line-height: 1; }
+  .d-org { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #1d1c16; }
+  .d-detail { font-size: 13px; color: #555f70; margin-top: 3px; line-height: 1.5; }
+
+  /* ══════════════════════════════════════════════
+     OPTION E — Highlight cards with stat badges
+     ══════════════════════════════════════════════ */
+  .e-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+  .e-card { background: #fdf8ec; border: 1px solid rgba(210,200,170,0.5); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; min-height: 160px; position: relative; }
+  .e-badge { position: absolute; top: 16px; right: 16px; background: #0035a0; color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 900; width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .e-org { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; padding-right: 52px; }
+  .e-detail { font-size: 13px; color: #555f70; margin-top: 8px; line-height: 1.6; flex: 1; }
+  .e-stat-label { font-size: 10px; font-weight: 700; color: #0035a0; text-transform: uppercase; letter-spacing: 0.1em; margin-top: auto; padding-top: 12px; }
+
+  /* ══════════════════════════════════════════════
+     OPTION F — Inline stat accents
+     ══════════════════════════════════════════════ */
+  .f-list { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; }
+  .f-item { padding: 16px 0; border-bottom: 1px solid rgba(29,28,22,0.08); }
+  .f-item:last-child { border-bottom: none; }
+  .f-org { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: #1d1c16; }
+  .f-detail { font-size: 14px; color: #555f70; margin-top: 4px; line-height: 1.6; }
+  .f-detail .num { font-family: 'Space Grotesk', sans-serif; font-weight: 900; color: #0035a0; }
+
+  /* ══════════════════════════════════════════════
+     OPTION G — Scoreboard rows
+     ══════════════════════════════════════════════ */
+  .g-list { margin-top: 16px; }
+  .g-row { display: grid; grid-template-columns: 80px 200px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid rgba(29,28,22,0.08); align-items: baseline; }
+  .g-row:last-child { border-bottom: none; }
+  .g-num { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900; color: #0035a0; line-height: 1; }
+  .g-org { font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 700; color: #1d1c16; }
+  .g-detail { font-size: 13px; color: #555f70; line-height: 1.5; }
+
+  /* ══════════════════════════════════════════════
+     OPTION H — Progress bar style
+     ══════════════════════════════════════════════ */
+  .h-list { margin-top: 16px; }
+  .h-item { padding: 18px 0; border-bottom: 1px solid rgba(29,28,22,0.08); }
+  .h-item:last-child { border-bottom: none; }
+  .h-top { display: flex; align-items: baseline; justify-content: space-between; }
+  .h-org { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: #1d1c16; }
+  .h-num { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 900; color: #0035a0; }
+  .h-bar { height: 4px; border-radius: 2px; background: rgba(29,28,22,0.06); margin-top: 10px; overflow: hidden; }
+  .h-bar-fill { height: 100%; border-radius: 2px; background: #0035a0; }
+  .h-detail { font-size: 13px; color: #555f70; margin-top: 8px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION A — Stat cards (original)
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option A — Stat Cards</div>
+<div class="option-desc">The original: photo in hero, five stat cards spanning full width below. Quick-scan numbers, but potentially reductive.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider"></div>
+    <div class="a-grid">
+      <div class="a-stat-card"><div class="number">6+</div><div class="label">Years ML Engineering</div></div>
+      <div class="a-stat-card"><div class="number">2</div><div class="label">O&rsquo;Reilly Reports</div></div>
+      <div class="a-stat-card"><div class="number">1</div><div class="label">Book in Progress</div></div>
+      <div class="a-stat-card"><div class="number">2</div><div class="label">USPTO Patents</div></div>
+      <div class="a-stat-card"><div class="number">7</div><div class="label">Talks &amp; Lectures</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION B — Highlights list (two-column)
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option B — Highlights List</div>
+<div class="option-desc">Photo in hero, contextual highlights in a two-column list below. Names the work instead of just counting it.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="b-grid">
+      <div>
+        <div class="hl-item"><div class="hl-org">Workhelix</div><div class="hl-detail">Founding ML Engineer, enterprise GenAI platforms ($75M Series A)</div></div>
+        <div class="hl-item"><div class="hl-org">O&rsquo;Reilly Media</div><div class="hl-detail">Two reports (What Are AI Agents?, Managing Memory for AI Agents) + upcoming book: Agent Memory</div></div>
+        <div class="hl-item"><div class="hl-org">AEA Papers &amp; Proceedings</div><div class="hl-detail">Research: Extending &ldquo;GPTs Are GPTs&rdquo; to Firms</div></div>
+      </div>
+      <div>
+        <div class="hl-item"><div class="hl-org">ODSC &middot; Wharton &middot; AI.Science</div><div class="hl-detail">Conference talks and guest lectures</div></div>
+        <div class="hl-item"><div class="hl-org">2 USPTO Patents</div><div class="hl-detail">Shared mobility simulation and driver-vehicle matching systems</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION C — Stats + Highlights side by side
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option C — Stats + Highlights Side by Side</div>
+<div class="option-desc">Highlights list on the left, stat tiles on the right. Two separate blocks living next to each other.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="c-mixed">
+      <div>
+        <div class="c-hl-item"><div class="c-hl-org">Workhelix</div><div class="c-hl-detail">Founding ML Engineer, enterprise GenAI platforms ($75M Series A)</div></div>
+        <div class="c-hl-item"><div class="c-hl-org">O&rsquo;Reilly Media</div><div class="c-hl-detail">Two reports (What Are AI Agents?, Managing Memory for AI Agents) + upcoming book: Agent Memory</div></div>
+        <div class="c-hl-item"><div class="c-hl-org">AEA Papers &amp; Proceedings</div><div class="c-hl-detail">Research: Extending &ldquo;GPTs Are GPTs&rdquo; to Firms</div></div>
+        <div class="c-hl-item"><div class="c-hl-org">ODSC &middot; Wharton &middot; AI.Science</div><div class="c-hl-detail">Conference talks and guest lectures</div></div>
+        <div class="c-hl-item"><div class="c-hl-org">2 USPTO Patents</div><div class="c-hl-detail">Shared mobility simulation and driver-vehicle matching systems</div></div>
+      </div>
+      <div class="c-stats">
+        <div class="c-stat-tile"><div class="number">6+</div><div class="label">Years building production ML &amp; GenAI systems</div></div>
+        <div class="c-stat-tile"><div class="number">7</div><div class="label">Talks &amp; guest lectures across 6 venues</div></div>
+        <div class="c-stat-tile"><div class="number">2</div><div class="label">O&rsquo;Reilly reports on AI agents</div></div>
+        <div class="c-stat-tile"><div class="number">1</div><div class="label">O&rsquo;Reilly book in progress</div></div>
+        <div class="c-stat-tile"><div class="number">2</div><div class="label">USPTO patents in shared mobility</div></div>
+        <div class="c-stat-tile"><div class="number">1</div><div class="label">AEA research publication</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION D — Stats embedded in highlights (ledger)
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option D — Ledger Style</div>
+<div class="option-desc">Each highlight row has a bold number on the left edge acting as a visual anchor. The stat and the context live in one row. No separate sections.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="d-list">
+      <div class="d-row"><div class="d-num">$75M</div><div><div class="d-org">Workhelix</div><div class="d-detail">Founding ML Engineer building enterprise GenAI platforms. Seed to Series A with investors including Andrew Ng, Mira Murati, and Yann LeCun.</div></div></div>
+      <div class="d-row"><div class="d-num">3</div><div><div class="d-org">O&rsquo;Reilly Media</div><div class="d-detail">Two published reports (What Are AI Agents?, Managing Memory for AI Agents) plus an upcoming book: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.</div></div></div>
+      <div class="d-row"><div class="d-num">1</div><div><div class="d-org">AEA Papers &amp; Proceedings</div><div class="d-detail">Peer-reviewed research extending &ldquo;GPTs Are GPTs&rdquo; to measure firm-level exposure to large language models.</div></div></div>
+      <div class="d-row"><div class="d-num">7</div><div><div class="d-org">Talks &amp; Guest Lectures</div><div class="d-detail">ODSC West, Wharton, AI.Science, Normconf, and MLOps Community. Topics: agent memory, LLM validation, production AI.</div></div></div>
+      <div class="d-row"><div class="d-num">2</div><div><div class="d-org">USPTO Patents</div><div class="d-detail">Shared Mobility Simulation and Prediction System. Matching Drivers With Shared Vehicles To Optimize Services.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION E — Highlight cards with stat badges
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option E — Cards with Stat Badges</div>
+<div class="option-desc">Each highlight becomes a card with a bold stat badge in the corner. The number is part of the card, not a separate element. Visual but contextual.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="e-grid">
+      <div class="e-card">
+        <div class="e-badge">$75M</div>
+        <div class="e-org">Workhelix</div>
+        <div class="e-detail">Founding ML Engineer building enterprise GenAI platforms from seed to Series A.</div>
+        <div class="e-stat-label">Series A Valuation</div>
+      </div>
+      <div class="e-card">
+        <div class="e-badge">3</div>
+        <div class="e-org">O&rsquo;Reilly Media</div>
+        <div class="e-detail">Two published reports on AI agents + upcoming book: Agent Memory.</div>
+        <div class="e-stat-label">2 Reports + 1 Book</div>
+      </div>
+      <div class="e-card">
+        <div class="e-badge">1</div>
+        <div class="e-org">AEA Papers &amp; Proceedings</div>
+        <div class="e-detail">Peer-reviewed research extending &ldquo;GPTs Are GPTs&rdquo; to firm-level LLM exposure.</div>
+        <div class="e-stat-label">Research Publication</div>
+      </div>
+      <div class="e-card">
+        <div class="e-badge">7</div>
+        <div class="e-org">Talks &amp; Lectures</div>
+        <div class="e-detail">ODSC West, Wharton, AI.Science, Normconf, MLOps Community. Agent memory, LLM validation, production AI.</div>
+        <div class="e-stat-label">Across 6 Venues</div>
+      </div>
+      <div class="e-card">
+        <div class="e-badge">2</div>
+        <div class="e-org">USPTO Patents</div>
+        <div class="e-detail">Shared mobility simulation and driver-vehicle matching systems at Arity (Allstate).</div>
+        <div class="e-stat-label">Patent Applications</div>
+      </div>
+      <div class="e-card">
+        <div class="e-badge">6+</div>
+        <div class="e-org">Years in ML</div>
+        <div class="e-detail">From telematics risk modeling to production LLM systems across 5 companies.</div>
+        <div class="e-stat-label">Industry Experience</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION F — Inline stat accents
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option F — Inline Stat Accents</div>
+<div class="option-desc">Same two-column highlight list, but numbers are woven into the detail text with bold blue emphasis. Stats live inside sentences, not in separate boxes.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="f-list">
+      <div>
+        <div class="f-item"><div class="f-org">Workhelix</div><div class="f-detail">Founding ML Engineer. Enterprise GenAI platforms from seed to <span class="num">$75M</span> Series A, backed by Andrew Ng, Mira Murati, and Yann LeCun.</div></div>
+        <div class="f-item"><div class="f-org">O&rsquo;Reilly Media</div><div class="f-detail"><span class="num">2</span> published reports on AI agents. <span class="num">1</span> book in progress: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.</div></div>
+        <div class="f-item"><div class="f-org">AEA Papers &amp; Proceedings</div><div class="f-detail"><span class="num">1</span> peer-reviewed publication extending &ldquo;GPTs Are GPTs&rdquo; to measure firm-level LLM exposure.</div></div>
+      </div>
+      <div>
+        <div class="f-item"><div class="f-org">Talks &amp; Guest Lectures</div><div class="f-detail"><span class="num">7</span> appearances across <span class="num">6</span> venues: ODSC West, Wharton, AI.Science, Normconf, MLOps Community, and Into the Hopper podcast.</div></div>
+        <div class="f-item"><div class="f-org">USPTO Patents</div><div class="f-detail"><span class="num">2</span> patent applications: Shared Mobility Simulation and Prediction System, and Matching Drivers With Shared Vehicles.</div></div>
+        <div class="f-item"><div class="f-org">Industry Experience</div><div class="f-detail"><span class="num">6+</span> years building production ML systems across <span class="num">5</span> companies, from telematics risk modeling to enterprise LLM platforms.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION G — Scoreboard rows
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option G — Scoreboard</div>
+<div class="option-desc">Three-column table: big number | org name | description. Like a sports scoreboard. The number is the visual anchor, the rest reads like a caption.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="g-list">
+      <div class="g-row"><div class="g-num">$75M</div><div class="g-org">Workhelix</div><div class="g-detail">Founding ML Engineer building enterprise GenAI platforms. Seed to Series A with investors including Andrew Ng, Mira Murati, Yann LeCun.</div></div>
+      <div class="g-row"><div class="g-num">3</div><div class="g-org">O&rsquo;Reilly</div><div class="g-detail">Two published reports on AI agents + upcoming book: Agent Memory &mdash; on building stateful agents that remember and adapt.</div></div>
+      <div class="g-row"><div class="g-num">1</div><div class="g-org">AEA</div><div class="g-detail">Peer-reviewed research extending &ldquo;GPTs Are GPTs&rdquo; to measure firm-level exposure to large language models.</div></div>
+      <div class="g-row"><div class="g-num">7</div><div class="g-org">Talks</div><div class="g-detail">ODSC West, Wharton, AI.Science, Normconf, MLOps Community. Agent memory, LLM validation, production AI deployment.</div></div>
+      <div class="g-row"><div class="g-num">2</div><div class="g-org">Patents</div><div class="g-detail">Shared Mobility Simulation and Prediction System. Matching Drivers With Shared Vehicles To Optimize Services.</div></div>
+      <div class="g-row"><div class="g-num">6+</div><div class="g-org">Years</div><div class="g-detail">Production ML &amp; GenAI engineering across Workhelix, Hopper, XPO Logistics, Revantage (Blackstone), and Arity (Allstate).</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     OPTION H — Progress bar style
+     ════════════════════════════════════════════════════════════════ -->
+<div class="option-label">Option H — Progress Bars</div>
+<div class="option-desc">Each highlight has a horizontal accent bar whose width loosely represents scale, with the stat and description inline. More visual energy than a plain list.</div>
+<div class="page">
+  <div class="nav"><div class="nav-logo">ECONOBEN.DEV</div><div class="nav-links"><span>Home</span><span>Posts</span><span>Talks</span><span>Publications</span><span>New Book</span><span>Code & Tools</span><span class="active">About</span></div></div>
+  <div class="hero">
+    <div>
+      <div class="name">Ben<br>Labaschin</div>
+      <div class="role-label" style="margin-top:24px;">Staff AI/ML Engineer &middot; Writer &middot; Speaker</div>
+      <div style="width:200px; margin-top:20px;" class="divider"></div>
+      <div class="bio-text" style="margin-top:20px;">I&rsquo;m an MLE passionate about using machine learning and generative AI to transform technical challenges into high-impact solutions. I thrive on building software systems that deliver tangible results, pioneering enterprise-scale GenAI platforms, and developing ML systems that drive millions in business value.</div>
+    </div>
+    <div class="photo"><img src="/assets/atlas_and_I.jpg" alt="Ben Labaschin with Atlas"></div>
+  </div>
+  <div class="section-pad">
+    <div class="divider" style="margin-bottom:24px;"></div>
+    <h2>Highlights</h2>
+    <div class="h-list">
+      <div class="h-item">
+        <div class="h-top"><div class="h-org">Workhelix</div><div class="h-num">$75M Series A</div></div>
+        <div class="h-bar"><div class="h-bar-fill" style="width:95%;"></div></div>
+        <div class="h-detail">Founding ML Engineer building enterprise GenAI platforms. Backed by Andrew Ng, Mira Murati, Yann LeCun.</div>
+      </div>
+      <div class="h-item">
+        <div class="h-top"><div class="h-org">O&rsquo;Reilly Media</div><div class="h-num">2 Reports + 1 Book</div></div>
+        <div class="h-bar"><div class="h-bar-fill" style="width:70%;"></div></div>
+        <div class="h-detail">What Are AI Agents?, Managing Memory for AI Agents. Upcoming: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.</div>
+      </div>
+      <div class="h-item">
+        <div class="h-top"><div class="h-org">Research &amp; Patents</div><div class="h-num">1 Paper + 2 Patents</div></div>
+        <div class="h-bar"><div class="h-bar-fill" style="width:50%;"></div></div>
+        <div class="h-detail">AEA Papers &amp; Proceedings: Extending &ldquo;GPTs Are GPTs&rdquo; to Firms. Two USPTO patent applications for shared mobility systems.</div>
+      </div>
+      <div class="h-item">
+        <div class="h-top"><div class="h-org">Talks &amp; Guest Lectures</div><div class="h-num">7 Across 6 Venues</div></div>
+        <div class="h-bar"><div class="h-bar-fill" style="width:80%;"></div></div>
+        <div class="h-detail">ODSC West, Wharton, AI.Science, Normconf, MLOps Community, Into the Hopper. Agent memory, LLM validation, production AI.</div>
+      </div>
+      <div class="h-item">
+        <div class="h-top"><div class="h-org">Industry Experience</div><div class="h-num">6+ Years</div></div>
+        <div class="h-bar"><div class="h-bar-fill" style="width:88%;"></div></div>
+        <div class="h-detail">Production ML &amp; GenAI across Workhelix, Hopper, XPO Logistics, Revantage (Blackstone), and Arity (Allstate).</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height: 80px;"></div>
+
+</body>
+</html>

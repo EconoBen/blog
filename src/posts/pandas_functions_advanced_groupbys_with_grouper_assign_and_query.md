@@ -3,6 +3,7 @@ title: "Pandas Functions: Advanced Groupbys with Grouper, Assign, and Query"
 date: "2021-06-26"
 tags: ["Pandas", "Groupby", "Python", "Data Science", "Time Series", "Covid19"]
 summary: "A technical walkthrough on advanced uses of Pandas groupbys, showcasing time-based aggregations, lambda expressions, and inline data manipulation with assign, all framed around real-world Covid19 data."
+image: "/assets/covers/pandas-advanced-groupbys.svg"
 ---
 
 

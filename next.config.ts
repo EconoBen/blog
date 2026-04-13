@@ -32,7 +32,6 @@ const nextConfig: NextConfig = {
 
   // Configure image optimization
   images: {
-    domains: ['econoben.dev', 'tech-notes-blog.s3.us-west-2.amazonaws.com'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     formats: ['image/webp'],

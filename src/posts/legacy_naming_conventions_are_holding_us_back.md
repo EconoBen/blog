@@ -3,6 +3,7 @@ title: "Legacy Naming Conventions Are Holding Us Back"
 date: "2021-12-08"
 tags: ["Service Design", "Developer Experience", "Naming Conventions", "Engineering Culture", "Internal Tools"]
 summary: "A case for naming internal services with intention—favoring names that are intuitive, easy, and specific over clever or obscure references. A little clarity can go a long way in reducing cognitive overhead and improving team communication."
+image: "/assets/covers/legacy-naming-conventions.svg"
 ---
 
 

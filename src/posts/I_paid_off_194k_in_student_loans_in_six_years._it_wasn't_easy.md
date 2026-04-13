@@ -3,6 +3,7 @@ title: "I Paid Off $194k in Student Loans in Six Years. It Wasn’t Easy."
 date: "2023-07-24"
 tags: ["student loans", "debt payoff", "financial independence", "machine learning", "career", "economics"]
 summary: "I graduated with $150k in debt and paid back over $194k in six years. This is the story of how I got there, what I learned, and what came next."
+image: "/assets/covers/student-loans.svg"
 ---
 
 

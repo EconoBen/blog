@@ -1,117 +1,254 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
-  title: 'Archive | Economic Notes',
-  description: 'Browse all posts by year and month in the Economic Notes archive.',
+  title: 'Archive | ECONOBEN.DEV',
+  description: 'Browse the writing archive by year and month.',
+};
+
+const monthFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+});
+
+const shortDateFormatter = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: '2-digit',
+});
+
+type ArchiveMonth = {
+  key: string;
+  year: number;
+  month: number;
+  monthLabel: string;
+  monthHref: string;
+  posts: Awaited<ReturnType<typeof postService.getAllPosts>>;
+};
+
+type ArchiveYear = {
+  year: number;
+  months: ArchiveMonth[];
+  postCount: number;
 };
 
 export default async function ArchivePage() {
   const posts = await postService.getAllPosts();
-  
-  // Group posts by year and month
-  const postsByYearMonth = posts.reduce((acc, post) => {
+  const archiveByMonth = posts.reduce<Record<string, ArchiveMonth>>((acc, post) => {
     const year = post.date.getFullYear();
     const month = post.date.getMonth();
-    const key = `${year}-${month}`;
-    
+    const key = `${year}-${String(month + 1).padStart(2, '0')}`;
+
     if (!acc[key]) {
       acc[key] = {
+        key,
         year,
         month,
-        monthName: post.date.toLocaleDateString('en-US', { month: 'long' }),
-        posts: []
+        monthLabel: monthFormatter.format(post.date),
+        monthHref: `/archives/${key}`,
+        posts: [],
       };
     }
-    
+
     acc[key].posts.push(post);
     return acc;
-  }, {} as Record<string, { year: number; month: number; monthName: string; posts: typeof posts }>);
+  }, {});
 
-  // Sort by year and month
-  const sortedEntries = Object.values(postsByYearMonth).sort((a, b) => {
-    if (a.year !== b.year) return b.year - a.year;
+  const months = Object.values(archiveByMonth).sort((a, b) => {
+    if (a.year !== b.year) {
+      return b.year - a.year;
+    }
+
     return b.month - a.month;
   });
 
-  // Group by year for display
-  const postsByYear = sortedEntries.reduce((acc, entry) => {
-    if (!acc[entry.year]) {
-      acc[entry.year] = [];
-    }
-    acc[entry.year].push(entry);
+  const monthsByYear = months.reduce<Record<number, ArchiveMonth[]>>((acc, month) => {
+    acc[month.year] ??= [];
+    acc[month.year].push(month);
     return acc;
-  }, {} as Record<number, typeof sortedEntries>);
+  }, {});
 
-  const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+  const years = Object.keys(monthsByYear)
+    .map(Number)
+    .sort((a, b) => b - a);
+  const yearEntries: ArchiveYear[] = years.map((year) => ({
+    year,
+    months: monthsByYear[year],
+    postCount: monthsByYear[year].reduce((count, month) => count + month.posts.length, 0),
+  }));
+
+  const uniqueTags = new Set(posts.flatMap((post) => post.tags)).size;
+  const latestMonth = months[0];
 
   return (
-    <div className="archive-page">
-      <div className="page-header">
-        <h1 className="page-title">Archive</h1>
-        <p className="page-subtitle">
-          {posts.length} posts across {years.length} years
-        </p>
-      </div>
+    <EditorialPageFrame currentPath="/archive">
+      <main className="mx-auto max-w-7xl px-8 pb-28 pt-20">
+        <header className="mb-20 max-w-3xl">
+          <span className="mb-4 block font-label text-xs uppercase tracking-[0.2em] text-secondary">
+            Chronological Index
+          </span>
+          <h1 className="mb-8 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
+            Archive.
+          </h1>
+          <p className="font-body text-xl italic leading-relaxed text-on-surface-variant md:text-2xl">
+            Browse the full writing record by year and month. The structure stays compact, practical, and fully linked.
+          </p>
+        </header>
 
-      <div className="archive-content">
-        {years.map(year => (
-          <section key={year} className="archive-year">
-            <h2 className="year-heading">{year}</h2>
-            
-            <div className="months-grid">
-              {postsByYear[year].map(({ monthName, posts: monthPosts }) => (
-                <div key={`${year}-${monthName}`} className="month-section">
-                  <h3 className="month-heading">
-                    {monthName} 
-                    <span className="post-count">({monthPosts.length})</span>
-                  </h3>
-                  
-                  <ul className="posts-list">
-                    {monthPosts.map(post => (
-                      <li key={post.slug} className="archive-post">
-                        <Link href={`/posts/${post.slug}`}>
-                          <time className="archive-post-date">
-                            {post.date.getDate().toString().padStart(2, '0')}
-                          </time>
-                          <span className="archive-post-title">{post.title}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+          <aside className="lg:col-span-3">
+            <nav className="sticky top-32 space-y-10">
+              <div>
+                <h2 className="mb-6 font-label text-[10px] uppercase tracking-[0.3em] text-secondary">
+                  Years
+                </h2>
+                <ul className="space-y-3">
+                  {yearEntries.map((entry, index) => (
+                    <li key={entry.year}>
+                      <a
+                        href={`#year-${entry.year}`}
+                        className={index === 0
+                          ? 'block sticky-note px-4 py-4 text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary/[0.08]'
+                          : 'block sticky-note px-4 py-4 text-on-surface-variant transition-colors hover:border-outline-variant/40 hover:bg-surface-container-high'}
+                      >
+                        <div className="flex items-baseline justify-between gap-4">
+                          <span className="font-headline text-2xl font-bold tracking-tighter">{entry.year}</span>
+                          <span className="font-label text-[10px] uppercase tracking-[0.2em]">{entry.months.length} month{entry.months.length === 1 ? '' : 's'}</span>
+                        </div>
+                        <p className="mt-2 font-body text-sm leading-relaxed">
+                          {entry.postCount} post{entry.postCount === 1 ? '' : 's'} in this year.
+                        </p>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="sticky-note p-5">
+                <h3 className="mb-4 font-headline text-sm font-bold text-on-surface">Archive at a glance</h3>
+                <div className="grid gap-3">
+                  {[
+                    ['Total posts', `${posts.length}`],
+                    ['Years covered', `${years.length}`],
+                    ['Unique tags', `${uniqueTags}`],
+                  ].map(([labelText, value]) => (
+                    <div key={labelText} className="flex items-center justify-between sticky-note px-4 py-3">
+                      <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">{labelText}</span>
+                      <span className="font-headline text-lg font-bold text-on-surface">{value}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
+                {latestMonth ? (
+                  <Link
+                    href={latestMonth.monthHref}
+                    className="mt-6 inline-flex items-center gap-2 font-label text-xs font-bold uppercase tracking-widest text-primary transition-all hover:-translate-y-0.5 hover:text-primary-container"
+                  >
+                    Latest month {latestMonth.monthLabel} {latestMonth.year}
+                  </Link>
+                ) : null}
+              </div>
+            </nav>
+          </aside>
 
-      <div className="archive-stats">
-        <h2 className="stats-heading">Post Statistics</h2>
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-value">{posts.length}</div>
-            <div className="stat-label">Total Posts</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">{years.length}</div>
-            <div className="stat-label">Years Active</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">
-              {Math.round(posts.length / years.length)}
-            </div>
-            <div className="stat-label">Posts per Year</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-value">
-              {new Set(posts.flatMap(p => p.tags)).size}
-            </div>
-            <div className="stat-label">Unique Tags</div>
+          <div className="space-y-20 lg:col-span-9">
+            {yearEntries.map((entry) => (
+              <section key={entry.year} id={`year-${entry.year}`} className="scroll-mt-32">
+                <div className="mb-10 flex flex-col gap-3 border-b border-outline-variant/20 pb-4 sm:flex-row sm:items-end sm:justify-between">
+                  <div>
+                    <h2 className="font-headline text-4xl font-black tracking-tighter text-on-surface">{entry.year}</h2>
+                    <p className="mt-2 font-body text-base leading-relaxed text-on-surface-variant">
+                      {entry.months.length} month{entry.months.length === 1 ? '' : 's'} and {entry.postCount} post{entry.postCount === 1 ? '' : 's'} in the record.
+                    </p>
+                  </div>
+                  <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">
+                    Year index
+                  </span>
+                </div>
+
+                <div className="space-y-12">
+                  {entry.months.map((month) => (
+                    <section key={month.key} className="border-l border-outline-variant/20 pl-6">
+                      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">
+                        <div>
+                          <h3 className="font-headline text-2xl font-bold text-on-surface">{month.monthLabel}</h3>
+                          <p className="mt-1 font-body text-base text-on-surface-variant">
+                            {month.posts.length} post{month.posts.length === 1 ? '' : 's'} published in {month.monthLabel} {entry.year}.
+                          </p>
+                        </div>
+                        <Link
+                          href={month.monthHref}
+                          className="font-label text-xs font-bold uppercase tracking-[0.2em] text-primary transition-colors hover:text-primary-container"
+                        >
+                          Open month
+                        </Link>
+                      </div>
+
+                      <div className="divide-y divide-outline-variant/20 border-y border-outline-variant/20">
+                        {month.posts.map((post) => (
+                          <Link
+                            key={post.slug}
+                            href={`/posts/${post.slug}`}
+                            className="block py-5 transition-colors hover:text-primary"
+                          >
+                            <div className="grid gap-3 md:grid-cols-[110px_minmax(0,1fr)] md:gap-6">
+                              <div className="font-label text-xs uppercase tracking-widest text-secondary">
+                                {shortDateFormatter.format(post.date)}
+                              </div>
+                              <div>
+                                <h4 className="font-headline text-xl font-bold text-on-surface">{post.title}</h4>
+                                {post.summary ? (
+                                  <p className="mt-2 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant">
+                                    {post.summary}
+                                  </p>
+                                ) : null}
+                                {post.tags.length > 0 ? (
+                                  <div className="mt-4 flex flex-wrap gap-2">
+                                    {post.tags.slice(0, 4).map((tag) => (
+                                      <span
+                                        key={`${post.slug}-${tag}`}
+                                        className="rounded-sm bg-surface-container-highest px-2 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-secondary"
+                                      >
+                                        {tag}
+                                      </span>
+                                    ))}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </section>
+                  ))}
+                </div>
+              </section>
+            ))}
+
+            <section className="sticky-note p-10">
+              <div className="max-w-xl">
+                <h3 className="mb-4 font-headline text-3xl font-bold">Keep browsing.</h3>
+                <p className="mb-8 font-body text-lg leading-relaxed text-on-surface-variant">
+                  Move from the archive into tags or search when subject matters more than date.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/tags"
+                    className="rounded-md bg-primary-container px-6 py-3 font-label text-sm font-bold uppercase tracking-widest text-on-primary"
+                  >
+                    Browse tags
+                  </Link>
+                  <Link
+                    href="/search"
+                    className="rounded-md border border-outline-variant bg-surface px-6 py-3 font-label text-sm font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-surface-container-low"
+                  >
+                    Search archive
+                  </Link>
+                </div>
+              </div>
+            </section>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </EditorialPageFrame>
   );
 }

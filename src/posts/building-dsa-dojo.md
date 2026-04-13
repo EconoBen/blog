@@ -3,6 +3,7 @@ title: "Building DSA Dojo: A CLI-Driven Approach to Learning Data Structures and
 date: "2026-01-04"
 summary: "I'm building my own data structures and algorithms course—a CLI-driven, ladder-based system where mastery comes through doing, not watching. Here's a first look at DSA Dojo."
 tags: ["AI", "LLMs", "Developer Tooling", "Python", "Teaching", "Personal"]
+image: "/assets/covers/building-dsa-dojo.svg"
 ---
 
 ![DSA Dojo curriculum tree](/assets/2026/01/dsa-dojo-curriculum-tree.png)

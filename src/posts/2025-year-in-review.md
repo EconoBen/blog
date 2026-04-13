@@ -3,6 +3,7 @@ title: "2025: My Year In Review"
 date: "2025-12-31"
 summary: "Reflections on a year of milestones—getting engaged in Florence, publishing with O'Reilly and the AEA, raising a Series A at Workhelix, and overcoming health challenges. Plus, my goals for 2026."
 tags: ["year in review", "engagement", "AI", "LLMs", "research", "personal growth"]
+image: "/assets/covers/2025-year-in-review.svg"
 ---
 
 ![Hannah and I in Florence](/assets/2026/01/florence_engagement.jpeg)

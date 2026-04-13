@@ -3,6 +3,7 @@ title: "I Waited 9 Years to Write This: On The Death of a Friend"
 date: "2023-01-31"
 tags: ["Personal", "Grief", "Loss", "Friendship", "Reflection", "Memory"]
 summary: "On the ninth anniversary of Sarah McCausland’s passing, a reflection on grief, memory, and the enduring questions that follow the loss of a friend taken too soon."
+image: "/assets/covers/on-the-death-of-a-friend.svg"
 ---
 
 *Thank you to the McCausland family for reviewing this post before it was published.*

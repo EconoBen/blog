@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import Sidebar from './Sidebar';
 import SocialLinks from './SocialLinks';
 import DarkModeToggle from './DarkModeToggle';
@@ -10,7 +11,22 @@ interface ClientLayoutProps {
   children: React.ReactNode;
 }
 
+const editorialShellRoutes = [
+  '/',
+  '/book',
+  '/code-ai',
+  '/posts',
+  '/publications',
+  '/talks',
+  '/about',
+  '/search',
+  '/tags',
+  '/archive',
+  '/archives',
+];
+
 const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
+  const pathname = usePathname();
   // Default to open on desktop (production parity)
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -89,6 +105,26 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
       document.removeEventListener('mouseup', handleMouseUp);
     };
   }, [isResizing, sidebarWidth]);
+
+  const useEditorialShell = editorialShellRoutes.some((route) => {
+    if (route === '/') {
+      return pathname === route;
+    }
+
+    return pathname === route || pathname.startsWith(`${route}/`);
+  });
+
+  useEffect(() => {
+    document.body.classList.toggle('shell-editorial', useEditorialShell);
+
+    return () => {
+      document.body.classList.remove('shell-editorial');
+    };
+  }, [useEditorialShell]);
+
+  if (useEditorialShell) {
+    return <>{children}</>;
+  }
 
   // Don't render sidebar on mobile
   if (isMobile) {
