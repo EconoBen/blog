@@ -48,3 +48,4 @@ public/audio/
 
 # Screenshots from visual regression testing
 screenshots/
+.env*.local
