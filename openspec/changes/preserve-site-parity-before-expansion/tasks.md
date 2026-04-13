@@ -320,3 +320,32 @@ Direct human-guided design session covering about page redesign, talks page impr
 - [x] 14.45 Footer links: raise on hover
 
 Commits: `0cc39834`, `8b92bd58`, `0038c450`, `a07b3912`, `7155bcd0`, `e29d5e6f`, `784f79de`, `09a6e98c`, `054a3cd9`, `4d99a78a`. Pushed to `origin/feat/site-current-review` on April 12, 2026.
+
+## 15. OG Image & Production Deployment (April 13, 2026)
+
+### Social preview / OG image
+- [x] 15.1 Created dynamic OG image route (`app/opengraph-image.tsx`) using `next/og` ImageResponse — 1200x630 PNG with Space Grotesk + Inter fonts, matching the existing HTML preview design
+- [x] 15.2 Removed hardcoded `og-image.png` references from `layout.tsx` openGraph/twitter metadata — Next.js auto-discovers the `opengraph-image.tsx` file convention
+- [x] 15.3 Fixed Vercel edge function size limit (1.07MB > 1MB) by switching to `runtime = 'nodejs'`
+- [x] 15.4 Fixed woff2 → TTF font URLs (Satori nodejs runtime doesn't support woff2)
+- [x] 15.5 Fixed Satori `display: flex` requirement on all multi-child containers (replaced `<br/>` with nested `<div>` elements)
+- [x] 15.6 Fixed root container dimensions (`width: 1200, height: 630` instead of `100%` which didn't resolve in Satori)
+
+### Vercel deployment
+- [x] 15.7 Discovered `econoben.dev` domain is linked to the `blog` Vercel project, not `site-current-review` — OG meta tags were pointing to `econoben.dev/opengraph-image` which didn't exist on the production project
+- [x] 15.8 Re-linked worktree to `blog` project via `vercel link --project blog` and deployed to production with `vercel --prod`
+- [x] 15.9 Verified OG image serves correctly at `https://econoben.dev/opengraph-image` (200 OK, image/png, 1200x630)
+- [x] 15.10 Added `.env*.local` to `.gitignore` (created by `vercel link`)
+
+Commits: `5669a3c6`, `64d9db5e`, `0bec8a8f`, `da611c54`, `9d736bea`, `dd47590f`. Pushed to `origin/feat/site-current-review` on April 13, 2026. Production deployed to `econoben.dev` via the `blog` Vercel project.
+
+### Remaining open work (carried from section 14)
+- [ ] `/code-ai` still needs editorial cleanup (13.4 still open)
+- [ ] `/posts` list view not yet updated to match grid view clickability
+- [ ] Mobile responsiveness not yet audited since April 11-12 session
+- [ ] Search results cards not yet made fully clickable
+- [ ] `/book` page not reviewed since March sessions
+- [ ] `/archive` and `/archives/[month]` not given full spacing/clickability pass
+- [ ] `/publications` not given spacing or clickability audit beyond subtitle removal
+- [ ] Some hover affordances may still be missing on less-visited pages (e.g. code-ai filters, book page CTAs)
+- [ ] iMessage / social platform caches will show stale OG preview until cache expires — no action needed, new shares will pick up the correct image
