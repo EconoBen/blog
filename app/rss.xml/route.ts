@@ -28,8 +28,8 @@ export async function GET() {
   <channel>
     <title>${escapeXml('Economic Notes')}</title>
     <description>${escapeXml('Exploring Economics, Technology, and Life')}</description>
-    <link>${siteUrl}</link>
-    <atom:link href="${siteUrl}/rss.xml" rel="self" type="application/rss+xml" />
+    <link>${escapeXml(siteUrl)}</link>
+    <atom:link href="${escapeXml(siteUrl)}/rss.xml" rel="self" type="application/rss+xml" />
     <language>en-us</language>
     <lastBuildDate>${latestPostDate.toUTCString()}</lastBuildDate>
     <generator>Next.js</generator>
@@ -39,8 +39,8 @@ export async function GET() {
     <item>
       <title><![CDATA[${escapeCdata(post.title)}]]></title>
       <description><![CDATA[${escapeCdata(post.summary || `${post.content.substring(0, 200)}...`)}]]></description>
-      <link>${siteUrl}/posts/${post.slug}</link>
-      <guid isPermaLink="true">${siteUrl}/posts/${post.slug}</guid>
+      <link>${escapeXml(siteUrl)}/posts/${escapeXml(post.slug)}</link>
+      <guid isPermaLink="true">${escapeXml(siteUrl)}/posts/${escapeXml(post.slug)}</guid>
       <pubDate>${post.date.toUTCString()}</pubDate>
       ${post.tags.map((tag: string) => `<category>${escapeXml(tag)}</category>`).join('\n      ')}
       <content:encoded><![CDATA[${escapeCdata(post.content)}]]></content:encoded>
