@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { EditorialPageFrame } from './EditorialPageFrame';
+import { SubscribeForm } from './SubscribeForm';
 import type { Post } from '../services/PostService';
 
 interface ShellHomePageProps {
@@ -283,30 +284,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
       <section className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
         <div className="mx-auto max-w-[1440px] px-8">
-          <div className="grid items-center gap-10 md:grid-cols-2">
-            <div className="space-y-4">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
-                Stay in the loop
-              </p>
-              <h2 className="font-headline text-3xl font-black tracking-tight text-[#1d1c16] md:text-4xl">
-                Get updates on new posts, talks, and book progress
-              </h2>
-              <p className="max-w-lg text-lg leading-relaxed text-[#1d1c16]/70">
-                No newsletter — just a direct email when something new ships
-              </p>
-            </div>
-            <div className="flex flex-col items-start gap-4 md:items-end">
-              <a
-                href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/30 bg-white/80 px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#0035a0] shadow-[0_8px_24px_rgba(0,53,160,0.08)] transition-transform hover:-translate-y-1"
-              >
-                Email for updates
-              </a>
-              <p className="font-label text-[10px] uppercase tracking-widest text-[#1d1c16]/40">
-                benjaminlabaschindev@gmail.com
-              </p>
-            </div>
-          </div>
+          <SubscribeForm />
         </div>
       </section>
     </EditorialPageFrame>
