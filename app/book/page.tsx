@@ -1,190 +1,211 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
+import { SubscribeForm } from '../components/SubscribeForm';
 
 export const metadata: Metadata = {
   title: 'Agent Memory | Book | ECONOBEN.DEV',
-  description: 'The forthcoming Agent Memory book page on ECONOBEN.DEV.',
+  description: 'Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time. An upcoming O\'Reilly book by Ben Labaschin.',
 };
 
-const bookSubtitle =
-  'How AI systems remember, retrieve, compress, and act on information in production.';
-
-const chapterInsights = [
+const audiences = [
   {
-    label: 'What the book covers',
-    title: 'How memory, retrieval, compression, and action fit together in production agents.',
-    summary:
-      'The book is a practical guide to the mechanics behind durable agent behavior: storing useful context, retrieving it at the right time, and keeping the system understandable once it is in production.',
+    title: 'Engineers building agents',
+    desc: "You\u2019re past the prompt-and-pray stage. You need memory that works across sessions, handles corrections, and doesn\u2019t rot as it grows.",
   },
   {
-    label: 'Why it belongs here',
-    title: 'It extends the same technical arc as the posts, reports, and talks.',
-    summary:
-      'The page should make the book easy to understand before launch without turning it into a separate identity. The subject, audience, and point of view stay tied to the rest of the site.',
+    title: 'Teams shipping AI products',
+    desc: 'Your agent works in demos but breaks in production. This book covers the operational patterns that make memory reliable at scale.',
   },
   {
-    label: 'What readers should take away',
-    title: 'Practical patterns for building memory systems people can trust.',
-    summary:
-      'The emphasis is on system design, operational trade-offs, and the architectural choices that determine whether long-running agents stay useful or become opaque.',
+    title: 'Anyone designing stateful AI',
+    desc: "If you\u2019re deciding how an AI system should remember, forget, and share information, this is the architectural reference.",
   },
 ];
 
-const bookFacts = [
-  ['Status', 'In progress'],
-  ['Publisher', "O'Reilly Media"],
-  ['Format', 'Print + digital'],
-  ['Focus', 'Agent memory systems'],
-] as const;
+const questions = [
+  {
+    q: 'How do I stop my agent from forgetting everything between sessions?',
+    a: 'The book separates context from memory and shows how to build retention that survives session boundaries without polluting future interactions.',
+    ref: 'Chapters 1 \u2013 2',
+  },
+  {
+    q: 'What should my agent actually remember?',
+    a: 'Not everything. The book defines practical rules for what to keep, what to compress, and what to deliberately forget.',
+    ref: 'Chapter 3',
+  },
+  {
+    q: 'How do I write memory without filling it with noise?',
+    a: 'Write triggers, thresholds, restraint. The book covers when to write, when to wait, and how to avoid memory pollution.',
+    ref: 'Chapter 4',
+  },
+  {
+    q: 'My retrieval keeps pulling the wrong memories. Now what?',
+    a: 'The book covers query formation, ranking, context loading, semantic caching, and how to evaluate whether retrieval is helping or hurting.',
+    ref: 'Chapter 6',
+  },
+  {
+    q: 'How do I keep memory useful as it grows?',
+    a: 'Rollups, summaries, corrections, versioning, duplicate detection, and maintenance strategies that prevent memory rot.',
+    ref: 'Chapter 7',
+  },
+  {
+    q: 'What happens when memory goes wrong?',
+    a: 'Poisoning, leakage, staleness, over-trust. The book closes with detection, repair, rollback, and designing memory to fail safely.',
+    ref: 'Chapter 10',
+  },
+];
+
+const concepts = [
+  { title: 'Design a memory API', desc: 'Give your agent the verbs it needs: write, retrieve, update, forget, consolidate' },
+  { title: 'Decide what to keep', desc: 'Build practical retention rules instead of storing everything and hoping' },
+  { title: 'Retrieve without hallucinating', desc: 'Form better queries, rank candidates, and measure whether recall is helping' },
+  { title: 'Resume interrupted work', desc: 'Checkpoints, durable state, and handoff patterns for long-running agents' },
+  { title: 'Maintain memory at scale', desc: 'Prevent rot, resolve duplicates, and keep memory useful as it grows' },
+  { title: 'Share memory safely', desc: 'Ownership, boundaries, and coordination across agents and teams' },
+  { title: 'Design for failure', desc: 'Poisoning, leakage, rollback, and guardrails that limit blast radius' },
+  { title: 'Evaluate memory quality', desc: 'Baselines, regressions, and knowing when memory is making things worse' },
+];
+
+const chapters = [
+  { part: 'I', partTitle: 'Agents, Memory, and the Act of Remembering', chapters: [
+    { num: '01', title: 'The Work of Remembering', desc: 'What memory means for an agent, how it differs from context, and why continuity changes everything.' },
+    { num: '02', title: 'What the Agent Can Read and Write', desc: 'Where memory lives, the five working verbs, and giving the agent a memory API.' },
+  ]},
+  { part: 'II', partTitle: 'Building and Managing Agent Memory', chapters: [
+    { num: '03', title: 'Choosing What Becomes Memory', desc: 'Rules for retention, compression, forgetting, and knowing when memory helps.' },
+    { num: '04', title: 'How Memory Gets Written', desc: 'Write triggers, normalization, correction, and failure modes in the write path.' },
+    { num: '05', title: 'Where Memory Lives and Who Controls It', desc: 'Client vs server, portability, inspectability, and the control model.' },
+    { num: '06', title: 'Finding the Right Memory', desc: 'Retrieval, ranking, context loading, caching, and evaluating quality.' },
+    { num: '07', title: 'Keeping Memory Useful Over Time', desc: 'Rollups, corrections, versioning, duplicates, and maintenance strategies.' },
+    { num: '08', title: 'More Than Memory: State and Resumability', desc: 'Checkpoints, durable work, resume, replay, and human pause points.' },
+  ]},
+  { part: 'III', partTitle: 'Shared Memory, Risk, and Recovery', chapters: [
+    { num: '09', title: 'Shared Memory: Coordination, Boundaries, and Conflict', desc: 'Ownership, leakage, multi-agent coordination, and provenance.' },
+    { num: '10', title: 'Dangerous Memory: Risk, Failure, and Recovery', desc: 'Poisoning, detection, repair, rollback, and designing memory to fail safely.' },
+  ]},
+];
 
 export default function BookPage() {
   return (
     <EditorialPageFrame currentPath="/book">
-      <main className="mx-auto max-w-[1440px] px-8">
-        {/* Book facts */}
-        <section className="sticky-note mt-6 grid grid-cols-1 gap-8 p-8 sm:grid-cols-2 sm:gap-10 sm:p-10 md:grid-cols-4 md:p-12">
-          {bookFacts.map(([label, value]) => (
-            <div key={label} className="space-y-2">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                {label}
-              </p>
-              <p className="font-headline text-lg font-bold text-on-surface">{value}</p>
-            </div>
-          ))}
-        </section>
+      <main className="mx-auto max-w-[1440px] px-5 md:px-8">
 
-        {/* Hero */}
-        <header className="grid grid-cols-1 items-start gap-8 pb-4 pt-12 md:grid-cols-12 md:items-center md:gap-12 md:pb-6 md:pt-16">
-          <div className="order-1 space-y-8 md:col-span-7 md:order-none">
-            {/* Status badge */}
+        {/* ── Hero ── */}
+        <header className="grid grid-cols-1 items-start gap-8 pb-4 pt-12 md:grid-cols-[1fr_380px] md:gap-16 md:pt-16">
+          <div>
             <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#0035a0] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_4px_12px_rgba(0,53,160,0.25)]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#0035a0] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                 <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
                 In progress
               </span>
-              <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface/40">
+              <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
                 O&apos;Reilly Media
               </span>
             </div>
-
-            {/* Headline */}
-            <div className="space-y-3">
-              <h1 className="font-headline text-5xl font-black tracking-tight text-on-surface md:text-6xl">
-                Agent Memory
-              </h1>
-              <p className="max-w-lg font-body text-xl leading-relaxed text-on-surface/70 md:text-2xl">
-                {bookSubtitle}
-              </p>
-            </div>
-
-            {/* Key details */}
-            <div className="flex flex-wrap gap-x-8 gap-y-2 border-l-2 border-[#0035a0]/20 pl-5">
-              <div>
-                <p className="font-label text-[9px] font-bold uppercase tracking-[0.2em] text-on-surface/40">Format</p>
-                <p className="font-headline text-sm font-bold text-on-surface">Print + Digital</p>
-              </div>
-              <div>
-                <p className="font-label text-[9px] font-bold uppercase tracking-[0.2em] text-on-surface/40">Focus</p>
-                <p className="font-headline text-sm font-bold text-on-surface">Agent memory systems</p>
-              </div>
-            </div>
-
-            {/* CTA buttons */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+            <h1 className="mt-6 font-headline text-5xl font-black tracking-tight text-[#1d1c16] md:text-6xl">
+              Agent Memory
+            </h1>
+            <p className="mt-4 max-w-lg font-body text-xl leading-relaxed text-[#555f70] md:text-2xl">
+              Building Stateful AI Agents That Remember, Adapt, and Work Across Time
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <a
-                href="mailto:benjaminlabaschindev@gmail.com?subject=Agent%20Memory%20updates"
-                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 bg-white px-8 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-1 hover:border-[#0035a0]/40 hover:shadow-[0_8px_20px_rgba(0,53,160,0.1)]"
+                href="#subscribe"
+                className="inline-flex items-center justify-center rounded-lg bg-[#0035a0] px-7 py-3.5 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
+                style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
               >
                 Get book updates
               </a>
               <Link
                 href="/publications"
-                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 bg-white px-8 py-4 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-1 hover:border-[#0035a0]/40 hover:shadow-[0_8px_20px_rgba(0,53,160,0.1)]"
+                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 px-7 py-3.5 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-0.5"
               >
                 See related work
               </Link>
             </div>
-
-            {/* Follow the research — inline */}
-            <div className="border-t border-outline-variant/15 pt-6">
-              <p className="max-w-lg font-body text-sm leading-relaxed text-on-surface/50">
-                No fake signup form — just email if you want updates on Agent Memory or want to talk about the posts, talks, or publications that feed into it.
-              </p>
-            </div>
           </div>
-
-          {/* Book illustration */}
-          <div className="order-2 flex items-center justify-center md:col-span-5 md:order-none">
+          <div className="flex items-center justify-center">
             <img
               src="/assets/book-illustration.svg"
-              alt="Agent Memory book"
+              alt="Agent Memory book cover"
               className="h-auto w-full max-w-[320px] md:max-w-[380px]"
             />
           </div>
         </header>
 
-        {/* Central thesis */}
-        <section className="py-2 md:py-3">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-            <div className="sticky-note flex min-h-[300px] flex-col justify-between p-6 sm:p-10 md:col-span-2 md:min-h-[400px] md:p-12">
-              <div className="max-w-xl">
-                <span className="mb-4 block font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                  Central Thesis
-                </span>
-                <h3 className="mb-4 font-headline text-3xl font-bold tracking-tight text-on-surface sm:text-4xl">
-                  The memory problem is really a systems problem.
-                </h3>
-                <p className="font-body text-base leading-relaxed text-on-surface/70 sm:text-xl">
-                  The book is about the mechanics that sit between a one-shot model call and a
-                  durable agent: what should be remembered, how it should be compressed, when it
-                  should be retrieved, and how those choices affect reliability once the system is
-                  live.
+        {/* ── Who This Book Is For ── */}
+        <section className="pb-12 pt-4">
+          <div className="h-px w-full bg-[#1d1c16]/8" />
+          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Who This Book Is For</h2>
+          <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
+            {audiences.map((item) => (
+              <div key={item.title} className="sticky-note p-7">
+                <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{item.title}</h3>
+                <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Questions This Book Answers ── */}
+        <section className="pb-12">
+          <div className="h-px w-full bg-[#1d1c16]/8" />
+          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Questions This Book Answers</h2>
+          <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {questions.map((item) => (
+              <div key={item.q} className="sticky-note p-7">
+                <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{item.q}</h3>
+                <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">{item.a}</p>
+                <p className="mt-3 font-label text-[10px] font-bold uppercase tracking-[0.1em] text-[#0035a0]">{item.ref}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── What You'll Learn to Build ── */}
+        <section className="pb-12">
+          <div className="h-px w-full bg-[#1d1c16]/8" />
+          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>What You&rsquo;ll Learn to Build</h2>
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {concepts.map((item) => (
+              <div key={item.title} className="sticky-note p-5">
+                <h3 className="font-headline text-base font-bold text-[#1d1c16]">{item.title}</h3>
+                <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── What the Book Covers ── */}
+        <section className="pb-12">
+          <div className="h-px w-full bg-[#1d1c16]/8" />
+          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>What the Book Covers</h2>
+          <p className="mt-2 font-headline text-lg font-bold text-[#1d1c16]">10 chapters across 3 parts.</p>
+          <div className="mt-6">
+            {chapters.map((part) => (
+              <div key={part.part}>
+                <p className="pb-2 pt-5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">
+                  Part {part.part} &mdash; {part.partTitle}
                 </p>
+                {part.chapters.map((ch) => (
+                  <div key={ch.num} className="grid grid-cols-[60px_1fr] gap-5 border-b border-[#1d1c16]/6 py-5">
+                    <span className="font-headline text-3xl font-black text-[#0035a0]/15">{ch.num}</span>
+                    <div>
+                      <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{ch.title}</h3>
+                      <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">{ch.desc}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="mt-7 inline-flex items-center gap-3 rounded-lg border border-outline-variant/15 px-4 py-3">
-                <span className="font-headline text-lg" aria-hidden="true">🧠</span>
-                <span className="font-headline text-sm font-bold text-on-surface">Architectural Deep-Dive</span>
-              </div>
-            </div>
-            <div className="sticky-note flex flex-col justify-center p-7 sm:p-10">
-              <h4 className="mb-5 font-headline text-4xl font-black text-on-surface/10 sm:text-5xl">01.</h4>
-              <p className="font-body text-base italic leading-relaxed text-on-surface/70 sm:text-lg">
-                Memory is not just storage. It is the structure that decides what historical intent
-                remains available to the agent when the next decision matters.
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* Chapter insights */}
-        <section className="border-t border-outline-variant/20 py-12 md:py-16">
-          <div className="flex flex-col gap-10 md:flex-row md:gap-16">
-            <div className="md:w-1/3">
-              <h2 className="font-headline text-3xl font-black tracking-tighter text-on-surface md:sticky md:top-32 md:text-4xl">
-                Chapter
-                <br />
-                Insights.
-              </h2>
-            </div>
-            <div className="space-y-12 md:w-2/3 md:space-y-16">
-              {chapterInsights.map((item) => (
-                <div key={item.label}>
-                  <span className="mb-2 block font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">
-                    {item.label}
-                  </span>
-                  <h4 className="mb-4 font-headline text-xl font-bold text-on-surface transition-colors hover:text-primary sm:text-2xl">
-                    {item.title}
-                  </h4>
-                  <p className="max-w-2xl font-body text-base leading-relaxed text-on-surface/70 sm:text-lg">
-                    {item.summary}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* ── Subscribe CTA ── */}
+        <section className="pb-16" id="subscribe">
+          <SubscribeForm />
         </section>
-
 
       </main>
     </EditorialPageFrame>
