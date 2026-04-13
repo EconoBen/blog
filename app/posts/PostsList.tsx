@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
 interface Post {
@@ -99,12 +99,6 @@ function PostIllustration({ post }: { post: Post }) {
 
 export function PostsList({ posts, latestSlug }: { posts: Post[]; latestSlug?: string }) {
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('grid');
-  const [hasMounted, setHasMounted] = useState(false);
-  useEffect(() => { setHasMounted(true); }, []);
-
-  if (!hasMounted) {
-    return <div style={{ minHeight: 400 }} />;
-  }
 
   return (
     <div>
