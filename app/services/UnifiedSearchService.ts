@@ -29,6 +29,8 @@ class UnifiedSearchService {
     posts.forEach((post: any) => {
       if (
         post.title.toLowerCase().includes(searchTerm) ||
+        post.slug?.toLowerCase().includes(searchTerm) ||
+        post.summary?.toLowerCase().includes(searchTerm) ||
         post.content.toLowerCase().includes(searchTerm) ||
         post.tags.some((tag: string) => tag.toLowerCase().includes(searchTerm))
       ) {

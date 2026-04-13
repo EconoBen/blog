@@ -68,6 +68,8 @@ function SearchContent() {
   useEffect(() => {
     setSearchQuery(query);
 
+    const abortController = new AbortController();
+
     const performSearch = async (searchTerm: string) => {
       if (!searchTerm.trim()) {
         setResults([]);
@@ -76,23 +78,33 @@ function SearchContent() {
 
       setLoading(true);
       try {
-        const response = await fetch(`/api/search?q=${encodeURIComponent(searchTerm)}`);
+        const response = await fetch(
+          `/api/search?q=${encodeURIComponent(searchTerm)}`,
+          { signal: abortController.signal },
+        );
         const data = await response.json();
-        setResults(data.results || []);
+        if (!abortController.signal.aborted) {
+          setResults(data.results || []);
+        }
       } catch (error) {
-        console.error('Search error:', error);
-        setResults([]);
+        if (!abortController.signal.aborted) {
+          console.error('Search error:', error);
+          setResults([]);
+        }
       } finally {
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          setLoading(false);
+        }
       }
     };
 
     if (query) {
       void performSearch(query);
-      return;
+      return () => { abortController.abort(); };
     }
 
     setResults([]);
+    return () => { abortController.abort(); };
   }, [query]);
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {

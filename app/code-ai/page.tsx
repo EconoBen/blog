@@ -168,6 +168,11 @@ export default function CodeAIPage() {
       return a.label.localeCompare(b.label);
     });
 
+  const allCategoryOption = visibleCategories.find((category) => category.id === 'all');
+  const sidebarCategories = allCategoryOption
+    ? [allCategoryOption, ...orderedVisibleCategories]
+    : orderedVisibleCategories;
+
   const toggleExpanded = (itemId: string) => {
     const nextExpanded = new Set(expandedItems);
     if (nextExpanded.has(itemId)) {
@@ -261,7 +266,7 @@ export default function CodeAIPage() {
                 <div className="space-y-1.5 md:space-y-2">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-secondary">Categories</p>
                   <div className="flex flex-col gap-0.5 md:gap-1">
-                    {orderedVisibleCategories.map((category) => {
+                    {sidebarCategories.map((category) => {
                       const count = category.id === 'all' ? allItems.length : categoryCounts[category.id] ?? 0;
                       const active = selectedCategory === category.id;
 
