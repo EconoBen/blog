@@ -8,10 +8,10 @@ export const contentType = 'image/png';
 export default async function Image() {
   const [spaceGrotesk, inter] = await Promise.all([
     fetch(
-      new URL('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2')
+      new URL('https://fonts.gstatic.com/s/spacegrotesk/v22/V8mQoQDjQSkFtoMM3T6r8E7mF71Q-gOoraIAEj4PVksj.ttf')
     ).then((res) => res.arrayBuffer()),
     fetch(
-      new URL('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjQ.woff2')
+      new URL('https://fonts.gstatic.com/s/inter/v20/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfMZg.ttf')
     ).then((res) => res.arrayBuffer()),
   ]);
 
