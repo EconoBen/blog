@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 
-export function SubscribeForm() {
+interface SubscribeFormProps {
+  variant?: 'dark' | 'light';
+}
+
+export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -30,12 +34,60 @@ export function SubscribeForm() {
   };
 
   if (status === 'success') {
-    return (
+    return variant === 'dark' ? (
       <div className="rounded-2xl bg-[#0035a0] p-8 text-white md:p-12">
         <h3 className="font-headline text-2xl font-bold">You&rsquo;re on the list.</h3>
         <p className="mt-3 max-w-md font-body text-base leading-relaxed text-white/80">
-          You&rsquo;ll get an email when Agent Memory is ready. No spam, no filler &mdash; just the book announcement and occasional writing updates.
+          You&rsquo;ll hear about new writing, talks, and book progress. No spam.
         </p>
+      </div>
+    ) : (
+      <div>
+        <h3 className="font-headline text-2xl font-bold text-[#1d1c16]">You&rsquo;re on the list.</h3>
+        <p className="mt-3 max-w-md font-body text-base leading-relaxed text-[#1d1c16]/70">
+          You&rsquo;ll hear about new writing, talks, and book progress. No spam.
+        </p>
+      </div>
+    );
+  }
+
+  if (variant === 'light') {
+    return (
+      <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_auto]">
+        <div className="space-y-4">
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
+            Stay in the loop
+          </p>
+          <h2 className="font-headline text-3xl font-black tracking-tight text-[#1d1c16] md:text-4xl">
+            Get updates on new posts, talks, and book progress
+          </h2>
+          <p className="max-w-lg text-lg leading-relaxed text-[#1d1c16]/70">
+            No spam &mdash; just updates when something new ships or the book hits a milestone.
+          </p>
+        </div>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:items-center md:justify-center">
+          <div className="flex w-full gap-3">
+            <input
+              type="email"
+              required
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="min-w-0 flex-1 rounded-lg border border-[#0035a0]/15 bg-white/80 px-4 py-3 font-body text-sm text-[#1d1c16] placeholder:text-[#1d1c16]/30 shadow-[0_4px_12px_rgba(0,53,160,0.06)] focus:border-[#0035a0]/30 focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={status === 'loading'}
+              className="shrink-0 rounded-lg bg-[#0035a0] px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5 disabled:opacity-60"
+              style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
+            >
+              {status === 'loading' ? 'Sending...' : 'Subscribe'}
+            </button>
+          </div>
+          {status === 'error' && (
+            <p className="font-body text-sm text-[#1d1c16]/50">Something went wrong. Try emailing agentmemory@econoben.dev directly.</p>
+          )}
+        </form>
       </div>
     );
   }

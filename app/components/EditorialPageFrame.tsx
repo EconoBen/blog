@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import Link from 'next/link';
 import { ScrollToTop } from './ScrollToTop';
 import { StickyContactRemote } from './StickyContactRemote';
+import { SubscribeForm } from './SubscribeForm';
 
 const primaryNavItems = [
   { href: '/', label: 'Home' },
@@ -165,7 +166,12 @@ export function EditorialPageFrame({
         <main className="lg:pr-20 xl:pr-24">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
-        <footer className="mt-12 w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
+        <section className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
+          <div className="mx-auto max-w-[1440px] px-8">
+            <SubscribeForm variant="light" />
+          </div>
+        </section>
+        <footer className="w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-8 py-5 md:flex-row">
             <div className="font-headline text-xs uppercase tracking-wide text-[#1d1c16]" suppressHydrationWarning>
               {copyrightYear > 2024 ? `© 2024-${copyrightYear}` : '© 2024'} Ben Labaschin

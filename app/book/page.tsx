@@ -92,7 +92,7 @@ export default function BookPage() {
       <main className="mx-auto max-w-[1440px] px-5 md:px-8">
 
         {/* ── Hero ── */}
-        <header className="grid grid-cols-1 items-start gap-8 pb-4 pt-12 md:grid-cols-[1fr_380px] md:gap-16 md:pt-16">
+        <header className="grid grid-cols-1 items-start gap-10 pb-8 pt-12 md:pb-12 md:pt-16 lg:grid-cols-[7fr_5fr] lg:gap-16">
           <div>
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#0035a0] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
@@ -103,23 +103,23 @@ export default function BookPage() {
                 O&apos;Reilly Media
               </span>
             </div>
-            <h1 className="mt-6 font-headline text-5xl font-black tracking-tight text-[#1d1c16] md:text-6xl">
-              Agent Memory
+            <h1 className="mt-8 font-headline text-[clamp(3.5rem,8vw,5.5rem)] font-black leading-[0.95] tracking-[-0.03em] text-[#1d1c16]">
+              Agent<br />Memory
             </h1>
-            <p className="mt-4 max-w-lg font-body text-xl leading-relaxed text-[#555f70] md:text-2xl">
+            <p className="mt-6 max-w-xl font-body text-xl leading-relaxed text-[#555f70] md:text-2xl">
               Building Stateful AI Agents That Remember, Adapt, and Work Across Time
             </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
                 href="#subscribe"
-                className="inline-flex items-center justify-center rounded-lg bg-[#0035a0] px-7 py-3.5 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-lg bg-[#0035a0] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5"
                 style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
               >
                 Get book updates
               </a>
               <Link
                 href="/publications"
-                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 px-7 py-3.5 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#0035a0] transition-all hover:-translate-y-0.5"
               >
                 See related work
               </Link>
@@ -129,7 +129,7 @@ export default function BookPage() {
             <img
               src="/assets/book-illustration.svg"
               alt="Agent Memory book cover"
-              className="h-auto w-full max-w-[320px] md:max-w-[380px]"
+              style={{ maxHeight: '440px', width: 'auto' }}
             />
           </div>
         </header>

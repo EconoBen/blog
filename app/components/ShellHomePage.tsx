@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { EditorialPageFrame } from './EditorialPageFrame';
-import { SubscribeForm } from './SubscribeForm';
 import type { Post } from '../services/PostService';
 
 interface ShellHomePageProps {
@@ -282,11 +281,6 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
         </div>
       </section>
 
-      <section className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
-        <div className="mx-auto max-w-[1440px] px-8">
-          <SubscribeForm />
-        </div>
-      </section>
     </EditorialPageFrame>
   );
 }
