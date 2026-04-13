@@ -166,7 +166,7 @@ export function EditorialPageFrame({
         <main className="lg:pr-20 xl:pr-24">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
-        <section className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
+        <section id="subscribe" className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
           <div className="mx-auto max-w-[1440px] px-8">
             <SubscribeForm variant="light" />
           </div>

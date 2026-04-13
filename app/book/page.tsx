@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
-import { SubscribeForm } from '../components/SubscribeForm';
 
 export const metadata: Metadata = {
   title: 'Agent Memory | Book | ECONOBEN.DEV',
@@ -127,9 +126,10 @@ export default function BookPage() {
           </div>
           <div className="flex items-center justify-center">
             <img
-              src="/assets/book-illustration.svg"
-              alt="Agent Memory book cover"
-              style={{ maxHeight: '440px', width: 'auto' }}
+              src="/assets/agent-memory-cover.png"
+              alt="Agent Memory — O'Reilly book by Ben Labaschin"
+              className="w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.25)]"
+              style={{ maxHeight: '480px', objectFit: 'contain' }}
             />
           </div>
         </header>
@@ -200,11 +200,6 @@ export default function BookPage() {
               </div>
             ))}
           </div>
-        </section>
-
-        {/* ── Subscribe CTA ── */}
-        <section className="pb-16" id="subscribe">
-          <SubscribeForm />
         </section>
 
       </main>
