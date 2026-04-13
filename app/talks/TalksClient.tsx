@@ -358,11 +358,6 @@ export default function TalksClient() {
 
   const featuredTalk = filteredTalks[0] ?? null;
   const archiveTalks = filteredTalks.slice(1);
-  const archiveSummary =
-    activeFilter === 'all'
-      ? `${archiveTalks.length} more session${archiveTalks.length === 1 ? '' : 's'} below the featured recording.`
-      : `${filteredTalks.length} session${filteredTalks.length === 1 ? '' : 's'} tagged ${activeFilter}.`;
-
   return (
     <section className="mx-auto max-w-[1440px] px-5 md:px-8">
       {featuredTalk && (

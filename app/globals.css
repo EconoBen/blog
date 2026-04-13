@@ -7,6 +7,7 @@
 
 /* MD3 semantic color tokens for Tailwind v4 utilities */
 @theme {
+  --color-primary: #2347d1;
   --color-on-surface: #1d1c16;
   --color-on-surface-variant: #5c6877;
   --color-surface: #f5efe6;
