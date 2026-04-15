@@ -19,7 +19,7 @@ type ExperienceItem = {
 
 const experience: ExperienceItem[] = [
   {
-    role: 'Principal AI/ML Engineer',
+    role: 'Founding Engineer, Principal ML/AI Engineer',
     company: 'Workhelix',
     period: 'Apr 2022 \u2014 Present',
     bullets: [
@@ -125,7 +125,7 @@ export default function AboutPage() {
               Ben<br />Labaschin
             </div>
             <p className="font-label text-sm font-bold uppercase tracking-[0.15em] text-[#0035a0]" style={{ marginTop: '1rem' }}>
-              Principal AI/ML Engineer &middot; Writer &middot; Speaker
+              Principal ML/AI Engineer &middot; Data Lead &middot; Founding Engineer
             </p>
             <div className="mt-5 h-px w-[200px] bg-[#1d1c16]/12" />
             <p className="mt-5 max-w-[580px] font-body text-lg leading-relaxed text-[#555f70]">

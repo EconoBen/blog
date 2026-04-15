@@ -123,7 +123,7 @@ export default async function Image() {
                 alignItems: 'center',
               }}
             >
-              <div style={{ display: 'flex' }}>PRINCIPAL AI/ML</div>
+              <div style={{ display: 'flex' }}>PRINCIPAL ML/AI</div>
               <div style={{ display: 'flex' }}>ENGINEER</div>
             </div>
             <div
