@@ -85,7 +85,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
       <section className="editorial-home-proof-strip" aria-label="Proof of work">
         <span>{posts.length} published posts</span>
         <span>/</span>
-        <span>Staff AI/ML Engineer</span>
+        <span>Principal AI/ML Engineer</span>
         <span>/</span>
         <span>O&apos;Reilly reports</span>
         <span>/</span>

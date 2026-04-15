@@ -89,7 +89,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
       {/* ── Hero — editorial headline + featured post ── */}
       <section className="mx-auto max-w-[1440px] px-5 pb-20 pt-14 md:px-8 md:pb-24 md:pt-28">
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-end">
+        <div className="grid gap-8 md:gap-10 lg:grid-cols-12 lg:items-end lg:gap-14">
           <div className="lg:col-span-7">
             <p className="font-label text-xs font-bold uppercase tracking-[0.2em] text-[#0035a0]">
               AI/ML Engineering &amp; Writing
@@ -110,7 +110,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
               {topTags.map(([tag, count]) => (
-                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#ede8de] px-3 py-1 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70] transition-all hover:-translate-y-0.5 hover:bg-[#e7e2d8] hover:text-[#0035a0]">
+                <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-sm bg-[#ede8de] px-3 py-1.5 font-label text-[11px] font-bold uppercase tracking-[0.15em] text-[#555f70] transition-all hover:-translate-y-0.5 hover:bg-[#e7e2d8] hover:text-[#0035a0]">
                   {tag} ({count})
                 </Link>
               ))}

@@ -76,8 +76,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
       : 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-all duration-200 hover:text-[#0035a0] hover:-translate-y-0.5';
   const mobileNavItemClassName = (active: boolean) =>
     active
-      ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#0035a0]/15 bg-[#0035a0] px-2.5 py-1 text-[9px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-2.5 py-1 text-[9px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#0035a0]/30 hover:bg-[#0035a0]/10 hover:text-[#0035a0]';
+      ? 'inline-flex min-h-[36px] items-center justify-center rounded-full border border-[#0035a0]/15 bg-[#0035a0] px-3 py-1.5 text-[11px] font-bold uppercase leading-none tracking-[0.15em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
+      : 'inline-flex min-h-[36px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-3 py-1.5 text-[11px] font-bold uppercase leading-none tracking-[0.15em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#0035a0]/30 hover:bg-[#0035a0]/10 hover:text-[#0035a0]';
 
   return (
     <header className={headerClassName}>
@@ -113,8 +113,8 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                   key={item.href}
                   href={item.href}
                   className={active
-                    ? 'inline-flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#555f70]'
-                    : 'flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#999] transition-all duration-200 hover:text-[#555f70] hover:-translate-y-0.5'
+                    ? 'inline-flex items-center justify-center px-2.5 py-1.5 font-label text-[11px] font-semibold uppercase leading-none tracking-[0.15em] whitespace-nowrap text-[#555f70]'
+                    : 'flex items-center justify-center px-2.5 py-1.5 font-label text-[11px] font-semibold uppercase leading-none tracking-[0.15em] whitespace-nowrap text-[#999] transition-all duration-200 hover:text-[#555f70] hover:-translate-y-0.5'
                   }
                   aria-current={active ? 'page' : undefined}
                 >
@@ -166,7 +166,7 @@ export function EditorialPageFrame({
         <ScrollToTop />
         <StickyContactRemote />
         <section id="subscribe" className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
-          <div className="mx-auto max-w-[1440px] px-8">
+          <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
             <SubscribeForm variant="light" />
           </div>
         </section>

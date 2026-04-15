@@ -66,19 +66,19 @@ export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
           </p>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:items-center md:justify-center">
-          <div className="flex w-full gap-3">
+          <div className="flex w-full flex-col gap-3 sm:flex-row">
             <input
               type="email"
               required
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="min-w-0 flex-1 rounded-lg border border-[#0035a0]/15 bg-white/80 px-4 py-3 font-body text-sm text-[#1d1c16] placeholder:text-[#1d1c16]/30 shadow-[0_4px_12px_rgba(0,53,160,0.06)] focus:border-[#0035a0]/30 focus:outline-none"
+              className="min-w-0 flex-1 rounded-lg border border-[#0035a0]/15 bg-white/80 px-4 py-3.5 font-body text-base text-[#1d1c16] placeholder:text-[#1d1c16]/30 shadow-[0_4px_12px_rgba(0,53,160,0.06)] focus:border-[#0035a0]/30 focus:outline-none"
             />
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="shrink-0 rounded-lg bg-[#0035a0] px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5 disabled:opacity-60"
+              className="shrink-0 rounded-lg bg-[#0035a0] px-6 py-3.5 font-label text-xs font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5 disabled:opacity-60"
               style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
             >
               {status === 'loading' ? 'Sending...' : 'Subscribe'}
@@ -101,19 +101,19 @@ export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
             No spam, no fake waitlist. Just an email when the book is ready.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="flex w-full max-w-md gap-3 md:w-auto">
+        <form onSubmit={handleSubmit} className="flex w-full max-w-md flex-col gap-3 sm:flex-row md:w-auto">
           <input
             type="email"
             required
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="min-w-0 flex-1 rounded-lg bg-white/10 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 focus:bg-white/15 focus:outline-none"
+            className="min-w-0 flex-1 rounded-lg bg-white/10 px-4 py-3.5 font-body text-base text-white placeholder:text-white/40 focus:bg-white/15 focus:outline-none"
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="shrink-0 rounded-lg bg-white px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-0.5 disabled:opacity-60"
+            className="shrink-0 rounded-lg bg-white px-6 py-3.5 font-label text-xs font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-0.5 disabled:opacity-60"
           >
             {status === 'loading' ? 'Sending...' : 'Subscribe'}
           </button>
