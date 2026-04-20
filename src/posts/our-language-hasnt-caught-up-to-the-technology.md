@@ -1,7 +1,7 @@
 ---
 title: "Our Language Hasn't Caught Up to the Technology"
 date: "2026-04-20"
-summary: "Writing chapter one of my O'Reilly book on Agent Memory, I keep tripping over how we talk about these systems. Calling context windows 'memory' isn't just description—it's performative. And the metaphor is too weak, not too strong."
+summary: "Writing chapter one of my O'Reilly book on Agent Memory, I keep tripping over how we talk about these systems. The words we choose don't just describe what we're building—they shape it. And the metaphor of 'memory' is too weak, not too strong."
 tags: ["Agent Memory", "AI", "LLMs", "Writing", "O'Reilly"]
 ---
 
