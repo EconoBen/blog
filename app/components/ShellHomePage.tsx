@@ -120,29 +120,31 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
           <aside className="lg:col-span-5">
             <Link href={`/posts/${featuredPost.slug}`} className="block no-underline" style={{ color: 'inherit', textDecoration: 'none' }}>
               <article className="cursor-pointer overflow-hidden rounded-3xl bg-[#e8eef8] text-[#1d1c16] shadow-[0_24px_70px_rgba(16,34,54,0.14)] transition-transform duration-300 hover:-translate-y-1">
-                {imageSourceFor(featuredPost) ? (
-                  <div className="relative h-52 overflow-hidden sm:h-72">
+                <div className={`relative overflow-hidden ${imageSourceFor(featuredPost) ? 'h-52 sm:h-72' : 'min-h-[13rem] sm:min-h-[18rem]'}`}>
+                  {imageSourceFor(featuredPost) ? (
                     <img
                       src={imageSourceFor(featuredPost) as string}
                       alt={featuredPost.title}
                       className="h-full w-full object-cover opacity-85"
                     />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(232,238,248,0)_35%,rgba(232,238,248,0.84)_100%)]" />
-                    <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
-                      <span className="rounded-sm bg-[#0035a0] px-3 py-1 font-label font-bold text-white" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
-                        Latest post
-                      </span>
-                      <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
+                  ) : (
+                    <div className="flex h-full flex-col justify-end bg-[linear-gradient(135deg,#e8eef8_0%,#e8eef8_100%)] p-8 pb-16">
+                      <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#bdc7db]">
+                        Latest writing
+                      </p>
+                      <p className="mt-3 max-w-sm font-headline text-3xl font-black leading-tight">
+                        {featuredPost.title}
+                      </p>
                     </div>
-                  </div>
-                ) : (
-                  <div className="flex items-center gap-3 px-5 pt-6 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16] sm:px-8 sm:pt-8">
+                  )}
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(232,238,248,0)_35%,rgba(232,238,248,0.84)_100%)]" />
+                  <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#1d1c16]">
                     <span className="rounded-sm bg-[#0035a0] px-3 py-1 font-label font-bold text-white" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
                       Latest post
                     </span>
                     <span className="font-label font-bold">{dateFormatter.format(featuredPost.date)}</span>
                   </div>
-                )}
+                </div>
                 <div className="p-5 sm:p-8">
                   <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
                     {primaryTag(featuredPost)}
