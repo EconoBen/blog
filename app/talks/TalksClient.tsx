@@ -138,7 +138,10 @@ function FeaturedTalk({ talk }: { talk: Talk }) {
   const isSpotifyOnly = Boolean(talk.spotifyUrl && !talk.youtubeId);
 
   return (
-    <article className="sticky-note overflow-hidden featured-shimmer transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(29,28,22,0.1)]">
+    <article
+      id={talk.id}
+      className="sticky-note scroll-mt-28 overflow-hidden featured-shimmer transition-shadow duration-300 hover:shadow-[0_24px_60px_rgba(29,28,22,0.1)]"
+    >
       {/* Spotify: show embed directly */}
       {isSpotifyOnly && spotifyEmbedUrl && (
         <div className="border-b border-[#1d1c16]/6">
@@ -255,7 +258,8 @@ function TalkCard({
 
   return (
     <article
-      className={`sticky-note overflow-hidden group transition-transform duration-300 hover:-translate-y-1 ${
+      id={talk.id}
+      className={`sticky-note scroll-mt-28 overflow-hidden group transition-transform duration-300 hover:-translate-y-1 ${
         viewMode === 'grid' ? 'flex h-full flex-col' : 'lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]'
       }`}
     >
