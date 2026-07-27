@@ -30,6 +30,7 @@ export const talksConfig = {
       title: "Agent Memory",
       description: "An agent hits a timeout, retries, and charges the customer twice. I use that to work through the difference between context and memory, where an organization's evidence actually lives, what is worth keeping, and how you would prove that remembering changed what the agent did. From the first chapters of my O'Reilly book, Agent Memory.",
       date: "2026-07-18",
+      youtubeId: "4SjLQAIiDoM",
       slidesUrl: "/talks/agent-memory-applied-ai-2026.pdf",
       transcriptUrl: "/transcripts/agent_memory_applied_ai_2026.txt",
       event: "Applied AI Conference 2026, GDG Chapel Hill",
