@@ -1,4 +1,5 @@
-Agent Memory: From a Timeout to a Managed Commitment
+Agent Memory
+From a timeout to a managed commitment. How evidence becomes durable, revisable guidance.
 Ben Labaschin - Applied AI Conference 2026 (GDG Chapel Hill), July 18, 2026
 Runtime 29:55
 
