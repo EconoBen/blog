@@ -6,6 +6,7 @@ export interface Talk {
   youtubeId?: string;
   spotifyUrl?: string;
   transcriptUrl?: string;
+  slidesUrl?: string;
   event: string;
   topics: string[];
 }
@@ -24,6 +25,16 @@ export const talksConfig = {
    * Array of talks
    */
   talks: [
+    {
+      id: "talk-agent-memory-applied-ai-2026",
+      title: "Agent Memory: From a Timeout to a Managed Commitment",
+      description: "One purchasing incident, followed end to end. A timeout on a billable write is not the same statement as a failure, and the retry that looks responsible is the one that double-charges the customer. From there the talk builds the case that memory is not more context. It is evidence selected for future use, carried through an explicit lifecycle of selection, representation, revision, retention, and compression, and judged by a single test: did remembering change the next action for the better? Closes by replaying the same timeout against an agent that kept the right evidence.",
+      date: "2026-07-18",
+      slidesUrl: "/talks/agent-memory-applied-ai-2026.pdf",
+      transcriptUrl: "/transcripts/agent_memory_applied_ai_2026.txt",
+      event: "Applied AI Conference 2026, GDG Chapel Hill",
+      topics: ["AI", "Agents", "Memory", "Context Engineering", "Reliability", "Evaluation", "Architecture", "Production Systems", "O'Reilly"]
+    },
     {
       id: "podcast-into-the-hopper-ai-agents",
       title: "The Evolution of AI Agents (Into the Hopper Podcast)",
