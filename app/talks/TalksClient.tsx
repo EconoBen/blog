@@ -120,7 +120,7 @@ function TalkMediaPreview({
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-10 w-10 text-[#0035a0]/40">
           <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
         </svg>
-        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Podcast</p>
+        <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">{talk.spotifyUrl ? 'Podcast' : 'Talk'}</p>
         <p className="max-w-sm font-headline text-xl font-bold leading-tight">{talk.event}</p>
         <span className="hidden items-center gap-2 rounded-lg bg-[#0035a0]/8 px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] md:inline-flex">
           Open player
@@ -211,6 +211,16 @@ function FeaturedTalk({ talk }: { talk: Talk }) {
                 className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1"
               >
                 {getPrimarySourceLabel(talk)}
+              </a>
+            )}
+            {talk.slidesUrl && (
+              <a
+                href={talk.slidesUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center font-label text-[11px] font-bold uppercase tracking-widest text-secondary transition-colors hover:text-primary"
+              >
+                Slides
               </a>
             )}
             {talk.transcriptUrl && (
@@ -316,16 +326,28 @@ function TalkCard({
               </span>
             ))}
           </div>
-          {primarySourceUrl && (
-            <a
-              href={primarySourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
-            >
-              {getPrimarySourceLabel(talk)}
-            </a>
-          )}
+          <div className="flex flex-wrap items-center gap-2">
+            {primarySourceUrl && (
+              <a
+                href={primarySourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-widest text-on-surface transition-colors hover:bg-secondary-container hover:text-primary"
+              >
+                {getPrimarySourceLabel(talk)}
+              </a>
+            )}
+            {talk.slidesUrl && (
+              <a
+                href={talk.slidesUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-lg px-3 py-1.5 font-label text-[10px] font-bold uppercase tracking-widest text-secondary transition-colors hover:text-primary"
+              >
+                Slides
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </article>
