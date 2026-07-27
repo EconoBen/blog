@@ -28,7 +28,7 @@ export const talksConfig = {
     {
       id: "talk-agent-memory-applied-ai-2026",
       title: "Agent Memory",
-      description: "How evidence becomes durable, revisable guidance. One purchasing incident, followed end to end. A timeout on a billable write is not the same statement as a failure, and the retry that looks responsible is the one that double-charges the customer. From there the talk builds the case that memory is not more context. It is evidence selected for future use, carried through an explicit lifecycle of selection, representation, revision, retention, and compression, and judged by a single test: did remembering change the next action for the better? Closes by replaying the same timeout against an agent that kept the right evidence.",
+      description: "An agent hits a timeout, retries, and charges the customer twice. I use that to work through the difference between context and memory, where an organization's evidence actually lives, what is worth keeping, and how you would prove that remembering changed what the agent did. From the first chapters of my O'Reilly book, Agent Memory.",
       date: "2026-07-18",
       slidesUrl: "/talks/agent-memory-applied-ai-2026.pdf",
       transcriptUrl: "/transcripts/agent_memory_applied_ai_2026.txt",
