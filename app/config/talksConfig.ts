@@ -1,5 +1,7 @@
 export interface Talk {
   id: string;
+  /** Short, stable URL segment. Falls back to `id` when absent. */
+  slug?: string;
   title: string;
   description: string;
   date: string;
@@ -27,6 +29,7 @@ export const talksConfig = {
   talks: [
     {
       id: "talk-agent-memory-applied-ai-2026",
+      slug: "agent-memory",
       title: "Agent Memory",
       description: "An agent hits a timeout, retries, and charges the customer twice. I use that to work through the difference between context and memory, where an organization's evidence actually lives, what is worth keeping, and how you would prove that remembering changed what the agent did. From the first chapters of my O'Reilly book, Agent Memory.",
       date: "2026-07-18",
@@ -38,6 +41,7 @@ export const talksConfig = {
     },
     {
       id: "podcast-into-the-hopper-ai-agents",
+      slug: "into-the-hopper",
       title: "The Evolution of AI Agents (Into the Hopper Podcast)",
       description: "A conversation with Tim Hopper about how AI agents are changing the day-to-day work of building software. We got into spec-driven development, managing agent memory effectively, and the shift from writing code to reviewing it. If you're thinking about how to integrate agents into your workflow or curious about measuring AI's impact on productivity, give it a listen.",
       date: "2026-01-09",
@@ -48,6 +52,7 @@ export const talksConfig = {
     },
     {
       id: "talk-ai-needs-memory",
+      slug: "ai-needs-memory",
       title: "AI Needs Memory: Here's How It Works",
       description: "A deep dive into why AI agents need memory to be truly useful, and the practical techniques for implementing memory systems. Covers short-term, long-term, and episodic memory patterns for building more capable and context-aware AI applications.",
       date: "2025-06-15",
@@ -57,6 +62,7 @@ export const talksConfig = {
     },
     {
       id: "talk-stateful-ai-agents-langgraph-redis",
+      slug: "stateful-agents-langgraph-redis",
       title: "Building Stateful AI Agents: Memory Management & Optimization with LangGraph and Redis",
       description: "A comprehensive walkthrough of building production-ready stateful AI agents using LangGraph for orchestration and Redis for persistent memory. Covers memory optimization strategies, state management patterns, and practical implementation details for scalable agent systems.",
       date: "2025-10-29",
@@ -66,6 +72,7 @@ export const talksConfig = {
     },
     {
       id: "talk-validating-llm-outputs",
+      slug: "validating-llm-outputs",
       title: "A Normie Approach to Validating LLM Outputs (AI.Science Talk)",
       description: "A practical walkthrough of how to handle messy, stochastic LLM responses—especially from local or quantized models—using cheap and reliable techniques like Pydantic validation and while loops. Includes a demo chatbot built on quantized LLaMA 2 and how to enforce predictable JSON responses from unpredictable models.",
       date: "2023-12-16",
@@ -75,6 +82,7 @@ export const talksConfig = {
     },
     {
       id: "talk-building-https-model-api-for-cheap",
+      slug: "https-model-api-for-cheap",
       title: "Building an HTTPS Model API for Cheap: AWS, Docker, and the Normconf API",
       description: "A candid walkthrough of building a production-grade conference API under time constraints—covering tool choices, trade-offs, and cloud deployment pain points. This talk frames fast API development as a metaphor for time management and argues for using 'Normie' software: tools that do what they say, are worth investing in, and are easy to pick up.",
       date: "2022-12-19",
@@ -84,6 +92,7 @@ export const talksConfig = {
     },
     {
       id: "talk-building-with-ai-llms-wharton",
+      slug: "building-with-ai-wharton",
       title: "Building With AI: How I Build Quick POCs with LLMs (Wharton Guest Lecture)",
       description: "A practical, high-energy lecture on building a workforce optimization platform from scratch using public datasets, synthetic org data, and large language models. The talk blends AI, economics, and personal career advice, showing how LLMs can supercharge idea validation and simulation—even without real data. A call to action for students to build, iterate, and grow through creation.",
       date: "2024-04-17",
@@ -104,6 +113,7 @@ export const talksConfig = {
     },
     {
       id: "talk-building-a-rag-model",
+      slug: "building-a-rag-model",
       title: "Building a RAG Model",
       description: "A step-by-step walkthrough for self-hosting a private large language model and retrieval-augmented generation (RAG) system using Synology NAS, Tailscale, Caddy, and Ollama. This guide covers setting up a reverse proxy, integrating Twitch stream alerts with Discord, and accessing your AI stack remotely and securely—no cloud costs, no open ports.",
       date: "2024-02-25",
@@ -125,6 +135,7 @@ export const talksConfig = {
     },
     {
       id: "stream-java-dsa-from-scratch",
+      slug: "java-arrays",
       title: "Learning Java Together | Data Structures & Algorithms | Practicing Array Fundamentals (Live Stream)",
       description: "A live coding session exploring the basics of Java programming and core data structures like arrays and matrices, with a focus on problem-solving and self-taught learning. Along the way, Ben breaks down for-loops, memory allocation, static vs dynamic arrays, and walks through solving a real coding challenge: removing even numbers from an array. This is part of a broader initiative to fill in the gaps of a self-taught background and encourage others to do the same.",
       date: "2024-02-19",
@@ -144,6 +155,7 @@ export const talksConfig = {
     },
     {
       id: "stream-java-linked-lists-and-cycle-detection",
+      slug: "java-linked-lists-cycles",
       title: "Learning Java Together | Data Structures & Algorithms | Linked Lists - Coding Practice |(Live Stream)",
       description: "A deep dive into Java's linked list data structure and the Floyd's Cycle Detection algorithm using fast and slow pointers. A walk-through on how to build a linked list from scratch, exploring how nodes are appended, and debug-traces the creation of head-insertion logic. This stream transitions into a code walkthrough of detecting cycles in a linked list and reflects on debugging strategies, generic types, and practical Java syntax—all through hands-on experimentation and learning.",
       date: "2024-02-26",
@@ -163,6 +175,7 @@ export const talksConfig = {
 },
     {
       id: "stream-java-array-merge-and-two-sum",
+      slug: "java-merge-two-sum",
       title: "Learning Java Together | Data Structures & Algorithms | Merging Sorted Arrays and Solving Two Sum in Java (Live Stream)",
       description: "This livestream session explores two classic coding problems in Java: merging two sorted arrays and solving the Two Sum problem. The stream includes detailed walkthroughs of each solution, emphasizes the use of test-driven development, and demonstrates how to manage iteration, edge cases, and debugging in Java. Designed as part of an ongoing effort to practice algorithms and data structures live.",
       date: "2024-02-25",
@@ -182,6 +195,7 @@ export const talksConfig = {
     },
     {
       id: "stream-java-linked-list-practice",
+      slug: "java-linked-lists",
       title: "Learning Java Together | Data Structures & Algorithms | Implementing Linked Lists in Java: Fundamentals and Traversal (Live Stream)",
       description: "This session focuses on building a singly linked list in Java from the ground up. Viewers are introduced to defining a `Node` class, constructing linked list elements, implementing the `appendToTail` method, and writing logic to traverse and print the list. The stream explores Java syntax, object-oriented design, and debugging techniques while relating key concepts to Python for context.",
       date: "2024-03-01",
@@ -201,3 +215,15 @@ export const talksConfig = {
     }
   ] as Talk[]
 };
+
+/** The URL segment for a talk. */
+export const getTalkSlug = (talk: Talk): string => talk.slug ?? talk.id;
+
+/** The anchor id rendered on the talks page. */
+export const getTalkAnchor = (talk: Talk): string => talk.id;
+
+/** Look a talk up by slug, falling back to its id so old links keep working. */
+export const findTalk = (key: string): Talk | null =>
+  talksConfig.talks.find((talk) => getTalkSlug(talk) === key) ??
+  talksConfig.talks.find((talk) => talk.id === key) ??
+  null;
