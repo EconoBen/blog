@@ -1,16 +1,17 @@
 import type { Metadata } from 'next';
+import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 import ClientLayout from './components/ClientLayout';
 
 export const metadata: Metadata = {
   title: 'ECONOBEN.DEV',
-  description: 'Posts, talks, publications, and the work surrounding my upcoming O\u2019Reilly book on AI agent memory.',
+  description: 'AI/ML engineering, posts, talks, tools, and Agent Memory — now in Early Release from O\u2019Reilly.',
   authors: [{ name: 'Benjamin Labaschin' }],
-  keywords: ['econoben', 'AI/ML engineering', 'posts', 'talks', 'publications', 'agent memory', 'O\u2019Reilly'],
+  keywords: ['econoben', 'AI/ML engineering', 'posts', 'talks', 'publications', 'agent memory', 'AI agents', 'O\u2019Reilly'],
   manifest: '/manifest.json',
   openGraph: {
     title: 'ECONOBEN.DEV',
-    description: 'Posts, talks, publications, and the work surrounding my upcoming O\u2019Reilly book on AI agent memory.',
+    description: 'AI/ML engineering, posts, talks, tools, and Agent Memory — now in Early Release from O\u2019Reilly.',
     url: 'https://econoben.dev',
     siteName: 'ECONOBEN.DEV',
     locale: 'en_US',
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'ECONOBEN.DEV',
-    description: 'Posts, talks, publications, and the work surrounding my upcoming O\u2019Reilly book on AI agent memory.',
+    description: 'AI/ML engineering, posts, talks, tools, and Agent Memory — now in Early Release from O\u2019Reilly.',
     images: ['https://econoben.dev/og-image.png'],
   },
   metadataBase: new URL('https://econoben.dev'),
@@ -37,6 +38,7 @@ export default function RootLayout({
         <ClientLayout>
           {children}
         </ClientLayout>
+        <Analytics />
       </body>
     </html>
   );

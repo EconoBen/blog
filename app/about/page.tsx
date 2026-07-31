@@ -121,9 +121,9 @@ export default function AboutPage() {
       <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-16 pt-10 md:pt-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_420px] lg:items-start">
           <div>
-            <div className="font-headline text-[clamp(4rem,10vw,6rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#1d1c16]" style={{ marginLeft: '-0.04em' }}>
+            <h1 className="font-headline text-[clamp(4rem,10vw,6rem)] font-black leading-[0.95] tracking-[-0.04em] text-[#1d1c16]" style={{ marginLeft: '-0.04em' }}>
               Ben<br />Labaschin
-            </div>
+            </h1>
             <p className="font-label text-sm font-bold uppercase tracking-[0.15em] text-[#0035a0]" style={{ marginTop: '1rem' }}>
               Staff AI/ML Engineer &middot; Writer &middot; Speaker
             </p>
@@ -157,7 +157,7 @@ export default function AboutPage() {
             <div className="border-b border-[#1d1c16]/8 py-3 md:py-4">
               <p className="font-headline text-xl font-bold text-[#1d1c16]">O&rsquo;Reilly Media</p>
               <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">
-                <span className="font-headline font-black text-[#0035a0]">2</span> published reports on AI agents. <span className="font-headline font-black text-[#0035a0]">1</span>{' '}book in progress: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.
+                <span className="font-headline font-black text-[#0035a0]">2</span> published reports on AI agents. <span className="font-headline font-black text-[#0035a0]">1</span>{' '}book in Early Release: Agent Memory &mdash; Building Stateful AI Agents That Remember, Adapt, and Work Across Time.
               </p>
             </div>
             <div className="border-b border-[#1d1c16]/8 py-3 md:py-4 md:border-b-0">
@@ -205,8 +205,8 @@ export default function AboutPage() {
             {
               label: 'Writing',
               title: 'An O\u2019Reilly Book on Agent Memory',
-              body: 'Writing Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time for O\u2019Reilly. Previously published two O\u2019Reilly reports on AI agents and co-authored AEA research on how LLMs reshape firm-level labor exposure.',
-              stat: 'Book in progress',
+              body: 'Writing Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time for O\u2019Reilly. Chapters 1 and 2 are live now, and Chapter 3 is submitted.',
+              stat: 'Early Release',
             },
             {
               label: 'Speaking',

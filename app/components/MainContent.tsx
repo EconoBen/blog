@@ -89,7 +89,7 @@ const DefaultHomeContent = ({ posts }: DefaultHomeContentProps) => {
         <span>/</span>
         <span>O&apos;Reilly reports</span>
         <span>/</span>
-        <span>forthcoming book on agent memory</span>
+        <span>Agent Memory in Early Release</span>
       </section>
 
       <section className="editorial-home-section">
