@@ -30,9 +30,9 @@ It’s not that I was in love with her or anything. Ask anyone who knew her and 
 
 That was the thing about Sarah, she was so quick. And she was quick because she was smart, really smart. She played multiple instruments, all self-taught. She was a straight-A student. And she had the most wonderful, moving voice that constantly touched those around her. I’ve linked a recording of one of her serenades below.
 
-Sarah\_SomebodyLikeYou.mp4
+Sarah\_SomebodyLikeYou.mp3
 
-[](https://benjaminlabaschin.com/wp-content/uploads/2023/01/Sarah_SomebodyLikeYou.mp4)
+[](/assets/2023/01/Sarah_SomebodyLikeYou.mp3)
 
 Because Sarah was so smart, she could read people quickly. And because she could read people quickly, she tended not to want to put up with their bullshit. This was fine if you were on her good side. But certainly it would put you in an uncomfortable situation if you found yourself on the other side of the coin. 
 

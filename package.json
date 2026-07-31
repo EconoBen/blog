@@ -29,7 +29,9 @@
     "analyze-local-assets": "node scripts/production-analysis/local-build-analyzer.js assets",
     "analyze-comprehensive": "node scripts/production-analysis/comprehensive-analyzer.js",
     "analyze-differences": "node scripts/production-analysis/difference-engine.js",
-    "test-difference-engine": "node scripts/production-analysis/test-difference-engine.js"
+    "test-difference-engine": "node scripts/production-analysis/test-difference-engine.js",
+    "test:grebe-refresh": "node scripts/verify-grebe-refresh.mjs",
+    "test:links": "node scripts/verify-site-links.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.840.0",

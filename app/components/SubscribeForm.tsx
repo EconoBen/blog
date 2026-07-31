@@ -1,12 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { track } from '@vercel/analytics/react';
 
 interface SubscribeFormProps {
   variant?: 'dark' | 'light';
+  placement?: string;
 }
 
-export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
+export function SubscribeForm({
+  variant = 'dark',
+  placement = 'site_footer',
+}: SubscribeFormProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -25,6 +30,11 @@ export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
       if (response.ok) {
         setStatus('success');
         setEmail('');
+        try {
+          track('newsletter_subscribe_success', { placement });
+        } catch {
+          // A successful subscription remains successful if analytics is blocked.
+        }
       } else {
         setStatus('error');
       }
@@ -65,20 +75,21 @@ export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
             No spam &mdash; just updates when something new ships or the book hits a milestone.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 md:items-center md:justify-center">
-          <div className="flex w-full gap-3">
+        <form onSubmit={handleSubmit} className="subscribe-form flex flex-col gap-3 md:items-center md:justify-center">
+          <div className="subscribe-controls flex w-full gap-3">
             <input
               type="email"
               required
+              aria-label="Email address"
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="min-w-0 flex-1 rounded-lg border border-[#0035a0]/15 bg-white/80 px-4 py-3 font-body text-sm text-[#1d1c16] placeholder:text-[#1d1c16]/30 shadow-[0_4px_12px_rgba(0,53,160,0.06)] focus:border-[#0035a0]/30 focus:outline-none"
+              className="subscribe-input min-w-0 flex-1 rounded-lg border border-[#176b69]/20 bg-white/80 px-4 py-3 font-body text-sm text-[#1d1c16] placeholder:text-[#1d1c16]/35 shadow-[0_4px_12px_rgba(23,107,105,0.08)] focus:border-[#176b69]/50 focus:outline-none focus:ring-2 focus:ring-[#84b8b1]/40"
             />
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="shrink-0 rounded-lg bg-[#0035a0] px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5 disabled:opacity-60"
+              className="subscribe-submit shrink-0 rounded-lg bg-[#176b69] px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-white transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#176b69]/35 focus:ring-offset-2 disabled:opacity-60"
               style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
             >
               {status === 'loading' ? 'Sending...' : 'Subscribe'}
@@ -96,24 +107,25 @@ export function SubscribeForm({ variant = 'dark' }: SubscribeFormProps) {
     <div className="rounded-2xl bg-[#0035a0] p-8 md:p-12">
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-12">
         <div className="text-white">
-          <h3 className="font-headline text-2xl font-bold md:text-3xl">Get notified when Agent Memory ships.</h3>
+          <h3 className="font-headline text-2xl font-bold md:text-3xl">Follow Agent Memory in Early Release.</h3>
           <p className="mt-2 max-w-md font-body text-base leading-relaxed text-white/80">
-            No spam, no fake waitlist. Just an email when the book is ready.
+            No spam, no fake waitlist. Just an email when new chapters and milestones land.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="flex w-full max-w-md gap-3 md:w-auto">
+        <form onSubmit={handleSubmit} className="subscribe-form subscribe-controls flex w-full max-w-md gap-3 md:w-auto">
           <input
             type="email"
             required
+            aria-label="Email address"
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="min-w-0 flex-1 rounded-lg bg-white/10 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 focus:bg-white/15 focus:outline-none"
+            className="subscribe-input min-w-0 flex-1 rounded-lg bg-white/10 px-4 py-3 font-body text-sm text-white placeholder:text-white/40 focus:bg-white/15 focus:outline-none"
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="shrink-0 rounded-lg bg-white px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-0.5 disabled:opacity-60"
+            className="subscribe-submit shrink-0 rounded-lg bg-white px-6 py-3 font-label text-[11px] font-bold uppercase tracking-widest text-[#0035a0] transition-all hover:-translate-y-0.5 disabled:opacity-60"
           >
             {status === 'loading' ? 'Sending...' : 'Subscribe'}
           </button>

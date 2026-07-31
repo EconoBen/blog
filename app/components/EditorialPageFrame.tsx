@@ -3,13 +3,14 @@ import Link from 'next/link';
 import { ScrollToTop } from './ScrollToTop';
 import { StickyContactRemote } from './StickyContactRemote';
 import { SubscribeForm } from './SubscribeForm';
+import { GrebeField } from './GrebeField';
 
 const primaryNavItems = [
   { href: '/', label: 'Home' },
   { href: '/posts', label: 'Posts' },
   { href: '/talks', label: 'Talks' },
   { href: '/publications', label: 'Publications' },
-  { href: '/book', label: 'New Book' },
+  { href: '/book', label: 'Book' },
   { href: '/code-ai', label: 'Code & Tools' },
   { href: '/about', label: 'About' },
 ];
@@ -64,7 +65,10 @@ const activeMobileNavStyle: CSSProperties = {
 
 export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const compactShell = isCompactShell(currentPath);
-  const mobilePrimaryNavItems = prioritizeActiveItem(primaryNavItems, currentPath);
+  const mobilePrimaryNavItems = prioritizeActiveItem(
+    [...primaryNavItems, ...discoveryNavItems],
+    currentPath,
+  );
   const brandLabel = 'ECONOBEN.DEV';
   const headerClassName = compactShell
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
@@ -81,13 +85,13 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
 
   return (
     <header className={headerClassName}>
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-2.5 px-4 py-3 sm:px-6 md:flex-row md:items-center md:justify-between md:gap-8 md:px-8 md:py-5">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-2.5 px-4 py-3 sm:px-6 xl:flex-row xl:items-center xl:justify-between xl:gap-8 xl:px-8 xl:py-5">
         <div className="flex items-center gap-3">
           <Link href="/" className={brandClassName} aria-label="Go to home">
             {brandLabel}
           </Link>
         </div>
-        <nav className="hidden flex-1 items-center justify-center gap-2 md:flex" aria-label="Primary">
+        <nav className="hidden flex-1 items-center justify-center gap-2 xl:flex" aria-label="Primary">
           {primaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
             const isBook = item.href === '/book';
@@ -104,7 +108,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             );
           })}
         </nav>
-        <nav className="hidden items-center gap-3 md:flex" aria-label="Discovery">
+        <nav className="hidden items-center gap-3 xl:flex" aria-label="Discovery">
           {discoveryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
@@ -125,7 +129,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         </nav>
       </div>
       <nav
-        className="mx-auto max-w-[1440px] px-4 pb-2.5 md:hidden sm:px-6"
+        className="mx-auto max-w-[1440px] px-4 pb-2.5 sm:px-6 xl:hidden"
         aria-label="Primary"
       >
         <div className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -156,18 +160,20 @@ export function EditorialPageFrame({
   pageClassName = 'editorial-book-page',
 }: EditorialPageFrameProps) {
   const copyrightYear = new Date().getFullYear();
+  const grebeVariant = currentPath === '/' ? 'home' : currentPath === '/book' ? 'book' : 'site';
 
   return (
-    <div className={`bg-[#fef9ef] min-h-screen text-[#1d1c16] ${pageClassName}`.trim()}>
-      <div>
+    <div className={`grebe-site-shell relative isolate min-h-screen overflow-clip bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
+      <GrebeField variant={grebeVariant} />
+      <div className="relative z-[2]">
         <EditorialTopbar currentPath={currentPath} />
-        <div className="h-[100px] md:h-[80px]" aria-hidden="true" />
-        <main>{children}</main>
+        <div className="h-[100px] xl:h-[80px]" aria-hidden="true" />
+        <main className="relative isolate overflow-clip">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
-        <section id="subscribe" className="banner-glow bg-[#e8eef8] py-16 sm:py-20">
-          <div className="mx-auto max-w-[1440px] px-8">
-            <SubscribeForm variant="light" />
+        <section id="subscribe" className="grebe-subscribe py-16 sm:py-20">
+          <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
+            <SubscribeForm variant="light" placement={`${currentPath}_footer`} />
           </div>
         </section>
         <footer className="w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">

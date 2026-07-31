@@ -25,6 +25,241 @@
   --color-on-secondary-container: #1d1c16;
 }
 
+/* ===========================
+   Grebe Editorial System
+   =========================== */
+
+.grebe-site-shell {
+  --grebe-paper: #f7f2e8;
+  --grebe-ink: #211e1f;
+  --grebe-teal: #176b69;
+  --grebe-ripple: #84b8b1;
+  --grebe-rust: #d95a2e;
+  --grebe-ochre: #d6a03b;
+  --grebe-release: #b9140b;
+  background-color: var(--grebe-paper);
+  background-image:
+    radial-gradient(circle at 15% 18%, rgba(214, 160, 59, 0.035), transparent 28%),
+    radial-gradient(circle at 84% 44%, rgba(23, 107, 105, 0.035), transparent 31%),
+    radial-gradient(rgba(33, 30, 31, 0.06) 0.45px, transparent 0.55px);
+  background-size: auto, auto, 7px 7px;
+  color: var(--grebe-ink);
+}
+
+.grebe-page-content {
+  position: relative;
+  z-index: 2;
+}
+
+.grebe-field {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  user-select: none;
+}
+
+.grebe-mascot {
+  position: absolute;
+  display: block;
+  width: clamp(76px, 7vw, 112px);
+  aspect-ratio: 1;
+  max-width: none !important;
+  background-image: url('/assets/grebes/grebe-mascots.png');
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  opacity: 0.68;
+  filter: saturate(0.88);
+  transform: translate3d(0, 0, 0);
+}
+
+.grebe-mascot--swim {
+  background-position: 0 0;
+}
+
+.grebe-mascot--note {
+  background-position: 100% 0;
+}
+
+.grebe-mascot--peek {
+  background-position: 0 100%;
+}
+
+.grebe-mascot--think {
+  background-position: 100% 100%;
+}
+
+.grebe-position--home-1 { top: 2.5%; left: -2rem; }
+.grebe-position--home-2 { top: 16%; right: 1.5%; }
+.grebe-position--home-3 { top: 35%; left: 1%; }
+.grebe-position--home-4 { top: 52%; right: 2%; }
+.grebe-position--home-5 { top: 68%; left: 3%; }
+.grebe-position--home-6 { top: 82%; right: -1.5rem; }
+.grebe-position--home-7 { top: 93%; left: 7%; }
+
+.grebe-position--book-1 { top: 2%; left: 43%; }
+.grebe-position--book-2 { top: 13%; right: -2rem; }
+.grebe-position--book-3 { top: 27%; left: 1%; }
+.grebe-position--book-4 { top: 39%; right: 2%; }
+.grebe-position--book-5 { top: 55%; left: -1.5rem; }
+.grebe-position--book-6 { top: 69%; right: 3%; }
+.grebe-position--book-7 { top: 83%; left: 2%; }
+.grebe-position--book-8 { top: 94%; right: -1rem; }
+
+.grebe-position--site-1 { top: 7%; left: -8rem; }
+.grebe-position--site-2 { top: 21%; right: -2rem; }
+.grebe-position--site-3 { top: 38%; left: 2%; }
+.grebe-position--site-4 { top: 56%; right: -8rem; }
+.grebe-position--site-5 { top: 72%; left: -1rem; }
+.grebe-position--site-6 { top: 86%; right: 3%; }
+.grebe-position--site-7 { top: 96%; left: 8%; }
+
+.grebe-motion--cross-a {
+  left: -8rem !important;
+  right: auto !important;
+  animation: grebe-cross-a 52s linear infinite;
+}
+
+.grebe-motion--cross-b {
+  right: -8rem !important;
+  left: auto !important;
+  animation: grebe-cross-b 61s linear infinite;
+}
+
+@keyframes grebe-cross-a {
+  0% { transform: translate3d(-4vw, 2px, 0) rotate(-1deg); }
+  48% { transform: translate3d(60vw, -6px, 0) rotate(1deg); }
+  100% { transform: translate3d(122vw, 1px, 0) rotate(-1deg); }
+}
+
+@keyframes grebe-cross-b {
+  0% { transform: translate3d(4vw, -2px, 0) scaleX(-1) rotate(-1deg); }
+  52% { transform: translate3d(-60vw, 7px, 0) scaleX(-1) rotate(1deg); }
+  100% { transform: translate3d(-122vw, 0, 0) scaleX(-1) rotate(-1deg); }
+}
+
+.book-cover {
+  width: 100%;
+  margin: 0;
+}
+
+.book-cover--hero {
+  width: min(100%, 410px);
+  max-width: 410px;
+  flex: none;
+}
+
+.book-cover--compact {
+  width: 185px;
+  max-width: 185px;
+  flex: none;
+}
+
+.book-cover__crop {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 924 / 1214;
+  overflow: hidden;
+  border: 1px solid rgba(33, 30, 31, 0.1);
+  background: #fff;
+  box-shadow:
+    0 24px 58px rgba(33, 30, 31, 0.16),
+    0 4px 12px rgba(33, 30, 31, 0.08);
+}
+
+.book-cover__source {
+  position: absolute;
+  top: -5.6%;
+  left: -8.44%;
+  width: 116.88% !important;
+  height: auto !important;
+  max-width: none !important;
+}
+
+.grebe-subscribe {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(23, 107, 105, 0.14);
+  background:
+    radial-gradient(circle at 82% 20%, rgba(132, 184, 177, 0.22), transparent 30%),
+    #edf2ea;
+}
+
+.subscribe-form {
+  width: 100%;
+}
+
+.subscribe-controls {
+  align-items: stretch;
+  min-width: 0;
+}
+
+.subscribe-input {
+  width: min(19rem, 54vw) !important;
+  min-width: 10rem !important;
+  flex: 1 1 16rem;
+}
+
+.subscribe-submit {
+  width: auto !important;
+  min-width: 8.5rem;
+  font-size: 11px !important;
+}
+
+@media (max-width: 767px) {
+  .grebe-mascot:not(.grebe-mascot--mobile) {
+    display: none;
+  }
+
+  .grebe-mascot {
+    width: clamp(60px, 20vw, 82px);
+    opacity: 0.5;
+  }
+
+  .grebe-position--home-1 { top: 1.5%; left: -2.2rem; }
+  .grebe-position--home-3 { top: 45%; left: -2rem; }
+  .grebe-position--home-6 { top: 86%; right: -2.2rem; }
+  .grebe-position--book-1 { top: 1.5%; left: auto; right: -2rem; }
+  .grebe-position--book-3 { top: 34%; left: -2.1rem; }
+  .grebe-position--book-7 { top: 82%; left: auto; right: -2rem; }
+
+  .book-cover--hero {
+    width: min(82vw, 360px);
+  }
+
+  .book-cover--compact {
+    width: min(42vw, 165px);
+  }
+
+  .subscribe-input {
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .subscribe-controls {
+    flex-direction: column;
+  }
+
+  .subscribe-input,
+  .subscribe-submit {
+    width: 100% !important;
+  }
+
+  .subscribe-input {
+    flex: 0 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grebe-mascot,
+  .grebe-motion--cross-a,
+  .grebe-motion--cross-b {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 /* CSS Variables */
 :root {
 	/* Layout */
@@ -8778,7 +9013,7 @@ body.sidebar-open .toggle-icon span:nth-child(4) {
   100% { background-position: 0% 50%; }
 }
 
-/* Shining border for New Book nav tab */
+/* Shining border for the book nav tab */
 .nav-shine {
   position: relative;
   overflow: visible;

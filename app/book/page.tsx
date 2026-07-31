@@ -1,274 +1,257 @@
 import type { Metadata } from 'next';
+import { BookCover } from '../components/BookCover';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
+import { TrackedAction } from '../components/TrackedAction';
+import {
+  AGENT_MEMORY,
+  OREILLY_LINKS,
+  buildOutcomes,
+  chapters,
+  chapterStatusLabels,
+  earlyReleaseNotes,
+} from './bookData';
+
+const bookDescription =
+  'Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time. Now in Early Release from O’Reilly Media.';
 
 export const metadata: Metadata = {
-  title: 'Agent Memory | Book | ECONOBEN.DEV',
-  description: 'Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time. An O\'Reilly book by Ben Labaschin, now in Early Release.',
+  title: 'Agent Memory | Early Release | ECONOBEN.DEV',
+  description: bookDescription,
+  alternates: { canonical: '/book' },
+  openGraph: {
+    title: 'Agent Memory — Early Release',
+    description: bookDescription,
+    url: 'https://econoben.dev/book',
+    type: 'website',
+    images: [
+      {
+        url: AGENT_MEMORY.coverSrc,
+        width: 1080,
+        height: 1350,
+        alt: AGENT_MEMORY.coverAlt,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agent Memory — Early Release',
+    description: bookDescription,
+    images: [AGENT_MEMORY.coverSrc],
+  },
 };
 
-const OREILLY_BOOK_URL =
-  'https://www.oreilly.com/library/view/agent-memory/0642572370473/?utm_source=econoben&utm_medium=book_page&utm_campaign=early_release';
-const OREILLY_TRIAL_URL =
-  'https://www.oreilly.com/start-trial/?type=individual&utm_source=econoben&utm_medium=book_page&utm_campaign=early_release';
-
-const audiences = [
-  {
-    title: 'Engineers building agents',
-    desc: "You’re past the prompt-and-pray stage. You need memory that works across sessions, handles corrections, and doesn’t rot as it grows.",
-  },
-  {
-    title: 'Teams shipping AI products',
-    desc: 'Your agent works in demos but breaks in production. This book covers the operational patterns that make memory reliable at scale.',
-  },
-  {
-    title: 'Anyone designing stateful AI',
-    desc: "If you’re deciding how an AI system should remember, forget, and share information, this is the architectural reference.",
-  },
-];
-
-const questions = [
-  {
-    q: 'How do I stop my agent from forgetting everything between sessions?',
-    a: 'The book separates context from memory and shows how to build retention that survives session boundaries without polluting future interactions.',
-    ref: 'Chapters 1 – 2',
-  },
-  {
-    q: 'What should my agent actually remember?',
-    a: 'Not everything. The book defines practical rules for what to keep, what to compress, and what to deliberately forget.',
-    ref: 'Chapter 3',
-  },
-  {
-    q: 'How do I write memory without filling it with noise?',
-    a: 'Write triggers, thresholds, restraint. The book covers when to write, when to wait, and how to avoid memory pollution.',
-    ref: 'Chapter 4',
-  },
-  {
-    q: 'My retrieval keeps pulling the wrong memories. Now what?',
-    a: 'The book covers query formation, ranking, context loading, semantic caching, and how to evaluate whether retrieval is helping or hurting.',
-    ref: 'Chapter 6',
-  },
-  {
-    q: 'How do I keep memory useful as it grows?',
-    a: 'Rollups, summaries, corrections, versioning, duplicate detection, and maintenance strategies that prevent memory rot.',
-    ref: 'Chapter 7',
-  },
-  {
-    q: 'What happens when memory goes wrong?',
-    a: 'Poisoning, leakage, staleness, over-trust. The book closes with detection, repair, rollback, and designing memory to fail safely.',
-    ref: 'Chapter 10',
-  },
-];
-
-const concepts = [
-  { title: 'Design a memory API', desc: 'Give your agent the verbs it needs: write, retrieve, update, forget, consolidate' },
-  { title: 'Decide what to keep', desc: 'Build practical retention rules instead of storing everything and hoping' },
-  { title: 'Retrieve without hallucinating', desc: 'Form better queries, rank candidates, and measure whether recall is helping' },
-  { title: 'Resume interrupted work', desc: 'Checkpoints, durable state, and handoff patterns for long-running agents' },
-  { title: 'Maintain memory at scale', desc: 'Prevent rot, resolve duplicates, and keep memory useful as it grows' },
-  { title: 'Share memory safely', desc: 'Ownership, boundaries, and coordination across agents and teams' },
-  { title: 'Design for failure', desc: 'Poisoning, leakage, rollback, and guardrails that limit blast radius' },
-  { title: 'Evaluate memory quality', desc: 'Baselines, regressions, and knowing when memory is making things worse' },
-];
-
-const chapters = [
-  { part: 'I', partTitle: 'Agents, Memory, and the Act of Remembering', chapters: [
-    { num: '01', title: 'The Work of Remembering', desc: 'What memory means for an agent, how it differs from context, and why continuity changes everything.', status: 'live' },
-    { num: '02', title: 'What the Agent Can Read and Write', desc: 'Where memory lives, the five working verbs, and giving the agent a memory API.', status: 'live' },
-  ]},
-  { part: 'II', partTitle: 'Building and Managing Agent Memory', chapters: [
-    { num: '03', title: 'Choosing What Becomes Memory', desc: 'Rules for retention, compression, forgetting, and knowing when memory helps.', status: 'submitted' },
-    { num: '04', title: 'How Memory Gets Written', desc: 'Write triggers, normalization, correction, and failure modes in the write path.', status: 'writing' },
-    { num: '05', title: 'Where Memory Lives and Who Controls It', desc: 'Client vs server, portability, inspectability, and the control model.', status: '' },
-    { num: '06', title: 'Finding the Right Memory', desc: 'Retrieval, ranking, context loading, caching, and evaluating quality.', status: '' },
-    { num: '07', title: 'Keeping Memory Useful Over Time', desc: 'Rollups, corrections, versioning, duplicates, and maintenance strategies.', status: '' },
-    { num: '08', title: 'More Than Memory: State and Resumability', desc: 'Checkpoints, durable work, resume, replay, and human pause points.', status: '' },
-  ]},
-  { part: 'III', partTitle: 'Shared Memory, Risk, and Recovery', chapters: [
-    { num: '09', title: 'Shared Memory: Coordination, Boundaries, and Conflict', desc: 'Ownership, leakage, multi-agent coordination, and provenance.', status: '' },
-    { num: '10', title: 'Dangerous Memory: Risk, Failure, and Recovery', desc: 'Poisoning, detection, repair, rollback, and designing memory to fail safely.', status: '' },
-  ]},
-];
-
-const statusLabels: Record<string, string> = {
-  live: 'Live now',
-  submitted: 'Submitted',
-  writing: 'Writing',
-};
+const liveChapterCount = chapters
+  .flatMap((part) => part.chapters)
+  .filter((chapter) => chapter.status === 'live').length;
 
 export default function BookPage() {
   return (
     <EditorialPageFrame currentPath="/book">
-      <main className="mx-auto max-w-[1440px] px-5 md:px-8">
-
-        {/* ── Hero ── */}
-        <header className="grid grid-cols-1 items-start gap-10 pb-8 pt-12 md:pb-12 md:pt-16 lg:grid-cols-[7fr_5fr] lg:gap-16">
+      <div className="grebe-page-content">
+        <header className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-12 px-5 pb-16 pt-12 md:px-8 md:pb-20 md:pt-20 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#0035a0] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#b9140b] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                 <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-                Early Release
+                {AGENT_MEMORY.releaseLabel}
               </span>
               <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
-                O&apos;Reilly Media
+                {AGENT_MEMORY.publisher}
               </span>
             </div>
-            <h1 className="mt-8 font-headline text-[clamp(3.5rem,8vw,5.5rem)] font-black leading-[0.95] tracking-[-0.03em] text-[#1d1c16]">
-              Agent<br />Memory
+
+            <h1 className="mt-7 max-w-[8ch] font-headline text-[clamp(3.3rem,7.5vw,6.4rem)] font-black leading-[0.9] tracking-[-0.055em] text-[#211e1f]">
+              Agent Memory
             </h1>
-            <p className="mt-6 max-w-xl font-body text-xl leading-relaxed text-[#555f70] md:text-2xl">
-              Building Stateful AI Agents That Remember, Adapt, and Work Across Time
+            <p className="mt-7 max-w-2xl font-body text-xl leading-relaxed text-[#555f70] md:text-[1.65rem]">
+              {AGENT_MEMORY.subtitle}
             </p>
-            <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-[#1d1c16]">
-              Chapters 1 and 2 are live on the O&rsquo;Reilly platform right now. New chapters land every four to six weeks.
+            <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-[#211e1f]">
+              {AGENT_MEMORY.availability}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={OREILLY_BOOK_URL}
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <TrackedAction
+                href={OREILLY_LINKS.bookPage}
+                eventName="oreilly_read_click"
+                eventProperties={{ source: 'book', placement: 'hero' }}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-lg bg-[#0035a0] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5"
+                className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#176b69] px-7 py-3.5 font-headline text-sm font-bold uppercase tracking-[0.08em] text-white shadow-[0_14px_28px_rgba(23,107,105,0.18)] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#176b69]/35 focus:ring-offset-2"
                 style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
               >
                 Read chapters 1 &amp; 2
-              </a>
+              </TrackedAction>
               <a
                 href="#subscribe"
-                className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#0035a0] transition-all hover:-translate-y-0.5"
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#176b69]/25 bg-[#fffdf8]/70 px-7 py-3.5 font-headline text-sm font-bold uppercase tracking-[0.08em] text-[#176b69] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#176b69]/25 focus:ring-offset-2"
               >
                 Get chapter updates
               </a>
             </div>
-            <p className="mt-4 font-body text-sm leading-relaxed text-[#555f70]">
-              No O&rsquo;Reilly account?{' '}
-              <a
-                href={OREILLY_TRIAL_URL}
+
+            <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-[#555f70]">
+              No O&rsquo;Reilly access?{' '}
+              <TrackedAction
+                href={OREILLY_LINKS.trial}
+                eventName="oreilly_trial_click"
+                eventProperties={{ source: 'book' }}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-[#0035a0] underline underline-offset-2"
+                className="font-bold text-[#176b69] underline decoration-[#84b8b1] underline-offset-4"
               >
                 Start a free 10-day trial
-              </a>
+              </TrackedAction>
               . Many companies and universities already provide access.
             </p>
           </div>
-          <div className="flex items-center justify-center">
-            <img
-              src="/assets/agent-memory-cover.png"
-              alt="Agent Memory — O'Reilly book by Ben Labaschin"
-              className="w-full drop-shadow-[0_20px_50px_rgba(0,0,0,0.25)]"
-              style={{ maxHeight: '480px', objectFit: 'contain' }}
-            />
+
+          <div className="relative flex justify-center lg:justify-end">
+            <div className="absolute -left-2 top-10 hidden h-28 w-28 rounded-full border border-[#84b8b1]/35 lg:block" />
+            <BookCover eager className="relative" />
           </div>
         </header>
 
-        {/* ── What Early Release Means ── */}
-        <section className="pb-12 pt-4">
-          <div className="h-px w-full bg-[#1d1c16]/8" />
-          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Reading It Early</h2>
-          <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
-            <div className="sticky-note p-7">
-              <h3 className="font-headline text-lg font-bold text-[#1d1c16]">It is raw and unedited</h3>
-              <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">
-                Early Release chapters ship before copyedit. You get the material months early and you see the rough edges.
-              </p>
+        <section aria-label="Current Early Release status" className="border-y border-[#211e1f]/10 bg-[#fffdf8]/72">
+          <div className="mx-auto grid max-w-[1320px] grid-cols-1 divide-y divide-[#211e1f]/10 px-5 md:grid-cols-3 md:divide-x md:divide-y-0 md:px-8">
+            <div className="py-6 md:pr-8">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Available now</p>
+              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">{liveChapterCount} chapters live</p>
             </div>
-            <div className="sticky-note p-7">
-              <h3 className="font-headline text-lg font-bold text-[#1d1c16]">Your feedback changes the book</h3>
-              <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">
-                Tell me what landed and what was thin. Reading it now is the only window where what you say still shapes what ships.
-              </p>
+            <div className="py-6 md:px-8">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Next in line</p>
+              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">Chapter 3 submitted</p>
             </div>
-            <div className="sticky-note p-7">
-              <h3 className="font-headline text-lg font-bold text-[#1d1c16]">New chapters every 4 to 6 weeks</h3>
-              <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">
-                Chapter 3 is submitted. Chapter 4 is being written now. Subscribe below and I&rsquo;ll tell you when each one lands.
-              </p>
+            <div className="py-6 md:pl-8">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Still shapeable</p>
+              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">Reader feedback is open</p>
             </div>
           </div>
         </section>
 
-        {/* ── Who This Book Is For ── */}
-        <section className="pb-12">
-          <div className="h-px w-full bg-[#1d1c16]/8" />
-          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Who This Book Is For</h2>
-          <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {audiences.map((item) => (
-              <div key={item.title} className="sticky-note p-7">
-                <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{item.title}</h3>
-                <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">{item.desc}</p>
-              </div>
+        <section className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20 lg:py-28">
+          <div>
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.25em] text-[#d95a2e]">
+              Why read the rough version?
+            </p>
+            <h2 className="mt-4 max-w-[10ch] font-headline text-4xl font-black tracking-[-0.03em] text-[#211e1f] md:text-5xl">
+              Early means useful now—and changeable.
+            </h2>
+            <p className="mt-6 max-w-lg font-body text-lg leading-relaxed text-[#555f70]">
+              This is a working technical book, not a polished preview. You get the architecture and examples early; I get the chance to make the final book answer the questions builders actually have.
+            </p>
+          </div>
+          <div className="border-t border-[#211e1f]/12">
+            {earlyReleaseNotes.map((note, index) => (
+              <article
+                key={note.title}
+                className="grid gap-4 border-b border-[#211e1f]/12 py-7 sm:grid-cols-[3.5rem_1fr]"
+              >
+                <span className="font-headline text-3xl font-black text-[#84b8b1]">
+                  0{index + 1}
+                </span>
+                <div>
+                  <h3 className="font-headline text-2xl font-bold text-[#211e1f]">{note.title}</h3>
+                  <p className="mt-2 max-w-2xl font-body text-base leading-relaxed text-[#555f70]">{note.body}</p>
+                </div>
+              </article>
             ))}
           </div>
         </section>
 
-        {/* ── Questions This Book Answers ── */}
-        <section className="pb-12">
-          <div className="h-px w-full bg-[#1d1c16]/8" />
-          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Questions This Book Answers</h2>
-          <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-            {questions.map((item) => (
-              <div key={item.q} className="sticky-note p-7">
-                <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{item.q}</h3>
-                <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">{item.a}</p>
-                <p className="mt-3 font-label text-[10px] font-bold uppercase tracking-[0.1em] text-[#0035a0]">{item.ref}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <section className="border-y border-[#176b69]/14 bg-[#edf2ea]/86">
+          <div className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-24">
+            <div className="max-w-3xl">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.25em] text-[#d95a2e]">
+                What you will learn to build
+              </p>
+              <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.03em] text-[#211e1f] md:text-5xl">
+                A memory system you can inspect, operate, and trust.
+              </h2>
+            </div>
 
-        {/* ── What You'll Learn to Build ── */}
-        <section className="pb-12">
-          <div className="h-px w-full bg-[#1d1c16]/8" />
-          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>What You&rsquo;ll Learn to Build</h2>
-          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {concepts.map((item) => (
-              <div key={item.title} className="sticky-note p-5">
-                <h3 className="font-headline text-base font-bold text-[#1d1c16]">{item.title}</h3>
-                <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── What the Book Covers ── */}
-        <section className="pb-20">
-          <div className="h-px w-full bg-[#1d1c16]/8" />
-          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>What the Book Covers</h2>
-          <p className="mt-2 font-headline text-lg font-bold text-[#1d1c16]">10 chapters across 3 parts.</p>
-          <div className="mt-6">
-            {chapters.map((part) => (
-              <div key={part.part}>
-                <p className="pb-2 pt-5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#0035a0]">
-                  Part {part.part} &mdash; {part.partTitle}
-                </p>
-                {part.chapters.map((ch) => (
-                  <div key={ch.num} className="grid grid-cols-[60px_1fr] gap-5 border-b border-[#1d1c16]/6 py-5">
-                    <span className="font-headline text-3xl font-black text-[#0035a0]/15">{ch.num}</span>
-                    <div>
-                      <div className="flex flex-wrap items-center gap-3">
-                        <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{ch.title}</h3>
-                        {ch.status && (
-                          <span
-                            className={
-                              ch.status === 'live'
-                                ? 'rounded-full bg-[#0035a0] px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.15em] text-white'
-                                : 'rounded-full border border-[#0035a0]/25 px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.15em] text-[#0035a0]'
-                            }
-                          >
-                            {statusLabels[ch.status]}
-                          </span>
-                        )}
-                      </div>
-                      <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">{ch.desc}</p>
-                    </div>
+            <div className="mt-12 grid border-t border-[#176b69]/18 md:grid-cols-2">
+              {buildOutcomes.map((outcome, index) => (
+                <article
+                  key={outcome.verb}
+                  className={[
+                    'border-b border-[#176b69]/18 py-8',
+                    index % 2 === 0 ? 'md:border-r md:pr-10' : 'md:pl-10',
+                  ].join(' ')}
+                >
+                  <div className="flex items-baseline justify-between gap-4">
+                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#176b69]">
+                      {outcome.chapters}
+                    </p>
+                    <span className="font-headline text-3xl font-black text-[#176b69]/15">0{index + 1}</span>
                   </div>
-                ))}
-              </div>
-            ))}
+                  <h3 className="mt-4 font-headline text-2xl font-black text-[#211e1f]">
+                    <span className="text-[#176b69]">{outcome.verb}</span> {outcome.title}
+                  </h3>
+                  <p className="mt-3 max-w-xl font-body text-base leading-relaxed text-[#555f70]">{outcome.body}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-      </main>
+        <section className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-28">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <p className="font-label text-[10px] font-bold uppercase tracking-[0.25em] text-[#d95a2e]">
+                The current map
+              </p>
+              <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.03em] text-[#211e1f] md:text-5xl">
+                Ten chapters across three parts.
+              </h2>
+              <p className="mt-5 max-w-md font-body text-lg leading-relaxed text-[#555f70]">
+                Part I establishes the contracts. Part II turns them into systems. Part III handles coordination, risk, and recovery.
+              </p>
+            </div>
+
+            <div className="space-y-12">
+              {chapters.map((part) => (
+                <section key={part.part} aria-labelledby={`part-${part.part}`}>
+                  <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-[#176b69] pb-3">
+                    <h3 id={`part-${part.part}`} className="font-headline text-2xl font-black text-[#211e1f]">
+                      Part {part.part}
+                    </h3>
+                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-[#176b69]">
+                      {part.partTitle}
+                    </p>
+                  </div>
+
+                  {part.chapters.map((chapter) => (
+                    <article
+                      key={chapter.num}
+                      className="grid grid-cols-[3.25rem_1fr] gap-4 border-b border-[#211e1f]/10 py-6 sm:grid-cols-[4.5rem_1fr]"
+                    >
+                      <span className="font-headline text-3xl font-black text-[#84b8b1]">{chapter.num}</span>
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3">
+                          <h4 className="font-headline text-xl font-bold text-[#211e1f]">{chapter.title}</h4>
+                          {chapter.status ? (
+                            <span
+                              className={
+                                chapter.status === 'live'
+                                  ? 'rounded-full bg-[#176b69] px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.14em] text-white'
+                                  : 'rounded-full border border-[#d95a2e]/35 bg-[#fffdf8]/70 px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.14em] text-[#d95a2e]'
+                              }
+                            >
+                              {chapterStatusLabels[chapter.status]}
+                            </span>
+                          ) : null}
+                        </div>
+                        <p className="mt-2 max-w-2xl font-body text-sm leading-relaxed text-[#555f70]">{chapter.desc}</p>
+                      </div>
+                    </article>
+                  ))}
+                </section>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
     </EditorialPageFrame>
   );
 }
