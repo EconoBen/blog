@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
-import { SubscribeForm } from '../components/SubscribeForm';
 
 export const metadata: Metadata = {
   title: 'Agent Memory | Book | ECONOBEN.DEV',
@@ -232,7 +231,7 @@ export default function BookPage() {
         </section>
 
         {/* ── What the Book Covers ── */}
-        <section className="pb-12">
+        <section className="pb-20">
           <div className="h-px w-full bg-[#1d1c16]/8" />
           <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>What the Book Covers</h2>
           <p className="mt-2 font-headline text-lg font-bold text-[#1d1c16]">10 chapters across 3 parts.</p>
@@ -266,14 +265,6 @@ export default function BookPage() {
                 ))}
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* ── Subscribe ── */}
-        <section id="subscribe" className="scroll-mt-24 pb-20">
-          <div className="h-px w-full bg-[#1d1c16]/8" />
-          <div className="pt-10">
-            <SubscribeForm variant="light" />
           </div>
         </section>
 
