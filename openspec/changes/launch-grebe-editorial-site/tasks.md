@@ -1,5 +1,7 @@
-> **Status:** IN PROGRESS — execution branch
-> `feat/grebe-editorial-refresh`, based on production `main` at `ff68ffb6`.
+> **Status:** COMPLETE — draft PR
+> [#79](https://github.com/EconoBen/blog/pull/79) is open from
+> `feat/grebe-editorial-refresh`, based on production `main` at `ff68ffb6`;
+> Vercel preview and required checks are green.
 
 ## 1. Baseline and Guardrails
 
@@ -59,5 +61,5 @@
 
 - [x] 8.1 Update proposal, design decisions, and this checklist with the actual implementation, evidence paths, validation results, and any approved deviations
 - [x] 8.2 Run the repository's substantive code-review workflow, address Must Address findings, and inspect the final diff for unrelated or generated-file churn
-- [ ] 8.3 Commit the coherent change, push `feat/grebe-editorial-refresh`, and open a draft PR to `main` with context, impact, next steps, and the complete test plan
-- [ ] 8.4 Verify the draft PR and its preview/check state, then leave merging to Ben's explicit approval
+- [x] 8.3 Commit the coherent change, push `feat/grebe-editorial-refresh`, and open a draft PR to `main` with context, impact, next steps, and the complete test plan
+- [x] 8.4 Verify the draft PR and its preview/check state, then leave merging to Ben's explicit approval

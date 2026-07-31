@@ -1,4 +1,5 @@
-> **Status:** IN PROGRESS — approved for implementation on 2026-07-30.
+> **Status:** IMPLEMENTED — draft PR
+> [#79](https://github.com/EconoBen/blog/pull/79) is ready for Ben's review.
 
 ## Why
 

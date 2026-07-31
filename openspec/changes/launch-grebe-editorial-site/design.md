@@ -1,5 +1,5 @@
-> **Status:** IN PROGRESS — implementation design approved by the user on
-> 2026-07-30; deviations will be recorded here.
+> **Status:** READY FOR REVIEW — implemented on 2026-07-30 in draft PR
+> [#79](https://github.com/EconoBen/blog/pull/79).
 
 ## Context
 
@@ -273,6 +273,10 @@ the visual direction needs another iteration.
 - **Build evidence:** `npm run test:grebe-refresh`, `npx tsc --noEmit`,
   `openspec validate launch-grebe-editorial-site`, and `npm run build` pass;
   the production build generates the full 159-page route table.
+- **Deployment evidence:** Vercel reports success for PR #79. The
+  [deployment preview](https://blog-git-feat-grebe-editorial-refresh-bens-projects-0b44e0e4.vercel.app)
+  and its homepage, `/book`, cover, mascot sprite, and repaired audio asset all
+  return HTTP 200.
 - **Known tooling exception:** the pre-existing `npm run lint` script cannot
   execute because this repository does not install ESLint or an applicable
   configuration. The refresh does not change the project's lint toolchain.
