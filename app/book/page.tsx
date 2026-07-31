@@ -1,16 +1,21 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
+import { SubscribeForm } from '../components/SubscribeForm';
 
 export const metadata: Metadata = {
   title: 'Agent Memory | Book | ECONOBEN.DEV',
-  description: 'Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time. An upcoming O\'Reilly book by Ben Labaschin.',
+  description: 'Agent Memory: Building Stateful AI Agents That Remember, Adapt, and Work Across Time. An O\'Reilly book by Ben Labaschin, now in Early Release.',
 };
+
+const OREILLY_BOOK_URL =
+  'https://www.oreilly.com/library/view/agent-memory/0642572370473/?utm_source=econoben&utm_medium=book_page&utm_campaign=early_release';
+const OREILLY_TRIAL_URL =
+  'https://www.oreilly.com/start-trial/?type=individual&utm_source=econoben&utm_medium=book_page&utm_campaign=early_release';
 
 const audiences = [
   {
     title: 'Engineers building agents',
-    desc: "You\u2019re past the prompt-and-pray stage. You need memory that works across sessions, handles corrections, and doesn\u2019t rot as it grows.",
+    desc: "You’re past the prompt-and-pray stage. You need memory that works across sessions, handles corrections, and doesn’t rot as it grows.",
   },
   {
     title: 'Teams shipping AI products',
@@ -18,7 +23,7 @@ const audiences = [
   },
   {
     title: 'Anyone designing stateful AI',
-    desc: "If you\u2019re deciding how an AI system should remember, forget, and share information, this is the architectural reference.",
+    desc: "If you’re deciding how an AI system should remember, forget, and share information, this is the architectural reference.",
   },
 ];
 
@@ -26,7 +31,7 @@ const questions = [
   {
     q: 'How do I stop my agent from forgetting everything between sessions?',
     a: 'The book separates context from memory and shows how to build retention that survives session boundaries without polluting future interactions.',
-    ref: 'Chapters 1 \u2013 2',
+    ref: 'Chapters 1 – 2',
   },
   {
     q: 'What should my agent actually remember?',
@@ -68,22 +73,28 @@ const concepts = [
 
 const chapters = [
   { part: 'I', partTitle: 'Agents, Memory, and the Act of Remembering', chapters: [
-    { num: '01', title: 'The Work of Remembering', desc: 'What memory means for an agent, how it differs from context, and why continuity changes everything.' },
-    { num: '02', title: 'What the Agent Can Read and Write', desc: 'Where memory lives, the five working verbs, and giving the agent a memory API.' },
+    { num: '01', title: 'The Work of Remembering', desc: 'What memory means for an agent, how it differs from context, and why continuity changes everything.', status: 'live' },
+    { num: '02', title: 'What the Agent Can Read and Write', desc: 'Where memory lives, the five working verbs, and giving the agent a memory API.', status: 'live' },
   ]},
   { part: 'II', partTitle: 'Building and Managing Agent Memory', chapters: [
-    { num: '03', title: 'Choosing What Becomes Memory', desc: 'Rules for retention, compression, forgetting, and knowing when memory helps.' },
-    { num: '04', title: 'How Memory Gets Written', desc: 'Write triggers, normalization, correction, and failure modes in the write path.' },
-    { num: '05', title: 'Where Memory Lives and Who Controls It', desc: 'Client vs server, portability, inspectability, and the control model.' },
-    { num: '06', title: 'Finding the Right Memory', desc: 'Retrieval, ranking, context loading, caching, and evaluating quality.' },
-    { num: '07', title: 'Keeping Memory Useful Over Time', desc: 'Rollups, corrections, versioning, duplicates, and maintenance strategies.' },
-    { num: '08', title: 'More Than Memory: State and Resumability', desc: 'Checkpoints, durable work, resume, replay, and human pause points.' },
+    { num: '03', title: 'Choosing What Becomes Memory', desc: 'Rules for retention, compression, forgetting, and knowing when memory helps.', status: 'submitted' },
+    { num: '04', title: 'How Memory Gets Written', desc: 'Write triggers, normalization, correction, and failure modes in the write path.', status: 'writing' },
+    { num: '05', title: 'Where Memory Lives and Who Controls It', desc: 'Client vs server, portability, inspectability, and the control model.', status: '' },
+    { num: '06', title: 'Finding the Right Memory', desc: 'Retrieval, ranking, context loading, caching, and evaluating quality.', status: '' },
+    { num: '07', title: 'Keeping Memory Useful Over Time', desc: 'Rollups, corrections, versioning, duplicates, and maintenance strategies.', status: '' },
+    { num: '08', title: 'More Than Memory: State and Resumability', desc: 'Checkpoints, durable work, resume, replay, and human pause points.', status: '' },
   ]},
   { part: 'III', partTitle: 'Shared Memory, Risk, and Recovery', chapters: [
-    { num: '09', title: 'Shared Memory: Coordination, Boundaries, and Conflict', desc: 'Ownership, leakage, multi-agent coordination, and provenance.' },
-    { num: '10', title: 'Dangerous Memory: Risk, Failure, and Recovery', desc: 'Poisoning, detection, repair, rollback, and designing memory to fail safely.' },
+    { num: '09', title: 'Shared Memory: Coordination, Boundaries, and Conflict', desc: 'Ownership, leakage, multi-agent coordination, and provenance.', status: '' },
+    { num: '10', title: 'Dangerous Memory: Risk, Failure, and Recovery', desc: 'Poisoning, detection, repair, rollback, and designing memory to fail safely.', status: '' },
   ]},
 ];
+
+const statusLabels: Record<string, string> = {
+  live: 'Live now',
+  submitted: 'Submitted',
+  writing: 'Writing',
+};
 
 export default function BookPage() {
   return (
@@ -96,7 +107,7 @@ export default function BookPage() {
             <div className="flex items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full bg-[#0035a0] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
                 <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-                In progress
+                Early Release
               </span>
               <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
                 O&apos;Reilly Media
@@ -108,21 +119,38 @@ export default function BookPage() {
             <p className="mt-6 max-w-xl font-body text-xl leading-relaxed text-[#555f70] md:text-2xl">
               Building Stateful AI Agents That Remember, Adapt, and Work Across Time
             </p>
+            <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-[#1d1c16]">
+              Chapters 1 and 2 are live on the O&rsquo;Reilly platform right now. New chapters land every four to six weeks.
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
-                href="#subscribe"
+                href={OREILLY_BOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center rounded-lg bg-[#0035a0] px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-white transition-all hover:-translate-y-0.5"
                 style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
               >
-                Get book updates
+                Read chapters 1 &amp; 2
               </a>
-              <Link
-                href="/publications"
+              <a
+                href="#subscribe"
                 className="inline-flex items-center justify-center rounded-lg border border-[#0035a0]/20 px-8 py-4 font-headline text-sm font-bold uppercase tracking-wider text-[#0035a0] transition-all hover:-translate-y-0.5"
               >
-                See related work
-              </Link>
+                Get chapter updates
+              </a>
             </div>
+            <p className="mt-4 font-body text-sm leading-relaxed text-[#555f70]">
+              No O&rsquo;Reilly account?{' '}
+              <a
+                href={OREILLY_TRIAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-[#0035a0] underline underline-offset-2"
+              >
+                Start a free 10-day trial
+              </a>
+              . Many companies and universities already provide access.
+            </p>
           </div>
           <div className="flex items-center justify-center">
             <img
@@ -134,8 +162,34 @@ export default function BookPage() {
           </div>
         </header>
 
-        {/* ── Who This Book Is For ── */}
+        {/* ── What Early Release Means ── */}
         <section className="pb-12 pt-4">
+          <div className="h-px w-full bg-[#1d1c16]/8" />
+          <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Reading It Early</h2>
+          <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
+            <div className="sticky-note p-7">
+              <h3 className="font-headline text-lg font-bold text-[#1d1c16]">It is raw and unedited</h3>
+              <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">
+                Early Release chapters ship before copyedit. You get the material months early and you see the rough edges.
+              </p>
+            </div>
+            <div className="sticky-note p-7">
+              <h3 className="font-headline text-lg font-bold text-[#1d1c16]">Your feedback changes the book</h3>
+              <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">
+                Tell me what landed and what was thin. Reading it now is the only window where what you say still shapes what ships.
+              </p>
+            </div>
+            <div className="sticky-note p-7">
+              <h3 className="font-headline text-lg font-bold text-[#1d1c16]">New chapters every 4 to 6 weeks</h3>
+              <p className="mt-2 font-body text-sm leading-relaxed text-[#555f70]">
+                Chapter 3 is submitted. Chapter 4 is being written now. Subscribe below and I&rsquo;ll tell you when each one lands.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Who This Book Is For ── */}
+        <section className="pb-12">
           <div className="h-px w-full bg-[#1d1c16]/8" />
           <h2 className="font-headline text-2xl font-black" style={{ color: '#0035a0', marginTop: '1.5rem' }}>Who This Book Is For</h2>
           <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-3">
@@ -192,13 +246,34 @@ export default function BookPage() {
                   <div key={ch.num} className="grid grid-cols-[60px_1fr] gap-5 border-b border-[#1d1c16]/6 py-5">
                     <span className="font-headline text-3xl font-black text-[#0035a0]/15">{ch.num}</span>
                     <div>
-                      <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{ch.title}</h3>
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h3 className="font-headline text-lg font-bold text-[#1d1c16]">{ch.title}</h3>
+                        {ch.status && (
+                          <span
+                            className={
+                              ch.status === 'live'
+                                ? 'rounded-full bg-[#0035a0] px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.15em] text-white'
+                                : 'rounded-full border border-[#0035a0]/25 px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.15em] text-[#0035a0]'
+                            }
+                          >
+                            {statusLabels[ch.status]}
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-1 font-body text-sm leading-relaxed text-[#555f70]">{ch.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ── Subscribe ── */}
+        <section id="subscribe" className="scroll-mt-24 pb-20">
+          <div className="h-px w-full bg-[#1d1c16]/8" />
+          <div className="pt-10">
+            <SubscribeForm variant="light" />
           </div>
         </section>
 
