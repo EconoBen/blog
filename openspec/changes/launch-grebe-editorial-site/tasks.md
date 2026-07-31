@@ -1,7 +1,8 @@
-> **Status:** COMPLETE — draft PR
+> **Status:** COMPLETE — approved for launch
 > [#79](https://github.com/EconoBen/blog/pull/79) is open from
 > `feat/grebe-editorial-refresh`, based on production `main` at `ff68ffb6`;
-> Vercel preview and required checks are green.
+> Vercel preview and required checks are green. Ben approved submission after
+> the final visual review.
 
 ## 1. Baseline and Guardrails
 
@@ -63,3 +64,4 @@
 - [x] 8.2 Run the repository's substantive code-review workflow, address Must Address findings, and inspect the final diff for unrelated or generated-file churn
 - [x] 8.3 Commit the coherent change, push `feat/grebe-editorial-refresh`, and open a draft PR to `main` with context, impact, next steps, and the complete test plan
 - [x] 8.4 Verify the draft PR and its preview/check state, then leave merging to Ben's explicit approval
+- [x] 8.5 Add, edit, and validate the July 30 Early Release launch post with the approved grebe banner, direct O'Reilly destinations, and the shared subscription funnel

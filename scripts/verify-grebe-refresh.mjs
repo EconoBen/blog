@@ -21,7 +21,9 @@ const requiredFiles = [
   'app/components/GrebeField.tsx',
   'app/components/TrackedAction.tsx',
   'public/assets/agent-memory-cover-early-release.png',
+  'public/assets/agent-memory-early-release-banner.jpg',
   'public/assets/grebes/grebe-mascots.png',
+  'src/posts/agent-memory-is-in-early-release.md',
 ];
 
 for (const relativePath of requiredFiles) {
@@ -39,6 +41,7 @@ const [
   trackedAction,
   globals,
   about,
+  launchPost,
 ] = await Promise.all([
   read('app/layout.tsx'),
   read('app/components/ShellHomePage.tsx'),
@@ -50,6 +53,7 @@ const [
   read('app/components/TrackedAction.tsx'),
   read('app/globals.css'),
   read('app/about/page.tsx'),
+  read('src/posts/agent-memory-is-in-early-release.md'),
 ]);
 
 const publicPositioningCopy = `${layout}\n${home}\n${book}`;
@@ -60,6 +64,15 @@ assert.doesNotMatch(
 );
 assert.match(publicPositioningCopy, /Early Release/);
 assert.match(about, /<h1[\s>]/, 'The About page must expose its visible name as the page heading');
+assert.match(launchPost, /title: "Agent Memory Is in Early Release"/);
+assert.match(launchPost, /date: "2026-07-30T12:00:00-07:00"/);
+assert.match(launchPost, /image: "\/assets\/agent-memory-early-release-banner\.jpg"/);
+assert.match(
+  launchPost,
+  /https:\/\/www\.oreilly\.com\/library\/view\/agent-memory\/0642572370473\/\?utm_source=econoben&utm_medium=post&utm_campaign=early_release/,
+  'The launch post must link directly to the current O’Reilly book with campaign attribution',
+);
+assert.match(launchPost, /\[subscribe here\]\(\/book#subscribe\)/);
 
 assert.match(layout, /<Analytics\s*\/>/, 'Vercel Analytics is not mounted');
 assert.equal(
