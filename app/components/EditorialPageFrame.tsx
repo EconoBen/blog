@@ -1,9 +1,10 @@
-import type { CSSProperties, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { ScrollToTop } from './ScrollToTop';
 import { StickyContactRemote } from './StickyContactRemote';
 import { SubscribeForm } from './SubscribeForm';
 import { GrebeField } from './GrebeField';
+import '../styles/accessibility-refinements.css';
 
 const primaryNavItems = [
   { href: '/', label: 'Home' },
@@ -58,11 +59,6 @@ interface EditorialPageFrameProps {
   pageClassName?: string;
 }
 
-const activeMobileNavStyle: CSSProperties = {
-  color: '#fef9ef',
-  WebkitTextFillColor: '#fef9ef',
-};
-
 export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const compactShell = isCompactShell(currentPath);
   const mobilePrimaryNavItems = prioritizeActiveItem(
@@ -74,33 +70,24 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
     : 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#f8f3e9]/96 shadow-[0_20px_36px_rgba(29,28,22,0.04)] backdrop-blur';
   const brandClassName = 'font-headline text-[1.7rem] font-black tracking-tight text-[#1d1c16] transition-all duration-200 hover:text-[#0035a0] hover:-translate-y-0.5';
-  const desktopNavItemClassName = (active: boolean) =>
-    active
-      ? 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 rounded-t-lg rounded-b-none bg-[#0035a0] font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap !text-white [&]:text-white'
-      : 'inline-flex min-h-[40px] items-center justify-center px-3 py-2 font-headline text-sm font-bold uppercase leading-none tracking-[0.12em] whitespace-nowrap text-[#555f70] transition-all duration-200 hover:text-[#0035a0] hover:-translate-y-0.5';
-  const mobileNavItemClassName = (active: boolean) =>
-    active
-      ? 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#0035a0]/15 bg-[#0035a0] px-2.5 py-1 text-[9px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#fef9ef] shadow-[0_8px_18px_rgba(0,74,198,0.18)]'
-      : 'inline-flex min-h-[32px] items-center justify-center rounded-full border border-[#1d1c16]/10 bg-[#f8f3e9]/90 px-2.5 py-1 text-[9px] font-bold uppercase leading-none tracking-[0.22em] whitespace-nowrap text-[#555f70] transition-colors duration-200 hover:border-[#0035a0]/30 hover:bg-[#0035a0]/10 hover:text-[#0035a0]';
 
   return (
-    <header className={headerClassName}>
+    <header className={`field-topbar ${headerClassName}`}>
       <div className="mx-auto flex max-w-[1440px] flex-col gap-2.5 px-4 py-3 sm:px-6 xl:flex-row xl:items-center xl:justify-between xl:gap-8 xl:px-8 xl:py-5">
         <div className="flex items-center gap-3">
           <Link href="/" className={brandClassName} aria-label="Go to home">
             {brandLabel}
           </Link>
         </div>
-        <nav className="hidden flex-1 items-center justify-center gap-2 xl:flex" aria-label="Primary">
+        <nav className="hidden flex-1 items-center justify-center gap-7 xl:flex" aria-label="Primary">
           {primaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
-            const isBook = item.href === '/book';
 
             return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`${desktopNavItemClassName(active)}${isBook && !active ? ' nav-shine' : ''}`}
+                  className="field-nav-link"
                   aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
@@ -108,7 +95,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
             );
           })}
         </nav>
-        <nav className="hidden items-center gap-3 xl:flex" aria-label="Discovery">
+        <nav className="hidden items-center gap-5 xl:flex" aria-label="Discovery">
           {discoveryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
@@ -116,10 +103,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={active
-                    ? 'inline-flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#555f70]'
-                    : 'flex items-center justify-center px-2 py-1 font-label text-[10px] font-semibold uppercase leading-none tracking-[0.18em] whitespace-nowrap text-[#999] transition-all duration-200 hover:text-[#555f70] hover:-translate-y-0.5'
-                  }
+                  className="field-nav-link"
                   aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
@@ -132,7 +116,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
         className="mx-auto max-w-[1440px] px-4 pb-2.5 sm:px-6 xl:hidden"
         aria-label="Primary"
       >
-        <div className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex gap-6 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {mobilePrimaryNavItems.map((item) => {
             const active = isActivePath(currentPath, item.href);
 
@@ -140,8 +124,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={mobileNavItemClassName(active)}
-                style={active ? activeMobileNavStyle : undefined}
+                className="field-nav-link"
                 aria-current={active ? 'page' : undefined}
               >
                 {item.label}
@@ -164,11 +147,12 @@ export function EditorialPageFrame({
 
   return (
     <div className={`grebe-site-shell relative isolate min-h-screen overflow-clip bg-[#fef9ef] text-[#1d1c16] ${pageClassName}`.trim()}>
+      <a href="#main-content" className="field-skip-link">Skip to content</a>
       <GrebeField variant={grebeVariant} />
       <div className="relative z-[2]">
         <EditorialTopbar currentPath={currentPath} />
         <div className="h-[100px] xl:h-[80px]" aria-hidden="true" />
-        <main className="relative isolate overflow-clip">{children}</main>
+        <main id="main-content" tabIndex={-1} className="relative isolate overflow-clip">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
         <section id="subscribe" className="grebe-subscribe py-16 sm:py-20">

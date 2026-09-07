@@ -94,7 +94,7 @@ export default async function TagPage({ params }: TagPageProps) {
                 {tag}
               </h1>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg md:text-xl">
-                {posts.length} post{posts.length === 1 ? '' : 's'} collected under this topic, grouped by year and left fully linked for browsing.
+                {posts.length} post{posts.length === 1 ? '' : 's'} on {tag}, with the most recent writing first.
               </p>
             </div>
 
@@ -132,7 +132,7 @@ export default async function TagPage({ params }: TagPageProps) {
             </div>
 
             <p className="max-w-2xl text-sm leading-relaxed text-on-surface-variant lg:hidden">
-              Use the route chips above to switch surfaces, then scroll the year groups below for the full topic trail.
+              Start with the most recent writing below, or search this topic across talks, books, and tools.
             </p>
 
             {postsByYear.map((yearGroup) => (
@@ -226,7 +226,7 @@ export default async function TagPage({ params }: TagPageProps) {
             <div className="hidden sticky-note p-6 md:block md:p-8">
               <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>Browse beyond this topic</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
-                Switch from this topic trail to the full archive or run a direct search if you want a broader slice of the same material.
+                Find more writing in the archive, or search this subject across talks, publications, and tools.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">

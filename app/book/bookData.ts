@@ -5,7 +5,7 @@ export const AGENT_MEMORY = {
   publisher: "O'Reilly Media",
   releaseLabel: 'Early Release',
   availability:
-    'Chapters 1 and 2 are live on the O’Reilly platform right now. New chapters land every four to six weeks.',
+    'Chapters 1–3 are live on the O’Reilly platform right now. New chapters land every four to six weeks.',
   coverSrc: '/assets/agent-memory-cover-early-release.png',
   coverAlt: "Agent Memory by Benjamin Labaschin, an O'Reilly Early Release book featuring an adult horned grebe",
 } as const;
@@ -37,7 +37,7 @@ export const earlyReleaseNotes = [
   },
   {
     title: 'Follow the build as it happens',
-    body: 'Chapter 3 is submitted and Chapter 4 is being written. Subscribers hear when a new chapter lands.',
+    body: 'Chapter 3 is now live, and Chapter 4 is next. Subscribers hear when a new chapter lands.',
   },
 ] as const;
 
@@ -104,7 +104,7 @@ export const chapters: BookPart[] = [
         num: '03',
         title: 'Choosing What Becomes Memory',
         desc: 'Which encountered information earns a durable representation and what future job that memory must perform.',
-        status: 'submitted',
+        status: 'live',
       },
     ],
   },

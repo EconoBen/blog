@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
+import './styles/field-notes.css';
+import './styles/living-pond.css';
+import './styles/publication-refinements.css';
 import ClientLayout from './components/ClientLayout';
 
 export const metadata: Metadata = {
@@ -35,9 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+        <ClientLayout>{children}</ClientLayout>
         <Analytics />
       </body>
     </html>

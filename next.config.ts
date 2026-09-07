@@ -147,6 +147,11 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/posts/extending_%22GPTs_Are_GPTs%22_to_Firms',
+        destination: '/posts/extending-gpts-are-gpts-to-firms',
+        permanent: true,
+      },
+      {
         source: '/workshop',
         destination: '/code-ai',
         permanent: true,

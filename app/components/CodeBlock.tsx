@@ -1,8 +1,7 @@
-'use client';
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import oneDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark';
+import { CopyCodeButton } from './CopyCodeButton';
 
 interface CodeBlockProps {
   filename: string;
@@ -26,22 +25,8 @@ const languageMap: Record<string, string> = {
 };
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ filename, code }) => {
-  const [copyButtonText, setCopyButtonText] = useState<string>('Copy');
-
   // Normalize the language name
   const language = languageMap[filename.toLowerCase()] || filename.toLowerCase();
-
-  const handleCopy = async (): Promise<void> => {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopyButtonText('Copied!');
-      setTimeout(() => setCopyButtonText('Copy'), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-      setCopyButtonText('Failed');
-      setTimeout(() => setCopyButtonText('Copy'), 2000);
-    }
-  };
 
   // Get a display-friendly language name
   const getDisplayLanguage = (lang: string): string => {
@@ -83,14 +68,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ filename, code }) => {
       <div className="code-header">
         <div className="code-filename">{getDisplayLanguage(language)}</div>
         <div className="code-actions">
-          <button
-            className="code-action"
-            onClick={handleCopy}
-            type="button"
-            aria-label="Copy code"
-          >
-            {copyButtonText}
-          </button>
+          <CopyCodeButton code={code} />
         </div>
       </div>
       <div className="code-container">

@@ -4,7 +4,7 @@ import TalksClient from './TalksClient';
 
 export const metadata: Metadata = {
   title: 'Talks | ECONOBEN.DEV',
-  description: 'Recorded talks, podcasts, and livestreams with inline playback, transcripts, and direct source links.',
+  description: 'Talks, conversations, and workshops on AI engineering, agent memory, and learning by building.',
 };
 
 export default function TalksPage() {
@@ -17,7 +17,7 @@ export default function TalksPage() {
           Talks
         </h1>
         <p className="mt-4 max-w-2xl font-body text-lg leading-relaxed text-on-surface">
-          Recorded talks, podcasts, and livestreams with inline playback, transcripts, and direct source links
+          Talks, conversations, and workshops on AI engineering, agent memory, and learning by building.
         </p>
       </section>
 

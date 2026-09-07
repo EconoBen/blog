@@ -1,0 +1,26 @@
+.grebe-neck-look,.grebe-neck-motion { transform-origin:535px 480px; }
+.grebe-neck-look { rotate:var(--grebe-neck-look,0deg); transition:rotate 650ms cubic-bezier(.16,1,.3,1); }
+:is(.field-pond,.study-world).is-diving .grebe-neck-motion { animation:grebe-neck-dive 3.8s linear both; }
+:is(.field-pond,.study-world).is-diving .study-near-waterline { animation:grebe-contact-water 3.8s linear both; }
+@keyframes grebe-contact-water {
+  0%,12% { opacity:1; }
+  25% { opacity:.3; }
+  31%,65% { opacity:0; }
+  80% { opacity:.4; }
+  95%,100% { opacity:1; }
+}
+@keyframes grebe-neck-dive {
+  0% { transform:rotate(0); }
+  8% { transform:rotate(3deg); animation-timing-function:cubic-bezier(.4,0,.6,1); }
+  19% { transform:rotate(-10deg); }
+  29%,39% { transform:rotate(-14deg); }
+  49% { transform:rotate(-8deg); animation-timing-function:cubic-bezier(.35,0,.4,1); }
+  56% { transform:rotate(0); }
+  72% { transform:rotate(2deg); }
+  86% { transform:rotate(-1deg); }
+  100% { transform:rotate(0); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .grebe-neck-look,.grebe-neck-motion { rotate:0deg; transform:none; animation:none!important; transition:none!important; }
+  .study-near-waterline { animation:none!important; }
+}

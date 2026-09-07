@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { BookCover } from '../components/BookCover';
+import { ChapterShoreline } from '../components/ChapterShoreline';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { TrackedAction } from '../components/TrackedAction';
 import {
@@ -80,7 +81,7 @@ export default function BookPage() {
                 className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#176b69] px-7 py-3.5 font-headline text-sm font-bold uppercase tracking-[0.08em] text-white shadow-[0_14px_28px_rgba(23,107,105,0.18)] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#176b69]/35 focus:ring-offset-2"
                 style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
               >
-                Read chapters 1 &amp; 2
+                Read chapters 1–3
               </TrackedAction>
               <a
                 href="#subscribe"
@@ -120,7 +121,7 @@ export default function BookPage() {
             </div>
             <div className="py-6 md:px-8">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Next in line</p>
-              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">Chapter 3 submitted</p>
+              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">Chapter 4 next</p>
             </div>
             <div className="py-6 md:pl-8">
               <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Still shapeable</p>
@@ -128,6 +129,8 @@ export default function BookPage() {
             </div>
           </div>
         </section>
+
+        <ChapterShoreline />
 
         <section className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20 lg:py-28">
           <div>
@@ -209,7 +212,9 @@ export default function BookPage() {
               </p>
             </div>
 
-            <div className="space-y-12">
+            <details className="field-book-contents">
+              <summary>Read the complete table of contents <span aria-hidden="true">+</span></summary>
+              <div className="space-y-12">
               {chapters.map((part) => (
                 <section key={part.part} aria-labelledby={`part-${part.part}`}>
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-[#176b69] pb-3">
@@ -248,7 +253,8 @@ export default function BookPage() {
                   ))}
                 </section>
               ))}
-            </div>
+              </div>
+            </details>
           </div>
         </section>
       </div>

@@ -1,0 +1,153 @@
+.chapter-shoreline {
+  --shore-ink: #211e1f;
+  --shore-teal: #176b69;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding: 70px 32px 12px;
+  color: var(--shore-ink);
+}
+.chapter-shoreline-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+}
+.chapter-shoreline-heading h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  line-height: 1.08;
+}
+.chapter-shoreline-heading p {
+  max-width: 320px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #57635c;
+}
+.chapter-shoreline-scroll {
+  overflow-x: auto;
+  scrollbar-color: #84b8b1 transparent;
+  scrollbar-width: thin;
+}
+.chapter-shoreline-map {
+  position: relative;
+  min-width: 760px;
+  height: 220px;
+  margin-top: 25px;
+}
+.chapter-shoreline-water {
+  position: absolute;
+  width: 100%;
+  height: 180px;
+  inset: 0;
+  fill: none;
+  stroke: #84b8b1;
+  stroke-width: 1.25;
+}
+.chapter-shoreline-water .chapter-shoreline-echo { opacity: .35; }
+.chapter-shoreline-stop {
+  position: absolute;
+  left: var(--stop-x);
+  top: var(--stop-y);
+  width: 58px;
+  min-height: 78px;
+  transform: translate(-50%, -24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  border: 0;
+  background: transparent;
+  color: #66706b;
+  cursor: pointer;
+}
+.chapter-shoreline-number {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px dashed #859b92;
+  border-radius: 50%;
+  background: #f7f2e8;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  transition: box-shadow 250ms ease, background 250ms ease;
+}
+.chapter-shoreline-stop--live .chapter-shoreline-number {
+  border: 1px solid var(--shore-teal);
+  background: var(--shore-teal);
+  color: #fffdf8;
+}
+.chapter-shoreline-stop--next .chapter-shoreline-number {
+  border-color: #a74a24;
+  color: #a74a24;
+}
+.chapter-shoreline-stop-status {
+  font-size: 11px;
+  font-weight: 500;
+}
+.chapter-shoreline-stop[aria-pressed="true"] .chapter-shoreline-number {
+  box-shadow: 0 0 0 6px #f7f2e8, 0 0 0 7px #84b8b1, 0 0 0 13px #f7f2e8, 0 0 0 14px #84b8b15c;
+}
+.chapter-shoreline-stop:hover .chapter-shoreline-number { box-shadow: 0 0 0 7px #84b8b138; }
+.chapter-shoreline-stop:focus-visible {
+  outline: 2px solid var(--shore-teal);
+  outline-offset: 8px;
+  border-radius: 3px;
+}
+.chapter-shoreline-scroll-hint { display: none; }
+.chapter-shoreline-detail {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 38px;
+  padding: 26px 0 30px;
+  border-top: 1px solid #176b6930;
+  border-bottom: 1px solid #176b6930;
+  min-height: 246px;
+}
+.chapter-shoreline-position { display: flex; flex-direction: column; gap: 10px; }
+.chapter-shoreline-position > :first-child {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 24px;
+  letter-spacing: -.025em;
+}
+.chapter-shoreline-position > :last-child { font-size: 13px; color: #98431f; }
+.chapter-shoreline-position > .chapter-shoreline-live-label { color: var(--shore-teal); }
+.chapter-shoreline-copy { max-width: 700px; }
+.chapter-shoreline-copy .chapter-shoreline-part { font-size: 12px; color: #57635c; margin: 0 0 5px; }
+.chapter-shoreline-copy h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(23px, 2.6vw, 31px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+}
+.chapter-shoreline-copy > p { color: #57635c; font-size: 15px; line-height: 1.65; margin-top: 12px; }
+.chapter-shoreline-copy .chapter-shoreline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-block: 6px;
+  color: var(--shore-teal);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: #84b8b1;
+}
+.chapter-shoreline-link:focus-visible { outline: 2px solid var(--shore-teal); outline-offset: 5px; }
+@media (max-width: 820px) {
+  .chapter-shoreline { padding: 48px 20px 0; }
+  .chapter-shoreline-heading { display: block; }
+  .chapter-shoreline-heading p { margin-top: 13px; max-width: 440px; }
+  .chapter-shoreline-scroll-hint { display: block; color: #57635c; font-size: 12px; margin: -5px 0 20px; }
+  .chapter-shoreline-detail { grid-template-columns: 1fr; gap: 20px; min-height: 320px; }
+  .chapter-shoreline-position { flex-direction: row; align-items: baseline; gap: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-shoreline-number { transition: none; }
+}

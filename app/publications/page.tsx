@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BookCover } from '../components/BookCover';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { publicationsConfig, type Publication } from '../config/publicationsConfig';
+import '../styles/editorial-index.css';
 
 export const metadata: Metadata = {
   title: 'Publications | ECONOBEN.DEV',
@@ -44,17 +46,20 @@ function BookCard({ publication }: { publication: Publication }) {
   return (
     <article
       id={publication.id}
-      className="group flex h-full flex-col overflow-hidden sticky-note transition-transform duration-300 hover:-translate-y-1"
+      className="group scroll-mt-36 flex h-full flex-col overflow-hidden sticky-note transition-transform duration-300 hover:-translate-y-1"
     >
       {/* Book cover area */}
-      <div className="relative flex items-center justify-center bg-surface-container-low p-4 md:p-6">
+      <div className="publication-cover-area relative flex items-center justify-center bg-surface-container-low">
         {/* Spine accent */}
         <div className="absolute inset-y-0 left-0 w-1.5 bg-primary/20" />
-        {publication.coverImage ? (
+        {publication.id === 'agent-memory' ? (
+          <BookCover size="compact" />
+        ) : publication.coverImage ? (
           <img
             src={publication.coverImage}
+            loading="lazy"
             alt={publication.title}
-            className="aspect-[3/4] h-40 w-auto rounded object-cover shadow-[4px_4px_0_rgba(29,28,22,0.06)] transition-transform duration-700 group-hover:scale-105 md:h-48"
+            className="rounded shadow-[4px_4px_0_rgba(29,28,22,0.06)]"
           />
         ) : (
           <div className="flex aspect-[3/4] h-40 items-center justify-center rounded bg-[linear-gradient(135deg,_#1d1c16,_#32302a)] p-4 shadow-[4px_4px_0_rgba(29,28,22,0.06)] md:h-48">
@@ -70,7 +75,7 @@ function BookCard({ publication }: { publication: Publication }) {
       {/* Content */}
       <div className="flex flex-1 flex-col space-y-3 p-4 md:p-6">
         <div className="space-y-1">
-          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{getType(publication)}</p>
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{getType(publication)}{publication.releaseLabel ? ` · ${publication.releaseLabel}` : ''}</p>
           <h3 className="font-headline text-lg font-bold leading-snug text-on-surface transition-colors group-hover:text-primary">
             {publication.title}
           </h3>
@@ -90,9 +95,13 @@ function BookCard({ publication }: { publication: Publication }) {
         </div>
 
         {href && (
-          <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-lg bg-surface-container-low px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface transition-transform hover:-translate-y-1">
-            {getAction(publication)}
-          </a>
+          href.startsWith('/') && !href.endsWith('.pdf') ? (
+            <Link href={href} className="mt-3 inline-flex w-fit py-2 font-body text-sm font-semibold text-primary underline underline-offset-4">Explore the book</Link>
+          ) : (
+            <a href={href} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex w-fit py-2 font-body text-sm font-semibold text-primary underline underline-offset-4">
+              {getAction(publication)}
+            </a>
+          )
         )}
       </div>
     </article>
@@ -100,7 +109,7 @@ function BookCard({ publication }: { publication: Publication }) {
 }
 
 /* ── Helpers ── */
-const shortDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const shortDateFormatter = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 
 function fmtDate(date: string) {
   return shortDateFormatter.format(new Date(date));
@@ -108,7 +117,7 @@ function fmtDate(date: string) {
 
 function getType(pub: Publication) {
   const labels: Record<Publication['type'], string> = { book: 'Book', journal: 'Journal', conference: 'Conference', report: 'Report', workshop: 'Workshop', other: 'Writing' };
-  return pub.venue === "O'Reilly Media" ? "O'Reilly Report" : labels[pub.type];
+  return labels[pub.type];
 }
 
 function getHref(pub: Publication) {
@@ -116,7 +125,7 @@ function getHref(pub: Publication) {
 }
 
 function getAction(pub: Publication) {
-  if (pub.url) return pub.venue === "O'Reilly Media" ? 'Read report' : 'Read online';
+  if (pub.url) return pub.type === 'report' ? 'Read report' : 'Read online';
   if (pub.pdfUrl) return 'Open PDF';
   if (pub.doi) return 'View DOI';
   return 'Open';

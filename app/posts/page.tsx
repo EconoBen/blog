@@ -33,7 +33,11 @@ export default async function PostsPage() {
 
   // Serialize dates for client component
   const serializedPosts = posts.map((p) => ({
-    ...p,
+    slug: p.slug,
+    title: p.title,
+    summary: p.summary,
+    tags: p.tags,
+    readingTime: p.readingTime,
     date: p.date.toISOString(),
   }));
 

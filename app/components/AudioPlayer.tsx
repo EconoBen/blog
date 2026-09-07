@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface AudioPlayerProps {
   audioUrl: string;
@@ -8,165 +8,114 @@ interface AudioPlayerProps {
   className?: string;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, title = "Listen to this post", className = "" }) => {
+function formatTime(value: number) {
+  const time = Number.isFinite(value) ? Math.max(0, value) : 0;
+  return `${Math.floor(time / 60)}:${Math.floor(time % 60).toString().padStart(2, '0')}`;
+}
+
+export default function AudioPlayer({ audioUrl, title = 'Listen to this post', className = '' }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [error, setError] = useState<string | null>(null);
-  
   const audioRef = useRef<HTMLAudioElement>(null);
-  const progressBarRef = useRef<HTMLDivElement>(null);
+  const playRequest = useRef(0);
+  const pending = useRef(false);
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
-
-    const setAudioData = () => {
-      setDuration(audio.duration);
+    setIsPlaying(false); setIsLoading(false); setDuration(0); setCurrentTime(0); setError(null); setPlaybackRate(1);
+    audio.playbackRate = 1;
+    const metadata = () => {
+      setDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
       setCurrentTime(audio.currentTime);
-    };
-
-    const setAudioTime = () => setCurrentTime(audio.currentTime);
-    const handleLoadStart = () => setIsLoading(true);
-    const handleCanPlay = () => setIsLoading(false);
-    const handleError = () => {
-      setError('Failed to load audio');
       setIsLoading(false);
-      setIsPlaying(false);
     };
-    const handleEnded = () => setIsPlaying(false);
-
-    audio.addEventListener('loadeddata', setAudioData);
-    audio.addEventListener('timeupdate', setAudioTime);
-    audio.addEventListener('loadstart', handleLoadStart);
-    audio.addEventListener('canplay', handleCanPlay);
-    audio.addEventListener('error', handleError);
-    audio.addEventListener('ended', handleEnded);
-
+    const time = () => setCurrentTime(audio.currentTime);
+    const playing = () => { pending.current = false; setIsPlaying(true); setIsLoading(false); setError(null); };
+    const pause = () => {
+      pending.current = false; playRequest.current += 1;
+      setIsPlaying(false); setIsLoading(false);
+    };
+    const waiting = () => { if (!audio.paused) setIsLoading(true); };
+    const failed = () => {
+      pending.current = false; playRequest.current += 1;
+      setError('Audio could not load. Try again.'); setIsPlaying(false); setIsLoading(false);
+    };
+    const listeners = { loadedmetadata: metadata, durationchange: metadata, timeupdate: time, play: playing, playing, pause, ended: pause, waiting, error: failed };
+    Object.entries(listeners).forEach(([name, listener]) => audio.addEventListener(name, listener));
+    if (audio.readyState >= 1) metadata();
     return () => {
-      audio.removeEventListener('loadeddata', setAudioData);
-      audio.removeEventListener('timeupdate', setAudioTime);
-      audio.removeEventListener('loadstart', handleLoadStart);
-      audio.removeEventListener('canplay', handleCanPlay);
-      audio.removeEventListener('error', handleError);
-      audio.removeEventListener('ended', handleEnded);
+      playRequest.current += 1; pending.current = false;
+      Object.entries(listeners).forEach(([name, listener]) => audio.removeEventListener(name, listener));
+      audio.pause();
     };
-  }, []);
+  }, [audioUrl]);
 
   const togglePlayPause = async () => {
     const audio = audioRef.current;
     if (!audio) return;
-
+    if (isPlaying || pending.current) {
+      playRequest.current += 1; pending.current = false;
+      audio.pause(); setIsPlaying(false); setIsLoading(false);
+      return;
+    }
+    const request = ++playRequest.current;
+    pending.current = true;
+    setIsLoading(true);
+    if (error) audio.load();
+    setError(null);
     try {
-      if (isPlaying) {
-        audio.pause();
-        setIsPlaying(false);
-      } else {
-        await audio.play();
-        setIsPlaying(true);
-        setError(null);
+      await audio.play();
+      if (request === playRequest.current) { pending.current = false; setIsPlaying(true); setIsLoading(false); }
+    } catch {
+      if (request === playRequest.current) {
+        pending.current = false; setError('Audio could not play. Try again.'); setIsPlaying(false); setIsLoading(false);
       }
-    } catch (err) {
-      setError('Failed to play audio');
-      setIsPlaying(false);
     }
   };
 
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const audio = audioRef.current;
-    const progressBar = progressBarRef.current;
-    if (!audio || !progressBar) return;
-
-    const rect = progressBar.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = x / rect.width;
-    const newTime = percentage * duration;
-    
-    audio.currentTime = newTime;
-    setCurrentTime(newTime);
+  const seek = (value: number) => {
+    if (!audioRef.current || !Number.isFinite(value) || duration <= 0) return;
+    const next = Math.max(0, Math.min(duration, value));
+    audioRef.current.currentTime = next;
+    setCurrentTime(next);
   };
 
-  const handleSpeedChange = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
+  const changeSpeed = () => {
+    if (!audioRef.current) return;
     const speeds = [1, 1.25, 1.5, 1.75, 2];
-    const currentIndex = speeds.indexOf(playbackRate);
-    const nextIndex = (currentIndex + 1) % speeds.length;
-    const newSpeed = speeds[nextIndex];
-    
-    audio.playbackRate = newSpeed;
-    setPlaybackRate(newSpeed);
+    const next = speeds[(speeds.indexOf(playbackRate) + 1) % speeds.length];
+    audioRef.current.playbackRate = next; setPlaybackRate(next);
   };
-
-  const formatTime = (time: number) => {
-    if (isNaN(time)) return '0:00';
-    
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-  const progressPercentage = duration ? (currentTime / duration) * 100 : 0;
 
   return (
     <div className={`audio-player ${className}`}>
       <audio ref={audioRef} src={audioUrl} preload="metadata" />
-      
       <div className="audio-player-header">
         <span className="audio-player-title">{title}</span>
-        {error && <span className="audio-player-error">{error}</span>}
+        {error && <span className="audio-player-error" role="alert">{error}</span>}
       </div>
-      
       <div className="audio-player-controls">
-        <button 
-          className="audio-player-play-btn"
-          onClick={togglePlayPause}
-          disabled={isLoading || !!error}
-          aria-label={isPlaying ? 'Pause' : 'Play'}
-        >
-          {isLoading ? (
-            <span className="audio-player-spinner">⊙</span>
-          ) : isPlaying ? (
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
-            </svg>
-          ) : (
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+        <button type="button" className="audio-player-play-btn" onClick={togglePlayPause}
+          aria-label={isPlaying ? 'Pause audio' : isLoading ? 'Cancel audio loading' : error ? 'Retry audio' : 'Play audio'}>
+          {isLoading ? <span className="audio-player-spinner" aria-hidden="true">⊙</span> : (
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d={isPlaying ? 'M4 3h3v10H4zm5 0h3v10H9z' : 'M4 2.5 13 8l-9 5.5z'} />
             </svg>
           )}
         </button>
-        
-        <div className="audio-player-time">
-          {formatTime(currentTime)} / {formatTime(duration)}
-        </div>
-        
-        <div 
-          ref={progressBarRef}
-          className="audio-player-progress"
-          onClick={handleProgressClick}
-        >
-          <div className="audio-player-progress-bar">
-            <div 
-              className="audio-player-progress-fill"
-              style={{ width: `${progressPercentage}%` }}
-            />
-          </div>
-        </div>
-        
-        <button 
-          className="audio-player-speed-btn"
-          onClick={handleSpeedChange}
-          title="Playback speed"
-        >
-          {playbackRate}x
-        </button>
+        <span className="audio-player-time" aria-hidden="true">{formatTime(currentTime)} / {formatTime(duration)}</span>
+        <input type="range" className="audio-player-seek" min={0} max={duration || 0} step={1}
+          value={Math.min(currentTime, duration)} disabled={duration <= 0} aria-label="Seek audio"
+          aria-valuetext={`${formatTime(currentTime)} of ${formatTime(duration)}`}
+          onInput={event => seek(Number(event.currentTarget.value))} />
+        <button type="button" className="audio-player-speed-btn" onClick={changeSpeed}
+          aria-label={`Playback speed ${playbackRate} times. Change speed.`}>{playbackRate}×</button>
       </div>
     </div>
   );
-};
-
-export default AudioPlayer;
+}

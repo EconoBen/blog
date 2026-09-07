@@ -1,31 +1,7 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 export function StickyContactRemote() {
-  const [hidden, setHidden] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const footer = document.querySelector('footer');
-      if (!footer) return;
-      const footerTop = footer.getBoundingClientRect().top;
-      // Hide when the footer is within 80px of the bottom of the viewport
-      setHidden(footerTop < window.innerHeight - 20);
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <div
-      className={`fixed bottom-6 right-4 z-40 hidden transition-all duration-300 lg:block xl:right-6 ${
-        hidden ? 'pointer-events-none translate-y-4 opacity-0' : 'opacity-100'
-      }`}
-    >
-      <div className="sticky-note overflow-hidden flex flex-col gap-2 p-2">
+    <nav className="field-contact-links" aria-label="Contact and profiles">
+      <div className="sticky-note flex flex-col gap-2 p-2">
         <a
           href="mailto:benjaminlabaschin@gmail.com"
           title="Email"
@@ -61,6 +37,6 @@ export function StickyContactRemote() {
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4"><path d="M10.75 2.75a.75.75 0 00-1.5 0v8.614L6.295 8.235a.75.75 0 10-1.09 1.03l4.25 4.5a.75.75 0 001.09 0l4.25-4.5a.75.75 0 00-1.09-1.03l-2.955 3.129V2.75z"/><path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z"/></svg>
         </a>
       </div>
-    </div>
+    </nav>
   );
 }

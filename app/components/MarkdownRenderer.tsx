@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -9,6 +7,7 @@ import rehypeKatex from 'rehype-katex';
 import 'katex/dist/katex.min.css';
 import CodeBlock from './CodeBlock';
 import TTSPipelineDiagram from './TTSPipelineDiagram';
+import { ArticleImage } from './ArticleImage';
 
 interface MarkdownRendererProps {
   content: string;
@@ -34,46 +33,13 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
 
   const components = {
     pre({ node, children, ...props }: any) {
-      const kids = React.Children.toArray(children);
-
-      // If any child is our marker span from code(), render the SVG inside a single <pre>
-      const hasTtsMarker = kids.some(
-        (el) => React.isValidElement(el) && (el as any).type === 'span' && Boolean(((el as any).props || {})['data-tts-diagram'])
-      );
-      if (hasTtsMarker) {
-        return <pre {...props}><TTSPipelineDiagram /></pre>;
-      }
-
-      // If react-markdown nested a <pre> inside this <pre>, unwrap it
-      if (kids.length === 1 && React.isValidElement(kids[0]) && (kids[0] as any).type === 'pre') {
-        const innerChildren = ((kids[0] as any).props || {}).children;
-        return <pre {...props}>{innerChildren}</pre>;
-      }
-
-      return <pre {...props}>{children}</pre>;
-    },
-    // Wrap fenced code blocks; ensure single <pre> around TTS diagram to match production// Override code block rendering
-    code({ node, inline, className, children, ...props }: any) {
-      const match = /language-([\w-]+)/.exec(className || '');
-      const language = match ? match[1] : '';
-      const code = String(children).replace(/\n$/, '');
-
-      // Handle custom diagrams
-      if (!inline && language === 'tts-pipeline-diagram') {
-        return <TTSPipelineDiagram />;
-      }
-
-      if (!inline && (language || code.includes('\n'))) {
-        return <CodeBlock filename={language || 'code'} code={code} />;
-      }
-
-      // For inline code
-      const { node: _node, ...rest } = props || {};
-      return (
-        <code className={className} {...rest}>
-          {children}
-        </code>
-      );
+      const codeNode = node?.children?.length === 1 && node.children[0]?.tagName === 'code' ? node.children[0] : null;
+      if (!codeNode) return <pre {...props}>{children}</pre>;
+      const className = (codeNode.properties?.className ?? []).join(' ');
+      const language = /language-([\w-]+)/.exec(className)?.[1] ?? 'text';
+      const code = codeNode.children.map((child: { value?: string }) => child.value ?? '').join('').replace(/\n$/, '');
+      if (language === 'tts-pipeline-diagram') return <TTSPipelineDiagram />;
+      return <CodeBlock filename={language} code={code} />;
     },
     // Demote h1 to h2 for post content parity and add IDs
     h1: ({ node, children, ...props }: any) => {
@@ -89,14 +55,20 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
       const id = slugify(toText(children));
       return <h3 id={id} {...props}>{children}</h3>;
     },
-    // Make external links open in new tab
-    a: ({ node, children, ...props }: any) => (
-      <a target="_blank" rel="noopener noreferrer" {...props}>{children}</a>
-    ),
-    // Add image styling
-    img: ({ node, ...props }: any) => (
-      <img alt={props.alt || ''} className="blog-image" {...props} />
-    ),
+    a: ({ node, children, href, ...props }: any) => {
+      let destination = href;
+      let external = false;
+      if (/^(?:https?:)?\/\//i.test(href ?? '')) {
+        try {
+          const url = new URL(href, 'https://econoben.dev');
+          external = url.origin !== 'https://econoben.dev';
+          if (!external) destination = `${url.pathname}${url.search}${url.hash}`;
+        } catch { /* Keep malformed legacy links from breaking the article. */ }
+      }
+      return <a href={destination} {...props} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{children}</a>;
+    },
+    img: ({ node, src, alt, title, width, height, style }: any) => typeof src === 'string'
+      ? <ArticleImage src={src} alt={alt || ''} title={title} width={width} height={height} style={style} /> : null,
   };
 
   return (

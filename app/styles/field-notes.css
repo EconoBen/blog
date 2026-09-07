@@ -1,0 +1,236 @@
+/* A composed naturalist layer on the existing editorial site. */
+body.shell-editorial .grebe-site-shell {
+  --color-primary: #176b69;
+  --color-primary-hover: #105452;
+  background-image: none;
+}
+
+.grebe-site-shell ::selection { background: #d9e6df; color: #211e1f; }
+.grebe-site-shell :is(a, button, input):focus-visible {
+  outline: 2px solid #176b69;
+  outline-offset: 5px;
+}
+
+.grebe-site-shell .field-topbar {
+  background: rgba(247, 242, 232, .97);
+  box-shadow: none;
+  border-color: #211e1f18;
+}
+.field-topbar a[aria-label="Go to home"] {
+  color: #211e1f;
+  font-size: 23px;
+  letter-spacing: -.045em;
+}
+/* Navigation reads as an editorial index, with only the current page underlined. */
+.field-topbar nav a {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 0;
+  font-family: var(--font-heading);
+  color: #59615b;
+  text-transform: none;
+  letter-spacing: .01em;
+  line-height: 1;
+  white-space: nowrap;
+  font-weight: 500;
+  font-size: 13px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.field-topbar nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+.field-topbar nav a[aria-current="page"] { color: #176b69; }
+.field-topbar nav a[aria-current="page"]::after,
+.field-topbar nav a:hover::after { transform: scaleX(1); }
+.field-topbar a:hover { transform: none; color: #176b69; }
+.field-topbar nav[aria-label="Discovery"] { border-left: 1px solid #211e1f20; padding-left: 24px; }
+.field-topbar nav[aria-label="Discovery"] a { font-size: 12px; }
+
+.field-home-hero {
+  width: min(100%, 1320px);
+  margin-inline: auto;
+  padding: 62px 48px 66px;
+}
+.field-home-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 72px;
+}
+.field-home-intro > p:first-child {
+  text-transform: none;
+  letter-spacing: .02em;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0 0 24px;
+}
+.field-home-title {
+  max-width: 660px;
+  color: #211e1f;
+  font-size: clamp(46px, 4.8vw, 68px);
+  font-weight: 650;
+  letter-spacing: -.055em;
+  line-height: 1.055;
+  text-wrap: balance;
+  margin: 0;
+}
+.field-home-description {
+  color: #525b56;
+  font-size: 23px;
+  line-height: 1.5;
+  max-width: 500px;
+  margin: 24px 0 0;
+}
+.field-home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+.field-home-actions a {
+  width: auto;
+  padding: 14px 18px;
+  min-height: 48px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+.field-home-actions a + a {
+  color: #176b69;
+  background: transparent;
+  box-shadow: inset 0 -1px #176b6940;
+  border-radius: 0;
+}
+.field-home-tags { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px; }
+.field-home-tags a {
+  padding: 0;
+  background: none;
+  color: #666c63;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.field-home-tags a:hover { background: none; color: #176b69; }
+.field-latest-post {
+  padding: 24px 0 0;
+  border-top: 1px solid #176b6950;
+  color: #211e1f;
+}
+.field-latest-post .rounded-full {
+  padding: 0;
+  color: #9b3924;
+  background: none;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.field-latest-post time { letter-spacing: .02em; font-size: 10px; font-weight: 400; }
+.field-latest-post .relative > p:first-of-type { display: none; }
+.field-latest-post h2 {
+  font-size: 28px;
+  line-height: 1.12;
+  letter-spacing: -.035em;
+  font-weight: 600;
+  margin-top: 14px;
+}
+.field-latest-post h2 + p { font-size: 18px; line-height: 1.45; margin-top: 12px; }
+.field-latest-post .relative > div:last-child { margin-top: 16px; padding-top: 0; border: 0; }
+.field-latest-post .relative > div:last-child span { text-transform: none; letter-spacing: 0; font-size: 11px; }
+
+.field-book-spotlight {
+  background: #e9eee6;
+  border-block: 1px solid #176b6920;
+}
+.field-book-spotlight > div { max-width: 1224px; padding: 48px; gap: 64px; }
+.field-book-spotlight h2 { font-size: 48px; font-weight: 600; letter-spacing: -.045em; }
+.field-book-spotlight .book-cover { width: 205px; max-width: 205px; }
+.field-book-spotlight a { text-transform: none; letter-spacing: 0; font-size: 12px; border-radius: 5px; }
+.field-book-spotlight span { text-transform: none; letter-spacing: .02em; }
+.field-book-spotlight .book-cover__crop { box-shadow: 8px 14px 22px #211e1f20, 1px 2px 3px #211e1f14; }
+
+.field-current-focus { max-width: 1224px; padding: 64px 48px 40px; }
+.field-current-focus > div:first-child { display: none; }
+.field-current-focus > h2 { margin: 0; color: #211e1f; font-size: 26px; font-weight: 600; letter-spacing: -.025em; }
+.field-current-focus .sticky-note { background: none; box-shadow: none; border: none; border-top: 1px solid #211e1f22; border-radius: 0; padding: 24px 0; }
+.field-current-focus .sticky-note h3 { font-size: 22px; letter-spacing: -.025em; font-weight: 600; }
+.field-current-focus .sticky-note p:first-child { text-transform: none; letter-spacing: .02em; font-size: 12px; }
+.field-current-focus .sticky-note p:last-child { color: #6a725f; text-transform: none; letter-spacing: .02em; }
+.field-current-focus .sticky-note p:nth-last-child(2) { font-size: 17px; }
+.field-current-focus > div:last-child { gap: 38px; margin-top: 28px; }
+.field-selected-work { padding: 20px 0 64px; }
+.field-selected-work > div { max-width: 1224px; padding-inline: 48px; }
+.field-selected-work .sticky-note { background: #fbf8f0; box-shadow: none; border-color: #211e1f20; border-radius: 5px; }
+.field-selected-work h3 { font-size: 23px; font-weight: 600; letter-spacing: -.025em; }
+.field-selected-work > div > div:first-child > p { background: none; padding: 0; font-size: 26px; text-transform: none; letter-spacing: -.025em; font-weight: 600; }
+.field-selected-work .font-label { text-transform: none; letter-spacing: .02em; }
+
+.field-contact-links { max-width: 1224px; margin: 0 auto; padding: 0 48px 24px; }
+.field-contact-links > div { display: flex; flex-direction: row; width: fit-content; margin-left: auto; background: none; border: 0; box-shadow: none; gap: 12px; padding: 0; }
+.field-contact-links a { color: #176b69; background: transparent; }
+.field-contact-links > div > div { display: none; }
+.grebe-site-shell .grebe-subscribe { background: #e9eee6; }
+.grebe-subscribe .font-label { color: #176b69; text-transform: none; letter-spacing: .02em; }
+.grebe-subscribe h2 { font-weight: 600; letter-spacing: -.03em; }
+.grebe-site-shell footer a { color: #47534f; }
+
+@media (max-width: 1279px) {
+  .field-home-hero { padding: 48px 40px; }
+  .field-home-grid { gap: 40px; }
+  .field-home-title { font-size: 54px; }
+  .field-topbar nav a { font-size: 13px; min-height: 36px; }
+}
+@media (max-width: 1023px) {
+  .field-home-grid { grid-template-columns: 1fr; gap: 20px; }
+  .field-home-title { max-width: 660px; font-size: 60px; }
+  .field-home-description { max-width: 600px; }
+  .field-home-aside { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; }
+    .field-latest-post h2 { font-size: 25px; }
+  .field-book-spotlight > div { gap: 32px; padding: 40px; }
+  .field-current-focus { padding-inline: 40px; }
+  .field-selected-work > div { padding-inline: 40px; }
+}
+@media (max-width: 767px) {
+  .field-home-hero { padding: 36px 24px 40px; }
+  .field-home-title { font-size: clamp(40px, 10vw, 58px); line-height: 1.08; }
+  .field-home-intro > p:first-child { font-size: 11px; margin-bottom: 20px; }
+  .field-home-description { font-size: 21px; margin-top: 20px; }
+  .field-home-actions { gap: 12px; margin-top: 24px; }
+  .field-home-actions a { width: 100%; }
+  .field-home-tags { gap: 12px; margin-top: 20px; }
+  .field-home-aside { display: block; }
+  .field-latest-post { padding-top: 20px; }
+  .field-latest-post h2 { font-size: 28px; }
+  .field-book-spotlight > div { padding: 36px 24px; gap: 28px; }
+  .field-book-spotlight h2 { font-size: 40px; }
+  .field-book-spotlight .book-cover { width: 175px; margin-inline: auto; }
+  .field-current-focus { padding: 44px 24px 20px; }
+  .field-current-focus > div:last-child { gap: 0; }
+  .field-selected-work { padding-bottom: 40px; }
+  .field-selected-work > div { padding-inline: 24px; }
+  .field-contact-links { padding-inline: 24px; }
+  .field-contact-links > div { margin-inline: auto; }
+}
+
+
+/* The unified discovery note replaces the separate latest-post column. */
+.shell-home-page .field-home-aside { display:block; min-width:0; }

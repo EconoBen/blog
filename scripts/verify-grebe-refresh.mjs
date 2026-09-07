@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import sharp from 'sharp';
 
 const root = process.cwd();
 const read = (relativePath) => readFile(path.join(root, relativePath), 'utf8');
@@ -150,9 +151,24 @@ assert.match(
   /\[\.\.\.primaryNavItems,\s*\.\.\.discoveryNavItems\]/,
   'The compact navigation must retain Tags and Search',
 );
-assert.match(globals, /@keyframes\s+grebe-cross-a[\s\S]*122vw/);
-assert.match(globals, /@keyframes\s+grebe-cross-b[\s\S]*-122vw/);
-assert.match(globals, /prefers-reduced-motion:\s*reduce[\s\S]*grebe/);
+const fieldNotes = await read('app/styles/living-pond.css');
+assert.match(grebeField, /pond-swimmer/, 'The grebe field must restore swimming birds');
+assert.match(grebeField, /startPondVisits/, 'Background visits must use the bounded scheduler');
+assert.match(grebeField, /<ReadingGrebe/);
+assert.doesNotMatch(await read('app/components/GrebePond.tsx'), /<ReadingGrebe/, 'The reader should be a passing visitor, not a permanent hero companion');
+assert.match(bookData, /num: '03',[\s\S]*?status: 'live'/);
+assert.doesNotMatch(`${bookData} ${book} ${home} ${about}`, /Chapter 3 (?:is )?submitted|[Cc]hapters 1 (?:and|&amp;) 2/);
+assert.match(fieldNotes, /prefers-reduced-motion:\s*reduce[\s\S]*pond/);
+assert.ok(existsSync(path.join(root, 'public/assets/grebes/horned-grebe-engraving.webp')));
+assert.match(home, /<GrebePond\s*\/>/, 'The homepage must expose the interactive pond');
+assert.match(home, /<FieldPondProvider[\s\S]*?<GrebePond[\s\S]*?<FieldAtlasExplorer[\s\S]*?<\/FieldPondProvider>/, 'Discovery and the atlas must share an essay selection');
+assert.doesNotMatch(editorialFrame, /PondMotionToggle/, 'The header must not contain a pond toggle');
+const swimmerImage = sharp(path.join(root, 'public/assets/grebes/grebe-swimmers.webp'));
+assert.equal((await swimmerImage.metadata()).hasAlpha, true, 'Swimming grebes need genuine alpha, not a white matte');
+const swimmerStats = await swimmerImage.stats();
+assert.equal(swimmerStats.channels[3].min, 0, 'The swimmer background must include fully transparent pixels');
+assert.equal(swimmerStats.channels[3].max, 255, 'The grebe illustration must remain visible');
+assert.doesNotMatch(grebeField, /horned-grebe-engraving/, 'White-background hero art must not be used for viewport swimmers');
 
 assert.equal(
   await sha256('public/assets/agent-memory-cover-early-release.png'),

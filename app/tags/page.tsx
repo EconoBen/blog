@@ -47,13 +47,13 @@ export default async function TagsPage() {
           <div className="space-y-8 lg:col-span-8">
             <div className="max-w-3xl">
               <span className="mb-6 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
-                Archive &amp; Taxonomy
+                Writing by subject
               </span>
               <h1 className="font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
                 Topic index.
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-surface-variant md:text-xl">
-                Browse the archive by subject. The tags stay ranked by use, but the page keeps the hierarchy quiet and practical.
+                Follow a recurring interest, or find a subject in the alphabetical index.
               </p>
             </div>
 
@@ -66,7 +66,7 @@ export default async function TagsPage() {
                   </p>
                 </div>
                 <p className="font-body text-sm italic text-secondary">
-                  Each tag still links to its own topic trail.
+                  Choose a topic to find its essays.
                 </p>
               </div>
 
@@ -106,10 +106,10 @@ export default async function TagsPage() {
 
               <div className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-2">
                 {sortedLetters.map((letter) => (
-                  <div key={letter} id={`tag-letter-${letter}`} className="contents">
-                    <span className="pt-1 font-headline text-sm font-black text-on-surface/30">{letter}</span>
+                  <div key={letter} className="contents">
+                    <span id={`tag-letter-${letter}`} className="scroll-mt-36 pt-1 font-headline text-sm font-black text-on-surface/50">{letter}</span>
                     <div className="flex flex-wrap gap-1.5">
-                      {tagsByLetter[letter].map((tagEntry) => (
+                      {tagsByLetter[letter].sort((a, b) => a.tag.localeCompare(b.tag)).map((tagEntry) => (
                         <Link
                           key={tagEntry.tag}
                           href={`/tags/${encodeURIComponent(tagEntry.tag)}`}
@@ -144,7 +144,7 @@ export default async function TagsPage() {
             </div>
 
             <div className="sticky-note p-4 md:p-8">
-              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Browse routes</h2>
+              <h2 className="mb-4 font-headline text-lg font-bold text-on-surface">Keep exploring</h2>
               <div className="flex flex-wrap gap-3">
                 <Link href="/archive" className="rounded-full bg-surface-container-high px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-on-surface-variant transition-all hover:-translate-y-0.5 hover:bg-secondary-container hover:text-on-secondary-container">
                   Browse archive
@@ -158,7 +158,7 @@ export default async function TagsPage() {
             <div className="sticky-note p-4 md:p-8">
               <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>A useful starting point</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant">
-                Pick a high-frequency tag first if you want breadth, or use the alphabetical index when you already know the subject you are chasing.
+                Start with AI agents, developer tools, or economics, then follow the related topics on each essay.
               </p>
             </div>
           </aside>

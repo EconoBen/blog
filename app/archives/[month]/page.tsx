@@ -76,7 +76,7 @@ export default async function ArchiveMonthPage({ params }: ArchivePageProps) {
             {monthName} <span className="font-body font-light italic text-primary">{yearLabel}</span>
           </h1>
           <p className="max-w-2xl font-body text-xl leading-relaxed text-on-surface-variant md:text-2xl">
-            A straight month index with every post preserved and easy to scan.
+            {monthPosts.length} post{monthPosts.length === 1 ? '' : 's'} from {label}.
           </p>
         </div>
 

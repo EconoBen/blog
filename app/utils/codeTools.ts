@@ -22,6 +22,7 @@ const languageMap: Record<string, string> = {
   code: 'plaintext',
   toml: 'toml',
   gitconfig: 'ini',
+  'git config': 'ini',
   ini: 'ini',
   conf: 'ini',
   cfg: 'ini',

@@ -6,6 +6,8 @@ import { postService } from '../../services/PostService';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import AudioPlayer from '../../components/AudioPlayer';
 import audioManifest from '../../config/audioManifest.json';
+import { ReadingProgress } from '../../components/ReadingMemory';
+import { ArticleImage } from '../../components/ArticleImage';
 
 const longDateFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -89,11 +91,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const olderPost = currentIndex >= 0 ? allPosts[currentIndex + 1] : undefined;
 
   return (
-    <EditorialPageFrame currentPath="/posts">
+    <EditorialPageFrame currentPath="/posts" pageClassName="field-article-page">
       {/* ── Hero ── */}
       <section className="mx-auto max-w-[1440px] px-5 md:px-8 pb-8 pt-14 md:pb-12 md:pt-20">
         <div className="max-w-3xl">
-          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
+          <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">
             {primaryTag ?? 'Post'}
           </p>
           <h1 className="mt-4 font-headline text-4xl font-black tracking-tight text-[#1d1c16] md:text-5xl">
@@ -109,12 +111,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <span>{post.readingTime ? `${post.readingTime} min read` : 'Long-form post'}</span>
             <span>Filed in {monthYearFormatter.format(post.date)}</span>
           </div>
-          <div className="mt-6 flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
+          <div className="field-article-navigation mt-6 flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
             <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] text-center transition-transform hover:-translate-y-1">
               Back to posts
             </Link>
             {primaryTag && (
-              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="rounded-lg bg-[#0035a0] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white text-center transition-transform hover:-translate-y-1" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
+              <Link href={`/tags/${encodeURIComponent(primaryTag)}`} className="rounded-lg bg-[#176b69] px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-white text-center transition-transform hover:-translate-y-1" style={{ color: '#fff', WebkitTextFillColor: '#fff' }}>
                 Browse this topic
               </Link>
             )}
@@ -128,9 +130,11 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* ── Cover image ── */}
       {post.coverImage && (
         <div className="mx-auto max-w-[1440px] px-5 md:px-8">
-          <img
+          <ArticleImage
             src={post.coverImage}
             alt={post.title}
+            eager
+            sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1440px) calc(100vw - 64px), 1376px"
             className="w-full rounded-xl md:rounded-2xl object-cover"
             style={{ maxHeight: '480px' }}
           />
@@ -140,7 +144,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* ── Article body ── */}
       <section className="border-t border-outline-variant/20 mt-8">
         <div className="mx-auto max-w-[860px] px-5 md:px-8 py-12 md:py-16">
-          <div className="blog-content prose-lg">
+          <ReadingProgress slug={slug} title={post.title} />
+          <div id="reading-content" tabIndex={-1} className="blog-content prose-lg">
             <MarkdownRenderer content={post.coverImage ? post.content.replace(new RegExp(`!\\[[^\\]]*\\]\\(${post.coverImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'm'), '') : post.content} />
           </div>
         </div>
@@ -186,16 +191,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {(newerPost || olderPost) && (
         <section className="border-t border-outline-variant/20">
           <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Related reading</p>
+            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">Related reading</p>
             <h2 className="mt-3 font-headline text-3xl font-bold tracking-tight text-[#1d1c16]">
-              Move to the adjacent posts in the archive.
+              Keep reading.
             </h2>
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {newerPost && (
                 <article className="sticky-note p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Newer post</p>
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">Newer post</p>
                   <h3 className="mt-3 font-headline text-xl font-bold leading-snug text-[#1d1c16] md:text-2xl">
-                    <Link href={`/posts/${newerPost.slug}`} className="transition-colors hover:text-[#0035a0]">
+                    <Link href={`/posts/${newerPost.slug}`} className="transition-colors hover:text-[#176b69]">
                       {newerPost.title}
                     </Link>
                   </h3>
@@ -207,7 +212,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     <span>{newerPost.readingTime ? `${newerPost.readingTime} min read` : 'Long-form post'}</span>
                   </div>
                   <div className="mt-4">
-                    <Link href={`/posts/${newerPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#0035a0] transition-transform hover:translate-x-1">
+                    <Link href={`/posts/${newerPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#176b69] transition-transform hover:translate-x-1">
                       Read newer post →
                     </Link>
                   </div>
@@ -216,9 +221,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
               {olderPost && (
                 <article className="sticky-note p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">Older post</p>
+                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">Older post</p>
                   <h3 className="mt-3 font-headline text-xl font-bold leading-snug text-[#1d1c16] md:text-2xl">
-                    <Link href={`/posts/${olderPost.slug}`} className="transition-colors hover:text-[#0035a0]">
+                    <Link href={`/posts/${olderPost.slug}`} className="transition-colors hover:text-[#176b69]">
                       {olderPost.title}
                     </Link>
                   </h3>
@@ -230,7 +235,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                     <span>{olderPost.readingTime ? `${olderPost.readingTime} min read` : 'Long-form post'}</span>
                   </div>
                   <div className="mt-4">
-                    <Link href={`/posts/${olderPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#0035a0] transition-transform hover:translate-x-1">
+                    <Link href={`/posts/${olderPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#176b69] transition-transform hover:translate-x-1">
                       Read older post →
                     </Link>
                   </div>

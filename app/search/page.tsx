@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import type { SearchResult } from '../services/UnifiedSearchService';
+import '../styles/editorial-index.css';
 
 const longDateFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -35,7 +36,7 @@ const quickQueries = ['memory', 'retrieval', 'economics', 'tooling'];
 const starterTips = [
   ['Specific titles', 'Use part of a post or talk title when you know the wording already.'],
   ['Subjects', 'Try themes like memory, retrieval, or economics to widen the result set.'],
-  ['Route jumps', 'Search for tools, publications, or topic terms to land on the most direct route.'],
+  ['People', 'Find conversations, papers, and projects by a contributor’s name.'],
 ];
 
 function groupResultsByType(results: SearchResult[]) {
@@ -62,33 +63,40 @@ function SearchContent() {
   const normalizedQuery = query.trim();
 
   const [results, setResults] = useState<SearchResult[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(Boolean(normalizedQuery));
+  const [error, setError] = useState(false);
+  const [retry, setRetry] = useState(0);
   const [searchQuery, setSearchQuery] = useState(query);
 
   useEffect(() => {
     setSearchQuery(query);
+    setError(false);
 
     const abortController = new AbortController();
 
     const performSearch = async (searchTerm: string) => {
       if (!searchTerm.trim()) {
         setResults([]);
+        setLoading(false);
         return;
       }
 
       setLoading(true);
+      setResults([]);
       try {
         const response = await fetch(
           `/api/search?q=${encodeURIComponent(searchTerm)}`,
           { signal: abortController.signal },
         );
+        if (!response.ok) throw new Error('Search is unavailable');
         const data = await response.json();
+        if (!Array.isArray(data.results)) throw new Error('Invalid search response');
         if (!abortController.signal.aborted) {
-          setResults(data.results || []);
+          setResults(data.results);
         }
-      } catch (error) {
+      } catch {
         if (!abortController.signal.aborted) {
-          console.error('Search error:', error);
+          setError(true);
           setResults([]);
         }
       } finally {
@@ -98,14 +106,15 @@ function SearchContent() {
       }
     };
 
-    if (query) {
-      void performSearch(query);
+    if (normalizedQuery) {
+      void performSearch(normalizedQuery);
       return () => { abortController.abort(); };
     }
 
     setResults([]);
+    setLoading(false);
     return () => { abortController.abort(); };
-  }, [query]);
+  }, [query, normalizedQuery, retry]);
 
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -116,13 +125,14 @@ function SearchContent() {
       return;
     }
 
+    if (nextQuery === normalizedQuery) setRetry((value) => value + 1);
     router.replace(`/search?q=${encodeURIComponent(nextQuery)}`);
   };
 
   const groupedResults = groupResultsByType(results);
 
   return (
-    <EditorialPageFrame currentPath="/search">
+    <EditorialPageFrame currentPath="/search" pageClassName="editorial-search-page">
       <div className="mx-auto min-h-screen max-w-7xl px-5 py-10 md:px-8 md:py-20">
         <header className="mb-12 max-w-3xl">
           <div className="mb-4 block font-label text-xs font-bold uppercase tracking-widest text-secondary">
@@ -132,10 +142,10 @@ function SearchContent() {
             Search the archive.
           </h1>
           <p className="max-w-2xl font-body text-lg leading-relaxed text-on-surface-variant md:text-xl">
-            Search across posts, tags, talks, publications, and tools with a plain query. Post matches now check title, summary, content, slug, and tags, so the page can route you more directly instead of pretending everything is the same.
+            Find an essay, a conversation, or a tool. Search by subject, title, or a phrase you remember.
           </p>
 
-          <form action="/search" className="group relative mt-7" onSubmit={handleSearch} role="search" aria-label="Site search">
+          <form action="/search" className="editorial-search-form group relative mt-7 flex items-stretch gap-3" onSubmit={handleSearch} role="search" aria-label="Site search">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-6">
               <svg
                 aria-hidden="true"
@@ -150,21 +160,22 @@ function SearchContent() {
               </svg>
             </div>
             <input
-              autoFocus
-              className="block w-full rounded-2xl bg-surface-container-lowest py-5 pl-16 pr-6 font-body text-lg text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none md:py-6 md:text-xl"
+              className="block min-w-0 flex-1 rounded-lg bg-surface-container-lowest py-5 pl-16 pr-6 font-body text-lg text-on-surface shadow-[0_2px_15px_rgba(0,0,0,0.02)] placeholder:text-secondary focus:outline-none md:py-6 md:text-xl"
               name="q"
               onChange={(event) => setSearchQuery(event.target.value)}
               aria-label="Search site"
               placeholder="Search for a title, topic, or phrase"
-              type="text"
+              type="search"
+              enterKeyHint="search"
               value={searchQuery}
             />
+            <button type="submit" className="shrink-0 rounded-lg bg-[#176b69] px-5 font-body text-sm font-semibold text-white">Search</button>
             <div className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-primary transition-transform duration-500 group-focus-within:scale-x-100" />
           </form>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="mr-1 self-center font-label text-[10px] uppercase tracking-widest text-secondary">
-              Quick queries
+              Try a topic
             </span>
             {quickQueries.map((term) => (
               <Link
@@ -177,18 +188,17 @@ function SearchContent() {
             ))}
           </div>
 
-          <p className="mt-6 max-w-2xl font-body text-sm leading-relaxed text-on-surface-variant">
-            Indexed surfaces: posts, tags, talks, publications, and Code &amp; Tools. Compact search uses the same endpoint, but trims that list in the dropdown so the route stays predictable on mobile.
-          </p>
+
         </header>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="space-y-10 lg:col-span-8">
+          <div className="space-y-10 lg:col-span-8" aria-busy={loading}>
+            <p className="sr-only" role="status">{loading ? 'Searching' : error ? '' : normalizedQuery ? `${results.length} results for ${normalizedQuery}` : ''}</p>
             {!normalizedQuery ? (
               <section className="sticky-note p-4 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">Start with a topic, title fragment, or name.</h2>
                 <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
-                  Search is broad by design. Exact titles, tag terms, and short phrases all work, and the results stay grouped by content type.
+                  Explore AI memory and retrieval, the economics of technology, or the tools behind the work.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-3">
                   {starterTips.map(([label, description]) => (
@@ -206,11 +216,19 @@ function SearchContent() {
                   Gathering results for &ldquo;{normalizedQuery}&rdquo;.
                 </p>
               </section>
+            ) : error ? (
+              <section className="sticky-note p-4 md:p-8" role="alert">
+                <h2 className="font-headline text-2xl font-bold text-on-surface">Search is unavailable.</h2>
+                <p className="mt-4 font-body text-base leading-relaxed text-on-surface-variant">
+                  Please try again. You can also browse the <Link href="/archive" className="underline underline-offset-4">writing archive</Link>.
+                </p>
+                <button type="button" onClick={() => setRetry((value) => value + 1)} className="mt-5 rounded-lg bg-[#176b69] px-5 py-3 font-body text-sm font-semibold text-white">Try again</button>
+              </section>
             ) : results.length === 0 ? (
               <section className="sticky-note p-4 md:p-8">
                 <h2 className="font-headline text-2xl font-bold text-on-surface">No results for &ldquo;{normalizedQuery}&rdquo;.</h2>
                 <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-on-surface-variant md:text-lg">
-                  Try a broader phrase, a title fragment, or one of the suggested terms in the side rail.
+                  Try a shorter phrase, a different spelling, or one of the topics above.
                 </p>
               </section>
             ) : (
@@ -281,25 +299,9 @@ function SearchContent() {
 
           <aside className="space-y-6 lg:col-span-4 lg:sticky lg:top-32">
             <div className="sticky-note p-4 md:p-8">
-              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Search summary</h2>
-              <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
-                {[
-                  ['Query', normalizedQuery || 'None'],
-                  ['Results', loading ? 'Searching' : `${results.length}`],
-                  ['Sections', `${groupedResults.length}`],
-                ].map(([label, value]) => (
-                  <div key={label} className="sticky-note px-4 py-3">
-                    <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>
-                    <span className="mt-3 block font-body text-sm text-on-surface-variant">{value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="sticky-note p-4 md:p-8">
-              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>Navigate elsewhere</h2>
+              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '1.25rem' }}>Keep exploring</h2>
               <p className="font-body text-sm leading-relaxed text-on-surface-variant" style={{ marginBottom: '1.25rem' }}>
-                If search is not the fastest route, jump directly to the archive, tags, or tools surface.
+                Browse by date, follow a topic, or find something useful to build with.
               </p>
               <div className="flex flex-wrap gap-2">
                 {[

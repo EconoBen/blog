@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { track } from '@vercel/analytics/react';
 
 interface SubscribeFormProps {
@@ -14,20 +14,29 @@ export function SubscribeForm({
 }: SubscribeFormProps) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const errorId = useId();
+  const request = useRef<AbortController | null>(null);
+  const success = useRef<HTMLDivElement>(null);
+  useEffect(() => () => request.current?.abort(), []);
+  useEffect(() => { if (status === 'success') success.current?.focus(); }, [status]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
+    if (!email.trim() || request.current) return;
 
+    const controller = new AbortController();
+    request.current = controller;
     setStatus('loading');
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim() }),
+        signal: controller.signal,
       });
-
-      if (response.ok) {
+      const result = await response.json();
+      if (controller.signal.aborted) return;
+      if (response.ok && result?.success === true) {
         setStatus('success');
         setEmail('');
         try {
@@ -39,20 +48,22 @@ export function SubscribeForm({
         setStatus('error');
       }
     } catch {
-      setStatus('error');
+      if (!controller.signal.aborted) setStatus('error');
+    } finally {
+      if (request.current === controller) request.current = null;
     }
   };
 
   if (status === 'success') {
     return variant === 'dark' ? (
-      <div className="rounded-2xl bg-[#0035a0] p-8 text-white md:p-12">
+      <div ref={success} tabIndex={-1} role="status" className="rounded-2xl bg-[#0035a0] p-8 text-white md:p-12">
         <h3 className="font-headline text-2xl font-bold">You&rsquo;re on the list.</h3>
         <p className="mt-3 max-w-md font-body text-base leading-relaxed text-white/80">
           You&rsquo;ll hear about new writing, talks, and book progress. No spam.
         </p>
       </div>
     ) : (
-      <div>
+      <div ref={success} tabIndex={-1} role="status">
         <h3 className="font-headline text-2xl font-bold text-[#1d1c16]">You&rsquo;re on the list.</h3>
         <p className="mt-3 max-w-md font-body text-base leading-relaxed text-[#1d1c16]/70">
           You&rsquo;ll hear about new writing, talks, and book progress. No spam.
@@ -66,19 +77,24 @@ export function SubscribeForm({
       <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_auto]">
         <div className="space-y-4">
           <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#0035a0]">
-            Stay in the loop
+            Email updates
           </p>
           <h2 className="font-headline text-3xl font-black tracking-tight text-[#1d1c16] md:text-4xl">
             Get updates on new posts, talks, and book progress
           </h2>
           <p className="max-w-lg text-lg leading-relaxed text-[#1d1c16]/70">
-            No spam &mdash; just updates when something new ships or the book hits a milestone.
+            Occasional emails about new writing, upcoming talks, and chapter releases.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="subscribe-form flex flex-col gap-3 md:items-center md:justify-center">
+        <form onSubmit={handleSubmit} aria-busy={status === 'loading'} className="subscribe-form flex flex-col gap-3 md:items-center md:justify-center">
           <div className="subscribe-controls flex w-full gap-3">
             <input
               type="email"
+              name="email"
+              autoComplete="email"
+              inputMode="email"
+              disabled={status === 'loading'}
+              aria-describedby={status === 'error' ? errorId : undefined}
               required
               aria-label="Email address"
               placeholder="you@example.com"
@@ -96,7 +112,7 @@ export function SubscribeForm({
             </button>
           </div>
           {status === 'error' && (
-            <p className="font-body text-sm text-[#1d1c16]/50">Something went wrong. Try emailing agentmemory@econoben.dev directly.</p>
+            <p id={errorId} role="alert" className="subscribe-feedback font-body text-sm text-[#1d1c16]/75">We couldn&rsquo;t confirm your signup. Please try again or <a href="mailto:agentmemory@econoben.dev">email me directly</a>.</p>
           )}
         </form>
       </div>
@@ -109,12 +125,17 @@ export function SubscribeForm({
         <div className="text-white">
           <h3 className="font-headline text-2xl font-bold md:text-3xl">Follow Agent Memory in Early Release.</h3>
           <p className="mt-2 max-w-md font-body text-base leading-relaxed text-white/80">
-            No spam, no fake waitlist. Just an email when new chapters and milestones land.
+            Get an email when new chapters become available.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="subscribe-form subscribe-controls flex w-full max-w-md gap-3 md:w-auto">
+        <form onSubmit={handleSubmit} aria-busy={status === 'loading'} className="subscribe-form subscribe-controls flex w-full max-w-md gap-3 md:w-auto">
           <input
             type="email"
+            name="email"
+            autoComplete="email"
+            inputMode="email"
+            disabled={status === 'loading'}
+            aria-describedby={status === 'error' ? errorId : undefined}
             required
             aria-label="Email address"
             placeholder="you@example.com"
@@ -132,7 +153,7 @@ export function SubscribeForm({
         </form>
       </div>
       {status === 'error' && (
-        <p className="mt-4 font-body text-sm text-white/70">Something went wrong. Try emailing agentmemory@econoben.dev directly.</p>
+        <p id={errorId} role="alert" className="subscribe-feedback mt-4 font-body text-sm text-white/85">We couldn&rsquo;t confirm your signup. Please try again or <a href="mailto:agentmemory@econoben.dev">email me directly</a>.</p>
       )}
     </div>
   );

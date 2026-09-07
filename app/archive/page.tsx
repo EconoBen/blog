@@ -85,13 +85,13 @@ export default async function ArchivePage() {
       <div className="mx-auto max-w-7xl px-5 pb-28 pt-14 md:px-8 md:pt-20">
         <header className="mb-12 max-w-3xl md:mb-20">
           <span className="mb-4 block font-label text-xs uppercase tracking-[0.2em] text-secondary">
-            Chronological Index
+            Writing through the years
           </span>
           <h1 className="mb-8 font-headline text-4xl font-black tracking-tight text-on-surface md:text-5xl">
             Archive.
           </h1>
           <p className="font-body text-xl italic leading-relaxed text-on-surface-variant md:text-2xl">
-            Browse the full writing record by year and month. The structure stays compact, practical, and fully linked.
+            Essays and field notes, from the latest work back to the first post.
           </p>
         </header>
 
@@ -157,12 +157,9 @@ export default async function ArchivePage() {
                   <div>
                     <h2 className="font-headline text-4xl font-black tracking-tighter text-on-surface">{entry.year}</h2>
                     <p className="mt-2 font-body text-base leading-relaxed text-on-surface-variant">
-                      {entry.months.length} month{entry.months.length === 1 ? '' : 's'} and {entry.postCount} post{entry.postCount === 1 ? '' : 's'} in the record.
+                      {entry.months.length} month{entry.months.length === 1 ? '' : 's'} and {entry.postCount} post{entry.postCount === 1 ? '' : 's'}.
                     </p>
                   </div>
-                  <span className="font-label text-[10px] uppercase tracking-[0.2em] text-secondary">
-                    Year index
-                  </span>
                 </div>
 
                 <div className="space-y-8 md:space-y-12">

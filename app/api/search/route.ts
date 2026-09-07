@@ -2,6 +2,12 @@ import { NextResponse } from 'next/server';
 import { postService } from '@/services/PostService';
 import { unifiedSearchService } from '@/app/services/UnifiedSearchService';
 
+// Keep the legacy metadata response without shipping the full Markdown archive.
+const metadataOnly = <T extends { content: string }>(post: T) => {
+  const { content: _content, ...metadata } = post;
+  return metadata;
+};
+
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const query = url.searchParams.get('q')?.trim() || '';
@@ -21,7 +27,7 @@ export async function GET(request: Request) {
     return NextResponse.json(
       {
         results,
-        posts: matchingPosts.slice(0, 5),
+        posts: matchingPosts.slice(0, 5).map(metadataOnly),
       },
       { headers: { 'Cache-Control': 'no-store' } }
     );
@@ -38,7 +44,7 @@ export async function GET(request: Request) {
           date: post.date,
           tags: post.tags,
         })),
-        posts,
+        posts: posts.map(metadataOnly),
       },
       { headers: { 'Cache-Control': 'no-store' } }
     );

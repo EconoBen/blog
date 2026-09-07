@@ -47,7 +47,7 @@ image: "/assets/covers/student-loans.svg"
 </li>
  <li style="margin-bottom: -10px;">
     <p style="line-height: 2; margin-top: 0;">
-        <a href="#a-mad-scramble-against-financial-reality">A Mad Scramble Against Madness and Financial Reality</a><br/>
+        <a href="#a-mad-scramble-against-madness-and-financial-reality">A Mad Scramble Against Madness and Financial Reality</a><br/>
         <span style="font-size: 0.9em; color: grey;"> In which I struggle to navigate a tumultuous job market while loan repayments loom.</span>
     </p>
 </li>
@@ -65,13 +65,13 @@ image: "/assets/covers/student-loans.svg"
 </li>
 <li style="margin-bottom: -10px;">
     <p style="line-height: 2; margin-top: 0;">
-        <a href="#Sticking-To-It"> Sticking To It </a><br/>
+        <a href="#sticking-to-it"> Sticking To It </a><br/>
         <span style="font-size: 0.9em; color: grey;"> In which I save a lot, and then dump most of it into my loans... </span>
     </p>
 </li>
 <li style="margin-bottom: -10px;">
     <p style="line-height: 2; margin-top: 0;">
-        <a href="#Pay-Off"> Pay Off </a><br/>
+        <a href="#pay-off"> Pay Off </a><br/>
         <span style="font-size: 0.9em; color: grey;">  In which I achieve my goal and think about what's next. </span>
     </p>
 </li>
@@ -297,4 +297,3 @@ As I've said, I am now debt free. But somehow the journey to paying off these lo
 My journey isn't over, however. I love my career so far in machine learning and don't plan to stop pushing myself. I'm even applying my research background to writing reports on Large Language Models for O'Reilly Media! I'lll be teaching an Introduction to Machine Learning Course at the Argyros School of Business & Eeconomics at Chapman University this Fall. And I still haven't closed the book on the possibility of grad school in economics. Crazier things have happened, like, for instance, paying off $194k in debt in six years.
 
 A final note: In 2020, as the pandemic began to proliferate around the globe, I had the honor of being my friend Alex's witness to the signing of her marriage contract (Ketubah). During that wonderful, intimate ceremony, as friends and family were giving words of blessing and thanks to Alex and her husband-to-be, I was able to take a moment to publicly thank Alex for all she'd done for me, for the belief she showed in me, and for the impact she's had on my life.
-

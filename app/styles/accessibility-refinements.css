@@ -1,0 +1,49 @@
+/* Reading remains direct with a keyboard, touch, and motion preferences. */
+html { scroll-padding-top: 132px; }
+.grebe-site-shell .field-skip-link {
+  position: fixed; top: 12px; left: 16px; z-index: 100;
+  padding: 12px 18px; background: #f7f2e8; color: #153f3d;
+  border: 1px solid #176b69; border-radius: 3px;
+  font-size: 15px; font-weight: 600;
+  transform: translateY(-180%);
+}
+.grebe-site-shell .field-skip-link:focus { transform: translateY(0); }
+.grebe-site-shell .field-scroll-top {
+  width: 44px; height: 44px; max-width: 44px; min-width: 0; min-height: 44px;
+  padding: 0; border-radius: 50%;
+}
+.grebe-site-shell .field-scroll-top svg { width: 18px; height: 18px; }
+#main-content:focus { outline: none; }
+.grebe-site-shell :is(h2, h3, h4, section[id]) { scroll-margin-top: 16px; }
+.grebe-site-shell .audio-player { background: #eef0e7; box-shadow: none; border: 1px solid #176b6926; }
+.grebe-site-shell .audio-player-header { flex-wrap: wrap; gap: 8px; }
+.grebe-site-shell .audio-player-title, .grebe-site-shell .audio-player-time { color: #435c52; }
+.grebe-site-shell .audio-player-error { color: #943b26; }
+.grebe-site-shell .audio-player-play-btn {
+  background: #176b69; color: #fff; width: 44px; height: 44px;
+  min-width: 44px; max-width: 44px; padding: 0; border-radius: 50%;
+}
+.grebe-site-shell .audio-player-seek {
+  flex: 1; width: 100%; min-width: 48px; height: 44px; margin: 0;
+  padding: 0; accent-color: #176b69; cursor: pointer; box-shadow: none;
+}
+.grebe-site-shell .audio-player-speed-btn {
+  width: 48px; min-height: 44px; min-width: 48px; max-width: 48px;
+  padding: 4px 0; font-size: 12px; border-radius: 6px;
+  color: #153f3d; background: transparent; border-color: #176b6940;
+}
+.subscribe-feedback a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 480px) {
+  .grebe-site-shell .audio-player-controls { display: grid; grid-template-columns: 44px 1fr 48px; }
+  .grebe-site-shell .audio-player-time { text-align: left; }
+  .grebe-site-shell .audio-player-seek { grid-column: 1 / -1; grid-row: 2; }
+  .grebe-site-shell .audio-player-speed-btn { grid-column: 3; grid-row: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .grebe-site-shell .audio-player-spinner { animation: none; }
+}
+/* On a phone, keep the return control in the spare header corner, off the prose. */
+@media (max-width: 620px) {
+  .grebe-site-shell .field-scroll-top { top: 12px; right: 16px; bottom: auto; left: auto; background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
+}

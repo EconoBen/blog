@@ -1,3 +1,5 @@
+import { AGENT_MEMORY } from '../book/bookData';
+
 export interface Publication {
   id: string;
   type: 'book' | 'journal' | 'conference' | 'report' | 'workshop' | 'other';
@@ -14,6 +16,7 @@ export interface Publication {
   doi?: string;
   topics: string[];
   featured?: boolean;
+  releaseLabel?: string;
   bibtex?: string;
 }
 
@@ -32,8 +35,24 @@ export const publicationsConfig = {
    */
   publications: [
     {
+      id: 'agent-memory',
+      type: 'book' as const,
+      title: AGENT_MEMORY.title,
+      authors: AGENT_MEMORY.author,
+      venue: AGENT_MEMORY.publisher,
+      date: '2026-07-30',
+      year: 2026,
+      abstract: `${AGENT_MEMORY.subtitle}. ${AGENT_MEMORY.availability}`,
+      url: '/book',
+      coverImage: AGENT_MEMORY.coverSrc,
+      thumbnail: AGENT_MEMORY.coverSrc,
+      topics: ['Agent Memory', 'AI Agents', 'Memory', 'LLMs'],
+      featured: true,
+      releaseLabel: AGENT_MEMORY.releaseLabel,
+    },
+    {
       id: "managing-memory-for-ai-agents",
-      type: "book" as const,
+      type: "report" as const,
       title: "Managing Memory for AI Agents",
       authors: "Benjamin Labaschin, Jim Allen Wallace, Andrew Brookins, Manvinder Singh",
       venue: "O'Reilly Media",
@@ -76,7 +95,7 @@ export const publicationsConfig = {
     },
     {
       id: "ai-agents-book",
-      type: "book" as const,
+      type: "report" as const,
       title: "What Are AI Agents? When and How to Use LLM Agents",
       authors: "Benjamin Labaschin",
       venue: "O'Reilly Media",
