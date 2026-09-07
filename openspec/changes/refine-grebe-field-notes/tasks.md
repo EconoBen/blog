@@ -1,4 +1,4 @@
-> Status: DEPLOYED — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. All 64 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: SPACING CORRECTION IN PROGRESS — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. The user requested a bounded card-spacing correction after the release; tasks 14.1–14.2 track that follow-up. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 ## 1. Baseline and design
 
@@ -108,3 +108,8 @@ Tasks 11.2 and 11.6 are complete with motion, startup and user-review evidence u
 - [x] 13.2 Create a matching favicon, Apple/installable icons and accurate versioned metadata/manifest identity.
 - [x] 13.3 Verify actual metadata, image dimensions, tiny-icon legibility and content-specific overrides; run the production build and independent review.
 - [x] 13.4 Push and release the correction; verify production crawler responses, icons and LinkedIn preview refresh or document the external limitation.
+
+## 14. Social card spacing correction
+
+- [x] 14.1 Separate the large grebe’s bill from the feet printed on the book, preserving the exact artwork and typography; visually review the versioned card at sharing size.
+- [ ] 14.2 Verify metadata and assets, push and deploy the correction, and confirm the production image and crawler metadata.

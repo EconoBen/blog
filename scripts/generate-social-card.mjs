@@ -24,7 +24,7 @@ try {
     .book-line strong { display:block;margin-top:7px;font-size:47px;font-weight:560;letter-spacing:-1.7px;color:#176b69; }
     .cover { position:absolute;left:846px;top:105px;width:276px;height:363px;overflow:hidden;transform:rotate(3deg);box-shadow:10px 17px 20px #283e2f26,1px 1px 2px #283e2f40;z-index:2; }
     .cover img { display:block;position:absolute;width:322.26px;height:402.82px;left:-23px;top:-20px;max-width:none; }
-    .bird { position:absolute;width:287px;height:287px;object-fit:contain;left:627px;top:267px;z-index:3; }
+    .bird { position:absolute;width:287px;height:287px;object-fit:contain;left:527px;top:267px;z-index:3; }
     .water { position:absolute;left:556px;top:486px;width:610px;height:124px;color:#8ba79a;opacity:.55; }
     .domain { position:absolute;left:68px;bottom:46px;color:#176b69;font-size:21px;font-weight:580;letter-spacing:.7px; }
     .publisher { position:absolute;right:76px;bottom:46px;color:#56654f;font-size:18px; }
@@ -40,8 +40,8 @@ try {
   await page.evaluate(() => document.fonts.ready);
   await mkdir(resolve(root, 'public/social'), { recursive: true });
   const screenshot = await page.screenshot();
-  await sharp(screenshot).png({ compressionLevel: 9 }).toFile(resolve(root, 'public/social/ben-labaschin-agent-memory-v1.png'));
-  console.log('Created public/social/ben-labaschin-agent-memory-v1.png (1200 × 630)');
+  await sharp(screenshot).png({ compressionLevel: 9 }).toFile(resolve(root, 'public/social/ben-labaschin-agent-memory-v2.png'));
+  console.log('Created public/social/ben-labaschin-agent-memory-v2.png (1200 × 630)');
 } finally {
   await browser.close();
 }

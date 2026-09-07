@@ -1,6 +1,6 @@
 # Local preview handoff — 2026-09-05
 
-> Status: DEPLOYED — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. All 64 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: SPACING CORRECTION IN PROGRESS — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. The user requested a bounded card-spacing correction after the release; tasks 14.1–14.2 track that follow-up. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 > Superseded first-pass observations below; see the living pond revision at the end for the current behavior.
 
@@ -335,3 +335,7 @@ The author/book/grebe sharing identity and browser icons are committed and pushe
 - The prior deployment `dpl_Cppp3BdczrH8TWWurnsDfCJTr4og` remains available as the rollback target; no rollback was needed.
 
 All 64 tasks are complete, including the explicitly allowed documentation of an external preview-refresh limitation. The broader site/content/deployment review is recorded in `analysis/site-review-2026-09-06.md`; issues #80–82 track the separate maintenance findings. Existing generated worktree changes remain untouched and excluded. No additional application changes or dependency updates accompany this release record.
+
+## Social card spacing preflight — September 6, 2026
+
+The large portrait moves 100px left in the existing editable composition; its bill now clears the book cover rather than crossing the printed grebe’s feet. Root inspected the 1200 × 630 version 2 PNG. Independent visual review confirms the separation at full size and an actual 320px-wide preview, with no remaining overlap or collision with the author name. The cover, portrait, typography and icons remain unchanged. The image generator, default metadata and existing verification script now point to version 2; version 1 remains available. Full social metadata/assets verification, TypeScript and strict OpenSpec validation pass. No new behavior or test suite is introduced for this layout correction. Release and live verification remain task 14.2.

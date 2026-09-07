@@ -11,7 +11,7 @@ import { JSDOM } from 'jsdom';
 const require = createRequire(import.meta.url);
 const root = process.cwd();
 const title = 'Ben Labaschin — AI Engineering & Agent Memory';
-const imageUrl = 'https://econoben.dev/social/ben-labaschin-agent-memory-v1.png';
+const imageUrl = 'https://econoben.dev/social/ben-labaschin-agent-memory-v2.png';
 const ui = { default: () => null };
 function load(file, stubs = {}) {
   const filename = path.resolve(root, file);
@@ -117,7 +117,7 @@ console.log('Social metadata passed: author/book identity, explicit icons, manif
 
 if (!process.argv.includes('--metadata-only')) {
   for (const [pathname, width, height] of [
-    ['/social/ben-labaschin-agent-memory-v1.png', 1200, 630],
+    ['/social/ben-labaschin-agent-memory-v2.png', 1200, 630],
     ['/icons/grebe-v1-32.png', 32, 32], ['/icons/grebe-v1-180.png', 180, 180],
     ...manifest.icons.map(icon => [icon.src, ...icon.sizes.split('x').map(Number)]),
   ]) {

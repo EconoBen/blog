@@ -1,4 +1,4 @@
-> Status: DEPLOYED — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. All 64 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: SPACING CORRECTION IN PROGRESS — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. The user requested a bounded card-spacing correction after the release; tasks 14.1–14.2 track that follow-up. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 The earlier sections preserve the sequence of design decisions. The selected-treatment, latest-revision and final user-review sections below govern the current implementation, superseding historical click-positioned ripples, metaphorical interface copy, production sound experiments and pending creative-review statements.
 
@@ -229,3 +229,7 @@ flowchart LR
 ```
 
 Validation includes source and real-rendered metadata, exact image sizes, icon small-size inspection, route-specific metadata preservation, production build, HTTP content types and a LinkedIn crawler user agent. LinkedIn owns preview caching: run its Post Inspector after release when accessible; document any sign-in limitation. LinkedIn says refreshed information applies to new posts, not existing shared posts. Preserve the recorded prior deployment for rollback.
+
+## Social card spacing correction — September 6, 2026
+
+The user identified an awkward visual collision between the large grebe bill and the feet printed on the book. Move only the existing portrait left by 100px in the editable composition. Preserve exact cover and portrait artwork, typography, icon family and every other placement. Export a version 2 image and update metadata atomically so cached version 1 remains intact. Verify the complete composition at normal and reduced sharing size before release.
