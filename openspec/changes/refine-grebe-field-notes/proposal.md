@@ -1,4 +1,4 @@
-> Status: RIPPLE ALIGNMENT IN PROGRESS — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `c8fb013083e8fa349d0df35e7f9b182feeb6a5d6`. Production metadata and the exact version 2 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. The user accepted the bill separation and requested that the water lines follow the moved bird; task 15.1 tracks that correction. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: DEPLOYED — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `608f879b1fe3b6376eb3e9e094f0b39b7e5524e4`. Production metadata and the exact version 3 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. All 67 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 ## Why
 

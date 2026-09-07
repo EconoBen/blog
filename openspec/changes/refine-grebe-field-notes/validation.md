@@ -1,6 +1,6 @@
 # Local preview handoff — 2026-09-05
 
-> Status: RIPPLE ALIGNMENT IN PROGRESS — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `c8fb013083e8fa349d0df35e7f9b182feeb6a5d6`. Production metadata and the exact version 2 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. The user accepted the bill separation and requested that the water lines follow the moved bird; task 15.1 tracks that correction. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: DEPLOYED — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `608f879b1fe3b6376eb3e9e094f0b39b7e5524e4`. Production metadata and the exact version 3 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. All 67 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 > Superseded first-pass observations below; see the living pond revision at the end for the current behavior.
 
@@ -351,3 +351,11 @@ All 66 tasks are complete. The remaining LinkedIn sign-in/cache limitation is un
 ## Social card ripple alignment preflight — September 6, 2026
 
 Root and independent review inspected version 3 at 1200px and an actual 320px preview. Three elliptical strokes now center beneath the bird base and avoid the cover, text and publisher footer; the accepted bill separation is preserved. Existing metadata/asset checks and strict OpenSpec validation pass. Only the native water paths, versioned output and metadata URL changed from the preceding spacing release. Production verification remains task 15.1.
+
+## Social card ripple alignment release completed — September 6, 2026
+
+Application source `608f879b1fe3b6376eb3e9e094f0b39b7e5524e4` is pushed to `feat/grebe-field-notes`. The exact pushed source was archived without local environment files, dependencies or generated build output, associated with the verified Vercel project, and released using `vercel --prod --yes --scope bens-projects-0b44e0e4 --meta sourceCommit=608f879b1fe3b6376eb3e9e094f0b39b7e5524e4`.
+
+Vercel deployment `dpl_69RwYg9oEMF5i6Bru4mjwykJHcjo` at https://blog-f15m2kk7r-bens-projects-0b44e0e4.vercel.app is Ready and aliased to `econoben.dev` and `www.econoben.dev`. The cloud build passed compilation, TypeScript and all 163 static routes. Production social verification passes with version 3 in the LinkedInBot metadata; byte comparison confirms the public image matches the reviewed 215,497-byte PNG exactly. The prior deployment `dpl_EJTavE7m6uxPdnaRVzx4s3Sj9moB` remains available; no rollback was needed.
+
+All 67 tasks are complete. The external LinkedIn sign-in/cache limitation is unchanged; no post was modified. This completion record is a documentation-only follow-up. No merge to main was performed, and the OpenSpec change remains unarchived.
