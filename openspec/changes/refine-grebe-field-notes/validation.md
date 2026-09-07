@@ -280,3 +280,35 @@ Vercel account `econoben`, scope `bens-projects-0b44e0e4`, project `blog` is ver
 An independent read-only packaging review verified relative imports, all three WebP assets, required new source files, and absence of credential-like files or high-confidence secrets among the proposed changes. Generated `.next`, `tsconfig.tsbuildinfo` and `next-env.d.ts` churn are excluded from the commit. Deployment uses a snapshot of the pushed source, excluding local environment files and generated output. Existing retired Beads-only hooks are bypassed per the user's global instruction; current regression checks run directly.
 
 The design comparison route now returns not-found when `VERCEL_ENV=production`, while local and preview comparisons remain accessible. `verify-study-production-boundary.mjs` failed before the guard and passes afterward, including verification that production does not load comparison content. This keeps the optional audio audition and design workbench off the public production site. No product navigation destination is removed.
+
+## Production release completed — September 6, 2026
+
+The approved application source is committed as `cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e` (“Refine the grebe pond and editorial reading experience”) and pushed to `EconoBen/blog`, branch `feat/grebe-field-notes`. Remote verification confirmed the exact source SHA. No merge to main was requested or performed. A subsequent documentation-only commit records these release results; the deployed application source remains this SHA.
+
+### Deployment
+
+- Ran `vercel --prod --yes --scope bens-projects-0b44e0e4 --meta sourceCommit=cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e` from a snapshot of the pushed commit. Local environment files, dependency directories, generated `.next` output and TypeScript build state were excluded. Only the verified Vercel project association was copied into the snapshot.
+- Vercel production deployment: `dpl_Cppp3BdczrH8TWWurnsDfCJTr4og`, `https://blog-cgetagre3-bens-projects-0b44e0e4.vercel.app`.
+- `vercel inspect https://econoben.dev` confirms Ready, target production, and the new deployment. The production aliases include `econoben.dev` and `www.econoben.dev`; the latter redirects to `https://econoben.dev/`.
+- The cloud Next.js 16.2.2 production build passed compilation, TypeScript and generation of 163 static routes. The CLI exited successfully and confirmed the production alias.
+- The previous deployment `dpl_B2V9PcNMkhG9Bswjusb3r8Bed5nQ` remains available. No rollback was needed.
+
+### Live verification
+
+Evidence directory: `/Users/blabaschin/.codex/visualizations/2026/09/05/01a0732f-8805-7692-a91a-e5cc1ba15962/pond-round-two/atlas-dusk/refinement/production/`. `live-verification.json` records actual production browser checks. Reviewed original screenshots `homepage-desktop.png`, `homepage-phone.png` and `related-desktop.png`; `book-chapters.png` also records the chapter selection.
+
+- HTTP 200: homepage, book, the Agent Memory early-release article, search API and shoreline WebP. `/pond-studies` returns 404 in production. An invalid empty-email subscription request returns 400 without sending a real signup. `www.econoben.dev` returns a 307 redirect to the canonical domain.
+- Desktop starts with one visible, running swimmer at x=280px. The 390px phone starts with one at x=17.5px; its document width is 390px, with no horizontal page overflow. Crossing durations and the 25% starting offset match the existing schedule.
+- Actual “Find an article” activation changes “Agent Memory Is in Early Release” to “Publishing for O’Reilly” and updates the selected related article. The suggestion note remains 372.03125px high before and after the sequence.
+- “View related articles” selects the intended article and focuses `field-atlas-selected-title`. “Read article” navigates to the real production article with its correct heading. No browser page errors occurred.
+- The book graphic is labeled “Explore the chapters,” reports three live chapters, and selecting Chapter 4 displays “How Memory Gets Written” with “Next release.”
+- Submitting “agent memory” through the live search UI returns six results, including the early-release article. The API omits full Markdown from results.
+- Reduced motion removes all viewport swimmers, while touch activation still selects another article. Temporary test browsers were closed after verification.
+
+### Quality and maintenance
+
+Fresh source checks passed before deployment: production-study boundary, pond studies, grebe refresh, pond discovery, field atlas, grebe lifecycle, visit scheduling, reading memory, newsletter validation, editorial search, reader controls, article rendering, article fragments, TypeScript and strict OpenSpec validation. The production-study boundary regression failed before the route guard and passes afterward. Article fragment validation covers 28 links across 19 articles. Independent release packaging review found no blocker.
+
+The cloud installation reported 57 existing dependency findings (4 low, 30 moderate, 21 high, 2 critical). This release changes no dependencies. Independent triage traced the two critical groups to `fast-xml-parser` through the offline S3 upload script and `tar` through build/install tooling. Neither appeared in the 26 checked local production function traces; this is not a claim that all tooling is risk-free or that the cloud bundles were independently extracted. Follow-up issue [#80](https://github.com/EconoBen/blog/issues/80) records evidence and bounded remediation/validation work. No verified request-path release blocker was found.
+
+All 60 checklist tasks are complete. The approved release is live, and the branch is pushed. Generated local build-file changes remain untouched and excluded from versioned release changes. The unmerged OpenSpec change remains unarchived.

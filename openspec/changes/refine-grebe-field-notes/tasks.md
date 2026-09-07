@@ -1,4 +1,4 @@
-> Status: RELEASE AUTHORIZED — user review is incorporated and the local refinement is complete. On September 6, 2026 the user explicitly requested a GitHub push followed by `vercel --prod`. Publishing is now authorized; earlier local-only restrictions below describe the pre-release phase. Push, deployment and production verification are in progress.
+> Status: DEPLOYED — the approved source was pushed to `feat/grebe-field-notes` and deployed with `vercel --prod` on September 6, 2026. `econoben.dev` serves source commit `cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e`; production verification passes. Earlier local-only restrictions below describe the pre-release phase and are superseded by the user’s explicit release authorization. The branch is unmerged and the change remains unarchived.
 
 ## 1. Baseline and design
 
@@ -94,10 +94,10 @@ Comparison validation: `node scripts/verify-pond-study-content.mjs`, `node scrip
 
 The sound decision is complete. The earlier pointer-positioned, six-instance ripple scenario is superseded by one coordinated dive and wake at the fixed waterline; its implementation history remains above. Reduced-motion announcement tests now cover repeated and batched selections with the actual resulting title and retained focus.
 
-Tasks 11.2 and 11.6 are complete with motion, startup and user-review evidence under `pond-round-two/atlas-dusk/refinement/`. All 57 checklist tasks are complete. The final lifecycle-fix production build and smoke check pass; the accepted local refinement is complete. No deployment or publishing is authorized, and the unmerged local change is not archived.
+Tasks 11.2 and 11.6 are complete with motion, startup and user-review evidence under `pond-round-two/atlas-dusk/refinement/`. All 57 creative-refinement tasks are complete. The final lifecycle-fix production build and smoke check pass. This was the accepted local checkpoint; the subsequently authorized release is completed in section 12. The unmerged change remains unarchived.
 
 ## 12. Approved production release
 
-- [ ] 12.1 Commit the reviewed source, artwork, regressions and records; push `feat/grebe-field-notes` to `EconoBen/blog`, excluding generated build files.
-- [ ] 12.2 Deploy the committed source to the existing Vercel `blog` project with `vercel --prod`, excluding local environment and build files.
-- [ ] 12.3 Verify the production domain, article discovery, initial swimmer, book status, search and the production-only exclusion of the design studies; record the deployment and source commit.
+- [x] 12.1 Commit the reviewed source, artwork, regressions and records; push `feat/grebe-field-notes` to `EconoBen/blog`, excluding generated build files.
+- [x] 12.2 Deploy the committed source to the existing Vercel `blog` project with `vercel --prod`, excluding local environment and build files.
+- [x] 12.3 Verify the production domain, article discovery, initial swimmer, book status, search and the production-only exclusion of the design studies; record the deployment and source commit.

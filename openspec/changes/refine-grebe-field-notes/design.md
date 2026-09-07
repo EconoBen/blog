@@ -1,4 +1,4 @@
-> Status: RELEASE AUTHORIZED — user review is incorporated and the local refinement is complete. On September 6, 2026 the user explicitly requested a GitHub push followed by `vercel --prod`. Publishing is now authorized; earlier local-only restrictions below describe the pre-release phase. Push, deployment and production verification are in progress.
+> Status: DEPLOYED — the approved source was pushed to `feat/grebe-field-notes` and deployed with `vercel --prod` on September 6, 2026. `econoben.dev` serves source commit `cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e`; production verification passes. Earlier local-only restrictions below describe the pre-release phase and are superseded by the user’s explicit release authorization. The branch is unmerged and the change remains unarchived.
 
 The earlier sections preserve the sequence of design decisions. The selected-treatment, latest-revision and final user-review sections below govern the current implementation, superseding historical click-positioned ripples, metaphorical interface copy, production sound experiments and pending creative-review statements.
 
