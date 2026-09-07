@@ -1,6 +1,6 @@
 # Local preview handoff — 2026-09-05
 
-> Status: SPACING CORRECTION IN PROGRESS — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. The user requested a bounded card-spacing correction after the release; tasks 14.1–14.2 track that follow-up. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: RIPPLE ALIGNMENT IN PROGRESS — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `c8fb013083e8fa349d0df35e7f9b182feeb6a5d6`. Production metadata and the exact version 2 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. The user accepted the bill separation and requested that the water lines follow the moved bird; task 15.1 tracks that correction. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 > Superseded first-pass observations below; see the living pond revision at the end for the current behavior.
 
@@ -339,3 +339,15 @@ All 64 tasks are complete, including the explicitly allowed documentation of an 
 ## Social card spacing preflight — September 6, 2026
 
 The large portrait moves 100px left in the existing editable composition; its bill now clears the book cover rather than crossing the printed grebe’s feet. Root inspected the 1200 × 630 version 2 PNG. Independent visual review confirms the separation at full size and an actual 320px-wide preview, with no remaining overlap or collision with the author name. The cover, portrait, typography and icons remain unchanged. The image generator, default metadata and existing verification script now point to version 2; version 1 remains available. Full social metadata/assets verification, TypeScript and strict OpenSpec validation pass. No new behavior or test suite is introduced for this layout correction. Release and live verification remain task 14.2.
+
+## Social card spacing release completed — September 6, 2026
+
+Application source `c8fb013083e8fa349d0df35e7f9b182feeb6a5d6` is pushed to `feat/grebe-field-notes`. An isolated archive of that exact source was deployed with `vercel --prod --yes --scope bens-projects-0b44e0e4 --meta sourceCommit=c8fb013083e8fa349d0df35e7f9b182feeb6a5d6`. Local environment files, dependencies and generated build artifacts were excluded; only the verified project association was copied.
+
+Vercel deployment `dpl_EJTavE7m6uxPdnaRVzx4s3Sj9moB` at https://blog-obwkwchuc-bens-projects-0b44e0e4.vercel.app is Ready and aliased to `econoben.dev` and `www.econoben.dev`. The cloud build passed compilation, TypeScript and all 163 static routes. Production social verification passes, including LinkedInBot metadata pointing to version 2. A separate byte-for-byte comparison confirms the public PNG exactly matches the reviewed 215,886-byte local image. The previous deployment `dpl_9UDeH4NBdVF6uzNA6h2gDycTgarX` remains available; no rollback was needed.
+
+All 66 tasks are complete. The remaining LinkedIn sign-in/cache limitation is unchanged and was documented in the preceding release; no social post was modified. A documentation-only commit records these results, with no additional application deployment required. The branch remains unmerged and the change unarchived.
+
+## Social card ripple alignment preflight — September 6, 2026
+
+Root and independent review inspected version 3 at 1200px and an actual 320px preview. Three elliptical strokes now center beneath the bird base and avoid the cover, text and publisher footer; the accepted bill separation is preserved. Existing metadata/asset checks and strict OpenSpec validation pass. Only the native water paths, versioned output and metadata URL changed from the preceding spacing release. Production verification remains task 15.1.

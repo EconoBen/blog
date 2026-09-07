@@ -1,4 +1,4 @@
-> Status: SPACING CORRECTION IN PROGRESS — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. The user requested a bounded card-spacing correction after the release; tasks 14.1–14.2 track that follow-up. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: RIPPLE ALIGNMENT IN PROGRESS — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `c8fb013083e8fa349d0df35e7f9b182feeb6a5d6`. Production metadata and the exact version 2 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. The user accepted the bill separation and requested that the water lines follow the moved bird; task 15.1 tracks that correction. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 ## 1. Baseline and design
 
@@ -112,4 +112,8 @@ Tasks 11.2 and 11.6 are complete with motion, startup and user-review evidence u
 ## 14. Social card spacing correction
 
 - [x] 14.1 Separate the large grebe’s bill from the feet printed on the book, preserving the exact artwork and typography; visually review the versioned card at sharing size.
-- [ ] 14.2 Verify metadata and assets, push and deploy the correction, and confirm the production image and crawler metadata.
+- [x] 14.2 Verify metadata and assets, push and deploy the correction, and confirm the production image and crawler metadata.
+
+## 15. Social card ripple alignment
+
+- [ ] 15.1 Center the ripples beneath the moved grebe, review the final composition at sharing size, and verify the versioned image and metadata after production release.

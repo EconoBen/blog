@@ -4,7 +4,7 @@ The dedicated share card identifies Ben Labaschin and Agent Memory using warm pa
 
 ## Assets and reproduction
 
-- Share card: `public/social/ben-labaschin-agent-memory-v2.png`, 1200 × 630 PNG, 215,886 bytes.
+- Share card: `public/social/ben-labaschin-agent-memory-v3.png`, 1200 × 630 PNG, 215,497 bytes.
 - Authoritative cover: `public/assets/agent-memory-cover-early-release.png`. Its original pixels and text are preserved, with the presentation matte cropped using the same proportions as the website’s BookCover component.
 - Generated portrait source: `design/social/grebe-portrait-source-v1.png`, 1254 × 1254 RGBA PNG. Created with the built-in image-generation tool on September 6, 2026; original retained at `/Users/blabaschin/.codex/generated_images/01a0732f-8805-7692-a91a-e5cc1ba15962/exec-13e6d2f2-61e7-4fab-b71c-2613fefd1ec8.png`.
 - `node scripts/generate-social-card.mjs` composes the card deterministically from the portrait, exact cover, literal text and the Geist font bundled with the installed Next.js dependency. The generated PNG is committed; generation is not part of the production build.
@@ -21,10 +21,12 @@ The two references were the animal-editorial-design skill’s `grebe-cover-refer
 
 ## LinkedIn refresh
 
-LinkedIn requires Open Graph title, image, description and URL, and recommends a 1.91:1 image of at least 1200 × 627 under 5 MB. This card is 1200 × 630 and about 211 KiB. See [LinkedIn’s requirements](https://www.linkedin.com/help/linkedin/answer/a521928).
+LinkedIn requires Open Graph title, image, description and URL, and recommends a 1.91:1 image of at least 1200 × 627 under 5 MB. This card is 1200 × 630 and about 210 KiB. See [LinkedIn’s requirements](https://www.linkedin.com/help/linkedin/answer/a521928).
 
 After publishing, use [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) with `https://econoben.dev/`. LinkedIn says refreshes apply to new posts; existing posts keep their previous preview. Remove and re-add the link preview in an unpublished draft after refresh. See [LinkedIn’s refresh guidance](https://www.linkedin.com/help/recruiter/answer/a6233775).
 
 ## Spacing correction
 
-Version 2 moves the existing portrait 100px left in the editable HTML/CSS composition, providing a clear ivory gap between the bill and the book artwork. The exact cover, source portrait, typography, icon family and other placements are unchanged. No new raster artwork was generated. Version 1 remains available for previously cached links; metadata now points to version 2.
+Version 2 moves the existing portrait 100px left in the editable HTML/CSS composition, providing a clear ivory gap between the bill and the book artwork. The exact cover, source portrait, typography, icon family and other placements are unchanged. No new raster artwork was generated. Version 1 remains available for previously cached links; metadata now points to version 3.
+
+Version 3 follows the accepted bill spacing with three elliptical ripple strokes centered beneath the portrait’s base. This replaces the offset wide water lines, grounding the grebe and clearing the publisher footer. Cover, portrait, typography and icons remain unchanged. This is another edit to the existing native composition; no raster artwork was regenerated.

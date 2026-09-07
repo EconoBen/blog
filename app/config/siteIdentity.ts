@@ -6,7 +6,7 @@ export const SITE_IDENTITY = {
 
 // Version the public asset so cached previews can discover a new illustration.
 export const SITE_SOCIAL_IMAGE = {
-  url: 'https://econoben.dev/social/ben-labaschin-agent-memory-v2.png',
+  url: 'https://econoben.dev/social/ben-labaschin-agent-memory-v3.png',
   width: 1200,
   height: 630,
   alt: 'Ben Labaschin — AI engineering and Agent Memory, with a horned grebe illustration.',

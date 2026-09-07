@@ -25,14 +25,14 @@ try {
     .cover { position:absolute;left:846px;top:105px;width:276px;height:363px;overflow:hidden;transform:rotate(3deg);box-shadow:10px 17px 20px #283e2f26,1px 1px 2px #283e2f40;z-index:2; }
     .cover img { display:block;position:absolute;width:322.26px;height:402.82px;left:-23px;top:-20px;max-width:none; }
     .bird { position:absolute;width:287px;height:287px;object-fit:contain;left:527px;top:267px;z-index:3; }
-    .water { position:absolute;left:556px;top:486px;width:610px;height:124px;color:#8ba79a;opacity:.55; }
+    .water { position:absolute;left:476px;top:520px;width:380px;height:66px;color:#8ba79a;opacity:.55; }
     .domain { position:absolute;left:68px;bottom:46px;color:#176b69;font-size:21px;font-weight:580;letter-spacing:.7px; }
     .publisher { position:absolute;right:76px;bottom:46px;color:#56654f;font-size:18px; }
   </style><main class="card"><div class="top-rule"></div>
     <h1 class="name">Ben<br>Labaschin</h1>
     <div class="practice">AI engineering &amp; writing</div>
     <div class="book-line">Author of<strong>Agent Memory</strong></div>
-    <svg class="water" viewBox="0 0 610 124" fill="none" aria-hidden="true"><path d="M12 49C120 14 338 17 484 50S593 80 609 72" stroke="currentColor" stroke-width="1.2"/><path d="M0 71C93 35 270 31 426 66S579 106 610 94" stroke="currentColor" stroke-width=".8"/><path d="M115 96C210 76 371 78 493 101" stroke="currentColor" stroke-width="1"/></svg>
+    <svg class="water" viewBox="0 0 380 66" fill="none" aria-hidden="true"><path d="M280 17C318 20 334 26 334 32C334 43 269 51 190 51C111 51 46 43 46 32C46 27 62 21 97 18" stroke="currentColor" stroke-width="1.2"/><path d="M305 11C349 16 375 24 375 33C375 49 292 62 190 62C88 62 5 49 5 33C5 24 31 16 75 11" stroke="currentColor" stroke-width=".8"/><path d="M271 26C284 28 291 31 291 34C291 41 246 46 190 46C134 46 89 41 89 34C89 31 96 28 109 26" stroke="currentColor" stroke-width="1"/></svg>
     <div class="cover"><img src="${cover}" alt="The exact O’Reilly Agent Memory Early Release cover"></div>
     <img class="bird" src="${portrait}" alt="Adult horned grebe portrait">
     <div class="domain">econoben.dev</div><div class="publisher">O’Reilly · Early Release</div>
@@ -40,8 +40,8 @@ try {
   await page.evaluate(() => document.fonts.ready);
   await mkdir(resolve(root, 'public/social'), { recursive: true });
   const screenshot = await page.screenshot();
-  await sharp(screenshot).png({ compressionLevel: 9 }).toFile(resolve(root, 'public/social/ben-labaschin-agent-memory-v2.png'));
-  console.log('Created public/social/ben-labaschin-agent-memory-v2.png (1200 × 630)');
+  await sharp(screenshot).png({ compressionLevel: 9 }).toFile(resolve(root, 'public/social/ben-labaschin-agent-memory-v3.png'));
+  console.log('Created public/social/ben-labaschin-agent-memory-v3.png (1200 × 630)');
 } finally {
   await browser.close();
 }

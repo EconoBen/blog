@@ -1,4 +1,4 @@
-> Status: SPACING CORRECTION IN PROGRESS — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. The user requested a bounded card-spacing correction after the release; tasks 14.1–14.2 track that follow-up. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
+> Status: RIPPLE ALIGNMENT IN PROGRESS — the accepted site and corrected author/book share card are live at https://econoben.dev, application source `c8fb013083e8fa349d0df35e7f9b182feeb6a5d6`. Production metadata and the exact version 2 image bytes are verified. LinkedIn’s cached preview still requires an authenticated Post Inspector refresh. The user accepted the bill separation and requested that the water lines follow the moved bird; task 15.1 tracks that correction. Earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 The earlier sections preserve the sequence of design decisions. The selected-treatment, latest-revision and final user-review sections below govern the current implementation, superseding historical click-positioned ripples, metaphorical interface copy, production sound experiments and pending creative-review statements.
 
@@ -233,3 +233,7 @@ Validation includes source and real-rendered metadata, exact image sizes, icon s
 ## Social card spacing correction — September 6, 2026
 
 The user identified an awkward visual collision between the large grebe bill and the feet printed on the book. Move only the existing portrait left by 100px in the editable composition. Preserve exact cover and portrait artwork, typography, icon family and every other placement. Export a version 2 image and update metadata atomically so cached version 1 remains intact. Verify the complete composition at normal and reduced sharing size before release.
+
+## Social card ripple alignment — September 6, 2026
+
+After accepting the bill separation, the user identified that the original water lines remained offset. Replace those paths with three restrained elliptical ripple strokes centered at the portrait base (x=666px). Preserve all other artwork and placements. Version 3 keeps the current cover and accepted spacing, and brings the surrounding water into alignment.
