@@ -1,4 +1,4 @@
-> Status: PRODUCTION FOLLOW-UP IN PROGRESS — the approved site is live at source `cb82e2f2`. The user requested a distinctive Ben Labaschin / Agent Memory / grebe share card and matching browser icons after seeing the old LinkedIn preview. This bounded identity correction is being implemented and verified for the existing release. Earlier deployment and local-only phases remain historical.
+> Status: DEPLOYED — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. All 64 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 ## Why
 

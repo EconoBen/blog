@@ -1,0 +1,25 @@
+# Site review — September 6, 2026
+
+This records the review of econoben.dev’s design, content, and deployment process after the grebe refresh. Observations refer to the reviewed production release (`cb82e2f2`) and its local source; recommendations are judgments, not demonstrated audience outcomes. The user subsequently prioritized the share card and browser icons. That follow-up now implements Ben Labaschin, Agent Memory, and the grebe as a consistent identity; it is now deployed as `737437e8`, with production crawler metadata and all image/icon paths verified. LinkedIn’s own cached preview still requires an authenticated Post Inspector refresh.
+
+**What works.** The naturalist illustration gives the site a recognizable relationship to Agent Memory and its O’Reilly cover. My assessment is that this is a stronger identity than a generic technical portfolio. The grebe now has a useful purpose: finding an article. Restrained roaming birds and the peeking grebe provide personality without requiring every interaction to become an animation. Literal labels such as “Find an article,” “Read article,” and “Related articles” make the experience easier to understand. Keeping production silent suits the reading environment. These are design judgments; engagement improvement has not yet been measured.
+
+**Verified issues to address.** [Issue #81](https://github.com/EconoBen/blog/issues/81) is the highest operational priority. Fresh production requests returned `Cache-Control: public, max-age=31536000, immutable` for article HTML. `vercel.json` overrides the revalidation policy in `next.config.ts`; mutable artwork paths also receive a year of immutable caching. Returning readers can therefore retain an old article or illustration after deployment. HTML should revalidate, while long caching belongs on genuinely versioned assets. Validation must include an ordinary returning browser, not only fresh requests.
+
+[Issue #82](https://github.com/EconoBen/blog/issues/82) captures two specific editorial corrections: customer examples do not support the “Fortune 50” classification, and recurring-topic cards reuse historical “Chapters 1 and 2 are live” excerpts as undated descriptions. Current book pages correctly state that chapters 1–3 are live and chapter 4 is next. Preserve the dated launch article; correct the current summaries and customer classification.
+
+[Issue #80](https://github.com/EconoBen/blog/issues/80) covers existing dependency advisories. The two critical audit groups involve `fast-xml-parser` through the offline S3 uploader and `tar` through installation/build tools. Neither appeared in 26 local production function traces; no request-path exploit was verified. The refresh introduced no dependency changes. This warrants compatible dependency maintenance and build validation, without presenting it as a confirmed production compromise.
+
+**Deployment and navigation.** The reviewed release was pushed and deployed from an explicit source snapshot, with local checks and production verification. However, `main` remains behind production, release validation is manual, and 327 `.next` files are tracked. Vercel project defaults also differ from the repository’s Next.js configuration. A documented release entry point, one comprehensive validation command, a recorded source revision and rollback target, and deliberate configuration alignment would reduce reliance on session knowledge. These are process improvements, not evidence that the successful release failed.
+
+At 390px, About and Search sit beyond the initially visible portion of the horizontal navigation rail. They remain available by scrolling, but discoverability is weaker. The article finder covers seven curated articles out of 19 published posts. Article endings largely offer chronological navigation, so the connected discovery experience does not yet continue through the wider archive. Neither finding calls for another visual overhaul.
+
+**The next distinctive feature.** A small interactive memory demonstration could connect the book to a concrete engineering problem: a purchase request times out after payment may already have succeeded. Let readers compare a retry without durable state against an agent that checks the saved transaction identifier before acting. Show the stored facts, uncertainty, and resulting decision. This is a proposed teaching experience, not existing functionality.
+
+Measure usefulness before expanding decoration: completed dives, article opens, meaningful reading progress, and book clicks. Book actions and successful newsletter subscriptions already have custom tracking; the pond has no equivalent custom events. A single local performance sample is not field performance or conversion evidence.
+
+Recommended next investments, in order:
+
+1. Fix caching and current editorial inaccuracies; complete the bounded dependency maintenance.
+2. Make releases reproducible and verifiable, and improve mobile navigation visibility.
+3. Extend verified article connections and build the memory demonstration, using reading and book-interest measurements to guide further work.

@@ -1,6 +1,6 @@
 # Local preview handoff — 2026-09-05
 
-> Current status, 2026-09-06: the user accepted the refinement with an immediate first-swimmer correction. That correction and its lifecycle fix are implemented and pass focused checks; all 57 tasks are complete. The final production build and smoke check are pending before goal completion. Earlier checkpoint observations and pending decisions below are historical; the latest evidence at the end records their resolution. No deployment, merge or archive.
+> Status: DEPLOYED — the approved grebe site and the requested author/book sharing identity are live at https://econoben.dev, application source `737437e84acd71ba44b046e2c50283bf07549478`. Production metadata and every identity asset pass crawler verification. LinkedIn Post Inspector redirects to sign-in, so its external cached preview requires an authenticated refresh. All 64 tasks are complete; earlier phases below remain historical. The branch is pushed, unmerged and unarchived.
 
 > Superseded first-pass observations below; see the living pond revision at the end for the current behavior.
 
@@ -322,3 +322,16 @@ The metadata regression failed first on the old domain-only title, then passed w
 Independent adversarial review found no must-fix issue. It verified route-specific images and titles, actual PNG dimensions, valid 16/32/48 ICO frames, SVG safety, robots/crawler behavior and the maskable icon radius (194.45px inside a 204.8px safe radius). Root inspected the card and icons at actual 16/32px sizes. No page layout or animation change is included.
 
 The Chrome connection timed out twice before LinkedIn Post Inspector could be opened; the actual LinkedIn preview has not yet been refreshed. Production crawler verification and release recording remain in task 13.4. LinkedIn’s documentation states that its inspector refresh applies to new posts, while existing shared posts retain their prior previews.
+
+## Social identity production release completed — September 6, 2026
+
+The author/book/grebe sharing identity and browser icons are committed and pushed as `737437e84acd71ba44b046e2c50283bf07549478` ("Add author and book sharing identity with grebe browser icons"). Remote verification confirmed the exact SHA on `feat/grebe-field-notes`. The deployed source is this application commit; a subsequent documentation-only commit records completion. No merge to main was performed.
+
+- Ran `vercel --prod --yes --scope bens-projects-0b44e0e4 --meta sourceCommit=737437e84acd71ba44b046e2c50283bf07549478` from an archive of the pushed source. Local environment files, dependencies, generated build output and TypeScript build state were excluded; only the verified project association was copied.
+- Ready production deployment: `dpl_9UDeH4NBdVF6uzNA6h2gDycTgarX`, https://blog-4z907dc5o-bens-projects-0b44e0e4.vercel.app. Vercel inspection confirms the production target and the `econoben.dev` and `www.econoben.dev` aliases.
+- The cloud production build passed compilation, TypeScript and generation of all 163 static routes. Deployment exited successfully and confirmed the domain alias.
+- `SITE_URL=https://econoben.dev node scripts/verify-social-identity.mjs`: PASS. The production LinkedInBot response contains the new author/book identity and versioned 1200 × 630 image; every browser icon and manifest asset is publicly available with the expected format and dimensions.
+- LinkedIn Post Inspector was successfully opened in an isolated browser tab after the earlier Chrome connection failures. Submitting the public homepage URL redirected to `https://www.linkedin.com/post-inspector/login`. Therefore, no actual LinkedIn cache refresh or rendered preview verification is claimed. The remaining external step is to sign in, inspect the homepage, then remove and re-add the URL preview in an unpublished draft if needed. LinkedIn documents that refreshed information applies to new posts, not previously shared posts: https://www.linkedin.com/help/linkedin/answer/a521928. No LinkedIn post or message was sent or edited.
+- The prior deployment `dpl_Cppp3BdczrH8TWWurnsDfCJTr4og` remains available as the rollback target; no rollback was needed.
+
+All 64 tasks are complete, including the explicitly allowed documentation of an external preview-refresh limitation. The broader site/content/deployment review is recorded in `analysis/site-review-2026-09-06.md`; issues #80–82 track the separate maintenance findings. Existing generated worktree changes remain untouched and excluded. No additional application changes or dependency updates accompany this release record.
