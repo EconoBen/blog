@@ -312,3 +312,13 @@ Fresh source checks passed before deployment: production-study boundary, pond st
 The cloud installation reported 57 existing dependency findings (4 low, 30 moderate, 21 high, 2 critical). This release changes no dependencies. Independent triage traced the two critical groups to `fast-xml-parser` through the offline S3 upload script and `tar` through build/install tooling. Neither appeared in the 26 checked local production function traces; this is not a claim that all tooling is risk-free or that the cloud bundles were independently extracted. Follow-up issue [#80](https://github.com/EconoBen/blog/issues/80) records evidence and bounded remediation/validation work. No verified request-path release blocker was found.
 
 All 60 checklist tasks are complete. The approved release is live, and the branch is pushed. Generated local build-file changes remain untouched and excluded from versioned release changes. The unmerged OpenSpec change remains unarchived.
+
+## Social identity follow-up preflight — September 6, 2026
+
+The user supplied a LinkedIn draft screenshot showing an obsolete site screenshot and asked for a distinguished author/book/grebe preview plus browser icons. A versioned 1200 × 630 card (213,423 bytes), SVG/PNG/favicon family and updated manifest now provide that identity. Exact cover pixels are preserved; the generated supporting portrait, prompt and deterministic composition are recorded in `design/social/README.md`.
+
+The metadata regression failed first on the old domain-only title, then passed with the new author/book identity. Full `verify-social-identity.mjs`, TypeScript and strict OpenSpec validation pass. An isolated production build passes all 163 routes; its temporary server on port 3110 returns correct LinkedInBot metadata and every icon/image path. No local environment files were included in that build.
+
+Independent adversarial review found no must-fix issue. It verified route-specific images and titles, actual PNG dimensions, valid 16/32/48 ICO frames, SVG safety, robots/crawler behavior and the maskable icon radius (194.45px inside a 204.8px safe radius). Root inspected the card and icons at actual 16/32px sizes. No page layout or animation change is included.
+
+The Chrome connection timed out twice before LinkedIn Post Inspector could be opened; the actual LinkedIn preview has not yet been refreshed. Production crawler verification and release recording remain in task 13.4. LinkedIn’s documentation states that its inspector refresh applies to new posts, while existing shared posts retain their prior previews.

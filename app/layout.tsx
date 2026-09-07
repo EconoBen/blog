@@ -5,27 +5,36 @@ import './styles/field-notes.css';
 import './styles/living-pond.css';
 import './styles/publication-refinements.css';
 import ClientLayout from './components/ClientLayout';
+import { SITE_IDENTITY, SITE_SOCIAL_IMAGE } from './config/siteIdentity';
 
 export const metadata: Metadata = {
-  title: 'ECONOBEN.DEV',
-  description: 'AI/ML engineering, posts, talks, tools, and Agent Memory — now in Early Release from O\u2019Reilly.',
-  authors: [{ name: 'Benjamin Labaschin' }],
+  title: SITE_IDENTITY.title,
+  description: SITE_IDENTITY.description,
+  authors: [{ name: 'Ben Labaschin' }],
   keywords: ['econoben', 'AI/ML engineering', 'posts', 'talks', 'publications', 'agent memory', 'AI agents', 'O\u2019Reilly'],
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/icons/grebe-v1-32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/icons/grebe-v1.svg', type: 'image/svg+xml', sizes: 'any' },
+    ],
+    shortcut: '/favicon.ico?v=grebe-v1',
+    apple: [{ url: '/icons/grebe-v1-180.png', type: 'image/png', sizes: '180x180' }],
+  },
   openGraph: {
-    title: 'ECONOBEN.DEV',
-    description: 'AI/ML engineering, posts, talks, tools, and Agent Memory — now in Early Release from O\u2019Reilly.',
+    title: SITE_IDENTITY.title,
+    description: SITE_IDENTITY.description,
     url: 'https://econoben.dev',
-    siteName: 'ECONOBEN.DEV',
+    siteName: SITE_IDENTITY.name,
     locale: 'en_US',
     type: 'website',
-    images: [{ url: 'https://econoben.dev/og-image.png', width: 1200, height: 630, alt: 'ECONOBEN.DEV — AI/ML Engineering & Writing' }],
+    images: [SITE_SOCIAL_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ECONOBEN.DEV',
-    description: 'AI/ML engineering, posts, talks, tools, and Agent Memory — now in Early Release from O\u2019Reilly.',
-    images: ['https://econoben.dev/og-image.png'],
+    title: SITE_IDENTITY.title,
+    description: SITE_IDENTITY.description,
+    images: [SITE_SOCIAL_IMAGE.url],
   },
   metadataBase: new URL('https://econoben.dev'),
 };

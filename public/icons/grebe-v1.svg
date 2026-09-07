@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <title>Adult horned grebe</title>
+  <rect width="64" height="64" rx="13" fill="#f7f2e8"/>
+  <g id="grebe">
+    <path fill="#242627" d="M24 33c2 6 6 10 3 15-2 4-8 7-12 10h31c3-8-2-13-6-18l-2-9Z"/>
+    <path fill="#c65427" d="M31 34c1 6 6 10 4 15-1 4-4 7-7 9h18c2-7-2-12-6-18l-2-7Z"/>
+    <path fill="#e3dcca" d="M43 46c3 5 4 8 3 12h-7c4-3 5-7 4-12Z"/>
+    <path fill="#242627" d="M12 21c0-9 9-12 17-10 7 2 13 7 16 15l14 8-16-1c-3 5-8 9-15 8-10-1-16-10-16-20Z"/>
+    <path fill="#e99832" d="m10 10 10 4-1-5 12 7 1-3c6 3 10 7 13 13-7-3-12-4-19-3-6 0-11 2-16 5l4-8-5 1 4-5Z"/>
+    <path fill="#f1b849" d="m10 10 13 7 9 3c-7-1-13 0-20 4l2-4-5 1 4-5Z"/>
+    <path fill="#242627" d="M21 13c9 0 17 4 22 11-5-3-8-5-13-6Z"/>
+    <path fill="#575b58" d="M15 29c4-3 10-4 17-3 5 0 8 3 11 4-5 7-10 9-16 8-6-1-9-4-12-9Z"/>
+    <path fill="#242627" d="m41 27 18 7-15-2Z"/>
+    <path d="m45 29 10 4" fill="none" stroke="#b8b7a9" stroke-width=".8" stroke-linecap="round"/>
+    <circle cx="37" cy="25" r="2.7" fill="#e44b35"/>
+    <circle cx="37.4" cy="25" r="1.35" fill="#242627"/>
+    <circle cx="37.8" cy="24.25" r=".45" fill="#f7f2e8"/>
+  </g>
+</svg>

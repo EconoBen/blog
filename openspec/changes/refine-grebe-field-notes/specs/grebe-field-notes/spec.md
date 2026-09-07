@@ -175,3 +175,18 @@ The second round SHALL include independent critique, relevant browser verificati
 #### Scenario: Accepted review with a bounded correction
 - **WHEN** the user accepts the refinement subject to an immediate first swimmer without pace or density changes
 - **THEN** implementing and validating that correction satisfies the final user-review task without another approval request. Goal completion SHALL still wait for the final production build and smoke check; an unmerged local change SHALL NOT be archived or deployed as a consequence of creative acceptance.
+
+### Requirement: Recognizable sharing and browser identity
+The site SHALL expose a static social image of at least 1200 × 627 pixels identifying Ben Labaschin, Agent Memory, the exact current book cover and an adult horned grebe. Default metadata SHALL identify the author and book. Browser and installable icons SHALL use a legible grebe identity, with a mask-safe variant. New assets SHALL use versioned paths.
+
+#### Scenario: Share the homepage
+- **WHEN** a sharing crawler reads the homepage metadata
+- **THEN** it receives the author/book title, descriptive copy, canonical site URL and publicly accessible new PNG with correct dimensions.
+
+#### Scenario: Preserve individual content identity
+- **WHEN** a reader shares an article, talk or book with its own title or image
+- **THEN** its content-specific metadata remains authoritative, and the new social image fills only a missing or legacy generic image.
+
+#### Scenario: Recognize a browser tab
+- **WHEN** a browser requests the declared icon or a platform requests an installation icon
+- **THEN** it receives a correctly sized grebe icon with suitable padding and content type.

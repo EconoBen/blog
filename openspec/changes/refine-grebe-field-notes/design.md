@@ -1,4 +1,4 @@
-> Status: DEPLOYED — the approved source was pushed to `feat/grebe-field-notes` and deployed with `vercel --prod` on September 6, 2026. `econoben.dev` serves source commit `cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e`; production verification passes. Earlier local-only restrictions below describe the pre-release phase and are superseded by the user’s explicit release authorization. The branch is unmerged and the change remains unarchived.
+> Status: PRODUCTION FOLLOW-UP IN PROGRESS — the approved site is live at source `cb82e2f2`. The user requested a distinctive Ben Labaschin / Agent Memory / grebe share card and matching browser icons after seeing the old LinkedIn preview. This bounded identity correction is being implemented and verified for the existing release. Earlier deployment and local-only phases remain historical.
 
 The earlier sections preserve the sequence of design decisions. The selected-treatment, latest-revision and final user-review sections below govern the current implementation, superseding historical click-positioned ripples, metaphorical interface copy, production sound experiments and pending creative-review statements.
 
@@ -213,3 +213,19 @@ The user accepted the refinement with a bounded startup correction: a grebe shou
 Immediate publication exposed a lifecycle edge case: a hidden/visible or reduced-motion toggle batched into one React update could reuse visit ID zero and retain the old CSS animation clock. Each scheduler session now contributes a monotonically increasing key alongside the visit ID. A restart therefore mounts a fresh animation node while preserving its timing, size, position and delay. Hidden pages, reduced motion and unmount still clear arrivals and departures; Strict Mode leaves one active scheduler.
 
 The source scheduler regression failed before the startup fix, and the actual-component DOM identity regression failed before the session-key fix. Both now pass, alongside peeker and TypeScript checks. Browser evidence shows an already-running first swimmer on desktop and phone, movement across a 350ms interval, zero swimmers with reduced motion and one after re-enabling it. Initial placement is inside 320, 390, 820 and 1440px viewports. The final production build and smoke check pass, including a fresh animation node after a motion-preference restart and no browser errors. The local change remains unmerged and unarchived.
+
+## Sharing and browser identity — September 6, 2026
+
+Use a static 1200 × 630 PNG with large author identity, exact O’Reilly book cover, warm paper and a newly generated adult grebe portrait. Compose authoritative text and book pixels deterministically. Use a separate simplified SVG grebe for tab-scale recognition, with PNG/apple/installable icons and a maskable variant. Version filenames to avoid reusing cached old artwork. Default metadata names Ben and Agent Memory; route-specific titles and custom images remain authoritative.
+
+```mermaid
+flowchart LR
+  A[Generated portrait + exact cover + literal type] --> B[Static social PNG]
+  C[Native grebe SVG] --> D[Tab / Apple / manifest icons]
+  B --> E[Next metadata]
+  D --> E
+  E --> F[Production HTML and assets]
+  F --> G[LinkedIn Post Inspector / browsers]
+```
+
+Validation includes source and real-rendered metadata, exact image sizes, icon small-size inspection, route-specific metadata preservation, production build, HTTP content types and a LinkedIn crawler user agent. LinkedIn owns preview caching: run its Post Inspector after release when accessible; document any sign-in limitation. LinkedIn says refreshed information applies to new posts, not existing shared posts. Preserve the recorded prior deployment for rollback.

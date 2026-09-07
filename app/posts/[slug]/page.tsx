@@ -8,6 +8,7 @@ import AudioPlayer from '../../components/AudioPlayer';
 import audioManifest from '../../config/audioManifest.json';
 import { ReadingProgress } from '../../components/ReadingMemory';
 import { ArticleImage } from '../../components/ArticleImage';
+import { SITE_SOCIAL_IMAGE } from '../../config/siteIdentity';
 
 const longDateFormatter = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -59,7 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title: post.title,
       description,
       url: `https://econoben.dev/posts/${slug}`,
-      images: imageUrl ? [imageUrl] : undefined,
+      images: imageUrl ? [imageUrl] : [SITE_SOCIAL_IMAGE],
       siteName: 'ECONOBEN.DEV',
       publishedTime: post.date.toISOString(),
       authors: ['Benjamin Labaschin'],
@@ -69,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       card: 'summary_large_image',
       title: post.title,
       description,
-      images: imageUrl ? [imageUrl] : undefined,
+      images: [imageUrl || SITE_SOCIAL_IMAGE.url],
     },
   };
 }

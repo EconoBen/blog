@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { findTalk, getTalkSlug, talksConfig, type Talk } from '../../config/talksConfig';
 import { getSiteUrl } from '../../utils/siteUrl';
 import TalkRedirect from './TalkRedirect';
+import { SITE_SOCIAL_IMAGE } from '../../config/siteIdentity';
 
 /**
  * A metadata-only route. It renders no design of its own: its whole job is to
@@ -12,10 +13,10 @@ import TalkRedirect from './TalkRedirect';
  * /talks#<id>, which is the real page.
  */
 
-const previewImage = (talk: Talk): string =>
+const previewImage = (talk: Talk) =>
   talk.youtubeId
-    ? `https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`
-    : `${getSiteUrl()}/og-image.png`;
+    ? { url: `https://img.youtube.com/vi/${talk.youtubeId}/maxresdefault.jpg`, width: 1280, height: 720, alt: talk.title }
+    : SITE_SOCIAL_IMAGE;
 
 export async function generateStaticParams() {
   return talksConfig.talks.map((talk) => ({ id: getTalkSlug(talk) }));
@@ -47,13 +48,13 @@ export async function generateMetadata({
       url: canonicalUrl,
       publishedTime: new Date(talk.date).toISOString(),
       tags: talk.topics,
-      images: [{ url: image, width: 1280, height: 720, alt: talk.title }],
+      images: [image],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${talk.title} (${talk.event})`,
       description: talk.description,
-      images: [image],
+      images: [image.url],
     },
   };
 }

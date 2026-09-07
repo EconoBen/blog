@@ -1,4 +1,4 @@
-> Status: DEPLOYED — the approved source was pushed to `feat/grebe-field-notes` and deployed with `vercel --prod` on September 6, 2026. `econoben.dev` serves source commit `cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e`; production verification passes. Earlier local-only restrictions below describe the pre-release phase and are superseded by the user’s explicit release authorization. The branch is unmerged and the change remains unarchived.
+> Status: PRODUCTION FOLLOW-UP IN PROGRESS — the approved site is live at source `cb82e2f2`. The user requested a distinctive Ben Labaschin / Agent Memory / grebe share card and matching browser icons after seeing the old LinkedIn preview. This bounded identity correction is being implemented and verified for the existing release. Earlier deployment and local-only phases remain historical.
 
 ## 1. Baseline and design
 
@@ -101,3 +101,10 @@ Tasks 11.2 and 11.6 are complete with motion, startup and user-review evidence u
 - [x] 12.1 Commit the reviewed source, artwork, regressions and records; push `feat/grebe-field-notes` to `EconoBen/blog`, excluding generated build files.
 - [x] 12.2 Deploy the committed source to the existing Vercel `blog` project with `vercel --prod`, excluding local environment and build files.
 - [x] 12.3 Verify the production domain, article discovery, initial swimmer, book status, search and the production-only exclusion of the design studies; record the deployment and source commit.
+
+## 13. Sharing and browser identity
+
+- [x] 13.1 Inspect the current preview/metadata, confirm platform requirements, and compose an author/book/grebe social card preserving the exact cover.
+- [x] 13.2 Create a matching favicon, Apple/installable icons and accurate versioned metadata/manifest identity.
+- [x] 13.3 Verify actual metadata, image dimensions, tiny-icon legibility and content-specific overrides; run the production build and independent review.
+- [ ] 13.4 Push and release the correction; verify production crawler responses, icons and LinkedIn preview refresh or document the external limitation.

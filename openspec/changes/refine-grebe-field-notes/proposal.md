@@ -1,4 +1,4 @@
-> Status: DEPLOYED — the approved source was pushed to `feat/grebe-field-notes` and deployed with `vercel --prod` on September 6, 2026. `econoben.dev` serves source commit `cb82e2f21f3be98f3a1925b7f92cdba7f763bd8e`; production verification passes. Earlier local-only restrictions below describe the pre-release phase and are superseded by the user’s explicit release authorization. The branch is unmerged and the change remains unarchived.
+> Status: PRODUCTION FOLLOW-UP IN PROGRESS — the approved site is live at source `cb82e2f2`. The user requested a distinctive Ben Labaschin / Agent Memory / grebe share card and matching browser icons after seeing the old LinkedIn preview. This bounded identity correction is being implemented and verified for the existing release. Earlier deployment and local-only phases remain historical.
 
 ## Why
 
@@ -36,3 +36,7 @@ None. The earlier grebe launch is merged (#79); its active folder is a historica
 ## Impact
 
 Shared editorial frame, homepage pond and related articles, article delivery, search, audio, newsletter, discovery and publication pages, with scoped styles and regression scripts. No new packages or data migrations. Unfinished reading stays local with dismissal and expiry. The first-round review package, comparative studies, hybrid integration and latest motion validation are complete. The user accepted the refinement with one bounded correction: start with a swimmer already running, without changing pace or amount. That correction and its lifecycle regression fix are implemented and verified; no further creative approval is required. The final production build and smoke check pass; the local refinement is complete. The silence decision applies to decorative pond audio, preserving article audio controls. The user has now authorized pushing the branch and deploying to Vercel production. No merge is included in this release.
+
+## Sharing and browser identity follow-up
+
+The user’s LinkedIn preview still shows an obsolete site screenshot and generic domain title. Extend the grebe editorial identity into a dedicated author/book social card and recognizable small browser icons. Update default social metadata and fallback artwork while preserving article and book-specific content. Scope is image/icon assets, sharing metadata and manifest identity; the broader audit is tracked separately in issues #80–82. No redesign of page content or new dependencies is included.

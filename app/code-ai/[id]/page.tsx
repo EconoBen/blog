@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { EditorialPageFrame } from '../../components/EditorialPageFrame';
 import { getSiteUrl } from '../../utils/siteUrl';
+import { SITE_SOCIAL_IMAGE } from '../../config/siteIdentity';
 import {
   formatCodeToolsDate,
   getCodeToolsCategoryMeta,
@@ -100,6 +101,13 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       url: canonicalUrl,
       publishedTime: item.date ? new Date(item.date).toISOString() : undefined,
       tags: item.tags,
+      images: [SITE_SOCIAL_IMAGE],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: item.title,
+      description: item.description,
+      images: [SITE_SOCIAL_IMAGE.url],
     },
   };
 }
