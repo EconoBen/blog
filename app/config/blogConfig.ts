@@ -1,3 +1,4 @@
+import { CONTACT_EMAIL, contactHref } from './contact';
 interface TechBadge {
   icon: string;
   name: string;
@@ -28,7 +29,7 @@ export const blogConfig: BlogConfig = {
   siteTitle: "Economic Notes",
   siteDescription: "Exploring the intersection of economics, technology, and artificial intelligence",
   author: "Benjamin Labaschin",
-  email: "benjaminlabaschindev@gmail.com",
+  email: CONTACT_EMAIL,
 
   hero: {
     titleLines: [
@@ -60,6 +61,6 @@ export const blogConfig: BlogConfig = {
     github: "https://github.com/econoben",
     linkedin: "https://linkedin.com/in/benjamin-labaschin",
     bluesky: "https://bsky.app/profile/econoben.dev",
-    email: "mailto:benjaminlabaschin@gmail.com"
+    email: contactHref()
   }
 };

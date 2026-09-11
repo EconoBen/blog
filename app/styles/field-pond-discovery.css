@@ -1,7 +1,8 @@
 .field-pond { position:relative; min-width:0; width:100%; color:#294b3d; isolation:isolate; }
 .field-pond .field-pond-scene { position:relative; display:block; width:100%; max-width:none; min-width:0; height:auto; min-height:0; aspect-ratio:800/440; margin:0; padding:0; overflow:hidden; border:0; border-radius:0; background:#f7f2e8; color:inherit; box-shadow:none; cursor:crosshair; transform:none; }
 .field-pond .field-pond-scene:hover { background:#f7f2e8; transform:none; box-shadow:none; }
-.field-pond .field-pond-scene:focus-visible { outline:2px solid #355f4a; outline-offset:-5px; }
+.field-pond .field-pond-scene:focus-visible { outline:none; }
+.field-pond .field-pond-scene:focus-visible .field-pond-invitation { outline:2px solid #355f4a; outline-offset:3px; }
 .field-pond .study-scene-art { display:block; width:100%; height:100%; }
 .field-pond .study-atlas-labels { font-family:Georgia,'Times New Roman',serif; font-size:15px; letter-spacing:.08em; font-style:italic; }
 .field-pond .field-pond-invitation { position:absolute; inset:auto 5% 6%; display:flex; align-items:center; justify-content:center; gap:14px; width:max-content; max-width:90%; min-height:38px; margin:0 auto; padding:8px 16px; border:1px solid #7183653b; border-radius:1px; background:#faf5e8ee; color:#355540; font-family:'Inter',Arial,sans-serif; font-size:14px; font-weight:400; line-height:1.35; letter-spacing:.005em; box-shadow:0 3px 14px #2343330b; transition:background .25s ease; }
@@ -57,6 +58,10 @@
   .field-pond .field-pond-note h2,.field-pond .field-pond-note-title { font-size:25px; }
   .field-pond .field-pond-summary { font-size:16px; }
   .field-pond .field-pond-note-links { gap:4px 18px; margin-top:15px; }
+}
+/* A landscape phone has room beside the grebe, but little room below it. */
+@media (max-height:600px) and (min-aspect-ratio:1/1) {
+  .field-pond .field-pond-invitation { inset:auto 7% 40% auto; margin:0; max-width:32%; }
 }
 @media (prefers-reduced-motion:reduce) {
   .field-pond .study-bird-pointer { translate:0 0; rotate:0deg; }

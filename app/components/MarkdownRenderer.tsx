@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
-import rehypeRaw from 'rehype-raw';
-import rehypeKatex from 'rehype-katex';
+import { articleRemarkPlugins, articleRehypePlugins } from '../lib/articleStructure';
 import 'katex/dist/katex.min.css';
 import CodeBlock from './CodeBlock';
 import TTSPipelineDiagram from './TTSPipelineDiagram';
@@ -14,23 +11,6 @@ interface MarkdownRendererProps {
 }
 
 const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
-  // Helpers to create stable heading ids that match production
-  const toText = (node: React.ReactNode): string => {
-    if (typeof node === 'string' || typeof node === 'number') return String(node);
-    if (Array.isArray(node as any)) return (node as any[]).map(toText).join('');
-    if (React.isValidElement(node)) {
-      return toText((node as React.ReactElement<any>).props.children);
-    }
-    return '';
-  };
-
-  const slugify = (value: string): string =>
-    value
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w-]/g, '');
-
   const components = {
     pre({ node, children, ...props }: any) {
       const codeNode = node?.children?.length === 1 && node.children[0]?.tagName === 'code' ? node.children[0] : null;
@@ -41,20 +21,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
       if (language === 'tts-pipeline-diagram') return <TTSPipelineDiagram />;
       return <CodeBlock filename={language} code={code} />;
     },
-    // Demote h1 to h2 for post content parity and add IDs
-    h1: ({ node, children, ...props }: any) => {
-      const id = slugify(toText(children));
-      return <h2 id={id} {...props}>{children}</h2>;
-    },
-    // Customize headings with IDs for TOC
-    h2: ({ node, children, ...props }: any) => {
-      const id = slugify(toText(children));
-      return <h2 id={id} {...props}>{children}</h2>;
-    },
-    h3: ({ node, children, ...props }: any) => {
-      const id = slugify(toText(children));
-      return <h3 id={id} {...props}>{children}</h3>;
-    },
+    // The shared AST transform assigns unique IDs before React renders headings.
+    h1: ({ node, children, ...props }: any) => <h2 {...props}>{children}</h2>,
     a: ({ node, children, href, ...props }: any) => {
       let destination = href;
       let external = false;
@@ -73,8 +41,8 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content }) => {
 
   return (
     <ReactMarkdown
-      remarkPlugins={[remarkGfm, remarkMath]}
-      rehypePlugins={[rehypeRaw, rehypeKatex]}
+      remarkPlugins={articleRemarkPlugins}
+      rehypePlugins={articleRehypePlugins}
       components={components}
     >
       {content}

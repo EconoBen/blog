@@ -31,7 +31,10 @@
     "analyze-differences": "node scripts/production-analysis/difference-engine.js",
     "test-difference-engine": "node scripts/production-analysis/test-difference-engine.js",
     "test:grebe-refresh": "node scripts/verify-grebe-refresh.mjs",
-    "test:links": "node scripts/verify-site-links.mjs"
+    "test:links": "node scripts/verify-site-links.mjs",
+    "test": "node scripts/verify-source.mjs",
+    "typecheck": "next typegen && tsc --noEmit --incremental false",
+    "release:prepare": "node scripts/prepare-release.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.840.0",
@@ -95,5 +98,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

@@ -26,14 +26,14 @@ help: ## Show this help message
 	@echo "$(GREEN)Examples:$(NC)"
 	@echo "  make dev              # Start development server"
 	@echo "  make test-visual      # Open visual regression tests"
-	@echo "  make deploy          # Deploy to Vercel preview"
-	@echo "  make deploy-prod     # Deploy to Vercel production"
+	@echo "  make release-prepare # Validate a local release snapshot"
+	@echo "  See docs/releasing.md for the approval gate"
 
 # Development Commands
 .PHONY: install
 install: ## Install dependencies
 	@echo "$(BLUE)Installing dependencies...$(NC)"
-	npm install
+	npm ci
 
 .PHONY: dev
 dev: ## Start development server (port 3000)
@@ -41,7 +41,7 @@ dev: ## Start development server (port 3000)
 	npm run dev
 
 .PHONY: build
-build: fetch-gists ## Build for production
+build: ## Build locally without changing source assets
 	@echo "$(BLUE)Building for production...$(NC)"
 	npm run build
 
@@ -70,7 +70,7 @@ lint: ## Run ESLint
 .PHONY: typecheck
 typecheck: ## Run TypeScript type checking
 	@echo "$(BLUE)Running TypeScript type check...$(NC)"
-	npx tsc --noEmit
+	npm run typecheck
 
 # Image and PDF Processing
 .PHONY: process-images
@@ -92,20 +92,15 @@ add-image: ## Add and optimize a new image (usage: make add-image IMG=path/to/im
 	@echo "$(BLUE)Adding and optimizing image: $(IMG)$(NC)"
 	node scripts/add-image.js "$(IMG)" "$(YEAR)" "$(MONTH)"
 
-# Vercel Deployment Commands
-.PHONY: deploy
-deploy: ## Deploy to Vercel (preview)
-	@echo "$(BLUE)Deploying to Vercel preview...$(NC)"
-	@echo "$(YELLOW)This will create a preview deployment with a unique URL$(NC)"
-	npx vercel
+# Release preparation never publishes. Hosted previews also require approval.
+.PHONY: release-prepare
+release-prepare: ## Verify an isolated local release (requires ROLLBACK_URL and ROLLBACK_SOURCE)
+	npm run release:prepare -- --rollback-url "$(ROLLBACK_URL)" --rollback-source "$(ROLLBACK_SOURCE)"
 
-.PHONY: deploy-prod
-deploy-prod: ## Deploy to Vercel (production)
-	@echo "$(RED)⚠️  WARNING: This will deploy to PRODUCTION$(NC)"
-	@echo "$(YELLOW)Are you sure? Press Ctrl+C to cancel, or Enter to continue$(NC)"
-	@read confirm
-	@echo "$(BLUE)Deploying to Vercel production...$(NC)"
-	npx vercel --prod
+.PHONY: deploy deploy-prod
+deploy deploy-prod: ## Publishing is held for explicit approval; see docs/releasing.md
+	@echo "No deployment performed. Prepare and review locally; obtain explicit approval before publishing. See docs/releasing.md."
+	@exit 1
 
 .PHONY: vercel-logs
 vercel-logs: ## View Vercel deployment logs
@@ -141,7 +136,6 @@ clean: ## Clean build artifacts and caches
 clean-all: clean ## Clean everything including node_modules
 	@echo "$(RED)Removing node_modules...$(NC)"
 	rm -rf node_modules/
-	rm -f package-lock.json
 
 .PHONY: reset
 reset: clean-all install ## Full reset - clean everything and reinstall
@@ -186,13 +180,7 @@ dev-full: ## Start dev server with all preprocessing
 	$(MAKE) dev
 
 .PHONY: pre-deploy
-pre-deploy: ## Run all checks before deployment
-	@echo "$(BLUE)Running pre-deployment checks...$(NC)"
-	$(MAKE) fetch-gists
-	$(MAKE) lint
-	$(MAKE) typecheck
-	$(MAKE) build
-	@echo "$(GREEN)✓ All checks passed! Ready to deploy.$(NC)"
+pre-deploy: release-prepare ## Alias for the safe local release gate
 
 .PHONY: check-links
 check-links: ## Check for broken links (requires server running)
@@ -232,9 +220,9 @@ docs: ## Show detailed documentation
 	@echo "  - make commit        # Commit changes"
 	@echo ""
 	@echo "$(GREEN)Deployment Workflow:$(NC)"
-	@echo "  1. make pre-deploy   # Run all checks"
-	@echo "  2. make deploy       # Preview deployment"
-	@echo "  3. make deploy-prod  # Production deployment"
+	@echo "  1. make release-prepare # Isolated local verification"
+	@echo "  2. Review local pages and release evidence"
+	@echo "  3. Obtain explicit approval; follow docs/releasing.md"
 	@echo ""
 	@echo "$(GREEN)Image Management:$(NC)"
 	@echo "  - Add images to public/assets/originals/"

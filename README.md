@@ -1,276 +1,66 @@
-# Economic Notes Blog
+# econoben.dev
 
-A modern, feature-rich blog built with Next.js 15, featuring AI-generated audio content, dynamic search, and comprehensive content management.
+Ben Labaschin's writing, talks, and *Agent Memory* book site. Built with Next.js 16, React 19 and TypeScript, with Markdown articles, search, existing article audio, and the naturalist grebe identity.
 
-## Features
+## Local development
 
-- 📝 **Markdown Blog Posts** with full metadata support
-- 🎙️ **Text-to-Speech Integration** using OpenAI TTS
-- 🔍 **Advanced Search** with fuzzy matching across posts, talks, and publications
-- 🎤 **Talks & Publications** management
-- 🔧 **Code Workshop** with GitHub Gists integration
-- 🌙 **Dark Mode** support
-- 📱 **Mobile-First** responsive design
-- 🚀 **Static Site Generation** with Next.js App Router
-- 📊 **Analytics** integration with Vercel Analytics
-- 🖼️ **Automatic Image Optimization**
-- 📄 **PDF Processing** for publications
+Use Node 22 (matching Vercel) and the committed npm lockfile:
 
-## Quick Start
-
-### Prerequisites
-
-- Node.js 18+ 
-- npm or yarn
-- Git
-
-### Installation
-
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd blog
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.local.example .env.local
-# Edit .env.local with your API keys
-```
-
-### Development
-
-```bash
-# Start development server
+```sh
+nvm use
+npm ci
 npm run dev
-# or
-make dev
-
-# Open http://localhost:3000 (or 3001 if 3000 is in use)
 ```
 
-### Building for Production
+Open the localhost address printed by Next. Ordinary site development does not require API credentials. Copy only needed values into an ignored `.env.local` when working on optional content pipelines. Keep credentials outside Git and release snapshots.
 
-```bash
-# Build the application
-npm run build
-# or  
-make build
-
-# Serve production build locally
-npm start
-# or
-make serve
+```sh
+npm test            # Source and mocked interaction regressions
+npm run typecheck   # Generate route types, then check TypeScript
+npm run build       # Local build; preserves all source assets
+npm start           # Serve the local production build
 ```
 
-## Environment Variables
+`make build` follows the same source-preserving build. It does not fetch or rewrite Gists. Fetching content, optimizing originals, generating audio, and uploading media remain explicit content-maintenance commands.
 
-Create a `.env.local` file with the following variables:
+## Release review
 
-```bash
-# OpenAI API (for TTS generation)
-OPENAI_API_KEY=your_openai_api_key
+**Do not deploy or push changes that could deploy without Ben's approval.** The local preparation command installs the lockfile in a disposable snapshot, runs checks/build/served verification, and records exact source and rollback evidence:
 
-# GitHub (for Gists integration)
-GITHUB_TOKEN=your_github_token
-
-# AWS S3 (for audio storage)
-AWS_ACCESS_KEY_ID=your_aws_access_key
-AWS_SECRET_ACCESS_KEY=your_aws_secret_key
-AWS_REGION=us-west-2
-S3_AUDIO_BUCKET=your_s3_bucket_name
-
-# Analytics
-NEXT_PUBLIC_GA_ID=your_google_analytics_id
+```sh
+npm run release:prepare -- --rollback-url https://<ready-deployment>.vercel.app --rollback-source <full-source-sha>
 ```
 
-## Project Structure
+See [the release procedure](docs/releasing.md) for current rollback values, local visual review, cache limitations, and the branch/Vercel reconciliation plan. Preparation does not publish. Legacy `make deploy` and `make deploy-prod` stop with the approval guidance.
 
-```
-blog/
-├── app/                    # Next.js App Router
-│   ├── components/         # React components
-│   ├── config/            # Configuration files
-│   ├── services/          # Business logic
-│   └── utils/             # Utility functions
-├── posts/                 # Markdown blog posts
-├── public/                # Static assets
-│   ├── assets/           # Images and media
-│   └── audio/            # Generated TTS audio files
-├── scripts/               # Build and utility scripts
-└── config/               # Global configuration
-```
+## Project layout
 
-## Content Management
+- `app/`: routes, components, shared configuration and styles.
+- `src/posts/`: Markdown articles and metadata.
+- `services/` and `app/services/`: content loading and discovery.
+- `public/`: published images, cover artwork, icons and other static files.
+- `scripts/`: verification and explicit content processing.
+- `openspec/`: approved proposals, requirements, tasks and execution records.
+- `design/social/`: sharing artwork sources, provenance and reproduction commands.
 
-### Adding Blog Posts
+Generated `.next`, `next-env.d.ts`, TypeScript incremental caches, local dependencies, and local release artifacts are ignored. Builds keep original images and videos intact; `.vercelignore` controls upload exclusions.
 
-1. Create a new `.md` file in the `posts/` directory
-2. Add frontmatter metadata:
+## Content maintenance
 
-```yaml
----
-title: "Your Post Title"
-date: "2025-01-01"
-tags: ["tag1", "tag2"]
-excerpt: "Brief description"
-featured: true
-tts: true  # Enable text-to-speech
----
+Add Markdown under `src/posts/` following existing frontmatter and naming patterns. Preserve published slugs when editing an article. Preview article headings, audio availability, related-reading reasons and topic pages before releasing.
 
-Your post content here...
-```
+Useful explicit commands:
 
-3. Run `npm run dev` to see your post
-
-### Adding Images
-
-```bash
-# Add images to originals directory
-make add-image IMG=path/to/image.jpg YEAR=2025 MONTH=01
-
-# Or process existing images
-make process-images
-```
-
-### Managing Publications
-
-Edit `config/publicationsConfig.ts` to add new publications, or place PDF files in `public/posts/` and run:
-
-```bash
+```sh
+npm run fetch-gists
+npm run optimize-images
 npm run process-pdfs
+npm run generate-audio
+npm run upload-audio
 ```
 
-## Available Scripts
+Audio generation uses OpenAI and uploads use S3. These commands may incur charges or change remote assets, so they are deliberately excluded from build and verification. Existing audio plays only after a reader starts it.
 
-### Development
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
+## Documentation and checks
 
-### Content Processing
-- `npm run fetch-gists` - Fetch GitHub Gists for code workshop
-- `npm run generate-audio` - Generate TTS audio for posts
-- `npm run upload-audio` - Upload audio files to S3
-- `npm run process-pdfs` - Generate PDF thumbnails
-- `npm run optimize-images` - Optimize images
-
-### Utility
-- `npm run post-build` - Post-build cleanup
-
-## Makefile Commands
-
-For convenience, you can use make commands:
-
-```bash
-make help              # Show available commands
-make dev               # Start development server
-make build             # Build for production
-make deploy            # Deploy to Vercel (preview)
-make deploy-prod       # Deploy to production
-make clean             # Clean build artifacts
-make setup             # Initial project setup
-```
-
-## Deployment
-
-### Vercel (Recommended)
-
-```bash
-# Deploy preview
-make deploy
-
-# Deploy to production
-make deploy-prod
-```
-
-### Manual Deployment
-
-```bash
-npm run build
-# Upload .next/ and public/ directories to your hosting provider
-```
-
-## Features in Detail
-
-### Text-to-Speech
-
-Posts with `tts: true` in frontmatter automatically generate audio versions using OpenAI's TTS API. Audio files are uploaded to S3 and served via CDN.
-
-### Search Functionality
-
-The blog includes a powerful search system that indexes:
-- Blog post content and metadata
-- Talk descriptions
-- Publication abstracts
-- Code workshop snippets
-
-### Mobile Experience
-
-Fully responsive design with:
-- Mobile-optimized navigation
-- Touch-friendly interfaces
-- Performance optimizations
-- Progressive loading
-
-## Development Guidelines
-
-### Adding New Features
-
-1. Create feature branch from main
-2. Implement changes with TypeScript
-3. Test thoroughly on mobile and desktop
-4. Update documentation
-5. Submit pull request
-
-### Code Style
-
-- TypeScript for type safety
-- ESLint for code quality
-- Responsive design principles
-- Component-based architecture
-
-## Troubleshooting
-
-### Common Issues
-
-**Build fails with module errors:**
-```bash
-rm -rf node_modules package-lock.json
-npm install
-```
-
-**Images not optimizing:**
-```bash
-make process-images
-```
-
-**Search not working:**
-Check that all content files have proper frontmatter and run:
-```bash
-npm run build
-```
-
-### Getting Help
-
-- Check the [Next.js documentation](https://nextjs.org/docs)
-- Review error logs in `.next/`
-- Use `make clean` to reset build cache
-
-## License
-
-This project is licensed under the MIT License.
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
----
-
-Built with ❤️ using Next.js, TypeScript, and modern web technologies.
+Read `AGENTS.md` and the installed Next documentation before framework changes. Keep OpenSpec tasks current. Tests run through `npm test`; scripts requiring a served site run in `release:prepare`. There is no configured working ESLint installation currently, and the release gate does not claim a lint result. Dependency maintenance is tracked separately in [issue 80](https://github.com/EconoBen/blog/issues/80).

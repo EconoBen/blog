@@ -144,11 +144,12 @@ assert.match(grebeField, /aria-hidden=["']true["']/);
 assert.match(grebeField, /pointer-events-none/);
 assert.match(grebeField, /'home'\s*\|\s*'book'\s*\|\s*'site'/);
 assert.match(editorialFrame, /<GrebeField variant=\{grebeVariant\}\s*\/>/);
-assert.match(editorialFrame, /xl:hidden/, 'The compact navigation must remain available below the 1280px desktop breakpoint');
+assert.match(editorialFrame, /<SiteMobileMenu/, 'The compact navigation must remain available');
+assert.match(await read('app/styles/navigation-refinements.css'), /min-width:1280px[\s\S]*site-mobile-navigation[^}]*display:none/, 'Compact navigation yields to the full desktop header at 1280px');
 assert.match(editorialFrame, /xl:flex/, 'The full desktop navigation must wait until it fits');
 assert.match(
   editorialFrame,
-  /\[\.\.\.primaryNavItems,\s*\.\.\.discoveryNavItems\]/,
+  /\[\.\.\.primaryNavItems,\s*\.\.\.discoveryNavItems/,
   'The compact navigation must retain Tags and Search',
 );
 const fieldNotes = await read('app/styles/living-pond.css');

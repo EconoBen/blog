@@ -57,7 +57,10 @@ const nextConfig: NextConfig = {
   },
 
   // Customize build output
-  distDir: '.next',
+  distDir: process.env.BLOG_BUILD_DIR || '.next',
+
+  // This is a standalone app; unrelated parent lockfiles must not widen traces.
+  outputFileTracingRoot: __dirname,
 
   // Enable compression
   compress: true,
@@ -75,6 +78,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/api/:path*',
+        headers: [{ key: 'Cache-Control', value: 'no-store, must-revalidate' }],
+      },
+      {
         source: '/api/og',
         headers: [
           {
@@ -83,7 +90,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Cache-Control',
-            value: 'public, immutable, no-transform, s-maxage=31536000, max-age=31536000',
+            value: 'public, max-age=0, must-revalidate',
           },
         ],
       },
@@ -92,7 +99,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=0, must-revalidate',
           },
         ],
       },
@@ -101,7 +108,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
+            value: 'public, max-age=0, must-revalidate',
           },
         ],
       },
@@ -114,13 +121,22 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      ...['/social/:path*', '/icons/:path*', '/favicon.ico', '/manifest.json'].map(source => ({
+        source,
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' }],
+      })),
       {
-        source: '/_next/static/:path*',
+        source: '/rss.xml',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
+          { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+          { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' },
+        ],
+      },
+      {
+        source: '/sitemap.xml',
+        headers: [
+          { key: 'Content-Type', value: 'application/xml; charset=utf-8' },
+          { key: 'Cache-Control', value: 'public, max-age=0, must-revalidate' },
         ],
       },
       {

@@ -26,7 +26,23 @@ try {
   process.env.VERCEL_ENV = 'preview';
   assert.ok(await route.exports.default(), 'Review deployments retain the comparison');
   assert.equal(contentLoads, 2);
-  console.log('Study boundary passed: unavailable in Vercel production; local and preview comparisons remain accessible.');
+  const flight = { exports: {} };
+  const flightSource = ts.transpileModule(fs.readFileSync('app/pond-studies/flight/page.tsx', 'utf8'), {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
+  }).outputText;
+  new Function('require', 'module', 'exports', flightSource)(id => {
+    if (id === 'next/navigation') return { notFound: () => { throw unavailable; } };
+    if (id === './FlightStudy') return { FlightStudy: () => null };
+    return require(id);
+  }, flight, flight.exports);
+  process.env.VERCEL_ENV = 'production';
+  assert.throws(() => flight.exports.default(), error => error === unavailable,
+    'A parent page guard does not protect its child flight-study route');
+  delete process.env.VERCEL_ENV;
+  assert.ok(flight.exports.default(), 'The isolated anatomy study remains available locally');
+  process.env.VERCEL_ENV = 'preview';
+  assert.ok(flight.exports.default(), 'The flight study follows the existing comparison environment boundary');
+  console.log('Study boundaries passed: pond comparisons and the child flight study are unavailable in Vercel production, with local review retained.');
 } finally {
   if (originalEnvironment === undefined) delete process.env.VERCEL_ENV;
   else process.env.VERCEL_ENV = originalEnvironment;

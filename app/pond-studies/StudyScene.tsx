@@ -1,18 +1,20 @@
 import { useId } from 'react';
 import '../styles/grebe-articulation.css';
 import { StudyGrebe, STUDY_GREBE_ASPECT } from './StudyGrebe';
+import { ArrivalResidentGrebe, ARRIVAL_RESIDENT_ASPECT } from './ArrivalResidentGrebe';
 
 export type StudyDirection = 'dusk' | 'atlas' | 'cutaway' | 'atlas-dusk';
 
 /** Environment geometry is distinct; the bird and world-space waterline are shared. */
-export function StudyScene({ direction }: { direction: StudyDirection }) {
+export function StudyScene({ direction, arrivalResident = false }: { direction: StudyDirection; arrivalResident?: boolean }) {
   const hybrid=direction==='atlas-dusk';
   const id = `study-${useId().replace(/:/g, '')}`;
   const surface = 263;
   const sceneHeight = direction==='cutaway'?560:440;
   const birdWidth = 268;
-  const birdHeight = birdWidth / STUDY_GREBE_ASPECT;
-  const bird = (suffix: string) => <StudyGrebe id={`${id}-${suffix}`} x={188} y={surface - birdHeight} width={birdWidth} height={birdHeight} carriedNote />;
+  const birdHeight = birdWidth / (arrivalResident ? ARRIVAL_RESIDENT_ASPECT : STUDY_GREBE_ASPECT);
+  const Resident = arrivalResident ? ArrivalResidentGrebe : StudyGrebe;
+  const bird = (suffix: string) => <Resident id={`${id}-${suffix}`} x={188} y={surface - birdHeight} width={birdWidth} height={birdHeight} carriedNote />;
   return (
     <svg className="study-scene-art" viewBox={`0 0 800 ${sceneHeight}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>

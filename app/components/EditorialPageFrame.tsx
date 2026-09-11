@@ -5,6 +5,9 @@ import { StickyContactRemote } from './StickyContactRemote';
 import { SubscribeForm } from './SubscribeForm';
 import { GrebeField } from './GrebeField';
 import '../styles/accessibility-refinements.css';
+import '../styles/navigation-refinements.css';
+import { SiteMobileMenu } from './SiteMobileMenu';
+import { contactHref } from '../config/contact';
 
 const primaryNavItems = [
   { href: '/', label: 'Home' },
@@ -24,7 +27,7 @@ const discoveryNavItems = [
 const footerLinks = [
   { href: '/archive', label: 'Archive' },
   { href: '/tags', label: 'Tags' },
-  { href: 'mailto:benjaminlabaschindev@gmail.com', label: 'Contact' },
+  { href: contactHref(), label: 'Contact' },
 ];
 
 const isActivePath = (currentPath: string, href: string) => {
@@ -39,20 +42,6 @@ const isCompactShell = (currentPath: string) => (
   currentPath === '/' || currentPath === '/posts' || currentPath === '/talks'
 );
 
-const prioritizeActiveItem = <T extends { href: string }>(items: T[], currentPath: string) => {
-  const activeIndex = items.findIndex((item) => isActivePath(currentPath, item.href));
-
-  if (activeIndex <= 0) {
-    return items;
-  }
-
-  return [
-    items[activeIndex],
-    ...items.slice(0, activeIndex),
-    ...items.slice(activeIndex + 1),
-  ];
-};
-
 interface EditorialPageFrameProps {
   children: ReactNode;
   currentPath: string;
@@ -61,10 +50,6 @@ interface EditorialPageFrameProps {
 
 export function EditorialTopbar({ currentPath }: { currentPath: string }) {
   const compactShell = isCompactShell(currentPath);
-  const mobilePrimaryNavItems = prioritizeActiveItem(
-    [...primaryNavItems, ...discoveryNavItems],
-    currentPath,
-  );
   const brandLabel = 'ECONOBEN.DEV';
   const headerClassName = compactShell
     ? 'fixed top-0 left-0 z-50 w-full border-b border-[#1d1c16]/8 bg-[#fef9ef]/96 backdrop-blur'
@@ -112,27 +97,7 @@ export function EditorialTopbar({ currentPath }: { currentPath: string }) {
           })}
         </nav>
       </div>
-      <nav
-        className="mx-auto max-w-[1440px] px-4 pb-2.5 sm:px-6 xl:hidden"
-        aria-label="Primary"
-      >
-        <div className="flex gap-6 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {mobilePrimaryNavItems.map((item) => {
-            const active = isActivePath(currentPath, item.href);
-
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="field-nav-link"
-                aria-current={active ? 'page' : undefined}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+      <SiteMobileMenu currentPath={currentPath} items={[...primaryNavItems, ...discoveryNavItems, {href:'/archive', label:'Archive'}]} />
     </header>
   );
 }
@@ -151,13 +116,13 @@ export function EditorialPageFrame({
       <GrebeField variant={grebeVariant} />
       <div className="relative z-[2]">
         <EditorialTopbar currentPath={currentPath} />
-        <div className="h-[100px] xl:h-[80px]" aria-hidden="true" />
+        <div className="field-header-spacer" aria-hidden="true" />
         <main id="main-content" tabIndex={-1} className="relative isolate overflow-clip">{children}</main>
         <ScrollToTop />
         <StickyContactRemote />
         <section id="subscribe" className="grebe-subscribe py-16 sm:py-20">
           <div className="mx-auto max-w-[1440px] px-5 sm:px-8">
-            <SubscribeForm variant="light" placement={`${currentPath}_footer`} />
+            <SubscribeForm context={currentPath === '/book' ? 'book' : 'site'} variant="light" placement={`${currentPath}_footer`} />
           </div>
         </section>
         <footer className="w-full border-t border-[#1d1c16]/10 bg-[#f8f3e9]">

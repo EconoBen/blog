@@ -8,6 +8,8 @@ import type { Post } from '../services/PostService';
 import { BookCover } from './BookCover';
 import { EditorialPageFrame } from './EditorialPageFrame';
 import { TrackedAction } from './TrackedAction';
+import { GrebeArrivalProvider } from './GrebeArrivalContext';
+import { GrebeArrival } from './GrebeArrival';
 
 interface ShellHomePageProps {
   posts: Post[];
@@ -71,6 +73,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
   const topTags = topTagsFor(posts);
 
   return (
+    <GrebeArrivalProvider>
     <EditorialPageFrame currentPath="/" pageClassName="shell-home-page">
       <FieldPondProvider {...pondContent}>
       <div className="grebe-page-content">
@@ -118,6 +121,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
 
             <aside className="field-home-aside">
               <GrebePond />
+              <GrebeArrival />
             </aside>
           </div>
         </section>
@@ -176,7 +180,7 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
               {
                 label: 'Building',
                 title: 'Enterprise GenAI',
-                body: 'Founding engineer at Workhelix, building the Nucleus platform that helps enterprises measure and grow AI ROI. Async LLM APIs, embedding pipelines, and agent deployment for Fortune 50 customers like Autodesk and Nasdaq.',
+                body: 'Founding engineer at Workhelix, building the Nucleus platform that helps enterprises measure and grow AI ROI. Async LLM APIs, embedding pipelines, and agent deployment for enterprise customers including Autodesk and Nasdaq.',
                 stat: 'Founding Engineer',
               },
               {
@@ -207,5 +211,6 @@ export function ShellHomePage({ posts }: ShellHomePageProps) {
       </div>
       </FieldPondProvider>
     </EditorialPageFrame>
+    </GrebeArrivalProvider>
   );
 }

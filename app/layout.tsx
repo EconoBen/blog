@@ -5,6 +5,8 @@ import './styles/field-notes.css';
 import './styles/living-pond.css';
 import './styles/publication-refinements.css';
 import ClientLayout from './components/ClientLayout';
+import ArrivalVisitMarker from './components/ArrivalVisitMarker';
+import { ArrivalPreparationHead, ArrivalPreparationBody } from './components/ArrivalPreparation';
 import { SITE_IDENTITY, SITE_SOCIAL_IMAGE } from './config/siteIdentity';
 
 export const metadata: Metadata = {
@@ -45,8 +47,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head><ArrivalPreparationHead /></head>
       <body>
+        <ArrivalPreparationBody />
+        <ArrivalVisitMarker />
         <ClientLayout>{children}</ClientLayout>
         <Analytics />
       </body>

@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRequire} from 'node:module';
+import ts from 'typescript';
+import React, {act} from 'react';
+import {JSDOM} from 'jsdom';
+const require=createRequire(import.meta.url);
+const code=ts.transpileModule(fs.readFileSync('app/components/SiteMobileMenu.tsx','utf8'),{compilerOptions:{jsx:ts.JsxEmit.ReactJSX,module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText;
+const module={exports:{}};
+new Function('require','module','exports',code)(id=>id==='next/link'?({children,...props})=>React.createElement('a',props,children):require(id),module,module.exports);
+const dom=new JSDOM('<div id="root"></div><button id="outside">Outside</button>',{url:'http://localhost/',pretendToBeVisual:true});
+globalThis.Node=dom.window.Node;globalThis.window=dom.window;globalThis.document=dom.window.document;globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const {createRoot}=await import('react-dom/client');
+const root=createRoot(document.getElementById('root'));
+const items=[{href:'/',label:'Home'},{href:'/posts',label:'Posts'},{href:'/about',label:'About'},{href:'/archive',label:'Archive'}];
+try {
+ await act(async()=>root.render(React.createElement(module.exports.SiteMobileMenu,{currentPath:'/about',items})));
+ assert.deepEqual([...document.querySelectorAll('.site-mobile-shortcuts > a')].map(a=>a.textContent),['Writing','Book','Search']);
+ const details=document.querySelector('details');const summary=document.querySelector('summary');
+ assert.ok(details.querySelector('a[href="/about"][aria-current="page"]'));
+ await act(async()=>{details.open=true;details.dispatchEvent(new window.Event('toggle'));});
+ const about=details.querySelector('a[href="/about"]');about.focus();
+ await act(async()=>about.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Escape',bubbles:true})));
+ assert.equal(details.open,false);assert.equal(document.activeElement,summary,'Escape returns focus to the menu control');
+ await act(async()=>{details.open=true;document.getElementById('outside').dispatchEvent(new window.Event('pointerdown',{bubbles:true}));});
+ assert.equal(details.open,false,'Outside click closes the disclosure');
+ await act(async()=>{details.open=true;details.querySelector('a').dispatchEvent(new window.MouseEvent('click',{bubbles:true,cancelable:true}));});
+ assert.equal(details.open,false,'Following a destination closes the menu');
+ console.log('Mobile menu passed: visible shortcuts, preserved destinations, current route, Escape focus, outside dismissal and navigation.');
+} finally {await act(async()=>root.unmount());dom.window.close();}

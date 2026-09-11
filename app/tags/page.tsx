@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
-import { postService, type Post, type TagCount } from '../services/PostService';
+import { postService } from '../services/PostService';
 
 export const metadata: Metadata = {
   title: 'Tags | ECONOBEN.DEV',
@@ -10,25 +10,7 @@ export const metadata: Metadata = {
 
 export default async function TagsPage() {
   const posts = await postService.getAllPosts();
-  const tagCountMap = new Map<string, { display: string; count: number }>();
-
-  posts.forEach((post: Post) => {
-    post.tags.forEach((tag) => {
-      const key = tag.toLowerCase().trim();
-      const existing = tagCountMap.get(key);
-      if (existing) {
-        existing.count += 1;
-        // Keep the longer or more capitalized version as display name
-        if (tag.length > existing.display.length) existing.display = tag;
-      } else {
-        tagCountMap.set(key, { display: tag, count: 1 });
-      }
-    });
-  });
-
-  const sortedTags = Array.from(tagCountMap.values())
-    .map(({ display, count }): TagCount => ({ tag: display, count }))
-    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+  const sortedTags = await postService.getAllTags();
   const topTags = sortedTags.slice(0, 8);
 
   const tagsByLetter = sortedTags.reduce<Record<string, typeof sortedTags>>((acc, tagEntry) => {
@@ -60,9 +42,9 @@ export default async function TagsPage() {
             <section className="sticky-note p-4 md:p-8">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <h2 className="font-headline text-xl font-bold text-on-surface">Top tags</h2>
+                  <h2 className="font-headline text-xl font-bold text-on-surface">Recurring topics</h2>
                   <p className="mt-3 font-body text-sm text-on-surface-variant">
-                    {sortedTags.length} tags across {posts.length} post{posts.length === 1 ? '' : 's'}.
+                    {sortedTags.length} topics across {posts.length} post{posts.length === 1 ? '' : 's'}.
                   </p>
                 </div>
                 <p className="font-body text-sm italic text-secondary">
@@ -128,12 +110,12 @@ export default async function TagsPage() {
 
           <aside className="space-y-6 lg:sticky lg:top-32 lg:col-span-4">
             <div className="sticky-note p-4 md:p-8">
-              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Tag archive</h2>
+              <h2 className="font-headline text-lg font-bold text-on-surface" style={{ marginBottom: '2rem' }}>Topic archive</h2>
               <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                 {[
-                  ['Total tags', `${sortedTags.length}`],
+                  ['Total topics', `${sortedTags.length}`],
                   ['Posts covered', `${posts.length}`],
-                  ['Top tag count', `${topTags[0]?.count ?? 0}`],
+                  ['Most articles', `${topTags[0]?.count ?? 0}`],
                 ].map(([label, value]) => (
                   <div key={label} className="sticky-note p-4">
                     <span className="block font-label text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">{label}</span>

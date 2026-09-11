@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import '../styles/book-experience.css';
 import { BookCover } from '../components/BookCover';
 import { ChapterShoreline } from '../components/ChapterShoreline';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
@@ -9,6 +11,7 @@ import {
   buildOutcomes,
   chapters,
   chapterStatusLabels,
+  chapterFeedbackHref,
   earlyReleaseNotes,
 } from './bookData';
 
@@ -47,215 +50,123 @@ const liveChapterCount = chapters
 
 export default function BookPage() {
   return (
-    <EditorialPageFrame currentPath="/book">
-      <div className="grebe-page-content">
-        <header className="mx-auto grid max-w-[1320px] grid-cols-1 items-center gap-12 px-5 pb-16 pt-12 md:px-8 md:pb-20 md:pt-20 lg:grid-cols-[1.08fr_0.92fr] lg:gap-20">
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#b9140b] px-3.5 py-1.5 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-white">
-                <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
-                {AGENT_MEMORY.releaseLabel}
-              </span>
-              <span className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
-                {AGENT_MEMORY.publisher}
-              </span>
-            </div>
-
-            <h1 className="mt-7 max-w-[8ch] font-headline text-[clamp(3.3rem,7.5vw,6.4rem)] font-black leading-[0.9] tracking-[-0.055em] text-[#211e1f]">
-              Agent Memory
-            </h1>
-            <p className="mt-7 max-w-2xl font-body text-xl leading-relaxed text-[#555f70] md:text-[1.65rem]">
-              {AGENT_MEMORY.subtitle}
-            </p>
-            <p className="mt-5 max-w-xl font-body text-lg leading-relaxed text-[#211e1f]">
-              {AGENT_MEMORY.availability}
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+    <EditorialPageFrame currentPath="/book" pageClassName="editorial-book-page book-experience-page">
+      <div className="grebe-page-content book-experience">
+        <header className="book-intro">
+          <div className="book-intro-copy">
+            <p className="book-release"><span>{AGENT_MEMORY.releaseLabel}</span> {AGENT_MEMORY.publisher}</p>
+            <h1 className="book-title">Agent <br />Memory</h1>
+            <p className="book-subtitle">{AGENT_MEMORY.subtitle}</p>
+            <p className="book-author">By {AGENT_MEMORY.author}</p>
+            <p className="book-availability">{AGENT_MEMORY.availability}</p>
+            <div className="book-actions">
               <TrackedAction
                 href={OREILLY_LINKS.bookPage}
                 eventName="oreilly_read_click"
                 eventProperties={{ source: 'book', placement: 'hero' }}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#176b69] px-7 py-3.5 font-headline text-sm font-bold uppercase tracking-[0.08em] text-white shadow-[0_14px_28px_rgba(23,107,105,0.18)] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#176b69]/35 focus:ring-offset-2"
-                style={{ color: '#fff', WebkitTextFillColor: '#fff' }}
-              >
-                Read chapters 1–3
-              </TrackedAction>
-              <a
-                href="#subscribe"
-                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-[#176b69]/25 bg-[#fffdf8]/70 px-7 py-3.5 font-headline text-sm font-bold uppercase tracking-[0.08em] text-[#176b69] transition-transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#176b69]/25 focus:ring-offset-2"
-              >
-                Get chapter updates
-              </a>
+                className="book-primary-action"
+              >Read chapters 1–3 <span aria-hidden="true">↗</span></TrackedAction>
+              <a href="#subscribe" className="book-secondary-action">Get chapter updates</a>
             </div>
-
-            <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-[#555f70]">
-              No O&rsquo;Reilly access?{' '}
+            <p className="book-access-note">
+              O&rsquo;Reilly subscription required. Your company or university may provide access, or you can{' '}
               <TrackedAction
                 href={OREILLY_LINKS.trial}
                 eventName="oreilly_trial_click"
                 eventProperties={{ source: 'book' }}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-[#176b69] underline decoration-[#84b8b1] underline-offset-4"
-              >
-                Start a free 10-day trial
-              </TrackedAction>
-              . Many companies and universities already provide access.
+              >start a free 10-day trial</TrackedAction>.
             </p>
           </div>
-
-          <div className="relative flex justify-center lg:justify-end">
-            <div className="absolute -left-2 top-10 hidden h-28 w-28 rounded-full border border-[#84b8b1]/35 lg:block" />
-            <BookCover eager className="relative" />
-          </div>
+          <div className="book-intro-cover"><BookCover eager /></div>
         </header>
 
-        <section aria-label="Current Early Release status" className="border-y border-[#211e1f]/10 bg-[#fffdf8]/72">
-          <div className="mx-auto grid max-w-[1320px] grid-cols-1 divide-y divide-[#211e1f]/10 px-5 md:grid-cols-3 md:divide-x md:divide-y-0 md:px-8">
-            <div className="py-6 md:pr-8">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Available now</p>
-              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">{liveChapterCount} chapters live</p>
-            </div>
-            <div className="py-6 md:px-8">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Next in line</p>
-              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">Chapter 4 next</p>
-            </div>
-            <div className="py-6 md:pl-8">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#d95a2e]">Still shapeable</p>
-              <p className="mt-2 font-headline text-2xl font-black text-[#211e1f]">Reader feedback is open</p>
-            </div>
+        <section className="book-release-status" aria-label="Current Early Release status">
+          <div>
+            <p><span>Available now</span><strong>{liveChapterCount} chapters live</strong></p>
+            <p><span>Coming next</span><strong>Chapter 4</strong></p>
+            <p><span>Reader feedback</span><a href="#shoreline-title">Choose a chapter to comment on</a></p>
           </div>
         </section>
 
         <ChapterShoreline />
 
-        <section className="mx-auto grid max-w-[1320px] gap-10 px-5 py-20 md:px-8 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20 lg:py-28">
+        <section className="book-section book-early-release" aria-labelledby="book-early-title">
           <div>
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.25em] text-[#d95a2e]">
-              Why read the rough version?
-            </p>
-            <h2 className="mt-4 max-w-[10ch] font-headline text-4xl font-black tracking-[-0.03em] text-[#211e1f] md:text-5xl">
-              Early means useful now—and changeable.
-            </h2>
-            <p className="mt-6 max-w-lg font-body text-lg leading-relaxed text-[#555f70]">
-              This is a working technical book, not a polished preview. You get the architecture and examples early; I get the chance to make the final book answer the questions builders actually have.
-            </p>
+            <h2 id="book-early-title">Read it early.<br />Help make it better.</h2>
+            <p className="book-section-intro">The architecture and examples are available while the manuscript is still taking shape. Your questions and experience can improve the final book.</p>
           </div>
-          <div className="border-t border-[#211e1f]/12">
-            {earlyReleaseNotes.map((note, index) => (
-              <article
-                key={note.title}
-                className="grid gap-4 border-b border-[#211e1f]/12 py-7 sm:grid-cols-[3.5rem_1fr]"
-              >
-                <span className="font-headline text-3xl font-black text-[#84b8b1]">
-                  0{index + 1}
-                </span>
-                <div>
-                  <h3 className="font-headline text-2xl font-bold text-[#211e1f]">{note.title}</h3>
-                  <p className="mt-2 max-w-2xl font-body text-base leading-relaxed text-[#555f70]">{note.body}</p>
-                </div>
+          <div className="book-release-notes">
+            {earlyReleaseNotes.map((note) => (
+              <article key={note.title}>
+                <h3>{note.title}</h3>
+                <p>{note.body}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="border-y border-[#176b69]/14 bg-[#edf2ea]/86">
-          <div className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-24">
-            <div className="max-w-3xl">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.25em] text-[#d95a2e]">
-                What you will learn to build
-              </p>
-              <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.03em] text-[#211e1f] md:text-5xl">
-                A memory system you can inspect, operate, and trust.
-              </h2>
+        <section className="book-outcomes" aria-labelledby="book-outcomes-title">
+          <div className="book-section">
+            <div className="book-section-heading">
+              <h2 id="book-outcomes-title">Build memory you can inspect, maintain, and trust.</h2>
+              <p>From choosing what to remember to recovering when memory fails.</p>
             </div>
-
-            <div className="mt-12 grid border-t border-[#176b69]/18 md:grid-cols-2">
-              {buildOutcomes.map((outcome, index) => (
-                <article
-                  key={outcome.verb}
-                  className={[
-                    'border-b border-[#176b69]/18 py-8',
-                    index % 2 === 0 ? 'md:border-r md:pr-10' : 'md:pl-10',
-                  ].join(' ')}
-                >
-                  <div className="flex items-baseline justify-between gap-4">
-                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.22em] text-[#176b69]">
-                      {outcome.chapters}
-                    </p>
-                    <span className="font-headline text-3xl font-black text-[#176b69]/15">0{index + 1}</span>
-                  </div>
-                  <h3 className="mt-4 font-headline text-2xl font-black text-[#211e1f]">
-                    <span className="text-[#176b69]">{outcome.verb}</span> {outcome.title}
-                  </h3>
-                  <p className="mt-3 max-w-xl font-body text-base leading-relaxed text-[#555f70]">{outcome.body}</p>
+            <div className="book-outcome-grid">
+              {buildOutcomes.map((outcome) => (
+                <article key={outcome.verb}>
+                  <p className="book-chapter-reference">{outcome.chapters}</p>
+                  <h3>{outcome.verb} {outcome.title}</h3>
+                  <p>{outcome.body}</p>
                 </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1320px] px-5 py-20 md:px-8 md:py-28">
-          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
-            <div className="lg:sticky lg:top-28 lg:self-start">
-              <p className="font-label text-[10px] font-bold uppercase tracking-[0.25em] text-[#d95a2e]">
-                The current map
-              </p>
-              <h2 className="mt-4 font-headline text-4xl font-black tracking-[-0.03em] text-[#211e1f] md:text-5xl">
-                Ten chapters across three parts.
-              </h2>
-              <p className="mt-5 max-w-md font-body text-lg leading-relaxed text-[#555f70]">
-                Part I establishes the contracts. Part II turns them into systems. Part III handles coordination, risk, and recovery.
-              </p>
-            </div>
-
-            <details className="field-book-contents">
-              <summary>Read the complete table of contents <span aria-hidden="true">+</span></summary>
-              <div className="space-y-12">
+        <section className="book-section book-contents-section" aria-labelledby="book-contents-title">
+          <div>
+            <h2 id="book-contents-title">Ten chapters.<br />Three parts.</h2>
+            <p className="book-section-intro">Part I establishes the contracts. Part II turns them into systems. Part III handles coordination, risk, and recovery.</p>
+          </div>
+          <details className="field-book-contents">
+            <summary>Read the complete table of contents <span aria-hidden="true">+</span></summary>
+            <div className="book-contents-parts">
               {chapters.map((part) => (
                 <section key={part.part} aria-labelledby={`part-${part.part}`}>
-                  <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-[#176b69] pb-3">
-                    <h3 id={`part-${part.part}`} className="font-headline text-2xl font-black text-[#211e1f]">
-                      Part {part.part}
-                    </h3>
-                    <p className="font-label text-[10px] font-bold uppercase tracking-[0.15em] text-[#176b69]">
-                      {part.partTitle}
-                    </p>
+                  <div className="book-part-heading">
+                    <h3 id={`part-${part.part}`}>Part {part.part}</h3><p>{part.partTitle}</p>
                   </div>
-
                   {part.chapters.map((chapter) => (
-                    <article
-                      key={chapter.num}
-                      className="grid grid-cols-[3.25rem_1fr] gap-4 border-b border-[#211e1f]/10 py-6 sm:grid-cols-[4.5rem_1fr]"
-                    >
-                      <span className="font-headline text-3xl font-black text-[#84b8b1]">{chapter.num}</span>
+                    <article key={chapter.num} className="book-contents-chapter">
+                      <span className="book-contents-number">{chapter.num}</span>
                       <div>
-                        <div className="flex flex-wrap items-center gap-3">
-                          <h4 className="font-headline text-xl font-bold text-[#211e1f]">{chapter.title}</h4>
-                          {chapter.status ? (
-                            <span
-                              className={
-                                chapter.status === 'live'
-                                  ? 'rounded-full bg-[#176b69] px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.14em] text-white'
-                                  : 'rounded-full border border-[#d95a2e]/35 bg-[#fffdf8]/70 px-2.5 py-1 font-label text-[9px] font-bold uppercase tracking-[0.14em] text-[#d95a2e]'
-                              }
-                            >
-                              {chapterStatusLabels[chapter.status]}
-                            </span>
-                          ) : null}
+                        <div className="book-contents-title">
+                          <h4>{chapter.title}</h4>
+                          {chapter.status && <span className={`book-chapter-status book-chapter-status--${chapter.status}`}>{chapterStatusLabels[chapter.status]}</span>}
                         </div>
-                        <p className="mt-2 max-w-2xl font-body text-sm leading-relaxed text-[#555f70]">{chapter.desc}</p>
+                        <p>{chapter.desc}</p>
+                        {chapter.status === 'live' && <div className="book-chapter-actions">
+                          <TrackedAction
+                            href={chapter.readHref ?? OREILLY_LINKS.bookPage}
+                            eventName="oreilly_read_click"
+                            eventProperties={{ source: 'book', placement: 'contents', chapter: chapter.num }}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Read chapter ${Number(chapter.num)} on O’Reilly`}
+                          >Read on O’Reilly <span aria-hidden="true">↗</span></TrackedAction>
+                          <a href={chapterFeedbackHref(chapter)} aria-label={`Email feedback on chapter ${Number(chapter.num)}: ${chapter.title}`}>Send feedback</a>
+                        </div>}
                       </div>
                     </article>
                   ))}
                 </section>
               ))}
-              </div>
-            </details>
-          </div>
+            </div>
+          </details>
         </section>
       </div>
     </EditorialPageFrame>

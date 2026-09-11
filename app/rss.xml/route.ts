@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { postService } from '../../services/PostService';
 import { getSiteUrl } from '../utils/siteUrl';
+import { CONTACT_EMAIL } from '../config/contact';
 
 const escapeXml = (value: string): string => {
   return value
@@ -33,8 +34,8 @@ export async function GET() {
     <language>en-us</language>
     <lastBuildDate>${latestPostDate.toUTCString()}</lastBuildDate>
     <generator>Next.js</generator>
-    <managingEditor>${escapeXml('benjamin.labaschin@gmail.com (Benjamin Labaschin)')}</managingEditor>
-    <webMaster>${escapeXml('benjamin.labaschin@gmail.com (Benjamin Labaschin)')}</webMaster>
+    <managingEditor>${escapeXml(`${CONTACT_EMAIL} (Benjamin Labaschin)`)}</managingEditor>
+    <webMaster>${escapeXml(`${CONTACT_EMAIL} (Benjamin Labaschin)`)}</webMaster>
     ${posts.slice(0, 20).map((post: any) => `
     <item>
       <title><![CDATA[${escapeCdata(post.title)}]]></title>
@@ -51,7 +52,6 @@ export async function GET() {
   return new NextResponse(rss, {
     headers: {
       'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
     },
   });
 }

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { canonicalTopic, countTopics, normalizeTopics, topicKey } from '../lib/topics';
 
 export interface Post {
   slug: string;
@@ -60,7 +61,7 @@ class PostService {
         title: data.title || slug,
         date: new Date(data.date || Date.now()),
         summary: data.summary || data.description || '',
-        tags: data.tags || [],
+        tags: normalizeTopics(Array.isArray(data.tags) ? data.tags : []),
         content,
         coverImage: data.coverImage || data.image || undefined,
         readingTime
@@ -74,23 +75,27 @@ class PostService {
   async getPostsByTag(tag: string): Promise<Post[]> {
     const allPosts = await this.getAllPosts();
     return allPosts.filter(post => 
-      post.tags.some(t => t.toLowerCase() === tag.toLowerCase())
+      post.tags.some(t => topicKey(t) === topicKey(tag))
     );
   }
 
   async getAllTags(): Promise<TagCount[]> {
     const allPosts = await this.getAllPosts();
-    const tagCounts = new Map<string, number>();
+    return countTopics(allPosts);
+  }
 
-    allPosts.forEach(post => {
-      post.tags.forEach(tag => {
-        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
-      });
-    });
-
-    return Array.from(tagCounts.entries())
-      .map(([tag, count]) => ({ tag, count }))
-      .sort((a, b) => b.count - a.count);
+  /** Include authored labels so existing bookmarks to an alias remain pre-rendered. */
+  async getTagRouteNames(): Promise<string[]> {
+    const posts = await this.getAllPosts();
+    const routes = new Set(posts.flatMap(post => post.tags));
+    for (const post of posts) {
+      const { data } = matter(fs.readFileSync(path.join(this.postsDirectory, `${post.slug}.md`), 'utf8'));
+      for (const tag of Array.isArray(data.tags) ? data.tags : []) {
+        routes.add(tag.trim());
+        routes.add(canonicalTopic(tag));
+      }
+    }
+    return [...routes].sort();
   }
 
   async searchPosts(query: string): Promise<Post[]> {

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useGrebeArrivalContext } from './GrebeArrivalContext';
 import { ReadingGrebe } from './ReadingGrebe';
 import { startPondVisits, type PondVisit } from './pondSchedule';
 
@@ -38,6 +39,7 @@ function CuriousPeeker() {
 
 /** Transparent decoration never catches clicks; the scheduler owns exactly two slots. */
 export function GrebeField({ variant }: { variant: GrebeFieldVariant }) {
+  const { opening } = useGrebeArrivalContext();
   const [visits, setVisits] = useState<Array<PondVisit & { session: number }>>([]);
   const session = useRef(0);
   useEffect(() => {
@@ -45,7 +47,7 @@ export function GrebeField({ variant }: { variant: GrebeFieldVariant }) {
     let stop = () => {};
     const reset = () => {
       stop(); setVisits([]);
-      if (!document.hidden && !reducedMotion.matches) {
+      if (!opening && !document.hidden && !reducedMotion.matches) {
         // Batched resets need fresh DOM keys to restart the CSS animation clock.
         const currentSession = ++session.current;
         stop = startPondVisits(next => setVisits(next.map(visit => ({ ...visit, session: currentSession }))));
@@ -55,10 +57,10 @@ export function GrebeField({ variant }: { variant: GrebeFieldVariant }) {
     document.addEventListener('visibilitychange', reset);
     reducedMotion.addEventListener('change', reset);
     return () => { stop(); document.removeEventListener('visibilitychange', reset); reducedMotion.removeEventListener('change', reset); };
-  }, []);
+  }, [opening]);
   return (
     <div className={`grebe-field pond-drift-field grebe-field--${variant} pointer-events-none`} aria-hidden="true">
-      {visits.map(visit => (
+      {!opening && visits.map(visit => (
         <span key={`${visit.session}-${visit.id}`} className={`pond-swimmer pond-swimmer--${visit.side}${visit.encounter ? ' pond-swimmer--meeting' : ''}`}
           style={{ '--visit-duration': `${visit.duration}s`, '--visit-height': `${visit.height}vh`, '--visit-size': `${visit.size}px`, animationDelay: `-${visit.headStart}s` } as CSSProperties}>
           {visit.reading ? <ReadingGrebe /> : (
@@ -66,7 +68,7 @@ export function GrebeField({ variant }: { variant: GrebeFieldVariant }) {
           )}
         </span>
       ))}
-      <CuriousPeeker />
+      {!opening && <CuriousPeeker />}
     </div>
   );
 }

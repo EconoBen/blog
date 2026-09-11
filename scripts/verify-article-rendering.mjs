@@ -24,7 +24,12 @@ const load = (relative, mocks = {}) => {
     if (imports.has(id)) return imports.get(id);
     if (id.startsWith('react-syntax-highlighter/dist/esm/')) return require(id.replace('/esm/', '/cjs/'));
     if (id.endsWith('.css') || id === 'server-only') return {};
-    if (id.startsWith('.')) return load(path.resolve(path.dirname(filename), `${id}.tsx`), mocks);
+    if (id.startsWith('.')) {
+      const base = path.resolve(path.dirname(filename), id);
+      const target = ['.tsx', '.ts'].map(extension => base + extension).find(fs.existsSync);
+      assert.ok(target, `Resolve article dependency: ${id}`);
+      return load(target, mocks);
+    }
     return require(id);
   }, module, module.exports);
   return module.exports;

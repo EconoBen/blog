@@ -1,3 +1,5 @@
+import { contactHref } from '../config/contact';
+
 export const AGENT_MEMORY = {
   title: 'Agent Memory',
   subtitle: 'Building Stateful AI Agents That Remember, Adapt, and Work Across Time',
@@ -75,7 +77,24 @@ export interface BookChapter {
   title: string;
   desc: string;
   status: ChapterStatus;
+  readHref?: string;
 }
+
+export function chapterFeedbackHref(chapter: Pick<BookChapter, 'num' | 'title'>): string {
+  const chapterLabel = `Chapter ${Number(chapter.num)}: ${chapter.title}`;
+  return contactHref({
+    subject: `Agent Memory — ${chapterLabel}`,
+    body: `Hi Ben,\n\nI have feedback on ${chapterLabel}.\n\nSection or example:\n\nMy feedback:\n`,
+  });
+}
+
+// Verified against O’Reilly’s published contents on September 6, 2026.
+// Future chapters receive a destination only after their published page is checked.
+const liveChapterLinks = {
+  '01': withCampaign(`${OREILLY_BOOK_BASE_URL}ch01.html`, 'chapter'),
+  '02': withCampaign(`${OREILLY_BOOK_BASE_URL}ch02.html`, 'chapter'),
+  '03': withCampaign(`${OREILLY_BOOK_BASE_URL}ch03.html`, 'chapter'),
+} as const;
 
 export interface BookPart {
   part: 'I' | 'II' | 'III';
@@ -93,18 +112,21 @@ export const chapters: BookPart[] = [
         title: 'The Work of Remembering',
         desc: 'What memory means for an agent, how it differs from context, and why continuity changes everything.',
         status: 'live',
+        readHref: liveChapterLinks['01'],
       },
       {
         num: '02',
         title: 'What the Agent Can Read and Write',
         desc: 'Where memory lives, the five working verbs, and giving the agent a memory API.',
         status: 'live',
+        readHref: liveChapterLinks['02'],
       },
       {
         num: '03',
         title: 'Choosing What Becomes Memory',
         desc: 'Which encountered information earns a durable representation and what future job that memory must perform.',
         status: 'live',
+        readHref: liveChapterLinks['03'],
       },
     ],
   },

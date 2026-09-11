@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, type CSSProperties } from 'react';
-import { chapters, OREILLY_LINKS } from '../book/bookData';
+import { chapters, chapterFeedbackHref, OREILLY_LINKS } from '../book/bookData';
 import { TrackedAction } from './TrackedAction';
 import '../styles/chapter-shoreline.css';
 
@@ -64,20 +64,29 @@ export function ChapterShoreline() {
           <p className="chapter-shoreline-part">Part {selected.part}</p>
           <h3>{selected.title}</h3>
           <p>{selected.desc}</p>
-          {selected.status === 'live' ? (
-            <TrackedAction
-              href={OREILLY_LINKS.bookPage}
-              eventName="oreilly_read_click"
-              eventProperties={{ source: 'book', placement: 'shoreline', chapter: selected.num }}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="chapter-shoreline-link"
+          <div className="chapter-shoreline-actions">
+            {selected.status === 'live' ? (
+              <TrackedAction
+                href={selected.readHref ?? OREILLY_LINKS.bookPage}
+                eventName="oreilly_read_click"
+                eventProperties={{ source: 'book', placement: 'shoreline', chapter: selected.num }}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="chapter-shoreline-link"
+              >
+                Read chapter {Number(selected.num)} on O’Reilly <span aria-hidden="true">↗</span>
+              </TrackedAction>
+            ) : (
+              <a className="chapter-shoreline-link" href="#subscribe">Get chapter updates</a>
+            )}
+            <a
+              className="chapter-shoreline-link chapter-shoreline-feedback"
+              href={chapterFeedbackHref(selected)}
+              aria-label={`Email feedback on chapter ${Number(selected.num)}: ${selected.title}`}
             >
-              Open the book on O’Reilly <span aria-hidden="true">↗</span>
-            </TrackedAction>
-          ) : (
-            <a className="chapter-shoreline-link" href="#subscribe">Get chapter updates</a>
-          )}
+              {selected.status === 'live' ? 'Send chapter feedback' : 'Suggest a question to cover'}
+            </a>
+          </div>
         </div>
       </div>
     </section>

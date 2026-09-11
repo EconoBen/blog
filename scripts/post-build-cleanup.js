@@ -1,62 +1,20 @@
 #!/usr/bin/env node
 
-/**
- * Post-build cleanup script for Next.js
- * Removes large files from build directory that should not be deployed
- */
+// Historical command name retained for callers. A build must never delete source
+// assets or alter the framework output; upload exclusions belong in .vercelignore.
+const fs = require('node:fs');
+const path = require('node:path');
 
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-
-console.log('Running post-build cleanup...');
-
-// Remove video files
-const videoExtensions = ['.mp4', '.m4v', '.mov', '.avi'];
-const buildAssetsPath = path.join(__dirname, '../.next/static');
-const publicAssetsPath = path.join(__dirname, '../public/assets');
-
-// Clean .next/static directory
-if (fs.existsSync(buildAssetsPath)) {
-  videoExtensions.forEach(ext => {
-    try {
-      execSync(`find "${buildAssetsPath}" -name "*${ext}" -delete`, { stdio: 'inherit' });
-      console.log(`Removed ${ext} files from .next/static`);
-    } catch (error) {
-      console.error(`Error removing ${ext} files:`, error.message);
-    }
-  });
+function directoryBytes(directory) {
+  if (!fs.existsSync(directory)) return 0;
+  return fs.readdirSync(directory, { withFileTypes: true }).reduce((total, entry) => {
+    const file = path.join(directory, entry.name);
+    return total + (entry.isDirectory() ? directoryBytes(file) : entry.isFile() ? fs.statSync(file).size : 0);
+  }, 0);
 }
 
-// Clean public/assets directory (remove originals and videos)
-if (fs.existsSync(publicAssetsPath)) {
-  // Remove video files
-  videoExtensions.forEach(ext => {
-    try {
-      execSync(`find "${publicAssetsPath}" -name "*${ext}" -delete`, { stdio: 'inherit' });
-      console.log(`Removed ${ext} files from public/assets`);
-    } catch (error) {
-      console.error(`Error removing ${ext} files:`, error.message);
-    }
-  });
-  
-  // Remove originals directory if it exists
-  const originalsPath = path.join(publicAssetsPath, 'originals');
-  if (fs.existsSync(originalsPath)) {
-    fs.rmSync(originalsPath, { recursive: true, force: true });
-    console.log('Removed originals directory from public/assets');
-  }
+for (const directory of [process.env.BLOG_BUILD_DIR || '.next', 'public']) {
+  const bytes = directoryBytes(path.join(__dirname, '..', directory));
+  console.log(`${directory}: ${(bytes / 1024 / 1024).toFixed(1)} MiB`);
 }
-
-// Check final build size
-try {
-  const nextBuildSize = execSync('du -sh .next/', { encoding: 'utf-8' }).trim();
-  console.log(`\nNext.js build size: ${nextBuildSize}`);
-  
-  const publicSize = execSync('du -sh public/', { encoding: 'utf-8' }).trim();
-  console.log(`Public directory size: ${publicSize}`);
-} catch (error) {
-  console.log('Could not determine build sizes');
-}
-
-console.log('Post-build cleanup complete!');
+console.log('Build size report complete. Source assets and build output were preserved.');

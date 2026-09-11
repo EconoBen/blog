@@ -2,16 +2,28 @@
 
 import { useEffect, useId, useRef, useState } from 'react';
 import { track } from '@vercel/analytics/react';
+import { contactHref } from '../config/contact';
 
 interface SubscribeFormProps {
   variant?: 'dark' | 'light';
   placement?: string;
+  context?: 'site' | 'book';
 }
 
 export function SubscribeForm({
   variant = 'dark',
   placement = 'site_footer',
+  context = 'site',
 }: SubscribeFormProps) {
+  const copy = context === 'book' ? {
+    title: 'Get the next chapter update',
+    description: 'Chapter releases from Agent Memory, plus occasional emails about new writing and talks.',
+    confirmation: 'You’ll receive Agent Memory chapter updates, plus occasional emails about new writing and talks.',
+  } : {
+    title: 'Get updates on new posts, talks, and book progress',
+    description: 'Occasional emails about new writing, upcoming talks, and chapter releases.',
+    confirmation: 'You’ll hear about new writing, talks, and book progress. No spam.',
+  };
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const errorId = useId();
@@ -59,14 +71,14 @@ export function SubscribeForm({
       <div ref={success} tabIndex={-1} role="status" className="rounded-2xl bg-[#0035a0] p-8 text-white md:p-12">
         <h3 className="font-headline text-2xl font-bold">You&rsquo;re on the list.</h3>
         <p className="mt-3 max-w-md font-body text-base leading-relaxed text-white/80">
-          You&rsquo;ll hear about new writing, talks, and book progress. No spam.
+          {copy.confirmation}
         </p>
       </div>
     ) : (
       <div ref={success} tabIndex={-1} role="status">
         <h3 className="font-headline text-2xl font-bold text-[#1d1c16]">You&rsquo;re on the list.</h3>
         <p className="mt-3 max-w-md font-body text-base leading-relaxed text-[#1d1c16]/70">
-          You&rsquo;ll hear about new writing, talks, and book progress. No spam.
+          {copy.confirmation}
         </p>
       </div>
     );
@@ -80,10 +92,10 @@ export function SubscribeForm({
             Email updates
           </p>
           <h2 className="font-headline text-3xl font-black tracking-tight text-[#1d1c16] md:text-4xl">
-            Get updates on new posts, talks, and book progress
+            {copy.title}
           </h2>
           <p className="max-w-lg text-lg leading-relaxed text-[#1d1c16]/70">
-            Occasional emails about new writing, upcoming talks, and chapter releases.
+            {copy.description}
           </p>
         </div>
         <form onSubmit={handleSubmit} aria-busy={status === 'loading'} className="subscribe-form flex flex-col gap-3 md:items-center md:justify-center">
@@ -112,7 +124,7 @@ export function SubscribeForm({
             </button>
           </div>
           {status === 'error' && (
-            <p id={errorId} role="alert" className="subscribe-feedback font-body text-sm text-[#1d1c16]/75">We couldn&rsquo;t confirm your signup. Please try again or <a href="mailto:agentmemory@econoben.dev">email me directly</a>.</p>
+            <p id={errorId} role="alert" className="subscribe-feedback font-body text-sm text-[#1d1c16]/75">We couldn&rsquo;t confirm your signup. Please try again or <a href={contactHref()}>email me directly</a>.</p>
           )}
         </form>
       </div>
@@ -123,9 +135,9 @@ export function SubscribeForm({
     <div className="rounded-2xl bg-[#0035a0] p-8 md:p-12">
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-12">
         <div className="text-white">
-          <h3 className="font-headline text-2xl font-bold md:text-3xl">Follow Agent Memory in Early Release.</h3>
+          <h3 className="font-headline text-2xl font-bold md:text-3xl">{copy.title}</h3>
           <p className="mt-2 max-w-md font-body text-base leading-relaxed text-white/80">
-            Get an email when new chapters become available.
+            {copy.description}
           </p>
         </div>
         <form onSubmit={handleSubmit} aria-busy={status === 'loading'} className="subscribe-form subscribe-controls flex w-full max-w-md gap-3 md:w-auto">
@@ -153,7 +165,7 @@ export function SubscribeForm({
         </form>
       </div>
       {status === 'error' && (
-        <p id={errorId} role="alert" className="subscribe-feedback mt-4 font-body text-sm text-white/85">We couldn&rsquo;t confirm your signup. Please try again or <a href="mailto:agentmemory@econoben.dev">email me directly</a>.</p>
+        <p id={errorId} role="alert" className="subscribe-feedback mt-4 font-body text-sm text-white/85">We couldn&rsquo;t confirm your signup. Please try again or <a href={contactHref()}>email me directly</a>.</p>
       )}
     </div>
   );

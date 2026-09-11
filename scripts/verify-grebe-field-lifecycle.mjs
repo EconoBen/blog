@@ -32,8 +32,11 @@ globalThis.clearTimeout = window.clearTimeout = id => { if (!timers.delete(id)) 
 const fixedMath = Object.create(Math); fixedMath.random = () => .5;
 const scheduler = { exports: {} };
 new Function('exports', 'Math', compile('app/components/pondSchedule.ts'))(scheduler.exports, fixedMath);
+const arrival = { exports: {} };
+new Function('require', 'module', 'exports', compile('app/components/GrebeArrivalContext.tsx'))(require, arrival, arrival.exports);
 const field = { exports: {} };
 new Function('require', 'module', 'exports', compile('app/components/GrebeField.tsx'))(id => {
+  if (id === './GrebeArrivalContext') return arrival.exports;
   if (id === './ReadingGrebe') return { ReadingGrebe: () => React.createElement('span', { 'data-reader': true }) };
   if (id === './pondSchedule') return { startPondVisits: onChange => {
     const session = ++starts;
@@ -92,6 +95,53 @@ try {
   assert.equal(timers.size, 0, 'Reduced motion leaves no running visitor schedule');
   await act(async () => motion(false));
   assert.equal(swimmers().length, 1);
+  let setOpening;
+  function ArrivalControls() {
+    setOpening = arrival.exports.useGrebeArrivalContext().setOpening;
+    return null;
+  }
+  const startsBeforeArrival = starts;
+  await act(async () => root.render(React.createElement(React.StrictMode, null,
+    React.createElement(arrival.exports.GrebeArrivalProvider, null,
+      React.createElement(ArrivalControls),
+      React.createElement(field.exports.GrebeField, { variant: 'home' }),
+    ),
+  )));
+  assert.equal(starts, startsBeforeArrival, 'The initial arrival hold starts no visitor schedule, including StrictMode replay');
+  assert.equal(swimmers().length, 0);
+  assert.equal(document.querySelector('.pond-peeker'), null, 'The peeker is absent while the arrival owns the scene');
+  assert.equal(timers.size, 0);
+  await act(async () => { visibility(true); visibility(false); motion(true); motion(false); });
+  await advance(10000);
+  assert.equal(starts, startsBeforeArrival, 'Visibility/motion changes cannot bypass an unfinished arrival');
+  await act(async () => setOpening(false));
+  assert.equal(swimmers().length, 1, 'Completing or skipping arrival immediately starts one swimmer');
+  assert.equal(swimmers()[0].getAttribute('style'), initialStyle, 'Arrival release preserves the original crossing speed, size, height and head start');
+  assert.ok(document.querySelector('.pond-peeker'), 'The peeker returns after arrival');
+  await advance(1900);
+  assert.equal(swimmers().length, 1, 'The opposite arrival still waits its normal delay');
+  await advance(2200);
+  assert.equal(swimmers().length, 2);
+  const beforeHold = swimmers()[0];
+  await act(async () => setOpening(true));
+  assert.equal(swimmers().length, 0, 'A new hold removes existing visitors immediately');
+  assert.equal(document.querySelector('.pond-peeker'), null);
+  assert.equal(timers.size, 0, 'A new hold cancels departures, opposite arrivals and meeting timers');
+  assert.equal(activeSchedulers.size, 0);
+  await act(async () => { visibility(true); setOpening(false); });
+  assert.equal(swimmers().length, 0, 'Releasing a hold while hidden does not start motion');
+  await act(async () => visibility(false));
+  assert.equal(swimmers().length, 1);
+  assert.notEqual(swimmers()[0], beforeHold, 'A resumed crossing gets a fresh DOM animation clock');
+  await act(async () => { setOpening(true); motion(true); });
+  await act(async () => setOpening(false));
+  assert.equal(swimmers().length, 0, 'Skipping arrival with reduced motion keeps roaming animation off');
+  assert.equal(timers.size, 0);
+  await act(async () => motion(false));
+  assert.equal(swimmers().length, 1);
+  await advance(600000);
+  assert.equal(maxVisitors, 2, 'Arrival handoffs retain the existing two-slot limit over repeated visits');
+  await act(async () => setOpening(true));
   await act(async () => root.unmount());
   assert.equal(timers.size, 0);
   assert.equal(activeSchedulers.size, 0);
@@ -99,7 +149,7 @@ try {
   const finalStarts = starts;
   visibility(true); visibility(false); motion(true); motion(false);
   assert.equal(starts, finalStarts, 'Unmount removes lifecycle listeners, so later events cannot restart a scheduler');
-  console.log('Grebe field lifecycle passed: immediate visitor, fresh animation nodes across batched visibility/motion resets, StrictMode cleanup, unchanged styles and two-slot density.');
+  console.log('Grebe field lifecycle passed: immediate visitor, fresh animation nodes across batched visibility/motion resets, StrictMode cleanup, unchanged styles, arrival hold/release/skip, and two-slot density.');
 } finally {
   if (document.getElementById('root')?.hasChildNodes()) await act(async () => root.unmount());
   Object.assign(globalThis, originalTimers);

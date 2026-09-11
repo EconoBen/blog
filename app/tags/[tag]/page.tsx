@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { EditorialPageFrame } from '../../components/EditorialPageFrame';
 import { postService } from '../../services/PostService';
+import { topicFromRoute, countTopics, topicKey } from '../../lib/topics';
 
 interface TagPageProps {
   params: Promise<{
@@ -37,41 +38,31 @@ const groupPostsByYear = (posts: Posts) => {
 };
 
 function getRelatedTags(posts: Posts, currentTag: string) {
-  const counts = new Map<string, number>();
-
-  posts.forEach((post) => {
-    post.tags
-      .filter((tag) => tag.toLowerCase() !== currentTag.toLowerCase())
-      .forEach((tag) => {
-        counts.set(tag, (counts.get(tag) ?? 0) + 1);
-      });
-  });
-
-  return Array.from(counts.entries())
-    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-    .slice(0, 6);
+  return countTopics(posts)
+    .filter(({ tag }) => topicKey(tag) !== topicKey(currentTag))
+    .slice(0, 6).map(({ tag, count }) => [tag, count] as const);
 }
 
+// Normalize legacy encoded labels without failing on literal percent signs.
 export async function generateMetadata({ params }: TagPageProps): Promise<Metadata> {
-  const { tag: encodedTag } = await params;
-  const tag = decodeURIComponent(encodedTag);
+  const { tag: requestedTag } = await params;
+  const tag = topicFromRoute(requestedTag);
 
   return {
     title: `${tag} | Tags | ECONOBEN.DEV`,
     description: `Browse all posts tagged with "${tag}".`,
+    alternates: { canonical: `https://econoben.dev/tags/${encodeURIComponent(tag)}` },
   };
 }
 
 export async function generateStaticParams() {
-  const tags = await postService.getAllTags();
-  return tags.map((tagData) => ({
-    tag: encodeURIComponent(tagData.tag),
-  }));
+  const tags = await postService.getTagRouteNames();
+  return tags.map(tag => ({ tag }));
 }
 
 export default async function TagPage({ params }: TagPageProps) {
-  const { tag: encodedTag } = await params;
-  const tag = decodeURIComponent(encodedTag);
+  const { tag: requestedTag } = await params;
+  const tag = topicFromRoute(requestedTag);
   const posts = await postService.getPostsByTag(tag);
 
   if (posts.length === 0) {

@@ -10,6 +10,7 @@ const context = {exports:{}, innerHeight:1000, performance:{now:()=>time},
   setTimeout:fn=>{timers.set(++nextId,fn);return nextId;},clearTimeout:id=>timers.delete(id),
   window:{...surface,matchMedia:()=>({matches:false})},document:{documentElement:surface},
   require:name=>name==='react'?{useState:()=>[[],()=>{}],useRef:()=>({current:element}),useEffect:fn=>effects.push(fn)}:
+    name==='./GrebeArrivalContext'?{useGrebeArrivalContext:()=>({opening:false,setOpening:()=>{}})}:
     name==='react/jsx-runtime'?{jsx:(type,props)=>({type,props}),jsxs:(type,props)=>({type,props})}:{},
 };
 vm.runInNewContext(code,context);

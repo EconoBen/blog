@@ -5,6 +5,11 @@ import { EditorialPageFrame } from '../../components/EditorialPageFrame';
 import { postService } from '../../services/PostService';
 import MarkdownRenderer from '../../components/MarkdownRenderer';
 import AudioPlayer from '../../components/AudioPlayer';
+import { ArticleSectionIndex } from '../../components/ArticleSectionIndex';
+import { RelatedReading, ChronologicalNavigation } from '../../components/RelatedReading';
+import { getArticleStructure, sectionIndexFor } from '../../lib/articleStructure';
+import { relatedReadingFor } from '../../services/readingDiscovery';
+import '../../styles/reading-refinements.css';
 import audioManifest from '../../config/audioManifest.json';
 import { ReadingProgress } from '../../components/ReadingMemory';
 import { ArticleImage } from '../../components/ArticleImage';
@@ -90,6 +95,8 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const currentIndex = allPosts.findIndex((item) => item.slug === post.slug);
   const newerPost = currentIndex > 0 ? allPosts[currentIndex - 1] : undefined;
   const olderPost = currentIndex >= 0 ? allPosts[currentIndex + 1] : undefined;
+  const sections = sectionIndexFor(getArticleStructure(post.content).headings, post.readingTime);
+  const related = relatedReadingFor(post, allPosts);
 
   return (
     <EditorialPageFrame currentPath="/posts" pageClassName="field-article-page">
@@ -112,6 +119,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             <span>{post.readingTime ? `${post.readingTime} min read` : 'Long-form post'}</span>
             <span>Filed in {monthYearFormatter.format(post.date)}</span>
           </div>
+          {audioUrl && (
+            <AudioPlayer audioUrl={audioUrl} title="Listen to this article" className="article-start-audio" />
+          )}
           <div className="field-article-navigation mt-6 flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
             <Link href="/posts" className="rounded-lg border border-[#c0c4cc] bg-transparent px-4 py-2 font-label text-[11px] font-bold uppercase tracking-widest text-[#1d1c16] text-center transition-transform hover:-translate-y-1">
               Back to posts
@@ -145,6 +155,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       {/* ── Article body ── */}
       <section className="border-t border-outline-variant/20 mt-8">
         <div className="mx-auto max-w-[860px] px-5 md:px-8 py-12 md:py-16">
+          <ArticleSectionIndex sections={sections} />
           <ReadingProgress slug={slug} title={post.title} />
           <div id="reading-content" tabIndex={-1} className="blog-content prose-lg">
             <MarkdownRenderer content={post.coverImage ? post.content.replace(new RegExp(`!\\[[^\\]]*\\]\\(${post.coverImage.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\)`, 'm'), '') : post.content} />
@@ -152,100 +163,14 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      {/* ── Audio + Tags sidebar ── */}
-      <section className="border-t border-outline-variant/20">
-        <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <div className="sticky-note p-6 md:p-8">
-              <div className="flex flex-wrap gap-3 font-label text-[10px] font-bold uppercase tracking-[0.2em] text-[#555f70]">
-                <span>Published {longDateFormatter.format(post.date)}</span>
-                <span>{post.readingTime ? `${post.readingTime} min read` : 'Essay'}</span>
-                <span>{post.tags.length} topic{post.tags.length === 1 ? '' : 's'}</span>
-              </div>
-              <div className="mt-6">
-                {audioUrl ? (
-                  <AudioPlayer
-                    audioUrl={audioUrl}
-                    title="Listen to this post"
-                    className="post-audio-player"
-                  />
-                ) : (
-                  <p className="font-body text-sm text-[#555f70]">No audio version is available for this post yet.</p>
-                )}
-              </div>
-              <div className="mt-6 flex flex-wrap gap-2">
-                {post.tags.length > 0
-                  ? post.tags.map((tag) => (
-                      <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`} className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16] transition-colors hover:bg-[#ede8de]">
-                        {tag}
-                      </Link>
-                    ))
-                  : <span className="rounded-full border border-[#c0c4cc] bg-transparent px-3 py-1 font-label text-[10px] font-bold uppercase tracking-wider text-[#1d1c16]">Essay</span>}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ── Related reading ── */}
-      {(newerPost || olderPost) && (
-        <section className="border-t border-outline-variant/20">
-          <div className="mx-auto max-w-[1440px] px-5 md:px-8 py-12 md:py-16">
-            <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">Related reading</p>
-            <h2 className="mt-3 font-headline text-3xl font-bold tracking-tight text-[#1d1c16]">
-              Keep reading.
-            </h2>
-            <div className="mt-8 grid gap-6 md:grid-cols-2">
-              {newerPost && (
-                <article className="sticky-note p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">Newer post</p>
-                  <h3 className="mt-3 font-headline text-xl font-bold leading-snug text-[#1d1c16] md:text-2xl">
-                    <Link href={`/posts/${newerPost.slug}`} className="transition-colors hover:text-[#176b69]">
-                      {newerPost.title}
-                    </Link>
-                  </h3>
-                  {newerPost.summary && (
-                    <p className="mt-3 font-body text-base leading-relaxed text-[#555f70]">{newerPost.summary}</p>
-                  )}
-                  <div className="mt-4 flex flex-wrap gap-3 font-label text-[10px] uppercase tracking-widest text-[#555f70]">
-                    <span>{longDateFormatter.format(newerPost.date)}</span>
-                    <span>{newerPost.readingTime ? `${newerPost.readingTime} min read` : 'Long-form post'}</span>
-                  </div>
-                  <div className="mt-4">
-                    <Link href={`/posts/${newerPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#176b69] transition-transform hover:translate-x-1">
-                      Read newer post →
-                    </Link>
-                  </div>
-                </article>
-              )}
-
-              {olderPost && (
-                <article className="sticky-note p-6 md:p-8 transition-transform duration-300 hover:-translate-y-1">
-                  <p className="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-[#176b69]">Older post</p>
-                  <h3 className="mt-3 font-headline text-xl font-bold leading-snug text-[#1d1c16] md:text-2xl">
-                    <Link href={`/posts/${olderPost.slug}`} className="transition-colors hover:text-[#176b69]">
-                      {olderPost.title}
-                    </Link>
-                  </h3>
-                  {olderPost.summary && (
-                    <p className="mt-3 font-body text-base leading-relaxed text-[#555f70]">{olderPost.summary}</p>
-                  )}
-                  <div className="mt-4 flex flex-wrap gap-3 font-label text-[10px] uppercase tracking-widest text-[#555f70]">
-                    <span>{longDateFormatter.format(olderPost.date)}</span>
-                    <span>{olderPost.readingTime ? `${olderPost.readingTime} min read` : 'Long-form post'}</span>
-                  </div>
-                  <div className="mt-4">
-                    <Link href={`/posts/${olderPost.slug}`} className="font-label text-[11px] font-extrabold uppercase tracking-[0.22em] text-[#176b69] transition-transform hover:translate-x-1">
-                      Read older post →
-                    </Link>
-                  </div>
-                </article>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
+      <div className="article-reading-end">
+        {post.tags.length > 0 && <nav className="article-topics" aria-label="Article topics">
+          <p className="article-reader-label">Topics in this article</p>
+          <div>{post.tags.map(tag => <Link key={tag} href={`/tags/${encodeURIComponent(tag)}`}>{tag}</Link>)}</div>
+        </nav>}
+        <RelatedReading items={related} />
+        <ChronologicalNavigation newer={newerPost} older={olderPost} />
+      </div>
     </EditorialPageFrame>
   );
 }

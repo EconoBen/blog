@@ -69,7 +69,7 @@ export function GrebePond() {
     <div className={`field-pond${phase !== 'idle' ? ' is-diving' : ''}${hasFound ? ' has-found' : ''}${phase === 'revealing' ? ' is-revealing' : ''}`}>
       {selected ? <>
         <button ref={sceneButton} type="button" className="field-pond-scene" aria-label="Find an article" aria-disabled={phase !== 'idle'} onClick={dive} onPointerMove={pointer} onPointerLeave={settle}>
-          <StudyScene key={take} direction="atlas-dusk" />
+          <StudyScene key={take} direction="atlas-dusk" arrivalResident />
           <span className="field-pond-invitation">{phase === 'diving' ? 'Finding an article…' : phase === 'surfacing' ? 'Retrieving an article…' : phase === 'revealing' ? 'Article selected' : 'Find an article'}<span aria-hidden="true">↓</span></span>
         </button>
         <article className="field-pond-note" aria-busy={waiting}>

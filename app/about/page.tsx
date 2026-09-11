@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import { contactHref } from '../config/contact';
 import { EditorialPageFrame } from '../components/EditorialPageFrame';
 import { publicationsConfig } from '../config/publicationsConfig';
 import { talksConfig } from '../config/talksConfig';
@@ -203,7 +204,7 @@ export default function AboutPage() {
             {
               label: 'Building',
               title: 'Enterprise GenAI',
-              body: 'Founding engineer at Workhelix, building the Nucleus platform that helps enterprises measure and grow AI ROI. Async LLM APIs, embedding pipelines, and agent deployment for Fortune 50 customers like Autodesk and Nasdaq.',
+              body: 'Founding engineer at Workhelix, building the Nucleus platform that helps enterprises measure and grow AI ROI. Async LLM APIs, embedding pipelines, and agent deployment for enterprise customers including Autodesk and Nasdaq.',
               stat: 'Founding Engineer',
             },
             {
@@ -356,7 +357,7 @@ export default function AboutPage() {
         <div className="h-px w-full bg-[#211e1f]/8" />
         <h2 className="font-headline text-2xl font-black" style={{ color: '#176b69', marginTop: '1.5rem' }}>Contact</h2>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <a href="mailto:benjaminlabaschin@gmail.com" className="sticky-note rounded-lg px-4 py-2 font-label text-[11px] font-bold uppercase tracking-[0.15em] text-[#211e1f] transition-transform hover:-translate-y-0.5">Email</a>
+          <a href={contactHref()} className="sticky-note rounded-lg px-4 py-2 font-label text-[11px] font-bold uppercase tracking-[0.15em] text-[#211e1f] transition-transform hover:-translate-y-0.5">Email</a>
           <a href="https://github.com/econoben" target="_blank" rel="noreferrer noopener" className="sticky-note rounded-lg px-4 py-2 font-label text-[11px] font-bold uppercase tracking-[0.15em] text-[#211e1f] transition-transform hover:-translate-y-0.5">GitHub</a>
           <a href="https://linkedin.com/in/benjamin-labaschin" target="_blank" rel="noreferrer noopener" className="sticky-note rounded-lg px-4 py-2 font-label text-[11px] font-bold uppercase tracking-[0.15em] text-[#211e1f] transition-transform hover:-translate-y-0.5">LinkedIn</a>
         </div>

@@ -8,7 +8,16 @@ const require = createRequire(import.meta.url);
 function load(name) {
   const compiled = ts.transpileModule(fs.readFileSync(`app/components/${name}.tsx`, 'utf8'), { compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText;
   const module = { exports: {} };
-  new Function('require', 'module', 'exports', compiled)(id => id === '@vercel/analytics/react' ? { track() {} } : require(id), module, module.exports);
+  new Function('require', 'module', 'exports', compiled)(id => {
+    if (id === '@vercel/analytics/react') return { track() {} };
+    if (id === '../config/contact') {
+      const contact = { exports: {} };
+      const source = ts.transpileModule(fs.readFileSync('app/config/contact.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+      new Function('module', 'exports', source)(contact, contact.exports);
+      return contact.exports;
+    }
+    return require(id);
+  }, module, module.exports);
   return module.exports;
 }
 const dom = new JSDOM('<div id="root"></div><main id="main-content" tabindex="-1"></main>', { url: 'http://localhost/', pretendToBeVisual: true });

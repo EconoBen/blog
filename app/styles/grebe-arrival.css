@@ -1,0 +1,38 @@
+.arrival-dialog { position: absolute; inset: 0 0 auto; min-height: 100svh; pointer-events: none; color: #264e42; }
+/* The site's older mobile reset caps every element at 100vw. Animated art
+   needs its own coordinates; its fixed viewport layer supplies the clipping. */
+.arrival-dialog, .arrival-dialog *, .flight-anatomy-study .arrival-character { max-width: none !important; }
+.arrival-landscape, .arrival-actors { position: fixed; inset: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.arrival-landscape { z-index: 200; background: #f7f2e8; will-change: clip-path; }
+.arrival-landscape > canvas { display: block; width: 100%; height: 100%; }
+.arrival-actors { z-index: 201; }
+.arrival-hero-air { position: absolute; inset: 0; clip-path: inset(0 0 37% 0); }
+.arrival-bird { position: absolute; will-change: transform; overflow: visible; }
+.arrival-body, .arrival-wing { position: absolute; display: block; pointer-events: none; user-select: none; }
+.arrival-body { inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.arrival-plumage { position: absolute; inset: 0; }
+.arrival-eye { position: absolute; inset: 0; width: 100%; height: 100%; }
+.arrival-hero-layer .arrival-bird, .arrival-hero-layer img { mix-blend-mode: normal; }
+.arrival-wing { height: auto; max-width: none; }
+.arrival-bird-reflection { mask-image: linear-gradient(to top, #000 35%, transparent 88%); }
+.arrival-feather { position: absolute; width: clamp(46px, 5.5vw, 78px); transform-origin: 53.333333% 99.411765%; }
+.arrival-feather svg { display: block; width: 100%; overflow: visible; }
+.arrival-contact { position: absolute; transform: translate(-50%, -50%); overflow: visible; }
+.arrival-skip { position: fixed; z-index: 202; right: max(24px, env(safe-area-inset-right)); bottom: max(24px, env(safe-area-inset-bottom)); display: flex; align-items: center; gap: 24px; min-height: 44px; padding: 8px 16px; border: 1px solid #536d5438; border-radius: 2px; background: #f7f2e8ed; color: #264e42; font: 13px/1.4 var(--font-label, sans-serif); cursor: pointer; pointer-events: auto; }
+.arrival-skip:hover { background: #fffaf0; border-color: #536d5470; }
+.arrival-dialog .arrival-skip { width: max-content; max-width: calc(100vw - 48px) !important; }
+.arrival-dialog .arrival-skip { top: max(20px, env(safe-area-inset-top)); bottom: auto; }
+@media (max-height: 519px) and (orientation: landscape) {
+  .arrival-dialog .arrival-skip { top: auto; right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); gap: 8px; padding: 8px 12px; }
+  .arrival-skip-word { display: none; }
+}
+.arrival-skip:focus-visible { outline: 2px solid #176b69; outline-offset: 4px; }
+.arrival-replay { display: flex; align-items: center; gap: 7px; width: fit-content; min-height: 44px; margin: 7px 0 0 auto; padding: 8px 1px 8px 14px; border: 0; background: transparent; color: #607367; font: 11px/1.4 var(--font-label, sans-serif); cursor: pointer; text-underline-offset: 4px; }
+.arrival-replay svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+.arrival-replay:hover { color: #176b69; text-decoration: underline; }
+.arrival-replay:focus-visible { outline: 2px solid #176b69; outline-offset: 3px; }
+.arrival-replay[aria-disabled="true"] { opacity: .45; cursor: default; }
+html[data-grebe-arrival] .shell-home-page .field-pond-scene .study-bird-pointer { opacity: var(--arrival-resident, 0); }
+html[data-grebe-arrival] .shell-home-page .field-pond-scene .study-water-rings,
+html[data-grebe-arrival] .shell-home-page .field-pond-scene .study-near-waterline { opacity: var(--arrival-water, 0); }
+@media (prefers-reduced-motion: reduce) { .arrival-replay, .arrival-dialog { display: none; } }

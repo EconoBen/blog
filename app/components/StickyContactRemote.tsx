@@ -1,9 +1,10 @@
+import { contactHref } from '../config/contact';
 export function StickyContactRemote() {
   return (
     <nav className="field-contact-links" aria-label="Contact and profiles">
       <div className="sticky-note flex flex-col gap-2 p-2">
         <a
-          href="mailto:benjaminlabaschin@gmail.com"
+          href={contactHref()}
           title="Email"
           className="flex h-9 w-9 items-center justify-center rounded-lg bg-surface-container-low text-on-surface transition-transform hover:-translate-y-0.5"
         >
