@@ -1,4 +1,4 @@
-> Status: REVISED LOCAL IMPLEMENTATION VERIFIED. The interactive memory example is removed; six retained areas pass validation. No deployment or Git-triggered publishing without explicit approval.
+> Status — DEPLOYED WITH APPROVAL, September 10, 2026. The reviewed site, including subsequent wing refinements, is live at https://econoben.dev from commit `e221eab7878402d012c3a4ff930bbecf318ad07b` through Vercel deployment `dpl_HopkTX98TsxzzYAAGa2kXcoqc9iS`. Local and live release checks pass; see `docs/releasing.md` for final evidence and retained limitations. Earlier local-only delivery notes below are historical. Merge into `main` and OpenSpec archive remain deferred until branch reconciliation.
 
 ## 1. Plan and baseline
 - [x] 1.1 Record the six retained areas, user-requested demonstration removal, ownership, invariants, release gate and acceptance criteria.

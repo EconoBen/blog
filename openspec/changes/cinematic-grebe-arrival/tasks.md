@@ -1,4 +1,4 @@
-> Status: COMPLETE LOCALLY. Awaiting Ben’s review; do not publish.
+> Status — DEPLOYED WITH APPROVAL, September 10, 2026. The reviewed site, including subsequent wing refinements, is live at https://econoben.dev from commit `e221eab7878402d012c3a4ff930bbecf318ad07b` through Vercel deployment `dpl_HopkTX98TsxzzYAAGa2kXcoqc9iS`. Local and live release checks pass; see `docs/releasing.md` for final evidence and retained limitations. Earlier local-only delivery notes below are historical. Merge into `main` and OpenSpec archive remain deferred until branch reconciliation.
 
 ## 1. Plan and art direction
 - [x] 1.1 Read current instructions/state, preserve existing work and record sequence, ownership, accessibility and deployment boundaries.

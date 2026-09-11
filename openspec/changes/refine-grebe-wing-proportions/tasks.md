@@ -1,4 +1,4 @@
-> Status — LOCAL IMPLEMENTATION AND VERIFICATION COMPLETE, September 10, 2026. The selected sectioned wings passed independent isolated and integrated review, the 43-suite production gate, final Chromium/WebKit desktop and phone playback, scoped lifecycle checks and current performance measurement. Ben has approved pushing all reviewed changes to the feature branch. Deployment and merge still require approval; archive is deferred until the approved release workflow is complete. The branch-specific Vercel rule prevents an automatic preview during this push.
+> Status — DEPLOYED WITH APPROVAL, September 10, 2026. The reviewed site, including subsequent wing refinements, is live at https://econoben.dev from commit `e221eab7878402d012c3a4ff930bbecf318ad07b` through Vercel deployment `dpl_HopkTX98TsxzzYAAGa2kXcoqc9iS`. Local and live release checks pass; see `docs/releasing.md` for final evidence and retained limitations. Earlier local-only delivery notes below are historical. Merge into `main` and OpenSpec archive remain deferred until branch reconciliation.
 
 ## 1. Baseline and diagnosis
 

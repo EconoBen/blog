@@ -1,4 +1,4 @@
-> Status — LOCAL WING FOLLOW-UP COMPLETE, September 10, 2026. Build `bbTrs4g9kljfX6-Ec1gvs` passes all 33 source scripts, types, production build and all 12 release checks. Desktop/phone unfolding frames, independent critique and Chromium/WebKit playback checks pass. The current preview is `http://localhost:3112/`. Nothing was published; release requires explicit approval.
+> Status — DEPLOYED WITH APPROVAL, September 10, 2026. The reviewed site, including subsequent wing refinements, is live at https://econoben.dev from commit `e221eab7878402d012c3a4ff930bbecf318ad07b` through Vercel deployment `dpl_HopkTX98TsxzzYAAGa2kXcoqc9iS`. Local and live release checks pass; see `docs/releasing.md` for final evidence and retained limitations. Earlier local-only delivery notes below are historical. Merge into `main` and OpenSpec archive remain deferred until branch reconciliation.
 
 
 ## 1. Evidence and direction
