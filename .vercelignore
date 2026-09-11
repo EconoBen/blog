@@ -13,6 +13,9 @@ public/audio/
 *.mp3
 *.wav
 
+# This published article links to a local recording, not S3 narration.
+!public/assets/2023/01/Sarah_SomebodyLikeYou.mp3
+
 # Ignore backup files
 *.backup
 *.bak
