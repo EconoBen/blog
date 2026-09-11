@@ -4,6 +4,12 @@
 
 On September 10, 2026, Ben approved pushing all reviewed changes to `feat/grebe-field-notes`. Deployment and merge approval remain separate. Read-only inspection confirmed Vercel is connected to `EconoBen/blog`, with `main` as its production branch. The branch-specific `git.deploymentEnabled` rule in `vercel.json` prevents this feature branch from creating automatic deployments, following [Vercel's Git configuration](https://vercel.com/docs/project-configuration/git-configuration#git.deploymentenabled). It leaves other branches and manual CLI deployment behavior unchanged; those still require the applicable approval. No Vercel dashboard settings were changed.
 
+## September 10 committed verification
+
+Commit `158107741df7bae38c3dbbdd87031e14258d1265` passed `release:prepare` from a clean working tree on Node 22.14.0. All 43 source suites, type checking, the production build and all six served checks passed. The 922 source files were preserved through install/build, and the local server's build manifest matched the prepared output. Build `OBKdrefMenbf3qo0IdrvA` has source-manifest SHA256 `36d57b4ebff710fe6789858f218b87b4900d31a347cbeb817ea16dfa66e5894e`. The retained local record is `econoben-release-oHUXEQ/release-record.json`.
+
+All 618 application, public-asset and script inputs match the independently reviewed `pGdpjA` preview. Differences from that snapshot are completion documentation and the reviewed feature-branch deployment restriction. The publication audit found no unrelated files or credentials among the pending changes; generated build-file removals are the previously approved cleanup. The Vercel Git rule passed its official property schema and independent review. All eight OpenSpec changes passed strict validation. This verification note is a subsequent documentation-only commit; it does not change the tested application. Production deployment and merging into `main` remain pending separate approval.
+
 ## Prepare one reviewable release
 
 Use Node 22 (`nvm use`; `.nvmrc` and `package.json` agree with the production runtime), then run:
